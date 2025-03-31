@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 60, "column": 0}, "map": {"version":3,"sources":["file://D%3A/Webstep/NextJS/sleeping-owl/src/app/api/admin/auth/logout/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\r\n\r\nexport async function POST() {\r\n    return NextResponse.json({ message: 'Logout successful' }, { status: 200 });\r\n}\r\n"],"names":[],"mappings":";;;AAAA;;AAEO,eAAe;IAClB,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;QAAE,SAAS;IAAoB,GAAG;QAAE,QAAQ;IAAI;AAC7E","debugId":null}}]
+}
