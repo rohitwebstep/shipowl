@@ -35,6 +35,18 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$prisma$2f$client$2f$default$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@prisma/client/default.js [middleware-edge] (ecmascript)");
 ;
 const prisma = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$prisma$2f$client$2f$default$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["PrismaClient"]();
+async function connectToDatabase() {
+    try {
+        // Attempt to connect to the database
+        await prisma.$connect();
+        console.log("Database connection established successfully.");
+    } catch (error) {
+        // If connection fails, log the error
+        console.error("Database connection failed:", error);
+        process.exit(1); // Exit the process with an error code
+    }
+}
+connectToDatabase();
 const __TURBOPACK__default__export__ = prisma;
 }}),
 "[project]/src/utils/authUtils.ts [middleware-edge] (ecmascript)": ((__turbopack_context__) => {
