@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
         // Verify token and extract admin details
         const decodedAdmin = await verifyToken(token);
-        if (!decodedAdmin || !decodedAdmin.adminId) {
+        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
             return NextResponse.json({ error: "Invalid token" }, { status: 403 });
         }
 
