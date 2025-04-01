@@ -10,10 +10,16 @@ async function connectToDatabase() {
     } catch (error) {
         // If connection fails, log the error
         console.error("Database connection failed:", error);
-        process.exit(1);  // Exit the process with an error code
+        // Avoid using process.exit in Edge Runtime
+        // Instead, you can throw an error to be handled by the calling code
+        throw new Error("Database connection failed");
     }
 }
 
-connectToDatabase();
+connectToDatabase().catch((error) => {
+    // Handle any unhandled promise rejections here, if necessary
+    console.error(error);
+    // You can choose to return a response or perform other actions instead of exiting
+});
 
 export default prisma;
