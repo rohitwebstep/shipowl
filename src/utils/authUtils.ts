@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { jwtVerify } from 'jose';
 import prisma from "@/lib/prisma";

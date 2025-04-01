@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json({ message: "Token is valid", admin });
     } catch (error) {
+        console.error(`error - `, error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

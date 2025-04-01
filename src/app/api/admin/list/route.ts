@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ success: true, data: admins }, { status: 200 });
   } catch (error) {
+    console.error(`error - `, error);
     return NextResponse.json({ success: false, error: "Failed to fetch admins" }, { status: 500 });
   }
 }

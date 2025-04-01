@@ -4,11 +4,6 @@ import { generateToken } from '@/utils/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
 import bcrypt from 'bcryptjs';
 
-// Dummy User Database (Replace with actual DB)
-const users = [
-    { id: '1', email: 'admin@example.com', password: '$2b$10$PZmGqk9pWg/yH6Z1zuhef.6OOkHLKVNKIFLJCO/AcarRtt0OC4o8O' }, // bcrypt-hashed password
-];
-
 export async function handleLogin(req: NextRequest) {
     try {
         const { email, password } = await req.json();
@@ -52,6 +47,7 @@ export async function handleLogin(req: NextRequest) {
             },
         });
     } catch (error) {
+        console.error(`error - `, error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

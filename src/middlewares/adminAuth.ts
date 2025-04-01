@@ -28,6 +28,7 @@ export async function adminAuthMiddleware(req: NextRequest) {
 
         return response;
     } catch (error) {
+        console.error(`error - `, error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
