@@ -73,19 +73,10 @@ async function verifyToken(token) {
 }
 async function isAdminExist(adminId) {
     try {
-        // Validate if adminId is a valid positive integer
-        if (!adminId || isNaN(Number(adminId)) || Number(adminId) <= 0) {
-            return {
-                status: false,
-                message: "Invalid admin ID. It must be a positive integer."
-            };
-        }
-        // Convert adminId to integer
-        const adminIdInt = parseInt(adminId, 10);
         // Fetch admin details from database
         const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
             where: {
-                id: adminIdInt
+                id: adminId
             },
             select: {
                 id: true,
