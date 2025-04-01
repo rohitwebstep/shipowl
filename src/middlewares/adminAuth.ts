@@ -12,7 +12,7 @@ export async function adminAuthMiddleware(req: NextRequest) {
 
         // Verify token and extract admin details
         const decodedAdmin = await verifyToken(token);
-        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
+        if (!decodedAdmin || typeof decodedAdmin !== 'object' || typeof decodedAdmin.adminId !== 'number') {
             return NextResponse.json({ error: "Forbidden" }, { status: 403 });
         }
 
