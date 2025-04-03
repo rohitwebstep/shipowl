@@ -8,6 +8,12 @@ export async function handleLogin(req: NextRequest) {
     try {
         const { email, password } = await req.json();
 
+        // Hash the password using bcrypt
+        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
+
         // Fetch the admin by email from the database
         const admin = await prisma.admin.findUnique({
             where: { email },
@@ -23,12 +29,6 @@ export async function handleLogin(req: NextRequest) {
         if (!admin) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
-
-        // Hash the password using bcrypt
-        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
         const isPasswordValid = await comparePassword(password, admin.password);
         if (!isPasswordValid) {

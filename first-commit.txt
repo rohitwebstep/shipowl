@@ -1,1 +1,8 @@
-Hello, Worl
+# Install Project Dependencies
+bash - npm install
+
+# Generate Prisma Client
+bash - npx prisma generate
+
+# Apply Database Migrations
+bash - npx prisma migrate dev --name init
