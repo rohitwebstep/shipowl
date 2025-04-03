@@ -72,6 +72,24 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/@prisma/client [external] (@prisma/client, cjs)");
 ;
 const prisma = new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
+async function connectToDatabase() {
+    try {
+        // Attempt to connect to the database
+        await prisma.$connect();
+        console.log("Database connection established successfully.");
+    } catch (error) {
+        // If connection fails, log the error
+        console.error("Database connection failed:", error);
+        // Avoid using process.exit in Edge Runtime
+        // Instead, you can throw an error to be handled by the calling code
+        throw new Error("Database connection failed");
+    }
+}
+connectToDatabase().catch((error)=>{
+    // Handle any unhandled promise rejections here, if necessary
+    console.error(error);
+// You can choose to return a response or perform other actions instead of exiting
+});
 const __TURBOPACK__default__export__ = prisma;
 }}),
 "[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
@@ -113,10 +131,13 @@ var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
     "generateToken": (()=>generateToken),
+    "isAdminExist": (()=>isAdminExist),
     "verifyToken": (()=>verifyToken)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
 ;
 ;
 const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
@@ -135,6 +156,41 @@ async function verifyToken(token) {
     } catch (error) {
         console.error('Token verification failed:', error);
         return null;
+    }
+}
+async function isAdminExist(adminId) {
+    try {
+        // Fetch admin details from database
+        const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+            where: {
+                id: adminId
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                password: true,
+                role: true
+            }
+        });
+        // If admin doesn't exist, return false with a message
+        if (!admin) {
+            return {
+                status: false,
+                message: "Admin with the provided ID does not exist"
+            };
+        }
+        // Return admin details if found
+        return {
+            status: true,
+            admin
+        };
+    } catch (error) {
+        console.error("Error fetching admin by ID:", error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
     }
 }
 }}),
@@ -165,8 +221,7 @@ async function GET(req) {
         }
         // Verify token and extract admin details
         const decodedAdmin = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        console.log(`decodedAdmin - `, decodedAdmin);
-        if (!decodedAdmin || !decodedAdmin.adminId) {
+        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Invalid token"
             }, {
@@ -198,6 +253,7 @@ async function GET(req) {
             admin
         });
     } catch (error) {
+        console.error(`error - `, error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: "Internal Server Error"
         }, {
