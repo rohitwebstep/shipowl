@@ -1,11 +1,11 @@
 // src/middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuthMiddleware } from "./middlewares/adminAuth";  // Import admin middleware
+import { userAuthMiddleware } from "./middlewares/userAuth";  // Import user middleware
 
 export function middleware(req: NextRequest) {
-    // Apply adminAuthMiddleware to /api/admin/list route
-    if (req.url.includes("/api/admin/list")) {
-        return adminAuthMiddleware(req);
+    // Apply userAuthMiddleware to /api/user/list route
+    if (req.url.includes("/api/user/list")) {
+        return userAuthMiddleware(req);
     }
 
     return NextResponse.next();  // Continue processing for other routes
@@ -14,6 +14,6 @@ export function middleware(req: NextRequest) {
 // Define the matcher for specific routes
 export const config = {
     matcher: [
-        "/api/admin/list",
+        "/api/user/list",
     ],
 };

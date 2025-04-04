@@ -131,7 +131,7 @@ var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
     "generateToken": (()=>generateToken),
-    "isAdminExist": (()=>isAdminExist),
+    "isUserExist": (()=>isUserExist),
     "verifyToken": (()=>verifyToken)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
@@ -141,9 +141,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__
 ;
 ;
 const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
-function generateToken(adminId) {
+function generateToken(userId, userRole) {
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId
+        userId,
+        userRole
     }, SECRET_KEY, {
         expiresIn: '1h'
     });
@@ -158,12 +159,12 @@ async function verifyToken(token) {
         return null;
     }
 }
-async function isAdminExist(adminId) {
+async function isUserExist(userId) {
     try {
-        // Fetch admin details from database
-        const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+        // Fetch user details from database
+        const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique({
             where: {
-                id: parseInt(adminId, 10)
+                id: userId
             },
             select: {
                 id: true,
@@ -173,20 +174,20 @@ async function isAdminExist(adminId) {
                 role: true
             }
         });
-        // If admin doesn't exist, return false with a message
-        if (!admin) {
+        // If user doesn't exist, return false with a message
+        if (!user) {
             return {
                 status: false,
-                message: "Admin with the provided ID does not exist"
+                message: "User with the provided ID does not exist"
             };
         }
-        // Return admin details if found
+        // Return user details if found
         return {
             status: true,
-            admin
+            user
         };
     } catch (error) {
-        console.error("Error fetching admin by ID:", error);
+        console.error("Error fetching user by ID:", error);
         return {
             status: false,
             message: "Internal Server Error"
@@ -219,19 +220,26 @@ async function GET(req) {
                 status: 401
             });
         }
-        // Verify token and extract admin details
-        const decodedAdmin = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
+        // Verify token and extract user details
+        const decodedUser = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
+        console.log(`Decoded User: `, decodedUser); // Log the decoded user for debugging
+        if (!decodedUser || typeof decodedUser.userId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Invalid token"
             }, {
                 status: 403
             });
         }
-        // Fetch the admin from the database
-        const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+        // Determine the user model based on role
+        const userModel = [
+            "admin",
+            "dropshipper",
+            "supplier"
+        ].includes(decodedUser.adminRole) ? "user" : "userStaff";
+        // Fetch the user from the database
+        let user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"][userModel].findUnique({
             where: {
-                id: decodedAdmin.adminId
+                id: decodedUser.userId
             },
             select: {
                 id: true,
@@ -241,16 +249,16 @@ async function GET(req) {
                 createdAt: true
             }
         });
-        if (!admin) {
+        if (!user) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Admin not found"
+                error: "Invalid email or password"
             }, {
-                status: 404
+                status: 401
             });
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Token is valid",
-            admin
+            user
         });
     } catch (error) {
         console.error(`error - `, error);

@@ -10,15 +10,18 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'No token provided' }, { status: 401 });
         }
 
-        // Verify token and extract admin details
-        const decodedAdmin = await verifyToken(token);
-        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
+        // Verify token and extract user details
+        const decodedUser = await verifyToken(token);
+        if (!decodedUser || typeof decodedUser.userId !== 'number') {
             return NextResponse.json({ error: "Invalid token" }, { status: 403 });
         }
 
-        // Fetch the admin from the database
-        const admin = await prisma.admin.findUnique({
-            where: { id: decodedAdmin.adminId }, // Primary key lookup
+        // Determine the user model based on role
+        const userModel = ["admin", "dropshipper", "supplier"].includes(decodedUser.adminRole) ? "user" : "userStaff";
+
+        // Fetch the user from the database
+        let user = await prisma[userModel].findUnique({
+            where: { id: decodedUser.userId }, // Primary key lookup
             select: {
                 id: true,
                 name: true,
@@ -28,12 +31,11 @@ export async function GET(req: NextRequest) {
             },
         });
 
-
-        if (!admin) {
-            return NextResponse.json({ error: "Admin not found" }, { status: 404 });
+        if (!user) {
+            return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
 
-        return NextResponse.json({ message: "Token is valid", admin });
+        return NextResponse.json({ message: "Token is valid", user });
     } catch (error) {
         console.error(`error - `, error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

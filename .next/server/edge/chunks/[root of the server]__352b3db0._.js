@@ -73,7 +73,7 @@ async function isAdminExist(adminId) {
         // Convert adminId to integer
         const adminIdInt = parseInt(adminId, 10);
         // Fetch the admin by primary key (id) from the database
-        const admin = await prisma.admin.findUnique({
+        const admin = await prisma.user.findUnique({
             where: {
                 id: adminIdInt
             },

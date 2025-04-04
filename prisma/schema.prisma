@@ -13,12 +13,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
+model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
   password  String
   role      String   @default("admin")
+  status    String   @default("active")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  staff     UserStaff[]
+}
+
+model UserStaff {
+  id        Int      @id @default(autoincrement())
+  user_id   Int      @unique
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

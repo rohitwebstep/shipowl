@@ -1,1 +1,6 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/user/auth/login/route": "app/api/user/auth/login/route.js",
+  "/api/user/auth/verify/route": "app/api/user/auth/verify/route.js",
+  "/api/user/list/route": "app/api/user/list/route.js"
+}

@@ -14,8 +14,8 @@ export async function handleLogin(req: NextRequest) {
 
         console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
-        // Fetch the admin by email from the database
-        const admin = await prisma.admin.findUnique({
+        // Fetch the user by email from the database
+        let user = await prisma.user.findUnique({
             where: { email },
             select: {
                 id: true,
@@ -26,24 +26,37 @@ export async function handleLogin(req: NextRequest) {
             },
         });
 
-        if (!admin) {
-            return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+        if (!user) {
+            user = await prisma.userStaff.findUnique({
+                where: { email },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true,
+                },
+            });
+
+            if (!user) {
+                return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+            }
         }
 
-        const isPasswordValid = await comparePassword(password, admin.password);
+        const isPasswordValid = await comparePassword(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
 
-        const token = generateToken(admin.id);
+        const token = generateToken(user.id, user.role);
         return NextResponse.json({
             message: "Login successful",
             token,
             user: {
-                id: admin.id,
-                name: admin.name,
-                email: admin.email,
-                role: admin.role,
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
             },
         });
     } catch (error) {
