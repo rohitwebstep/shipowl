@@ -6,15 +6,15 @@ export async function GET(req: NextRequest) {
   try {
     // Retrieve x-admin-id from request headers
     const adminId = req.headers.get("x-admin-id");
-    if (!adminId) {
+    if (!adminId || isNaN(Number(adminId))) {
       return NextResponse.json(
-        { error: "Admin ID is missing from request" },
+        { error: "Admin ID is missing or invalid in request" },
         { status: 400 }
       );
     }
 
     // Check if admin exists
-    const result = await isAdminExist(adminId);
+    const result = await isAdminExist(Number(adminId));
     if (!result.status) {
       return NextResponse.json({ error: `Admin Not Found 1: ${result.message}` }, { status: 404 });
     }
