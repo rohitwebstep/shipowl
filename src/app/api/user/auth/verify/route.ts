@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
         }
 
         // Determine the user model based on role
-        const userModel = ["admin", "dropshipper", "supplier"].includes(decodedUser.adminRole) ? "user" : "userStaff";
+        const userModel = ["admin", "dropshipper", "supplier"].includes(decodedUser.userRole) ? "user" : "userStaff";
 
         // Fetch the user from the database
         const user = await prisma[userModel].findUnique({
