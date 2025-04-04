@@ -15,7 +15,7 @@ export async function handleLogin(req: NextRequest) {
         console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
         // Fetch the user by email from the database
-        let user = await prisma.user.findUnique({
+        let user = await prisma.User.findUnique({
             where: { email },
             select: {
                 id: true,
@@ -27,7 +27,7 @@ export async function handleLogin(req: NextRequest) {
         });
 
         if (!user) {
-            user = await prisma.userStaff.findUnique({
+            user = await prisma.UserStaff.findUnique({
                 where: { email },
                 select: {
                     id: true,

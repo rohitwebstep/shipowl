@@ -23,7 +23,7 @@ export async function verifyToken(token: string) {
 export async function isUserExist(userId: number, userRole: string) {
     try {
 
-        const userModel = ["admin", "dropshipper", "supplier"].includes(userRole) ? "user" : "userStaff";
+        const userModel = ["admin", "dropshipper", "supplier"].includes(userRole) ? "User" : "UserStaff";
 
         // Fetch user details from database
         const user = await prisma[userModel].findUnique({
