@@ -243,6 +243,7 @@ async function GET(req) {
         }
         // Check if user exists
         const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(userId), String(userRole));
+        console.log(`result - `, result);
         if (!result.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: `User Not Found 1: ${result.message}`

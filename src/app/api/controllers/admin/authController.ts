@@ -2,10 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from "@/lib/prisma";
 import { generateToken } from '@/utils/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
+import bcrypt from 'bcryptjs';
 
 export async function handleLogin(req: NextRequest) {
     try {
         const { email, password } = await req.json();
+
+        // Hash the password using bcrypt
+        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
         // Fetch user by email and role
         const userResponse = await userByUsernameRole(email, 'admin');
