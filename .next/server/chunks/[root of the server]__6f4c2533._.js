@@ -161,24 +161,41 @@ async function verifyToken(token) {
 }
 async function isUserExist(userId, userRole) {
     try {
+        const userRoleStr = String(userRole); // Ensure it's a string
         const userModel = [
             "admin",
             "dropshipper",
             "supplier"
-        ].includes(userRole) ? "user" : "userStaff";
+        ].includes(userRoleStr) ? "user" : "userStaff";
         // Fetch user details from database
-        const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"][userModel].findUnique({
-            where: {
-                id: userId
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                password: true,
-                role: true
-            }
-        });
+        let user;
+        if (userModel === "user") {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique({
+                where: {
+                    id: userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        } else {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].userStaff.findUnique({
+                where: {
+                    id: userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        }
         // If user doesn't exist, return false with a message
         if (!user) {
             return {
@@ -227,7 +244,6 @@ async function GET(req) {
         }
         // Verify token and extract user details
         const decodedUser = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        console.log(`Decoded User: `, decodedUser); // Log the decoded user for debugging
         if (!decodedUser || typeof decodedUser.userId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Invalid token"
@@ -236,24 +252,41 @@ async function GET(req) {
             });
         }
         // Determine the user model based on role
+        const userRole = String(decodedUser.userRole); // Ensure it's a string
         const userModel = [
             "admin",
             "dropshipper",
             "supplier"
-        ].includes(decodedUser.adminRole) ? "user" : "userStaff";
+        ].includes(userRole) ? "user" : "userStaff";
         // Fetch the user from the database
-        let user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"][userModel].findUnique({
-            where: {
-                id: decodedUser.userId
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                createdAt: true
-            }
-        });
+        let user;
+        if (userModel === "user") {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique({
+                where: {
+                    id: decodedUser.userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true
+                }
+            });
+        } else {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].userStaff.findUnique({
+                where: {
+                    id: decodedUser.userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true
+                }
+            });
+        }
         if (!user) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Invalid email or password"
