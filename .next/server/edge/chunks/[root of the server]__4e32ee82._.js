@@ -82,11 +82,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$userAu
 ;
 ;
 function middleware(req) {
+    const res = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
+    // Apply CORS headers globally
+    res.headers.set("Access-Control-Allow-Origin", "*"); // Change '*' to your frontend URL in production
+    res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    // Handle preflight requests
+    if (req.method === "OPTIONS") {
+        return new Response(null, {
+            status: 200,
+            headers: res.headers
+        });
+    }
     // Apply userAuthMiddleware to /api/user/list route
     if (req.url.includes("/api/user/list")) {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$userAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["userAuthMiddleware"])(req);
     }
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next(); // Continue processing for other routes
+    return req; // Continue processing for other routes
 }
 const config = {
     matcher: [
