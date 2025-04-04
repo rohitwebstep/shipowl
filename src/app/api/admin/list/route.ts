@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken, isAdminExist } from "@/utils/authUtils";
+import { isAdminExist } from "@/utils/authUtils";
 import prisma from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
