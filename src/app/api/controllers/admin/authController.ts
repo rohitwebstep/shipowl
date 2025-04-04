@@ -20,7 +20,7 @@ export async function handleLogin(req: NextRequest) {
         if (!userResponse.status || !userResponse.user) {
             userResponse = await userByUsernameRole(email, 'admin_staff');
             if (!userResponse.status || !userResponse.user) {
-                let userResponse = await userByUsernameRole(email, 'admin_staff');
+                userResponse = await userByUsernameRole(email, 'admin_staff');
                 return NextResponse.json({ error: userResponse.message || "Invalid email or password" }, { status: 401 });
             }
         }
