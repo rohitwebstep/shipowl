@@ -9,6 +9,7 @@ export async function handleLogin(req: NextRequest) {
 
         // Fetch user by email and role
         const userResponse = await userByUsernameRole(email, 'admin');
+        console.log(`userResponse - `, userResponse);
         if (!userResponse.status || !userResponse.user) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
@@ -17,6 +18,7 @@ export async function handleLogin(req: NextRequest) {
 
         // Compare the provided password with the stored hash
         const isPasswordValid = await comparePassword(password, user.password);
+        console.log(`isPasswordValid - `, isPasswordValid);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
