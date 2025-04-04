@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
         const userModel = ["admin", "dropshipper", "supplier"].includes(decodedUser.adminRole) ? "user" : "userStaff";
 
         // Fetch the user from the database
-        let user = await prisma[userModel].findUnique({
+        const user = await prisma[userModel].findUnique({
             where: { id: decodedUser.userId }, // Primary key lookup
             select: {
                 id: true,
