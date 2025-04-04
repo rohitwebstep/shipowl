@@ -16,7 +16,6 @@ export async function handleLogin(req: NextRequest) {
 
         // Fetch user by email and role
         let userResponse = await userByUsernameRole(email, 'admin');
-        console.log(`userResponse - `, userResponse);
         if (!userResponse.status || !userResponse.user) {
             userResponse = await userByUsernameRole(email, 'admin_staff');
             if (!userResponse.status || !userResponse.user) {
@@ -29,7 +28,6 @@ export async function handleLogin(req: NextRequest) {
 
         // Compare the provided password with the stored hash
         const isPasswordValid = await comparePassword(password, user.password);
-        console.log(`isPasswordValid - `, isPasswordValid);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
@@ -60,7 +58,6 @@ export async function userByUsernameRole(username: string, role: string) {
 
         // Fetch user details from database
         let user
-        console.log(`userModel - `, userModel);
         if (userModel === "user") {
             user = await prisma.user.findFirst({
                 where: { email: username, role },

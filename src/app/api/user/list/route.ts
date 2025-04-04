@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
 
     // Check if user exists
     const result = await isUserExist(Number(userId), String(userRole));
-    console.log(`result - `, result);
     if (!result.status) {
       return NextResponse.json({ error: `User Not Found 1: ${result.message}` }, { status: 404 });
     }

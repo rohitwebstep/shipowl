@@ -17,7 +17,6 @@ export async function userAuthMiddleware(req: NextRequest) {
         if (!payload || typeof payload !== 'object' || typeof payload.userId !== 'number' || typeof payload.userRole !== 'string') {
             return NextResponse.json({ error: "Forbidden" }, { status: 403 });
         }
-        console.log(`payload - `, payload);
         // Clone the request and set custom headers
         const response = NextResponse.next();
         response.headers.set("x-user-id", payload.userId.toString());

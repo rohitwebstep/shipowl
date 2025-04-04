@@ -11,7 +11,6 @@ export function generateToken(userId: number, userRole: string) {
 export async function verifyToken(token: string) {
     try {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
-        console.log(`payload - `, payload);
         return payload;
     } catch (error) {
         console.error('Token verification failed:', error);
