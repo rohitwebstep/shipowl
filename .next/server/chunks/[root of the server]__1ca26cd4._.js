@@ -72,6 +72,24 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/@prisma/client [external] (@prisma/client, cjs)");
 ;
 const prisma = new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
+async function connectToDatabase() {
+    try {
+        // Attempt to connect to the database
+        await prisma.$connect();
+        console.log("Database connection established successfully.");
+    } catch (error) {
+        // If connection fails, log the error
+        console.error("Database connection failed:", error);
+        // Avoid using process.exit in Edge Runtime
+        // Instead, you can throw an error to be handled by the calling code
+        throw new Error("Database connection failed");
+    }
+}
+connectToDatabase().catch((error)=>{
+    // Handle any unhandled promise rejections here, if necessary
+    console.error(error);
+// You can choose to return a response or perform other actions instead of exiting
+});
 const __TURBOPACK__default__export__ = prisma;
 }}),
 "[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
@@ -142,19 +160,10 @@ async function verifyToken(token) {
 }
 async function isAdminExist(adminId) {
     try {
-        // Validate if adminId is a valid positive integer
-        if (!adminId || isNaN(Number(adminId)) || Number(adminId) <= 0) {
-            return {
-                status: false,
-                message: "Invalid admin ID. It must be a positive integer."
-            };
-        }
-        // Convert adminId to integer
-        const adminIdInt = parseInt(adminId, 10);
         // Fetch admin details from database
         const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
             where: {
-                id: adminIdInt
+                id: adminId
             },
             select: {
                 id: true,
@@ -201,28 +210,29 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e
 ;
 async function GET(req) {
     try {
-        // Retrieve x-admin-id from request headers
-        const adminId = req.headers.get("x-admin-id");
-        if (!adminId) {
+        // Extract token from Authorization header
+        const token = req.headers.get('authorization')?.split(' ')[1];
+        if (!token) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Admin ID is missing from request"
+                error: 'No token provided'
             }, {
-                status: 400
+                status: 401
             });
         }
-        // Log the adminId to console
-        console.log("x-admin-id:", adminId);
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isAdminExist"])(adminId);
-        console.log(`result - `, result);
-        if (!result.status) {
+        // Verify token and extract admin details
+        const decodedAdmin = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
+        if (!decodedAdmin || typeof decodedAdmin.adminId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: result.message
+                error: "Invalid token"
             }, {
-                status: 404
+                status: 403
             });
         }
-        const admins = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findMany({
+        // Fetch the admin from the database
+        const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+            where: {
+                id: decodedAdmin.adminId
+            },
             select: {
                 id: true,
                 name: true,
@@ -231,16 +241,21 @@ async function GET(req) {
                 createdAt: true
             }
         });
+        if (!admin) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "Admin not found"
+            }, {
+                status: 404
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            success: true,
-            data: admins
-        }, {
-            status: 200
+            message: "Token is valid",
+            admin
         });
     } catch (error) {
+        console.error(`error - `, error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            success: false,
-            error: "Failed to fetch admins"
+            error: "Internal Server Error"
         }, {
             status: 500
         });

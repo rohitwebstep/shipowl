@@ -16,12 +16,6 @@ export async function adminAuthMiddleware(req: NextRequest) {
             return NextResponse.json({ error: "Forbidden" }, { status: 403 });
         }
 
-        // Check if admin exists
-        const result = await isAdminExist(decodedAdmin.adminId);
-        if (!result.status) {
-            return NextResponse.json({ error: `Admin Not Found 1: ${result.message}` }, { status: 404 });
-        }
-
         // Clone the request and set custom headers
         const response = NextResponse.next();
         response.headers.set("x-admin-id", decodedAdmin.adminId.toString());

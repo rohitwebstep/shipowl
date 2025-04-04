@@ -94,7 +94,7 @@ async function isAdminExist(adminId) {
         // Fetch admin details from database
         const admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
             where: {
-                id: adminId
+                id: parseInt(adminId, 10)
             },
             select: {
                 id: true,
@@ -157,15 +157,6 @@ async function adminAuthMiddleware(req) {
                 error: "Forbidden"
             }, {
                 status: 403
-            });
-        }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["isAdminExist"])(decodedAdmin.adminId);
-        if (!result.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `Admin Not Found 1: ${result.message}`
-            }, {
-                status: 404
             });
         }
         // Clone the request and set custom headers

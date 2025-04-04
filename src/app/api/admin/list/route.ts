@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyToken, isAdminExist } from "@/utils/authUtils";
 import prisma from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
@@ -10,6 +11,12 @@ export async function GET(req: NextRequest) {
         { error: "Admin ID is missing from request" },
         { status: 400 }
       );
+    }
+
+    // Check if admin exists
+    const result = await isAdminExist(adminId);
+    if (!result.status) {
+      return NextResponse.json({ error: `Admin Not Found 1: ${result.message}` }, { status: 404 });
     }
 
     const admins = await prisma.admin.findMany({
