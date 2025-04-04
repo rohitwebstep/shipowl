@@ -24,7 +24,7 @@ export async function isAdminExist(adminId: number) {
     try {
         // Fetch admin details from database
         const admin = await prisma.admin.findUnique({
-            where: { id: parseInt(adminId, 10) },
+            where: { id: adminId },
             select: {
                 id: true,
                 name: true,
