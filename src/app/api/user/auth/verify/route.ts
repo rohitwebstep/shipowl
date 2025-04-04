@@ -19,18 +19,32 @@ export async function GET(req: NextRequest) {
         // Determine the user model based on role
         const userRole = String(decodedUser.userRole); // Ensure it's a string
         const userModel = ["admin", "dropshipper", "supplier"].includes(userRole) ? "user" : "userStaff";
-        
+
         // Fetch the user from the database
-        const user = await prisma[userModel].findUnique({
-            where: { id: decodedUser.userId }, // Primary key lookup
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                createdAt: true,
-            },
-        });
+        let user
+        if (userModel === "user") {
+            user = await prisma.user.findUnique({
+                where: { id: decodedUser.userId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        } else {
+            user = await prisma.userStaff.findUnique({
+                where: { id: decodedUser.userId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        }
 
         if (!user) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });

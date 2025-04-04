@@ -24,18 +24,32 @@ export async function isUserExist(userId: number, userRole: string) {
     try {
         const userRoleStr = String(userRole); // Ensure it's a string
         const userModel = ["admin", "dropshipper", "supplier"].includes(userRoleStr) ? "user" : "userStaff";
-        
+
         // Fetch user details from database
-        const user = await prisma[userModel].findUnique({
-            where: { id: userId },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                password: true, // Hashed password stored in DB
-                role: true,
-            },
-        });
+        let user
+        if (userModel === "user") {
+            user = await prisma.user.findUnique({
+                where: { id: userId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true, // Hashed password stored in DB
+                    role: true,
+                },
+            });
+        } else {
+            user = await prisma.userStaff.findUnique({
+                where: { id: userId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true, // Hashed password stored in DB
+                    role: true,
+                },
+            });
+        }
 
         // If user doesn't exist, return false with a message
         if (!user) {
