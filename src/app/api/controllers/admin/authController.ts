@@ -15,10 +15,14 @@ export async function handleLogin(req: NextRequest) {
         console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
         // Fetch user by email and role
-        const userResponse = await userByUsernameRole(email, 'admin');
+        let userResponse = await userByUsernameRole(email, 'admin');
         console.log(`userResponse - `, userResponse);
         if (!userResponse.status || !userResponse.user) {
-            return NextResponse.json({ error: userResponse.message || "Invalid email or password" }, { status: 401 });
+            userResponse = await userByUsernameRole(email, 'admin_staff');
+            if (!userResponse.status || !userResponse.user) {
+                let userResponse = await userByUsernameRole(email, 'admin_staff');
+                return NextResponse.json({ error: userResponse.message || "Invalid email or password" }, { status: 401 });
+            }
         }
 
         const user = userResponse.user;
