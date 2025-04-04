@@ -161,24 +161,41 @@ async function verifyToken(token) {
 }
 async function isUserExist(userId, userRole) {
     try {
+        const userRoleStr = String(userRole); // Ensure it's a string
         const userModel = [
             "admin",
             "dropshipper",
             "supplier"
-        ].includes(userRole) ? "user" : "userStaff";
+        ].includes(userRoleStr) ? "user" : "userStaff";
         // Fetch user details from database
-        const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"][userModel].findUnique({
-            where: {
-                id: userId
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                password: true,
-                role: true
-            }
-        });
+        let user;
+        if (userModel === "user") {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique({
+                where: {
+                    id: userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        } else {
+            user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].userStaff.findUnique({
+                where: {
+                    id: userId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        }
         // If user doesn't exist, return false with a message
         if (!user) {
             return {

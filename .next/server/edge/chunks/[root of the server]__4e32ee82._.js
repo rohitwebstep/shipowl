@@ -44,13 +44,14 @@ async function userAuthMiddleware(req) {
         }
         // Verify token and extract user details
         const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
-        if (!payload || typeof payload !== 'object' || typeof payload.userId !== 'number') {
+        if (!payload || typeof payload !== 'object' || typeof payload.userId !== 'number' || typeof payload.userRole !== 'string') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Forbidden"
             }, {
                 status: 403
             });
         }
+        console.log(`payload - `, payload);
         // Clone the request and set custom headers
         const response = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
         response.headers.set("x-user-id", payload.userId.toString());
