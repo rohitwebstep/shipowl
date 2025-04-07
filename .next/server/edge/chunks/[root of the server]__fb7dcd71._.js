@@ -31,7 +31,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist
 ;
 ;
 const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
-async function adminAuthMiddleware(req) {
+async function adminAuthMiddleware(req, adminRole, applicableRoles) {
     try {
         // Extract token from Authorization header
         const token = req.headers.get("authorization")?.split(" ")[1];
@@ -50,10 +50,7 @@ async function adminAuthMiddleware(req) {
             }, {
                 status: 403
             });
-        } else if (![
-            "admin",
-            "admin_staff"
-        ].includes(payload.adminRole)) {
+        } else if (!applicableRoles.includes(payload.adminRole)) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Access denied. Admin privileges required."
             }, {
@@ -62,8 +59,8 @@ async function adminAuthMiddleware(req) {
         }
         // Clone the request and set custom headers
         const response = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
-        response.headers.set("x-admin-id", payload.adminId.toString());
-        response.headers.set("x-admin-role", payload.adminRole.toString());
+        response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());
+        response.headers.set(`x-${adminRole}-role`, payload.adminRole.toString());
         return response;
     } catch (error) {
         console.error(`error - `, error);
@@ -109,15 +106,48 @@ function middleware(req) {
         "/api/admin/list",
         "/api/admin/auth/verify"
     ];
+    const dropshipperProtectedRoutes = [
+        "/api/dropshipper/list",
+        "/api/dropshipper/auth/verify"
+    ];
+    const supplierProtectedRoutes = [
+        "/api/supplier/list",
+        "/api/supplier/auth/verify"
+    ];
     if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req);
+        const applicableRoles = [
+            "admin",
+            "admin_staff"
+        ];
+        const adminRole = "admin";
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
+    }
+    if (dropshipperProtectedRoutes.some((route)=>req.url.includes(route))) {
+        const applicableRoles = [
+            "dropshipper",
+            "dropshipper_staff"
+        ];
+        const adminRole = "dropshipper";
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
+    }
+    if (supplierProtectedRoutes.some((route)=>req.url.includes(route))) {
+        const applicableRoles = [
+            "supplier",
+            "supplier_staff"
+        ];
+        const adminRole = "supplier";
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
     }
     return req; // Continue processing for other routes
 }
 const config = {
     matcher: [
         "/api/admin/list",
-        "/api/admin/auth/verify"
+        "/api/admin/auth/verify",
+        "/api/dropshipper/list",
+        "/api/dropshipper/auth/verify",
+        "/api/supplier/list",
+        "/api/supplier/auth/verify"
     ]
 };
 }}),

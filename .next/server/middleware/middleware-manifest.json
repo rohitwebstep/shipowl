@@ -17,6 +17,22 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/admin/auth/verify{(\\\\.json)}?",
           "originalSource": "/api/admin/auth/verify"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/list{(\\\\.json)}?",
+          "originalSource": "/api/dropshipper/list"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/auth/verify{(\\\\.json)}?",
+          "originalSource": "/api/dropshipper/auth/verify"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/list{(\\\\.json)}?",
+          "originalSource": "/api/supplier/list"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/auth/verify{(\\\\.json)}?",
+          "originalSource": "/api/supplier/auth/verify"
         }
       ],
       "wasm": [],
@@ -24,9 +40,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "3e4ce31c9c48601fb53dfad1a8c78f95",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "19d0f104eb44949fd3f3d018352f23b8ff98d00eba7d7d0176c5083acc5e4240",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "621c6bc5b770280d174cdd7dd3765b5337d6120a48c3cdd16cbdf4beb519a037"
+        "__NEXT_PREVIEW_MODE_ID": "c59af4ceabc4ed003c14b68e40f60d66",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "683167d9955943a4bc95f06d1ea7fae9908a995a3af472383140de769c17ae3b",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "8f1d45da898bc0bf66efa98688981555237385a1f94881de934ede494c995082"
       }
     }
   },

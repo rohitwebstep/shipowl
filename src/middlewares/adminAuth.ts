@@ -4,7 +4,7 @@ import { jwtVerify } from 'jose';
 
 const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
 
-export async function adminAuthMiddleware(req: NextRequest) {
+export async function adminAuthMiddleware(req: NextRequest, adminRole: string, applicableRoles: string[]) {
     try {
         // Extract token from Authorization header
         const token = req.headers.get("authorization")?.split(" ")[1];
@@ -16,14 +16,14 @@ export async function adminAuthMiddleware(req: NextRequest) {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
         if (!payload || typeof payload !== 'object' || typeof payload.adminId !== 'number' || typeof payload.adminRole !== 'string') {
             return NextResponse.json({ error: "Access forbidden. Invalid token payload." }, { status: 403 });
-        } else if (!["admin", "admin_staff"].includes(payload.adminRole)) {
+        } else if (!applicableRoles.includes(payload.adminRole)) {
             return NextResponse.json({ error: "Access denied. Admin privileges required." }, { status: 403 });
         }
 
         // Clone the request and set custom headers
         const response = NextResponse.next();
-        response.headers.set("x-admin-id", payload.adminId.toString());
-        response.headers.set("x-admin-role", payload.adminRole.toString());
+        response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());
+        response.headers.set(`x-${adminRole}-role`, payload.adminRole.toString());
 
         return response;
     } catch (error) {

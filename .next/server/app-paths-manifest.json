@@ -1,5 +1,8 @@
 {
-  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/admin/auth/verify/route": "app/api/admin/auth/verify/route.js",
-  "/api/admin/list/route": "app/api/admin/list/route.js"
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
+  "/api/dropshipper/auth/verify/route": "app/api/dropshipper/auth/verify/route.js",
+  "/api/dropshipper/list/route": "app/api/dropshipper/list/route.js",
+  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
+  "/api/supplier/auth/verify/route": "app/api/supplier/auth/verify/route.js",
+  "/api/supplier/list/route": "app/api/supplier/list/route.js"
 }

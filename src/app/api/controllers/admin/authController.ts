@@ -110,7 +110,7 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
     }
 }
 
-export async function adminByUsernameRole(adminname: string, role: string) {
+export async function adminByUsernameRole(username: string, role: string) {
     try {
 
         const adminRoleStr = String(role); // Ensure it's a string
@@ -120,7 +120,7 @@ export async function adminByUsernameRole(adminname: string, role: string) {
         let admin
         if (adminModel === "admin") {
             admin = await prisma.admin.findFirst({
-                where: { email: adminname, role },
+                where: { email: username, role },
                 select: {
                     id: true,
                     name: true,
@@ -131,7 +131,7 @@ export async function adminByUsernameRole(adminname: string, role: string) {
             });
         } else {
             admin = await prisma.adminStaff.findFirst({
-                where: { email: adminname, role },
+                where: { email: username, role },
                 select: {
                     id: true,
                     name: true,

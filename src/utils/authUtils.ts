@@ -33,7 +33,7 @@ export async function isUserExist(adminId: number, adminRole: string) {
         let admin
         if (adminModel === "admin") {
             admin = await prisma.admin.findUnique({
-                where: { id: adminId },
+                where: { id: adminId, role: adminRoleStr },
                 select: {
                     id: true,
                     name: true,
@@ -44,7 +44,7 @@ export async function isUserExist(adminId: number, adminRole: string) {
             });
         } else {
             admin = await prisma.adminStaff.findUnique({
-                where: { id: adminId },
+                where: { id: adminId, role: adminRoleStr },
                 select: {
                     id: true,
                     name: true,
