@@ -37,7 +37,7 @@ async function adminAuthMiddleware(req) {
         const token = req.headers.get("authorization")?.split(" ")[1];
         if (!token) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Unauthorized"
+                error: "Access denied. Please log in to continue."
             }, {
                 status: 401
             });
@@ -46,7 +46,16 @@ async function adminAuthMiddleware(req) {
         const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
         if (!payload || typeof payload !== 'object' || typeof payload.adminId !== 'number' || typeof payload.adminRole !== 'string') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Forbidden"
+                error: "Access forbidden. Invalid token payload."
+            }, {
+                status: 403
+            });
+        } else if (![
+            "admin",
+            "admin_staff"
+        ].includes(payload.adminRole)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "Access denied. Admin privileges required."
             }, {
                 status: 403
             });
@@ -58,10 +67,11 @@ async function adminAuthMiddleware(req) {
         return response;
     } catch (error) {
         console.error(`error - `, error);
+        const message = error.code === 'ERR_JWT_EXPIRED' ? "Session expired. Please log in again." : "Authentication failed. Please try again.";
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Internal Server Error"
+            error: message
         }, {
-            status: 500
+            status: 401
         });
     }
 }
@@ -95,14 +105,19 @@ function middleware(req) {
         });
     }
     // Apply adminAuthMiddleware to /api/admin/list route
-    if (req.url.includes("/api/admin/list")) {
+    const adminProtectedRoutes = [
+        "/api/admin/list",
+        "/api/admin/auth/verify"
+    ];
+    if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req);
     }
     return req; // Continue processing for other routes
 }
 const config = {
     matcher: [
-        "/api/admin/list"
+        "/api/admin/list",
+        "/api/admin/auth/verify"
     ]
 };
 }}),

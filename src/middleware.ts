@@ -15,7 +15,9 @@ export function middleware(req: NextRequest) {
     }
 
     // Apply adminAuthMiddleware to /api/admin/list route
-    if (req.url.includes("/api/admin/list")) {
+    const adminProtectedRoutes = ["/api/admin/list", "/api/admin/auth/verify"];
+
+    if (adminProtectedRoutes.some(route => req.url.includes(route))) {
         return adminAuthMiddleware(req);
     }
 
@@ -24,7 +26,5 @@ export function middleware(req: NextRequest) {
 
 // Define the matcher for specific routes
 export const config = {
-    matcher: [
-        "/api/admin/list",
-    ],
+    matcher: ["/api/admin/list", "/api/admin/auth/verify"],
 };

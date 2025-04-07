@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/admin/auth/login/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/admin/auth/verify/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -345,7 +345,7 @@ async function handleVerifyLogin(req, adminRole, adminStaffRole) {
         }
         // Determine the admin model based on role
         const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-        if ([
+        if (![
             adminRole,
             adminStaffRole
         ].includes(payloadAdminRole)) {
@@ -468,23 +468,23 @@ async function adminByUsernameRole(adminname, role) {
     }
 }
 }}),
-"[project]/src/app/api/admin/auth/login/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/admin/auth/verify/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "POST": (()=>POST)
+    "GET": (()=>GET)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/controllers/admin/authController.ts [app-route] (ecmascript)");
 ;
-async function POST(req) {
+async function GET(req) {
     const adminRole = "admin";
     const adminStaffRole = "admin_staff";
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["handleLogin"])(req, adminRole, adminStaffRole);
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["handleVerifyLogin"])(req, adminRole, adminStaffRole);
 }
 }}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__f2efe24e._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__20016697._.js.map

@@ -9,14 +9,17 @@ export async function adminAuthMiddleware(req: NextRequest) {
         // Extract token from Authorization header
         const token = req.headers.get("authorization")?.split(" ")[1];
         if (!token) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ error: "Access denied. Please log in to continue." }, { status: 401 });
         }
 
         // Verify token and extract admin details
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
         if (!payload || typeof payload !== 'object' || typeof payload.adminId !== 'number' || typeof payload.adminRole !== 'string') {
-            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ error: "Access forbidden. Invalid token payload." }, { status: 403 });
+        } else if (!["admin", "admin_staff"].includes(payload.adminRole)) {
+            return NextResponse.json({ error: "Access denied. Admin privileges required." }, { status: 403 });
         }
+
         // Clone the request and set custom headers
         const response = NextResponse.next();
         response.headers.set("x-admin-id", payload.adminId.toString());
@@ -25,6 +28,10 @@ export async function adminAuthMiddleware(req: NextRequest) {
         return response;
     } catch (error) {
         console.error(`error - `, error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        const message =
+            error.code === 'ERR_JWT_EXPIRED'
+                ? "Session expired. Please log in again."
+                : "Authentication failed. Please try again.";
+        return NextResponse.json({ error: message }, { status: 401 });
     }
 }
