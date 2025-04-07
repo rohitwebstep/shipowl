@@ -20,7 +20,7 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         if (!adminResponse.status || !adminResponse.admin) {
             adminResponse = await adminByUsernameRole(email, adminStaffRole);
             if (!adminResponse.status || !adminResponse.admin) {
-                return NextResponse.json({ error: adminResponse.message || "Invalid email or password" }, { status: 401 });
+                return NextResponse.json({ message: adminResponse.message || "Invalid email or password", status: false }, { status: 401 });
             }
         }
 
@@ -29,7 +29,7 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         // Compare the provided password with the stored hash
         const isPasswordValid = await comparePassword(password, admin.password);
         if (!isPasswordValid) {
-            return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+            return NextResponse.json({ message: 'Invalid email or password', status: false }, { status: 401 });
         }
 
         // Generate authentication token
@@ -46,7 +46,7 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         });
     } catch (error) {
         console.error(`Error during login:`, error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ message: "Internal Server Error", status: false }, { status: 500 });
     }
 }
 
@@ -55,20 +55,20 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
         // Extract token from Authorization header
         const token = req.headers.get('authorization')?.split(' ')[1];
         if (!token) {
-            return NextResponse.json({ error: 'No token provided' }, { status: 401 });
+            return NextResponse.json({ message: 'No token provided', status: false }, { status: 401 });
         }
 
         // Verify token and extract admin details
         const { payload, status, message } = await verifyToken(token);
         if (!status || !payload || typeof payload.adminId !== 'number') {
-            return NextResponse.json({ error: message }, { status: 403 });
+            return NextResponse.json({ message: message, status: false }, { status: 403 });
         }
 
         // Determine the admin model based on role
         const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
 
         if (![adminRole, adminStaffRole].includes(payloadAdminRole)) {
-            return NextResponse.json({ error: "Access denied. Invalid role." }, { status: 403 });
+            return NextResponse.json({ message: "Access denied. Invalid role.", status: false }, { status: 403 });
         }
 
         const adminModel = ["admin", "dropshipper", "supplier"].includes(payloadAdminRole) ? "admin" : "adminStaff";
@@ -100,13 +100,13 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
         }
 
         if (!admin) {
-            return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+            return NextResponse.json({ message: "Invalid email or password", status: false }, { status: 401 });
         }
 
-        return NextResponse.json({ message: "Token is valid", admin });
+        return NextResponse.json({ message: "Token is valid", admin, status: true });
     } catch (error) {
         console.error(`error - `, error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ message: "Internal Server Error", status: false }, { status: 500 });
     }
 }
 
