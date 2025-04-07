@@ -64,7 +64,13 @@ async function adminAuthMiddleware(req, adminRole, applicableRoles) {
         return response;
     } catch (error) {
         console.error(`error - `, error);
-        const message = error.code === 'ERR_JWT_EXPIRED' ? "Session expired. Please log in again." : "Authentication failed. Please try again.";
+        let message = "Authentication failed. Please try again.";
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error;
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
+            }
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: message
         }, {

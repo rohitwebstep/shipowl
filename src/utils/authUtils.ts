@@ -13,8 +13,13 @@ export async function verifyToken(token: string) {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
         return { payload, status: true, message: "Token is valid" };
     } catch (error) {
-        if (error.code === 'ERR_JWT_EXPIRED') {
-            console.warn('Token expired:', error.payload);
+        if (
+            typeof error === "object" &&
+            error !== null &&
+            "code" in error &&
+            (error as any).code === 'ERR_JWT_EXPIRED'
+        ) {
+            console.warn('Token expired:', (error as any).payload);
             return { payload: null, status: false, message: "Token has expired" };
         } else {
             console.error('Token verification failed:', error);

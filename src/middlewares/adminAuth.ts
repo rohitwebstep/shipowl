@@ -28,10 +28,14 @@ export async function adminAuthMiddleware(req: NextRequest, adminRole: string, a
         return response;
     } catch (error) {
         console.error(`error - `, error);
-        const message =
-            error.code === 'ERR_JWT_EXPIRED'
-                ? "Session expired. Please log in again."
-                : "Authentication failed. Please try again.";
+        let message = "Authentication failed. Please try again.";
+
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error as { code: string };
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
+            }
+        }
         return NextResponse.json({ error: message }, { status: 401 });
     }
 }
