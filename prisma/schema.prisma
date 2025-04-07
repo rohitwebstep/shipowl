@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model admin {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
@@ -23,12 +23,12 @@ model user {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  staff     userStaff[]
+  staff     adminStaff[]
 }
 
-model userStaff {
+model adminStaff {
   id        Int      @id @default(autoincrement())
-  user_id   Int      @unique
+  admin_id   Int      @unique
   name      String
   email     String   @unique
   password  String
@@ -37,5 +37,5 @@ model userStaff {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user      user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  admin      admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }

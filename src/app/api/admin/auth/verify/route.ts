@@ -10,21 +10,21 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'No token provided' }, { status: 401 });
         }
 
-        // Verify token and extract user details
-        const decodedUser = await verifyToken(token);
-        if (!decodedUser || typeof decodedUser.userId !== 'number') {
-            return NextResponse.json({ error: "Invalid token" }, { status: 403 });
+        // Verify token and extract admin details
+        const { payload, status, message } = await verifyToken(token);
+        if (!status || !payload || typeof payload.adminId !== 'number') {
+            return NextResponse.json({ error: message }, { status: 403 });
         }
 
-        // Determine the user model based on role
-        const userRole = String(decodedUser.userRole); // Ensure it's a string
-        const userModel = ["admin", "dropshipper", "supplier"].includes(userRole) ? "user" : "userStaff";
+        // Determine the admin model based on role
+        const adminRole = String(payload.adminRole); // Ensure it's a string
+        const adminModel = ["admin", "dropshipper", "supplier"].includes(adminRole) ? "admin" : "adminStaff";
 
-        // Fetch the user from the database
-        let user
-        if (userModel === "user") {
-            user = await prisma.user.findUnique({
-                where: { id: decodedUser.userId },
+        // Fetch the admin from the database
+        let admin
+        if (adminModel === "admin") {
+            admin = await prisma.admin.findUnique({
+                where: { id: payload.adminId },
                 select: {
                     id: true,
                     name: true,
@@ -34,8 +34,8 @@ export async function GET(req: NextRequest) {
                 },
             });
         } else {
-            user = await prisma.userStaff.findUnique({
-                where: { id: decodedUser.userId },
+            admin = await prisma.adminStaff.findUnique({
+                where: { id: payload.adminId },
                 select: {
                     id: true,
                     name: true,
@@ -46,11 +46,11 @@ export async function GET(req: NextRequest) {
             });
         }
 
-        if (!user) {
+        if (!admin) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
 
-        return NextResponse.json({ message: "Token is valid", user });
+        return NextResponse.json({ message: "Token is valid", admin });
     } catch (error) {
         console.error(`error - `, error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

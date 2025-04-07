@@ -3,25 +3,25 @@ import { isUserExist } from "@/utils/authUtils";
 
 export async function GET(req: NextRequest) {
   try {
-    // Retrieve x-user-id from request headers
-    const userId = req.headers.get("x-user-id");
-    const userRole = req.headers.get("x-user-role");
-    if (!userId || isNaN(Number(userId))) {
+    // Retrieve x-admin-id from request headers
+    const adminId = req.headers.get("x-admin-id");
+    const adminRole = req.headers.get("x-admin-role");
+    if (!adminId || isNaN(Number(adminId))) {
       return NextResponse.json(
         { error: "User ID is missing or invalid in request" },
         { status: 400 }
       );
     }
 
-    // Check if user exists
-    const result = await isUserExist(Number(userId), String(userRole));
+    // Check if admin exists
+    const result = await isUserExist(Number(adminId), String(adminRole));
     if (!result.status) {
       return NextResponse.json({ error: `User Not Found 1: ${result.message}` }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, data: result.user }, { status: 200 });
+    return NextResponse.json({ success: true, data: result.admin }, { status: 200 });
   } catch (error) {
     console.error(`error - `, error);
-    return NextResponse.json({ success: false, error: "Failed to fetch users" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Failed to fetch admins" }, { status: 500 });
   }
 }

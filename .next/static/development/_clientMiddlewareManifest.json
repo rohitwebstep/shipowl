@@ -1,6 +1,6 @@
 [
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/user\\/list(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/user/list"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/admin\\/list(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/admin/list"
   }
 ]

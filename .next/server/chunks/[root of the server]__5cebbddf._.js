@@ -141,10 +141,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__
 ;
 ;
 const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
-function generateToken(userId, userRole) {
+function generateToken(adminId, adminRole) {
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        userId,
-        userRole
+        adminId,
+        adminRole
     }, SECRET_KEY, {
         expiresIn: '1h'
     });
@@ -152,42 +152,80 @@ function generateToken(userId, userRole) {
 async function verifyToken(token) {
     try {
         const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
-        console.log(`payload - `, payload);
-        return payload;
+        return {
+            payload,
+            status: true,
+            message: "Token is valid"
+        };
     } catch (error) {
-        console.error('Token verification failed:', error);
-        return null;
+        if (error.code === 'ERR_JWT_EXPIRED') {
+            console.warn('Token expired:', error.payload);
+            return {
+                payload: null,
+                status: false,
+                message: "Token has expired"
+            };
+        } else {
+            console.error('Token verification failed:', error);
+            return {
+                payload: null,
+                status: false,
+                message: "Token is invalid"
+            };
+        }
     }
 }
-async function isUserExist(userId) {
+async function isUserExist(adminId, adminRole) {
     try {
-        // Fetch user details from database
-        const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].user.findUnique({
-            where: {
-                id: userId
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                password: true,
-                role: true
-            }
-        });
-        // If user doesn't exist, return false with a message
-        if (!user) {
+        const adminRoleStr = String(adminRole); // Ensure it's a string
+        const adminModel = [
+            "admin",
+            "dropshipper",
+            "supplier"
+        ].includes(adminRoleStr) ? "admin" : "adminStaff";
+        // Fetch admin details from database
+        let admin;
+        if (adminModel === "admin") {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+                where: {
+                    id: adminId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        } else {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
+                where: {
+                    id: adminId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        }
+        // If admin doesn't exist, return false with a message
+        if (!admin) {
             return {
                 status: false,
                 message: "User with the provided ID does not exist"
             };
         }
-        // Return user details if found
+        // Return admin details if found
         return {
             status: true,
-            user
+            admin
         };
     } catch (error) {
-        console.error("Error fetching user by ID:", error);
+        console.error("Error fetching admin by ID:", error);
         return {
             status: false,
             message: "Internal Server Error"
@@ -220,36 +258,52 @@ async function GET(req) {
                 status: 401
             });
         }
-        // Verify token and extract user details
-        const decodedUser = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        console.log(`Decoded User: `, decodedUser); // Log the decoded user for debugging
-        if (!decodedUser || typeof decodedUser.userId !== 'number') {
+        // Verify token and extract admin details
+        const { payload, status, message } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
+        if (!status || !payload || typeof payload.adminId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Invalid token"
+                error: message
             }, {
                 status: 403
             });
         }
-        // Determine the user model based on role
-        const userModel = [
+        // Determine the admin model based on role
+        const adminRole = String(payload.adminRole); // Ensure it's a string
+        const adminModel = [
             "admin",
             "dropshipper",
             "supplier"
-        ].includes(decodedUser.adminRole) ? "user" : "userStaff";
-        // Fetch the user from the database
-        let user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"][userModel].findUnique({
-            where: {
-                id: decodedUser.userId
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                createdAt: true
-            }
-        });
-        if (!user) {
+        ].includes(adminRole) ? "admin" : "adminStaff";
+        // Fetch the admin from the database
+        let admin;
+        if (adminModel === "admin") {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+                where: {
+                    id: payload.adminId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true
+                }
+            });
+        } else {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
+                where: {
+                    id: payload.adminId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true
+                }
+            });
+        }
+        if (!admin) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Invalid email or password"
             }, {
@@ -258,7 +312,7 @@ async function GET(req) {
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Token is valid",
-            user
+            admin
         });
     } catch (error) {
         console.error(`error - `, error);

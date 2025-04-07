@@ -14,34 +14,34 @@ export async function handleLogin(req: NextRequest) {
 
         console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
-        // Fetch user by email and role
-        let userResponse = await userByUsernameRole(email, 'admin');
-        if (!userResponse.status || !userResponse.user) {
-            userResponse = await userByUsernameRole(email, 'admin_staff');
-            if (!userResponse.status || !userResponse.user) {
-                userResponse = await userByUsernameRole(email, 'admin_staff');
-                return NextResponse.json({ error: userResponse.message || "Invalid email or password" }, { status: 401 });
+        // Fetch admin by email and role
+        let adminResponse = await adminByUsernameRole(email, 'admin');
+        if (!adminResponse.status || !adminResponse.admin) {
+            adminResponse = await adminByUsernameRole(email, 'admin_staff');
+            if (!adminResponse.status || !adminResponse.admin) {
+                adminResponse = await adminByUsernameRole(email, 'admin_staff');
+                return NextResponse.json({ error: adminResponse.message || "Invalid email or password" }, { status: 401 });
             }
         }
 
-        const user = userResponse.user;
+        const admin = adminResponse.admin;
 
         // Compare the provided password with the stored hash
-        const isPasswordValid = await comparePassword(password, user.password);
+        const isPasswordValid = await comparePassword(password, admin.password);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
 
         // Generate authentication token
-        const token = generateToken(user.id, user.role);
+        const token = generateToken(admin.id, admin.role);
         return NextResponse.json({
             message: "Login successful",
             token,
-            user: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                role: user.role,
+            admin: {
+                id: admin.id,
+                name: admin.name,
+                email: admin.email,
+                role: admin.role,
             },
         });
     } catch (error) {
@@ -50,17 +50,17 @@ export async function handleLogin(req: NextRequest) {
     }
 }
 
-export async function userByUsernameRole(username: string, role: string) {
+export async function adminByUsernameRole(adminname: string, role: string) {
     try {
 
-        const userRoleStr = String(role); // Ensure it's a string
-        const userModel = ["admin", "dropshipper", "supplier"].includes(userRoleStr) ? "user" : "userStaff";
+        const adminRoleStr = String(role); // Ensure it's a string
+        const adminModel = ["admin", "dropshipper", "supplier"].includes(adminRoleStr) ? "admin" : "adminStaff";
 
-        // Fetch user details from database
-        let user
-        if (userModel === "user") {
-            user = await prisma.user.findFirst({
-                where: { email: username, role },
+        // Fetch admin details from database
+        let admin
+        if (adminModel === "admin") {
+            admin = await prisma.admin.findFirst({
+                where: { email: adminname, role },
                 select: {
                     id: true,
                     name: true,
@@ -70,8 +70,8 @@ export async function userByUsernameRole(username: string, role: string) {
                 },
             });
         } else {
-            user = await prisma.userStaff.findFirst({
-                where: { email: username, role },
+            admin = await prisma.adminStaff.findFirst({
+                where: { email: adminname, role },
                 select: {
                     id: true,
                     name: true,
@@ -82,14 +82,14 @@ export async function userByUsernameRole(username: string, role: string) {
             });
         }
 
-        // If user doesn't exist, return false with a message
-        if (!user) {
+        // If admin doesn't exist, return false with a message
+        if (!admin) {
             return { status: false, message: "User with the provided ID does not exist" };
         }
 
-        return { status: true, user };
+        return { status: true, admin };
     } catch (error) {
-        console.error(`Error fetching user:`, error);
+        console.error(`Error fetching admin:`, error);
         return { status: false, message: "Internal Server Error" };
     }
 }
