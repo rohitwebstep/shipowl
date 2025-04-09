@@ -39,8 +39,8 @@
           "originalSource": "/api/product/create"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category/create{(\\\\.json)}?",
-          "originalSource": "/api/category/create"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category{(\\\\.json)}?",
+          "originalSource": "/api/category"
         }
       ],
       "wasm": [],

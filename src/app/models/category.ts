@@ -58,3 +58,66 @@ export async function createCategory(adminId: number, adminRole: string, categor
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+// 🟡 UPDATE
+export const updateCategory = async (
+    adminId: number,
+    adminRole: string,
+    categoryId: number,
+    data: Category
+) => {
+    try {
+        data.updatedBy = adminId;
+        data.updatedAt = new Date();
+        data.updatedByRole = adminRole;
+
+        const category = await prisma.category.update({
+            where: { id: categoryId }, // Assuming 'id' is the correct primary key field
+            data: data,
+        });
+
+        return { status: true, category };
+    } catch (error) {
+        console.error("❌ updateCategory Error:", error);
+        return { status: false, message: "Error updating category" };
+    }
+};
+
+// 🔵 GET BY ID
+export const getCategoryById = async (id: number) => {
+    try {
+        const category = await prisma.category.findUnique({
+            where: { id },
+        });
+
+        if (!category) return { status: false, message: "Category not found" };
+        return { status: true, category };
+    } catch (error) {
+        console.error("❌ getCategoryById Error:", error);
+        return { status: false, message: "Error fetching category" };
+    }
+};
+
+// 🟣 GET ALL
+export const getAllCategories = async () => {
+    try {
+        const categories = await prisma.category.findMany({
+            orderBy: { id: 'desc' },
+        });
+        return { status: true, categories };
+    } catch (error) {
+        console.error("❌ getAllCategories Error:", error);
+        return { status: false, message: "Error fetching categories" };
+    }
+};
+
+// 🔴 DELETE
+export const deleteCategory = async (id: number) => {
+    try {
+        await prisma.category.delete({ where: { id } });
+        return { status: true, message: "Category deleted successfully" };
+    } catch (error) {
+        console.error("❌ deleteCategory Error:", error);
+        return { status: false, message: "Error deleting category" };
+    }
+};

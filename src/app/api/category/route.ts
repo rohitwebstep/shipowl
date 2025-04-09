@@ -4,7 +4,7 @@ import path from 'path';
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { createCategory } from '@/app/models/category';
+import { createCategory, getAllCategories } from '@/app/models/category';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -112,3 +112,50 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    // Retrieve x-admin-id and x-admin-role from request headers
+    const adminIdHeader = req.headers.get("x-admin-id");
+    const adminRole = req.headers.get("x-admin-role");
+
+    const adminId = Number(adminIdHeader);
+    if (!adminIdHeader || isNaN(adminId)) {
+      return NextResponse.json(
+        { status: false, error: "User ID is missing or invalid in request" },
+        { status: 400 }
+      );
+    }
+
+    // Check if admin exists
+    const result = await isUserExist(adminId, String(adminRole));
+    if (!result.status) {
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${result.message}` },
+        { status: 404 }
+      );
+    }
+
+    // Fetch all categories
+    const categoriesResult = await getAllCategories();
+
+    if (categoriesResult?.status) {
+      return NextResponse.json(
+        { status: true, categories: categoriesResult.categories },
+        { status: 200 }
+      );
+    }
+
+    return NextResponse.json(
+      { status: false, error: "No categories found" },
+      { status: 404 }
+    );
+  } catch (error) {
+    console.error("❌ Error fetching categories:", error);
+    return NextResponse.json(
+      { status: false, error: "Failed to fetch categories" },
+      { status: 500 }
+    );
+  }
+}
+
