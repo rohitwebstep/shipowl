@@ -1,81 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isUserExist } from '@/utils/authUtils';
-import { writeFile, mkdir } from 'fs/promises';
+import { saveFilesFromFormData } from '@/utils/saveFiles';
 import path from 'path';
-import fs from 'fs';
-
-export const config = {
-  runtime: 'nodejs',
-};
-
-interface FileInfo {
-  name: string;
-  type: string;
-  size: number;
-  url: string;
-}
-
-interface FormDataObj {
-  [key: string]: string | FileInfo | FileInfo[];
-}
 
 export async function POST(req: NextRequest) {
   try {
-    const adminId = req.headers.get('x-admin-id');
-    const adminRole = req.headers.get('x-admin-role');
-
-    if (!adminId || isNaN(Number(adminId))) {
-      return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
-    }
-
     const formData = await req.formData();
-    const formDataObj: FormDataObj = {};
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    const uploadPath = path.join(process.cwd(), 'public', 'uploads', 'products');
 
-    // 🟡 Ensure uploads directory exists
-    if (!fs.existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-      console.log(`📁 Created uploads directory at ${uploadsDir}`);
-    }
+    const fileData = await saveFilesFromFormData(formData, 'image', {
+      dir: uploadPath,
+      pattern: 'slug-unique',
+      multiple: true,
+    });
 
-    for (const [key, value] of formData.entries()) {
-      if (value instanceof File && value.name) {
-        const bytes = await value.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const uploadPath = path.join(uploadsDir, value.name);
-
-        await writeFile(uploadPath, buffer);
-        console.log(`✅ Saved file ${value.name} at ${uploadPath}`);
-
-        const fileInfo: FileInfo = {
-          name: value.name,
-          type: value.type,
-          size: value.size,
-          url: `/uploads/${value.name}`,
-        };
-
-        if (formDataObj[key]) {
-          if (!Array.isArray(formDataObj[key])) {
-            formDataObj[key] = [formDataObj[key] as FileInfo];
-          }
-          (formDataObj[key] as FileInfo[]).push(fileInfo);
-        } else {
-          formDataObj[key] = fileInfo;
-        }
-      } else {
-        formDataObj[key] = value as string;
-      }
-    }
-
-    const result = await isUserExist(Number(adminId), String(adminRole));
-    if (!result.status) {
-      return NextResponse.json({ error: `User Not Found: ${result.message}` }, { status: 404 });
-    }
-
-    return NextResponse.json({ success: true, data: formDataObj }, { status: 200 });
-  } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ success: false, error: 'Failed to process request' }, { status: 500 });
+    return NextResponse.json({ success: true, files: fileData });
+  } catch (err) {
+    console.error('❌ File Save Error:', err);
+    return NextResponse.json({ success: false, error: 'File upload failed' }, { status: 500 });
   }
 }
