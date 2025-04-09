@@ -158,21 +158,18 @@ async function verifyToken(token) {
             message: "Token is valid"
         };
     } catch (error) {
-        if (error.code === 'ERR_JWT_EXPIRED') {
-            console.warn('Token expired:', error.payload);
-            return {
-                payload: null,
-                status: false,
-                message: "Token has expired"
-            };
-        } else {
-            console.error('Token verification failed:', error);
-            return {
-                payload: null,
-                status: false,
-                message: "Token is invalid"
-            };
+        let message = "Authentication failed. Please try again.";
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error;
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
+            }
         }
+        return {
+            payload: null,
+            status: false,
+            message
+        };
     }
 }
 async function isUserExist(adminId, adminRole) {
@@ -188,7 +185,8 @@ async function isUserExist(adminId, adminRole) {
         if (adminModel === "admin") {
             admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
                 where: {
-                    id: adminId
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
@@ -201,7 +199,8 @@ async function isUserExist(adminId, adminRole) {
         } else {
             admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
                 where: {
-                    id: adminId
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
@@ -286,7 +285,8 @@ async function handleLogin(req, adminRole, adminStaffRole) {
             adminResponse = await adminByUsernameRole(email, adminStaffRole);
             if (!adminResponse.status || !adminResponse.admin) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    error: adminResponse.message || "Invalid email or password"
+                    message: adminResponse.message || "Invalid email or password",
+                    status: false
                 }, {
                     status: 401
                 });
@@ -297,7 +297,8 @@ async function handleLogin(req, adminRole, adminStaffRole) {
         const isPasswordValid = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["comparePassword"])(password, admin.password);
         if (!isPasswordValid) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Invalid email or password'
+                message: 'Invalid email or password',
+                status: false
             }, {
                 status: 401
             });
@@ -317,7 +318,8 @@ async function handleLogin(req, adminRole, adminStaffRole) {
     } catch (error) {
         console.error(`Error during login:`, error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Internal Server Error"
+            message: "Internal Server Error",
+            status: false
         }, {
             status: 500
         });
@@ -329,7 +331,8 @@ async function handleVerifyLogin(req, adminRole, adminStaffRole) {
         const token = req.headers.get('authorization')?.split(' ')[1];
         if (!token) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'No token provided'
+                message: 'No token provided',
+                status: false
             }, {
                 status: 401
             });
@@ -338,19 +341,21 @@ async function handleVerifyLogin(req, adminRole, adminStaffRole) {
         const { payload, status, message } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
         if (!status || !payload || typeof payload.adminId !== 'number') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: message
+                message: message,
+                status: false
             }, {
                 status: 403
             });
         }
         // Determine the admin model based on role
         const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-        if ([
+        if (![
             adminRole,
             adminStaffRole
         ].includes(payloadAdminRole)) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Access denied. Invalid role."
+                message: "Access denied. Invalid role.",
+                status: false
             }, {
                 status: 403
             });
@@ -391,25 +396,28 @@ async function handleVerifyLogin(req, adminRole, adminStaffRole) {
         }
         if (!admin) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Invalid email or password"
+                message: "Invalid email or password",
+                status: false
             }, {
                 status: 401
             });
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Token is valid",
-            admin
+            admin,
+            status: true
         });
     } catch (error) {
         console.error(`error - `, error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Internal Server Error"
+            message: "Internal Server Error",
+            status: false
         }, {
             status: 500
         });
     }
 }
-async function adminByUsernameRole(adminname, role) {
+async function adminByUsernameRole(username, role) {
     try {
         const adminRoleStr = String(role); // Ensure it's a string
         const adminModel = [
@@ -422,7 +430,7 @@ async function adminByUsernameRole(adminname, role) {
         if (adminModel === "admin") {
             admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findFirst({
                 where: {
-                    email: adminname,
+                    email: username,
                     role
                 },
                 select: {
@@ -436,7 +444,7 @@ async function adminByUsernameRole(adminname, role) {
         } else {
             admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findFirst({
                 where: {
-                    email: adminname,
+                    email: username,
                     role
                 },
                 select: {
