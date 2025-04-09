@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isUserExist } from "@/utils/authUtils";
 import { getCategoryById } from '@/app/models/category';
 
+// ✅ Correct function signature with `context` object
 export async function GET(
   req: NextRequest,
-  context: { params: { categoryId: string } } // ✅ explicitly name it 'context'
+  context: { params: Record<string, string> }
 ) {
   try {
     const adminId = req.headers.get('x-admin-id');
