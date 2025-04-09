@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isUserExist } from "@/utils/authUtils";
 import { getCategoryById } from '@/app/models/category';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { categoryId: string } } // Destructure params directly with proper typing
-) {
+// Define the type for the params explicitly if needed
+interface RouteParams {
+  params: {
+    categoryId: string;
+  };
+}
+
+export async function GET(req: NextRequest, { params }: RouteParams) {
   try {
     const adminId = req.headers.get('x-admin-id');
     const adminRole = req.headers.get('x-admin-role');
@@ -19,7 +23,7 @@ export async function GET(
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const { categoryId } = params; // Access categoryId directly from params
+    const { categoryId } = params;
     const categoryIdNum = Number(categoryId);
     if (isNaN(categoryIdNum)) {
       return NextResponse.json({ error: 'Invalid category ID' }, { status: 400 });
