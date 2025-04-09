@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isUserExist } from "@/utils/authUtils";
 import { getCategoryById } from '@/app/models/category';
 
-// ✅ Correct function signature with `context` object
 export async function GET(
   req: NextRequest,
-  context: { params: Record<string, string> }
+  context: { params: { categoryId: string } }
 ) {
   try {
     const adminId = req.headers.get('x-admin-id');
@@ -20,12 +19,13 @@ export async function GET(
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const categoryId = Number(context.params.categoryId);
-    if (isNaN(categoryId)) {
+    const { categoryId } = context.params;
+    const categoryIdNum = Number(categoryId);
+    if (isNaN(categoryIdNum)) {
       return NextResponse.json({ error: 'Invalid category ID' }, { status: 400 });
     }
 
-    const categoryResult = await getCategoryById(categoryId);
+    const categoryResult = await getCategoryById(categoryIdNum);
     if (categoryResult?.status) {
       return NextResponse.json({ status: true, category: categoryResult.category }, { status: 200 });
     }
