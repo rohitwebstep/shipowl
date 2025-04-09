@@ -68,7 +68,7 @@ export async function saveFilesFromFormData(
 
     // console.log(`🚀 Starting file save from field: "${fieldName}"`);
     await ensureDir(dir);
-    const result: any = multiple ? [] : null;
+    let result: UploadedFileInfo[] | UploadedFileInfo | null = multiple ? [] : null;
 
     const files = formData.getAll(fieldName).filter(
         (item): item is File => item instanceof File && item.name
@@ -78,7 +78,6 @@ export async function saveFilesFromFormData(
 
     for (let index = 0; index < files.length; index++) {
         const file = files[index];
-        // console.log(`📄 Processing file ${index + 1}: ${file.name}`);
 
         const nameToUse =
             pattern === 'custom' && multiple
@@ -93,13 +92,11 @@ export async function saveFilesFromFormData(
         const buffer = Buffer.from(bytes);
         const fullPath = path.join(dir, finalFileName);
 
-        // console.log(`💾 Saving file to: ${fullPath}`);
         await writeFile(fullPath, buffer);
-        // console.log(`✅ Saved file ${file.name} as ${finalFileName}`);
 
         const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
 
-        const info = {
+        const info: UploadedFileInfo = {
             originalName: file.name,
             savedAs: finalFileName,
             size: file.size,
@@ -107,15 +104,13 @@ export async function saveFilesFromFormData(
             url: `/uploads${fileUrl}`,
         };
 
-        // console.log(`📁 File saved info:`, info);
-
-        if (multiple) {
+        if (multiple && Array.isArray(result)) {
             result.push(info);
         } else {
-            return info;
+            result = info;
         }
     }
 
-    // console.log(`🎉 All files processed.`);
-    return result;
+    return result!;
+
 }
