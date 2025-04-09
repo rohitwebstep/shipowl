@@ -1,9 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
 import prisma from "@/lib/prisma";
-import { generateToken } from '@/utils/authUtils';
-import { comparePassword } from '@/utils/hashUtils';
-import { verifyToken } from '@/utils/authUtils';
-import bcrypt from 'bcryptjs';
 
 interface Product {
     name: string;
