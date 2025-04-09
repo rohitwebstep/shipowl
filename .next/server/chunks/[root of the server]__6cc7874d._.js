@@ -397,7 +397,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$cate
 ;
 ;
 ;
-async function GET(req, context) {
+async function GET(req, { params } // Use inline typing without a separate interface
+) {
     try {
         const adminId = req.headers.get('x-admin-id');
         const adminRole = req.headers.get('x-admin-role');
@@ -416,7 +417,7 @@ async function GET(req, context) {
                 status: 404
             });
         }
-        const { categoryId } = context.params;
+        const { categoryId } = params;
         const categoryIdNum = Number(categoryId);
         if (isNaN(categoryIdNum)) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
