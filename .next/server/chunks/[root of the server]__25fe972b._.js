@@ -232,21 +232,54 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
+"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
+
+module.exports = mod;
+}}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
+"[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs", () => require("fs"));
+
+module.exports = mod;
+}}),
 "[project]/src/app/api/product/create/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "POST": (()=>POST)
+    "POST": (()=>POST),
+    "config": (()=>config)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
 ;
 ;
+;
+;
+;
+const config = {
+    runtime: 'nodejs'
+};
 async function POST(req) {
     try {
-        // Retrieve x-admin-id from request headers
         const adminId = req.headers.get('x-admin-id');
         const adminRole = req.headers.get('x-admin-role');
         if (!adminId || isNaN(Number(adminId))) {
@@ -256,270 +289,54 @@ async function POST(req) {
                 status: 400
             });
         }
-        // 🟡 Extract form-data from the request
         const formData = await req.formData();
-        const title = formData.get('title');
-        console.log(`formData: `, formData);
-        console.log(`title: `, title);
         const formDataObj = {};
-        formData.forEach((value, key)=>{
-            formDataObj[key] = value;
-        });
-        console.log('Parsed Form Data:', formDataObj);
-        // Check if admin exists
+        const uploadsDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads');
+        // 🟡 Ensure uploads directory exists
+        if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(uploadsDir)) {
+            await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(uploadsDir, {
+                recursive: true
+            });
+            console.log(`📁 Created uploads directory at ${uploadsDir}`);
+        }
+        for (const [key, value] of formData.entries()){
+            if (value instanceof File && value.name) {
+                const bytes = await value.arrayBuffer();
+                const buffer = Buffer.from(bytes);
+                const uploadPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadsDir, value.name);
+                await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(uploadPath, buffer);
+                console.log(`✅ Saved file ${value.name} at ${uploadPath}`);
+                const fileInfo = {
+                    name: value.name,
+                    type: value.type,
+                    size: value.size,
+                    url: `/uploads/${value.name}`
+                };
+                if (formDataObj[key]) {
+                    if (!Array.isArray(formDataObj[key])) {
+                        formDataObj[key] = [
+                            formDataObj[key]
+                        ];
+                    }
+                    formDataObj[key].push(fileInfo);
+                } else {
+                    formDataObj[key] = fileInfo;
+                }
+            } else {
+                formDataObj[key] = value;
+            }
+        }
         const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
         if (!result.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found 1: ${result.message}`
+                error: `User Not Found: ${result.message}`
             }, {
                 status: 404
             });
         }
-        const products = [
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Description 1',
-                image: 'image1.jpg',
-                category: 'Category 1',
-                stock: 10,
-                sku: 'SKU1',
-                tags: [
-                    'tag1',
-                    'tag2'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 2',
-                price: 150,
-                description: 'Description 2',
-                image: 'image2.jpg',
-                category: 'Category 2',
-                stock: 20,
-                sku: 'SKU2',
-                tags: [
-                    'tag3',
-                    'tag4'
-                ],
-                status: 'inactive',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 3',
-                price: 200,
-                description: 'Description 3',
-                image: 'image3.jpg',
-                category: 'Category 1',
-                stock: 5,
-                sku: 'SKU3',
-                tags: [
-                    'tag1',
-                    'tag5'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 4',
-                price: 50,
-                description: 'Description 4',
-                image: 'image4.jpg',
-                category: 'Category 3',
-                stock: 30,
-                sku: 'SKU4',
-                tags: [
-                    'tag6'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 5',
-                price: 120,
-                description: 'Description 5',
-                image: 'image5.jpg',
-                category: 'Category 2',
-                stock: 15,
-                sku: 'SKU5',
-                tags: [
-                    'tag3',
-                    'tag7'
-                ],
-                status: 'inactive',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 6',
-                price: 250,
-                description: 'Description 6',
-                image: 'image6.jpg',
-                category: 'Category 1',
-                stock: 12,
-                sku: 'SKU6',
-                tags: [
-                    'tag2',
-                    'tag8'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 7',
-                price: 90,
-                description: 'Description 7',
-                image: 'image7.jpg',
-                category: 'Category 4',
-                stock: 50,
-                sku: 'SKU7',
-                tags: [
-                    'tag9'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 8',
-                price: 180,
-                description: 'Description 8',
-                image: 'image8.jpg',
-                category: 'Category 5',
-                stock: 25,
-                sku: 'SKU8',
-                tags: [
-                    'tag10',
-                    'tag11'
-                ],
-                status: 'inactive',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 9',
-                price: 160,
-                description: 'Description 9',
-                image: 'image9.jpg',
-                category: 'Category 3',
-                stock: 8,
-                sku: 'SKU9',
-                tags: [
-                    'tag4',
-                    'tag12'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 10',
-                price: 220,
-                description: 'Description 10',
-                image: 'image10.jpg',
-                category: 'Category 2',
-                stock: 18,
-                sku: 'SKU10',
-                tags: [
-                    'tag5',
-                    'tag13'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 11',
-                price: 140,
-                description: 'Description 11',
-                image: 'image11.jpg',
-                category: 'Category 4',
-                stock: 35,
-                sku: 'SKU11',
-                tags: [
-                    'tag6',
-                    'tag14'
-                ],
-                status: 'inactive',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 12',
-                price: 110,
-                description: 'Description 12',
-                image: 'image12.jpg',
-                category: 'Category 1',
-                stock: 40,
-                sku: 'SKU12',
-                tags: [
-                    'tag7',
-                    'tag15'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 13',
-                price: 300,
-                description: 'Description 13',
-                image: 'image13.jpg',
-                category: 'Category 5',
-                stock: 7,
-                sku: 'SKU13',
-                tags: [
-                    'tag8',
-                    'tag16'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 14',
-                price: 80,
-                description: 'Description 14',
-                image: 'image14.jpg',
-                category: 'Category 3',
-                stock: 22,
-                sku: 'SKU14',
-                tags: [
-                    'tag9',
-                    'tag17'
-                ],
-                status: 'inactive',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'Product 15',
-                price: 130,
-                description: 'Description 15',
-                image: 'image15.jpg',
-                category: 'Category 2',
-                stock: 12,
-                sku: 'SKU15',
-                tags: [
-                    'tag10',
-                    'tag18'
-                ],
-                status: 'active',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            }
-        ];
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true,
-            data: {
-                formDataObj
-            }
+            data: formDataObj
         }, {
             status: 200
         });
@@ -527,7 +344,7 @@ async function POST(req) {
         console.error('Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: false,
-            error: 'Failed to fetch admins'
+            error: 'Failed to process request'
         }, {
             status: 500
         });
@@ -537,4 +354,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__b1ac5185._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__25fe972b._.js.map
