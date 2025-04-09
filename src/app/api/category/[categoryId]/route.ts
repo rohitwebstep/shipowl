@@ -2,14 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isUserExist } from "@/utils/authUtils";
 import { getCategoryById } from '@/app/models/category';
 
-// Define the type for the params explicitly if needed
-interface RouteParams {
-  params: {
-    categoryId: string;
-  };
-}
-
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { categoryId: string } } // Use inline typing without a separate interface
+) {
   try {
     const adminId = req.headers.get('x-admin-id');
     const adminRole = req.headers.get('x-admin-role');
