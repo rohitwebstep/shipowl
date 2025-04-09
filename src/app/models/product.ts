@@ -33,7 +33,7 @@ export async function generateProductSlug(name: string) {
     return slug;
 }
 
-export async function createProduct(adminId: number, product: Product) {
+export async function createProduct(adminId: number, adminRole: string, product: Product) {
 
     try {
         const { name, description, price, quantity, status, image } = product;
@@ -52,6 +52,7 @@ export async function createProduct(adminId: number, product: Product) {
                 image,
                 createdAt: new Date(),
                 createdBy: adminId,
+                createdByRole: adminRole,
             },
         });
 

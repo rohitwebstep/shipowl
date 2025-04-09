@@ -18,7 +18,7 @@ export function middleware(req: NextRequest) {
     const adminProtectedRoutes = ["/api/admin/list", "/api/admin/auth/verify"];
     const dropshipperProtectedRoutes = ["/api/dropshipper/list", "/api/dropshipper/auth/verify"];
     const supplierProtectedRoutes = ["/api/supplier/list", "/api/supplier/auth/verify"];
-    const restProtectedRoutes = ["/api/product/create"];
+    const restProtectedRoutes = ["/api/product/create", "/api/category/create"];
 
     if (adminProtectedRoutes.some(route => req.url.includes(route))) {
         const applicableRoles = ["admin", "admin_staff"];
@@ -49,5 +49,5 @@ export function middleware(req: NextRequest) {
 
 // Define the matcher for specific routes
 export const config = {
-    matcher: ["/api/admin/list", "/api/admin/auth/verify", "/api/dropshipper/list", "/api/dropshipper/auth/verify", "/api/supplier/list", "/api/supplier/auth/verify", "/api/product/create"],
+    matcher: ["/api/admin/list", "/api/admin/auth/verify", "/api/dropshipper/list", "/api/dropshipper/auth/verify", "/api/supplier/list", "/api/supplier/auth/verify", "/api/product/create", "/api/category/create"],
 };

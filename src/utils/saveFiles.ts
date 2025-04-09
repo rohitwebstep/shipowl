@@ -13,10 +13,10 @@ export interface UploadedFileInfo {
 // Helper: ensure directory exists
 async function ensureDir(dirPath: string) {
     if (!fs.existsSync(dirPath)) {
-        // console.log(`📁 Directory not found. Creating: ${dirPath}`);
+        console.log(`📁 Directory not found. Creating: ${dirPath}`);
         await mkdir(dirPath, { recursive: true });
     } else {
-        // console.log(`✅ Directory already exists: ${dirPath}`);
+        console.log(`✅ Directory already exists: ${dirPath}`);
     }
 }
 
@@ -31,21 +31,21 @@ function generateFileName(
 
     switch (pattern) {
         case 'original':
-            // console.log(`📝 Using original filename: ${originalName}`);
+            console.log(`📝 Using original filename: ${originalName}`);
             return originalName;
         case 'custom':
             const name = `${customName}${ext}`;
-            // console.log(`📝 Using custom filename: ${name}`);
+            console.log(`📝 Using custom filename: ${name}`);
             return name;
         case 'slug':
             const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
             const slugName = `${slug}${ext}`;
-            // console.log(`📝 Using slug filename: ${slugName}`);
+            console.log(`📝 Using slug filename: ${slugName}`);
             return slugName;
         case 'slug-unique':
             const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
             const slugUniqueName = `${unique}${ext}`;
-            // console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
+            console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
             return slugUniqueName;
         default:
             return originalName;
@@ -66,7 +66,7 @@ export async function saveFilesFromFormData(
 ): Promise<UploadedFileInfo | UploadedFileInfo[]> {
     const { dir, pattern, customName, multiple = false } = options;
 
-    // console.log(`🚀 Starting file save from field: "${fieldName}"`);
+    console.log(`🚀 Starting file save from field: "${fieldName}"`);
     await ensureDir(dir);
     let result: UploadedFileInfo[] | UploadedFileInfo | null = multiple ? [] : null;
 
@@ -74,7 +74,7 @@ export async function saveFilesFromFormData(
         (item): item is File => item instanceof File && item.name.length > 0
     );
 
-    // console.log(`📦 Total files to process: ${files.length}`);
+    console.log(`📦 Total files to process: ${files.length}`);
 
     for (let index = 0; index < files.length; index++) {
         const file = files[index];

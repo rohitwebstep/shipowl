@@ -24,10 +24,6 @@ model admin {
   updatedAt DateTime @updatedAt
 
   staff     adminStaff[]
-
-  // 👇 Add these two lines for back-relations
-  productsCreated product[] @relation("ProductCreatedBy")
-  productsUpdated product[] @relation("ProductUpdatedBy")
 }
 
 model adminStaff {
@@ -44,21 +40,40 @@ model adminStaff {
   admin      admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }
 
-model product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  slug        String   @unique
-  description String?
-  image       String?
-  price       Decimal  @db.Decimal(10, 2)
-  quantity    Int      @default(0)
-  status      Boolean  @default(false)
-  createdBy   Int?
-  updatedBy   Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model category {
+  id             Int      @id @default(autoincrement())
+  name           String
+  slug           String   @unique
+  description    String?
+  image          String?
+  status         Boolean  @default(false)
+  createdBy      Int?
+  createdByRole  String?
+  updatedBy      Int?
+  updatedByRole  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  // ✅ Relations with named relation identifiers
-  adminCreatedBy admin? @relation("ProductCreatedBy", fields: [createdBy], references: [id], onDelete: SetNull)
-  adminUpdatedBy admin? @relation("ProductUpdatedBy", fields: [updatedBy], references: [id], onDelete: SetNull)
+  @@index([createdBy])
+  @@index([updatedBy])
+}
+
+model product {
+  id             Int      @id @default(autoincrement())
+  name           String
+  slug           String   @unique
+  description    String?
+  image          String?
+  price          Decimal  @db.Decimal(10, 2)
+  quantity       Int      @default(0)
+  status         Boolean  @default(false)
+  createdBy      Int?
+  createdByRole  String?
+  updatedBy      Int?
+  updatedByRole  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
