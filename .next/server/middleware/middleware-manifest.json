@@ -41,6 +41,10 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category{(\\\\.json)}?",
           "originalSource": "/api/category"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category/:path*{(\\\\.json)}?",
+          "originalSource": "/api/category/:path*"
         }
       ],
       "wasm": [],
@@ -48,9 +52,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "2f5ecc67dbba45f86f08b7a716c684fd",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "988b29ec97ef0744c64baa21866b95f4f9b860ca90c19d9bfcbabe3281b1fb6f",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "7605524cc3905f1fea210b3f2fd57109f9d03272ec89c2e30510df2e46013d0d"
+        "__NEXT_PREVIEW_MODE_ID": "d1a514ded4e74546db240bb7f69c8eea",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "d44d026bf056647e71eeb6fa703d450418f64fc6c3ed4feac66e0b28d07c17bf",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "7df32c4fad8ca89094c29bc815c1d961812b43ffaf8a350309c64d8960eec45c"
       }
     }
   },

@@ -1,7 +1,5 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/category/create/route": "app/api/category/create/route.js",
-  "/api/category/route": "app/api/category/route.js",
-  "/api/product/create/route": "app/api/product/create/route.js"
+  "/api/category/[categoryId]/route": "app/api/category/[categoryId]/route.js",
+  "/api/category/route": "app/api/category/route.js"
 }

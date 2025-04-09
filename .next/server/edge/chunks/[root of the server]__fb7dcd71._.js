@@ -122,7 +122,8 @@ function middleware(req) {
     ];
     const restProtectedRoutes = [
         "/api/product/create",
-        "/api/category"
+        "/api/category",
+        "/api/category/:path*"
     ];
     if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
         const applicableRoles = [
@@ -158,6 +159,7 @@ function middleware(req) {
             "supplier_staff"
         ];
         const adminRole = "admin";
+        console.log(`adminAuthMiddleware(req, adminRole, applicableRoles) - `, (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles));
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
     }
     return req; // Continue processing for other routes
@@ -171,7 +173,8 @@ const config = {
         "/api/supplier/list",
         "/api/supplier/auth/verify",
         "/api/product/create",
-        "/api/category"
+        "/api/category",
+        "/api/category/:path*"
     ]
 };
 }}),
