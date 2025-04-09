@@ -33,7 +33,8 @@ export async function generateProductSlug(name: string) {
     return slug;
 }
 
-export async function createProduct(adminId: Number, product: Product) {
+export async function createProduct(adminId: number, product: Product) {
+
     try {
         const { name, description, price, quantity, status, image } = product;
 

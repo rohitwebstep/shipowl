@@ -6,6 +6,14 @@ import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createProduct } from '@/app/api/models/product';
 
+type UploadedFileInfo = {
+  originalName: string;
+  savedAs: string;
+  size: number;
+  type: string;
+  url: string;
+};
+
 export async function POST(req: NextRequest) {
   try {
     // Get headers
@@ -41,7 +49,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!validation.isValid) {
-      return NextResponse.json({ success: false, error: validation.errors }, { status: 400 });
+      return NextResponse.json({ status: false, error: validation.errors }, { status: 400 });
     }
 
     // Extract fields
@@ -61,8 +69,8 @@ export async function POST(req: NextRequest) {
     });
 
     const image = isMultipleImages
-      ? (fileData as any[]).map(file => file.url).join(', ')
-      : (fileData as any).url;
+      ? (fileData as UploadedFileInfo[]).map(file => file.url).join(', ')
+      : (fileData as UploadedFileInfo).url;
 
     const productPayload = {
       name,
@@ -78,13 +86,14 @@ export async function POST(req: NextRequest) {
     const productCreateResult = await createProduct(adminId, productPayload);
 
     if (productCreateResult?.status) {
-      return NextResponse.json({ success: true, product: productCreateResult.product }, { status: 200 });
+      return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
     }
 
-    return NextResponse.json({ success: false, error: productCreateResult?.message || 'Product creation failed' }, { status: 500 });
+    return NextResponse.json({ status: false, error: productCreateResult?.message || 'Product creation failed' }, { status: 500 });
 
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const error = err instanceof Error ? err.message : 'Internal Server Error';
     console.error('❌ Product Creation Error:', err);
-    return NextResponse.json({ success: false, error: err.message || 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
