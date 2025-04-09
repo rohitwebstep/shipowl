@@ -8,6 +8,17 @@ export const config = {
   runtime: 'nodejs',
 };
 
+interface FileInfo {
+  name: string;
+  type: string;
+  size: number;
+  url: string;
+}
+
+interface FormDataObj {
+  [key: string]: string | FileInfo | FileInfo[];
+}
+
 export async function POST(req: NextRequest) {
   try {
     const adminId = req.headers.get('x-admin-id');
@@ -18,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     const formData = await req.formData();
-    const formDataObj: { [key: string]: any } = {};
+    const formDataObj: FormDataObj = {};
 
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
 
@@ -37,7 +48,7 @@ export async function POST(req: NextRequest) {
         await writeFile(uploadPath, buffer);
         console.log(`✅ Saved file ${value.name} at ${uploadPath}`);
 
-        const fileInfo = {
+        const fileInfo: FileInfo = {
           name: value.name,
           type: value.type,
           size: value.size,
@@ -46,14 +57,14 @@ export async function POST(req: NextRequest) {
 
         if (formDataObj[key]) {
           if (!Array.isArray(formDataObj[key])) {
-            formDataObj[key] = [formDataObj[key]];
+            formDataObj[key] = [formDataObj[key] as FileInfo];
           }
-          formDataObj[key].push(fileInfo);
+          (formDataObj[key] as FileInfo[]).push(fileInfo);
         } else {
           formDataObj[key] = fileInfo;
         }
       } else {
-        formDataObj[key] = value;
+        formDataObj[key] = value as string;
       }
     }
 
