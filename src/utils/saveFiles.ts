@@ -126,6 +126,7 @@ export async function deleteFile(filePath: string): Promise<boolean> {
         await unlink(filePath);
         return true;
     } catch (error) {
+        console.log(`error - File not found or couldn't be deleted: ${filePath}`, error);
         return false;
     }
 }
