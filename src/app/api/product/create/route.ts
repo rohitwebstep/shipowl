@@ -14,6 +14,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 🟡 Extract form-data from the request
+    const formData = await req.formData();
+    const title = formData.get('title');
+    console.log(`formData: `, formData);
+    console.log(`title: `, title);
+
+    const formDataObj: { [key: string]: any } = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value;
+    });
+
+    console.log('Parsed Form Data:', formDataObj);
+
     // Check if admin exists
     const result = await isUserExist(Number(adminId), String(adminRole));
     if (!result.status) {
@@ -218,7 +231,7 @@ export async function POST(req: NextRequest) {
       },
     ];
 
-    return NextResponse.json({ success: true, data: { products } }, { status: 200 });
+    return NextResponse.json({ success: true, data: { formDataObj } }, { status: 200 });
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch admins' }, { status: 500 });
