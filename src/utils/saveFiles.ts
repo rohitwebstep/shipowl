@@ -2,6 +2,14 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import fs from 'fs';
 
+export interface UploadedFileInfo {
+    originalName: string;
+    savedAs: string;
+    size: number;
+    type: string;
+    url: string;
+}
+
 // Helper: ensure directory exists
 async function ensureDir(dirPath: string) {
     if (!fs.existsSync(dirPath)) {
@@ -55,7 +63,7 @@ export async function saveFilesFromFormData(
     formData: FormData,
     fieldName: string,
     options: SaveFileOptions
-): Promise<any> {
+): Promise<UploadedFileInfo | UploadedFileInfo[]> {
     const { dir, pattern, customName, multiple = false } = options;
 
     // console.log(`🚀 Starting file save from field: "${fieldName}"`);
