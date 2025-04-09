@@ -71,9 +71,9 @@ export async function saveFilesFromFormData(
     let result: UploadedFileInfo[] | UploadedFileInfo | null = multiple ? [] : null;
 
     const files = formData.getAll(fieldName).filter(
-        (item): item is File => item instanceof File && item.name
+        (item): item is File => item instanceof File && item.name.length > 0
     );
-
+    
     // console.log(`📦 Total files to process: ${files.length}`);
 
     for (let index = 0; index < files.length; index++) {
