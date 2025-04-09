@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
 import { isUserExist } from "@/utils/authUtils";
-import { saveFilesFromFormData } from '@/utils/saveFiles';
+import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createProduct } from '@/app/api/models/product';
 
@@ -89,8 +89,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
     }
 
-    return NextResponse.json({ status: false, error: productCreateResult?.message || 'Product creation failed' }, { status: 500 });
+    // ❌ Product creation failed — delete uploaded file(s)
+    const deletePath = (file: UploadedFileInfo) => path.join(uploadDir, path.basename(file.url));
 
+    if (isMultipleImages && Array.isArray(fileData)) {
+      await Promise.all(fileData.map(file => deleteFile(deletePath(file))));
+    } else {
+      await deleteFile(deletePath(fileData as UploadedFileInfo));
+    }
+
+    return NextResponse.json(
+      { status: false, error: productCreateResult?.message || 'Product creation failed' },
+      { status: 500 }
+    );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
     console.error('❌ Product Creation Error:', err);

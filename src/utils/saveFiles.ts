@@ -1,4 +1,4 @@
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, unlink, stat } from 'fs/promises';
 import path from 'path';
 import fs from 'fs';
 
@@ -73,7 +73,7 @@ export async function saveFilesFromFormData(
     const files = formData.getAll(fieldName).filter(
         (item): item is File => item instanceof File && item.name.length > 0
     );
-    
+
     // console.log(`📦 Total files to process: ${files.length}`);
 
     for (let index = 0; index < files.length; index++) {
@@ -113,4 +113,19 @@ export async function saveFilesFromFormData(
 
     return result!;
 
+}
+
+/**
+ * Deletes a file from the file system
+ * @param filePath Absolute path to the file
+ * @returns A boolean indicating if the file was deleted successfully
+ */
+export async function deleteFile(filePath: string): Promise<boolean> {
+    try {
+        await stat(filePath); // Throws if file doesn't exist
+        await unlink(filePath);
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
