@@ -5,6 +5,9 @@ interface Category {
     description: string;
     status: boolean;
     image?: string;
+    updatedBy?: number;
+    updatedAt?: Date;
+    updatedByRole?: string;
 }
 
 export async function generateCategorySlug(name: string) {
