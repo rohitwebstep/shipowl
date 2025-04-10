@@ -100,6 +100,8 @@ function middleware(req) {
     res.headers.set("Access-Control-Allow-Origin", "*"); // Change '*' to your frontend URL in production
     res.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    console.log(`req.method: ${req.method}`);
+    console.log(`req.url: ${req.url}`);
     // Handle preflight requests
     if (req.method === "OPTIONS") {
         return new Response(null, {
