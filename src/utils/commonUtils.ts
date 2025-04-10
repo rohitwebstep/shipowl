@@ -1,4 +1,4 @@
-export async function logMessage(type: string, message: string, item?: any): Promise<void> {
+export async function logMessage<T>(type: string, message: string, item?: T): Promise<void> {
     try {
         // Ensure debug mode is active or in development environment
         if (process.env.DEBUG === 'true' || process.env.NODE_ENV === 'development') {
