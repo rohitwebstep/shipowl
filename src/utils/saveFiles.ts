@@ -101,7 +101,7 @@ export async function saveFilesFromFormData(
             savedAs: finalFileName,
             size: file.size,
             type: file.type,
-            url: `/uploads${fileUrl}`,
+            url: `${fileUrl}`,
         };
 
         if (multiple && Array.isArray(result)) {

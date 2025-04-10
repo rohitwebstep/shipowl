@@ -73,6 +73,7 @@ export async function POST(req: NextRequest) {
     let image = '';
 
     if (fileData) {
+      logMessage('info', 'uploaded fileData:', fileData);
       image = isMultipleImages
         ? (fileData as UploadedFileInfo[]).map(file => file.url).join(', ')
         : (fileData as UploadedFileInfo).url;
