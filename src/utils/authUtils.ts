@@ -6,7 +6,7 @@ const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb
 const SESSION_EXPIRES_IN = process.env.SESSION_TIMEOUT || '3h';
 
 export function generateToken(adminId: number, adminRole: string) {
-    return jwt.sign({ adminId, adminRole }, SECRET_KEY, { expiresIn: SESSION_EXPIRES_IN });
+    return jwt.sign({ adminId, adminRole }, SECRET_KEY, { expiresIn: '3h' });
 }
 
 export async function verifyToken(token: string) {
