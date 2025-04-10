@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/category/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/category/[categoryId]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -544,14 +544,14 @@ const deleteCategory = async (id)=>{
     }
 };
 }}),
-"[project]/src/app/api/category/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/category/[categoryId]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
     "GET": (()=>GET),
-    "POST": (()=>POST)
+    "PUT": (()=>PUT)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
@@ -565,9 +565,67 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$cate
 ;
 ;
 ;
-async function POST(req) {
+async function GET(req) {
     try {
-        console.log(`Hit`);
+        console.log(`🔍 DATABASE_URL:`, process.env.DATABASE_URL);
+        // Extract categoryId directly from the URL path
+        const categoryId = req.nextUrl.pathname.split('/').pop();
+        console.log("🔍 Requested Category ID:", categoryId);
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        if (!adminId || isNaN(Number(adminId))) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid or missing admin ID'
+            }, {
+                status: 400
+            });
+        }
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const categoryIdNum = Number(categoryId);
+        if (isNaN(categoryIdNum)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid category ID'
+            }, {
+                status: 400
+            });
+        }
+        const categoryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoryById"])(categoryIdNum);
+        if (categoryResult?.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                category: categoryResult.category
+            }, {
+                status: 200
+            });
+        }
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'Category not found'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        console.error('❌ Error fetching single category:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function PUT(req) {
+    try {
+        // Extract categoryId directly from the URL path
+        const categoryId = req.nextUrl.pathname.split('/').pop();
+        console.log("🔍 Requested Category ID:", categoryId);
         // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
@@ -586,6 +644,25 @@ async function POST(req) {
         if (!userCheck.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const categoryIdNum = Number(categoryId);
+        if (isNaN(categoryIdNum)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid category ID'
+            }, {
+                status: 400
+            });
+        }
+        const categoryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoryById"])(categoryIdNum);
+        console.log(`categoryIdNum - `, categoryIdNum);
+        console.log(`categoryResult - `, categoryResult);
+        if (!categoryResult?.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Category not found'
             }, {
                 status: 404
             });
@@ -634,7 +711,7 @@ async function POST(req) {
             image
         };
         console.log("📦 categoryPayload:", categoryPayload);
-        const categoryCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCategory"])(adminId, String(adminRole), categoryPayload);
+        const categoryCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateCategory"])(adminId, String(adminRole), categoryIdNum, categoryPayload);
         if (categoryCreateResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
@@ -658,60 +735,10 @@ async function POST(req) {
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        console.error('❌ Category Creation Error:', err);
+        console.error('❌ Category Updation Error:', err);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
-        }, {
-            status: 500
-        });
-    }
-}
-async function GET(req) {
-    try {
-        // Retrieve x-admin-id and x-admin-role from request headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: "User ID is missing or invalid in request"
-            }, {
-                status: 400
-            });
-        }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: `User Not Found: ${result.message}`
-            }, {
-                status: 404
-            });
-        }
-        // Fetch all categories
-        const categoriesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getAllCategories"])();
-        if (categoriesResult?.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                categories: categoriesResult.categories
-            }, {
-                status: 200
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: "No categories found"
-        }, {
-            status: 404
-        });
-    } catch (error) {
-        console.error("❌ Error fetching categories:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: "Failed to fetch categories"
         }, {
             status: 500
         });
@@ -721,4 +748,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__2a532063._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__8618ffc5._.js.map

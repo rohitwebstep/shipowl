@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
+import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
@@ -16,15 +17,15 @@ type UploadedFileInfo = {
 
 export async function POST(req: NextRequest) {
   try {
-    console.log(`Hit`);
+    logMessage('debug', 'POST request received for category creation');
+
     // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
 
     const adminId = Number(adminIdHeader);
     if (!adminIdHeader || isNaN(adminId)) {
-      console.log(`adminIdHeader - `, adminIdHeader);
-      console.log(`adminRole - `, adminRole);
+      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
       return NextResponse.json(
         { error: "User ID is missing or invalid in request" },
         { status: 400 }
@@ -34,6 +35,7 @@ export async function POST(req: NextRequest) {
     // Check if admin exists
     const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
@@ -49,9 +51,8 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    console.log(`formData - `, formData);
-
     if (!validation.isValid) {
+      logMessage('warn', 'Form validation failed', validation.errors);
       return NextResponse.json({ status: false, error: validation.errors }, { status: 400 });
     }
 
@@ -69,7 +70,6 @@ export async function POST(req: NextRequest) {
       multiple: isMultipleImages,
     });
 
-    console.log(`fileData - `, fileData);
     let image = '';
 
     if (fileData) {
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
       image,
     };
 
-    console.log("📦 categoryPayload:", categoryPayload);
+    logMessage('info', 'Category payload created:', categoryPayload);
 
     const categoryCreateResult = await createCategory(adminId, String(adminRole), categoryPayload);
 
@@ -102,25 +102,29 @@ export async function POST(req: NextRequest) {
       await deleteFile(deletePath(fileData as UploadedFileInfo));
     }
 
+    logMessage('error', 'Category creation failed:', categoryCreateResult?.message || 'Unknown error');
     return NextResponse.json(
       { status: false, error: categoryCreateResult?.message || 'Category creation failed' },
       { status: 500 }
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    console.error('❌ Category Creation Error:', err);
+    logMessage('error', 'Category Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
 
 export async function GET(req: NextRequest) {
   try {
+    logMessage('debug', 'GET request received for fetching categories');
+
     // Retrieve x-admin-id and x-admin-role from request headers
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
 
     const adminId = Number(adminIdHeader);
     if (!adminIdHeader || isNaN(adminId)) {
+      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
       return NextResponse.json(
         { status: false, error: "User ID is missing or invalid in request" },
         { status: 400 }
@@ -130,6 +134,7 @@ export async function GET(req: NextRequest) {
     // Check if admin exists
     const result = await isUserExist(adminId, String(adminRole));
     if (!result.status) {
+      logMessage('warn', `User not found: ${result.message}`);
       return NextResponse.json(
         { status: false, error: `User Not Found: ${result.message}` },
         { status: 404 }
@@ -146,12 +151,13 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    logMessage('warn', 'No categories found');
     return NextResponse.json(
       { status: false, error: "No categories found" },
       { status: 404 }
     );
   } catch (error) {
-    console.error("❌ Error fetching categories:", error);
+    logMessage('error', 'Error fetching categories:', error);
     return NextResponse.json(
       { status: false, error: "Failed to fetch categories" },
       { status: 500 }

@@ -61,6 +61,58 @@ const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
+"[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "logMessage": (()=>logMessage)
+});
+async function logMessage(type, message, item) {
+    try {
+        // Ensure debug mode is active or in development environment
+        if ("TURBOPACK compile-time truthy", 1) {
+            // Choose the appropriate console method based on the type
+            switch(type.toLowerCase()){
+                case 'error':
+                    console.error(`❌ ${message}`, item);
+                    break;
+                case 'warn':
+                    console.warn(`⚠️ ${message}`, item);
+                    break;
+                case 'info':
+                    console.info(`ℹ️ ${message}`, item);
+                    break;
+                case 'debug':
+                    console.debug(`🔍 ${message}`, item);
+                    break;
+                case 'log':
+                    console.log(`${message}`, item);
+                    break;
+                case 'trace':
+                    console.trace(`🔍 ${message}`, item);
+                    break;
+                case 'table':
+                    console.table(item);
+                    break;
+                case 'group':
+                    console.group(`${message}`);
+                    break;
+                case 'groupend':
+                    console.groupEnd();
+                    break;
+                default:
+                    console.log(`Default log for unknown type: ${message}`, item);
+                    break;
+            }
+        }
+    } catch (error) {
+        // Log any errors that occur in the try block
+        console.error('❌ Error in consoleLog:', error);
+    }
+}
+}}),
 "[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -555,6 +607,7 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
@@ -565,16 +618,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$cate
 ;
 ;
 ;
+;
 async function POST(req) {
     try {
-        console.log(`Hit`);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for category creation');
         // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            console.log(`adminIdHeader - `, adminIdHeader);
-            console.log(`adminRole - `, adminRole);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "User ID is missing or invalid in request"
             }, {
@@ -584,6 +637,7 @@ async function POST(req) {
         // Check if admin exists
         const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
         if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: `User Not Found: ${userCheck.message}`
             }, {
@@ -601,8 +655,8 @@ async function POST(req) {
                 status: 'boolean'
             }
         });
-        console.log(`formData - `, formData);
         if (!validation.isValid) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.errors);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
                 error: validation.errors
@@ -622,7 +676,6 @@ async function POST(req) {
             pattern: 'slug-unique',
             multiple: isMultipleImages
         });
-        console.log(`fileData - `, fileData);
         let image = '';
         if (fileData) {
             image = ("TURBOPACK compile-time falsy", 0) ? ("TURBOPACK unreachable", undefined) : fileData.url;
@@ -633,7 +686,7 @@ async function POST(req) {
             status,
             image
         };
-        console.log("📦 categoryPayload:", categoryPayload);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Category payload created:', categoryPayload);
         const categoryCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCategory"])(adminId, String(adminRole), categoryPayload);
         if (categoryCreateResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -650,6 +703,7 @@ async function POST(req) {
         } else {
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
         }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category creation failed:', categoryCreateResult?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error: categoryCreateResult?.message || 'Category creation failed'
@@ -658,7 +712,7 @@ async function POST(req) {
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        console.error('❌ Category Creation Error:', err);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -669,11 +723,13 @@ async function POST(req) {
 }
 async function GET(req) {
     try {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching categories');
         // Retrieve x-admin-id and x-admin-role from request headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
                 error: "User ID is missing or invalid in request"
@@ -684,6 +740,7 @@ async function GET(req) {
         // Check if admin exists
         const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
         if (!result.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
                 error: `User Not Found: ${result.message}`
@@ -701,6 +758,7 @@ async function GET(req) {
                 status: 200
             });
         }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No categories found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error: "No categories found"
@@ -708,7 +766,7 @@ async function GET(req) {
             status: 404
         });
     } catch (error) {
-        console.error("❌ Error fetching categories:", error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching categories:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error: "Failed to fetch categories"
@@ -721,4 +779,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__2a532063._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__6bd1dfc6._.js.map

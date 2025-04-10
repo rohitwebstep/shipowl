@@ -41,7 +41,6 @@ export function middleware(req: NextRequest) {
     if (restProtectedRoutes.some(route => req.url.includes(route))) {
         const applicableRoles = ["admin", "admin_staff", "dropshipper", "dropshipper_staff", "supplier", "supplier_staff"];
         const adminRole = "admin";
-        console.log(`adminAuthMiddleware(req, adminRole, applicableRoles) - `, adminAuthMiddleware(req, adminRole, applicableRoles));
         return adminAuthMiddleware(req, adminRole, applicableRoles);
     }
 
