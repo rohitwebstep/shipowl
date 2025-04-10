@@ -1,5 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/category/[categoryId]/route": "app/api/category/[categoryId]/route.js",
-  "/api/category/route": "app/api/category/route.js"
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js"
 }
