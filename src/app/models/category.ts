@@ -77,6 +77,25 @@ export const updateCategory = async (
         data.updatedAt = new Date();
         data.updatedByRole = adminRole;
 
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img) => img.trim());
+
+            const { status, category, message } = await getCategoryById(categoryId);
+
+            if (!status || !category) {
+                return { status: false, message: message || "Category not found." };
+            }
+
+            const existingImages = category.image
+                ? category.image.split(",").map((img) => img.trim())
+                : [];
+
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([...existingImages, ...newImagesArr]));
+
+            data.image = mergedImages.join(",");
+        }
+
         const category = await prisma.category.update({
             where: { id: categoryId }, // Assuming 'id' is the correct primary key field
             data: data,
@@ -107,12 +126,10 @@ export const getCategoryById = async (id: number) => {
 // 🔵 GET BY ID
 export const removeCategoryImageByIndex = async (categoryId: number, imageIndex: number) => {
     try {
-        const category = await prisma.category.findUnique({
-            where: { id: categoryId },
-        });
+        const { status, category, message } = await getCategoryById(categoryId);
 
-        if (!category) {
-            return { status: false, message: "Category not found." };
+        if (!status || !category) {
+            return { status: false, message: message || "Category not found." };
         }
 
         if (!category.image) {
