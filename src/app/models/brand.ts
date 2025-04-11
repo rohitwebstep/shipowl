@@ -77,6 +77,25 @@ export const updateBrand = async (
         data.updatedAt = new Date();
         data.updatedByRole = adminRole;
 
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img) => img.trim());
+
+            const { status, brand, message } = await getBrandById(brandId);
+
+            if (!status || !brand) {
+                return { status: false, message: message || "Brand not found." };
+            }
+
+            const existingImages = brand.image
+                ? brand.image.split(",").map((img) => img.trim())
+                : [];
+
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([...existingImages, ...newImagesArr]));
+
+            data.image = mergedImages.join(",");
+        }
+
         const brand = await prisma.brand.update({
             where: { id: brandId }, // Assuming 'id' is the correct primary key field
             data: data,
@@ -101,6 +120,44 @@ export const getBrandById = async (id: number) => {
     } catch (error) {
         console.error("❌ getBrandById Error:", error);
         return { status: false, message: "Error fetching brand" };
+    }
+};
+
+// 🔵 GET BY ID
+export const removeBrandImageByIndex = async (brandId: number, imageIndex: number) => {
+    try {
+        const { status, brand, message } = await getBrandById(brandId);
+
+        if (!status || !brand) {
+            return { status: false, message: message || "Brand not found." };
+        }
+
+        if (!brand.image) {
+            return { status: false, message: "No images available to delete." };
+        }
+
+        const images = brand.image.split(",");
+
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return { status: false, message: "Invalid image index provided." };
+        }
+
+        images.splice(imageIndex, 1); // Remove image at given index
+        const updatedImages = images.join(",");
+
+        const updatedBrand = await prisma.brand.update({
+            where: { id: brandId },
+            data: { image: updatedImages },
+        });
+
+        return {
+            status: true,
+            message: "Image removed successfully.",
+            brand: updatedBrand,
+        };
+    } catch (error) {
+        console.error("❌ Error removing brand image:", error);
+        return { status: false, message: "An unexpected error occurred while removing the image." };
     }
 };
 
