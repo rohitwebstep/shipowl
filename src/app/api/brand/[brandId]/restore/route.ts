@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
