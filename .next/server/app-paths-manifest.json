@@ -1,6 +1,4 @@
 {
-  "/api/category/[categoryId]/destroy/route": "app/api/category/[categoryId]/destroy/route.js",
-  "/api/category/[categoryId]/restore/route": "app/api/category/[categoryId]/restore/route.js",
-  "/api/category/[categoryId]/route": "app/api/category/[categoryId]/route.js",
+  "/api/category/[categoryId]/image/[imageIndex]/route": "app/api/category/[categoryId]/image/[imageIndex]/route.js",
   "/api/category/route": "app/api/category/route.js"
 }

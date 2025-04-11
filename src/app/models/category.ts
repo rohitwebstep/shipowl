@@ -1,4 +1,6 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
+import { log } from "console";
 
 interface Category {
     name: string;
@@ -101,6 +103,46 @@ export const getCategoryById = async (id: number) => {
     } catch (error) {
         console.error("❌ getCategoryById Error:", error);
         return { status: false, message: "Error fetching category" };
+    }
+};
+
+// 🔵 GET BY ID
+export const removeCategoryImageByIndex = async (categoryId: number, imageIndex: number) => {
+    try {
+        const category = await prisma.category.findUnique({
+            where: { id: categoryId },
+        });
+
+        if (!category) {
+            return { status: false, message: "Category not found." };
+        }
+
+        if (!category.image) {
+            return { status: false, message: "No images available to delete." };
+        }
+
+        const images = category.image.split(",");
+
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return { status: false, message: "Invalid image index provided." };
+        }
+
+        images.splice(imageIndex, 1); // Remove image at given index
+        const updatedImages = images.join(",");
+
+        const updatedCategory = await prisma.category.update({
+            where: { id: categoryId },
+            data: { image: updatedImages },
+        });
+
+        return {
+            status: true,
+            message: "Image removed successfully.",
+            category: updatedCategory,
+        };
+    } catch (error) {
+        console.error("❌ Error removing category image:", error);
+        return { status: false, message: "An unexpected error occurred while removing the image." };
     }
 };
 

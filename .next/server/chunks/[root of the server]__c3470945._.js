@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/category/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/category/[categoryId]/image/[imageIndex]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -53,14 +53,6 @@ const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-asyn
 
 module.exports = mod;
 }}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
-
-module.exports = mod;
-}}),
 "[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -71,45 +63,51 @@ __turbopack_context__.s({
 });
 async function logMessage(type, message, item) {
     try {
-        // Ensure debug mode is active or in development environment
-        if ("TURBOPACK compile-time truthy", 1) {
-            // Choose the appropriate console method based on the type
-            switch(type.toLowerCase()){
-                case 'error':
-                    console.error(`❌ ${message}`, item);
-                    break;
-                case 'warn':
-                    console.warn(`⚠️ ${message}`, item);
-                    break;
-                case 'info':
-                    console.info(`ℹ️ ${message}`, item);
-                    break;
-                case 'debug':
-                    console.debug(`🔍 ${message}`, item);
-                    break;
-                case 'log':
-                    console.log(`${message}`, item);
-                    break;
-                case 'trace':
-                    console.trace(`🔍 ${message}`, item);
-                    break;
-                case 'table':
-                    console.table(item);
-                    break;
-                case 'group':
-                    console.group(`${message}`);
-                    break;
-                case 'groupend':
-                    console.groupEnd();
-                    break;
-                default:
-                    console.log(`Default log for unknown type: ${message}`, item);
-                    break;
+        const isDev = process.env.DEBUG === 'true' || ("TURBOPACK compile-time value", "development") === 'development';
+        if ("TURBOPACK compile-time falsy", 0) {
+            "TURBOPACK unreachable";
+        }
+        const logWithMessage = (logFn, prefix = '')=>{
+            if (item !== undefined) {
+                logFn(`${prefix}${message}`, item);
+            } else {
+                logFn(`${prefix}${message}`);
             }
+        };
+        switch(type.toLowerCase()){
+            case 'error':
+                logWithMessage(console.error, '❌ ');
+                break;
+            case 'warn':
+                logWithMessage(console.warn, '⚠️ ');
+                break;
+            case 'info':
+                logWithMessage(console.info, 'ℹ️ ');
+                break;
+            case 'debug':
+                logWithMessage(console.debug, '🔍 ');
+                break;
+            case 'log':
+                logWithMessage(console.log);
+                break;
+            case 'trace':
+                logWithMessage(console.trace, '🔍 ');
+                break;
+            case 'table':
+                if (item !== undefined) console.table(item);
+                break;
+            case 'group':
+                console.group(message);
+                break;
+            case 'groupend':
+                console.groupEnd();
+                break;
+            default:
+                logWithMessage(console.log, '📌 ');
+                break;
         }
     } catch (error) {
-        // Log any errors that occur in the try block
-        console.error('❌ Error in consoleLog:', error);
+        console.error('❌ Error in logMessage:', error);
     }
 }
 }}),
@@ -8148,6 +8146,14 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -8557,150 +8563,6 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/saveFiles.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "deleteFile": (()=>deleteFile),
-    "saveFilesFromFormData": (()=>saveFilesFromFormData)
-});
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
-;
-;
-;
-// Helper: ensure directory exists
-async function ensureDir(dirPath) {
-    if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(dirPath)) {
-        console.log(`📁 Directory not found. Creating: ${dirPath}`);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(dirPath, {
-            recursive: true
-        });
-    } else {
-        console.log(`✅ Directory already exists: ${dirPath}`);
-    }
-}
-// Helper: generate file name
-function generateFileName(originalName, pattern, customName) {
-    const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(originalName);
-    const base = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(originalName, ext);
-    switch(pattern){
-        case 'original':
-            console.log(`📝 Using original filename: ${originalName}`);
-            return originalName;
-        case 'custom':
-            const name = `${customName}${ext}`;
-            console.log(`📝 Using custom filename: ${name}`);
-            return name;
-        case 'slug':
-            const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const slugName = `${slug}${ext}`;
-            console.log(`📝 Using slug filename: ${slugName}`);
-            return slugName;
-        case 'slug-unique':
-            const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
-            const slugUniqueName = `${unique}${ext}`;
-            console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
-            return slugUniqueName;
-        default:
-            return originalName;
-    }
-}
-async function saveFilesFromFormData(formData, fieldName, options) {
-    const { dir, pattern, customName, multiple = false } = options;
-    console.log(`🚀 Starting file save from field: "${fieldName}"`);
-    await ensureDir(dir);
-    let result = multiple ? [] : null;
-    const files = formData.getAll(fieldName).filter((item)=>item instanceof File && item.name.length > 0);
-    console.log(`📦 Total files to process: ${files.length}`);
-    for(let index = 0; index < files.length; index++){
-        const file = files[index];
-        const nameToUse = pattern === 'custom' && multiple ? `${customName}-${index + 1}` : pattern === 'custom' ? customName : file.name;
-        const finalFileName = generateFileName(nameToUse, pattern, nameToUse);
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const fullPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(dir, finalFileName);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(fullPath, buffer);
-        const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
-        const info = {
-            originalName: file.name,
-            savedAs: finalFileName,
-            size: file.size,
-            type: file.type,
-            url: `${fileUrl}`
-        };
-        if (multiple && Array.isArray(result)) {
-            result.push(info);
-        } else {
-            result = info;
-        }
-    }
-    return result;
-}
-async function deleteFile(filePath) {
-    try {
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["stat"])(filePath); // Throws if file doesn't exist
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
-        return true;
-    } catch (error) {
-        console.log(`error - File not found or couldn't be deleted: ${filePath}`, error);
-        return false;
-    }
-}
-}}),
-"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "validateFormData": (()=>validateFormData)
-});
-function validateFormData(formData, { requiredFields = [], patternValidations = {} }) {
-    const errors = [];
-    // ✅ Required fields check
-    for (const field of requiredFields){
-        const value = formData.get(field);
-        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
-            errors.push(`Field "${field}" is required`);
-        }
-    }
-    // ✅ Type pattern check (only if field exists)
-    for (const [field, expectedType] of Object.entries(patternValidations)){
-        const value = formData.get(field);
-        if (value !== null) {
-            const val = typeof value === 'string' ? value.trim() : value;
-            if (expectedType === 'number' && isNaN(Number(val)) || expectedType === 'boolean' && ![
-                'true',
-                'false',
-                '1',
-                '0',
-                true,
-                false,
-                1,
-                0
-            ].includes(val.toString().toLowerCase())) {
-                errors.push(`Field "${field}" must be of type ${expectedType}`);
-            }
-        }
-    }
-    return {
-        isValid: errors.length === 0,
-        errors
-    };
-}
-}}),
 "[project]/src/app/models/category.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -8713,6 +8575,7 @@ __turbopack_context__.s({
     "getAllCategories": (()=>getAllCategories),
     "getCategoriesByStatus": (()=>getCategoriesByStatus),
     "getCategoryById": (()=>getCategoryById),
+    "removeCategoryImageByIndex": (()=>removeCategoryImageByIndex),
     "restoreCategory": (()=>restoreCategory),
     "softDeleteCategory": (()=>softDeleteCategory),
     "updateCategory": (()=>updateCategory)
@@ -8813,6 +8676,55 @@ const getCategoryById = async (id)=>{
         return {
             status: false,
             message: "Error fetching category"
+        };
+    }
+};
+const removeCategoryImageByIndex = async (categoryId, imageIndex)=>{
+    try {
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
+            where: {
+                id: categoryId
+            }
+        });
+        if (!category) {
+            return {
+                status: false,
+                message: "Category not found."
+            };
+        }
+        if (!category.image) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = category.image.split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        images.splice(imageIndex, 1); // Remove image at given index
+        const updatedImages = images.join(",");
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: {
+                image: updatedImages
+            }
+        });
+        return {
+            status: true,
+            message: "Image removed successfully.",
+            category: updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ Error removing category image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
         };
     }
 };
@@ -8957,181 +8869,96 @@ const deleteCategory = async (id)=>{
     }
 };
 }}),
-"[project]/src/app/api/category/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/category/[categoryId]/image/[imageIndex]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "GET": (()=>GET),
-    "POST": (()=>POST)
+    "DELETE": (()=>DELETE)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/category.ts [app-route] (ecmascript)");
 ;
 ;
 ;
 ;
-;
-;
-;
-async function POST(req) {
+async function DELETE(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for category creation');
-        // Get headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+        const parts = req.nextUrl.pathname.split('/');
+        const categoryId = Number(parts[parts.length - 3]);
+        const imageIndex = Number(parts[parts.length - 1]);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', `Attempting to delete image (${imageIndex}) from category (${categoryId})`);
+        // Validate admin headers
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Missing or invalid admin ID header', {
+                adminId
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "User ID is missing or invalid in request"
+                error: 'Admin ID is missing or invalid'
             }, {
                 status: 400
             });
         }
-        // Check if admin exists
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        // Authenticate admin user
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
         if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Admin authentication failed', {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found: ${userCheck.message}`
+                error: `Admin not found: ${userCheck.message}`
             }, {
                 status: 404
             });
         }
-        const isMultipleImages = true; // Set true to allow multiple image uploads
-        const formData = await req.formData();
-        // Validate input
-        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: [
-                'name'
-            ],
-            patternValidations: {
-                status: 'boolean'
-            }
-        });
-        if (!validation.isValid) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.errors);
+        // Validate category existence
+        const categoryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoryById"])(categoryId);
+        if (!categoryResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Category not found', {
+                categoryId
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: validation.errors
-            }, {
-                status: 400
-            });
-        }
-        // Extract fields
-        const name = formData.get('name');
-        const description = formData.get('description') || '';
-        const statusRaw = formData.get('status')?.toString().toLowerCase();
-        const status = statusRaw === 'true' || statusRaw === '1';
-        // File upload
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'category');
-        const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
-            dir: uploadDir,
-            pattern: 'slug-unique',
-            multiple: isMultipleImages
-        });
-        let image = '';
-        if (fileData) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
-            image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
-        }
-        const categoryPayload = {
-            name,
-            description,
-            status,
-            image
-        };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Category payload created:', categoryPayload);
-        const categoryCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCategory"])(adminId, String(adminRole), categoryPayload);
-        if (categoryCreateResult?.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                category: categoryCreateResult.category
-            }, {
-                status: 200
-            });
-        }
-        // ❌ Category creation failed — delete uploaded file(s)
-        const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
-        if (isMultipleImages && Array.isArray(fileData)) {
-            await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
-        } else {
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
-        }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category creation failed:', categoryCreateResult?.message || 'Unknown error');
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: categoryCreateResult?.message || 'Category creation failed'
-        }, {
-            status: 500
-        });
-    } catch (err) {
-        const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category Creation Error:', error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error
-        }, {
-            status: 500
-        });
-    }
-}
-async function GET(req) {
-    try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching categories');
-        // Retrieve x-admin-id and x-admin-role from request headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: "User ID is missing or invalid in request"
-            }, {
-                status: 400
-            });
-        }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: `User Not Found: ${result.message}`
+                message: 'Category not found'
             }, {
                 status: 404
             });
         }
-        // Fetch all categories
-        const categoriesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoriesByStatus"])("notDeleted");
-        if (categoriesResult?.status) {
+        // Perform image removal
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["removeCategoryImageByIndex"])(categoryId, imageIndex);
+        if (result.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Image index ${imageIndex} removed from category ${categoryId} by admin ${adminId}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                categories: categoriesResult.categories
+                message: 'Image removed successfully',
+                data: result.category
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No categories found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Image removal failed: ${result.message}`, {
+            categoryId,
+            imageIndex
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No categories found"
+            message: result.message || 'Image removal failed'
         }, {
-            status: 404
+            status: 400
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching categories:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Unexpected error during image deletion', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch categories"
+            error: 'Internal server error'
         }, {
             status: 500
         });
@@ -9141,4 +8968,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__f058bc69._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__c3470945._.js.map
