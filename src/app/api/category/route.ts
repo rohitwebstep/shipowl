@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const isMultipleImages = false; // Set true to allow multiple image uploads
+    const isMultipleImages = true; // Set true to allow multiple image uploads
 
     const formData = await req.formData();
 
