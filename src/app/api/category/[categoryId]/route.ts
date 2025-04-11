@@ -5,7 +5,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { getCategoryById, updateCategory, softDeleteCategory, restoreCategory, deleteCategory } from '@/app/models/category';
+import { getCategoryById, updateCategory, softDeleteCategory, restoreCategory } from '@/app/models/category';
 
 type UploadedFileInfo = {
   originalName: string;
