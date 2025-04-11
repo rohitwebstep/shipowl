@@ -95,7 +95,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ status: false, message: 'Category not found' }, { status: 404 });
     }
 
-    const isMultipleImages = false; // Set true to allow multiple image uploads
+    const isMultipleImages = true; // Set true to allow multiple image uploads
 
     const formData = await req.formData();
 
