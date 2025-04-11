@@ -105,19 +105,19 @@ export const getBrandById = async (id: number) => {
 };
 
 // 🟣 GET ALL
-export const getAllCategories = async () => {
+export const getAllBrands = async () => {
     try {
-        const categories = await prisma.brand.findMany({
+        const brands = await prisma.brand.findMany({
             orderBy: { id: 'desc' },
         });
-        return { status: true, categories };
+        return { status: true, brands };
     } catch (error) {
-        console.error("❌ getAllCategories Error:", error);
-        return { status: false, message: "Error fetching categories" };
+        console.error("❌ getAllBrands Error:", error);
+        return { status: false, message: "Error fetching brands" };
     }
 };
 
-export const getCategoriesByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+export const getBrandsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
     try {
         let whereCondition = {};
 
@@ -138,15 +138,15 @@ export const getCategoriesByStatus = async (status: "active" | "inactive" | "del
                 throw new Error("Invalid status");
         }
 
-        const categories = await prisma.brand.findMany({
+        const brands = await prisma.brand.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
         });
 
-        return { status: true, categories };
+        return { status: true, brands };
     } catch (error) {
-        console.error(`Error fetching categories by status (${status}):`, error);
-        return { status: false, message: "Error fetching categories" };
+        console.error(`Error fetching brands by status (${status}):`, error);
+        return { status: false, message: "Error fetching brands" };
     }
 };
 

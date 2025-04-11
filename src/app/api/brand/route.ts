@@ -5,7 +5,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { createBrand, getCategoriesByStatus } from '@/app/models/brand';
+import { createBrand, getBrandsByStatus } from '@/app/models/brand';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching categories');
+    logMessage('debug', 'GET request received for fetching brands');
 
     // Retrieve x-admin-id and x-admin-role from request headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -142,25 +142,25 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch all categories
-    const categoriesResult = await getCategoriesByStatus("active");
+    // Fetch all brands
+    const brandsResult = await getBrandsByStatus("active");
 
-    if (categoriesResult?.status) {
+    if (brandsResult?.status) {
       return NextResponse.json(
-        { status: true, categories: categoriesResult.categories },
+        { status: true, brands: brandsResult.brands },
         { status: 200 }
       );
     }
 
-    logMessage('warn', 'No categories found');
+    logMessage('warn', 'No brands found');
     return NextResponse.json(
-      { status: false, error: "No categories found" },
+      { status: false, error: "No brands found" },
       { status: 404 }
     );
   } catch (error) {
-    logMessage('error', 'Error fetching categories:', error);
+    logMessage('error', 'Error fetching brands:', error);
     return NextResponse.json(
-      { status: false, error: "Failed to fetch categories" },
+      { status: false, error: "Failed to fetch brands" },
       { status: 500 }
     );
   }
