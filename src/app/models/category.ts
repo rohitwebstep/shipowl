@@ -8,9 +8,9 @@ interface Category {
     updatedBy?: number;
     updatedAt?: Date;
     updatedByRole?: string;
-    deletedBy?: Date;
+    deletedBy?: number | null;
     deletedAt?: Date;
-    deletedByRole?: string;
+    deletedByRole?: string | null;
 }
 
 export async function generateCategorySlug(name: string) {
