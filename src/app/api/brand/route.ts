@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch all brands
-    const brandsResult = await getBrandsByStatus("active");
+    const brandsResult = await getBrandsByStatus("notDeleted");
 
     if (brandsResult?.status) {
       return NextResponse.json(

@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch all categories
-    const categoriesResult = await getCategoriesByStatus("active");
+    const categoriesResult = await getCategoriesByStatus("notDeleted");
 
     if (categoriesResult?.status) {
       return NextResponse.json(
