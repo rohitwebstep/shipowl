@@ -5,7 +5,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { createBrand, getAllCategories } from '@/app/models/brand';
+import { createBrand, getCategoriesByStatus } from '@/app/models/brand';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch all categories
-    const categoriesResult = await getAllCategories();
+    const categoriesResult = await getCategoriesByStatus("active");
 
     if (categoriesResult?.status) {
       return NextResponse.json(

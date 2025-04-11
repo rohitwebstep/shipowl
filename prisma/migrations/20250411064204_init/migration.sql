@@ -44,10 +44,14 @@ CREATE TABLE `category` (
     `updatedByRole` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
 
     UNIQUE INDEX `category_slug_key`(`slug`),
     INDEX `category_createdBy_idx`(`createdBy`),
     INDEX `category_updatedBy_idx`(`updatedBy`),
+    INDEX `category_deletedAt_idx`(`deletedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -65,10 +69,14 @@ CREATE TABLE `brand` (
     `updatedByRole` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
 
     UNIQUE INDEX `brand_slug_key`(`slug`),
     INDEX `brand_createdBy_idx`(`createdBy`),
     INDEX `brand_updatedBy_idx`(`updatedBy`),
+    INDEX `brand_deletedAt_idx`(`deletedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

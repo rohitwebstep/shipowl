@@ -1,0 +1,3 @@
+{
+  "/api/category/[categoryId]/restore/route": "app/api/category/[categoryId]/restore/route.js"
+}

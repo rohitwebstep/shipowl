@@ -3272,12 +3272,14 @@ export namespace Prisma {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type CategorySumAggregateOutputType = {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type CategoryMinAggregateOutputType = {
@@ -3293,6 +3295,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type CategoryMaxAggregateOutputType = {
@@ -3308,6 +3313,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type CategoryCountAggregateOutputType = {
@@ -3323,6 +3331,9 @@ export namespace Prisma {
     updatedByRole: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
@@ -3331,12 +3342,14 @@ export namespace Prisma {
     id?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type CategorySumAggregateInputType = {
     id?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type CategoryMinAggregateInputType = {
@@ -3352,6 +3365,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type CategoryMaxAggregateInputType = {
@@ -3367,6 +3383,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type CategoryCountAggregateInputType = {
@@ -3382,6 +3401,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -3484,6 +3506,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
@@ -3518,6 +3543,9 @@ export namespace Prisma {
     updatedByRole?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }, ExtArgs["result"]["category"]>
 
 
@@ -3535,9 +3563,12 @@ export namespace Prisma {
     updatedByRole?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type categoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type categoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["category"]>
 
   export type $categoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "category"
@@ -3555,6 +3586,9 @@ export namespace Prisma {
       updatedByRole: string | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -3936,6 +3970,9 @@ export namespace Prisma {
     readonly updatedByRole: FieldRef<"category", 'String'>
     readonly createdAt: FieldRef<"category", 'DateTime'>
     readonly updatedAt: FieldRef<"category", 'DateTime'>
+    readonly deletedAt: FieldRef<"category", 'DateTime'>
+    readonly deletedBy: FieldRef<"category", 'Int'>
+    readonly deletedByRole: FieldRef<"category", 'String'>
   }
     
 
@@ -4273,12 +4310,14 @@ export namespace Prisma {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type BrandSumAggregateOutputType = {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type BrandMinAggregateOutputType = {
@@ -4294,6 +4333,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type BrandMaxAggregateOutputType = {
@@ -4309,6 +4351,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type BrandCountAggregateOutputType = {
@@ -4324,6 +4369,9 @@ export namespace Prisma {
     updatedByRole: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
@@ -4332,12 +4380,14 @@ export namespace Prisma {
     id?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type BrandSumAggregateInputType = {
     id?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type BrandMinAggregateInputType = {
@@ -4353,6 +4403,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type BrandMaxAggregateInputType = {
@@ -4368,6 +4421,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type BrandCountAggregateInputType = {
@@ -4383,6 +4439,9 @@ export namespace Prisma {
     updatedByRole?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -4485,6 +4544,9 @@ export namespace Prisma {
     updatedByRole: string | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: BrandCountAggregateOutputType | null
     _avg: BrandAvgAggregateOutputType | null
     _sum: BrandSumAggregateOutputType | null
@@ -4519,6 +4581,9 @@ export namespace Prisma {
     updatedByRole?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }, ExtArgs["result"]["brand"]>
 
 
@@ -4536,9 +4601,12 @@ export namespace Prisma {
     updatedByRole?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
+  export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["brand"]>
 
   export type $brandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "brand"
@@ -4556,6 +4624,9 @@ export namespace Prisma {
       updatedByRole: string | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["brand"]>
     composites: {}
   }
@@ -4937,6 +5008,9 @@ export namespace Prisma {
     readonly updatedByRole: FieldRef<"brand", 'String'>
     readonly createdAt: FieldRef<"brand", 'DateTime'>
     readonly updatedAt: FieldRef<"brand", 'DateTime'>
+    readonly deletedAt: FieldRef<"brand", 'DateTime'>
+    readonly deletedBy: FieldRef<"brand", 'Int'>
+    readonly deletedByRole: FieldRef<"brand", 'String'>
   }
     
 
@@ -6344,7 +6418,10 @@ export namespace Prisma {
     updatedBy: 'updatedBy',
     updatedByRole: 'updatedByRole',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -6362,7 +6439,10 @@ export namespace Prisma {
     updatedBy: 'updatedBy',
     updatedByRole: 'updatedByRole',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
@@ -6432,7 +6512,8 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     createdByRole: 'createdByRole',
-    updatedByRole: 'updatedByRole'
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type categoryOrderByRelevanceFieldEnum = (typeof categoryOrderByRelevanceFieldEnum)[keyof typeof categoryOrderByRelevanceFieldEnum]
@@ -6444,7 +6525,8 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     createdByRole: 'createdByRole',
-    updatedByRole: 'updatedByRole'
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type brandOrderByRelevanceFieldEnum = (typeof brandOrderByRelevanceFieldEnum)[keyof typeof brandOrderByRelevanceFieldEnum]
@@ -6679,6 +6761,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableFilter<"category"> | string | null
     createdAt?: DateTimeFilter<"category"> | Date | string
     updatedAt?: DateTimeFilter<"category"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
+    deletedBy?: IntNullableFilter<"category"> | number | null
+    deletedByRole?: StringNullableFilter<"category"> | string | null
   }
 
   export type categoryOrderByWithRelationInput = {
@@ -6694,6 +6779,9 @@ export namespace Prisma {
     updatedByRole?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _relevance?: categoryOrderByRelevanceInput
   }
 
@@ -6713,6 +6801,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableFilter<"category"> | string | null
     createdAt?: DateTimeFilter<"category"> | Date | string
     updatedAt?: DateTimeFilter<"category"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
+    deletedBy?: IntNullableFilter<"category"> | number | null
+    deletedByRole?: StringNullableFilter<"category"> | string | null
   }, "id" | "slug">
 
   export type categoryOrderByWithAggregationInput = {
@@ -6728,6 +6819,9 @@ export namespace Prisma {
     updatedByRole?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: categoryCountOrderByAggregateInput
     _avg?: categoryAvgOrderByAggregateInput
     _max?: categoryMaxOrderByAggregateInput
@@ -6751,6 +6845,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"category"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"category"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
   }
 
   export type brandWhereInput = {
@@ -6769,6 +6866,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableFilter<"brand"> | string | null
     createdAt?: DateTimeFilter<"brand"> | Date | string
     updatedAt?: DateTimeFilter<"brand"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
+    deletedBy?: IntNullableFilter<"brand"> | number | null
+    deletedByRole?: StringNullableFilter<"brand"> | string | null
   }
 
   export type brandOrderByWithRelationInput = {
@@ -6784,6 +6884,9 @@ export namespace Prisma {
     updatedByRole?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _relevance?: brandOrderByRelevanceInput
   }
 
@@ -6803,6 +6906,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableFilter<"brand"> | string | null
     createdAt?: DateTimeFilter<"brand"> | Date | string
     updatedAt?: DateTimeFilter<"brand"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
+    deletedBy?: IntNullableFilter<"brand"> | number | null
+    deletedByRole?: StringNullableFilter<"brand"> | string | null
   }, "id" | "slug">
 
   export type brandOrderByWithAggregationInput = {
@@ -6818,6 +6924,9 @@ export namespace Prisma {
     updatedByRole?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: brandCountOrderByAggregateInput
     _avg?: brandAvgOrderByAggregateInput
     _max?: brandMaxOrderByAggregateInput
@@ -6841,6 +6950,9 @@ export namespace Prisma {
     updatedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"brand"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
   }
 
   export type productWhereInput = {
@@ -7113,6 +7225,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type categoryUncheckedCreateInput = {
@@ -7128,6 +7243,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type categoryUpdateInput = {
@@ -7142,6 +7260,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type categoryUncheckedUpdateInput = {
@@ -7157,6 +7278,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type categoryCreateManyInput = {
@@ -7172,6 +7296,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type categoryUpdateManyMutationInput = {
@@ -7186,6 +7313,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type categoryUncheckedUpdateManyInput = {
@@ -7201,6 +7331,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type brandCreateInput = {
@@ -7215,6 +7348,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type brandUncheckedCreateInput = {
@@ -7230,6 +7366,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type brandUpdateInput = {
@@ -7244,6 +7383,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type brandUncheckedUpdateInput = {
@@ -7259,6 +7401,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type brandCreateManyInput = {
@@ -7274,6 +7419,9 @@ export namespace Prisma {
     updatedByRole?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type brandUpdateManyMutationInput = {
@@ -7288,6 +7436,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type brandUncheckedUpdateManyInput = {
@@ -7303,6 +7454,9 @@ export namespace Prisma {
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productCreateInput = {
@@ -7651,6 +7805,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -7675,12 +7840,16 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type categoryAvgOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type categoryMaxOrderByAggregateInput = {
@@ -7696,6 +7865,9 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type categoryMinOrderByAggregateInput = {
@@ -7711,12 +7883,16 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type categorySumOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7761,6 +7937,20 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type brandOrderByRelevanceInput = {
     fields: brandOrderByRelevanceFieldEnum | brandOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -7780,12 +7970,16 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type brandAvgOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type brandMaxOrderByAggregateInput = {
@@ -7801,6 +7995,9 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type brandMinOrderByAggregateInput = {
@@ -7816,12 +8013,16 @@ export namespace Prisma {
     updatedByRole?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type brandSumOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -8012,6 +8213,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
@@ -8147,6 +8352,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -8198,6 +8414,20 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {

@@ -54,9 +54,13 @@ model category {
   updatedByRole  String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  deletedAt      DateTime?
+  deletedBy      Int?
+  deletedByRole  String?
 
   @@index([createdBy])
   @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model brand {
@@ -72,9 +76,13 @@ model brand {
   updatedByRole  String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  deletedAt      DateTime?
+  deletedBy      Int?
+  deletedByRole  String?
 
   @@index([createdBy])
   @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model product {

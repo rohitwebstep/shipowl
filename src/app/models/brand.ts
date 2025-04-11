@@ -8,6 +8,9 @@ interface Brand {
     updatedBy?: number;
     updatedAt?: Date;
     updatedByRole?: string;
+    deletedBy?: Date;
+    deletedAt?: Date;
+    deletedByRole?: string;
 }
 
 export async function generateBrandSlug(name: string) {
@@ -111,6 +114,79 @@ export const getAllCategories = async () => {
     } catch (error) {
         console.error("❌ getAllCategories Error:", error);
         return { status: false, message: "Error fetching categories" };
+    }
+};
+
+export const getCategoriesByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+    try {
+        let whereCondition = {};
+
+        switch (status) {
+            case "active":
+                whereCondition = { status: true, deletedAt: null };
+                break;
+            case "inactive":
+                whereCondition = { status: false, deletedAt: null };
+                break;
+            case "deleted":
+                whereCondition = { deletedAt: { not: null } };
+                break;
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const categories = await prisma.brand.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+        });
+
+        return { status: true, categories };
+    } catch (error) {
+        console.error(`Error fetching categories by status (${status}):`, error);
+        return { status: false, message: "Error fetching categories" };
+    }
+};
+
+// 🔴 Soft DELETE (marks as deleted by setting deletedAt field)
+export const softDeleteBrand = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const updatedBrand = await prisma.brand.update({
+            where: { id },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+        return { status: true, message: "Brand soft deleted successfully", updatedBrand };
+    } catch (error) {
+        console.error("❌ softDeleteBrand Error:", error);
+        return { status: false, message: "Error soft deleting brand" };
+    }
+};
+
+// 🟢 RESTORE (Restores a soft-deleted brand by setting deletedAt to null)
+export const restoreBrand = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const restoredBrand = await prisma.brand.update({
+            where: { id },
+            data: {
+                deletedBy: null,      // Reset the deletedBy field
+                deletedAt: null,      // Set deletedAt to null
+                deletedByRole: null,  // Reset the deletedByRole field
+                updatedBy: adminId,   // Record the user restoring the brand
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field
+            },
+        });
+
+        return { status: true, message: "Brand restored successfully", restoredBrand };
+    } catch (error) {
+        console.error("❌ restoreBrand Error:", error);
+        return { status: false, message: "Error restoring brand" };
     }
 };
 

@@ -152,7 +152,10 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updatedBy: 'updatedBy',
   updatedByRole: 'updatedByRole',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.BrandScalarFieldEnum = {
@@ -167,7 +170,10 @@ exports.Prisma.BrandScalarFieldEnum = {
   updatedBy: 'updatedBy',
   updatedByRole: 'updatedByRole',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.ProductScalarFieldEnum = {
@@ -219,7 +225,8 @@ exports.Prisma.categoryOrderByRelevanceFieldEnum = {
   description: 'description',
   image: 'image',
   createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole'
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.brandOrderByRelevanceFieldEnum = {
@@ -228,7 +235,8 @@ exports.Prisma.brandOrderByRelevanceFieldEnum = {
   description: 'description',
   image: 'image',
   createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole'
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.productOrderByRelevanceFieldEnum = {

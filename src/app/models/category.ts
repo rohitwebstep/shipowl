@@ -8,6 +8,9 @@ interface Category {
     updatedBy?: number;
     updatedAt?: Date;
     updatedByRole?: string;
+    deletedBy?: Date;
+    deletedAt?: Date;
+    deletedByRole?: string;
 }
 
 export async function generateCategorySlug(name: string) {
@@ -111,6 +114,79 @@ export const getAllCategories = async () => {
     } catch (error) {
         console.error("❌ getAllCategories Error:", error);
         return { status: false, message: "Error fetching categories" };
+    }
+};
+
+export const getCategoriesByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+    try {
+        let whereCondition = {};
+
+        switch (status) {
+            case "active":
+                whereCondition = { status: true, deletedAt: null };
+                break;
+            case "inactive":
+                whereCondition = { status: false, deletedAt: null };
+                break;
+            case "deleted":
+                whereCondition = { deletedAt: { not: null } };
+                break;
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const categories = await prisma.category.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+        });
+
+        return { status: true, categories };
+    } catch (error) {
+        console.error(`Error fetching categories by status (${status}):`, error);
+        return { status: false, message: "Error fetching categories" };
+    }
+};
+
+// 🔴 Soft DELETE (marks as deleted by setting deletedAt field)
+export const softDeleteCategory = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const updatedCategory = await prisma.category.update({
+            where: { id },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+        return { status: true, message: "Category soft deleted successfully", updatedCategory };
+    } catch (error) {
+        console.error("❌ softDeleteCategory Error:", error);
+        return { status: false, message: "Error soft deleting category" };
+    }
+};
+
+// 🟢 RESTORE (Restores a soft-deleted category by setting deletedAt to null)
+export const restoreCategory = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const restoredCategory = await prisma.category.update({
+            where: { id },
+            data: {
+                deletedBy: null,      // Reset the deletedBy field
+                deletedAt: null,      // Set deletedAt to null
+                deletedByRole: null,  // Reset the deletedByRole field
+                updatedBy: adminId,   // Record the user restoring the category
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field
+            },
+        });
+
+        return { status: true, message: "Category restored successfully", restoredCategory };
+    } catch (error) {
+        console.error("❌ restoreCategory Error:", error);
+        return { status: false, message: "Error restoring category" };
     }
 };
 

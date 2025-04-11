@@ -5,7 +5,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { getCategoryById, updateCategory, deleteCategory } from '@/app/models/category';
+import { getCategoryById, updateCategory, softDeleteCategory, restoreCategory, deleteCategory } from '@/app/models/category';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -174,6 +174,63 @@ export async function PUT(req: NextRequest) {
   }
 }
 
+export async function PATCH(req: NextRequest) {
+  try {
+    // Extract categoryId directly from the URL path
+    const categoryId = req.nextUrl.pathname.split('/').pop();
+
+    logMessage('debug', 'Requested Category ID:', categoryId);
+
+    // Get headers
+    const adminIdHeader = req.headers.get("x-admin-id");
+    const adminRole = req.headers.get("x-admin-role");
+
+    const adminId = Number(adminIdHeader);
+    if (!adminIdHeader || isNaN(adminId)) {
+      logMessage('warn', 'Invalid or missing admin ID header', { adminIdHeader, adminRole });
+      return NextResponse.json(
+        { error: "User ID is missing or invalid in request" },
+        { status: 400 }
+      );
+    }
+
+    // Check if admin exists
+    const userCheck = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
+      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const categoryIdNum = Number(categoryId);
+    if (isNaN(categoryIdNum)) {
+      logMessage('warn', 'Invalid category ID', { categoryId });
+      return NextResponse.json({ error: 'Invalid category ID' }, { status: 400 });
+    }
+
+    const categoryResult = await getCategoryById(categoryIdNum);
+    logMessage('debug', 'Category fetch result:', categoryResult);
+    if (!categoryResult?.status) {
+      logMessage('warn', 'Category not found', { categoryIdNum });
+      return NextResponse.json({ status: false, message: 'Category not found' }, { status: 404 });
+    }
+
+    // Restore the category (i.e., reset deletedAt, deletedBy, deletedByRole)
+    const restoreResult = await restoreCategory(adminId, String(adminRole), categoryIdNum);
+
+    if (restoreResult?.status) {
+      logMessage('info', 'Category restored successfully:', restoreResult.restoredCategory);
+      return NextResponse.json({ status: true, category: restoreResult.restoredCategory }, { status: 200 });
+    }
+
+    logMessage('error', 'Category restore failed');
+    return NextResponse.json({ status: false, error: 'Category restore failed' }, { status: 500 });
+
+  } catch (error) {
+    logMessage('error', '❌ Category restore error:', error);
+    return NextResponse.json({ status: false, error: 'Server error' }, { status: 500 });
+  }
+}
+
 export async function DELETE(req: NextRequest) {
   try {
     // Extract categoryId directly from the URL path
@@ -205,16 +262,22 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Category ID is invalid' }, { status: 400 });
     }
 
-    // Attempt to delete the category
-    const categoryResult = await deleteCategory(categoryIdNum);
-    if (categoryResult?.status) {
-      logMessage('info', `Category deleted successfully: ${categoryIdNum}`, { adminId });
-      return NextResponse.json({ status: true, message: 'Category successfully deleted' }, { status: 200 });
+    const categoryResult = await getCategoryById(categoryIdNum);
+    if (!categoryResult?.status) {
+      logMessage('warn', 'Category not found', { categoryIdNum });
+      return NextResponse.json({ status: false, message: 'Category not found' }, { status: 404 });
     }
 
-    // If category not found
-    logMessage('info', `Category not found: ${categoryIdNum}`, { adminId });
-    return NextResponse.json({ status: false, message: 'Category not found' }, { status: 404 });
+    const result = await softDeleteCategory(Number(adminId), String(adminRole), categoryIdNum);  // Assuming softDeleteCategory marks the category as deleted
+    logMessage('info', `Soft delete request for category: ${categoryIdNum}`, { adminId });
+
+    if (result?.status) {
+      logMessage('info', `Category soft deleted successfully: ${categoryIdNum}`, { adminId });
+      return NextResponse.json({ status: true, message: `Category soft deleted successfully` }, { status: 200 });
+    }
+
+    logMessage('info', `Category not found or could not be deleted: ${categoryIdNum}`, { adminId });
+    return NextResponse.json({ status: false, message: 'Category not found or deletion failed' }, { status: 404 });
   } catch (error) {
     logMessage('error', 'Error during category deletion', { error });
     return NextResponse.json({ status: false, error: 'Internal server error' }, { status: 500 });
