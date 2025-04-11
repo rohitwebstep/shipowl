@@ -29,6 +29,11 @@ export type adminStaff = $Result.DefaultSelection<Prisma.$adminStaffPayload>
  */
 export type category = $Result.DefaultSelection<Prisma.$categoryPayload>
 /**
+ * Model brand
+ * 
+ */
+export type brand = $Result.DefaultSelection<Prisma.$brandPayload>
+/**
  * Model product
  * 
  */
@@ -188,6 +193,16 @@ export class PrismaClient<
     * ```
     */
   get category(): Prisma.categoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.brand`: Exposes CRUD operations for the **brand** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Brands
+    * const brands = await prisma.brand.findMany()
+    * ```
+    */
+  get brand(): Prisma.brandDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.product`: Exposes CRUD operations for the **product** model.
@@ -641,6 +656,7 @@ export namespace Prisma {
     admin: 'admin',
     adminStaff: 'adminStaff',
     category: 'category',
+    brand: 'brand',
     product: 'product'
   };
 
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "adminStaff" | "category" | "product"
+      modelProps: "admin" | "adminStaff" | "category" | "brand" | "product"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -862,6 +878,72 @@ export namespace Prisma {
           }
         }
       }
+      brand: {
+        payload: Prisma.$brandPayload<ExtArgs>
+        fields: Prisma.brandFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.brandFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.brandFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          findFirst: {
+            args: Prisma.brandFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.brandFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          findMany: {
+            args: Prisma.brandFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>[]
+          }
+          create: {
+            args: Prisma.brandCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          createMany: {
+            args: Prisma.brandCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.brandDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          update: {
+            args: Prisma.brandUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          deleteMany: {
+            args: Prisma.brandDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.brandUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.brandUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$brandPayload>
+          }
+          aggregate: {
+            args: Prisma.BrandAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBrand>
+          }
+          groupBy: {
+            args: Prisma.brandGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BrandGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.brandCountArgs<ExtArgs>
+            result: $Utils.Optional<BrandCountAggregateOutputType> | number
+          }
+        }
+      }
       product: {
         payload: Prisma.$productPayload<ExtArgs>
         fields: Prisma.productFieldRefs
@@ -1015,6 +1097,7 @@ export namespace Prisma {
     admin?: adminOmit
     adminStaff?: adminStaffOmit
     category?: categoryOmit
+    brand?: brandOmit
     product?: productOmit
   }
 
@@ -4175,6 +4258,1007 @@ export namespace Prisma {
 
 
   /**
+   * Model brand
+   */
+
+  export type AggregateBrand = {
+    _count: BrandCountAggregateOutputType | null
+    _avg: BrandAvgAggregateOutputType | null
+    _sum: BrandSumAggregateOutputType | null
+    _min: BrandMinAggregateOutputType | null
+    _max: BrandMaxAggregateOutputType | null
+  }
+
+  export type BrandAvgAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+  }
+
+  export type BrandSumAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+  }
+
+  export type BrandMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    image: string | null
+    status: boolean | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    image: string | null
+    status: boolean | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    description: number
+    image: number
+    status: number
+    createdBy: number
+    createdByRole: number
+    updatedBy: number
+    updatedByRole: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BrandAvgAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+  }
+
+  export type BrandSumAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+  }
+
+  export type BrandMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    image?: true
+    status?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedBy?: true
+    updatedByRole?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    image?: true
+    status?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedBy?: true
+    updatedByRole?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    image?: true
+    status?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedBy?: true
+    updatedByRole?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BrandAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which brand to aggregate.
+     */
+    where?: brandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of brands to fetch.
+     */
+    orderBy?: brandOrderByWithRelationInput | brandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: brandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` brands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` brands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned brands
+    **/
+    _count?: true | BrandCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BrandAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BrandSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BrandMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BrandMaxAggregateInputType
+  }
+
+  export type GetBrandAggregateType<T extends BrandAggregateArgs> = {
+        [P in keyof T & keyof AggregateBrand]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBrand[P]>
+      : GetScalarType<T[P], AggregateBrand[P]>
+  }
+
+
+
+
+  export type brandGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: brandWhereInput
+    orderBy?: brandOrderByWithAggregationInput | brandOrderByWithAggregationInput[]
+    by: BrandScalarFieldEnum[] | BrandScalarFieldEnum
+    having?: brandScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BrandCountAggregateInputType | true
+    _avg?: BrandAvgAggregateInputType
+    _sum?: BrandSumAggregateInputType
+    _min?: BrandMinAggregateInputType
+    _max?: BrandMaxAggregateInputType
+  }
+
+  export type BrandGroupByOutputType = {
+    id: number
+    name: string
+    slug: string
+    description: string | null
+    image: string | null
+    status: boolean
+    createdBy: number | null
+    createdByRole: string | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BrandCountAggregateOutputType | null
+    _avg: BrandAvgAggregateOutputType | null
+    _sum: BrandSumAggregateOutputType | null
+    _min: BrandMinAggregateOutputType | null
+    _max: BrandMaxAggregateOutputType | null
+  }
+
+  type GetBrandGroupByPayload<T extends brandGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BrandGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BrandGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BrandGroupByOutputType[P]>
+            : GetScalarType<T[P], BrandGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type brandSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
+    status?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["brand"]>
+
+
+
+  export type brandSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
+    status?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
+
+  export type $brandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "brand"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      slug: string
+      description: string | null
+      image: string | null
+      status: boolean
+      createdBy: number | null
+      createdByRole: string | null
+      updatedBy: number | null
+      updatedByRole: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["brand"]>
+    composites: {}
+  }
+
+  type brandGetPayload<S extends boolean | null | undefined | brandDefaultArgs> = $Result.GetResult<Prisma.$brandPayload, S>
+
+  type brandCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<brandFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BrandCountAggregateInputType | true
+    }
+
+  export interface brandDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['brand'], meta: { name: 'brand' } }
+    /**
+     * Find zero or one Brand that matches the filter.
+     * @param {brandFindUniqueArgs} args - Arguments to find a Brand
+     * @example
+     * // Get one Brand
+     * const brand = await prisma.brand.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends brandFindUniqueArgs>(args: SelectSubset<T, brandFindUniqueArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Brand that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {brandFindUniqueOrThrowArgs} args - Arguments to find a Brand
+     * @example
+     * // Get one Brand
+     * const brand = await prisma.brand.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends brandFindUniqueOrThrowArgs>(args: SelectSubset<T, brandFindUniqueOrThrowArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Brand that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandFindFirstArgs} args - Arguments to find a Brand
+     * @example
+     * // Get one Brand
+     * const brand = await prisma.brand.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends brandFindFirstArgs>(args?: SelectSubset<T, brandFindFirstArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Brand that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandFindFirstOrThrowArgs} args - Arguments to find a Brand
+     * @example
+     * // Get one Brand
+     * const brand = await prisma.brand.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends brandFindFirstOrThrowArgs>(args?: SelectSubset<T, brandFindFirstOrThrowArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Brands that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Brands
+     * const brands = await prisma.brand.findMany()
+     * 
+     * // Get first 10 Brands
+     * const brands = await prisma.brand.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const brandWithIdOnly = await prisma.brand.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends brandFindManyArgs>(args?: SelectSubset<T, brandFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Brand.
+     * @param {brandCreateArgs} args - Arguments to create a Brand.
+     * @example
+     * // Create one Brand
+     * const Brand = await prisma.brand.create({
+     *   data: {
+     *     // ... data to create a Brand
+     *   }
+     * })
+     * 
+     */
+    create<T extends brandCreateArgs>(args: SelectSubset<T, brandCreateArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Brands.
+     * @param {brandCreateManyArgs} args - Arguments to create many Brands.
+     * @example
+     * // Create many Brands
+     * const brand = await prisma.brand.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends brandCreateManyArgs>(args?: SelectSubset<T, brandCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Brand.
+     * @param {brandDeleteArgs} args - Arguments to delete one Brand.
+     * @example
+     * // Delete one Brand
+     * const Brand = await prisma.brand.delete({
+     *   where: {
+     *     // ... filter to delete one Brand
+     *   }
+     * })
+     * 
+     */
+    delete<T extends brandDeleteArgs>(args: SelectSubset<T, brandDeleteArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Brand.
+     * @param {brandUpdateArgs} args - Arguments to update one Brand.
+     * @example
+     * // Update one Brand
+     * const brand = await prisma.brand.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends brandUpdateArgs>(args: SelectSubset<T, brandUpdateArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Brands.
+     * @param {brandDeleteManyArgs} args - Arguments to filter Brands to delete.
+     * @example
+     * // Delete a few Brands
+     * const { count } = await prisma.brand.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends brandDeleteManyArgs>(args?: SelectSubset<T, brandDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Brands.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Brands
+     * const brand = await prisma.brand.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends brandUpdateManyArgs>(args: SelectSubset<T, brandUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Brand.
+     * @param {brandUpsertArgs} args - Arguments to update or create a Brand.
+     * @example
+     * // Update or create a Brand
+     * const brand = await prisma.brand.upsert({
+     *   create: {
+     *     // ... data to create a Brand
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Brand we want to update
+     *   }
+     * })
+     */
+    upsert<T extends brandUpsertArgs>(args: SelectSubset<T, brandUpsertArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Brands.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandCountArgs} args - Arguments to filter Brands to count.
+     * @example
+     * // Count the number of Brands
+     * const count = await prisma.brand.count({
+     *   where: {
+     *     // ... the filter for the Brands we want to count
+     *   }
+     * })
+    **/
+    count<T extends brandCountArgs>(
+      args?: Subset<T, brandCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BrandCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Brand.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BrandAggregateArgs>(args: Subset<T, BrandAggregateArgs>): Prisma.PrismaPromise<GetBrandAggregateType<T>>
+
+    /**
+     * Group by Brand.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {brandGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends brandGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: brandGroupByArgs['orderBy'] }
+        : { orderBy?: brandGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, brandGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBrandGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the brand model
+   */
+  readonly fields: brandFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for brand.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__brandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the brand model
+   */
+  interface brandFieldRefs {
+    readonly id: FieldRef<"brand", 'Int'>
+    readonly name: FieldRef<"brand", 'String'>
+    readonly slug: FieldRef<"brand", 'String'>
+    readonly description: FieldRef<"brand", 'String'>
+    readonly image: FieldRef<"brand", 'String'>
+    readonly status: FieldRef<"brand", 'Boolean'>
+    readonly createdBy: FieldRef<"brand", 'Int'>
+    readonly createdByRole: FieldRef<"brand", 'String'>
+    readonly updatedBy: FieldRef<"brand", 'Int'>
+    readonly updatedByRole: FieldRef<"brand", 'String'>
+    readonly createdAt: FieldRef<"brand", 'DateTime'>
+    readonly updatedAt: FieldRef<"brand", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * brand findUnique
+   */
+  export type brandFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter, which brand to fetch.
+     */
+    where: brandWhereUniqueInput
+  }
+
+  /**
+   * brand findUniqueOrThrow
+   */
+  export type brandFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter, which brand to fetch.
+     */
+    where: brandWhereUniqueInput
+  }
+
+  /**
+   * brand findFirst
+   */
+  export type brandFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter, which brand to fetch.
+     */
+    where?: brandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of brands to fetch.
+     */
+    orderBy?: brandOrderByWithRelationInput | brandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for brands.
+     */
+    cursor?: brandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` brands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` brands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of brands.
+     */
+    distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * brand findFirstOrThrow
+   */
+  export type brandFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter, which brand to fetch.
+     */
+    where?: brandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of brands to fetch.
+     */
+    orderBy?: brandOrderByWithRelationInput | brandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for brands.
+     */
+    cursor?: brandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` brands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` brands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of brands.
+     */
+    distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * brand findMany
+   */
+  export type brandFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter, which brands to fetch.
+     */
+    where?: brandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of brands to fetch.
+     */
+    orderBy?: brandOrderByWithRelationInput | brandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing brands.
+     */
+    cursor?: brandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` brands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` brands.
+     */
+    skip?: number
+    distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * brand create
+   */
+  export type brandCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * The data needed to create a brand.
+     */
+    data: XOR<brandCreateInput, brandUncheckedCreateInput>
+  }
+
+  /**
+   * brand createMany
+   */
+  export type brandCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many brands.
+     */
+    data: brandCreateManyInput | brandCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * brand update
+   */
+  export type brandUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * The data needed to update a brand.
+     */
+    data: XOR<brandUpdateInput, brandUncheckedUpdateInput>
+    /**
+     * Choose, which brand to update.
+     */
+    where: brandWhereUniqueInput
+  }
+
+  /**
+   * brand updateMany
+   */
+  export type brandUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update brands.
+     */
+    data: XOR<brandUpdateManyMutationInput, brandUncheckedUpdateManyInput>
+    /**
+     * Filter which brands to update
+     */
+    where?: brandWhereInput
+    /**
+     * Limit how many brands to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * brand upsert
+   */
+  export type brandUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * The filter to search for the brand to update in case it exists.
+     */
+    where: brandWhereUniqueInput
+    /**
+     * In case the brand found by the `where` argument doesn't exist, create a new brand with this data.
+     */
+    create: XOR<brandCreateInput, brandUncheckedCreateInput>
+    /**
+     * In case the brand was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<brandUpdateInput, brandUncheckedUpdateInput>
+  }
+
+  /**
+   * brand delete
+   */
+  export type brandDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+    /**
+     * Filter which brand to delete.
+     */
+    where: brandWhereUniqueInput
+  }
+
+  /**
+   * brand deleteMany
+   */
+  export type brandDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which brands to delete
+     */
+    where?: brandWhereInput
+    /**
+     * Limit how many brands to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * brand without action
+   */
+  export type brandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the brand
+     */
+    select?: brandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the brand
+     */
+    omit?: brandOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model product
    */
 
@@ -5266,6 +6350,24 @@ export namespace Prisma {
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
+  export const BrandScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    image: 'image',
+    status: 'status',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
+
+
   export const ProductScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -5334,6 +6436,18 @@ export namespace Prisma {
   };
 
   export type categoryOrderByRelevanceFieldEnum = (typeof categoryOrderByRelevanceFieldEnum)[keyof typeof categoryOrderByRelevanceFieldEnum]
+
+
+  export const brandOrderByRelevanceFieldEnum: {
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    image: 'image',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole'
+  };
+
+  export type brandOrderByRelevanceFieldEnum = (typeof brandOrderByRelevanceFieldEnum)[keyof typeof brandOrderByRelevanceFieldEnum]
 
 
   export const productOrderByRelevanceFieldEnum: {
@@ -5637,6 +6751,96 @@ export namespace Prisma {
     updatedByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
+  }
+
+  export type brandWhereInput = {
+    AND?: brandWhereInput | brandWhereInput[]
+    OR?: brandWhereInput[]
+    NOT?: brandWhereInput | brandWhereInput[]
+    id?: IntFilter<"brand"> | number
+    name?: StringFilter<"brand"> | string
+    slug?: StringFilter<"brand"> | string
+    description?: StringNullableFilter<"brand"> | string | null
+    image?: StringNullableFilter<"brand"> | string | null
+    status?: BoolFilter<"brand"> | boolean
+    createdBy?: IntNullableFilter<"brand"> | number | null
+    createdByRole?: StringNullableFilter<"brand"> | string | null
+    updatedBy?: IntNullableFilter<"brand"> | number | null
+    updatedByRole?: StringNullableFilter<"brand"> | string | null
+    createdAt?: DateTimeFilter<"brand"> | Date | string
+    updatedAt?: DateTimeFilter<"brand"> | Date | string
+  }
+
+  export type brandOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: brandOrderByRelevanceInput
+  }
+
+  export type brandWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: brandWhereInput | brandWhereInput[]
+    OR?: brandWhereInput[]
+    NOT?: brandWhereInput | brandWhereInput[]
+    name?: StringFilter<"brand"> | string
+    description?: StringNullableFilter<"brand"> | string | null
+    image?: StringNullableFilter<"brand"> | string | null
+    status?: BoolFilter<"brand"> | boolean
+    createdBy?: IntNullableFilter<"brand"> | number | null
+    createdByRole?: StringNullableFilter<"brand"> | string | null
+    updatedBy?: IntNullableFilter<"brand"> | number | null
+    updatedByRole?: StringNullableFilter<"brand"> | string | null
+    createdAt?: DateTimeFilter<"brand"> | Date | string
+    updatedAt?: DateTimeFilter<"brand"> | Date | string
+  }, "id" | "slug">
+
+  export type brandOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: brandCountOrderByAggregateInput
+    _avg?: brandAvgOrderByAggregateInput
+    _max?: brandMaxOrderByAggregateInput
+    _min?: brandMinOrderByAggregateInput
+    _sum?: brandSumOrderByAggregateInput
+  }
+
+  export type brandScalarWhereWithAggregatesInput = {
+    AND?: brandScalarWhereWithAggregatesInput | brandScalarWhereWithAggregatesInput[]
+    OR?: brandScalarWhereWithAggregatesInput[]
+    NOT?: brandScalarWhereWithAggregatesInput | brandScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"brand"> | number
+    name?: StringWithAggregatesFilter<"brand"> | string
+    slug?: StringWithAggregatesFilter<"brand"> | string
+    description?: StringNullableWithAggregatesFilter<"brand"> | string | null
+    image?: StringNullableWithAggregatesFilter<"brand"> | string | null
+    status?: BoolWithAggregatesFilter<"brand"> | boolean
+    createdBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
+    updatedBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
   }
 
   export type productWhereInput = {
@@ -5985,6 +7189,108 @@ export namespace Prisma {
   }
 
   export type categoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type brandCreateInput = {
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type brandUncheckedCreateInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type brandUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type brandUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type brandCreateManyInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type brandUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type brandUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -6453,6 +7759,69 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type brandOrderByRelevanceInput = {
+    fields: brandOrderByRelevanceFieldEnum | brandOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type brandCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type brandAvgOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+  }
+
+  export type brandMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type brandMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type brandSumOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {

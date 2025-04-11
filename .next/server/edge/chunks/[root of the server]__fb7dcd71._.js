@@ -125,7 +125,9 @@ function middleware(req) {
     const restProtectedRoutes = [
         "/api/product/create",
         "/api/category",
-        "/api/category/:path*"
+        "/api/category/:path*",
+        "/api/brand",
+        "/api/brand/:path*"
     ];
     if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
         const applicableRoles = [
@@ -175,7 +177,9 @@ const config = {
         "/api/supplier/auth/verify",
         "/api/product/create",
         "/api/category",
-        "/api/category/:path*"
+        "/api/category/:path*",
+        "/api/brand",
+        "/api/brand/:path*"
     ]
 };
 }}),

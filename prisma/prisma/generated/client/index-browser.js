@@ -155,6 +155,21 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BrandScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  image: 'image',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -207,6 +222,15 @@ exports.Prisma.categoryOrderByRelevanceFieldEnum = {
   updatedByRole: 'updatedByRole'
 };
 
+exports.Prisma.brandOrderByRelevanceFieldEnum = {
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  image: 'image',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole'
+};
+
 exports.Prisma.productOrderByRelevanceFieldEnum = {
   name: 'name',
   slug: 'slug',
@@ -221,6 +245,7 @@ exports.Prisma.ModelName = {
   admin: 'admin',
   adminStaff: 'adminStaff',
   category: 'category',
+  brand: 'brand',
   product: 'product'
 };
 

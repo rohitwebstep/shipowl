@@ -59,6 +59,24 @@ model category {
   @@index([updatedBy])
 }
 
+model brand {
+  id            Int      @id @default(autoincrement())
+  name          String
+  slug          String   @unique
+  description   String?
+  image         String?
+  status        Boolean  @default(false)
+  createdBy     Int?
+  createdByRole String?
+  updatedBy     Int?
+  updatedByRole String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([createdBy])
+  @@index([updatedBy])
+}
+
 model product {
   id            Int      @id @default(autoincrement())
   name          String
