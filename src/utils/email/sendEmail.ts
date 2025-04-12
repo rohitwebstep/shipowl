@@ -82,8 +82,14 @@ export async function sendEmail(
 
         console.log(`📤 Email sent to ${mailOptions.to.join(", ")} | ID: ${info.messageId}`);
         return { success: true, messageId: info.messageId };
-    } catch (error: any) {
-        console.error("❌ Email Error:", error);
-        return { success: false, error: error.message };
+    } catch (error) {
+        // Specify a type other than 'any' for the error
+        if (error instanceof Error) {
+            console.error("❌ Email Error:", error.message);
+            return { success: false, error: error.message };
+        } else {
+            console.error("❌ Unknown Error:", error);
+            return { success: false, error: "Unknown error occurred" };
+        }
     }
 }

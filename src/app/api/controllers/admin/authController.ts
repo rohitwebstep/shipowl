@@ -210,7 +210,7 @@ export async function handleResetPassword(
         // Verify token and fetch admin details using adminByToken function
         const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
 
-        if (!status) {
+        if (!status || !admin) {
             return NextResponse.json(
                 { message: message || "Invalid token or role", status: false },
                 { status: 401 }
