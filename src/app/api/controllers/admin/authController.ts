@@ -6,6 +6,14 @@ import { comparePassword } from '@/utils/hashUtils';
 import { verifyToken } from '@/utils/authUtils';
 import bcrypt from 'bcryptjs';
 
+interface Admin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    createdAt: Date;
+}
+
 export async function handleLogin(req: NextRequest, adminRole: string, adminStaffRole: string) {
     try {
         const { email, password } = await req.json();
@@ -339,7 +347,7 @@ export async function adminByToken(
     token: string,
     adminRole: string,
     adminStaffRole: string
-): Promise<{ status: boolean, message: string, admin?: any }> {
+): Promise<{ status: boolean, message: string, admin?: Admin }> {
     try {
         // Verify token and extract admin details
         const { payload, status, message } = await verifyToken(token);
@@ -358,7 +366,7 @@ export async function adminByToken(
         const adminModel = ["admin", "dropshipper", "supplier"].includes(payloadAdminRole) ? "admin" : "adminStaff";
 
         // Fetch the admin from the database
-        let admin;
+        let admin: Admin | null;
         if (adminModel === "admin") {
             admin = await prisma.admin.findUnique({
                 where: { id: payload.adminId },
