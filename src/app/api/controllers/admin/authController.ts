@@ -64,7 +64,7 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
         const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
 
         if (!status) {
-            return NextResponse.json({ message: "Invalid email or password", status: false }, { status: 401 });
+            return NextResponse.json({ message: message || "Invalid email or password", status: false }, { status: 401 });
         }
 
         return NextResponse.json({ message: "Token is valid", admin, status: true });
@@ -243,8 +243,6 @@ export async function handleResetPassword(
             pass: "dxoaeeczgiapoybi",
             from: "Inspire Tuition",
         };
-
-        const resetUrl = `https://yourdomain.com/admin/auth/password/reset?token=${token}`;
 
         const mailData = {
             recipient: [
