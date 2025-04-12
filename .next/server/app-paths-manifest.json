@@ -1,4 +1,5 @@
 {
-  "/api/category/[categoryId]/image/[imageIndex]/route": "app/api/category/[categoryId]/image/[imageIndex]/route.js",
-  "/api/category/route": "app/api/category/route.js"
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
+  "/api/admin/auth/password/forget/route": "app/api/admin/auth/password/forget/route.js",
+  "/api/admin/auth/password/reset/route": "app/api/admin/auth/password/reset/route.js"
 }

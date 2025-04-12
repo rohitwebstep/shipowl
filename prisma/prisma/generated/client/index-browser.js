@@ -125,7 +125,10 @@ exports.Prisma.AdminScalarFieldEnum = {
   role: 'role',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  pr_token: 'pr_token',
+  pr_expires_at: 'pr_expires_at',
+  pr_last_reset: 'pr_last_reset'
 };
 
 exports.Prisma.AdminStaffScalarFieldEnum = {
@@ -137,7 +140,10 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   role: 'role',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  pr_token: 'pr_token',
+  pr_expires_at: 'pr_expires_at',
+  pr_last_reset: 'pr_last_reset'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -198,12 +204,18 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
   role: 'role',
-  status: 'status'
+  status: 'status',
+  pr_token: 'pr_token'
 };
 
 exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
@@ -211,12 +223,8 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  status: 'status'
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
+  status: 'status',
+  pr_token: 'pr_token'
 };
 
 exports.Prisma.categoryOrderByRelevanceFieldEnum = {

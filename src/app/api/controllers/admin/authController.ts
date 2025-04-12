@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from "@/lib/prisma";
-import { generateToken } from '@/utils/authUtils';
+import { sendEmail } from "@/utils/email/sendEmail";
+import { generateToken, generatePasswordResetToken } from '@/utils/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
 import { verifyToken } from '@/utils/authUtils';
 import bcrypt from 'bcryptjs';
@@ -34,6 +35,7 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
 
         // Generate authentication token
         const token = generateToken(admin.id, admin.role);
+
         return NextResponse.json({
             message: "Login successful",
             token,
@@ -58,48 +60,10 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
             return NextResponse.json({ message: 'No token provided', status: false }, { status: 401 });
         }
 
-        // Verify token and extract admin details
-        const { payload, status, message } = await verifyToken(token);
-        if (!status || !payload || typeof payload.adminId !== 'number') {
-            return NextResponse.json({ message: message, status: false }, { status: 403 });
-        }
+        // Use adminByToken to verify token and fetch admin details
+        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
 
-        // Determine the admin model based on role
-        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-
-        if (![adminRole, adminStaffRole].includes(payloadAdminRole)) {
-            return NextResponse.json({ message: "Access denied. Invalid role.", status: false }, { status: 403 });
-        }
-
-        const adminModel = ["admin", "dropshipper", "supplier"].includes(payloadAdminRole) ? "admin" : "adminStaff";
-
-        // Fetch the admin from the database
-        let admin
-        if (adminModel === "admin") {
-            admin = await prisma.admin.findUnique({
-                where: { id: payload.adminId },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true,
-                },
-            });
-        } else {
-            admin = await prisma.adminStaff.findUnique({
-                where: { id: payload.adminId },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true,
-                },
-            });
-        }
-
-        if (!admin) {
+        if (!status) {
             return NextResponse.json({ message: "Invalid email or password", status: false }, { status: 401 });
         }
 
@@ -107,6 +71,225 @@ export async function handleVerifyLogin(req: NextRequest, adminRole: string, adm
     } catch (error) {
         console.error(`error - `, error);
         return NextResponse.json({ message: "Internal Server Error", status: false }, { status: 500 });
+    }
+}
+
+export async function handleForgetPassword(
+    req: NextRequest,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { email } = await req.json();
+
+        if (!email) {
+            return NextResponse.json(
+                { message: "Email is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Attempt to fetch admin or adminStaff by email
+        let userResponse = await adminByUsernameRole(email, adminRole);
+        if (!userResponse.status || !userResponse.admin) {
+            userResponse = await adminByUsernameRole(email, adminStaffRole);
+            if (!userResponse.status || !userResponse.admin) {
+                return NextResponse.json(
+                    {
+                        message: "No account found with this email.",
+                        status: false,
+                    },
+                    { status: 404 }
+                );
+            }
+        }
+
+        const admin = userResponse.admin;
+        const token = generatePasswordResetToken(admin.id, admin.role);
+        const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+        // Update token and expiry in database
+        const updateData = {
+            pr_token: token,
+            pr_expires_at: expiry,
+        };
+
+        if (admin.role === adminRole) {
+            await prisma.admin.update({ where: { id: admin.id }, data: updateData });
+        } else {
+            await prisma.adminStaff.update({ where: { id: admin.id }, data: updateData });
+        }
+
+        // Optional: Send email
+        // await sendPasswordResetEmail(admin.email, token);
+
+        const smtpConfig = {
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            user: "rohitwebstep@gmail.com",
+            pass: "dxoaeeczgiapoybi",
+            from: "Inspire Tuition",
+        };
+
+        const resetUrl = `https://yourdomain.com/admin/auth/password/reset?token=${token}`;
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email }
+            ],
+            cc: [],
+            bcc: [],
+            subject: "Reset Your Password",
+            htmlBody: `
+                <h3>Hello ${admin.name},</h3>
+                <p>We received a request to reset your password.</p>
+                <p>Please click the button below to continue:</p>
+                <a href="${resetUrl}" style="display:inline-block;padding:10px 20px;margin:15px 0;background:#007bff;color:#fff;text-decoration:none;border-radius:5px;">Reset Password</a>
+                <p><strong>This link will expire in 1 hour.</strong></p>
+                <p>If you did not request this, you can ignore this message.</p>
+                <p>Regards,<br><strong>Inspire Tuition Team</strong></p>
+            `,
+            attachments: [],
+        };
+
+        const emailResult = await sendEmail(smtpConfig, mailData);
+
+        if (!emailResult.success) {
+            return NextResponse.json(
+                {
+                    message: "Reset token created but failed to send email. Please try again.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        return NextResponse.json(
+            {
+                message: "Password reset link has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Forgot password error:", error);
+        return NextResponse.json(
+            { message: "Something went wrong. Please try again later.", status: false },
+            { status: 500 }
+        );
+    }
+}
+
+export async function handleResetPassword(
+    req: NextRequest,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { token, password } = await req.json();
+
+        // Check if token is provided
+        if (!token) {
+            return NextResponse.json(
+                { message: "Token is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Verify token and fetch admin details using adminByToken function
+        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
+
+        if (!status) {
+            return NextResponse.json(
+                { message: message || "Invalid token or role", status: false },
+                { status: 401 }
+            );
+        }
+
+        // Hash the password using bcrypt
+        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Prepare the update data
+        const updateData = {
+            pr_token: null,
+            pr_expires_at: null,
+            pr_last_reset: new Date(),
+            password: hashedPassword,
+        };
+
+        // Update the admin or admin staff record based on the role
+        if (admin.role === adminRole) {
+            await prisma.admin.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        } else {
+            await prisma.adminStaff.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        }
+
+        // Email configuration and reset URL
+        const smtpConfig = {
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            user: "rohitwebstep@gmail.com",
+            pass: "dxoaeeczgiapoybi",
+            from: "Inspire Tuition",
+        };
+
+        const resetUrl = `https://yourdomain.com/admin/auth/password/reset?token=${token}`;
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email: admin.email },
+            ],
+            subject: "Password Reset Successful",
+            htmlBody: `
+                <h3>Hello ${admin.name},</h3>
+                <p>Your password has been successfully reset.</p>
+                <p>If you did not initiate this request, please contact support immediately.</p>
+                <p>Regards,</p>
+                <p><strong>Inspire Tuition Team</strong></p>
+            `,
+            attachments: [],
+        };
+
+        // Send email notification
+        const emailResult = await sendEmail(smtpConfig, mailData);
+
+        if (!emailResult.success) {
+            return NextResponse.json(
+                {
+                    message: "Password reset successful, but failed to send email notification.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        // Return success response
+        return NextResponse.json(
+            {
+                message: "Password reset successful. A notification has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Password reset error:", error);
+        return NextResponse.json(
+            { message: "An error occurred while resetting the password. Please try again later.", status: false },
+            { status: 500 }
+        );
     }
 }
 
@@ -153,3 +336,65 @@ export async function adminByUsernameRole(username: string, role: string) {
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export async function adminByToken(
+    token: string,
+    adminRole: string,
+    adminStaffRole: string
+): Promise<{ status: boolean, message: string, admin?: any }> {
+    try {
+        // Verify token and extract admin details
+        const { payload, status, message } = await verifyToken(token);
+        if (!status || !payload || typeof payload.adminId !== 'number') {
+            return { status: false, message: message || "Unauthorized access. Invalid token." };
+        }
+
+        // Determine the admin model based on role
+        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
+
+        if (![adminRole, adminStaffRole].includes(payloadAdminRole)) {
+            return { status: false, message: "Access denied. Invalid role." };
+        }
+
+        // Set the correct admin model
+        const adminModel = ["admin", "dropshipper", "supplier"].includes(payloadAdminRole) ? "admin" : "adminStaff";
+
+        // Fetch the admin from the database
+        let admin;
+        if (adminModel === "admin") {
+            admin = await prisma.admin.findUnique({
+                where: { id: payload.adminId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        } else {
+            admin = await prisma.adminStaff.findUnique({
+                where: { id: payload.adminId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        }
+
+        // If admin not found, return error
+        if (!admin) {
+            return { status: false, message: "Invalid admin credentials or account not found." };
+        }
+
+        // Return success with admin details
+        return { status: true, message: "Token is valid", admin };
+    } catch (error) {
+        console.error("Error fetching admin:", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+

@@ -15,14 +15,17 @@ datasource db {
 }
 
 model admin {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  role      String   @default("admin")
-  status    String   @default("active")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String   @unique
+  password       String
+  role           String   @default("admin")
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  pr_token       String?
+  pr_expires_at  DateTime?
+  pr_last_reset  DateTime?
 
   staff     adminStaff[]
 }
@@ -37,6 +40,9 @@ model adminStaff {
   status    String   @default("active")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  pr_token       String?
+  pr_expires_at  DateTime?
+  pr_last_reset  DateTime?
 
   admin      admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }

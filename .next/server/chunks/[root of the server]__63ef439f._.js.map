@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 52, "column": 0}, "map": {"version":3,"sources":["file://D%3A/Webstep/Shipping%20OWL/2025/April/12/WORKING/sleeping-owl/src/app/api/admin/auth/password/forget/route.ts"],"sourcesContent":["import { handleForgetPassword } from '../../../controllers/admin/authController';\r\nimport { NextRequest } from 'next/server';\r\n\r\nexport async function POST(req: NextRequest) {\r\n    const adminRole = \"admin\";\r\n    const adminStaffRole = \"admin_staff\";\r\n    return handleForgetPassword(req, adminRole, adminStaffRole);\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;AAGO,eAAe,KAAK,GAAgB;IACvC,MAAM,YAAY;IAClB,MAAM,iBAAiB;IACvB,OAAO,qBAAqB,KAAK,WAAW;AAChD","debugId":null}}]
+}

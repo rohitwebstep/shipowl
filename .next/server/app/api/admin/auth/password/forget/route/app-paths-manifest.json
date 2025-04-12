@@ -1,0 +1,3 @@
+{
+  "/api/admin/auth/password/forget/route": "app/api/admin/auth/password/forget/route.js"
+}

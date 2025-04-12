@@ -8,6 +8,9 @@ CREATE TABLE `admin` (
     `status` VARCHAR(191) NOT NULL DEFAULT 'active',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `pr_token` VARCHAR(191) NULL,
+    `pr_expires_at` DATETIME(3) NULL,
+    `pr_last_reset` DATETIME(3) NULL,
 
     UNIQUE INDEX `admin_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -24,6 +27,9 @@ CREATE TABLE `adminStaff` (
     `status` VARCHAR(191) NOT NULL DEFAULT 'active',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `pr_token` VARCHAR(191) NULL,
+    `pr_expires_at` DATETIME(3) NULL,
+    `pr_last_reset` DATETIME(3) NULL,
 
     UNIQUE INDEX `adminStaff_admin_id_key`(`admin_id`),
     UNIQUE INDEX `adminStaff_email_key`(`email`),
