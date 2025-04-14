@@ -4,7 +4,10 @@ import { sendEmail } from "@/utils/email/sendEmail";
 import { generateToken, generatePasswordResetToken } from '@/utils/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
 import { verifyToken } from '@/utils/authUtils';
+import { getEmailConfig } from '@/app/models/emailConfig';
 import bcrypt from 'bcryptjs';
+import { logMessage } from '@/utils/commonUtils';
+import { log } from 'console';
 
 interface Admin {
     id: number;
@@ -130,17 +133,37 @@ export async function handleForgetPassword(
 
         // Optional: Send email
         // await sendPasswordResetEmail(admin.email, token);
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig("admin", "auth", "forget-password", true);
+        logMessage('debug', 'Email Config:', emailConfig);
 
-        const smtpConfig = {
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
-            user: "rohitwebstep@gmail.com",
-            pass: "dxoaeeczgiapoybi",
-            from: "Inspire Tuition",
-        };
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
 
         const resetUrl = `https://yourdomain.com/admin/auth/password/reset?token=${token}`;
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{resetUrl}}": resetUrl,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate;
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
 
         const mailData = {
             recipient: [
@@ -148,20 +171,12 @@ export async function handleForgetPassword(
             ],
             cc: [],
             bcc: [],
-            subject: "Reset Your Password",
-            htmlBody: `
-                <h3>Hello ${admin.name},</h3>
-                <p>We received a request to reset your password.</p>
-                <p>Please click the button below to continue:</p>
-                <a href="${resetUrl}" style="display:inline-block;padding:10px 20px;margin:15px 0;background:#007bff;color:#fff;text-decoration:none;border-radius:5px;">Reset Password</a>
-                <p><strong>This link will expire in 1 hour.</strong></p>
-                <p>If you did not request this, you can ignore this message.</p>
-                <p>Regards,<br><strong>Inspire Tuition Team</strong></p>
-            `,
+            subject,
+            htmlBody,
             attachments: [],
         };
 
-        const emailResult = await sendEmail(smtpConfig, mailData);
+        const emailResult = await sendEmail(emailConfig, mailData);
 
         if (!emailResult.success) {
             return NextResponse.json(
@@ -208,18 +223,17 @@ export async function handleResetPassword(
         }
 
         // Verify token and fetch admin details using adminByToken function
-        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
+        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
 
-        if (!status || !admin) {
+        if (!tokenStatus || !admin) {
             return NextResponse.json(
-                { message: message || "Invalid token or role", status: false },
+                { status: false, message: tokenMessage || "Invalid token or role." },
                 { status: 401 }
             );
         }
 
         // Hash the password using bcrypt
-        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
 
         // Prepare the update data
         const updateData = {
@@ -242,33 +256,46 @@ export async function handleResetPassword(
             });
         }
 
-        // Email configuration and reset URL
-        const smtpConfig = {
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
-            user: "rohitwebstep@gmail.com",
-            pass: "dxoaeeczgiapoybi",
-            from: "Inspire Tuition",
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig("admin", "auth", "reset-password", true);
+        logMessage('debug', 'Email Config:', emailConfig);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
         };
+
+        let htmlBody = htmlTemplate;
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
 
         const mailData = {
             recipient: [
                 { name: admin.name, email: admin.email },
             ],
-            subject: "Password Reset Successful",
-            htmlBody: `
-                <h3>Hello ${admin.name},</h3>
-                <p>Your password has been successfully reset.</p>
-                <p>If you did not initiate this request, please contact support immediately.</p>
-                <p>Regards,</p>
-                <p><strong>Inspire Tuition Team</strong></p>
-            `,
+            subject,
+            htmlBody,
             attachments: [],
         };
 
         // Send email notification
-        const emailResult = await sendEmail(smtpConfig, mailData);
+        const emailResult = await sendEmail(emailConfig, mailData);
 
         if (!emailResult.success) {
             return NextResponse.json(

@@ -11,12 +11,13 @@ interface EmailAttachment {
 }
 
 interface SMTPConfig {
-    host: string;
-    port: number | string;
-    secure: boolean;
-    user: string;
-    pass: string;
-    from: string; // e.g., "Company <noreply@example.com>"
+    host: string; // SMTP server hostname
+    port: number; // SMTP server port
+    secure: boolean; // Use TLS/SSL for connection
+    username: string; // SMTP authentication username
+    password: string; // SMTP authentication password
+    from_email: string; // Sender's email address
+    from_name: string; // Sender's name to appear in "From" field (e.g., "Company Name")
 }
 
 interface MailData {
@@ -41,7 +42,7 @@ export async function sendEmail(
     config: SMTPConfig,
     mailData: MailData
 ): Promise<EmailResult> {
-    const { host, port, secure, user, pass, from } = config;
+    const { host, port, secure, username, password, from_email, from_name } = config;
     const {
         recipient = [],
         cc = [],
@@ -65,11 +66,11 @@ export async function sendEmail(
             host,
             port: Number(port),
             secure,
-            auth: { user, pass },
+            auth: { user: username, pass: password },
         });
 
         const mailOptions = {
-            from: `${from} <${user}>`,
+            from: `${from_name} <${from_email}>`,
             to: formatAddressList(recipient),
             cc: formatAddressList(cc),
             bcc: formatAddressList(bcc),

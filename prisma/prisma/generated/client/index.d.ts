@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model emailConfig
+ * 
+ */
+export type emailConfig = $Result.DefaultSelection<Prisma.$emailConfigPayload>
+/**
  * Model admin
  * 
  */
@@ -46,8 +51,8 @@ export type product = $Result.DefaultSelection<Prisma.$productPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Admins
- * const admins = await prisma.admin.findMany()
+ * // Fetch zero or more EmailConfigs
+ * const emailConfigs = await prisma.emailConfig.findMany()
  * ```
  *
  *
@@ -67,8 +72,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Admins
-   * const admins = await prisma.admin.findMany()
+   * // Fetch zero or more EmailConfigs
+   * const emailConfigs = await prisma.emailConfig.findMany()
    * ```
    *
    *
@@ -165,6 +170,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.emailConfig`: Exposes CRUD operations for the **emailConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailConfigs
+    * const emailConfigs = await prisma.emailConfig.findMany()
+    * ```
+    */
+  get emailConfig(): Prisma.emailConfigDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.admin`: Exposes CRUD operations for the **admin** model.
     * Example usage:
     * ```ts
@@ -653,6 +668,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    emailConfig: 'emailConfig',
     admin: 'admin',
     adminStaff: 'adminStaff',
     category: 'category',
@@ -676,10 +692,76 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "adminStaff" | "category" | "brand" | "product"
+      modelProps: "emailConfig" | "admin" | "adminStaff" | "category" | "brand" | "product"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      emailConfig: {
+        payload: Prisma.$emailConfigPayload<ExtArgs>
+        fields: Prisma.emailConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.emailConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.emailConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.emailConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.emailConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          findMany: {
+            args: Prisma.emailConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>[]
+          }
+          create: {
+            args: Prisma.emailConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          createMany: {
+            args: Prisma.emailConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.emailConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          update: {
+            args: Prisma.emailConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.emailConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.emailConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.emailConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$emailConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailConfig>
+          }
+          groupBy: {
+            args: Prisma.emailConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.emailConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailConfigCountAggregateOutputType> | number
+          }
+        }
+      }
       admin: {
         payload: Prisma.$adminPayload<ExtArgs>
         fields: Prisma.adminFieldRefs
@@ -1094,6 +1176,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    emailConfig?: emailConfigOmit
     admin?: adminOmit
     adminStaff?: adminStaffOmit
     category?: categoryOmit
@@ -1222,6 +1305,1099 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model emailConfig
+   */
+
+  export type AggregateEmailConfig = {
+    _count: EmailConfigCountAggregateOutputType | null
+    _avg: EmailConfigAvgAggregateOutputType | null
+    _sum: EmailConfigSumAggregateOutputType | null
+    _min: EmailConfigMinAggregateOutputType | null
+    _max: EmailConfigMaxAggregateOutputType | null
+  }
+
+  export type EmailConfigAvgAggregateOutputType = {
+    id: number | null
+    smtp_port: number | null
+    createdBy: number | null
+    updatedBy: number | null
+  }
+
+  export type EmailConfigSumAggregateOutputType = {
+    id: bigint | null
+    smtp_port: number | null
+    createdBy: number | null
+    updatedBy: number | null
+  }
+
+  export type EmailConfigMinAggregateOutputType = {
+    id: bigint | null
+    panel: string | null
+    module: string | null
+    subject: string | null
+    action: string | null
+    html_template: string | null
+    smtp_host: string | null
+    smtp_secure: boolean | null
+    smtp_port: number | null
+    smtp_username: string | null
+    smtp_password: string | null
+    from_email: string | null
+    from_name: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+  }
+
+  export type EmailConfigMaxAggregateOutputType = {
+    id: bigint | null
+    panel: string | null
+    module: string | null
+    subject: string | null
+    action: string | null
+    html_template: string | null
+    smtp_host: string | null
+    smtp_secure: boolean | null
+    smtp_port: number | null
+    smtp_username: string | null
+    smtp_password: string | null
+    from_email: string | null
+    from_name: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+  }
+
+  export type EmailConfigCountAggregateOutputType = {
+    id: number
+    panel: number
+    module: number
+    subject: number
+    action: number
+    html_template: number
+    smtp_host: number
+    smtp_secure: number
+    smtp_port: number
+    smtp_username: number
+    smtp_password: number
+    from_email: number
+    from_name: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    _all: number
+  }
+
+
+  export type EmailConfigAvgAggregateInputType = {
+    id?: true
+    smtp_port?: true
+    createdBy?: true
+    updatedBy?: true
+  }
+
+  export type EmailConfigSumAggregateInputType = {
+    id?: true
+    smtp_port?: true
+    createdBy?: true
+    updatedBy?: true
+  }
+
+  export type EmailConfigMinAggregateInputType = {
+    id?: true
+    panel?: true
+    module?: true
+    subject?: true
+    action?: true
+    html_template?: true
+    smtp_host?: true
+    smtp_secure?: true
+    smtp_port?: true
+    smtp_username?: true
+    smtp_password?: true
+    from_email?: true
+    from_name?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+  }
+
+  export type EmailConfigMaxAggregateInputType = {
+    id?: true
+    panel?: true
+    module?: true
+    subject?: true
+    action?: true
+    html_template?: true
+    smtp_host?: true
+    smtp_secure?: true
+    smtp_port?: true
+    smtp_username?: true
+    smtp_password?: true
+    from_email?: true
+    from_name?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+  }
+
+  export type EmailConfigCountAggregateInputType = {
+    id?: true
+    panel?: true
+    module?: true
+    subject?: true
+    action?: true
+    html_template?: true
+    smtp_host?: true
+    smtp_secure?: true
+    smtp_port?: true
+    smtp_username?: true
+    smtp_password?: true
+    from_email?: true
+    from_name?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    _all?: true
+  }
+
+  export type EmailConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which emailConfig to aggregate.
+     */
+    where?: emailConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of emailConfigs to fetch.
+     */
+    orderBy?: emailConfigOrderByWithRelationInput | emailConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: emailConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` emailConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` emailConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned emailConfigs
+    **/
+    _count?: true | EmailConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmailConfigAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmailConfigSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailConfigMaxAggregateInputType
+  }
+
+  export type GetEmailConfigAggregateType<T extends EmailConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailConfig[P]>
+      : GetScalarType<T[P], AggregateEmailConfig[P]>
+  }
+
+
+
+
+  export type emailConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: emailConfigWhereInput
+    orderBy?: emailConfigOrderByWithAggregationInput | emailConfigOrderByWithAggregationInput[]
+    by: EmailConfigScalarFieldEnum[] | EmailConfigScalarFieldEnum
+    having?: emailConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailConfigCountAggregateInputType | true
+    _avg?: EmailConfigAvgAggregateInputType
+    _sum?: EmailConfigSumAggregateInputType
+    _min?: EmailConfigMinAggregateInputType
+    _max?: EmailConfigMaxAggregateInputType
+  }
+
+  export type EmailConfigGroupByOutputType = {
+    id: bigint
+    panel: string
+    module: string
+    subject: string
+    action: string
+    html_template: string
+    smtp_host: string
+    smtp_secure: boolean
+    smtp_port: number
+    smtp_username: string
+    smtp_password: string
+    from_email: string
+    from_name: string
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    _count: EmailConfigCountAggregateOutputType | null
+    _avg: EmailConfigAvgAggregateOutputType | null
+    _sum: EmailConfigSumAggregateOutputType | null
+    _min: EmailConfigMinAggregateOutputType | null
+    _max: EmailConfigMaxAggregateOutputType | null
+  }
+
+  type GetEmailConfigGroupByPayload<T extends emailConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type emailConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    panel?: boolean
+    module?: boolean
+    subject?: boolean
+    action?: boolean
+    html_template?: boolean
+    smtp_host?: boolean
+    smtp_secure?: boolean
+    smtp_port?: boolean
+    smtp_username?: boolean
+    smtp_password?: boolean
+    from_email?: boolean
+    from_name?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+  }, ExtArgs["result"]["emailConfig"]>
+
+
+
+  export type emailConfigSelectScalar = {
+    id?: boolean
+    panel?: boolean
+    module?: boolean
+    subject?: boolean
+    action?: boolean
+    html_template?: boolean
+    smtp_host?: boolean
+    smtp_secure?: boolean
+    smtp_port?: boolean
+    smtp_username?: boolean
+    smtp_password?: boolean
+    from_email?: boolean
+    from_name?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+  }
+
+  export type emailConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panel" | "module" | "subject" | "action" | "html_template" | "smtp_host" | "smtp_secure" | "smtp_port" | "smtp_username" | "smtp_password" | "from_email" | "from_name" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole", ExtArgs["result"]["emailConfig"]>
+
+  export type $emailConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "emailConfig"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      panel: string
+      module: string
+      subject: string
+      action: string
+      html_template: string
+      smtp_host: string
+      smtp_secure: boolean
+      smtp_port: number
+      smtp_username: string
+      smtp_password: string
+      from_email: string
+      from_name: string
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+    }, ExtArgs["result"]["emailConfig"]>
+    composites: {}
+  }
+
+  type emailConfigGetPayload<S extends boolean | null | undefined | emailConfigDefaultArgs> = $Result.GetResult<Prisma.$emailConfigPayload, S>
+
+  type emailConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<emailConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailConfigCountAggregateInputType | true
+    }
+
+  export interface emailConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['emailConfig'], meta: { name: 'emailConfig' } }
+    /**
+     * Find zero or one EmailConfig that matches the filter.
+     * @param {emailConfigFindUniqueArgs} args - Arguments to find a EmailConfig
+     * @example
+     * // Get one EmailConfig
+     * const emailConfig = await prisma.emailConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends emailConfigFindUniqueArgs>(args: SelectSubset<T, emailConfigFindUniqueArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {emailConfigFindUniqueOrThrowArgs} args - Arguments to find a EmailConfig
+     * @example
+     * // Get one EmailConfig
+     * const emailConfig = await prisma.emailConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends emailConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, emailConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigFindFirstArgs} args - Arguments to find a EmailConfig
+     * @example
+     * // Get one EmailConfig
+     * const emailConfig = await prisma.emailConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends emailConfigFindFirstArgs>(args?: SelectSubset<T, emailConfigFindFirstArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigFindFirstOrThrowArgs} args - Arguments to find a EmailConfig
+     * @example
+     * // Get one EmailConfig
+     * const emailConfig = await prisma.emailConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends emailConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, emailConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailConfigs
+     * const emailConfigs = await prisma.emailConfig.findMany()
+     * 
+     * // Get first 10 EmailConfigs
+     * const emailConfigs = await prisma.emailConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailConfigWithIdOnly = await prisma.emailConfig.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends emailConfigFindManyArgs>(args?: SelectSubset<T, emailConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailConfig.
+     * @param {emailConfigCreateArgs} args - Arguments to create a EmailConfig.
+     * @example
+     * // Create one EmailConfig
+     * const EmailConfig = await prisma.emailConfig.create({
+     *   data: {
+     *     // ... data to create a EmailConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends emailConfigCreateArgs>(args: SelectSubset<T, emailConfigCreateArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailConfigs.
+     * @param {emailConfigCreateManyArgs} args - Arguments to create many EmailConfigs.
+     * @example
+     * // Create many EmailConfigs
+     * const emailConfig = await prisma.emailConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends emailConfigCreateManyArgs>(args?: SelectSubset<T, emailConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a EmailConfig.
+     * @param {emailConfigDeleteArgs} args - Arguments to delete one EmailConfig.
+     * @example
+     * // Delete one EmailConfig
+     * const EmailConfig = await prisma.emailConfig.delete({
+     *   where: {
+     *     // ... filter to delete one EmailConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends emailConfigDeleteArgs>(args: SelectSubset<T, emailConfigDeleteArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailConfig.
+     * @param {emailConfigUpdateArgs} args - Arguments to update one EmailConfig.
+     * @example
+     * // Update one EmailConfig
+     * const emailConfig = await prisma.emailConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends emailConfigUpdateArgs>(args: SelectSubset<T, emailConfigUpdateArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailConfigs.
+     * @param {emailConfigDeleteManyArgs} args - Arguments to filter EmailConfigs to delete.
+     * @example
+     * // Delete a few EmailConfigs
+     * const { count } = await prisma.emailConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends emailConfigDeleteManyArgs>(args?: SelectSubset<T, emailConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailConfigs
+     * const emailConfig = await prisma.emailConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends emailConfigUpdateManyArgs>(args: SelectSubset<T, emailConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EmailConfig.
+     * @param {emailConfigUpsertArgs} args - Arguments to update or create a EmailConfig.
+     * @example
+     * // Update or create a EmailConfig
+     * const emailConfig = await prisma.emailConfig.upsert({
+     *   create: {
+     *     // ... data to create a EmailConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends emailConfigUpsertArgs>(args: SelectSubset<T, emailConfigUpsertArgs<ExtArgs>>): Prisma__emailConfigClient<$Result.GetResult<Prisma.$emailConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigCountArgs} args - Arguments to filter EmailConfigs to count.
+     * @example
+     * // Count the number of EmailConfigs
+     * const count = await prisma.emailConfig.count({
+     *   where: {
+     *     // ... the filter for the EmailConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends emailConfigCountArgs>(
+      args?: Subset<T, emailConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailConfigAggregateArgs>(args: Subset<T, EmailConfigAggregateArgs>): Prisma.PrismaPromise<GetEmailConfigAggregateType<T>>
+
+    /**
+     * Group by EmailConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {emailConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends emailConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: emailConfigGroupByArgs['orderBy'] }
+        : { orderBy?: emailConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, emailConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the emailConfig model
+   */
+  readonly fields: emailConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for emailConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__emailConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the emailConfig model
+   */
+  interface emailConfigFieldRefs {
+    readonly id: FieldRef<"emailConfig", 'BigInt'>
+    readonly panel: FieldRef<"emailConfig", 'String'>
+    readonly module: FieldRef<"emailConfig", 'String'>
+    readonly subject: FieldRef<"emailConfig", 'String'>
+    readonly action: FieldRef<"emailConfig", 'String'>
+    readonly html_template: FieldRef<"emailConfig", 'String'>
+    readonly smtp_host: FieldRef<"emailConfig", 'String'>
+    readonly smtp_secure: FieldRef<"emailConfig", 'Boolean'>
+    readonly smtp_port: FieldRef<"emailConfig", 'Int'>
+    readonly smtp_username: FieldRef<"emailConfig", 'String'>
+    readonly smtp_password: FieldRef<"emailConfig", 'String'>
+    readonly from_email: FieldRef<"emailConfig", 'String'>
+    readonly from_name: FieldRef<"emailConfig", 'String'>
+    readonly status: FieldRef<"emailConfig", 'Boolean'>
+    readonly createdAt: FieldRef<"emailConfig", 'DateTime'>
+    readonly createdBy: FieldRef<"emailConfig", 'Int'>
+    readonly createdByRole: FieldRef<"emailConfig", 'String'>
+    readonly updatedAt: FieldRef<"emailConfig", 'DateTime'>
+    readonly updatedBy: FieldRef<"emailConfig", 'Int'>
+    readonly updatedByRole: FieldRef<"emailConfig", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * emailConfig findUnique
+   */
+  export type emailConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which emailConfig to fetch.
+     */
+    where: emailConfigWhereUniqueInput
+  }
+
+  /**
+   * emailConfig findUniqueOrThrow
+   */
+  export type emailConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which emailConfig to fetch.
+     */
+    where: emailConfigWhereUniqueInput
+  }
+
+  /**
+   * emailConfig findFirst
+   */
+  export type emailConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which emailConfig to fetch.
+     */
+    where?: emailConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of emailConfigs to fetch.
+     */
+    orderBy?: emailConfigOrderByWithRelationInput | emailConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for emailConfigs.
+     */
+    cursor?: emailConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` emailConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` emailConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of emailConfigs.
+     */
+    distinct?: EmailConfigScalarFieldEnum | EmailConfigScalarFieldEnum[]
+  }
+
+  /**
+   * emailConfig findFirstOrThrow
+   */
+  export type emailConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which emailConfig to fetch.
+     */
+    where?: emailConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of emailConfigs to fetch.
+     */
+    orderBy?: emailConfigOrderByWithRelationInput | emailConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for emailConfigs.
+     */
+    cursor?: emailConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` emailConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` emailConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of emailConfigs.
+     */
+    distinct?: EmailConfigScalarFieldEnum | EmailConfigScalarFieldEnum[]
+  }
+
+  /**
+   * emailConfig findMany
+   */
+  export type emailConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which emailConfigs to fetch.
+     */
+    where?: emailConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of emailConfigs to fetch.
+     */
+    orderBy?: emailConfigOrderByWithRelationInput | emailConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing emailConfigs.
+     */
+    cursor?: emailConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` emailConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` emailConfigs.
+     */
+    skip?: number
+    distinct?: EmailConfigScalarFieldEnum | EmailConfigScalarFieldEnum[]
+  }
+
+  /**
+   * emailConfig create
+   */
+  export type emailConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * The data needed to create a emailConfig.
+     */
+    data: XOR<emailConfigCreateInput, emailConfigUncheckedCreateInput>
+  }
+
+  /**
+   * emailConfig createMany
+   */
+  export type emailConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many emailConfigs.
+     */
+    data: emailConfigCreateManyInput | emailConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * emailConfig update
+   */
+  export type emailConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * The data needed to update a emailConfig.
+     */
+    data: XOR<emailConfigUpdateInput, emailConfigUncheckedUpdateInput>
+    /**
+     * Choose, which emailConfig to update.
+     */
+    where: emailConfigWhereUniqueInput
+  }
+
+  /**
+   * emailConfig updateMany
+   */
+  export type emailConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update emailConfigs.
+     */
+    data: XOR<emailConfigUpdateManyMutationInput, emailConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which emailConfigs to update
+     */
+    where?: emailConfigWhereInput
+    /**
+     * Limit how many emailConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * emailConfig upsert
+   */
+  export type emailConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * The filter to search for the emailConfig to update in case it exists.
+     */
+    where: emailConfigWhereUniqueInput
+    /**
+     * In case the emailConfig found by the `where` argument doesn't exist, create a new emailConfig with this data.
+     */
+    create: XOR<emailConfigCreateInput, emailConfigUncheckedCreateInput>
+    /**
+     * In case the emailConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<emailConfigUpdateInput, emailConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * emailConfig delete
+   */
+  export type emailConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+    /**
+     * Filter which emailConfig to delete.
+     */
+    where: emailConfigWhereUniqueInput
+  }
+
+  /**
+   * emailConfig deleteMany
+   */
+  export type emailConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which emailConfigs to delete
+     */
+    where?: emailConfigWhereInput
+    /**
+     * Limit how many emailConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * emailConfig without action
+   */
+  export type emailConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the emailConfig
+     */
+    select?: emailConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the emailConfig
+     */
+    omit?: emailConfigOmit<ExtArgs> | null
+  }
+
 
   /**
    * Model admin
@@ -3355,12 +4531,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -3373,12 +4549,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -3391,12 +4567,12 @@ export namespace Prisma {
     description: number
     image: number
     status: number
+    createdAt: number
     createdBy: number
     createdByRole: number
+    updatedAt: number
     updatedBy: number
     updatedByRole: number
-    createdAt: number
-    updatedAt: number
     deletedAt: number
     deletedBy: number
     deletedByRole: number
@@ -3425,12 +4601,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -3443,12 +4619,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -3461,12 +4637,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -3566,12 +4742,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean
+    createdAt: Date
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date
-    updatedAt: Date
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -3603,12 +4779,12 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
@@ -3623,18 +4799,18 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
   }
 
-  export type categoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["category"]>
+  export type categoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["category"]>
 
   export type $categoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "category"
@@ -3646,12 +4822,12 @@ export namespace Prisma {
       description: string | null
       image: string | null
       status: boolean
+      createdAt: Date
       createdBy: number | null
       createdByRole: string | null
+      updatedAt: Date
       updatedBy: number | null
       updatedByRole: string | null
-      createdAt: Date
-      updatedAt: Date
       deletedAt: Date | null
       deletedBy: number | null
       deletedByRole: string | null
@@ -4030,12 +5206,12 @@ export namespace Prisma {
     readonly description: FieldRef<"category", 'String'>
     readonly image: FieldRef<"category", 'String'>
     readonly status: FieldRef<"category", 'Boolean'>
+    readonly createdAt: FieldRef<"category", 'DateTime'>
     readonly createdBy: FieldRef<"category", 'Int'>
     readonly createdByRole: FieldRef<"category", 'String'>
+    readonly updatedAt: FieldRef<"category", 'DateTime'>
     readonly updatedBy: FieldRef<"category", 'Int'>
     readonly updatedByRole: FieldRef<"category", 'String'>
-    readonly createdAt: FieldRef<"category", 'DateTime'>
-    readonly updatedAt: FieldRef<"category", 'DateTime'>
     readonly deletedAt: FieldRef<"category", 'DateTime'>
     readonly deletedBy: FieldRef<"category", 'Int'>
     readonly deletedByRole: FieldRef<"category", 'String'>
@@ -4393,12 +5569,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -4411,12 +5587,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -4429,12 +5605,12 @@ export namespace Prisma {
     description: number
     image: number
     status: number
+    createdAt: number
     createdBy: number
     createdByRole: number
+    updatedAt: number
     updatedBy: number
     updatedByRole: number
-    createdAt: number
-    updatedAt: number
     deletedAt: number
     deletedBy: number
     deletedByRole: number
@@ -4463,12 +5639,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -4481,12 +5657,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -4499,12 +5675,12 @@ export namespace Prisma {
     description?: true
     image?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
     deletedAt?: true
     deletedBy?: true
     deletedByRole?: true
@@ -4604,12 +5780,12 @@ export namespace Prisma {
     description: string | null
     image: string | null
     status: boolean
+    createdAt: Date
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date
-    updatedAt: Date
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
@@ -4641,12 +5817,12 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
@@ -4661,18 +5837,18 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
   }
 
-  export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["brand"]>
+  export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["brand"]>
 
   export type $brandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "brand"
@@ -4684,12 +5860,12 @@ export namespace Prisma {
       description: string | null
       image: string | null
       status: boolean
+      createdAt: Date
       createdBy: number | null
       createdByRole: string | null
+      updatedAt: Date
       updatedBy: number | null
       updatedByRole: string | null
-      createdAt: Date
-      updatedAt: Date
       deletedAt: Date | null
       deletedBy: number | null
       deletedByRole: string | null
@@ -5068,12 +6244,12 @@ export namespace Prisma {
     readonly description: FieldRef<"brand", 'String'>
     readonly image: FieldRef<"brand", 'String'>
     readonly status: FieldRef<"brand", 'Boolean'>
+    readonly createdAt: FieldRef<"brand", 'DateTime'>
     readonly createdBy: FieldRef<"brand", 'Int'>
     readonly createdByRole: FieldRef<"brand", 'String'>
+    readonly updatedAt: FieldRef<"brand", 'DateTime'>
     readonly updatedBy: FieldRef<"brand", 'Int'>
     readonly updatedByRole: FieldRef<"brand", 'String'>
-    readonly createdAt: FieldRef<"brand", 'DateTime'>
-    readonly updatedAt: FieldRef<"brand", 'DateTime'>
     readonly deletedAt: FieldRef<"brand", 'DateTime'>
     readonly deletedBy: FieldRef<"brand", 'Int'>
     readonly deletedByRole: FieldRef<"brand", 'String'>
@@ -5416,6 +6592,7 @@ export namespace Prisma {
     quantity: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type ProductSumAggregateOutputType = {
@@ -5424,6 +6601,7 @@ export namespace Prisma {
     quantity: number | null
     createdBy: number | null
     updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type ProductMinAggregateOutputType = {
@@ -5435,12 +6613,15 @@ export namespace Prisma {
     price: Decimal | null
     quantity: number | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type ProductMaxAggregateOutputType = {
@@ -5452,12 +6633,15 @@ export namespace Prisma {
     price: Decimal | null
     quantity: number | null
     status: boolean | null
+    createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date | null
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type ProductCountAggregateOutputType = {
@@ -5469,12 +6653,15 @@ export namespace Prisma {
     price: number
     quantity: number
     status: number
+    createdAt: number
     createdBy: number
     createdByRole: number
+    updatedAt: number
     updatedBy: number
     updatedByRole: number
-    createdAt: number
-    updatedAt: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
@@ -5485,6 +6672,7 @@ export namespace Prisma {
     quantity?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type ProductSumAggregateInputType = {
@@ -5493,6 +6681,7 @@ export namespace Prisma {
     quantity?: true
     createdBy?: true
     updatedBy?: true
+    deletedBy?: true
   }
 
   export type ProductMinAggregateInputType = {
@@ -5504,12 +6693,15 @@ export namespace Prisma {
     price?: true
     quantity?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type ProductMaxAggregateInputType = {
@@ -5521,12 +6713,15 @@ export namespace Prisma {
     price?: true
     quantity?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type ProductCountAggregateInputType = {
@@ -5538,12 +6733,15 @@ export namespace Prisma {
     price?: true
     quantity?: true
     status?: true
+    createdAt?: true
     createdBy?: true
     createdByRole?: true
+    updatedAt?: true
     updatedBy?: true
     updatedByRole?: true
-    createdAt?: true
-    updatedAt?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -5642,12 +6840,15 @@ export namespace Prisma {
     price: Decimal
     quantity: number
     status: boolean
+    createdAt: Date
     createdBy: number | null
     createdByRole: string | null
+    updatedAt: Date
     updatedBy: number | null
     updatedByRole: string | null
-    createdAt: Date
-    updatedAt: Date
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: ProductCountAggregateOutputType | null
     _avg: ProductAvgAggregateOutputType | null
     _sum: ProductSumAggregateOutputType | null
@@ -5678,12 +6879,15 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }, ExtArgs["result"]["product"]>
 
 
@@ -5697,15 +6901,18 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     status?: boolean
+    createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
+    updatedAt?: boolean
     updatedBy?: boolean
     updatedByRole?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "price" | "quantity" | "status" | "createdBy" | "createdByRole" | "updatedBy" | "updatedByRole" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "price" | "quantity" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
 
   export type $productPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "product"
@@ -5719,12 +6926,15 @@ export namespace Prisma {
       price: Prisma.Decimal
       quantity: number
       status: boolean
+      createdAt: Date
       createdBy: number | null
       createdByRole: string | null
+      updatedAt: Date
       updatedBy: number | null
       updatedByRole: string | null
-      createdAt: Date
-      updatedAt: Date
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["product"]>
     composites: {}
   }
@@ -6102,12 +7312,15 @@ export namespace Prisma {
     readonly price: FieldRef<"product", 'Decimal'>
     readonly quantity: FieldRef<"product", 'Int'>
     readonly status: FieldRef<"product", 'Boolean'>
+    readonly createdAt: FieldRef<"product", 'DateTime'>
     readonly createdBy: FieldRef<"product", 'Int'>
     readonly createdByRole: FieldRef<"product", 'String'>
+    readonly updatedAt: FieldRef<"product", 'DateTime'>
     readonly updatedBy: FieldRef<"product", 'Int'>
     readonly updatedByRole: FieldRef<"product", 'String'>
-    readonly createdAt: FieldRef<"product", 'DateTime'>
-    readonly updatedAt: FieldRef<"product", 'DateTime'>
+    readonly deletedAt: FieldRef<"product", 'DateTime'>
+    readonly deletedBy: FieldRef<"product", 'Int'>
+    readonly deletedByRole: FieldRef<"product", 'String'>
   }
     
 
@@ -6443,6 +7656,32 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const EmailConfigScalarFieldEnum: {
+    id: 'id',
+    panel: 'panel',
+    module: 'module',
+    subject: 'subject',
+    action: 'action',
+    html_template: 'html_template',
+    smtp_host: 'smtp_host',
+    smtp_secure: 'smtp_secure',
+    smtp_port: 'smtp_port',
+    smtp_username: 'smtp_username',
+    smtp_password: 'smtp_password',
+    from_email: 'from_email',
+    from_name: 'from_name',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole'
+  };
+
+  export type EmailConfigScalarFieldEnum = (typeof EmailConfigScalarFieldEnum)[keyof typeof EmailConfigScalarFieldEnum]
+
+
   export const AdminScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -6485,12 +7724,12 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     status: 'status',
+    createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
     updatedBy: 'updatedBy',
     updatedByRole: 'updatedByRole',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
     deletedAt: 'deletedAt',
     deletedBy: 'deletedBy',
     deletedByRole: 'deletedByRole'
@@ -6506,12 +7745,12 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     status: 'status',
+    createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
     updatedBy: 'updatedBy',
     updatedByRole: 'updatedByRole',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
     deletedAt: 'deletedAt',
     deletedBy: 'deletedBy',
     deletedByRole: 'deletedByRole'
@@ -6529,12 +7768,15 @@ export namespace Prisma {
     price: 'price',
     quantity: 'quantity',
     status: 'status',
+    createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
     updatedBy: 'updatedBy',
     updatedByRole: 'updatedByRole',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -6554,6 +7796,24 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const emailConfigOrderByRelevanceFieldEnum: {
+    panel: 'panel',
+    module: 'module',
+    subject: 'subject',
+    action: 'action',
+    html_template: 'html_template',
+    smtp_host: 'smtp_host',
+    smtp_username: 'smtp_username',
+    smtp_password: 'smtp_password',
+    from_email: 'from_email',
+    from_name: 'from_name',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole'
+  };
+
+  export type emailConfigOrderByRelevanceFieldEnum = (typeof emailConfigOrderByRelevanceFieldEnum)[keyof typeof emailConfigOrderByRelevanceFieldEnum]
 
 
   export const adminOrderByRelevanceFieldEnum: {
@@ -6612,7 +7872,8 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     createdByRole: 'createdByRole',
-    updatedByRole: 'updatedByRole'
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type productOrderByRelevanceFieldEnum = (typeof productOrderByRelevanceFieldEnum)[keyof typeof productOrderByRelevanceFieldEnum]
@@ -6624,9 +7885,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'BigInt'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
 
 
@@ -6638,16 +7899,23 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Boolean'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'Int'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
@@ -6667,6 +7935,136 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type emailConfigWhereInput = {
+    AND?: emailConfigWhereInput | emailConfigWhereInput[]
+    OR?: emailConfigWhereInput[]
+    NOT?: emailConfigWhereInput | emailConfigWhereInput[]
+    id?: BigIntFilter<"emailConfig"> | bigint | number
+    panel?: StringFilter<"emailConfig"> | string
+    module?: StringFilter<"emailConfig"> | string
+    subject?: StringFilter<"emailConfig"> | string
+    action?: StringFilter<"emailConfig"> | string
+    html_template?: StringFilter<"emailConfig"> | string
+    smtp_host?: StringFilter<"emailConfig"> | string
+    smtp_secure?: BoolFilter<"emailConfig"> | boolean
+    smtp_port?: IntFilter<"emailConfig"> | number
+    smtp_username?: StringFilter<"emailConfig"> | string
+    smtp_password?: StringFilter<"emailConfig"> | string
+    from_email?: StringFilter<"emailConfig"> | string
+    from_name?: StringFilter<"emailConfig"> | string
+    status?: BoolFilter<"emailConfig"> | boolean
+    createdAt?: DateTimeFilter<"emailConfig"> | Date | string
+    createdBy?: IntNullableFilter<"emailConfig"> | number | null
+    createdByRole?: StringNullableFilter<"emailConfig"> | string | null
+    updatedAt?: DateTimeFilter<"emailConfig"> | Date | string
+    updatedBy?: IntNullableFilter<"emailConfig"> | number | null
+    updatedByRole?: StringNullableFilter<"emailConfig"> | string | null
+  }
+
+  export type emailConfigOrderByWithRelationInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    subject?: SortOrder
+    action?: SortOrder
+    html_template?: SortOrder
+    smtp_host?: SortOrder
+    smtp_secure?: SortOrder
+    smtp_port?: SortOrder
+    smtp_username?: SortOrder
+    smtp_password?: SortOrder
+    from_email?: SortOrder
+    from_name?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    _relevance?: emailConfigOrderByRelevanceInput
+  }
+
+  export type emailConfigWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: emailConfigWhereInput | emailConfigWhereInput[]
+    OR?: emailConfigWhereInput[]
+    NOT?: emailConfigWhereInput | emailConfigWhereInput[]
+    panel?: StringFilter<"emailConfig"> | string
+    module?: StringFilter<"emailConfig"> | string
+    subject?: StringFilter<"emailConfig"> | string
+    action?: StringFilter<"emailConfig"> | string
+    html_template?: StringFilter<"emailConfig"> | string
+    smtp_host?: StringFilter<"emailConfig"> | string
+    smtp_secure?: BoolFilter<"emailConfig"> | boolean
+    smtp_port?: IntFilter<"emailConfig"> | number
+    smtp_username?: StringFilter<"emailConfig"> | string
+    smtp_password?: StringFilter<"emailConfig"> | string
+    from_email?: StringFilter<"emailConfig"> | string
+    from_name?: StringFilter<"emailConfig"> | string
+    status?: BoolFilter<"emailConfig"> | boolean
+    createdAt?: DateTimeFilter<"emailConfig"> | Date | string
+    createdBy?: IntNullableFilter<"emailConfig"> | number | null
+    createdByRole?: StringNullableFilter<"emailConfig"> | string | null
+    updatedAt?: DateTimeFilter<"emailConfig"> | Date | string
+    updatedBy?: IntNullableFilter<"emailConfig"> | number | null
+    updatedByRole?: StringNullableFilter<"emailConfig"> | string | null
+  }, "id">
+
+  export type emailConfigOrderByWithAggregationInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    subject?: SortOrder
+    action?: SortOrder
+    html_template?: SortOrder
+    smtp_host?: SortOrder
+    smtp_secure?: SortOrder
+    smtp_port?: SortOrder
+    smtp_username?: SortOrder
+    smtp_password?: SortOrder
+    from_email?: SortOrder
+    from_name?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    _count?: emailConfigCountOrderByAggregateInput
+    _avg?: emailConfigAvgOrderByAggregateInput
+    _max?: emailConfigMaxOrderByAggregateInput
+    _min?: emailConfigMinOrderByAggregateInput
+    _sum?: emailConfigSumOrderByAggregateInput
+  }
+
+  export type emailConfigScalarWhereWithAggregatesInput = {
+    AND?: emailConfigScalarWhereWithAggregatesInput | emailConfigScalarWhereWithAggregatesInput[]
+    OR?: emailConfigScalarWhereWithAggregatesInput[]
+    NOT?: emailConfigScalarWhereWithAggregatesInput | emailConfigScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"emailConfig"> | bigint | number
+    panel?: StringWithAggregatesFilter<"emailConfig"> | string
+    module?: StringWithAggregatesFilter<"emailConfig"> | string
+    subject?: StringWithAggregatesFilter<"emailConfig"> | string
+    action?: StringWithAggregatesFilter<"emailConfig"> | string
+    html_template?: StringWithAggregatesFilter<"emailConfig"> | string
+    smtp_host?: StringWithAggregatesFilter<"emailConfig"> | string
+    smtp_secure?: BoolWithAggregatesFilter<"emailConfig"> | boolean
+    smtp_port?: IntWithAggregatesFilter<"emailConfig"> | number
+    smtp_username?: StringWithAggregatesFilter<"emailConfig"> | string
+    smtp_password?: StringWithAggregatesFilter<"emailConfig"> | string
+    from_email?: StringWithAggregatesFilter<"emailConfig"> | string
+    from_name?: StringWithAggregatesFilter<"emailConfig"> | string
+    status?: BoolWithAggregatesFilter<"emailConfig"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"emailConfig"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"emailConfig"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"emailConfig"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"emailConfig"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"emailConfig"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"emailConfig"> | string | null
+  }
 
   export type adminWhereInput = {
     AND?: adminWhereInput | adminWhereInput[]
@@ -6859,12 +8257,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"category"> | string | null
     image?: StringNullableFilter<"category"> | string | null
     status?: BoolFilter<"category"> | boolean
+    createdAt?: DateTimeFilter<"category"> | Date | string
     createdBy?: IntNullableFilter<"category"> | number | null
     createdByRole?: StringNullableFilter<"category"> | string | null
+    updatedAt?: DateTimeFilter<"category"> | Date | string
     updatedBy?: IntNullableFilter<"category"> | number | null
     updatedByRole?: StringNullableFilter<"category"> | string | null
-    createdAt?: DateTimeFilter<"category"> | Date | string
-    updatedAt?: DateTimeFilter<"category"> | Date | string
     deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
     deletedBy?: IntNullableFilter<"category"> | number | null
     deletedByRole?: StringNullableFilter<"category"> | string | null
@@ -6877,12 +8275,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
@@ -6899,12 +8297,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"category"> | string | null
     image?: StringNullableFilter<"category"> | string | null
     status?: BoolFilter<"category"> | boolean
+    createdAt?: DateTimeFilter<"category"> | Date | string
     createdBy?: IntNullableFilter<"category"> | number | null
     createdByRole?: StringNullableFilter<"category"> | string | null
+    updatedAt?: DateTimeFilter<"category"> | Date | string
     updatedBy?: IntNullableFilter<"category"> | number | null
     updatedByRole?: StringNullableFilter<"category"> | string | null
-    createdAt?: DateTimeFilter<"category"> | Date | string
-    updatedAt?: DateTimeFilter<"category"> | Date | string
     deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
     deletedBy?: IntNullableFilter<"category"> | number | null
     deletedByRole?: StringNullableFilter<"category"> | string | null
@@ -6917,12 +8315,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
@@ -6943,12 +8341,12 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"category"> | string | null
     image?: StringNullableWithAggregatesFilter<"category"> | string | null
     status?: BoolWithAggregatesFilter<"category"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"category"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
     updatedBy?: IntNullableWithAggregatesFilter<"category"> | number | null
     updatedByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"category"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"category"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"category"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"category"> | string | null
@@ -6964,12 +8362,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"brand"> | string | null
     image?: StringNullableFilter<"brand"> | string | null
     status?: BoolFilter<"brand"> | boolean
+    createdAt?: DateTimeFilter<"brand"> | Date | string
     createdBy?: IntNullableFilter<"brand"> | number | null
     createdByRole?: StringNullableFilter<"brand"> | string | null
+    updatedAt?: DateTimeFilter<"brand"> | Date | string
     updatedBy?: IntNullableFilter<"brand"> | number | null
     updatedByRole?: StringNullableFilter<"brand"> | string | null
-    createdAt?: DateTimeFilter<"brand"> | Date | string
-    updatedAt?: DateTimeFilter<"brand"> | Date | string
     deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableFilter<"brand"> | number | null
     deletedByRole?: StringNullableFilter<"brand"> | string | null
@@ -6982,12 +8380,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
@@ -7004,12 +8402,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"brand"> | string | null
     image?: StringNullableFilter<"brand"> | string | null
     status?: BoolFilter<"brand"> | boolean
+    createdAt?: DateTimeFilter<"brand"> | Date | string
     createdBy?: IntNullableFilter<"brand"> | number | null
     createdByRole?: StringNullableFilter<"brand"> | string | null
+    updatedAt?: DateTimeFilter<"brand"> | Date | string
     updatedBy?: IntNullableFilter<"brand"> | number | null
     updatedByRole?: StringNullableFilter<"brand"> | string | null
-    createdAt?: DateTimeFilter<"brand"> | Date | string
-    updatedAt?: DateTimeFilter<"brand"> | Date | string
     deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableFilter<"brand"> | number | null
     deletedByRole?: StringNullableFilter<"brand"> | string | null
@@ -7022,12 +8420,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
@@ -7048,12 +8446,12 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"brand"> | string | null
     image?: StringNullableWithAggregatesFilter<"brand"> | string | null
     status?: BoolWithAggregatesFilter<"brand"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
     updatedBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
     updatedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"brand"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
@@ -7071,12 +8469,15 @@ export namespace Prisma {
     price?: DecimalFilter<"product"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"product"> | number
     status?: BoolFilter<"product"> | boolean
+    createdAt?: DateTimeFilter<"product"> | Date | string
     createdBy?: IntNullableFilter<"product"> | number | null
     createdByRole?: StringNullableFilter<"product"> | string | null
+    updatedAt?: DateTimeFilter<"product"> | Date | string
     updatedBy?: IntNullableFilter<"product"> | number | null
     updatedByRole?: StringNullableFilter<"product"> | string | null
-    createdAt?: DateTimeFilter<"product"> | Date | string
-    updatedAt?: DateTimeFilter<"product"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableFilter<"product"> | number | null
+    deletedByRole?: StringNullableFilter<"product"> | string | null
   }
 
   export type productOrderByWithRelationInput = {
@@ -7088,12 +8489,15 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _relevance?: productOrderByRelevanceInput
   }
 
@@ -7109,12 +8513,15 @@ export namespace Prisma {
     price?: DecimalFilter<"product"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"product"> | number
     status?: BoolFilter<"product"> | boolean
+    createdAt?: DateTimeFilter<"product"> | Date | string
     createdBy?: IntNullableFilter<"product"> | number | null
     createdByRole?: StringNullableFilter<"product"> | string | null
+    updatedAt?: DateTimeFilter<"product"> | Date | string
     updatedBy?: IntNullableFilter<"product"> | number | null
     updatedByRole?: StringNullableFilter<"product"> | string | null
-    createdAt?: DateTimeFilter<"product"> | Date | string
-    updatedAt?: DateTimeFilter<"product"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableFilter<"product"> | number | null
+    deletedByRole?: StringNullableFilter<"product"> | string | null
   }, "id" | "slug">
 
   export type productOrderByWithAggregationInput = {
@@ -7126,12 +8533,15 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
     updatedByRole?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: productCountOrderByAggregateInput
     _avg?: productAvgOrderByAggregateInput
     _max?: productMaxOrderByAggregateInput
@@ -7151,12 +8561,176 @@ export namespace Prisma {
     price?: DecimalWithAggregatesFilter<"product"> | Decimal | DecimalJsLike | number | string
     quantity?: IntWithAggregatesFilter<"product"> | number
     status?: BoolWithAggregatesFilter<"product"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"product"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
     updatedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
     updatedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
+  }
+
+  export type emailConfigCreateInput = {
+    id?: bigint | number
+    panel: string
+    module: string
+    subject: string
+    action: string
+    html_template: string
+    smtp_host: string
+    smtp_secure: boolean
+    smtp_port: number
+    smtp_username: string
+    smtp_password: string
+    from_email: string
+    from_name: string
+    status: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+  }
+
+  export type emailConfigUncheckedCreateInput = {
+    id?: bigint | number
+    panel: string
+    module: string
+    subject: string
+    action: string
+    html_template: string
+    smtp_host: string
+    smtp_secure: boolean
+    smtp_port: number
+    smtp_username: string
+    smtp_password: string
+    from_email: string
+    from_name: string
+    status: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+  }
+
+  export type emailConfigUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    panel?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    html_template?: StringFieldUpdateOperationsInput | string
+    smtp_host?: StringFieldUpdateOperationsInput | string
+    smtp_secure?: BoolFieldUpdateOperationsInput | boolean
+    smtp_port?: IntFieldUpdateOperationsInput | number
+    smtp_username?: StringFieldUpdateOperationsInput | string
+    smtp_password?: StringFieldUpdateOperationsInput | string
+    from_email?: StringFieldUpdateOperationsInput | string
+    from_name?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type emailConfigUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    panel?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    html_template?: StringFieldUpdateOperationsInput | string
+    smtp_host?: StringFieldUpdateOperationsInput | string
+    smtp_secure?: BoolFieldUpdateOperationsInput | boolean
+    smtp_port?: IntFieldUpdateOperationsInput | number
+    smtp_username?: StringFieldUpdateOperationsInput | string
+    smtp_password?: StringFieldUpdateOperationsInput | string
+    from_email?: StringFieldUpdateOperationsInput | string
+    from_name?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type emailConfigCreateManyInput = {
+    id?: bigint | number
+    panel: string
+    module: string
+    subject: string
+    action: string
+    html_template: string
+    smtp_host: string
+    smtp_secure: boolean
+    smtp_port: number
+    smtp_username: string
+    smtp_password: string
+    from_email: string
+    from_name: string
+    status: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+  }
+
+  export type emailConfigUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    panel?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    html_template?: StringFieldUpdateOperationsInput | string
+    smtp_host?: StringFieldUpdateOperationsInput | string
+    smtp_secure?: BoolFieldUpdateOperationsInput | boolean
+    smtp_port?: IntFieldUpdateOperationsInput | number
+    smtp_username?: StringFieldUpdateOperationsInput | string
+    smtp_password?: StringFieldUpdateOperationsInput | string
+    from_email?: StringFieldUpdateOperationsInput | string
+    from_name?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type emailConfigUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    panel?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    html_template?: StringFieldUpdateOperationsInput | string
+    smtp_host?: StringFieldUpdateOperationsInput | string
+    smtp_secure?: BoolFieldUpdateOperationsInput | boolean
+    smtp_port?: IntFieldUpdateOperationsInput | number
+    smtp_username?: StringFieldUpdateOperationsInput | string
+    smtp_password?: StringFieldUpdateOperationsInput | string
+    from_email?: StringFieldUpdateOperationsInput | string
+    from_name?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminCreateInput = {
@@ -7365,12 +8939,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7383,12 +8957,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7400,12 +8974,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7418,12 +8992,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7436,12 +9010,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7453,12 +9027,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7471,12 +9045,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7488,12 +9062,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7506,12 +9080,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7523,12 +9097,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7541,12 +9115,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7559,12 +9133,12 @@ export namespace Prisma {
     description?: string | null
     image?: string | null
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
@@ -7576,12 +9150,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7594,12 +9168,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7613,12 +9187,15 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productUncheckedCreateInput = {
@@ -7630,12 +9207,15 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productUpdateInput = {
@@ -7646,12 +9226,15 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productUncheckedUpdateInput = {
@@ -7663,12 +9246,15 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productCreateManyInput = {
@@ -7680,12 +9266,15 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     status?: boolean
+    createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
+    updatedAt?: Date | string
     updatedBy?: number | null
     updatedByRole?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productUpdateManyMutationInput = {
@@ -7696,12 +9285,15 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productUncheckedUpdateManyInput = {
@@ -7713,23 +9305,26 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7747,6 +9342,22 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -7756,6 +9367,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -7773,6 +9395,206 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type emailConfigOrderByRelevanceInput = {
+    fields: emailConfigOrderByRelevanceFieldEnum | emailConfigOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type emailConfigCountOrderByAggregateInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    subject?: SortOrder
+    action?: SortOrder
+    html_template?: SortOrder
+    smtp_host?: SortOrder
+    smtp_secure?: SortOrder
+    smtp_port?: SortOrder
+    smtp_username?: SortOrder
+    smtp_password?: SortOrder
+    from_email?: SortOrder
+    from_name?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+  }
+
+  export type emailConfigAvgOrderByAggregateInput = {
+    id?: SortOrder
+    smtp_port?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+  }
+
+  export type emailConfigMaxOrderByAggregateInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    subject?: SortOrder
+    action?: SortOrder
+    html_template?: SortOrder
+    smtp_host?: SortOrder
+    smtp_secure?: SortOrder
+    smtp_port?: SortOrder
+    smtp_username?: SortOrder
+    smtp_password?: SortOrder
+    from_email?: SortOrder
+    from_name?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+  }
+
+  export type emailConfigMinOrderByAggregateInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    subject?: SortOrder
+    action?: SortOrder
+    html_template?: SortOrder
+    smtp_host?: SortOrder
+    smtp_secure?: SortOrder
+    smtp_port?: SortOrder
+    smtp_username?: SortOrder
+    smtp_password?: SortOrder
+    from_email?: SortOrder
+    from_name?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+  }
+
+  export type emailConfigSumOrderByAggregateInput = {
+    id?: SortOrder
+    smtp_port?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -7788,11 +9610,6 @@ export namespace Prisma {
     every?: adminStaffWhereInput
     some?: adminStaffWhereInput
     none?: adminStaffWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type adminStaffOrderByRelationAggregateInput = {
@@ -7853,72 +9670,6 @@ export namespace Prisma {
 
   export type adminSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8001,22 +9752,6 @@ export namespace Prisma {
     admin_id?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type categoryOrderByRelevanceInput = {
     fields: categoryOrderByRelevanceFieldEnum | categoryOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -8030,12 +9765,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8055,12 +9790,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8073,12 +9808,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8089,30 +9824,6 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type brandOrderByRelevanceInput = {
@@ -8128,12 +9839,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8153,12 +9864,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8171,12 +9882,12 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     deletedAt?: SortOrder
     deletedBy?: SortOrder
     deletedByRole?: SortOrder
@@ -8215,12 +9926,15 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productAvgOrderByAggregateInput = {
@@ -8229,6 +9943,7 @@ export namespace Prisma {
     quantity?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type productMaxOrderByAggregateInput = {
@@ -8240,12 +9955,15 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productMinOrderByAggregateInput = {
@@ -8257,12 +9975,15 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
+    updatedAt?: SortOrder
     updatedBy?: SortOrder
     updatedByRole?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productSumOrderByAggregateInput = {
@@ -8271,6 +9992,7 @@ export namespace Prisma {
     quantity?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -8289,6 +10011,46 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type adminStaffCreateNestedManyWithoutAdminInput = {
     create?: XOR<adminStaffCreateWithoutAdminInput, adminStaffUncheckedCreateWithoutAdminInput> | adminStaffCreateWithoutAdminInput[] | adminStaffUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
@@ -8301,18 +10063,6 @@ export namespace Prisma {
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
     createMany?: adminStaffCreateManyAdminInputEnvelope
     connect?: adminStaffWhereUniqueInput | adminStaffWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -8331,14 +10081,6 @@ export namespace Prisma {
     update?: adminStaffUpdateWithWhereUniqueWithoutAdminInput | adminStaffUpdateWithWhereUniqueWithoutAdminInput[]
     updateMany?: adminStaffUpdateManyWithWhereWithoutAdminInput | adminStaffUpdateManyWithWhereWithoutAdminInput[]
     deleteMany?: adminStaffScalarWhereInput | adminStaffScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type adminStaffUncheckedUpdateManyWithoutAdminNestedInput = {
@@ -8369,18 +10111,6 @@ export namespace Prisma {
     update?: XOR<XOR<adminUpdateToOneWithWhereWithoutStaffInput, adminUpdateWithoutStaffInput>, adminUncheckedUpdateWithoutStaffInput>
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
@@ -8389,15 +10119,15 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8415,6 +10145,22 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -8424,6 +10170,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -8441,31 +10198,20 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
     _count?: NestedIntFilter<$PrismaModel>
     _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -8497,6 +10243,30 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -8509,62 +10279,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8592,6 +10306,49 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {

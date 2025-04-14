@@ -117,6 +117,29 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.EmailConfigScalarFieldEnum = {
+  id: 'id',
+  panel: 'panel',
+  module: 'module',
+  subject: 'subject',
+  action: 'action',
+  html_template: 'html_template',
+  smtp_host: 'smtp_host',
+  smtp_secure: 'smtp_secure',
+  smtp_port: 'smtp_port',
+  smtp_username: 'smtp_username',
+  smtp_password: 'smtp_password',
+  from_email: 'from_email',
+  from_name: 'from_name',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole'
+};
+
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -153,12 +176,12 @@ exports.Prisma.CategoryScalarFieldEnum = {
   description: 'description',
   image: 'image',
   status: 'status',
+  createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
   updatedBy: 'updatedBy',
   updatedByRole: 'updatedByRole',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
   deletedBy: 'deletedBy',
   deletedByRole: 'deletedByRole'
@@ -171,12 +194,12 @@ exports.Prisma.BrandScalarFieldEnum = {
   description: 'description',
   image: 'image',
   status: 'status',
+  createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
   updatedBy: 'updatedBy',
   updatedByRole: 'updatedByRole',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
   deletedBy: 'deletedBy',
   deletedByRole: 'deletedByRole'
@@ -191,12 +214,15 @@ exports.Prisma.ProductScalarFieldEnum = {
   price: 'price',
   quantity: 'quantity',
   status: 'status',
+  createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
   updatedBy: 'updatedBy',
   updatedByRole: 'updatedByRole',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.SortOrder = {
@@ -207,6 +233,21 @@ exports.Prisma.SortOrder = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.emailConfigOrderByRelevanceFieldEnum = {
+  panel: 'panel',
+  module: 'module',
+  subject: 'subject',
+  action: 'action',
+  html_template: 'html_template',
+  smtp_host: 'smtp_host',
+  smtp_username: 'smtp_username',
+  smtp_password: 'smtp_password',
+  from_email: 'from_email',
+  from_name: 'from_name',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole'
 };
 
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
@@ -253,11 +294,13 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
   description: 'description',
   image: 'image',
   createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole'
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 
 exports.Prisma.ModelName = {
+  emailConfig: 'emailConfig',
   admin: 'admin',
   adminStaff: 'adminStaff',
   category: 'category',

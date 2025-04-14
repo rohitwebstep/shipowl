@@ -14,6 +14,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model emailConfig {
+  id             BigInt   @id @default(autoincrement())
+
+  panel          String   // Target panel: 'admin', 'dropshipper', or 'supplier'
+  module         String   // Associated module (e.g., user, order, notification)
+  subject        String   // Subject of the email
+  action         String   // Triggering action (e.g., welcome, reset_password)
+  html_template  String   // HTML email template content
+
+  smtp_host      String   // SMTP server hostname or IP address
+  smtp_secure    Boolean  // Use secure SMTP connection (e.g., true for SSL/TLS)
+  smtp_port      Int      // SMTP port (e.g., 465 for SSL, 587 for TLS)
+  smtp_username  String   // SMTP username for authentication
+  smtp_password  String   // SMTP password (store securely, preferably hashed)
+
+  from_email     String   // Sender's email address
+  from_name      String   // Sender's name
+
+  status         Boolean  // Status of the email config (active/inactive)
+
+  createdAt      DateTime @default(now())
+  createdBy      Int?
+  createdByRole  String?
+  updatedAt      DateTime @updatedAt
+  updatedBy      Int?
+  updatedByRole  String?
+
+  @@index([createdBy])
+  @@index([updatedBy])
+}
+
 model admin {
   id             Int      @id @default(autoincrement())
   name           String
@@ -54,12 +85,12 @@ model category {
   description    String?
   image          String?
   status         Boolean  @default(false)
+  createdAt      DateTime @default(now())
   createdBy      Int?
   createdByRole  String?
+  updatedAt      DateTime @updatedAt
   updatedBy      Int?
   updatedByRole  String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
   deletedAt      DateTime?
   deletedBy      Int?
   deletedByRole  String?
@@ -76,12 +107,12 @@ model brand {
   description    String?
   image          String?
   status         Boolean  @default(false)
+  createdAt      DateTime @default(now())
   createdBy      Int?
   createdByRole  String?
+  updatedAt      DateTime @updatedAt
   updatedBy      Int?
   updatedByRole  String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
   deletedAt      DateTime?
   deletedBy      Int?
   deletedByRole  String?
@@ -100,13 +131,17 @@ model product {
   price          Decimal  @db.Decimal(10, 2)
   quantity       Int      @default(0)
   status         Boolean  @default(false)
+  createdAt      DateTime @default(now())
   createdBy      Int?
   createdByRole  String?
+  updatedAt      DateTime @updatedAt
   updatedBy      Int?
   updatedByRole  String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  deletedAt      DateTime?
+  deletedBy      Int?
+  deletedByRole  String?
 
   @@index([createdBy])
   @@index([updatedBy])
+  @@index([deletedAt])
 }

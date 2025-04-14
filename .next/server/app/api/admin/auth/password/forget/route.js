@@ -1,6 +1,6 @@
 const CHUNK_PUBLIC_PATH = "server/app/api/admin/auth/password/forget/route.js";
 const runtime = require("../../../../../../chunks/[turbopack]_runtime.js");
-runtime.loadChunk("server/chunks/[root of the server]__8b65bb7c._.js");
+runtime.loadChunk("server/chunks/[root of the server]__7187372e._.js");
 runtime.loadChunk("server/chunks/node_modules_next_3a3e573e._.js");
 runtime.loadChunk("server/chunks/node_modules_nodemailer_a9f338b9._.js");
 runtime.loadChunk("server/chunks/node_modules_3a8d398a._.js");
