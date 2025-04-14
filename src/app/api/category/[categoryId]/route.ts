@@ -121,7 +121,7 @@ export async function PUT(req: NextRequest) {
     const name = formData.get('name') as string;
     const description = (formData.get('description') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
+    const status = statusRaw === 'true' || statusRaw === '1';
 
     // File upload
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'category');

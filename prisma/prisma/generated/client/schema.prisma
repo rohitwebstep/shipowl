@@ -21,7 +21,7 @@ model emailConfig {
   module        String // Associated module (e.g., user, order, notification)
   subject       String // Subject of the email
   action        String // Triggering action (e.g., welcome, reset_password)
-  html_template String @db.LongText // HTML email template content
+  html_template String // HTML email template content
 
   smtp_host     String // SMTP server hostname or IP address
   smtp_secure   Boolean // Use secure SMTP connection (e.g., true for SSL/TLS)
@@ -113,45 +113,12 @@ model adminStaff {
   admin admin @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }
 
-model warehouse {
-  id             Int     @id @default(autoincrement())
-  name           String
-  slug           String  @unique
-  gst_number     String
-  contact_name   String
-  contact_number String
-  address_line_1 String
-  address_line_2 String?
-  postal_code    String
-
-  stateId BigInt @db.UnsignedBigInt
-  cityId  BigInt @db.UnsignedBigInt
-
-  status Boolean @default(false)
-
-  createdAt     DateTime  @default(now())
-  createdBy     Int?
-  createdByRole String?
-  updatedAt     DateTime  @updatedAt
-  updatedBy     Int?
-  updatedByRole String?
-  deletedAt     DateTime?
-  deletedBy     Int?
-  deletedByRole String?
-
-  @@index([stateId])
-  @@index([cityId])
-  @@index([createdBy])
-  @@index([updatedBy])
-  @@index([deletedAt])
-}
-
 model category {
   id            Int       @id @default(autoincrement())
   name          String
   slug          String    @unique
   description   String?
-  image         String?   @db.LongText
+  image         String?
   status        Boolean   @default(false)
   createdAt     DateTime  @default(now())
   createdBy     Int?
@@ -173,7 +140,7 @@ model brand {
   name          String
   slug          String    @unique
   description   String?
-  image         String?   @db.LongText
+  image         String?
   status        Boolean   @default(false)
   createdAt     DateTime  @default(now())
   createdBy     Int?
@@ -195,7 +162,7 @@ model product {
   name          String
   slug          String    @unique
   description   String?
-  image         String?   @db.LongText
+  image         String?
   price         Decimal   @db.Decimal(10, 2)
   quantity      Int       @default(0)
   status        Boolean   @default(false)

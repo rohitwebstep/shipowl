@@ -196,30 +196,6 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   pr_last_reset: 'pr_last_reset'
 };
 
-exports.Prisma.WarehouseScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  gst_number: 'gst_number',
-  contact_name: 'contact_name',
-  contact_number: 'contact_number',
-  address_line_1: 'address_line_1',
-  address_line_2: 'address_line_2',
-  postal_code: 'postal_code',
-  stateId: 'stateId',
-  cityId: 'cityId',
-  status: 'status',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -333,20 +309,6 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   pr_token: 'pr_token'
 };
 
-exports.Prisma.warehouseOrderByRelevanceFieldEnum = {
-  name: 'name',
-  slug: 'slug',
-  gst_number: 'gst_number',
-  contact_name: 'contact_name',
-  contact_number: 'contact_number',
-  address_line_1: 'address_line_1',
-  address_line_2: 'address_line_2',
-  postal_code: 'postal_code',
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.categoryOrderByRelevanceFieldEnum = {
   name: 'name',
   slug: 'slug',
@@ -384,7 +346,6 @@ exports.Prisma.ModelName = {
   city: 'city',
   admin: 'admin',
   adminStaff: 'adminStaff',
-  warehouse: 'warehouse',
   category: 'category',
   brand: 'brand',
   product: 'product'
