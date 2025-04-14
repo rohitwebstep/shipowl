@@ -1,4 +1,6 @@
 import prisma from "@/lib/prisma";
+import path from "path";
+import { deleteFile } from '@/utils/saveFiles';
 
 interface Category {
     name: string;
@@ -142,22 +144,34 @@ export const removeCategoryImageByIndex = async (categoryId: number, imageIndex:
             return { status: false, message: "Invalid image index provided." };
         }
 
-        images.splice(imageIndex, 1); // Remove image at given index
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
         const updatedImages = images.join(",");
 
+        // Update category in DB
         const updatedCategory = await prisma.category.update({
             where: { id: categoryId },
             data: { image: updatedImages },
         });
 
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = path.basename(removedImage.trim());
+        const filePath = path.join(process.cwd(), "public", "uploads", "category", imageFileName);
+
+        const fileDeleted = await deleteFile(filePath);
+
         return {
             status: true,
-            message: "Image removed successfully.",
+            message: fileDeleted
+                ? "Image removed and file deleted successfully."
+                : "Image removed, but file deletion failed.",
             category: updatedCategory,
         };
     } catch (error) {
         console.error("❌ Error removing category image:", error);
-        return { status: false, message: "An unexpected error occurred while removing the image." };
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image.",
+        };
     }
 };
 
