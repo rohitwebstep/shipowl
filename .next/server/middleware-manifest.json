@@ -53,6 +53,14 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/brand(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/brand/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/warehouse(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/warehouse"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/warehouse(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/warehouse/:path*"
         }
       ],
       "wasm": [],
@@ -60,9 +68,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "6c1e7570d7074d59dfb04a3babc83ed1",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "a00364dc5840cfa2c2e44e17c01d18894728bbe12b568b7562f88e0fd22c4979",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ff88360c3e4fe6110759fd7dca829e5ca75cedd6eee62dba697d348c2b5ef7c5"
+        "__NEXT_PREVIEW_MODE_ID": "fd35a7201a3bea122ff7ee02dc60027c",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "bd9f90566bc5481a15f973ca60e9b287f00c52d5c4de3527106bc2ca2d99c18c",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "561337a1e74947982654666846e2885e2c85754550b1565e11690447291329e3"
       }
     }
   },

@@ -81,36 +81,69 @@ model city {
 }
 
 model admin {
-  id             Int      @id @default(autoincrement())
-  name           String
-  email          String   @unique
-  password       String
-  role           String   @default("admin")
-  status         String   @default("active")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  pr_token       String?
-  pr_expires_at  DateTime?
-  pr_last_reset  DateTime?
+  id              Int         @id @default(autoincrement())
+  name            String
+  email           String      @unique
+  password        String
+  role            String      @default("admin")
+  status          String      @default("active")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  pr_token        String?
+  pr_expires_at   DateTime?
+  pr_last_reset   DateTime?
 
-  staff     adminStaff[]
+  staff           adminStaff[]
 }
 
 model adminStaff {
-  id        Int      @id @default(autoincrement())
-  admin_id   Int      @unique
-  name      String
-  email     String   @unique
-  password  String
-  role      String   @default("admin")
-  status    String   @default("active")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  pr_token       String?
-  pr_expires_at  DateTime?
-  pr_last_reset  DateTime?
+  id              Int         @id @default(autoincrement())
+  admin_id        Int         @unique
+  name            String    
+  email           String      @unique
+  password        String
+  role            String      @default("admin")
+  status          String      @default("active")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  pr_token        String?
+  pr_expires_at   DateTime?
+  pr_last_reset   DateTime?
 
-  admin      admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+  admin           admin       @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+}
+
+model warehouse {
+  id              Int      @id @default(autoincrement())
+  name            String
+  slug            String   @unique
+  gst_number      String
+  contact_name    String
+  contact_number  String
+  address_line_1  String
+  address_line_2  String?
+  postal_code     String
+
+  stateId         BigInt   @db.UnsignedBigInt
+  cityId          BigInt   @db.UnsignedBigInt
+
+  status          Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  @@index([stateId])
+  @@index([cityId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model category {

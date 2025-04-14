@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
     const name = formData.get('name') as string;
     const description = (formData.get('description') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = statusRaw === 'true' || statusRaw === '1';
+    const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
     // File upload
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'category');

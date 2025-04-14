@@ -3,21 +3,13 @@ import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { createBrand, getBrandsByStatus } from '@/app/models/brand';
+import { createWarehouse, getWarehousesByStatus } from '@/app/models/warehouse';
 
-type UploadedFileInfo = {
-  originalName: string;
-  savedAs: string;
-  size: number;
-  type: string;
-  url: string;
-};
 
 export async function POST(req: NextRequest) {
   try {
-    logMessage('debug', 'POST request received for brand creation');
+    logMessage('debug', 'POST request received for warehouse creation');
 
     // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -39,17 +31,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const isMultipleImages = true; // Set true to allow multiple image uploads
-
     const formData = await req.formData();
 
     // Validate input
     const validation = validateFormData(formData, {
-      requiredFields: ['name'],
+      requiredFields: ['name', 'gst_number', 'contact_name', 'contact_number', 'address_line_1', 'address_line_2', 'city', 'state', 'postal_code'],
       patternValidations: {
         status: 'boolean',
+        city: 'number',
+        state: 'number',
       },
     });
+
+    logMessage('debug', 'Form validation result:', validation);
 
     if (!validation.isValid) {
       logMessage('warn', 'Form validation failed', validation.error);
@@ -61,66 +55,74 @@ export async function POST(req: NextRequest) {
 
     // Extract fields
     const name = formData.get('name') as string;
-    const description = (formData.get('description') as string) || '';
+    const gst_number = (formData.get('gst_number') as string) || '';
+    const contact_name = (formData.get('contact_name') as string) || '';
+    const contact_number = (formData.get('contact_number') as string) || '';
+    const address_line_1 = (formData.get('address_line_1') as string) || '';
+    const address_line_2 = (formData.get('address_line_2') as string) || '';
+
+    const cityRaw = formData.get('city');
+    const stateRaw = formData.get('state');
+    // Ensure cityRaw and stateRaw are strings before converting them to BigInt
+    const cityId = cityRaw && typeof cityRaw === 'string' ? BigInt(cityRaw) : null;
+    const stateId = stateRaw && typeof stateRaw === 'string' ? BigInt(stateRaw) : null;
+
+    const postal_code = (formData.get('postal_code') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
-    // File upload
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'brand');
-    const fileData = await saveFilesFromFormData(formData, 'image', {
-      dir: uploadDir,
-      pattern: 'slug-unique',
-      multiple: isMultipleImages,
+    logMessage('debug', 'Extracted fields:', {
+      name,
+      cityId,
+      stateId,
     });
 
-    let image = '';
-
-    if (fileData) {
-      logMessage('info', 'uploaded fileData:', fileData);
-      image = isMultipleImages
-        ? (fileData as UploadedFileInfo[]).map(file => file.url).join(', ')
-        : (fileData as UploadedFileInfo).url;
+    // Validate required fields
+    if (!name || cityId === null || stateId === null) {
+      throw new Error("Missing required fields: name, city, or state");
     }
 
-    const brandPayload = {
+    // Prepare the payload for warehouse creation
+    const warehousePayload = {
       name,
-      description,
+      gst_number,
+      contact_name,
+      contact_number,
+      address_line_1,
+      address_line_2,
+      cityId,
+      stateId,
+      postal_code,
       status,
-      image,
+      createdAt: new Date(),
+      createdBy: adminId,
+      createdByRole: adminRole,
     };
 
-    logMessage('info', 'Brand payload created:', brandPayload);
+    logMessage('info', 'Warehouse payload created:', warehousePayload);
 
-    const brandCreateResult = await createBrand(adminId, String(adminRole), brandPayload);
+    const warehouseCreateResult = await createWarehouse(adminId, String(adminRole), warehousePayload);
 
-    if (brandCreateResult?.status) {
-      return NextResponse.json({ status: true, brand: brandCreateResult.brand }, { status: 200 });
+    if (warehouseCreateResult?.status) {
+      logMessage('info', 'Warehouse created successfully:', warehouseCreateResult.warehouse);
+      return NextResponse.json({ status: true, warehouse: warehouseCreateResult.warehouse }, { status: 200 });
     }
 
-    // ❌ Brand creation failed — delete uploaded file(s)
-    const deletePath = (file: UploadedFileInfo) => path.join(uploadDir, path.basename(file.url));
-
-    if (isMultipleImages && Array.isArray(fileData)) {
-      await Promise.all(fileData.map(file => deleteFile(deletePath(file))));
-    } else {
-      await deleteFile(deletePath(fileData as UploadedFileInfo));
-    }
-
-    logMessage('error', 'Brand creation failed:', brandCreateResult?.message || 'Unknown error');
+    logMessage('error', 'Warehouse creation failed:', warehouseCreateResult?.message || 'Unknown error');
     return NextResponse.json(
-      { status: false, error: brandCreateResult?.message || 'Brand creation failed' },
+      { status: false, error: warehouseCreateResult?.message || 'Warehouse creation failed' },
       { status: 500 }
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'Brand Creation Error:', error);
+    logMessage('error', 'Warehouse Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
 
 export async function GET(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching brands');
+    logMessage('debug', 'GET request received for fetching warehouses');
 
     // Retrieve x-admin-id and x-admin-role from request headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -145,27 +147,26 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch all brands
-    const brandsResult = await getBrandsByStatus("notDeleted");
+    // Fetch all warehouses
+    const warehousesResult = await getWarehousesByStatus("notDeleted");
 
-    if (brandsResult?.status) {
+    if (warehousesResult?.status) {
       return NextResponse.json(
-        { status: true, brands: brandsResult.brands },
+        { status: true, warehouses: warehousesResult.warehouses },
         { status: 200 }
       );
     }
 
-    logMessage('warn', 'No brands found');
+    logMessage('warn', 'No warehouses found');
     return NextResponse.json(
-      { status: false, error: "No brands found" },
+      { status: false, error: "No warehouses found" },
       { status: 404 }
     );
   } catch (error) {
-    logMessage('error', 'Error fetching brands:', error);
+    logMessage('error', 'Error fetching warehouses:', error);
     return NextResponse.json(
-      { status: false, error: "Failed to fetch brands" },
+      { status: false, error: "Failed to fetch warehouses" },
       { status: 500 }
     );
   }
 }
-
