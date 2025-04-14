@@ -52,8 +52,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (!validation.isValid) {
-      logMessage('warn', 'Form validation failed', validation.errors);
-      return NextResponse.json({ status: false, error: validation.errors }, { status: 400 });
+      logMessage('warn', 'Form validation failed', validation.error);
+      return NextResponse.json(
+        { status: false, error: validation.error, message: validation.message },
+        { status: 400 }
+      );
     }
 
     // Extract fields

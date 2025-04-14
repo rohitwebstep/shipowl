@@ -110,10 +110,13 @@ export async function PUT(req: NextRequest) {
     logMessage('debug', 'Form data received:', formData);
 
     if (!validation.isValid) {
-      logMessage('warn', 'Validation failed', validation.errors);
-      return NextResponse.json({ status: false, error: validation.errors }, { status: 400 });
+      logMessage('warn', 'Form validation failed', validation.error);
+      return NextResponse.json(
+        { status: false, error: validation.error, message: validation.message },
+        { status: 400 }
+      );
     }
-
+    
     // Extract fields
     const name = formData.get('name') as string;
     const description = (formData.get('description') as string) || '';
