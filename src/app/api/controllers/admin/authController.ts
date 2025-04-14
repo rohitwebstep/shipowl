@@ -7,7 +7,6 @@ import { verifyToken } from '@/utils/authUtils';
 import { getEmailConfig } from '@/app/models/emailConfig';
 import bcrypt from 'bcryptjs';
 import { logMessage } from '@/utils/commonUtils';
-import { log } from 'console';
 
 interface Admin {
     id: number;
