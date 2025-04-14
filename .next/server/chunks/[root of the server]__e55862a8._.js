@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/warehouse/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/warehouse/trashed/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -8697,88 +8697,143 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
+
+module.exports = mod;
+}}),
+"[project]/src/utils/saveFiles.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "validateFormData": (()=>validateFormData)
+    "deleteFile": (()=>deleteFile),
+    "saveFilesFromFormData": (()=>saveFilesFromFormData)
 });
-function toReadableFieldName(field) {
-    // Converts camelCase or snake_case to Title Case
-    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
+;
+;
+;
+// Helper: ensure directory exists
+async function ensureDir(dirPath) {
+    if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(dirPath)) {
+        console.log(`📁 Directory not found. Creating: ${dirPath}`);
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(dirPath, {
+            recursive: true
+        });
+    } else {
+        console.log(`✅ Directory already exists: ${dirPath}`);
+    }
 }
-function validateFormData(formData, { requiredFields = [], patternValidations = {} }) {
-    const error = {};
-    // Required fields
-    for (const field of requiredFields){
-        const value = formData.get(field);
-        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
-            error[field] = `${toReadableFieldName(field)} is required`;
+// Helper: generate file name
+function generateFileName(originalName, pattern, customName) {
+    const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(originalName);
+    const base = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(originalName, ext);
+    switch(pattern){
+        case 'original':
+            console.log(`📝 Using original filename: ${originalName}`);
+            return originalName;
+        case 'custom':
+            const name = `${customName}${ext}`;
+            console.log(`📝 Using custom filename: ${name}`);
+            return name;
+        case 'slug':
+            const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const slugName = `${slug}${ext}`;
+            console.log(`📝 Using slug filename: ${slugName}`);
+            return slugName;
+        case 'slug-unique':
+            const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
+            const slugUniqueName = `${unique}${ext}`;
+            console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
+            return slugUniqueName;
+        default:
+            return originalName;
+    }
+}
+async function saveFilesFromFormData(formData, fieldName, options) {
+    const { dir, pattern, customName, multiple = false } = options;
+    console.log(`🚀 Starting file save from field: "${fieldName}"`);
+    await ensureDir(dir);
+    let result = multiple ? [] : null;
+    const files = formData.getAll(fieldName).filter((item)=>item instanceof File && item.name.length > 0);
+    console.log(`📦 Total files to process: ${files.length}`);
+    for(let index = 0; index < files.length; index++){
+        const file = files[index];
+        const nameToUse = pattern === 'custom' && multiple ? `${customName}-${index + 1}` : pattern === 'custom' ? customName : file.name;
+        const finalFileName = generateFileName(nameToUse, pattern, nameToUse);
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const fullPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(dir, finalFileName);
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(fullPath, buffer);
+        const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
+        const info = {
+            originalName: file.name,
+            savedAs: finalFileName,
+            size: file.size,
+            type: file.type,
+            url: `${fileUrl}`
+        };
+        if (multiple && Array.isArray(result)) {
+            result.push(info);
+        } else {
+            result = info;
         }
     }
-    // Pattern validations
-    for (const [field, expectedType] of Object.entries(patternValidations)){
-        const value = formData.get(field);
-        if (value !== null) {
-            const val = typeof value === 'string' ? value.trim() : value;
-            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
-            const isInvalidBoolean = expectedType === 'boolean' && ![
-                'true',
-                'false',
-                '1',
-                '0',
-                true,
-                false,
-                1,
-                0
-            ].includes(val.toString().toLowerCase());
-            if (isInvalidNumber || isInvalidBoolean) {
-                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
-            }
-        }
+    return result;
+}
+async function deleteFile(filePath) {
+    try {
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["stat"])(filePath); // Throws if file doesn't exist
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
+        return true;
+    } catch (error) {
+        console.log(`error - File not found or couldn't be deleted: ${filePath}`, error);
+        return false;
     }
-    const errorCount = Object.keys(error).length;
-    return {
-        isValid: errorCount === 0,
-        ...errorCount > 0 && {
-            error
-        },
-        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
-    };
 }
 }}),
-"[project]/src/app/models/warehouse.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/category.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "createWarehouse": (()=>createWarehouse),
-    "deleteWarehouse": (()=>deleteWarehouse),
-    "generateWarehouseSlug": (()=>generateWarehouseSlug),
-    "getAllWarehouses": (()=>getAllWarehouses),
-    "getWarehouseById": (()=>getWarehouseById),
-    "getWarehousesByStatus": (()=>getWarehousesByStatus),
-    "restoreWarehouse": (()=>restoreWarehouse),
-    "softDeleteWarehouse": (()=>softDeleteWarehouse),
-    "updateWarehouse": (()=>updateWarehouse)
+    "createCategory": (()=>createCategory),
+    "deleteCategory": (()=>deleteCategory),
+    "generateCategorySlug": (()=>generateCategorySlug),
+    "getAllCategories": (()=>getAllCategories),
+    "getCategoriesByStatus": (()=>getCategoriesByStatus),
+    "getCategoryById": (()=>getCategoryById),
+    "removeCategoryImageByIndex": (()=>removeCategoryImageByIndex),
+    "restoreCategory": (()=>restoreCategory),
+    "softDeleteCategory": (()=>softDeleteCategory),
+    "updateCategory": (()=>updateCategory)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 ;
-async function generateWarehouseSlug(name) {
+;
+;
+async function generateCategorySlug(name) {
     let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
     let isSlugTaken = true;
     let suffix = 0;
     // Keep checking until an unused slug is found
     while(isSlugTaken){
-        const existingWarehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.findUnique({
+        const existingCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
             where: {
                 slug
             }
         });
-        if (existingWarehouse) {
+        if (existingCategory) {
             // If the slug already exists, add a suffix (-1, -2, etc.)
             suffix++;
             slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
@@ -8789,134 +8844,168 @@ async function generateWarehouseSlug(name) {
     }
     return slug;
 }
-async function createWarehouse(adminId, adminRole, warehouse) {
+async function createCategory(adminId, adminRole, category) {
     try {
-        const { name, gst_number, contact_name, contact_number, address_line_1, address_line_2, cityId, stateId, postal_code, status } = warehouse;
-        // Convert cityId and stateId to numbers
-        const numCityId = BigInt(cityId);
-        const numStateId = BigInt(stateId);
-        // Generate a unique slug for the warehouse
-        const slug = await generateWarehouseSlug(name);
-        const newWarehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.create({
+        const { name, description, status, image } = category;
+        // Generate a unique slug for the category
+        const slug = await generateCategorySlug(name);
+        const newCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.create({
             data: {
                 name,
-                slug,
-                gst_number,
-                contact_name,
-                contact_number,
-                address_line_1,
-                address_line_2,
-                cityId: numCityId,
-                stateId: numStateId,
-                postal_code,
+                description,
                 status,
+                slug,
+                image,
                 createdAt: new Date(),
                 createdBy: adminId,
                 createdByRole: adminRole
             }
         });
-        // Convert BigInt to string for serialization
-        const warehouseWithStringBigInts = {
-            ...newWarehouse,
-            cityId: newWarehouse.cityId.toString(),
-            stateId: newWarehouse.stateId.toString()
-        };
         return {
             status: true,
-            warehouse: warehouseWithStringBigInts
+            category: newCategory
         };
     } catch (error) {
-        console.error(`Error creating warehouse:`, error);
+        console.error(`Error creating category:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateWarehouse = async (adminId, adminRole, warehouseId, data)=>{
+const updateCategory = async (adminId, adminRole, categoryId, data)=>{
     try {
         data.updatedBy = adminId;
         data.updatedAt = new Date();
         data.updatedByRole = adminRole;
-        const warehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.update({
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img)=>img.trim());
+            const { status, category, message } = await getCategoryById(categoryId);
+            if (!status || !category) {
+                return {
+                    status: false,
+                    message: message || "Category not found."
+                };
+            }
+            const existingImages = category.image ? category.image.split(",").map((img)=>img.trim()) : [];
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([
+                ...existingImages,
+                ...newImagesArr
+            ]));
+            data.image = mergedImages.join(",");
+        }
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
-                id: warehouseId
+                id: categoryId
             },
             data: data
         });
-        // Convert BigInt to string for serialization
-        const warehouseWithStringBigInts = {
-            ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString()
-        };
         return {
             status: true,
-            warehouse: warehouseWithStringBigInts
+            category
         };
     } catch (error) {
-        console.error("❌ updateWarehouse Error:", error);
+        console.error("❌ updateCategory Error:", error);
         return {
             status: false,
-            message: "Error updating warehouse"
+            message: "Error updating category"
         };
     }
 };
-const getWarehouseById = async (id)=>{
+const getCategoryById = async (id)=>{
     try {
-        const warehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.findUnique({
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
             where: {
                 id
             }
         });
-        if (!warehouse) return {
+        if (!category) return {
             status: false,
-            message: "Warehouse not found"
-        };
-        // Convert BigInt to string for serialization
-        const warehouseWithStringBigInts = {
-            ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString()
+            message: "Category not found"
         };
         return {
             status: true,
-            warehouse: warehouseWithStringBigInts
+            category
         };
     } catch (error) {
-        console.error("❌ getWarehouseById Error:", error);
+        console.error("❌ getCategoryById Error:", error);
         return {
             status: false,
-            message: "Error fetching warehouse"
+            message: "Error fetching category"
         };
     }
 };
-const getAllWarehouses = async ()=>{
+const removeCategoryImageByIndex = async (categoryId, imageIndex)=>{
     try {
-        const warehouses = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.findMany({
+        const { status, category, message } = await getCategoryById(categoryId);
+        if (!status || !category) {
+            return {
+                status: false,
+                message: message || "Category not found."
+            };
+        }
+        if (!category.image) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = category.image.split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update category in DB
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: {
+                image: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "category", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            category: updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ Error removing category image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getAllCategories = async ()=>{
+    try {
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
             orderBy: {
                 id: 'desc'
             }
         });
-        // Convert BigInt to string for serialization
-        const warehousesWithStringBigInts = warehouses.map((warehouse)=>({
-                ...warehouse,
-                cityId: warehouse.cityId.toString(),
-                stateId: warehouse.stateId.toString()
-            }));
         return {
             status: true,
-            warehouses: warehousesWithStringBigInts
+            categories
         };
     } catch (error) {
-        console.error("❌ getAllWarehouses Error:", error);
+        console.error("❌ getAllCategories Error:", error);
         return {
             status: false,
-            message: "Error fetching warehouses"
+            message: "Error fetching categories"
         };
     }
 };
-const getWarehousesByStatus = async (status)=>{
+const getCategoriesByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -8947,33 +9036,27 @@ const getWarehousesByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const warehouses = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.findMany({
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
             where: whereCondition,
             orderBy: {
                 id: "desc"
             }
         });
-        // Convert BigInt to string for serialization
-        const warehousesWithStringBigInts = warehouses.map((warehouse)=>({
-                ...warehouse,
-                cityId: warehouse.cityId.toString(),
-                stateId: warehouse.stateId.toString()
-            }));
         return {
             status: true,
-            warehouses: warehousesWithStringBigInts
+            categories
         };
     } catch (error) {
-        console.error(`Error fetching warehouses by status (${status}):`, error);
+        console.error(`Error fetching categories by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching warehouses"
+            message: "Error fetching categories"
         };
     }
 };
-const softDeleteWarehouse = async (adminId, adminRole, id)=>{
+const softDeleteCategory = async (adminId, adminRole, id)=>{
     try {
-        const updatedWarehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.update({
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
                 id
             },
@@ -8985,20 +9068,20 @@ const softDeleteWarehouse = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Warehouse soft deleted successfully",
-            updatedWarehouse
+            message: "Category soft deleted successfully",
+            updatedCategory
         };
     } catch (error) {
-        console.error("❌ softDeleteWarehouse Error:", error);
+        console.error("❌ softDeleteCategory Error:", error);
         return {
             status: false,
-            message: "Error soft deleting warehouse"
+            message: "Error soft deleting category"
         };
     }
 };
-const restoreWarehouse = async (adminId, adminRole, id)=>{
+const restoreCategory = async (adminId, adminRole, id)=>{
     try {
-        const restoredWarehouse = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.update({
+        const restoredCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
                 id
             },
@@ -9013,189 +9096,56 @@ const restoreWarehouse = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Warehouse restored successfully",
-            restoredWarehouse
+            message: "Category restored successfully",
+            restoredCategory
         };
     } catch (error) {
-        console.error("❌ restoreWarehouse Error:", error);
+        console.error("❌ restoreCategory Error:", error);
         return {
             status: false,
-            message: "Error restoring warehouse"
+            message: "Error restoring category"
         };
     }
 };
-const deleteWarehouse = async (id)=>{
+const deleteCategory = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].warehouse.delete({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "Warehouse deleted successfully"
+            message: "Category deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteWarehouse Error:", error);
+        console.error("❌ deleteCategory Error:", error);
         return {
             status: false,
-            message: "Error deleting warehouse"
+            message: "Error deleting category"
         };
     }
 };
 }}),
-"[project]/src/app/api/warehouse/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/warehouse/trashed/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "GET": (()=>GET),
-    "POST": (()=>POST)
+    "GET": (()=>GET)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$warehouse$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/warehouse.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/category.ts [app-route] (ecmascript)");
 ;
 ;
 ;
 ;
-;
-async function POST(req) {
-    try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for warehouse creation');
-        // Get headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "User ID is missing or invalid in request"
-            }, {
-                status: 400
-            });
-        }
-        // Check if admin exists
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found: ${userCheck.message}`
-            }, {
-                status: 404
-            });
-        }
-        const formData = await req.formData();
-        // Validate input
-        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: [
-                'name',
-                'gst_number',
-                'contact_name',
-                'contact_number',
-                'address_line_1',
-                'address_line_2',
-                'city',
-                'state',
-                'postal_code'
-            ],
-            patternValidations: {
-                status: 'boolean',
-                city: 'number',
-                state: 'number'
-            }
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Form validation result:', validation);
-        if (!validation.isValid) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.error);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: validation.error,
-                message: validation.message
-            }, {
-                status: 400
-            });
-        }
-        // Extract fields
-        const name = formData.get('name');
-        const gst_number = formData.get('gst_number') || '';
-        const contact_name = formData.get('contact_name') || '';
-        const contact_number = formData.get('contact_number') || '';
-        const address_line_1 = formData.get('address_line_1') || '';
-        const address_line_2 = formData.get('address_line_2') || '';
-        const cityRaw = formData.get('city');
-        const stateRaw = formData.get('state');
-        // Ensure cityRaw and stateRaw are strings before converting them to BigInt
-        const cityId = cityRaw && typeof cityRaw === 'string' ? BigInt(cityRaw) : null;
-        const stateId = stateRaw && typeof stateRaw === 'string' ? BigInt(stateRaw) : null;
-        const postal_code = formData.get('postal_code') || '';
-        const statusRaw = formData.get('status')?.toString().toLowerCase();
-        const status = [
-            'true',
-            '1',
-            1,
-            true
-        ].includes(statusRaw);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Extracted fields:', {
-            name,
-            cityId,
-            stateId
-        });
-        // Validate required fields
-        if (!name || cityId === null || stateId === null) {
-            throw new Error("Missing required fields: name, city, or state");
-        }
-        // Prepare the payload for warehouse creation
-        const warehousePayload = {
-            name,
-            gst_number,
-            contact_name,
-            contact_number,
-            address_line_1,
-            address_line_2,
-            cityId,
-            stateId,
-            postal_code,
-            status,
-            createdAt: new Date(),
-            createdBy: adminId,
-            createdByRole: adminRole
-        };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Warehouse payload created:', warehousePayload);
-        const warehouseCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$warehouse$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createWarehouse"])(adminId, String(adminRole), warehousePayload);
-        if (warehouseCreateResult?.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Warehouse created successfully:', warehouseCreateResult.warehouse);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                warehouse: warehouseCreateResult.warehouse
-            }, {
-                status: 200
-            });
-        }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Warehouse creation failed:', warehouseCreateResult?.message || 'Unknown error');
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: warehouseCreateResult?.message || 'Warehouse creation failed'
-        }, {
-            status: 500
-        });
-    } catch (err) {
-        const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Warehouse Creation Error:', error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error
-        }, {
-            status: 500
-        });
-    }
-}
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching warehouses');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching categories');
         // Retrieve x-admin-id and x-admin-role from request headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
@@ -9220,28 +9170,28 @@ async function GET(req) {
                 status: 404
             });
         }
-        // Fetch all warehouses
-        const warehousesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$warehouse$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getWarehousesByStatus"])("notDeleted");
-        if (warehousesResult?.status) {
+        // Fetch all categories
+        const categoriesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoriesByStatus"])("deleted");
+        if (categoriesResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                warehouses: warehousesResult.warehouses
+                categories: categoriesResult.categories
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No warehouses found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No categories found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No warehouses found"
+            error: "No categories found"
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching warehouses:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching categories:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch warehouses"
+            error: "Failed to fetch categories"
         }, {
             status: 500
         });
@@ -9251,4 +9201,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__97f6e0d4._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__e55862a8._.js.map

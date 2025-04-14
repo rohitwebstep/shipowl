@@ -1,0 +1,3 @@
+{
+  "/api/warehouse/[warehouseId]/destroy/route": "app/api/warehouse/[warehouseId]/destroy/route.js"
+}

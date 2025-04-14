@@ -1,3 +1,7 @@
 {
-  "/api/warehouse/route": "app/api/warehouse/route.js"
+  "/api/warehouse/[warehouseId]/destroy/route": "app/api/warehouse/[warehouseId]/destroy/route.js",
+  "/api/warehouse/[warehouseId]/restore/route": "app/api/warehouse/[warehouseId]/restore/route.js",
+  "/api/warehouse/[warehouseId]/route": "app/api/warehouse/[warehouseId]/route.js",
+  "/api/warehouse/route": "app/api/warehouse/route.js",
+  "/api/warehouse/trashed/route": "app/api/warehouse/trashed/route.js"
 }

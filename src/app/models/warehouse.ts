@@ -17,7 +17,11 @@ interface Warehouse {
     updatedAt?: Date;
     deletedAt?: Date | null;
     createdBy: number;
+    updatedBy?: number;
+    deletedBy?: number;
     createdByRole: string | null;
+    updatedByRole?: string | null;
+    deletedByRole?: string | null;
 }
 
 export async function generateWarehouseSlug(name: string) {
@@ -89,6 +93,59 @@ export async function createWarehouse(adminId: number, adminRole: string, wareho
     }
 }
 
+// 🟡 UPDATE
+export const updateWarehouse = async (
+    adminId: number,
+    adminRole: string,
+    warehouseId: number,
+    data: Warehouse
+) => {
+    try {
+        data.updatedBy = adminId;
+        data.updatedAt = new Date();
+        data.updatedByRole = adminRole;
+
+        const warehouse = await prisma.warehouse.update({
+            where: { id: warehouseId }, // Assuming 'id' is the correct primary key field
+            data: data,
+        });
+
+        // Convert BigInt to string for serialization
+        const warehouseWithStringBigInts = {
+            ...warehouse,
+            cityId: warehouse.cityId.toString(),
+            stateId: warehouse.stateId.toString(),
+        };
+
+        return { status: true, warehouse: warehouseWithStringBigInts };
+    } catch (error) {
+        console.error("❌ updateWarehouse Error:", error);
+        return { status: false, message: "Error updating warehouse" };
+    }
+};
+
+// 🔵 GET BY ID
+export const getWarehouseById = async (id: number) => {
+    try {
+        const warehouse = await prisma.warehouse.findUnique({
+            where: { id },
+        });
+
+        if (!warehouse) return { status: false, message: "Warehouse not found" };
+
+        // Convert BigInt to string for serialization
+        const warehouseWithStringBigInts = {
+            ...warehouse,
+            cityId: warehouse.cityId.toString(),
+            stateId: warehouse.stateId.toString(),
+        };
+        return { status: true, warehouse: warehouseWithStringBigInts };
+    } catch (error) {
+        console.error("❌ getWarehouseById Error:", error);
+        return { status: false, message: "Error fetching warehouse" };
+    }
+};
+
 // 🟣 GET ALL
 export const getAllWarehouses = async () => {
     try {
@@ -147,5 +204,63 @@ export const getWarehousesByStatus = async (status: "active" | "inactive" | "del
     } catch (error) {
         console.error(`Error fetching warehouses by status (${status}):`, error);
         return { status: false, message: "Error fetching warehouses" };
+    }
+};
+
+// 🔴 Soft DELETE (marks as deleted by setting deletedAt field)
+export const softDeleteWarehouse = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const updatedWarehouse = await prisma.warehouse.update({
+            where: { id },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+        return { status: true, message: "Warehouse soft deleted successfully", updatedWarehouse };
+    } catch (error) {
+        console.error("❌ softDeleteWarehouse Error:", error);
+        return { status: false, message: "Error soft deleting warehouse" };
+    }
+};
+
+// 🟢 RESTORE (Restores a soft-deleted warehouse by setting deletedAt to null)
+export const restoreWarehouse = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        const restoredWarehouse = await prisma.warehouse.update({
+            where: { id },
+            data: {
+                deletedBy: null,      // Reset the deletedBy field
+                deletedAt: null,      // Set deletedAt to null
+                deletedByRole: null,  // Reset the deletedByRole field
+                updatedBy: adminId,   // Record the user restoring the warehouse
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field
+            },
+        });
+
+        // Convert BigInt to string for serialization
+        const warehouseWithStringBigInts = {
+            ...restoredWarehouse,
+            cityId: restoredWarehouse.cityId.toString(),
+            stateId: restoredWarehouse.stateId.toString(),
+        };
+
+        return { status: true, message: "Warehouse restored successfully", warehouse: warehouseWithStringBigInts };
+    } catch (error) {
+        console.error("❌ restoreWarehouse Error:", error);
+        return { status: false, message: "Error restoring warehouse" };
+    }
+};
+
+// 🔴 DELETE
+export const deleteWarehouse = async (id: number) => {
+    try {
+        await prisma.warehouse.delete({ where: { id } });
+        return { status: true, message: "Warehouse deleted successfully" };
+    } catch (error) {
+        console.error("❌ deleteWarehouse Error:", error);
+        return { status: false, message: "Error deleting warehouse" };
     }
 };
