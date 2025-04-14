@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     const state = stateRaw ? Number(stateRaw) : null;
     const postal_code = (formData.get('postal_code') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', 1, true].includes(statusRaw as any);
+    const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
     // Validate required fields
     if (!name || city === null || state === null) {

@@ -116,12 +116,12 @@ export async function PUT(req: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     // Extract fields
     const name = formData.get('name') as string;
     const description = (formData.get('description') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', 1, true].includes(statusRaw as any);
+    const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
     // File upload
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'brand');
