@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createWarehouse, getWarehousesByStatus } from '@/app/models/warehouse';
-
 
 export async function POST(req: NextRequest) {
   try {
