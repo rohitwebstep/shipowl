@@ -21,7 +21,7 @@ model emailConfig {
   module         String   // Associated module (e.g., user, order, notification)
   subject        String   // Subject of the email
   action         String   // Triggering action (e.g., welcome, reset_password)
-  html_template  String   // HTML email template content
+  html_template  String   @db.LongText   // HTML email template content
 
   smtp_host      String   // SMTP server hostname or IP address
   smtp_secure    Boolean  // Use secure SMTP connection (e.g., true for SSL/TLS)
@@ -43,6 +43,41 @@ model emailConfig {
 
   @@index([createdBy])
   @@index([updatedBy])
+}
+
+model state {
+  id           BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
+  name         String
+  fipsCode     String?    // FIPS (Federal Information Processing Standard) code
+  iso2         String?    // ISO 3166-2 code (e.g., "US-CA")
+  type         String?    // Region type (e.g., "province", "region")
+  latitude     Decimal?   @db.Decimal(10, 8)
+  longitude    Decimal?   @db.Decimal(11, 8)
+  flag         Int        @default(1) // 1 = active, 0 = inactive
+  wikiDataId   String?    // Wikidata reference ID
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  city         city[]
+}
+
+model city {
+  id           BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
+  name         String
+  stateId      BigInt     @db.UnsignedBigInt
+  stateCode    String     // Optional: 2-letter code for state reference
+  latitude     Decimal    @db.Decimal(10, 8)
+  longitude    Decimal    @db.Decimal(11, 8)
+  flag         Int        @default(1) // 1 = active, 0 = inactive
+  wikiDataId   String?    // Wikidata reference ID
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  state        state      @relation(fields: [stateId], references: [id], onDelete: Cascade)
+
+  @@index([stateId])
 }
 
 model admin {
@@ -78,12 +113,45 @@ model adminStaff {
   admin      admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }
 
+model warehouse {
+  id              Int      @id @default(autoincrement())
+  name            String
+  slug            String   @unique
+  gst_number      String
+  contact_name    String
+  contact_number  String
+  address_line_1  String
+  address_line_2  String?
+  postal_code     String
+
+  stateId         BigInt   @db.UnsignedBigInt
+  cityId          BigInt   @db.UnsignedBigInt
+
+  status          Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  @@index([stateId])
+  @@index([cityId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
 model category {
   id             Int      @id @default(autoincrement())
   name           String
   slug           String   @unique
   description    String?
-  image          String?
+  image          String?  @db.LongText
   status         Boolean  @default(false)
   createdAt      DateTime @default(now())
   createdBy      Int?
@@ -105,7 +173,7 @@ model brand {
   name           String
   slug           String   @unique
   description    String?
-  image          String?
+  image          String?  @db.LongText
   status         Boolean  @default(false)
   createdAt      DateTime @default(now())
   createdBy      Int?
@@ -127,7 +195,7 @@ model product {
   name           String
   slug           String   @unique
   description    String?
-  image          String?
+  image          String?  @db.LongText
   price          Decimal  @db.Decimal(10, 2)
   quantity       Int      @default(0)
   status         Boolean  @default(false)

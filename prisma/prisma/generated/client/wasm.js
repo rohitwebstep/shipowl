@@ -140,6 +140,33 @@ exports.Prisma.EmailConfigScalarFieldEnum = {
   updatedByRole: 'updatedByRole'
 };
 
+exports.Prisma.StateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  fipsCode: 'fipsCode',
+  iso2: 'iso2',
+  type: 'type',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  flag: 'flag',
+  wikiDataId: 'wikiDataId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  stateId: 'stateId',
+  stateCode: 'stateCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  flag: 'flag',
+  wikiDataId: 'wikiDataId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -167,6 +194,30 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   pr_token: 'pr_token',
   pr_expires_at: 'pr_expires_at',
   pr_last_reset: 'pr_last_reset'
+};
+
+exports.Prisma.WarehouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  gst_number: 'gst_number',
+  contact_name: 'contact_name',
+  contact_number: 'contact_number',
+  address_line_1: 'address_line_1',
+  address_line_2: 'address_line_2',
+  postal_code: 'postal_code',
+  stateId: 'stateId',
+  cityId: 'cityId',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -250,6 +301,20 @@ exports.Prisma.emailConfigOrderByRelevanceFieldEnum = {
   updatedByRole: 'updatedByRole'
 };
 
+exports.Prisma.stateOrderByRelevanceFieldEnum = {
+  name: 'name',
+  fipsCode: 'fipsCode',
+  iso2: 'iso2',
+  type: 'type',
+  wikiDataId: 'wikiDataId'
+};
+
+exports.Prisma.cityOrderByRelevanceFieldEnum = {
+  name: 'name',
+  stateCode: 'stateCode',
+  wikiDataId: 'wikiDataId'
+};
+
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
@@ -266,6 +331,20 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   role: 'role',
   status: 'status',
   pr_token: 'pr_token'
+};
+
+exports.Prisma.warehouseOrderByRelevanceFieldEnum = {
+  name: 'name',
+  slug: 'slug',
+  gst_number: 'gst_number',
+  contact_name: 'contact_name',
+  contact_number: 'contact_number',
+  address_line_1: 'address_line_1',
+  address_line_2: 'address_line_2',
+  postal_code: 'postal_code',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.categoryOrderByRelevanceFieldEnum = {
@@ -301,8 +380,11 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
+  state: 'state',
+  city: 'city',
   admin: 'admin',
   adminStaff: 'adminStaff',
+  warehouse: 'warehouse',
   category: 'category',
   brand: 'brand',
   product: 'product'

@@ -1,23 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { createCategory, getCategoriesByStatus } from '@/app/models/category';
-
-type UploadedFileInfo = {
-  originalName: string;
-  savedAs: string;
-  size: number;
-  type: string;
-  url: string;
-};
+import { createWarehouse, getWarehousesByStatus } from '@/app/models/warehouse';
 
 export async function POST(req: NextRequest) {
   try {
-    logMessage('debug', 'POST request received for category creation');
+    logMessage('debug', 'POST request received for warehouse creation');
 
     // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -36,88 +26,99 @@ export async function POST(req: NextRequest) {
     const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
-
-    const isMultipleImages = true; // Set true to allow multiple image uploads
 
     const formData = await req.formData();
 
     // Validate input
     const validation = validateFormData(formData, {
-      requiredFields: ['name'],
+      requiredFields: ['name', 'gst_number', 'contact_name', 'contact_number', 'address_line_1', 'address_line_2', 'city', 'state', 'postal_code'],
       patternValidations: {
         status: 'boolean',
+        city: 'number',
+        state: 'number',
       },
     });
 
+    logMessage('debug', 'Form validation result:', validation);
+
     if (!validation.isValid) {
-      logMessage('warn', 'Form validation failed', validation.errors);
-      return NextResponse.json({ status: false, error: validation.errors }, { status: 400 });
+      logMessage('warn', 'Form validation failed', validation.error);
+      return NextResponse.json(
+        { status: false, error: validation.error, message: validation.message },
+        { status: 400 }
+      );
     }
 
     // Extract fields
     const name = formData.get('name') as string;
-    const description = (formData.get('description') as string) || '';
+    const gst_number = (formData.get('gst_number') as string) || '';
+    const contact_name = (formData.get('contact_name') as string) || '';
+    const contact_number = (formData.get('contact_number') as string) || '';
+    const address_line_1 = (formData.get('address_line_1') as string) || '';
+    const address_line_2 = (formData.get('address_line_2') as string) || '';
+    const cityRaw = formData.get('city');
+    const stateRaw = formData.get('state');
+    const city = cityRaw ? Number(cityRaw) : null;
+    const state = stateRaw ? Number(stateRaw) : null;
+    const postal_code = (formData.get('postal_code') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = statusRaw === 'true' || statusRaw === '1';
+    const status = ['true', '1', 1, true].includes(statusRaw as any);
 
-    // File upload
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'category');
-    const fileData = await saveFilesFromFormData(formData, 'image', {
-      dir: uploadDir,
-      pattern: 'slug-unique',
-      multiple: isMultipleImages,
-    });
-
-    let image = '';
-
-    if (fileData) {
-      logMessage('info', 'uploaded fileData:', fileData);
-      image = isMultipleImages
-        ? (fileData as UploadedFileInfo[]).map(file => file.url).join(', ')
-        : (fileData as UploadedFileInfo).url;
+    // Validate required fields
+    if (!name || city === null || state === null) {
+      throw new Error("Missing required fields: name, city, or state");
     }
 
-    const categoryPayload = {
+    // Prepare the payload for warehouse creation
+    const warehousePayload = {
       name,
-      description,
-      status,
-      image,
+      gst_number,
+      contact_name,
+      contact_number,
+      address_line_1,
+      address_line_2,
+      city,
+      state,
+      postal_code,
+      status
     };
 
-    logMessage('info', 'Category payload created:', categoryPayload);
+    logMessage('info', 'Warehouse payload created:', warehousePayload);
 
-    const categoryCreateResult = await createCategory(adminId, String(adminRole), categoryPayload);
+    // Call to create the warehouse
+    const warehouseCreateResult = await createWarehouse(adminId, String(adminRole), warehousePayload);
+    logMessage('info', 'Warehouse creation result:', warehouseCreateResult);
 
-    if (categoryCreateResult?.status) {
-      return NextResponse.json({ status: true, category: categoryCreateResult.category }, { status: 200 });
+    if (warehouseCreateResult?.status && warehouseCreateResult.warehouse) {
+      const warehouse = {
+        ...warehouseCreateResult.warehouse,
+        stateId: warehouseCreateResult.warehouse.stateId.toString(),
+        cityId: warehouseCreateResult.warehouse.cityId.toString(),
+      };
+      logMessage('info', 'Warehouse created successfully:', warehouse);
+      return NextResponse.json({ status: true, warehouse }, { status: 200 });
     }
 
-    // ❌ Category creation failed — delete uploaded file(s)
-    const deletePath = (file: UploadedFileInfo) => path.join(uploadDir, path.basename(file.url));
-
-    if (isMultipleImages && Array.isArray(fileData)) {
-      await Promise.all(fileData.map(file => deleteFile(deletePath(file))));
-    } else {
-      await deleteFile(deletePath(fileData as UploadedFileInfo));
-    }
-
-    logMessage('error', 'Category creation failed:', categoryCreateResult?.message || 'Unknown error');
+    logMessage('error', 'Warehouse creation failed:', warehouseCreateResult?.message || 'Unknown error');
     return NextResponse.json(
-      { status: false, error: categoryCreateResult?.message || 'Category creation failed' },
+      { status: false, error: warehouseCreateResult?.message || 'Warehouse creation failed' },
       { status: 500 }
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'Category Creation Error:', error);
+    logMessage('error', 'Warehouse Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
 
 export async function GET(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching categories');
+    logMessage('debug', 'GET request received for fetching warehouses');
 
     // Retrieve x-admin-id and x-admin-role from request headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -142,25 +143,38 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch all categories
-    const categoriesResult = await getCategoriesByStatus("notDeleted");
+    // Fetch all warehouses
+    const warehousesResult = await getWarehousesByStatus("notDeleted");
 
-    if (categoriesResult?.status) {
+    if (warehousesResult?.status && warehousesResult.warehouses) {
+      logMessage('info', 'Warehouses fetched successfully:', warehousesResult.warehouses);
+
+      // Refine the warehouse data to ensure proper formatting
+      const refinedWarehouses = warehousesResult.warehouses.map((warehouse: any) => {
+        return {
+          ...warehouse,
+          stateId: warehouse.stateId.toString(),
+          cityId: warehouse.cityId.toString(),
+          createdAt: warehouse.createdAt.toISOString(),
+          updatedAt: warehouse.updatedAt ? warehouse.updatedAt.toISOString() : null,
+        };
+      });
+
       return NextResponse.json(
-        { status: true, categories: categoriesResult.categories },
+        { status: true, warehouses: refinedWarehouses },
         { status: 200 }
       );
     }
 
-    logMessage('warn', 'No categories found');
+    logMessage('warn', 'No warehouses found');
     return NextResponse.json(
-      { status: false, error: "No categories found" },
+      { status: false, error: "No warehouses found" },
       { status: 404 }
     );
   } catch (error) {
-    logMessage('error', 'Error fetching categories:', error);
+    logMessage('error', 'Error fetching warehouses:', error);
     return NextResponse.json(
-      { status: false, error: "Failed to fetch categories" },
+      { status: false, error: "Failed to fetch warehouses" },
       { status: 500 }
     );
   }

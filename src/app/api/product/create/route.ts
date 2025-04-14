@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     const price = parseFloat(formData.get('price') as string);
     const quantity = parseInt(formData.get('quantity') as string, 10);
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = statusRaw === 'true' || statusRaw === '1';
+    const status = ['true', '1', 1, true].includes(statusRaw as any);
 
     // File upload
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'products');

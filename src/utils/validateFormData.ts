@@ -5,41 +5,57 @@ interface ValidationOptions {
 
 interface ValidationResult {
     isValid: boolean;
-    errors: string[];
+    error?: Record<string, string>;
+    message: string;
+}
+
+function toReadableFieldName(field: string): string {
+    // Converts camelCase or snake_case to Title Case
+    return field
+        .replace(/_/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/\b\w/g, char => char.toUpperCase());
 }
 
 export function validateFormData(
     formData: FormData,
     { requiredFields = [], patternValidations = {} }: ValidationOptions
 ): ValidationResult {
-    const errors: string[] = [];
+    const error: Record<string, string> = {};
 
-    // ✅ Required fields check
+    // Required fields
     for (const field of requiredFields) {
         const value = formData.get(field);
         if (value === null || value === '' || (typeof value === 'string' && value.trim() === '')) {
-            errors.push(`Field "${field}" is required`);
+            error[field] = `${toReadableFieldName(field)} is required`;
         }
     }
 
-    // ✅ Type pattern check (only if field exists)
+    // Pattern validations
     for (const [field, expectedType] of Object.entries(patternValidations)) {
         const value = formData.get(field);
         if (value !== null) {
             const val = typeof value === 'string' ? value.trim() : value;
 
-            if (
-                (expectedType === 'number' && isNaN(Number(val))) ||
-                (expectedType === 'boolean' &&
-                    !['true', 'false', '1', '0', true, false, 1, 0].includes(val.toString().toLowerCase()))
-            ) {
-                errors.push(`Field "${field}" must be of type ${expectedType}`);
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean =
+                expectedType === 'boolean' &&
+                !['true', 'false', '1', '0', true, false, 1, 0].includes(val.toString().toLowerCase());
+
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
             }
         }
     }
 
+    const errorCount = Object.keys(error).length;
+
     return {
-        isValid: errors.length === 0,
-        errors,
+        isValid: errorCount === 0,
+        ...(errorCount > 0 && { error }),
+        message:
+            errorCount === 0
+                ? 'Form submitted successfully.'
+                : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`,
     };
 }

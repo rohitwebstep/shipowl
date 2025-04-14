@@ -1,6 +1,4 @@
 {
   "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/category/[categoryId]/image/[imageIndex]/route": "app/api/category/[categoryId]/image/[imageIndex]/route.js",
-  "/api/category/[categoryId]/route": "app/api/category/[categoryId]/route.js",
-  "/api/category/route": "app/api/category/route.js"
+  "/api/warehouse/route": "app/api/warehouse/route.js"
 }

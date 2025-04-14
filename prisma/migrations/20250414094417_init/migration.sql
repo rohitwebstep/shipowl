@@ -5,7 +5,7 @@ CREATE TABLE `emailConfig` (
     `module` VARCHAR(191) NOT NULL,
     `subject` VARCHAR(191) NOT NULL,
     `action` VARCHAR(191) NOT NULL,
-    `html_template` VARCHAR(191) NOT NULL,
+    `html_template` LONGTEXT NOT NULL,
     `smtp_host` VARCHAR(191) NOT NULL,
     `smtp_secure` BOOLEAN NOT NULL,
     `smtp_port` INTEGER NOT NULL,
@@ -23,6 +23,40 @@ CREATE TABLE `emailConfig` (
 
     INDEX `emailConfig_createdBy_idx`(`createdBy`),
     INDEX `emailConfig_updatedBy_idx`(`updatedBy`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `state` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `fipsCode` VARCHAR(191) NULL,
+    `iso2` VARCHAR(191) NULL,
+    `type` VARCHAR(191) NULL,
+    `latitude` DECIMAL(10, 8) NULL,
+    `longitude` DECIMAL(11, 8) NULL,
+    `flag` INTEGER NOT NULL DEFAULT 1,
+    `wikiDataId` VARCHAR(191) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `city` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `stateId` BIGINT UNSIGNED NOT NULL,
+    `stateCode` VARCHAR(191) NOT NULL,
+    `latitude` DECIMAL(10, 8) NOT NULL,
+    `longitude` DECIMAL(11, 8) NOT NULL,
+    `flag` INTEGER NOT NULL DEFAULT 1,
+    `wikiDataId` VARCHAR(191) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    INDEX `city_stateId_idx`(`stateId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -65,12 +99,45 @@ CREATE TABLE `adminStaff` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `warehouse` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `slug` VARCHAR(191) NOT NULL,
+    `gst_number` VARCHAR(191) NOT NULL,
+    `contact_name` VARCHAR(191) NOT NULL,
+    `contact_number` VARCHAR(191) NOT NULL,
+    `address_line_1` VARCHAR(191) NOT NULL,
+    `address_line_2` VARCHAR(191) NULL,
+    `postal_code` VARCHAR(191) NOT NULL,
+    `stateId` BIGINT UNSIGNED NOT NULL,
+    `cityId` BIGINT UNSIGNED NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT false,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `warehouse_slug_key`(`slug`),
+    INDEX `warehouse_stateId_idx`(`stateId`),
+    INDEX `warehouse_cityId_idx`(`cityId`),
+    INDEX `warehouse_createdBy_idx`(`createdBy`),
+    INDEX `warehouse_updatedBy_idx`(`updatedBy`),
+    INDEX `warehouse_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `category` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `image` VARCHAR(191) NULL,
+    `image` LONGTEXT NULL,
     `status` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
@@ -95,7 +162,7 @@ CREATE TABLE `brand` (
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `image` VARCHAR(191) NULL,
+    `image` LONGTEXT NULL,
     `status` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
@@ -120,7 +187,7 @@ CREATE TABLE `product` (
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `image` VARCHAR(191) NULL,
+    `image` LONGTEXT NULL,
     `price` DECIMAL(10, 2) NOT NULL,
     `quantity` INTEGER NOT NULL DEFAULT 0,
     `status` BOOLEAN NOT NULL DEFAULT false,
@@ -140,6 +207,9 @@ CREATE TABLE `product` (
     INDEX `product_deletedAt_idx`(`deletedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `city` ADD CONSTRAINT `city_stateId_fkey` FOREIGN KEY (`stateId`) REFERENCES `state`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_admin_id_fkey` FOREIGN KEY (`admin_id`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
