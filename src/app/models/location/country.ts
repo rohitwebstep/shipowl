@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 interface Country {
-    id?: BigInt;
+    id?: bigint;
     name: string;
     iso3?: string;
     iso2?: string;

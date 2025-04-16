@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     logMessage('debug', 'GET request received for fetching countries');
 
