@@ -140,33 +140,6 @@ exports.Prisma.EmailConfigScalarFieldEnum = {
   updatedByRole: 'updatedByRole'
 };
 
-exports.Prisma.StateScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  fipsCode: 'fipsCode',
-  iso2: 'iso2',
-  type: 'type',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  flag: 'flag',
-  wikiDataId: 'wikiDataId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CityScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  stateId: 'stateId',
-  stateCode: 'stateCode',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  flag: 'flag',
-  wikiDataId: 'wikiDataId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -196,6 +169,110 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   pr_last_reset: 'pr_last_reset'
 };
 
+exports.Prisma.LoginLogScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  adminRole: 'adminRole',
+  action: 'action',
+  response: 'response',
+  ipv4: 'ipv4',
+  ipv6: 'ipv6',
+  internetServiceProvider: 'internetServiceProvider',
+  clientInformation: 'clientInformation',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.ActivityLogScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  adminRole: 'adminRole',
+  module: 'module',
+  action: 'action',
+  endpoint: 'endpoint',
+  method: 'method',
+  payload: 'payload',
+  response: 'response',
+  result: 'result',
+  data: 'data',
+  ipv4: 'ipv4',
+  ipv6: 'ipv6',
+  internetServiceProvider: 'internetServiceProvider',
+  clientInformation: 'clientInformation',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.CountryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  iso3: 'iso3',
+  iso2: 'iso2',
+  phonecode: 'phonecode',
+  currency: 'currency',
+  currencyName: 'currencyName',
+  currencySymbol: 'currencySymbol',
+  nationality: 'nationality',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.StateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  countryId: 'countryId',
+  iso2: 'iso2',
+  type: 'type',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.CityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  stateId: 'stateId',
+  countryId: 'countryId',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.WarehouseScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -206,6 +283,7 @@ exports.Prisma.WarehouseScalarFieldEnum = {
   address_line_1: 'address_line_1',
   address_line_2: 'address_line_2',
   postal_code: 'postal_code',
+  countryId: 'countryId',
   stateId: 'stateId',
   cityId: 'cityId',
   status: 'status',
@@ -256,26 +334,6 @@ exports.Prisma.BrandScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.ProductScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  description: 'description',
-  image: 'image',
-  price: 'price',
-  quantity: 'quantity',
-  status: 'status',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -301,20 +359,6 @@ exports.Prisma.emailConfigOrderByRelevanceFieldEnum = {
   updatedByRole: 'updatedByRole'
 };
 
-exports.Prisma.stateOrderByRelevanceFieldEnum = {
-  name: 'name',
-  fipsCode: 'fipsCode',
-  iso2: 'iso2',
-  type: 'type',
-  wikiDataId: 'wikiDataId'
-};
-
-exports.Prisma.cityOrderByRelevanceFieldEnum = {
-  name: 'name',
-  stateCode: 'stateCode',
-  wikiDataId: 'wikiDataId'
-};
-
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
@@ -331,6 +375,69 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   role: 'role',
   status: 'status',
   pr_token: 'pr_token'
+};
+
+exports.Prisma.loginLogOrderByRelevanceFieldEnum = {
+  adminRole: 'adminRole',
+  action: 'action',
+  response: 'response',
+  ipv4: 'ipv4',
+  ipv6: 'ipv6',
+  internetServiceProvider: 'internetServiceProvider',
+  clientInformation: 'clientInformation',
+  userAgent: 'userAgent',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.activityLogOrderByRelevanceFieldEnum = {
+  adminRole: 'adminRole',
+  module: 'module',
+  action: 'action',
+  endpoint: 'endpoint',
+  method: 'method',
+  payload: 'payload',
+  response: 'response',
+  data: 'data',
+  ipv4: 'ipv4',
+  ipv6: 'ipv6',
+  internetServiceProvider: 'internetServiceProvider',
+  clientInformation: 'clientInformation',
+  userAgent: 'userAgent',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.countryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  iso3: 'iso3',
+  iso2: 'iso2',
+  phonecode: 'phonecode',
+  currency: 'currency',
+  currencyName: 'currencyName',
+  currencySymbol: 'currencySymbol',
+  nationality: 'nationality',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.stateOrderByRelevanceFieldEnum = {
+  name: 'name',
+  iso2: 'iso2',
+  type: 'type',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.cityOrderByRelevanceFieldEnum = {
+  name: 'name',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.warehouseOrderByRelevanceFieldEnum = {
@@ -367,27 +474,19 @@ exports.Prisma.brandOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.productOrderByRelevanceFieldEnum = {
-  name: 'name',
-  slug: 'slug',
-  description: 'description',
-  image: 'image',
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
-  state: 'state',
-  city: 'city',
   admin: 'admin',
   adminStaff: 'adminStaff',
+  loginLog: 'loginLog',
+  activityLog: 'activityLog',
+  country: 'country',
+  state: 'state',
+  city: 'city',
   warehouse: 'warehouse',
   category: 'category',
-  brand: 'brand',
-  product: 'product'
+  brand: 'brand'
 };
 
 /**

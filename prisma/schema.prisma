@@ -17,22 +17,22 @@ datasource db {
 model emailConfig {
   id             BigInt   @id @default(autoincrement())
 
-  panel          String   // Target panel: 'admin', 'dropshipper', or 'supplier'
-  module         String   // Associated module (e.g., user, order, notification)
-  subject        String   // Subject of the email
-  action         String   // Triggering action (e.g., welcome, reset_password)
-  html_template  String   // HTML email template content
+  panel          String
+  module         String
+  subject        String
+  action         String
+  html_template  String?   @db.LongText
 
-  smtp_host      String   // SMTP server hostname or IP address
-  smtp_secure    Boolean  // Use secure SMTP connection (e.g., true for SSL/TLS)
-  smtp_port      Int      // SMTP port (e.g., 465 for SSL, 587 for TLS)
-  smtp_username  String   // SMTP username for authentication
-  smtp_password  String   // SMTP password (store securely, preferably hashed)
+  smtp_host      String
+  smtp_secure    Boolean
+  smtp_port      Int
+  smtp_username  String
+  smtp_password  String
 
-  from_email     String   // Sender's email address
-  from_name      String   // Sender's name
+  from_email     String
+  from_name      String
 
-  status         Boolean  // Status of the email config (active/inactive)
+  status         Boolean
 
   createdAt      DateTime @default(now())
   createdBy      Int?
@@ -43,41 +43,6 @@ model emailConfig {
 
   @@index([createdBy])
   @@index([updatedBy])
-}
-
-model state {
-  id           BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
-  name         String
-  fipsCode     String?    // FIPS (Federal Information Processing Standard) code
-  iso2         String?    // ISO 3166-2 code (e.g., "US-CA")
-  type         String?    // Region type (e.g., "province", "region")
-  latitude     Decimal?   @db.Decimal(10, 8)
-  longitude    Decimal?   @db.Decimal(11, 8)
-  flag         Int        @default(1) // 1 = active, 0 = inactive
-  wikiDataId   String?    // Wikidata reference ID
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-
-  // Relations
-  city         city[]
-}
-
-model city {
-  id           BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
-  name         String
-  stateId      BigInt     @db.UnsignedBigInt
-  stateCode    String     // Optional: 2-letter code for state reference
-  latitude     Decimal    @db.Decimal(10, 8)
-  longitude    Decimal    @db.Decimal(11, 8)
-  flag         Int        @default(1) // 1 = active, 0 = inactive
-  wikiDataId   String?    // Wikidata reference ID
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-
-  // Relations
-  state        state      @relation(fields: [stateId], references: [id], onDelete: Cascade)
-
-  @@index([stateId])
 }
 
 model admin {
@@ -97,26 +62,164 @@ model admin {
 }
 
 model adminStaff {
-  id              Int         @id @default(autoincrement())
-  admin_id        Int         @unique
+  id              Int       @id @default(autoincrement())
+  admin_id        Int       @unique
   name            String    
-  email           String      @unique
+  email           String    @unique
   password        String
-  role            String      @default("admin")
-  status          String      @default("active")
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  role            String    @default("admin")
+  status          String    @default("active")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
   pr_token        String?
   pr_expires_at   DateTime?
   pr_last_reset   DateTime?
 
-  admin           admin       @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+  admin           admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+}
+
+model loginLog {
+  id                      Int       @id @default(autoincrement())
+  adminId                 Int
+  adminRole               String
+  action                  String
+  response                String?
+
+  ipv4                    String?
+  ipv6                    String?
+  internetServiceProvider String?
+  clientInformation       String?
+  userAgent               String?
+
+  createdAt               DateTime  @default(now())
+  createdBy               Int?
+  createdByRole           String?
+  updatedAt               DateTime  @updatedAt
+  updatedBy               Int?
+  updatedByRole           String?
+  deletedAt               DateTime?
+  deletedBy               Int?
+  deletedByRole           String?
+
+  @@index([adminId])
+  @@index([adminRole])
+  @@index([action])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+model activityLog {
+  id                      Int       @id @default(autoincrement())
+  adminId                 Int
+  adminRole               String
+  module                  String
+  action                  String
+  endpoint                String
+  method                  String
+  payload                 String?     @db.LongText
+  response                String?     @db.LongText
+  result                  Boolean
+  data                    String?     @db.LongText
+
+  ipv4                    String?
+  ipv6                    String?
+  internetServiceProvider String?
+  clientInformation       String?
+  userAgent               String?
+
+  createdAt               DateTime   @default(now())
+  createdBy               Int?
+  createdByRole           String?
+  updatedAt               DateTime   @updatedAt
+  updatedBy               Int?
+  updatedByRole           String?
+  deletedAt               DateTime?
+  deletedBy               Int?
+  deletedByRole           String?
+
+  @@index([adminId])
+  @@index([adminRole])
+  @@index([module])
+  @@index([action])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+model country {
+  id              BigInt     @id @default(autoincrement())
+  name            String
+  iso3            String?
+  iso2            String?
+  phonecode       String?
+  currency        String?
+  currencyName    String?
+  currencySymbol  String?
+  nationality     String?
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  states          state[]
+  cities          city[]
+  warehouses      warehouse[]
+}
+
+model state {
+  id              BigInt     @id @default(autoincrement())
+  name            String
+  countryId       BigInt
+  iso2            String?
+  type            String?
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  country         country    @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  cities          city[]
+  warehouses      warehouse[]
+
+  @@index([countryId])
+}
+
+model city {
+  id              BigInt     @id @default(autoincrement())
+  name            String
+  stateId         BigInt
+  countryId       BigInt
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  state           state      @relation(fields: [stateId], references: [id], onDelete: Cascade)
+  country         country    @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  warehouses      warehouse[]
+
+  @@index([stateId])
+  @@index([countryId])
 }
 
 model warehouse {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   name            String
-  slug            String   @unique
+  slug            String    @unique
   gst_number      String
   contact_name    String
   contact_number  String
@@ -124,21 +227,27 @@ model warehouse {
   address_line_2  String?
   postal_code     String
 
-  stateId         BigInt   @db.UnsignedBigInt
-  cityId          BigInt   @db.UnsignedBigInt
+  countryId       BigInt?
+  stateId         BigInt?
+  cityId          BigInt?
 
-  status          Boolean  @default(false)
+  country         country?    @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  state           state?      @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  city            city?       @relation(fields: [cityId], references: [id], onDelete: SetNull)
 
-  createdAt       DateTime @default(now())
+  status          Boolean   @default(false)
+  
+  createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
-  updatedAt       DateTime @updatedAt
+  updatedAt       DateTime  @updatedAt
   updatedBy       Int?
   updatedByRole   String?
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
 
+  @@index([countryId])
   @@index([stateId])
   @@index([cityId])
   @@index([createdBy])
@@ -147,16 +256,16 @@ model warehouse {
 }
 
 model category {
-  id             Int      @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   name           String
-  slug           String   @unique
-  description    String?
-  image          String?
-  status         Boolean  @default(false)
-  createdAt      DateTime @default(now())
+  slug           String    @unique
+  description    String?   @db.LongText
+  image          String?   @db.LongText
+  status         Boolean   @default(false)
+  createdAt      DateTime  @default(now())
   createdBy      Int?
   createdByRole  String?
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime  @updatedAt
   updatedBy      Int?
   updatedByRole  String?
   deletedAt      DateTime?
@@ -169,40 +278,16 @@ model category {
 }
 
 model brand {
-  id             Int      @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   name           String
-  slug           String   @unique
-  description    String?
-  image          String?
-  status         Boolean  @default(false)
-  createdAt      DateTime @default(now())
+  slug           String    @unique
+  description    String?   @db.LongText
+  image          String?   @db.LongText
+  status         Boolean   @default(false)
+  createdAt      DateTime  @default(now())
   createdBy      Int?
   createdByRole  String?
-  updatedAt      DateTime @updatedAt
-  updatedBy      Int?
-  updatedByRole  String?
-  deletedAt      DateTime?
-  deletedBy      Int?
-  deletedByRole  String?
-
-  @@index([createdBy])
-  @@index([updatedBy])
-  @@index([deletedAt])
-}
-
-model product {
-  id             Int      @id @default(autoincrement())
-  name           String
-  slug           String   @unique
-  description    String?
-  image          String?
-  price          Decimal  @db.Decimal(10, 2)
-  quantity       Int      @default(0)
-  status         Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  createdBy      Int?
-  createdByRole  String?
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime  @updatedAt
   updatedBy      Int?
   updatedByRole  String?
   deletedAt      DateTime?

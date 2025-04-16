@@ -1,3 +1,7 @@
 {
-  "/api/location/states/[stateId]/cities/route": "app/api/location/states/[stateId]/cities/route.js"
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
+  "/api/location/country/[countryId]/restore/route": "app/api/location/country/[countryId]/restore/route.js",
+  "/api/location/country/[countryId]/route": "app/api/location/country/[countryId]/route.js",
+  "/api/location/country/route": "app/api/location/country/route.js",
+  "/api/location/country/trashed/route": "app/api/location/country/trashed/route.js"
 }

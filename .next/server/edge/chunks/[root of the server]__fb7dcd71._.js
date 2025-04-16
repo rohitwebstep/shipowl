@@ -130,7 +130,9 @@ function middleware(req) {
         "/api/brand",
         "/api/brand/:path*",
         "/api/warehouse",
-        "/api/warehouse/:path*"
+        "/api/warehouse/:path*",
+        "/api/location/country",
+        "/api/location/country/:path*"
     ];
     if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
         const applicableRoles = [
@@ -184,7 +186,9 @@ const config = {
         "/api/brand",
         "/api/brand/:path*",
         "/api/warehouse",
-        "/api/warehouse/:path*"
+        "/api/warehouse/:path*",
+        "/api/location/country",
+        "/api/location/country/:path*"
     ]
 };
 }}),

@@ -2,14 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { getCategoryById, deleteCategory } from '@/app/models/category';
+import { getWarehouseById, deleteWarehouse } from '@/app/models/warehouse';
 
 export async function DELETE(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
-    const categoryId = parts[parts.length - 2]; // Get the second-to-last segment
+    const warehouseId = parts[parts.length - 2]; // Get the second-to-last segment
 
-    logMessage('debug', 'Delete Category Request:', { categoryId });
+    logMessage('debug', 'Delete Warehouse Request:', { warehouseId });
 
     // Extract admin ID and role from headers
     const adminId = req.headers.get('x-admin-id');
@@ -28,33 +28,33 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
     }
 
-    // Validate category ID
-    const categoryIdNum = Number(categoryId);
-    if (isNaN(categoryIdNum)) {
-      logMessage('warn', 'Invalid category ID format', { categoryId });
-      return NextResponse.json({ error: 'Category ID is invalid' }, { status: 400 });
+    // Validate warehouse ID
+    const warehouseIdNum = Number(warehouseId);
+    if (isNaN(warehouseIdNum)) {
+      logMessage('warn', 'Invalid warehouse ID format', { warehouseId });
+      return NextResponse.json({ error: 'Warehouse ID is invalid' }, { status: 400 });
     }
 
-    const categoryResult = await getCategoryById(categoryIdNum);
-    if (!categoryResult?.status) {
-      logMessage('warn', 'Category not found', { categoryIdNum });
-      return NextResponse.json({ status: false, message: 'Category not found' }, { status: 404 });
+    const warehouseResult = await getWarehouseById(warehouseIdNum);
+    if (!warehouseResult?.status) {
+      logMessage('warn', 'Warehouse not found', { warehouseIdNum });
+      return NextResponse.json({ status: false, message: 'Warehouse not found' }, { status: 404 });
     }
 
     // Permanent delete operation
-    const result = await deleteCategory(categoryIdNum);  // Assuming deleteCategory is for permanent deletion
-    logMessage('info', `Permanent delete request for category: ${categoryIdNum}`, { adminId });
+    const result = await deleteWarehouse(warehouseIdNum);  // Assuming deleteWarehouse is for permanent deletion
+    logMessage('info', `Permanent delete request for warehouse: ${warehouseIdNum}`, { adminId });
 
 
     if (result?.status) {
-      logMessage('info', `Category permanently deleted successfully: ${categoryIdNum}`, { adminId });
-      return NextResponse.json({ status: true, message: `Category permanently deleted successfully` }, { status: 200 });
+      logMessage('info', `Warehouse permanently deleted successfully: ${warehouseIdNum}`, { adminId });
+      return NextResponse.json({ status: true, message: `Warehouse permanently deleted successfully` }, { status: 200 });
     }
 
-    logMessage('info', `Category not found or could not be deleted: ${categoryIdNum}`, { adminId });
-    return NextResponse.json({ status: false, message: 'Category not found or deletion failed' }, { status: 404 });
+    logMessage('info', `Warehouse not found or could not be deleted: ${warehouseIdNum}`, { adminId });
+    return NextResponse.json({ status: false, message: 'Warehouse not found or deletion failed' }, { status: 404 });
   } catch (error) {
-    logMessage('error', 'Error during category deletion', { error });
+    logMessage('error', 'Error during warehouse deletion', { error });
     return NextResponse.json({ status: false, error: 'Internal server error' }, { status: 500 });
   }
 }

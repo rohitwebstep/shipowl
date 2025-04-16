@@ -19,16 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type emailConfig = $Result.DefaultSelection<Prisma.$emailConfigPayload>
 /**
- * Model state
- * 
- */
-export type state = $Result.DefaultSelection<Prisma.$statePayload>
-/**
- * Model city
- * 
- */
-export type city = $Result.DefaultSelection<Prisma.$cityPayload>
-/**
  * Model admin
  * 
  */
@@ -38,6 +28,31 @@ export type admin = $Result.DefaultSelection<Prisma.$adminPayload>
  * 
  */
 export type adminStaff = $Result.DefaultSelection<Prisma.$adminStaffPayload>
+/**
+ * Model loginLog
+ * 
+ */
+export type loginLog = $Result.DefaultSelection<Prisma.$loginLogPayload>
+/**
+ * Model activityLog
+ * 
+ */
+export type activityLog = $Result.DefaultSelection<Prisma.$activityLogPayload>
+/**
+ * Model country
+ * 
+ */
+export type country = $Result.DefaultSelection<Prisma.$countryPayload>
+/**
+ * Model state
+ * 
+ */
+export type state = $Result.DefaultSelection<Prisma.$statePayload>
+/**
+ * Model city
+ * 
+ */
+export type city = $Result.DefaultSelection<Prisma.$cityPayload>
 /**
  * Model warehouse
  * 
@@ -53,11 +68,6 @@ export type category = $Result.DefaultSelection<Prisma.$categoryPayload>
  * 
  */
 export type brand = $Result.DefaultSelection<Prisma.$brandPayload>
-/**
- * Model product
- * 
- */
-export type product = $Result.DefaultSelection<Prisma.$productPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -195,26 +205,6 @@ export class PrismaClient<
   get emailConfig(): Prisma.emailConfigDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.state`: Exposes CRUD operations for the **state** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more States
-    * const states = await prisma.state.findMany()
-    * ```
-    */
-  get state(): Prisma.stateDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.city`: Exposes CRUD operations for the **city** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Cities
-    * const cities = await prisma.city.findMany()
-    * ```
-    */
-  get city(): Prisma.cityDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.admin`: Exposes CRUD operations for the **admin** model.
     * Example usage:
     * ```ts
@@ -233,6 +223,56 @@ export class PrismaClient<
     * ```
     */
   get adminStaff(): Prisma.adminStaffDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.loginLog`: Exposes CRUD operations for the **loginLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LoginLogs
+    * const loginLogs = await prisma.loginLog.findMany()
+    * ```
+    */
+  get loginLog(): Prisma.loginLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activityLog`: Exposes CRUD operations for the **activityLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivityLogs
+    * const activityLogs = await prisma.activityLog.findMany()
+    * ```
+    */
+  get activityLog(): Prisma.activityLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.country`: Exposes CRUD operations for the **country** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Countries
+    * const countries = await prisma.country.findMany()
+    * ```
+    */
+  get country(): Prisma.countryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.state`: Exposes CRUD operations for the **state** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more States
+    * const states = await prisma.state.findMany()
+    * ```
+    */
+  get state(): Prisma.stateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.city`: Exposes CRUD operations for the **city** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Cities
+    * const cities = await prisma.city.findMany()
+    * ```
+    */
+  get city(): Prisma.cityDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.warehouse`: Exposes CRUD operations for the **warehouse** model.
@@ -263,16 +303,6 @@ export class PrismaClient<
     * ```
     */
   get brand(): Prisma.brandDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.product`: Exposes CRUD operations for the **product** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Products
-    * const products = await prisma.product.findMany()
-    * ```
-    */
-  get product(): Prisma.productDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -714,14 +744,16 @@ export namespace Prisma {
 
   export const ModelName: {
     emailConfig: 'emailConfig',
-    state: 'state',
-    city: 'city',
     admin: 'admin',
     adminStaff: 'adminStaff',
+    loginLog: 'loginLog',
+    activityLog: 'activityLog',
+    country: 'country',
+    state: 'state',
+    city: 'city',
     warehouse: 'warehouse',
     category: 'category',
-    brand: 'brand',
-    product: 'product'
+    brand: 'brand'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -740,7 +772,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "state" | "city" | "admin" | "adminStaff" | "warehouse" | "category" | "brand" | "product"
+      modelProps: "emailConfig" | "admin" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -807,138 +839,6 @@ export namespace Prisma {
           count: {
             args: Prisma.emailConfigCountArgs<ExtArgs>
             result: $Utils.Optional<EmailConfigCountAggregateOutputType> | number
-          }
-        }
-      }
-      state: {
-        payload: Prisma.$statePayload<ExtArgs>
-        fields: Prisma.stateFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.stateFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.stateFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          findFirst: {
-            args: Prisma.stateFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.stateFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          findMany: {
-            args: Prisma.stateFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>[]
-          }
-          create: {
-            args: Prisma.stateCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          createMany: {
-            args: Prisma.stateCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.stateDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          update: {
-            args: Prisma.stateUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          deleteMany: {
-            args: Prisma.stateDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.stateUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.stateUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$statePayload>
-          }
-          aggregate: {
-            args: Prisma.StateAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateState>
-          }
-          groupBy: {
-            args: Prisma.stateGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StateGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.stateCountArgs<ExtArgs>
-            result: $Utils.Optional<StateCountAggregateOutputType> | number
-          }
-        }
-      }
-      city: {
-        payload: Prisma.$cityPayload<ExtArgs>
-        fields: Prisma.cityFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.cityFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.cityFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          findFirst: {
-            args: Prisma.cityFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.cityFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          findMany: {
-            args: Prisma.cityFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>[]
-          }
-          create: {
-            args: Prisma.cityCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          createMany: {
-            args: Prisma.cityCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.cityDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          update: {
-            args: Prisma.cityUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          deleteMany: {
-            args: Prisma.cityDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.cityUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.cityUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
-          }
-          aggregate: {
-            args: Prisma.CityAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCity>
-          }
-          groupBy: {
-            args: Prisma.cityGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CityGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.cityCountArgs<ExtArgs>
-            result: $Utils.Optional<CityCountAggregateOutputType> | number
           }
         }
       }
@@ -1071,6 +971,336 @@ export namespace Prisma {
           count: {
             args: Prisma.adminStaffCountArgs<ExtArgs>
             result: $Utils.Optional<AdminStaffCountAggregateOutputType> | number
+          }
+        }
+      }
+      loginLog: {
+        payload: Prisma.$loginLogPayload<ExtArgs>
+        fields: Prisma.loginLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.loginLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.loginLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          findFirst: {
+            args: Prisma.loginLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.loginLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          findMany: {
+            args: Prisma.loginLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>[]
+          }
+          create: {
+            args: Prisma.loginLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          createMany: {
+            args: Prisma.loginLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.loginLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          update: {
+            args: Prisma.loginLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.loginLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.loginLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.loginLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$loginLogPayload>
+          }
+          aggregate: {
+            args: Prisma.LoginLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLoginLog>
+          }
+          groupBy: {
+            args: Prisma.loginLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LoginLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.loginLogCountArgs<ExtArgs>
+            result: $Utils.Optional<LoginLogCountAggregateOutputType> | number
+          }
+        }
+      }
+      activityLog: {
+        payload: Prisma.$activityLogPayload<ExtArgs>
+        fields: Prisma.activityLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.activityLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.activityLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          findFirst: {
+            args: Prisma.activityLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.activityLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          findMany: {
+            args: Prisma.activityLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>[]
+          }
+          create: {
+            args: Prisma.activityLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          createMany: {
+            args: Prisma.activityLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.activityLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          update: {
+            args: Prisma.activityLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.activityLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.activityLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.activityLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$activityLogPayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivityLog>
+          }
+          groupBy: {
+            args: Prisma.activityLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.activityLogCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityLogCountAggregateOutputType> | number
+          }
+        }
+      }
+      country: {
+        payload: Prisma.$countryPayload<ExtArgs>
+        fields: Prisma.countryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.countryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.countryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          findFirst: {
+            args: Prisma.countryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.countryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          findMany: {
+            args: Prisma.countryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>[]
+          }
+          create: {
+            args: Prisma.countryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          createMany: {
+            args: Prisma.countryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.countryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          update: {
+            args: Prisma.countryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          deleteMany: {
+            args: Prisma.countryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.countryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.countryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$countryPayload>
+          }
+          aggregate: {
+            args: Prisma.CountryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCountry>
+          }
+          groupBy: {
+            args: Prisma.countryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CountryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.countryCountArgs<ExtArgs>
+            result: $Utils.Optional<CountryCountAggregateOutputType> | number
+          }
+        }
+      }
+      state: {
+        payload: Prisma.$statePayload<ExtArgs>
+        fields: Prisma.stateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.stateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.stateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          findFirst: {
+            args: Prisma.stateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.stateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          findMany: {
+            args: Prisma.stateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>[]
+          }
+          create: {
+            args: Prisma.stateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          createMany: {
+            args: Prisma.stateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.stateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          update: {
+            args: Prisma.stateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          deleteMany: {
+            args: Prisma.stateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.stateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.stateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$statePayload>
+          }
+          aggregate: {
+            args: Prisma.StateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateState>
+          }
+          groupBy: {
+            args: Prisma.stateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.stateCountArgs<ExtArgs>
+            result: $Utils.Optional<StateCountAggregateOutputType> | number
+          }
+        }
+      }
+      city: {
+        payload: Prisma.$cityPayload<ExtArgs>
+        fields: Prisma.cityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.cityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.cityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          findFirst: {
+            args: Prisma.cityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.cityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          findMany: {
+            args: Prisma.cityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>[]
+          }
+          create: {
+            args: Prisma.cityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          createMany: {
+            args: Prisma.cityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.cityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          update: {
+            args: Prisma.cityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          deleteMany: {
+            args: Prisma.cityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.cityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.cityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+          }
+          aggregate: {
+            args: Prisma.CityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCity>
+          }
+          groupBy: {
+            args: Prisma.cityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.cityCountArgs<ExtArgs>
+            result: $Utils.Optional<CityCountAggregateOutputType> | number
           }
         }
       }
@@ -1272,72 +1502,6 @@ export namespace Prisma {
           }
         }
       }
-      product: {
-        payload: Prisma.$productPayload<ExtArgs>
-        fields: Prisma.productFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.productFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.productFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          findFirst: {
-            args: Prisma.productFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.productFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          findMany: {
-            args: Prisma.productFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>[]
-          }
-          create: {
-            args: Prisma.productCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          createMany: {
-            args: Prisma.productCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.productDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          update: {
-            args: Prisma.productUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          deleteMany: {
-            args: Prisma.productDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.productUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.productUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$productPayload>
-          }
-          aggregate: {
-            args: Prisma.ProductAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProduct>
-          }
-          groupBy: {
-            args: Prisma.productGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProductGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.productCountArgs<ExtArgs>
-            result: $Utils.Optional<ProductCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1423,14 +1587,16 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     emailConfig?: emailConfigOmit
-    state?: stateOmit
-    city?: cityOmit
     admin?: adminOmit
     adminStaff?: adminStaffOmit
+    loginLog?: loginLogOmit
+    activityLog?: activityLogOmit
+    country?: countryOmit
+    state?: stateOmit
+    city?: cityOmit
     warehouse?: warehouseOmit
     category?: categoryOmit
     brand?: brandOmit
-    product?: productOmit
   }
 
   /* Types for Logging */
@@ -1521,37 +1687,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type StateCountOutputType
-   */
-
-  export type StateCountOutputType = {
-    city: number
-  }
-
-  export type StateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    city?: boolean | StateCountOutputTypeCountCityArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * StateCountOutputType without action
-   */
-  export type StateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StateCountOutputType
-     */
-    select?: StateCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * StateCountOutputType without action
-   */
-  export type StateCountOutputTypeCountCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: cityWhereInput
-  }
-
-
-  /**
    * Count Type AdminCountOutputType
    */
 
@@ -1579,6 +1714,126 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountStaffArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: adminStaffWhereInput
+  }
+
+
+  /**
+   * Count Type CountryCountOutputType
+   */
+
+  export type CountryCountOutputType = {
+    states: number
+    cities: number
+    warehouses: number
+  }
+
+  export type CountryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    states?: boolean | CountryCountOutputTypeCountStatesArgs
+    cities?: boolean | CountryCountOutputTypeCountCitiesArgs
+    warehouses?: boolean | CountryCountOutputTypeCountWarehousesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryCountOutputType
+     */
+    select?: CountryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountStatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: stateWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountCitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: cityWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: warehouseWhereInput
+  }
+
+
+  /**
+   * Count Type StateCountOutputType
+   */
+
+  export type StateCountOutputType = {
+    cities: number
+    warehouses: number
+  }
+
+  export type StateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cities?: boolean | StateCountOutputTypeCountCitiesArgs
+    warehouses?: boolean | StateCountOutputTypeCountWarehousesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StateCountOutputType without action
+   */
+  export type StateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StateCountOutputType
+     */
+    select?: StateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StateCountOutputType without action
+   */
+  export type StateCountOutputTypeCountCitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: cityWhereInput
+  }
+
+  /**
+   * StateCountOutputType without action
+   */
+  export type StateCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: warehouseWhereInput
+  }
+
+
+  /**
+   * Count Type CityCountOutputType
+   */
+
+  export type CityCountOutputType = {
+    warehouses: number
+  }
+
+  export type CityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    warehouses?: boolean | CityCountOutputTypeCountWarehousesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CityCountOutputType
+     */
+    select?: CityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: warehouseWhereInput
   }
 
 
@@ -1859,7 +2114,7 @@ export namespace Prisma {
     module: string
     subject: string
     action: string
-    html_template: string
+    html_template: string | null
     smtp_host: string
     smtp_secure: boolean
     smtp_port: number
@@ -1954,7 +2209,7 @@ export namespace Prisma {
       module: string
       subject: string
       action: string
-      html_template: string
+      html_template: string | null
       smtp_host: string
       smtp_secure: boolean
       smtp_port: number
@@ -2676,2107 +2931,6 @@ export namespace Prisma {
      * Omit specific fields from the emailConfig
      */
     omit?: emailConfigOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model state
-   */
-
-  export type AggregateState = {
-    _count: StateCountAggregateOutputType | null
-    _avg: StateAvgAggregateOutputType | null
-    _sum: StateSumAggregateOutputType | null
-    _min: StateMinAggregateOutputType | null
-    _max: StateMaxAggregateOutputType | null
-  }
-
-  export type StateAvgAggregateOutputType = {
-    id: number | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-  }
-
-  export type StateSumAggregateOutputType = {
-    id: bigint | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-  }
-
-  export type StateMinAggregateOutputType = {
-    id: bigint | null
-    name: string | null
-    fipsCode: string | null
-    iso2: string | null
-    type: string | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-    wikiDataId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type StateMaxAggregateOutputType = {
-    id: bigint | null
-    name: string | null
-    fipsCode: string | null
-    iso2: string | null
-    type: string | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-    wikiDataId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type StateCountAggregateOutputType = {
-    id: number
-    name: number
-    fipsCode: number
-    iso2: number
-    type: number
-    latitude: number
-    longitude: number
-    flag: number
-    wikiDataId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type StateAvgAggregateInputType = {
-    id?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-  }
-
-  export type StateSumAggregateInputType = {
-    id?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-  }
-
-  export type StateMinAggregateInputType = {
-    id?: true
-    name?: true
-    fipsCode?: true
-    iso2?: true
-    type?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type StateMaxAggregateInputType = {
-    id?: true
-    name?: true
-    fipsCode?: true
-    iso2?: true
-    type?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type StateCountAggregateInputType = {
-    id?: true
-    name?: true
-    fipsCode?: true
-    iso2?: true
-    type?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type StateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which state to aggregate.
-     */
-    where?: stateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of states to fetch.
-     */
-    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: stateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` states from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` states.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned states
-    **/
-    _count?: true | StateCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: StateAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: StateSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: StateMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: StateMaxAggregateInputType
-  }
-
-  export type GetStateAggregateType<T extends StateAggregateArgs> = {
-        [P in keyof T & keyof AggregateState]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateState[P]>
-      : GetScalarType<T[P], AggregateState[P]>
-  }
-
-
-
-
-  export type stateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: stateWhereInput
-    orderBy?: stateOrderByWithAggregationInput | stateOrderByWithAggregationInput[]
-    by: StateScalarFieldEnum[] | StateScalarFieldEnum
-    having?: stateScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: StateCountAggregateInputType | true
-    _avg?: StateAvgAggregateInputType
-    _sum?: StateSumAggregateInputType
-    _min?: StateMinAggregateInputType
-    _max?: StateMaxAggregateInputType
-  }
-
-  export type StateGroupByOutputType = {
-    id: bigint
-    name: string
-    fipsCode: string | null
-    iso2: string | null
-    type: string | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number
-    wikiDataId: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: StateCountAggregateOutputType | null
-    _avg: StateAvgAggregateOutputType | null
-    _sum: StateSumAggregateOutputType | null
-    _min: StateMinAggregateOutputType | null
-    _max: StateMaxAggregateOutputType | null
-  }
-
-  type GetStateGroupByPayload<T extends stateGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<StateGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof StateGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], StateGroupByOutputType[P]>
-            : GetScalarType<T[P], StateGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type stateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    fipsCode?: boolean
-    iso2?: boolean
-    type?: boolean
-    latitude?: boolean
-    longitude?: boolean
-    flag?: boolean
-    wikiDataId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    city?: boolean | state$cityArgs<ExtArgs>
-    _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["state"]>
-
-
-
-  export type stateSelectScalar = {
-    id?: boolean
-    name?: boolean
-    fipsCode?: boolean
-    iso2?: boolean
-    type?: boolean
-    latitude?: boolean
-    longitude?: boolean
-    flag?: boolean
-    wikiDataId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type stateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "fipsCode" | "iso2" | "type" | "latitude" | "longitude" | "flag" | "wikiDataId" | "createdAt" | "updatedAt", ExtArgs["result"]["state"]>
-  export type stateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    city?: boolean | state$cityArgs<ExtArgs>
-    _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $statePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "state"
-    objects: {
-      city: Prisma.$cityPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: bigint
-      name: string
-      fipsCode: string | null
-      iso2: string | null
-      type: string | null
-      latitude: Prisma.Decimal | null
-      longitude: Prisma.Decimal | null
-      flag: number
-      wikiDataId: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["state"]>
-    composites: {}
-  }
-
-  type stateGetPayload<S extends boolean | null | undefined | stateDefaultArgs> = $Result.GetResult<Prisma.$statePayload, S>
-
-  type stateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<stateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StateCountAggregateInputType | true
-    }
-
-  export interface stateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['state'], meta: { name: 'state' } }
-    /**
-     * Find zero or one State that matches the filter.
-     * @param {stateFindUniqueArgs} args - Arguments to find a State
-     * @example
-     * // Get one State
-     * const state = await prisma.state.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends stateFindUniqueArgs>(args: SelectSubset<T, stateFindUniqueArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one State that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {stateFindUniqueOrThrowArgs} args - Arguments to find a State
-     * @example
-     * // Get one State
-     * const state = await prisma.state.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends stateFindUniqueOrThrowArgs>(args: SelectSubset<T, stateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first State that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateFindFirstArgs} args - Arguments to find a State
-     * @example
-     * // Get one State
-     * const state = await prisma.state.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends stateFindFirstArgs>(args?: SelectSubset<T, stateFindFirstArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first State that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateFindFirstOrThrowArgs} args - Arguments to find a State
-     * @example
-     * // Get one State
-     * const state = await prisma.state.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends stateFindFirstOrThrowArgs>(args?: SelectSubset<T, stateFindFirstOrThrowArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more States that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all States
-     * const states = await prisma.state.findMany()
-     * 
-     * // Get first 10 States
-     * const states = await prisma.state.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const stateWithIdOnly = await prisma.state.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends stateFindManyArgs>(args?: SelectSubset<T, stateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a State.
-     * @param {stateCreateArgs} args - Arguments to create a State.
-     * @example
-     * // Create one State
-     * const State = await prisma.state.create({
-     *   data: {
-     *     // ... data to create a State
-     *   }
-     * })
-     * 
-     */
-    create<T extends stateCreateArgs>(args: SelectSubset<T, stateCreateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many States.
-     * @param {stateCreateManyArgs} args - Arguments to create many States.
-     * @example
-     * // Create many States
-     * const state = await prisma.state.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends stateCreateManyArgs>(args?: SelectSubset<T, stateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a State.
-     * @param {stateDeleteArgs} args - Arguments to delete one State.
-     * @example
-     * // Delete one State
-     * const State = await prisma.state.delete({
-     *   where: {
-     *     // ... filter to delete one State
-     *   }
-     * })
-     * 
-     */
-    delete<T extends stateDeleteArgs>(args: SelectSubset<T, stateDeleteArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one State.
-     * @param {stateUpdateArgs} args - Arguments to update one State.
-     * @example
-     * // Update one State
-     * const state = await prisma.state.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends stateUpdateArgs>(args: SelectSubset<T, stateUpdateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more States.
-     * @param {stateDeleteManyArgs} args - Arguments to filter States to delete.
-     * @example
-     * // Delete a few States
-     * const { count } = await prisma.state.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends stateDeleteManyArgs>(args?: SelectSubset<T, stateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more States.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many States
-     * const state = await prisma.state.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends stateUpdateManyArgs>(args: SelectSubset<T, stateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one State.
-     * @param {stateUpsertArgs} args - Arguments to update or create a State.
-     * @example
-     * // Update or create a State
-     * const state = await prisma.state.upsert({
-     *   create: {
-     *     // ... data to create a State
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the State we want to update
-     *   }
-     * })
-     */
-    upsert<T extends stateUpsertArgs>(args: SelectSubset<T, stateUpsertArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of States.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateCountArgs} args - Arguments to filter States to count.
-     * @example
-     * // Count the number of States
-     * const count = await prisma.state.count({
-     *   where: {
-     *     // ... the filter for the States we want to count
-     *   }
-     * })
-    **/
-    count<T extends stateCountArgs>(
-      args?: Subset<T, stateCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], StateCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a State.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends StateAggregateArgs>(args: Subset<T, StateAggregateArgs>): Prisma.PrismaPromise<GetStateAggregateType<T>>
-
-    /**
-     * Group by State.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {stateGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends stateGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: stateGroupByArgs['orderBy'] }
-        : { orderBy?: stateGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, stateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the state model
-   */
-  readonly fields: stateFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for state.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__stateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    city<T extends state$cityArgs<ExtArgs> = {}>(args?: Subset<T, state$cityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the state model
-   */
-  interface stateFieldRefs {
-    readonly id: FieldRef<"state", 'BigInt'>
-    readonly name: FieldRef<"state", 'String'>
-    readonly fipsCode: FieldRef<"state", 'String'>
-    readonly iso2: FieldRef<"state", 'String'>
-    readonly type: FieldRef<"state", 'String'>
-    readonly latitude: FieldRef<"state", 'Decimal'>
-    readonly longitude: FieldRef<"state", 'Decimal'>
-    readonly flag: FieldRef<"state", 'Int'>
-    readonly wikiDataId: FieldRef<"state", 'String'>
-    readonly createdAt: FieldRef<"state", 'DateTime'>
-    readonly updatedAt: FieldRef<"state", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * state findUnique
-   */
-  export type stateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter, which state to fetch.
-     */
-    where: stateWhereUniqueInput
-  }
-
-  /**
-   * state findUniqueOrThrow
-   */
-  export type stateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter, which state to fetch.
-     */
-    where: stateWhereUniqueInput
-  }
-
-  /**
-   * state findFirst
-   */
-  export type stateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter, which state to fetch.
-     */
-    where?: stateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of states to fetch.
-     */
-    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for states.
-     */
-    cursor?: stateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` states from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` states.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of states.
-     */
-    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
-  }
-
-  /**
-   * state findFirstOrThrow
-   */
-  export type stateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter, which state to fetch.
-     */
-    where?: stateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of states to fetch.
-     */
-    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for states.
-     */
-    cursor?: stateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` states from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` states.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of states.
-     */
-    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
-  }
-
-  /**
-   * state findMany
-   */
-  export type stateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter, which states to fetch.
-     */
-    where?: stateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of states to fetch.
-     */
-    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing states.
-     */
-    cursor?: stateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` states from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` states.
-     */
-    skip?: number
-    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
-  }
-
-  /**
-   * state create
-   */
-  export type stateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * The data needed to create a state.
-     */
-    data: XOR<stateCreateInput, stateUncheckedCreateInput>
-  }
-
-  /**
-   * state createMany
-   */
-  export type stateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many states.
-     */
-    data: stateCreateManyInput | stateCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * state update
-   */
-  export type stateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * The data needed to update a state.
-     */
-    data: XOR<stateUpdateInput, stateUncheckedUpdateInput>
-    /**
-     * Choose, which state to update.
-     */
-    where: stateWhereUniqueInput
-  }
-
-  /**
-   * state updateMany
-   */
-  export type stateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update states.
-     */
-    data: XOR<stateUpdateManyMutationInput, stateUncheckedUpdateManyInput>
-    /**
-     * Filter which states to update
-     */
-    where?: stateWhereInput
-    /**
-     * Limit how many states to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * state upsert
-   */
-  export type stateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * The filter to search for the state to update in case it exists.
-     */
-    where: stateWhereUniqueInput
-    /**
-     * In case the state found by the `where` argument doesn't exist, create a new state with this data.
-     */
-    create: XOR<stateCreateInput, stateUncheckedCreateInput>
-    /**
-     * In case the state was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<stateUpdateInput, stateUncheckedUpdateInput>
-  }
-
-  /**
-   * state delete
-   */
-  export type stateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-    /**
-     * Filter which state to delete.
-     */
-    where: stateWhereUniqueInput
-  }
-
-  /**
-   * state deleteMany
-   */
-  export type stateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which states to delete
-     */
-    where?: stateWhereInput
-    /**
-     * Limit how many states to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * state.city
-   */
-  export type state$cityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    where?: cityWhereInput
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    cursor?: cityWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
-  }
-
-  /**
-   * state without action
-   */
-  export type stateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the state
-     */
-    select?: stateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the state
-     */
-    omit?: stateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: stateInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model city
-   */
-
-  export type AggregateCity = {
-    _count: CityCountAggregateOutputType | null
-    _avg: CityAvgAggregateOutputType | null
-    _sum: CitySumAggregateOutputType | null
-    _min: CityMinAggregateOutputType | null
-    _max: CityMaxAggregateOutputType | null
-  }
-
-  export type CityAvgAggregateOutputType = {
-    id: number | null
-    stateId: number | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-  }
-
-  export type CitySumAggregateOutputType = {
-    id: bigint | null
-    stateId: bigint | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-  }
-
-  export type CityMinAggregateOutputType = {
-    id: bigint | null
-    name: string | null
-    stateId: bigint | null
-    stateCode: string | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-    wikiDataId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type CityMaxAggregateOutputType = {
-    id: bigint | null
-    name: string | null
-    stateId: bigint | null
-    stateCode: string | null
-    latitude: Decimal | null
-    longitude: Decimal | null
-    flag: number | null
-    wikiDataId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type CityCountAggregateOutputType = {
-    id: number
-    name: number
-    stateId: number
-    stateCode: number
-    latitude: number
-    longitude: number
-    flag: number
-    wikiDataId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type CityAvgAggregateInputType = {
-    id?: true
-    stateId?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-  }
-
-  export type CitySumAggregateInputType = {
-    id?: true
-    stateId?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-  }
-
-  export type CityMinAggregateInputType = {
-    id?: true
-    name?: true
-    stateId?: true
-    stateCode?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type CityMaxAggregateInputType = {
-    id?: true
-    name?: true
-    stateId?: true
-    stateCode?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type CityCountAggregateInputType = {
-    id?: true
-    name?: true
-    stateId?: true
-    stateCode?: true
-    latitude?: true
-    longitude?: true
-    flag?: true
-    wikiDataId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type CityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which city to aggregate.
-     */
-    where?: cityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of cities to fetch.
-     */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: cityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` cities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` cities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned cities
-    **/
-    _count?: true | CityCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: CityAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CitySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: CityMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: CityMaxAggregateInputType
-  }
-
-  export type GetCityAggregateType<T extends CityAggregateArgs> = {
-        [P in keyof T & keyof AggregateCity]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateCity[P]>
-      : GetScalarType<T[P], AggregateCity[P]>
-  }
-
-
-
-
-  export type cityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: cityWhereInput
-    orderBy?: cityOrderByWithAggregationInput | cityOrderByWithAggregationInput[]
-    by: CityScalarFieldEnum[] | CityScalarFieldEnum
-    having?: cityScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CityCountAggregateInputType | true
-    _avg?: CityAvgAggregateInputType
-    _sum?: CitySumAggregateInputType
-    _min?: CityMinAggregateInputType
-    _max?: CityMaxAggregateInputType
-  }
-
-  export type CityGroupByOutputType = {
-    id: bigint
-    name: string
-    stateId: bigint
-    stateCode: string
-    latitude: Decimal
-    longitude: Decimal
-    flag: number
-    wikiDataId: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: CityCountAggregateOutputType | null
-    _avg: CityAvgAggregateOutputType | null
-    _sum: CitySumAggregateOutputType | null
-    _min: CityMinAggregateOutputType | null
-    _max: CityMaxAggregateOutputType | null
-  }
-
-  type GetCityGroupByPayload<T extends cityGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CityGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CityGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CityGroupByOutputType[P]>
-            : GetScalarType<T[P], CityGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type citySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    stateId?: boolean
-    stateCode?: boolean
-    latitude?: boolean
-    longitude?: boolean
-    flag?: boolean
-    wikiDataId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    state?: boolean | stateDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["city"]>
-
-
-
-  export type citySelectScalar = {
-    id?: boolean
-    name?: boolean
-    stateId?: boolean
-    stateCode?: boolean
-    latitude?: boolean
-    longitude?: boolean
-    flag?: boolean
-    wikiDataId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type cityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "stateId" | "stateCode" | "latitude" | "longitude" | "flag" | "wikiDataId" | "createdAt" | "updatedAt", ExtArgs["result"]["city"]>
-  export type cityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    state?: boolean | stateDefaultArgs<ExtArgs>
-  }
-
-  export type $cityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "city"
-    objects: {
-      state: Prisma.$statePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: bigint
-      name: string
-      stateId: bigint
-      stateCode: string
-      latitude: Prisma.Decimal
-      longitude: Prisma.Decimal
-      flag: number
-      wikiDataId: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["city"]>
-    composites: {}
-  }
-
-  type cityGetPayload<S extends boolean | null | undefined | cityDefaultArgs> = $Result.GetResult<Prisma.$cityPayload, S>
-
-  type cityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<cityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CityCountAggregateInputType | true
-    }
-
-  export interface cityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['city'], meta: { name: 'city' } }
-    /**
-     * Find zero or one City that matches the filter.
-     * @param {cityFindUniqueArgs} args - Arguments to find a City
-     * @example
-     * // Get one City
-     * const city = await prisma.city.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends cityFindUniqueArgs>(args: SelectSubset<T, cityFindUniqueArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one City that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {cityFindUniqueOrThrowArgs} args - Arguments to find a City
-     * @example
-     * // Get one City
-     * const city = await prisma.city.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends cityFindUniqueOrThrowArgs>(args: SelectSubset<T, cityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first City that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindFirstArgs} args - Arguments to find a City
-     * @example
-     * // Get one City
-     * const city = await prisma.city.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends cityFindFirstArgs>(args?: SelectSubset<T, cityFindFirstArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first City that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindFirstOrThrowArgs} args - Arguments to find a City
-     * @example
-     * // Get one City
-     * const city = await prisma.city.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends cityFindFirstOrThrowArgs>(args?: SelectSubset<T, cityFindFirstOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Cities that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Cities
-     * const cities = await prisma.city.findMany()
-     * 
-     * // Get first 10 Cities
-     * const cities = await prisma.city.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const cityWithIdOnly = await prisma.city.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends cityFindManyArgs>(args?: SelectSubset<T, cityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a City.
-     * @param {cityCreateArgs} args - Arguments to create a City.
-     * @example
-     * // Create one City
-     * const City = await prisma.city.create({
-     *   data: {
-     *     // ... data to create a City
-     *   }
-     * })
-     * 
-     */
-    create<T extends cityCreateArgs>(args: SelectSubset<T, cityCreateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Cities.
-     * @param {cityCreateManyArgs} args - Arguments to create many Cities.
-     * @example
-     * // Create many Cities
-     * const city = await prisma.city.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends cityCreateManyArgs>(args?: SelectSubset<T, cityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a City.
-     * @param {cityDeleteArgs} args - Arguments to delete one City.
-     * @example
-     * // Delete one City
-     * const City = await prisma.city.delete({
-     *   where: {
-     *     // ... filter to delete one City
-     *   }
-     * })
-     * 
-     */
-    delete<T extends cityDeleteArgs>(args: SelectSubset<T, cityDeleteArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one City.
-     * @param {cityUpdateArgs} args - Arguments to update one City.
-     * @example
-     * // Update one City
-     * const city = await prisma.city.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends cityUpdateArgs>(args: SelectSubset<T, cityUpdateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Cities.
-     * @param {cityDeleteManyArgs} args - Arguments to filter Cities to delete.
-     * @example
-     * // Delete a few Cities
-     * const { count } = await prisma.city.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends cityDeleteManyArgs>(args?: SelectSubset<T, cityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Cities.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Cities
-     * const city = await prisma.city.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends cityUpdateManyArgs>(args: SelectSubset<T, cityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one City.
-     * @param {cityUpsertArgs} args - Arguments to update or create a City.
-     * @example
-     * // Update or create a City
-     * const city = await prisma.city.upsert({
-     *   create: {
-     *     // ... data to create a City
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the City we want to update
-     *   }
-     * })
-     */
-    upsert<T extends cityUpsertArgs>(args: SelectSubset<T, cityUpsertArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Cities.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityCountArgs} args - Arguments to filter Cities to count.
-     * @example
-     * // Count the number of Cities
-     * const count = await prisma.city.count({
-     *   where: {
-     *     // ... the filter for the Cities we want to count
-     *   }
-     * })
-    **/
-    count<T extends cityCountArgs>(
-      args?: Subset<T, cityCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], CityCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a City.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends CityAggregateArgs>(args: Subset<T, CityAggregateArgs>): Prisma.PrismaPromise<GetCityAggregateType<T>>
-
-    /**
-     * Group by City.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends cityGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: cityGroupByArgs['orderBy'] }
-        : { orderBy?: cityGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, cityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the city model
-   */
-  readonly fields: cityFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for city.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__cityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    state<T extends stateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stateDefaultArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the city model
-   */
-  interface cityFieldRefs {
-    readonly id: FieldRef<"city", 'BigInt'>
-    readonly name: FieldRef<"city", 'String'>
-    readonly stateId: FieldRef<"city", 'BigInt'>
-    readonly stateCode: FieldRef<"city", 'String'>
-    readonly latitude: FieldRef<"city", 'Decimal'>
-    readonly longitude: FieldRef<"city", 'Decimal'>
-    readonly flag: FieldRef<"city", 'Int'>
-    readonly wikiDataId: FieldRef<"city", 'String'>
-    readonly createdAt: FieldRef<"city", 'DateTime'>
-    readonly updatedAt: FieldRef<"city", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * city findUnique
-   */
-  export type cityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter, which city to fetch.
-     */
-    where: cityWhereUniqueInput
-  }
-
-  /**
-   * city findUniqueOrThrow
-   */
-  export type cityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter, which city to fetch.
-     */
-    where: cityWhereUniqueInput
-  }
-
-  /**
-   * city findFirst
-   */
-  export type cityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter, which city to fetch.
-     */
-    where?: cityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of cities to fetch.
-     */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for cities.
-     */
-    cursor?: cityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` cities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` cities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of cities.
-     */
-    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
-  }
-
-  /**
-   * city findFirstOrThrow
-   */
-  export type cityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter, which city to fetch.
-     */
-    where?: cityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of cities to fetch.
-     */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for cities.
-     */
-    cursor?: cityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` cities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` cities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of cities.
-     */
-    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
-  }
-
-  /**
-   * city findMany
-   */
-  export type cityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter, which cities to fetch.
-     */
-    where?: cityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of cities to fetch.
-     */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing cities.
-     */
-    cursor?: cityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` cities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` cities.
-     */
-    skip?: number
-    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
-  }
-
-  /**
-   * city create
-   */
-  export type cityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * The data needed to create a city.
-     */
-    data: XOR<cityCreateInput, cityUncheckedCreateInput>
-  }
-
-  /**
-   * city createMany
-   */
-  export type cityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many cities.
-     */
-    data: cityCreateManyInput | cityCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * city update
-   */
-  export type cityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * The data needed to update a city.
-     */
-    data: XOR<cityUpdateInput, cityUncheckedUpdateInput>
-    /**
-     * Choose, which city to update.
-     */
-    where: cityWhereUniqueInput
-  }
-
-  /**
-   * city updateMany
-   */
-  export type cityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update cities.
-     */
-    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyInput>
-    /**
-     * Filter which cities to update
-     */
-    where?: cityWhereInput
-    /**
-     * Limit how many cities to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * city upsert
-   */
-  export type cityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * The filter to search for the city to update in case it exists.
-     */
-    where: cityWhereUniqueInput
-    /**
-     * In case the city found by the `where` argument doesn't exist, create a new city with this data.
-     */
-    create: XOR<cityCreateInput, cityUncheckedCreateInput>
-    /**
-     * In case the city was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<cityUpdateInput, cityUncheckedUpdateInput>
-  }
-
-  /**
-   * city delete
-   */
-  export type cityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
-    /**
-     * Filter which city to delete.
-     */
-    where: cityWhereUniqueInput
-  }
-
-  /**
-   * city deleteMany
-   */
-  export type cityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which cities to delete
-     */
-    where?: cityWhereInput
-    /**
-     * Limit how many cities to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * city without action
-   */
-  export type cityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the city
-     */
-    select?: citySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the city
-     */
-    omit?: cityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: cityInclude<ExtArgs> | null
   }
 
 
@@ -6880,6 +5034,5685 @@ export namespace Prisma {
 
 
   /**
+   * Model loginLog
+   */
+
+  export type AggregateLoginLog = {
+    _count: LoginLogCountAggregateOutputType | null
+    _avg: LoginLogAvgAggregateOutputType | null
+    _sum: LoginLogSumAggregateOutputType | null
+    _min: LoginLogMinAggregateOutputType | null
+    _max: LoginLogMaxAggregateOutputType | null
+  }
+
+  export type LoginLogAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type LoginLogSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type LoginLogMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    adminRole: string | null
+    action: string | null
+    response: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type LoginLogMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    adminRole: string | null
+    action: string | null
+    response: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type LoginLogCountAggregateOutputType = {
+    id: number
+    adminId: number
+    adminRole: number
+    action: number
+    response: number
+    ipv4: number
+    ipv6: number
+    internetServiceProvider: number
+    clientInformation: number
+    userAgent: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type LoginLogAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type LoginLogSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type LoginLogMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    action?: true
+    response?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type LoginLogMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    action?: true
+    response?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type LoginLogCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    action?: true
+    response?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type LoginLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which loginLog to aggregate.
+     */
+    where?: loginLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of loginLogs to fetch.
+     */
+    orderBy?: loginLogOrderByWithRelationInput | loginLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: loginLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` loginLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` loginLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned loginLogs
+    **/
+    _count?: true | LoginLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LoginLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LoginLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LoginLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LoginLogMaxAggregateInputType
+  }
+
+  export type GetLoginLogAggregateType<T extends LoginLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateLoginLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLoginLog[P]>
+      : GetScalarType<T[P], AggregateLoginLog[P]>
+  }
+
+
+
+
+  export type loginLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: loginLogWhereInput
+    orderBy?: loginLogOrderByWithAggregationInput | loginLogOrderByWithAggregationInput[]
+    by: LoginLogScalarFieldEnum[] | LoginLogScalarFieldEnum
+    having?: loginLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LoginLogCountAggregateInputType | true
+    _avg?: LoginLogAvgAggregateInputType
+    _sum?: LoginLogSumAggregateInputType
+    _min?: LoginLogMinAggregateInputType
+    _max?: LoginLogMaxAggregateInputType
+  }
+
+  export type LoginLogGroupByOutputType = {
+    id: number
+    adminId: number
+    adminRole: string
+    action: string
+    response: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: LoginLogCountAggregateOutputType | null
+    _avg: LoginLogAvgAggregateOutputType | null
+    _sum: LoginLogSumAggregateOutputType | null
+    _min: LoginLogMinAggregateOutputType | null
+    _max: LoginLogMaxAggregateOutputType | null
+  }
+
+  type GetLoginLogGroupByPayload<T extends loginLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LoginLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LoginLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LoginLogGroupByOutputType[P]>
+            : GetScalarType<T[P], LoginLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type loginLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    adminRole?: boolean
+    action?: boolean
+    response?: boolean
+    ipv4?: boolean
+    ipv6?: boolean
+    internetServiceProvider?: boolean
+    clientInformation?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }, ExtArgs["result"]["loginLog"]>
+
+
+
+  export type loginLogSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    adminRole?: boolean
+    action?: boolean
+    response?: boolean
+    ipv4?: boolean
+    ipv6?: boolean
+    internetServiceProvider?: boolean
+    clientInformation?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type loginLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "adminRole" | "action" | "response" | "ipv4" | "ipv6" | "internetServiceProvider" | "clientInformation" | "userAgent" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["loginLog"]>
+
+  export type $loginLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "loginLog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      adminRole: string
+      action: string
+      response: string | null
+      ipv4: string | null
+      ipv6: string | null
+      internetServiceProvider: string | null
+      clientInformation: string | null
+      userAgent: string | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["loginLog"]>
+    composites: {}
+  }
+
+  type loginLogGetPayload<S extends boolean | null | undefined | loginLogDefaultArgs> = $Result.GetResult<Prisma.$loginLogPayload, S>
+
+  type loginLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<loginLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LoginLogCountAggregateInputType | true
+    }
+
+  export interface loginLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['loginLog'], meta: { name: 'loginLog' } }
+    /**
+     * Find zero or one LoginLog that matches the filter.
+     * @param {loginLogFindUniqueArgs} args - Arguments to find a LoginLog
+     * @example
+     * // Get one LoginLog
+     * const loginLog = await prisma.loginLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends loginLogFindUniqueArgs>(args: SelectSubset<T, loginLogFindUniqueArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LoginLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {loginLogFindUniqueOrThrowArgs} args - Arguments to find a LoginLog
+     * @example
+     * // Get one LoginLog
+     * const loginLog = await prisma.loginLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends loginLogFindUniqueOrThrowArgs>(args: SelectSubset<T, loginLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LoginLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogFindFirstArgs} args - Arguments to find a LoginLog
+     * @example
+     * // Get one LoginLog
+     * const loginLog = await prisma.loginLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends loginLogFindFirstArgs>(args?: SelectSubset<T, loginLogFindFirstArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LoginLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogFindFirstOrThrowArgs} args - Arguments to find a LoginLog
+     * @example
+     * // Get one LoginLog
+     * const loginLog = await prisma.loginLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends loginLogFindFirstOrThrowArgs>(args?: SelectSubset<T, loginLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LoginLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LoginLogs
+     * const loginLogs = await prisma.loginLog.findMany()
+     * 
+     * // Get first 10 LoginLogs
+     * const loginLogs = await prisma.loginLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const loginLogWithIdOnly = await prisma.loginLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends loginLogFindManyArgs>(args?: SelectSubset<T, loginLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LoginLog.
+     * @param {loginLogCreateArgs} args - Arguments to create a LoginLog.
+     * @example
+     * // Create one LoginLog
+     * const LoginLog = await prisma.loginLog.create({
+     *   data: {
+     *     // ... data to create a LoginLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends loginLogCreateArgs>(args: SelectSubset<T, loginLogCreateArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LoginLogs.
+     * @param {loginLogCreateManyArgs} args - Arguments to create many LoginLogs.
+     * @example
+     * // Create many LoginLogs
+     * const loginLog = await prisma.loginLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends loginLogCreateManyArgs>(args?: SelectSubset<T, loginLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LoginLog.
+     * @param {loginLogDeleteArgs} args - Arguments to delete one LoginLog.
+     * @example
+     * // Delete one LoginLog
+     * const LoginLog = await prisma.loginLog.delete({
+     *   where: {
+     *     // ... filter to delete one LoginLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends loginLogDeleteArgs>(args: SelectSubset<T, loginLogDeleteArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LoginLog.
+     * @param {loginLogUpdateArgs} args - Arguments to update one LoginLog.
+     * @example
+     * // Update one LoginLog
+     * const loginLog = await prisma.loginLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends loginLogUpdateArgs>(args: SelectSubset<T, loginLogUpdateArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LoginLogs.
+     * @param {loginLogDeleteManyArgs} args - Arguments to filter LoginLogs to delete.
+     * @example
+     * // Delete a few LoginLogs
+     * const { count } = await prisma.loginLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends loginLogDeleteManyArgs>(args?: SelectSubset<T, loginLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LoginLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LoginLogs
+     * const loginLog = await prisma.loginLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends loginLogUpdateManyArgs>(args: SelectSubset<T, loginLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LoginLog.
+     * @param {loginLogUpsertArgs} args - Arguments to update or create a LoginLog.
+     * @example
+     * // Update or create a LoginLog
+     * const loginLog = await prisma.loginLog.upsert({
+     *   create: {
+     *     // ... data to create a LoginLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LoginLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends loginLogUpsertArgs>(args: SelectSubset<T, loginLogUpsertArgs<ExtArgs>>): Prisma__loginLogClient<$Result.GetResult<Prisma.$loginLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LoginLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogCountArgs} args - Arguments to filter LoginLogs to count.
+     * @example
+     * // Count the number of LoginLogs
+     * const count = await prisma.loginLog.count({
+     *   where: {
+     *     // ... the filter for the LoginLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends loginLogCountArgs>(
+      args?: Subset<T, loginLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LoginLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LoginLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LoginLogAggregateArgs>(args: Subset<T, LoginLogAggregateArgs>): Prisma.PrismaPromise<GetLoginLogAggregateType<T>>
+
+    /**
+     * Group by LoginLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {loginLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends loginLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: loginLogGroupByArgs['orderBy'] }
+        : { orderBy?: loginLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, loginLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLoginLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the loginLog model
+   */
+  readonly fields: loginLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for loginLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__loginLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the loginLog model
+   */
+  interface loginLogFieldRefs {
+    readonly id: FieldRef<"loginLog", 'Int'>
+    readonly adminId: FieldRef<"loginLog", 'Int'>
+    readonly adminRole: FieldRef<"loginLog", 'String'>
+    readonly action: FieldRef<"loginLog", 'String'>
+    readonly response: FieldRef<"loginLog", 'String'>
+    readonly ipv4: FieldRef<"loginLog", 'String'>
+    readonly ipv6: FieldRef<"loginLog", 'String'>
+    readonly internetServiceProvider: FieldRef<"loginLog", 'String'>
+    readonly clientInformation: FieldRef<"loginLog", 'String'>
+    readonly userAgent: FieldRef<"loginLog", 'String'>
+    readonly createdAt: FieldRef<"loginLog", 'DateTime'>
+    readonly createdBy: FieldRef<"loginLog", 'Int'>
+    readonly createdByRole: FieldRef<"loginLog", 'String'>
+    readonly updatedAt: FieldRef<"loginLog", 'DateTime'>
+    readonly updatedBy: FieldRef<"loginLog", 'Int'>
+    readonly updatedByRole: FieldRef<"loginLog", 'String'>
+    readonly deletedAt: FieldRef<"loginLog", 'DateTime'>
+    readonly deletedBy: FieldRef<"loginLog", 'Int'>
+    readonly deletedByRole: FieldRef<"loginLog", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * loginLog findUnique
+   */
+  export type loginLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter, which loginLog to fetch.
+     */
+    where: loginLogWhereUniqueInput
+  }
+
+  /**
+   * loginLog findUniqueOrThrow
+   */
+  export type loginLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter, which loginLog to fetch.
+     */
+    where: loginLogWhereUniqueInput
+  }
+
+  /**
+   * loginLog findFirst
+   */
+  export type loginLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter, which loginLog to fetch.
+     */
+    where?: loginLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of loginLogs to fetch.
+     */
+    orderBy?: loginLogOrderByWithRelationInput | loginLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for loginLogs.
+     */
+    cursor?: loginLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` loginLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` loginLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of loginLogs.
+     */
+    distinct?: LoginLogScalarFieldEnum | LoginLogScalarFieldEnum[]
+  }
+
+  /**
+   * loginLog findFirstOrThrow
+   */
+  export type loginLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter, which loginLog to fetch.
+     */
+    where?: loginLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of loginLogs to fetch.
+     */
+    orderBy?: loginLogOrderByWithRelationInput | loginLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for loginLogs.
+     */
+    cursor?: loginLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` loginLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` loginLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of loginLogs.
+     */
+    distinct?: LoginLogScalarFieldEnum | LoginLogScalarFieldEnum[]
+  }
+
+  /**
+   * loginLog findMany
+   */
+  export type loginLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter, which loginLogs to fetch.
+     */
+    where?: loginLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of loginLogs to fetch.
+     */
+    orderBy?: loginLogOrderByWithRelationInput | loginLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing loginLogs.
+     */
+    cursor?: loginLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` loginLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` loginLogs.
+     */
+    skip?: number
+    distinct?: LoginLogScalarFieldEnum | LoginLogScalarFieldEnum[]
+  }
+
+  /**
+   * loginLog create
+   */
+  export type loginLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a loginLog.
+     */
+    data: XOR<loginLogCreateInput, loginLogUncheckedCreateInput>
+  }
+
+  /**
+   * loginLog createMany
+   */
+  export type loginLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many loginLogs.
+     */
+    data: loginLogCreateManyInput | loginLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * loginLog update
+   */
+  export type loginLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a loginLog.
+     */
+    data: XOR<loginLogUpdateInput, loginLogUncheckedUpdateInput>
+    /**
+     * Choose, which loginLog to update.
+     */
+    where: loginLogWhereUniqueInput
+  }
+
+  /**
+   * loginLog updateMany
+   */
+  export type loginLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update loginLogs.
+     */
+    data: XOR<loginLogUpdateManyMutationInput, loginLogUncheckedUpdateManyInput>
+    /**
+     * Filter which loginLogs to update
+     */
+    where?: loginLogWhereInput
+    /**
+     * Limit how many loginLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * loginLog upsert
+   */
+  export type loginLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the loginLog to update in case it exists.
+     */
+    where: loginLogWhereUniqueInput
+    /**
+     * In case the loginLog found by the `where` argument doesn't exist, create a new loginLog with this data.
+     */
+    create: XOR<loginLogCreateInput, loginLogUncheckedCreateInput>
+    /**
+     * In case the loginLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<loginLogUpdateInput, loginLogUncheckedUpdateInput>
+  }
+
+  /**
+   * loginLog delete
+   */
+  export type loginLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+    /**
+     * Filter which loginLog to delete.
+     */
+    where: loginLogWhereUniqueInput
+  }
+
+  /**
+   * loginLog deleteMany
+   */
+  export type loginLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which loginLogs to delete
+     */
+    where?: loginLogWhereInput
+    /**
+     * Limit how many loginLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * loginLog without action
+   */
+  export type loginLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the loginLog
+     */
+    select?: loginLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the loginLog
+     */
+    omit?: loginLogOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model activityLog
+   */
+
+  export type AggregateActivityLog = {
+    _count: ActivityLogCountAggregateOutputType | null
+    _avg: ActivityLogAvgAggregateOutputType | null
+    _sum: ActivityLogSumAggregateOutputType | null
+    _min: ActivityLogMinAggregateOutputType | null
+    _max: ActivityLogMaxAggregateOutputType | null
+  }
+
+  export type ActivityLogAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ActivityLogSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ActivityLogMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    adminRole: string | null
+    module: string | null
+    action: string | null
+    endpoint: string | null
+    method: string | null
+    payload: string | null
+    response: string | null
+    result: boolean | null
+    data: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ActivityLogMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    adminRole: string | null
+    module: string | null
+    action: string | null
+    endpoint: string | null
+    method: string | null
+    payload: string | null
+    response: string | null
+    result: boolean | null
+    data: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ActivityLogCountAggregateOutputType = {
+    id: number
+    adminId: number
+    adminRole: number
+    module: number
+    action: number
+    endpoint: number
+    method: number
+    payload: number
+    response: number
+    result: number
+    data: number
+    ipv4: number
+    ipv6: number
+    internetServiceProvider: number
+    clientInformation: number
+    userAgent: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type ActivityLogAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ActivityLogSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ActivityLogMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    module?: true
+    action?: true
+    endpoint?: true
+    method?: true
+    payload?: true
+    response?: true
+    result?: true
+    data?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ActivityLogMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    module?: true
+    action?: true
+    endpoint?: true
+    method?: true
+    payload?: true
+    response?: true
+    result?: true
+    data?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ActivityLogCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    adminRole?: true
+    module?: true
+    action?: true
+    endpoint?: true
+    method?: true
+    payload?: true
+    response?: true
+    result?: true
+    data?: true
+    ipv4?: true
+    ipv6?: true
+    internetServiceProvider?: true
+    clientInformation?: true
+    userAgent?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type ActivityLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which activityLog to aggregate.
+     */
+    where?: activityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of activityLogs to fetch.
+     */
+    orderBy?: activityLogOrderByWithRelationInput | activityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: activityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` activityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` activityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned activityLogs
+    **/
+    _count?: true | ActivityLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityLogMaxAggregateInputType
+  }
+
+  export type GetActivityLogAggregateType<T extends ActivityLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivityLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivityLog[P]>
+      : GetScalarType<T[P], AggregateActivityLog[P]>
+  }
+
+
+
+
+  export type activityLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: activityLogWhereInput
+    orderBy?: activityLogOrderByWithAggregationInput | activityLogOrderByWithAggregationInput[]
+    by: ActivityLogScalarFieldEnum[] | ActivityLogScalarFieldEnum
+    having?: activityLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityLogCountAggregateInputType | true
+    _avg?: ActivityLogAvgAggregateInputType
+    _sum?: ActivityLogSumAggregateInputType
+    _min?: ActivityLogMinAggregateInputType
+    _max?: ActivityLogMaxAggregateInputType
+  }
+
+  export type ActivityLogGroupByOutputType = {
+    id: number
+    adminId: number
+    adminRole: string
+    module: string
+    action: string
+    endpoint: string
+    method: string
+    payload: string | null
+    response: string | null
+    result: boolean
+    data: string | null
+    ipv4: string | null
+    ipv6: string | null
+    internetServiceProvider: string | null
+    clientInformation: string | null
+    userAgent: string | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: ActivityLogCountAggregateOutputType | null
+    _avg: ActivityLogAvgAggregateOutputType | null
+    _sum: ActivityLogSumAggregateOutputType | null
+    _min: ActivityLogMinAggregateOutputType | null
+    _max: ActivityLogMaxAggregateOutputType | null
+  }
+
+  type GetActivityLogGroupByPayload<T extends activityLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityLogGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type activityLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    adminRole?: boolean
+    module?: boolean
+    action?: boolean
+    endpoint?: boolean
+    method?: boolean
+    payload?: boolean
+    response?: boolean
+    result?: boolean
+    data?: boolean
+    ipv4?: boolean
+    ipv6?: boolean
+    internetServiceProvider?: boolean
+    clientInformation?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }, ExtArgs["result"]["activityLog"]>
+
+
+
+  export type activityLogSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    adminRole?: boolean
+    module?: boolean
+    action?: boolean
+    endpoint?: boolean
+    method?: boolean
+    payload?: boolean
+    response?: boolean
+    result?: boolean
+    data?: boolean
+    ipv4?: boolean
+    ipv6?: boolean
+    internetServiceProvider?: boolean
+    clientInformation?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type activityLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "adminRole" | "module" | "action" | "endpoint" | "method" | "payload" | "response" | "result" | "data" | "ipv4" | "ipv6" | "internetServiceProvider" | "clientInformation" | "userAgent" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["activityLog"]>
+
+  export type $activityLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "activityLog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      adminRole: string
+      module: string
+      action: string
+      endpoint: string
+      method: string
+      payload: string | null
+      response: string | null
+      result: boolean
+      data: string | null
+      ipv4: string | null
+      ipv6: string | null
+      internetServiceProvider: string | null
+      clientInformation: string | null
+      userAgent: string | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["activityLog"]>
+    composites: {}
+  }
+
+  type activityLogGetPayload<S extends boolean | null | undefined | activityLogDefaultArgs> = $Result.GetResult<Prisma.$activityLogPayload, S>
+
+  type activityLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<activityLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityLogCountAggregateInputType | true
+    }
+
+  export interface activityLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['activityLog'], meta: { name: 'activityLog' } }
+    /**
+     * Find zero or one ActivityLog that matches the filter.
+     * @param {activityLogFindUniqueArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends activityLogFindUniqueArgs>(args: SelectSubset<T, activityLogFindUniqueArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivityLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {activityLogFindUniqueOrThrowArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends activityLogFindUniqueOrThrowArgs>(args: SelectSubset<T, activityLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogFindFirstArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends activityLogFindFirstArgs>(args?: SelectSubset<T, activityLogFindFirstArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogFindFirstOrThrowArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends activityLogFindFirstOrThrowArgs>(args?: SelectSubset<T, activityLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivityLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivityLogs
+     * const activityLogs = await prisma.activityLog.findMany()
+     * 
+     * // Get first 10 ActivityLogs
+     * const activityLogs = await prisma.activityLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityLogWithIdOnly = await prisma.activityLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends activityLogFindManyArgs>(args?: SelectSubset<T, activityLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivityLog.
+     * @param {activityLogCreateArgs} args - Arguments to create a ActivityLog.
+     * @example
+     * // Create one ActivityLog
+     * const ActivityLog = await prisma.activityLog.create({
+     *   data: {
+     *     // ... data to create a ActivityLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends activityLogCreateArgs>(args: SelectSubset<T, activityLogCreateArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivityLogs.
+     * @param {activityLogCreateManyArgs} args - Arguments to create many ActivityLogs.
+     * @example
+     * // Create many ActivityLogs
+     * const activityLog = await prisma.activityLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends activityLogCreateManyArgs>(args?: SelectSubset<T, activityLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ActivityLog.
+     * @param {activityLogDeleteArgs} args - Arguments to delete one ActivityLog.
+     * @example
+     * // Delete one ActivityLog
+     * const ActivityLog = await prisma.activityLog.delete({
+     *   where: {
+     *     // ... filter to delete one ActivityLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends activityLogDeleteArgs>(args: SelectSubset<T, activityLogDeleteArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivityLog.
+     * @param {activityLogUpdateArgs} args - Arguments to update one ActivityLog.
+     * @example
+     * // Update one ActivityLog
+     * const activityLog = await prisma.activityLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends activityLogUpdateArgs>(args: SelectSubset<T, activityLogUpdateArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivityLogs.
+     * @param {activityLogDeleteManyArgs} args - Arguments to filter ActivityLogs to delete.
+     * @example
+     * // Delete a few ActivityLogs
+     * const { count } = await prisma.activityLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends activityLogDeleteManyArgs>(args?: SelectSubset<T, activityLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivityLogs
+     * const activityLog = await prisma.activityLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends activityLogUpdateManyArgs>(args: SelectSubset<T, activityLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ActivityLog.
+     * @param {activityLogUpsertArgs} args - Arguments to update or create a ActivityLog.
+     * @example
+     * // Update or create a ActivityLog
+     * const activityLog = await prisma.activityLog.upsert({
+     *   create: {
+     *     // ... data to create a ActivityLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivityLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends activityLogUpsertArgs>(args: SelectSubset<T, activityLogUpsertArgs<ExtArgs>>): Prisma__activityLogClient<$Result.GetResult<Prisma.$activityLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogCountArgs} args - Arguments to filter ActivityLogs to count.
+     * @example
+     * // Count the number of ActivityLogs
+     * const count = await prisma.activityLog.count({
+     *   where: {
+     *     // ... the filter for the ActivityLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends activityLogCountArgs>(
+      args?: Subset<T, activityLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityLogAggregateArgs>(args: Subset<T, ActivityLogAggregateArgs>): Prisma.PrismaPromise<GetActivityLogAggregateType<T>>
+
+    /**
+     * Group by ActivityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {activityLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends activityLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: activityLogGroupByArgs['orderBy'] }
+        : { orderBy?: activityLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, activityLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the activityLog model
+   */
+  readonly fields: activityLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for activityLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__activityLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the activityLog model
+   */
+  interface activityLogFieldRefs {
+    readonly id: FieldRef<"activityLog", 'Int'>
+    readonly adminId: FieldRef<"activityLog", 'Int'>
+    readonly adminRole: FieldRef<"activityLog", 'String'>
+    readonly module: FieldRef<"activityLog", 'String'>
+    readonly action: FieldRef<"activityLog", 'String'>
+    readonly endpoint: FieldRef<"activityLog", 'String'>
+    readonly method: FieldRef<"activityLog", 'String'>
+    readonly payload: FieldRef<"activityLog", 'String'>
+    readonly response: FieldRef<"activityLog", 'String'>
+    readonly result: FieldRef<"activityLog", 'Boolean'>
+    readonly data: FieldRef<"activityLog", 'String'>
+    readonly ipv4: FieldRef<"activityLog", 'String'>
+    readonly ipv6: FieldRef<"activityLog", 'String'>
+    readonly internetServiceProvider: FieldRef<"activityLog", 'String'>
+    readonly clientInformation: FieldRef<"activityLog", 'String'>
+    readonly userAgent: FieldRef<"activityLog", 'String'>
+    readonly createdAt: FieldRef<"activityLog", 'DateTime'>
+    readonly createdBy: FieldRef<"activityLog", 'Int'>
+    readonly createdByRole: FieldRef<"activityLog", 'String'>
+    readonly updatedAt: FieldRef<"activityLog", 'DateTime'>
+    readonly updatedBy: FieldRef<"activityLog", 'Int'>
+    readonly updatedByRole: FieldRef<"activityLog", 'String'>
+    readonly deletedAt: FieldRef<"activityLog", 'DateTime'>
+    readonly deletedBy: FieldRef<"activityLog", 'Int'>
+    readonly deletedByRole: FieldRef<"activityLog", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * activityLog findUnique
+   */
+  export type activityLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which activityLog to fetch.
+     */
+    where: activityLogWhereUniqueInput
+  }
+
+  /**
+   * activityLog findUniqueOrThrow
+   */
+  export type activityLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which activityLog to fetch.
+     */
+    where: activityLogWhereUniqueInput
+  }
+
+  /**
+   * activityLog findFirst
+   */
+  export type activityLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which activityLog to fetch.
+     */
+    where?: activityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of activityLogs to fetch.
+     */
+    orderBy?: activityLogOrderByWithRelationInput | activityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for activityLogs.
+     */
+    cursor?: activityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` activityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` activityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of activityLogs.
+     */
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * activityLog findFirstOrThrow
+   */
+  export type activityLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which activityLog to fetch.
+     */
+    where?: activityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of activityLogs to fetch.
+     */
+    orderBy?: activityLogOrderByWithRelationInput | activityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for activityLogs.
+     */
+    cursor?: activityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` activityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` activityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of activityLogs.
+     */
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * activityLog findMany
+   */
+  export type activityLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which activityLogs to fetch.
+     */
+    where?: activityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of activityLogs to fetch.
+     */
+    orderBy?: activityLogOrderByWithRelationInput | activityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing activityLogs.
+     */
+    cursor?: activityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` activityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` activityLogs.
+     */
+    skip?: number
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * activityLog create
+   */
+  export type activityLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a activityLog.
+     */
+    data: XOR<activityLogCreateInput, activityLogUncheckedCreateInput>
+  }
+
+  /**
+   * activityLog createMany
+   */
+  export type activityLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many activityLogs.
+     */
+    data: activityLogCreateManyInput | activityLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * activityLog update
+   */
+  export type activityLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a activityLog.
+     */
+    data: XOR<activityLogUpdateInput, activityLogUncheckedUpdateInput>
+    /**
+     * Choose, which activityLog to update.
+     */
+    where: activityLogWhereUniqueInput
+  }
+
+  /**
+   * activityLog updateMany
+   */
+  export type activityLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update activityLogs.
+     */
+    data: XOR<activityLogUpdateManyMutationInput, activityLogUncheckedUpdateManyInput>
+    /**
+     * Filter which activityLogs to update
+     */
+    where?: activityLogWhereInput
+    /**
+     * Limit how many activityLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * activityLog upsert
+   */
+  export type activityLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the activityLog to update in case it exists.
+     */
+    where: activityLogWhereUniqueInput
+    /**
+     * In case the activityLog found by the `where` argument doesn't exist, create a new activityLog with this data.
+     */
+    create: XOR<activityLogCreateInput, activityLogUncheckedCreateInput>
+    /**
+     * In case the activityLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<activityLogUpdateInput, activityLogUncheckedUpdateInput>
+  }
+
+  /**
+   * activityLog delete
+   */
+  export type activityLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+    /**
+     * Filter which activityLog to delete.
+     */
+    where: activityLogWhereUniqueInput
+  }
+
+  /**
+   * activityLog deleteMany
+   */
+  export type activityLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which activityLogs to delete
+     */
+    where?: activityLogWhereInput
+    /**
+     * Limit how many activityLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * activityLog without action
+   */
+  export type activityLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the activityLog
+     */
+    select?: activityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the activityLog
+     */
+    omit?: activityLogOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model country
+   */
+
+  export type AggregateCountry = {
+    _count: CountryCountAggregateOutputType | null
+    _avg: CountryAvgAggregateOutputType | null
+    _sum: CountrySumAggregateOutputType | null
+    _min: CountryMinAggregateOutputType | null
+    _max: CountryMaxAggregateOutputType | null
+  }
+
+  export type CountryAvgAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CountrySumAggregateOutputType = {
+    id: bigint | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CountryMinAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    iso3: string | null
+    iso2: string | null
+    phonecode: string | null
+    currency: string | null
+    currencyName: string | null
+    currencySymbol: string | null
+    nationality: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CountryMaxAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    iso3: string | null
+    iso2: string | null
+    phonecode: string | null
+    currency: string | null
+    currencyName: string | null
+    currencySymbol: string | null
+    nationality: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CountryCountAggregateOutputType = {
+    id: number
+    name: number
+    iso3: number
+    iso2: number
+    phonecode: number
+    currency: number
+    currencyName: number
+    currencySymbol: number
+    nationality: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type CountryAvgAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CountrySumAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CountryMinAggregateInputType = {
+    id?: true
+    name?: true
+    iso3?: true
+    iso2?: true
+    phonecode?: true
+    currency?: true
+    currencyName?: true
+    currencySymbol?: true
+    nationality?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CountryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    iso3?: true
+    iso2?: true
+    phonecode?: true
+    currency?: true
+    currencyName?: true
+    currencySymbol?: true
+    nationality?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CountryCountAggregateInputType = {
+    id?: true
+    name?: true
+    iso3?: true
+    iso2?: true
+    phonecode?: true
+    currency?: true
+    currencyName?: true
+    currencySymbol?: true
+    nationality?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type CountryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which country to aggregate.
+     */
+    where?: countryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of countries to fetch.
+     */
+    orderBy?: countryOrderByWithRelationInput | countryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: countryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` countries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` countries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned countries
+    **/
+    _count?: true | CountryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CountryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CountrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CountryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CountryMaxAggregateInputType
+  }
+
+  export type GetCountryAggregateType<T extends CountryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCountry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCountry[P]>
+      : GetScalarType<T[P], AggregateCountry[P]>
+  }
+
+
+
+
+  export type countryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: countryWhereInput
+    orderBy?: countryOrderByWithAggregationInput | countryOrderByWithAggregationInput[]
+    by: CountryScalarFieldEnum[] | CountryScalarFieldEnum
+    having?: countryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CountryCountAggregateInputType | true
+    _avg?: CountryAvgAggregateInputType
+    _sum?: CountrySumAggregateInputType
+    _min?: CountryMinAggregateInputType
+    _max?: CountryMaxAggregateInputType
+  }
+
+  export type CountryGroupByOutputType = {
+    id: bigint
+    name: string
+    iso3: string | null
+    iso2: string | null
+    phonecode: string | null
+    currency: string | null
+    currencyName: string | null
+    currencySymbol: string | null
+    nationality: string | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: CountryCountAggregateOutputType | null
+    _avg: CountryAvgAggregateOutputType | null
+    _sum: CountrySumAggregateOutputType | null
+    _min: CountryMinAggregateOutputType | null
+    _max: CountryMaxAggregateOutputType | null
+  }
+
+  type GetCountryGroupByPayload<T extends countryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CountryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CountryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CountryGroupByOutputType[P]>
+            : GetScalarType<T[P], CountryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type countrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    iso3?: boolean
+    iso2?: boolean
+    phonecode?: boolean
+    currency?: boolean
+    currencyName?: boolean
+    currencySymbol?: boolean
+    nationality?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    states?: boolean | country$statesArgs<ExtArgs>
+    cities?: boolean | country$citiesArgs<ExtArgs>
+    warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["country"]>
+
+
+
+  export type countrySelectScalar = {
+    id?: boolean
+    name?: boolean
+    iso3?: boolean
+    iso2?: boolean
+    phonecode?: boolean
+    currency?: boolean
+    currencyName?: boolean
+    currencySymbol?: boolean
+    nationality?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type countryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "iso3" | "iso2" | "phonecode" | "currency" | "currencyName" | "currencySymbol" | "nationality" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["country"]>
+  export type countryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    states?: boolean | country$statesArgs<ExtArgs>
+    cities?: boolean | country$citiesArgs<ExtArgs>
+    warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $countryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "country"
+    objects: {
+      states: Prisma.$statePayload<ExtArgs>[]
+      cities: Prisma.$cityPayload<ExtArgs>[]
+      warehouses: Prisma.$warehousePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      name: string
+      iso3: string | null
+      iso2: string | null
+      phonecode: string | null
+      currency: string | null
+      currencyName: string | null
+      currencySymbol: string | null
+      nationality: string | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["country"]>
+    composites: {}
+  }
+
+  type countryGetPayload<S extends boolean | null | undefined | countryDefaultArgs> = $Result.GetResult<Prisma.$countryPayload, S>
+
+  type countryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<countryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CountryCountAggregateInputType | true
+    }
+
+  export interface countryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['country'], meta: { name: 'country' } }
+    /**
+     * Find zero or one Country that matches the filter.
+     * @param {countryFindUniqueArgs} args - Arguments to find a Country
+     * @example
+     * // Get one Country
+     * const country = await prisma.country.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends countryFindUniqueArgs>(args: SelectSubset<T, countryFindUniqueArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Country that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {countryFindUniqueOrThrowArgs} args - Arguments to find a Country
+     * @example
+     * // Get one Country
+     * const country = await prisma.country.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends countryFindUniqueOrThrowArgs>(args: SelectSubset<T, countryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Country that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryFindFirstArgs} args - Arguments to find a Country
+     * @example
+     * // Get one Country
+     * const country = await prisma.country.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends countryFindFirstArgs>(args?: SelectSubset<T, countryFindFirstArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Country that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryFindFirstOrThrowArgs} args - Arguments to find a Country
+     * @example
+     * // Get one Country
+     * const country = await prisma.country.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends countryFindFirstOrThrowArgs>(args?: SelectSubset<T, countryFindFirstOrThrowArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Countries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Countries
+     * const countries = await prisma.country.findMany()
+     * 
+     * // Get first 10 Countries
+     * const countries = await prisma.country.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const countryWithIdOnly = await prisma.country.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends countryFindManyArgs>(args?: SelectSubset<T, countryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Country.
+     * @param {countryCreateArgs} args - Arguments to create a Country.
+     * @example
+     * // Create one Country
+     * const Country = await prisma.country.create({
+     *   data: {
+     *     // ... data to create a Country
+     *   }
+     * })
+     * 
+     */
+    create<T extends countryCreateArgs>(args: SelectSubset<T, countryCreateArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Countries.
+     * @param {countryCreateManyArgs} args - Arguments to create many Countries.
+     * @example
+     * // Create many Countries
+     * const country = await prisma.country.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends countryCreateManyArgs>(args?: SelectSubset<T, countryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Country.
+     * @param {countryDeleteArgs} args - Arguments to delete one Country.
+     * @example
+     * // Delete one Country
+     * const Country = await prisma.country.delete({
+     *   where: {
+     *     // ... filter to delete one Country
+     *   }
+     * })
+     * 
+     */
+    delete<T extends countryDeleteArgs>(args: SelectSubset<T, countryDeleteArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Country.
+     * @param {countryUpdateArgs} args - Arguments to update one Country.
+     * @example
+     * // Update one Country
+     * const country = await prisma.country.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends countryUpdateArgs>(args: SelectSubset<T, countryUpdateArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Countries.
+     * @param {countryDeleteManyArgs} args - Arguments to filter Countries to delete.
+     * @example
+     * // Delete a few Countries
+     * const { count } = await prisma.country.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends countryDeleteManyArgs>(args?: SelectSubset<T, countryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Countries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Countries
+     * const country = await prisma.country.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends countryUpdateManyArgs>(args: SelectSubset<T, countryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Country.
+     * @param {countryUpsertArgs} args - Arguments to update or create a Country.
+     * @example
+     * // Update or create a Country
+     * const country = await prisma.country.upsert({
+     *   create: {
+     *     // ... data to create a Country
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Country we want to update
+     *   }
+     * })
+     */
+    upsert<T extends countryUpsertArgs>(args: SelectSubset<T, countryUpsertArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Countries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryCountArgs} args - Arguments to filter Countries to count.
+     * @example
+     * // Count the number of Countries
+     * const count = await prisma.country.count({
+     *   where: {
+     *     // ... the filter for the Countries we want to count
+     *   }
+     * })
+    **/
+    count<T extends countryCountArgs>(
+      args?: Subset<T, countryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CountryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Country.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CountryAggregateArgs>(args: Subset<T, CountryAggregateArgs>): Prisma.PrismaPromise<GetCountryAggregateType<T>>
+
+    /**
+     * Group by Country.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {countryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends countryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: countryGroupByArgs['orderBy'] }
+        : { orderBy?: countryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, countryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCountryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the country model
+   */
+  readonly fields: countryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for country.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__countryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    states<T extends country$statesArgs<ExtArgs> = {}>(args?: Subset<T, country$statesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cities<T extends country$citiesArgs<ExtArgs> = {}>(args?: Subset<T, country$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    warehouses<T extends country$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, country$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the country model
+   */
+  interface countryFieldRefs {
+    readonly id: FieldRef<"country", 'BigInt'>
+    readonly name: FieldRef<"country", 'String'>
+    readonly iso3: FieldRef<"country", 'String'>
+    readonly iso2: FieldRef<"country", 'String'>
+    readonly phonecode: FieldRef<"country", 'String'>
+    readonly currency: FieldRef<"country", 'String'>
+    readonly currencyName: FieldRef<"country", 'String'>
+    readonly currencySymbol: FieldRef<"country", 'String'>
+    readonly nationality: FieldRef<"country", 'String'>
+    readonly createdAt: FieldRef<"country", 'DateTime'>
+    readonly createdBy: FieldRef<"country", 'Int'>
+    readonly createdByRole: FieldRef<"country", 'String'>
+    readonly updatedAt: FieldRef<"country", 'DateTime'>
+    readonly updatedBy: FieldRef<"country", 'Int'>
+    readonly updatedByRole: FieldRef<"country", 'String'>
+    readonly deletedAt: FieldRef<"country", 'DateTime'>
+    readonly deletedBy: FieldRef<"country", 'Int'>
+    readonly deletedByRole: FieldRef<"country", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * country findUnique
+   */
+  export type countryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter, which country to fetch.
+     */
+    where: countryWhereUniqueInput
+  }
+
+  /**
+   * country findUniqueOrThrow
+   */
+  export type countryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter, which country to fetch.
+     */
+    where: countryWhereUniqueInput
+  }
+
+  /**
+   * country findFirst
+   */
+  export type countryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter, which country to fetch.
+     */
+    where?: countryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of countries to fetch.
+     */
+    orderBy?: countryOrderByWithRelationInput | countryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for countries.
+     */
+    cursor?: countryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` countries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` countries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of countries.
+     */
+    distinct?: CountryScalarFieldEnum | CountryScalarFieldEnum[]
+  }
+
+  /**
+   * country findFirstOrThrow
+   */
+  export type countryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter, which country to fetch.
+     */
+    where?: countryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of countries to fetch.
+     */
+    orderBy?: countryOrderByWithRelationInput | countryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for countries.
+     */
+    cursor?: countryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` countries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` countries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of countries.
+     */
+    distinct?: CountryScalarFieldEnum | CountryScalarFieldEnum[]
+  }
+
+  /**
+   * country findMany
+   */
+  export type countryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter, which countries to fetch.
+     */
+    where?: countryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of countries to fetch.
+     */
+    orderBy?: countryOrderByWithRelationInput | countryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing countries.
+     */
+    cursor?: countryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` countries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` countries.
+     */
+    skip?: number
+    distinct?: CountryScalarFieldEnum | CountryScalarFieldEnum[]
+  }
+
+  /**
+   * country create
+   */
+  export type countryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a country.
+     */
+    data: XOR<countryCreateInput, countryUncheckedCreateInput>
+  }
+
+  /**
+   * country createMany
+   */
+  export type countryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many countries.
+     */
+    data: countryCreateManyInput | countryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * country update
+   */
+  export type countryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a country.
+     */
+    data: XOR<countryUpdateInput, countryUncheckedUpdateInput>
+    /**
+     * Choose, which country to update.
+     */
+    where: countryWhereUniqueInput
+  }
+
+  /**
+   * country updateMany
+   */
+  export type countryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update countries.
+     */
+    data: XOR<countryUpdateManyMutationInput, countryUncheckedUpdateManyInput>
+    /**
+     * Filter which countries to update
+     */
+    where?: countryWhereInput
+    /**
+     * Limit how many countries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * country upsert
+   */
+  export type countryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the country to update in case it exists.
+     */
+    where: countryWhereUniqueInput
+    /**
+     * In case the country found by the `where` argument doesn't exist, create a new country with this data.
+     */
+    create: XOR<countryCreateInput, countryUncheckedCreateInput>
+    /**
+     * In case the country was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<countryUpdateInput, countryUncheckedUpdateInput>
+  }
+
+  /**
+   * country delete
+   */
+  export type countryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    /**
+     * Filter which country to delete.
+     */
+    where: countryWhereUniqueInput
+  }
+
+  /**
+   * country deleteMany
+   */
+  export type countryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which countries to delete
+     */
+    where?: countryWhereInput
+    /**
+     * Limit how many countries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * country.states
+   */
+  export type country$statesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    where?: stateWhereInput
+    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
+    cursor?: stateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
+  }
+
+  /**
+   * country.cities
+   */
+  export type country$citiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    cursor?: cityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * country.warehouses
+   */
+  export type country$warehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the warehouse
+     */
+    select?: warehouseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the warehouse
+     */
+    omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    where?: warehouseWhereInput
+    orderBy?: warehouseOrderByWithRelationInput | warehouseOrderByWithRelationInput[]
+    cursor?: warehouseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * country without action
+   */
+  export type countryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model state
+   */
+
+  export type AggregateState = {
+    _count: StateCountAggregateOutputType | null
+    _avg: StateAvgAggregateOutputType | null
+    _sum: StateSumAggregateOutputType | null
+    _min: StateMinAggregateOutputType | null
+    _max: StateMaxAggregateOutputType | null
+  }
+
+  export type StateAvgAggregateOutputType = {
+    id: number | null
+    countryId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type StateSumAggregateOutputType = {
+    id: bigint | null
+    countryId: bigint | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type StateMinAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    countryId: bigint | null
+    iso2: string | null
+    type: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type StateMaxAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    countryId: bigint | null
+    iso2: string | null
+    type: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type StateCountAggregateOutputType = {
+    id: number
+    name: number
+    countryId: number
+    iso2: number
+    type: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type StateAvgAggregateInputType = {
+    id?: true
+    countryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type StateSumAggregateInputType = {
+    id?: true
+    countryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type StateMinAggregateInputType = {
+    id?: true
+    name?: true
+    countryId?: true
+    iso2?: true
+    type?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type StateMaxAggregateInputType = {
+    id?: true
+    name?: true
+    countryId?: true
+    iso2?: true
+    type?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type StateCountAggregateInputType = {
+    id?: true
+    name?: true
+    countryId?: true
+    iso2?: true
+    type?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type StateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which state to aggregate.
+     */
+    where?: stateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of states to fetch.
+     */
+    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: stateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` states from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` states.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned states
+    **/
+    _count?: true | StateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StateMaxAggregateInputType
+  }
+
+  export type GetStateAggregateType<T extends StateAggregateArgs> = {
+        [P in keyof T & keyof AggregateState]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateState[P]>
+      : GetScalarType<T[P], AggregateState[P]>
+  }
+
+
+
+
+  export type stateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: stateWhereInput
+    orderBy?: stateOrderByWithAggregationInput | stateOrderByWithAggregationInput[]
+    by: StateScalarFieldEnum[] | StateScalarFieldEnum
+    having?: stateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StateCountAggregateInputType | true
+    _avg?: StateAvgAggregateInputType
+    _sum?: StateSumAggregateInputType
+    _min?: StateMinAggregateInputType
+    _max?: StateMaxAggregateInputType
+  }
+
+  export type StateGroupByOutputType = {
+    id: bigint
+    name: string
+    countryId: bigint
+    iso2: string | null
+    type: string | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: StateCountAggregateOutputType | null
+    _avg: StateAvgAggregateOutputType | null
+    _sum: StateSumAggregateOutputType | null
+    _min: StateMinAggregateOutputType | null
+    _max: StateMaxAggregateOutputType | null
+  }
+
+  type GetStateGroupByPayload<T extends stateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StateGroupByOutputType[P]>
+            : GetScalarType<T[P], StateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type stateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    countryId?: boolean
+    iso2?: boolean
+    type?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    country?: boolean | countryDefaultArgs<ExtArgs>
+    cities?: boolean | state$citiesArgs<ExtArgs>
+    warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["state"]>
+
+
+
+  export type stateSelectScalar = {
+    id?: boolean
+    name?: boolean
+    countryId?: boolean
+    iso2?: boolean
+    type?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type stateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "countryId" | "iso2" | "type" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["state"]>
+  export type stateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    country?: boolean | countryDefaultArgs<ExtArgs>
+    cities?: boolean | state$citiesArgs<ExtArgs>
+    warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $statePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "state"
+    objects: {
+      country: Prisma.$countryPayload<ExtArgs>
+      cities: Prisma.$cityPayload<ExtArgs>[]
+      warehouses: Prisma.$warehousePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      name: string
+      countryId: bigint
+      iso2: string | null
+      type: string | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["state"]>
+    composites: {}
+  }
+
+  type stateGetPayload<S extends boolean | null | undefined | stateDefaultArgs> = $Result.GetResult<Prisma.$statePayload, S>
+
+  type stateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<stateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StateCountAggregateInputType | true
+    }
+
+  export interface stateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['state'], meta: { name: 'state' } }
+    /**
+     * Find zero or one State that matches the filter.
+     * @param {stateFindUniqueArgs} args - Arguments to find a State
+     * @example
+     * // Get one State
+     * const state = await prisma.state.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends stateFindUniqueArgs>(args: SelectSubset<T, stateFindUniqueArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one State that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {stateFindUniqueOrThrowArgs} args - Arguments to find a State
+     * @example
+     * // Get one State
+     * const state = await prisma.state.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends stateFindUniqueOrThrowArgs>(args: SelectSubset<T, stateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first State that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateFindFirstArgs} args - Arguments to find a State
+     * @example
+     * // Get one State
+     * const state = await prisma.state.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends stateFindFirstArgs>(args?: SelectSubset<T, stateFindFirstArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first State that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateFindFirstOrThrowArgs} args - Arguments to find a State
+     * @example
+     * // Get one State
+     * const state = await prisma.state.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends stateFindFirstOrThrowArgs>(args?: SelectSubset<T, stateFindFirstOrThrowArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more States that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all States
+     * const states = await prisma.state.findMany()
+     * 
+     * // Get first 10 States
+     * const states = await prisma.state.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stateWithIdOnly = await prisma.state.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends stateFindManyArgs>(args?: SelectSubset<T, stateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a State.
+     * @param {stateCreateArgs} args - Arguments to create a State.
+     * @example
+     * // Create one State
+     * const State = await prisma.state.create({
+     *   data: {
+     *     // ... data to create a State
+     *   }
+     * })
+     * 
+     */
+    create<T extends stateCreateArgs>(args: SelectSubset<T, stateCreateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many States.
+     * @param {stateCreateManyArgs} args - Arguments to create many States.
+     * @example
+     * // Create many States
+     * const state = await prisma.state.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends stateCreateManyArgs>(args?: SelectSubset<T, stateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a State.
+     * @param {stateDeleteArgs} args - Arguments to delete one State.
+     * @example
+     * // Delete one State
+     * const State = await prisma.state.delete({
+     *   where: {
+     *     // ... filter to delete one State
+     *   }
+     * })
+     * 
+     */
+    delete<T extends stateDeleteArgs>(args: SelectSubset<T, stateDeleteArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one State.
+     * @param {stateUpdateArgs} args - Arguments to update one State.
+     * @example
+     * // Update one State
+     * const state = await prisma.state.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends stateUpdateArgs>(args: SelectSubset<T, stateUpdateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more States.
+     * @param {stateDeleteManyArgs} args - Arguments to filter States to delete.
+     * @example
+     * // Delete a few States
+     * const { count } = await prisma.state.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends stateDeleteManyArgs>(args?: SelectSubset<T, stateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more States.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many States
+     * const state = await prisma.state.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends stateUpdateManyArgs>(args: SelectSubset<T, stateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one State.
+     * @param {stateUpsertArgs} args - Arguments to update or create a State.
+     * @example
+     * // Update or create a State
+     * const state = await prisma.state.upsert({
+     *   create: {
+     *     // ... data to create a State
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the State we want to update
+     *   }
+     * })
+     */
+    upsert<T extends stateUpsertArgs>(args: SelectSubset<T, stateUpsertArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of States.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateCountArgs} args - Arguments to filter States to count.
+     * @example
+     * // Count the number of States
+     * const count = await prisma.state.count({
+     *   where: {
+     *     // ... the filter for the States we want to count
+     *   }
+     * })
+    **/
+    count<T extends stateCountArgs>(
+      args?: Subset<T, stateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a State.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StateAggregateArgs>(args: Subset<T, StateAggregateArgs>): Prisma.PrismaPromise<GetStateAggregateType<T>>
+
+    /**
+     * Group by State.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {stateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends stateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: stateGroupByArgs['orderBy'] }
+        : { orderBy?: stateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, stateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the state model
+   */
+  readonly fields: stateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for state.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__stateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    cities<T extends state$citiesArgs<ExtArgs> = {}>(args?: Subset<T, state$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    warehouses<T extends state$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, state$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the state model
+   */
+  interface stateFieldRefs {
+    readonly id: FieldRef<"state", 'BigInt'>
+    readonly name: FieldRef<"state", 'String'>
+    readonly countryId: FieldRef<"state", 'BigInt'>
+    readonly iso2: FieldRef<"state", 'String'>
+    readonly type: FieldRef<"state", 'String'>
+    readonly createdAt: FieldRef<"state", 'DateTime'>
+    readonly createdBy: FieldRef<"state", 'Int'>
+    readonly createdByRole: FieldRef<"state", 'String'>
+    readonly updatedAt: FieldRef<"state", 'DateTime'>
+    readonly updatedBy: FieldRef<"state", 'Int'>
+    readonly updatedByRole: FieldRef<"state", 'String'>
+    readonly deletedAt: FieldRef<"state", 'DateTime'>
+    readonly deletedBy: FieldRef<"state", 'Int'>
+    readonly deletedByRole: FieldRef<"state", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * state findUnique
+   */
+  export type stateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter, which state to fetch.
+     */
+    where: stateWhereUniqueInput
+  }
+
+  /**
+   * state findUniqueOrThrow
+   */
+  export type stateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter, which state to fetch.
+     */
+    where: stateWhereUniqueInput
+  }
+
+  /**
+   * state findFirst
+   */
+  export type stateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter, which state to fetch.
+     */
+    where?: stateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of states to fetch.
+     */
+    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for states.
+     */
+    cursor?: stateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` states from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` states.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of states.
+     */
+    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
+  }
+
+  /**
+   * state findFirstOrThrow
+   */
+  export type stateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter, which state to fetch.
+     */
+    where?: stateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of states to fetch.
+     */
+    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for states.
+     */
+    cursor?: stateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` states from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` states.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of states.
+     */
+    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
+  }
+
+  /**
+   * state findMany
+   */
+  export type stateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter, which states to fetch.
+     */
+    where?: stateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of states to fetch.
+     */
+    orderBy?: stateOrderByWithRelationInput | stateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing states.
+     */
+    cursor?: stateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` states from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` states.
+     */
+    skip?: number
+    distinct?: StateScalarFieldEnum | StateScalarFieldEnum[]
+  }
+
+  /**
+   * state create
+   */
+  export type stateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a state.
+     */
+    data: XOR<stateCreateInput, stateUncheckedCreateInput>
+  }
+
+  /**
+   * state createMany
+   */
+  export type stateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many states.
+     */
+    data: stateCreateManyInput | stateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * state update
+   */
+  export type stateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a state.
+     */
+    data: XOR<stateUpdateInput, stateUncheckedUpdateInput>
+    /**
+     * Choose, which state to update.
+     */
+    where: stateWhereUniqueInput
+  }
+
+  /**
+   * state updateMany
+   */
+  export type stateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update states.
+     */
+    data: XOR<stateUpdateManyMutationInput, stateUncheckedUpdateManyInput>
+    /**
+     * Filter which states to update
+     */
+    where?: stateWhereInput
+    /**
+     * Limit how many states to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * state upsert
+   */
+  export type stateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the state to update in case it exists.
+     */
+    where: stateWhereUniqueInput
+    /**
+     * In case the state found by the `where` argument doesn't exist, create a new state with this data.
+     */
+    create: XOR<stateCreateInput, stateUncheckedCreateInput>
+    /**
+     * In case the state was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<stateUpdateInput, stateUncheckedUpdateInput>
+  }
+
+  /**
+   * state delete
+   */
+  export type stateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    /**
+     * Filter which state to delete.
+     */
+    where: stateWhereUniqueInput
+  }
+
+  /**
+   * state deleteMany
+   */
+  export type stateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which states to delete
+     */
+    where?: stateWhereInput
+    /**
+     * Limit how many states to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * state.cities
+   */
+  export type state$citiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    cursor?: cityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * state.warehouses
+   */
+  export type state$warehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the warehouse
+     */
+    select?: warehouseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the warehouse
+     */
+    omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    where?: warehouseWhereInput
+    orderBy?: warehouseOrderByWithRelationInput | warehouseOrderByWithRelationInput[]
+    cursor?: warehouseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * state without action
+   */
+  export type stateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model city
+   */
+
+  export type AggregateCity = {
+    _count: CityCountAggregateOutputType | null
+    _avg: CityAvgAggregateOutputType | null
+    _sum: CitySumAggregateOutputType | null
+    _min: CityMinAggregateOutputType | null
+    _max: CityMaxAggregateOutputType | null
+  }
+
+  export type CityAvgAggregateOutputType = {
+    id: number | null
+    stateId: number | null
+    countryId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CitySumAggregateOutputType = {
+    id: bigint | null
+    stateId: bigint | null
+    countryId: bigint | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CityMinAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    stateId: bigint | null
+    countryId: bigint | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CityMaxAggregateOutputType = {
+    id: bigint | null
+    name: string | null
+    stateId: bigint | null
+    countryId: bigint | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CityCountAggregateOutputType = {
+    id: number
+    name: number
+    stateId: number
+    countryId: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type CityAvgAggregateInputType = {
+    id?: true
+    stateId?: true
+    countryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CitySumAggregateInputType = {
+    id?: true
+    stateId?: true
+    countryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CityMinAggregateInputType = {
+    id?: true
+    name?: true
+    stateId?: true
+    countryId?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CityMaxAggregateInputType = {
+    id?: true
+    name?: true
+    stateId?: true
+    countryId?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CityCountAggregateInputType = {
+    id?: true
+    name?: true
+    stateId?: true
+    countryId?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type CityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which city to aggregate.
+     */
+    where?: cityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cities to fetch.
+     */
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: cityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned cities
+    **/
+    _count?: true | CityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CityMaxAggregateInputType
+  }
+
+  export type GetCityAggregateType<T extends CityAggregateArgs> = {
+        [P in keyof T & keyof AggregateCity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCity[P]>
+      : GetScalarType<T[P], AggregateCity[P]>
+  }
+
+
+
+
+  export type cityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: cityWhereInput
+    orderBy?: cityOrderByWithAggregationInput | cityOrderByWithAggregationInput[]
+    by: CityScalarFieldEnum[] | CityScalarFieldEnum
+    having?: cityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CityCountAggregateInputType | true
+    _avg?: CityAvgAggregateInputType
+    _sum?: CitySumAggregateInputType
+    _min?: CityMinAggregateInputType
+    _max?: CityMaxAggregateInputType
+  }
+
+  export type CityGroupByOutputType = {
+    id: bigint
+    name: string
+    stateId: bigint
+    countryId: bigint
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: CityCountAggregateOutputType | null
+    _avg: CityAvgAggregateOutputType | null
+    _sum: CitySumAggregateOutputType | null
+    _min: CityMinAggregateOutputType | null
+    _max: CityMaxAggregateOutputType | null
+  }
+
+  type GetCityGroupByPayload<T extends cityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CityGroupByOutputType[P]>
+            : GetScalarType<T[P], CityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type citySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    stateId?: boolean
+    countryId?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    state?: boolean | stateDefaultArgs<ExtArgs>
+    country?: boolean | countryDefaultArgs<ExtArgs>
+    warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["city"]>
+
+
+
+  export type citySelectScalar = {
+    id?: boolean
+    name?: boolean
+    stateId?: boolean
+    countryId?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type cityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "stateId" | "countryId" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["city"]>
+  export type cityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    state?: boolean | stateDefaultArgs<ExtArgs>
+    country?: boolean | countryDefaultArgs<ExtArgs>
+    warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $cityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "city"
+    objects: {
+      state: Prisma.$statePayload<ExtArgs>
+      country: Prisma.$countryPayload<ExtArgs>
+      warehouses: Prisma.$warehousePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      name: string
+      stateId: bigint
+      countryId: bigint
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["city"]>
+    composites: {}
+  }
+
+  type cityGetPayload<S extends boolean | null | undefined | cityDefaultArgs> = $Result.GetResult<Prisma.$cityPayload, S>
+
+  type cityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<cityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CityCountAggregateInputType | true
+    }
+
+  export interface cityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['city'], meta: { name: 'city' } }
+    /**
+     * Find zero or one City that matches the filter.
+     * @param {cityFindUniqueArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends cityFindUniqueArgs>(args: SelectSubset<T, cityFindUniqueArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one City that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {cityFindUniqueOrThrowArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends cityFindUniqueOrThrowArgs>(args: SelectSubset<T, cityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first City that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityFindFirstArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends cityFindFirstArgs>(args?: SelectSubset<T, cityFindFirstArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first City that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityFindFirstOrThrowArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends cityFindFirstOrThrowArgs>(args?: SelectSubset<T, cityFindFirstOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Cities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Cities
+     * const cities = await prisma.city.findMany()
+     * 
+     * // Get first 10 Cities
+     * const cities = await prisma.city.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cityWithIdOnly = await prisma.city.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends cityFindManyArgs>(args?: SelectSubset<T, cityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a City.
+     * @param {cityCreateArgs} args - Arguments to create a City.
+     * @example
+     * // Create one City
+     * const City = await prisma.city.create({
+     *   data: {
+     *     // ... data to create a City
+     *   }
+     * })
+     * 
+     */
+    create<T extends cityCreateArgs>(args: SelectSubset<T, cityCreateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Cities.
+     * @param {cityCreateManyArgs} args - Arguments to create many Cities.
+     * @example
+     * // Create many Cities
+     * const city = await prisma.city.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends cityCreateManyArgs>(args?: SelectSubset<T, cityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a City.
+     * @param {cityDeleteArgs} args - Arguments to delete one City.
+     * @example
+     * // Delete one City
+     * const City = await prisma.city.delete({
+     *   where: {
+     *     // ... filter to delete one City
+     *   }
+     * })
+     * 
+     */
+    delete<T extends cityDeleteArgs>(args: SelectSubset<T, cityDeleteArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one City.
+     * @param {cityUpdateArgs} args - Arguments to update one City.
+     * @example
+     * // Update one City
+     * const city = await prisma.city.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends cityUpdateArgs>(args: SelectSubset<T, cityUpdateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Cities.
+     * @param {cityDeleteManyArgs} args - Arguments to filter Cities to delete.
+     * @example
+     * // Delete a few Cities
+     * const { count } = await prisma.city.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends cityDeleteManyArgs>(args?: SelectSubset<T, cityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Cities
+     * const city = await prisma.city.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends cityUpdateManyArgs>(args: SelectSubset<T, cityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one City.
+     * @param {cityUpsertArgs} args - Arguments to update or create a City.
+     * @example
+     * // Update or create a City
+     * const city = await prisma.city.upsert({
+     *   create: {
+     *     // ... data to create a City
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the City we want to update
+     *   }
+     * })
+     */
+    upsert<T extends cityUpsertArgs>(args: SelectSubset<T, cityUpsertArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Cities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityCountArgs} args - Arguments to filter Cities to count.
+     * @example
+     * // Count the number of Cities
+     * const count = await prisma.city.count({
+     *   where: {
+     *     // ... the filter for the Cities we want to count
+     *   }
+     * })
+    **/
+    count<T extends cityCountArgs>(
+      args?: Subset<T, cityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a City.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CityAggregateArgs>(args: Subset<T, CityAggregateArgs>): Prisma.PrismaPromise<GetCityAggregateType<T>>
+
+    /**
+     * Group by City.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends cityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: cityGroupByArgs['orderBy'] }
+        : { orderBy?: cityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, cityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the city model
+   */
+  readonly fields: cityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for city.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__cityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    state<T extends stateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stateDefaultArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    warehouses<T extends city$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, city$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the city model
+   */
+  interface cityFieldRefs {
+    readonly id: FieldRef<"city", 'BigInt'>
+    readonly name: FieldRef<"city", 'String'>
+    readonly stateId: FieldRef<"city", 'BigInt'>
+    readonly countryId: FieldRef<"city", 'BigInt'>
+    readonly createdAt: FieldRef<"city", 'DateTime'>
+    readonly createdBy: FieldRef<"city", 'Int'>
+    readonly createdByRole: FieldRef<"city", 'String'>
+    readonly updatedAt: FieldRef<"city", 'DateTime'>
+    readonly updatedBy: FieldRef<"city", 'Int'>
+    readonly updatedByRole: FieldRef<"city", 'String'>
+    readonly deletedAt: FieldRef<"city", 'DateTime'>
+    readonly deletedBy: FieldRef<"city", 'Int'>
+    readonly deletedByRole: FieldRef<"city", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * city findUnique
+   */
+  export type cityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter, which city to fetch.
+     */
+    where: cityWhereUniqueInput
+  }
+
+  /**
+   * city findUniqueOrThrow
+   */
+  export type cityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter, which city to fetch.
+     */
+    where: cityWhereUniqueInput
+  }
+
+  /**
+   * city findFirst
+   */
+  export type cityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter, which city to fetch.
+     */
+    where?: cityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cities to fetch.
+     */
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for cities.
+     */
+    cursor?: cityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of cities.
+     */
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * city findFirstOrThrow
+   */
+  export type cityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter, which city to fetch.
+     */
+    where?: cityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cities to fetch.
+     */
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for cities.
+     */
+    cursor?: cityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of cities.
+     */
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * city findMany
+   */
+  export type cityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter, which cities to fetch.
+     */
+    where?: cityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cities to fetch.
+     */
+    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing cities.
+     */
+    cursor?: cityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cities.
+     */
+    skip?: number
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * city create
+   */
+  export type cityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a city.
+     */
+    data: XOR<cityCreateInput, cityUncheckedCreateInput>
+  }
+
+  /**
+   * city createMany
+   */
+  export type cityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many cities.
+     */
+    data: cityCreateManyInput | cityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * city update
+   */
+  export type cityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a city.
+     */
+    data: XOR<cityUpdateInput, cityUncheckedUpdateInput>
+    /**
+     * Choose, which city to update.
+     */
+    where: cityWhereUniqueInput
+  }
+
+  /**
+   * city updateMany
+   */
+  export type cityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update cities.
+     */
+    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyInput>
+    /**
+     * Filter which cities to update
+     */
+    where?: cityWhereInput
+    /**
+     * Limit how many cities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * city upsert
+   */
+  export type cityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the city to update in case it exists.
+     */
+    where: cityWhereUniqueInput
+    /**
+     * In case the city found by the `where` argument doesn't exist, create a new city with this data.
+     */
+    create: XOR<cityCreateInput, cityUncheckedCreateInput>
+    /**
+     * In case the city was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<cityUpdateInput, cityUncheckedUpdateInput>
+  }
+
+  /**
+   * city delete
+   */
+  export type cityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    /**
+     * Filter which city to delete.
+     */
+    where: cityWhereUniqueInput
+  }
+
+  /**
+   * city deleteMany
+   */
+  export type cityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which cities to delete
+     */
+    where?: cityWhereInput
+    /**
+     * Limit how many cities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * city.warehouses
+   */
+  export type city$warehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the warehouse
+     */
+    select?: warehouseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the warehouse
+     */
+    omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    where?: warehouseWhereInput
+    orderBy?: warehouseOrderByWithRelationInput | warehouseOrderByWithRelationInput[]
+    cursor?: warehouseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * city without action
+   */
+  export type cityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model warehouse
    */
 
@@ -6893,6 +10726,7 @@ export namespace Prisma {
 
   export type WarehouseAvgAggregateOutputType = {
     id: number | null
+    countryId: number | null
     stateId: number | null
     cityId: number | null
     createdBy: number | null
@@ -6902,6 +10736,7 @@ export namespace Prisma {
 
   export type WarehouseSumAggregateOutputType = {
     id: number | null
+    countryId: bigint | null
     stateId: bigint | null
     cityId: bigint | null
     createdBy: number | null
@@ -6919,6 +10754,7 @@ export namespace Prisma {
     address_line_1: string | null
     address_line_2: string | null
     postal_code: string | null
+    countryId: bigint | null
     stateId: bigint | null
     cityId: bigint | null
     status: boolean | null
@@ -6943,6 +10779,7 @@ export namespace Prisma {
     address_line_1: string | null
     address_line_2: string | null
     postal_code: string | null
+    countryId: bigint | null
     stateId: bigint | null
     cityId: bigint | null
     status: boolean | null
@@ -6967,6 +10804,7 @@ export namespace Prisma {
     address_line_1: number
     address_line_2: number
     postal_code: number
+    countryId: number
     stateId: number
     cityId: number
     status: number
@@ -6985,6 +10823,7 @@ export namespace Prisma {
 
   export type WarehouseAvgAggregateInputType = {
     id?: true
+    countryId?: true
     stateId?: true
     cityId?: true
     createdBy?: true
@@ -6994,6 +10833,7 @@ export namespace Prisma {
 
   export type WarehouseSumAggregateInputType = {
     id?: true
+    countryId?: true
     stateId?: true
     cityId?: true
     createdBy?: true
@@ -7011,6 +10851,7 @@ export namespace Prisma {
     address_line_1?: true
     address_line_2?: true
     postal_code?: true
+    countryId?: true
     stateId?: true
     cityId?: true
     status?: true
@@ -7035,6 +10876,7 @@ export namespace Prisma {
     address_line_1?: true
     address_line_2?: true
     postal_code?: true
+    countryId?: true
     stateId?: true
     cityId?: true
     status?: true
@@ -7059,6 +10901,7 @@ export namespace Prisma {
     address_line_1?: true
     address_line_2?: true
     postal_code?: true
+    countryId?: true
     stateId?: true
     cityId?: true
     status?: true
@@ -7170,8 +11013,9 @@ export namespace Prisma {
     address_line_1: string
     address_line_2: string | null
     postal_code: string
-    stateId: bigint
-    cityId: bigint
+    countryId: bigint | null
+    stateId: bigint | null
+    cityId: bigint | null
     status: boolean
     createdAt: Date
     createdBy: number | null
@@ -7213,6 +11057,7 @@ export namespace Prisma {
     address_line_1?: boolean
     address_line_2?: boolean
     postal_code?: boolean
+    countryId?: boolean
     stateId?: boolean
     cityId?: boolean
     status?: boolean
@@ -7225,6 +11070,9 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
+    country?: boolean | warehouse$countryArgs<ExtArgs>
+    state?: boolean | warehouse$stateArgs<ExtArgs>
+    city?: boolean | warehouse$cityArgs<ExtArgs>
   }, ExtArgs["result"]["warehouse"]>
 
 
@@ -7239,6 +11087,7 @@ export namespace Prisma {
     address_line_1?: boolean
     address_line_2?: boolean
     postal_code?: boolean
+    countryId?: boolean
     stateId?: boolean
     cityId?: boolean
     status?: boolean
@@ -7253,11 +11102,20 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type warehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "gst_number" | "contact_name" | "contact_number" | "address_line_1" | "address_line_2" | "postal_code" | "stateId" | "cityId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["warehouse"]>
+  export type warehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "gst_number" | "contact_name" | "contact_number" | "address_line_1" | "address_line_2" | "postal_code" | "countryId" | "stateId" | "cityId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["warehouse"]>
+  export type warehouseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    country?: boolean | warehouse$countryArgs<ExtArgs>
+    state?: boolean | warehouse$stateArgs<ExtArgs>
+    city?: boolean | warehouse$cityArgs<ExtArgs>
+  }
 
   export type $warehousePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "warehouse"
-    objects: {}
+    objects: {
+      country: Prisma.$countryPayload<ExtArgs> | null
+      state: Prisma.$statePayload<ExtArgs> | null
+      city: Prisma.$cityPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -7268,8 +11126,9 @@ export namespace Prisma {
       address_line_1: string
       address_line_2: string | null
       postal_code: string
-      stateId: bigint
-      cityId: bigint
+      countryId: bigint | null
+      stateId: bigint | null
+      cityId: bigint | null
       status: boolean
       createdAt: Date
       createdBy: number | null
@@ -7620,6 +11479,9 @@ export namespace Prisma {
    */
   export interface Prisma__warehouseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    country<T extends warehouse$countryArgs<ExtArgs> = {}>(args?: Subset<T, warehouse$countryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    state<T extends warehouse$stateArgs<ExtArgs> = {}>(args?: Subset<T, warehouse$stateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    city<T extends warehouse$cityArgs<ExtArgs> = {}>(args?: Subset<T, warehouse$cityArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7658,6 +11520,7 @@ export namespace Prisma {
     readonly address_line_1: FieldRef<"warehouse", 'String'>
     readonly address_line_2: FieldRef<"warehouse", 'String'>
     readonly postal_code: FieldRef<"warehouse", 'String'>
+    readonly countryId: FieldRef<"warehouse", 'BigInt'>
     readonly stateId: FieldRef<"warehouse", 'BigInt'>
     readonly cityId: FieldRef<"warehouse", 'BigInt'>
     readonly status: FieldRef<"warehouse", 'Boolean'>
@@ -7687,6 +11550,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * Filter, which warehouse to fetch.
      */
     where: warehouseWhereUniqueInput
@@ -7705,6 +11572,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * Filter, which warehouse to fetch.
      */
     where: warehouseWhereUniqueInput
@@ -7722,6 +11593,10 @@ export namespace Prisma {
      * Omit specific fields from the warehouse
      */
     omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
     /**
      * Filter, which warehouse to fetch.
      */
@@ -7771,6 +11646,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * Filter, which warehouse to fetch.
      */
     where?: warehouseWhereInput
@@ -7819,6 +11698,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * Filter, which warehouses to fetch.
      */
     where?: warehouseWhereInput
@@ -7862,6 +11745,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * The data needed to create a warehouse.
      */
     data: XOR<warehouseCreateInput, warehouseUncheckedCreateInput>
@@ -7890,6 +11777,10 @@ export namespace Prisma {
      * Omit specific fields from the warehouse
      */
     omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
     /**
      * The data needed to update a warehouse.
      */
@@ -7931,6 +11822,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * The filter to search for the warehouse to update in case it exists.
      */
     where: warehouseWhereUniqueInput
@@ -7957,6 +11852,10 @@ export namespace Prisma {
      */
     omit?: warehouseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
+    /**
      * Filter which warehouse to delete.
      */
     where: warehouseWhereUniqueInput
@@ -7977,6 +11876,63 @@ export namespace Prisma {
   }
 
   /**
+   * warehouse.country
+   */
+  export type warehouse$countryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    where?: countryWhereInput
+  }
+
+  /**
+   * warehouse.state
+   */
+  export type warehouse$stateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    where?: stateWhereInput
+  }
+
+  /**
+   * warehouse.city
+   */
+  export type warehouse$cityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
+  }
+
+  /**
    * warehouse without action
    */
   export type warehouseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7988,6 +11944,10 @@ export namespace Prisma {
      * Omit specific fields from the warehouse
      */
     omit?: warehouseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: warehouseInclude<ExtArgs> | null
   }
 
 
@@ -10068,1074 +14028,6 @@ export namespace Prisma {
 
 
   /**
-   * Model product
-   */
-
-  export type AggregateProduct = {
-    _count: ProductCountAggregateOutputType | null
-    _avg: ProductAvgAggregateOutputType | null
-    _sum: ProductSumAggregateOutputType | null
-    _min: ProductMinAggregateOutputType | null
-    _max: ProductMaxAggregateOutputType | null
-  }
-
-  export type ProductAvgAggregateOutputType = {
-    id: number | null
-    price: Decimal | null
-    quantity: number | null
-    createdBy: number | null
-    updatedBy: number | null
-    deletedBy: number | null
-  }
-
-  export type ProductSumAggregateOutputType = {
-    id: number | null
-    price: Decimal | null
-    quantity: number | null
-    createdBy: number | null
-    updatedBy: number | null
-    deletedBy: number | null
-  }
-
-  export type ProductMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    slug: string | null
-    description: string | null
-    image: string | null
-    price: Decimal | null
-    quantity: number | null
-    status: boolean | null
-    createdAt: Date | null
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date | null
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-  }
-
-  export type ProductMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-    slug: string | null
-    description: string | null
-    image: string | null
-    price: Decimal | null
-    quantity: number | null
-    status: boolean | null
-    createdAt: Date | null
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date | null
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-  }
-
-  export type ProductCountAggregateOutputType = {
-    id: number
-    name: number
-    slug: number
-    description: number
-    image: number
-    price: number
-    quantity: number
-    status: number
-    createdAt: number
-    createdBy: number
-    createdByRole: number
-    updatedAt: number
-    updatedBy: number
-    updatedByRole: number
-    deletedAt: number
-    deletedBy: number
-    deletedByRole: number
-    _all: number
-  }
-
-
-  export type ProductAvgAggregateInputType = {
-    id?: true
-    price?: true
-    quantity?: true
-    createdBy?: true
-    updatedBy?: true
-    deletedBy?: true
-  }
-
-  export type ProductSumAggregateInputType = {
-    id?: true
-    price?: true
-    quantity?: true
-    createdBy?: true
-    updatedBy?: true
-    deletedBy?: true
-  }
-
-  export type ProductMinAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    description?: true
-    image?: true
-    price?: true
-    quantity?: true
-    status?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-  }
-
-  export type ProductMaxAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    description?: true
-    image?: true
-    price?: true
-    quantity?: true
-    status?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-  }
-
-  export type ProductCountAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    description?: true
-    image?: true
-    price?: true
-    quantity?: true
-    status?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-    _all?: true
-  }
-
-  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which product to aggregate.
-     */
-    where?: productWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of products to fetch.
-     */
-    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: productWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned products
-    **/
-    _count?: true | ProductCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ProductAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ProductSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ProductMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ProductMaxAggregateInputType
-  }
-
-  export type GetProductAggregateType<T extends ProductAggregateArgs> = {
-        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateProduct[P]>
-      : GetScalarType<T[P], AggregateProduct[P]>
-  }
-
-
-
-
-  export type productGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: productWhereInput
-    orderBy?: productOrderByWithAggregationInput | productOrderByWithAggregationInput[]
-    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
-    having?: productScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProductCountAggregateInputType | true
-    _avg?: ProductAvgAggregateInputType
-    _sum?: ProductSumAggregateInputType
-    _min?: ProductMinAggregateInputType
-    _max?: ProductMaxAggregateInputType
-  }
-
-  export type ProductGroupByOutputType = {
-    id: number
-    name: string
-    slug: string
-    description: string | null
-    image: string | null
-    price: Decimal
-    quantity: number
-    status: boolean
-    createdAt: Date
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-    _count: ProductCountAggregateOutputType | null
-    _avg: ProductAvgAggregateOutputType | null
-    _sum: ProductSumAggregateOutputType | null
-    _min: ProductMinAggregateOutputType | null
-    _max: ProductMaxAggregateOutputType | null
-  }
-
-  type GetProductGroupByPayload<T extends productGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProductGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProductGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type productSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    description?: boolean
-    image?: boolean
-    price?: boolean
-    quantity?: boolean
-    status?: boolean
-    createdAt?: boolean
-    createdBy?: boolean
-    createdByRole?: boolean
-    updatedAt?: boolean
-    updatedBy?: boolean
-    updatedByRole?: boolean
-    deletedAt?: boolean
-    deletedBy?: boolean
-    deletedByRole?: boolean
-  }, ExtArgs["result"]["product"]>
-
-
-
-  export type productSelectScalar = {
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    description?: boolean
-    image?: boolean
-    price?: boolean
-    quantity?: boolean
-    status?: boolean
-    createdAt?: boolean
-    createdBy?: boolean
-    createdByRole?: boolean
-    updatedAt?: boolean
-    updatedBy?: boolean
-    updatedByRole?: boolean
-    deletedAt?: boolean
-    deletedBy?: boolean
-    deletedByRole?: boolean
-  }
-
-  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "price" | "quantity" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
-
-  export type $productPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "product"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-      slug: string
-      description: string | null
-      image: string | null
-      price: Prisma.Decimal
-      quantity: number
-      status: boolean
-      createdAt: Date
-      createdBy: number | null
-      createdByRole: string | null
-      updatedAt: Date
-      updatedBy: number | null
-      updatedByRole: string | null
-      deletedAt: Date | null
-      deletedBy: number | null
-      deletedByRole: string | null
-    }, ExtArgs["result"]["product"]>
-    composites: {}
-  }
-
-  type productGetPayload<S extends boolean | null | undefined | productDefaultArgs> = $Result.GetResult<Prisma.$productPayload, S>
-
-  type productCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<productFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProductCountAggregateInputType | true
-    }
-
-  export interface productDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['product'], meta: { name: 'product' } }
-    /**
-     * Find zero or one Product that matches the filter.
-     * @param {productFindUniqueArgs} args - Arguments to find a Product
-     * @example
-     * // Get one Product
-     * const product = await prisma.product.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends productFindUniqueArgs>(args: SelectSubset<T, productFindUniqueArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Product that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {productFindUniqueOrThrowArgs} args - Arguments to find a Product
-     * @example
-     * // Get one Product
-     * const product = await prisma.product.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends productFindUniqueOrThrowArgs>(args: SelectSubset<T, productFindUniqueOrThrowArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Product that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productFindFirstArgs} args - Arguments to find a Product
-     * @example
-     * // Get one Product
-     * const product = await prisma.product.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends productFindFirstArgs>(args?: SelectSubset<T, productFindFirstArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Product that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productFindFirstOrThrowArgs} args - Arguments to find a Product
-     * @example
-     * // Get one Product
-     * const product = await prisma.product.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends productFindFirstOrThrowArgs>(args?: SelectSubset<T, productFindFirstOrThrowArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Products that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Products
-     * const products = await prisma.product.findMany()
-     * 
-     * // Get first 10 Products
-     * const products = await prisma.product.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends productFindManyArgs>(args?: SelectSubset<T, productFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Product.
-     * @param {productCreateArgs} args - Arguments to create a Product.
-     * @example
-     * // Create one Product
-     * const Product = await prisma.product.create({
-     *   data: {
-     *     // ... data to create a Product
-     *   }
-     * })
-     * 
-     */
-    create<T extends productCreateArgs>(args: SelectSubset<T, productCreateArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Products.
-     * @param {productCreateManyArgs} args - Arguments to create many Products.
-     * @example
-     * // Create many Products
-     * const product = await prisma.product.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends productCreateManyArgs>(args?: SelectSubset<T, productCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Product.
-     * @param {productDeleteArgs} args - Arguments to delete one Product.
-     * @example
-     * // Delete one Product
-     * const Product = await prisma.product.delete({
-     *   where: {
-     *     // ... filter to delete one Product
-     *   }
-     * })
-     * 
-     */
-    delete<T extends productDeleteArgs>(args: SelectSubset<T, productDeleteArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Product.
-     * @param {productUpdateArgs} args - Arguments to update one Product.
-     * @example
-     * // Update one Product
-     * const product = await prisma.product.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends productUpdateArgs>(args: SelectSubset<T, productUpdateArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Products.
-     * @param {productDeleteManyArgs} args - Arguments to filter Products to delete.
-     * @example
-     * // Delete a few Products
-     * const { count } = await prisma.product.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends productDeleteManyArgs>(args?: SelectSubset<T, productDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Products
-     * const product = await prisma.product.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends productUpdateManyArgs>(args: SelectSubset<T, productUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Product.
-     * @param {productUpsertArgs} args - Arguments to update or create a Product.
-     * @example
-     * // Update or create a Product
-     * const product = await prisma.product.upsert({
-     *   create: {
-     *     // ... data to create a Product
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Product we want to update
-     *   }
-     * })
-     */
-    upsert<T extends productUpsertArgs>(args: SelectSubset<T, productUpsertArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productCountArgs} args - Arguments to filter Products to count.
-     * @example
-     * // Count the number of Products
-     * const count = await prisma.product.count({
-     *   where: {
-     *     // ... the filter for the Products we want to count
-     *   }
-     * })
-    **/
-    count<T extends productCountArgs>(
-      args?: Subset<T, productCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ProductCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Product.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
-
-    /**
-     * Group by Product.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {productGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends productGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: productGroupByArgs['orderBy'] }
-        : { orderBy?: productGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, productGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the product model
-   */
-  readonly fields: productFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for product.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__productClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the product model
-   */
-  interface productFieldRefs {
-    readonly id: FieldRef<"product", 'Int'>
-    readonly name: FieldRef<"product", 'String'>
-    readonly slug: FieldRef<"product", 'String'>
-    readonly description: FieldRef<"product", 'String'>
-    readonly image: FieldRef<"product", 'String'>
-    readonly price: FieldRef<"product", 'Decimal'>
-    readonly quantity: FieldRef<"product", 'Int'>
-    readonly status: FieldRef<"product", 'Boolean'>
-    readonly createdAt: FieldRef<"product", 'DateTime'>
-    readonly createdBy: FieldRef<"product", 'Int'>
-    readonly createdByRole: FieldRef<"product", 'String'>
-    readonly updatedAt: FieldRef<"product", 'DateTime'>
-    readonly updatedBy: FieldRef<"product", 'Int'>
-    readonly updatedByRole: FieldRef<"product", 'String'>
-    readonly deletedAt: FieldRef<"product", 'DateTime'>
-    readonly deletedBy: FieldRef<"product", 'Int'>
-    readonly deletedByRole: FieldRef<"product", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * product findUnique
-   */
-  export type productFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter, which product to fetch.
-     */
-    where: productWhereUniqueInput
-  }
-
-  /**
-   * product findUniqueOrThrow
-   */
-  export type productFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter, which product to fetch.
-     */
-    where: productWhereUniqueInput
-  }
-
-  /**
-   * product findFirst
-   */
-  export type productFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter, which product to fetch.
-     */
-    where?: productWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of products to fetch.
-     */
-    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for products.
-     */
-    cursor?: productWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of products.
-     */
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
-
-  /**
-   * product findFirstOrThrow
-   */
-  export type productFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter, which product to fetch.
-     */
-    where?: productWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of products to fetch.
-     */
-    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for products.
-     */
-    cursor?: productWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of products.
-     */
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
-
-  /**
-   * product findMany
-   */
-  export type productFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter, which products to fetch.
-     */
-    where?: productWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of products to fetch.
-     */
-    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing products.
-     */
-    cursor?: productWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` products.
-     */
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
-
-  /**
-   * product create
-   */
-  export type productCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * The data needed to create a product.
-     */
-    data: XOR<productCreateInput, productUncheckedCreateInput>
-  }
-
-  /**
-   * product createMany
-   */
-  export type productCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many products.
-     */
-    data: productCreateManyInput | productCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * product update
-   */
-  export type productUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * The data needed to update a product.
-     */
-    data: XOR<productUpdateInput, productUncheckedUpdateInput>
-    /**
-     * Choose, which product to update.
-     */
-    where: productWhereUniqueInput
-  }
-
-  /**
-   * product updateMany
-   */
-  export type productUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update products.
-     */
-    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyInput>
-    /**
-     * Filter which products to update
-     */
-    where?: productWhereInput
-    /**
-     * Limit how many products to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * product upsert
-   */
-  export type productUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * The filter to search for the product to update in case it exists.
-     */
-    where: productWhereUniqueInput
-    /**
-     * In case the product found by the `where` argument doesn't exist, create a new product with this data.
-     */
-    create: XOR<productCreateInput, productUncheckedCreateInput>
-    /**
-     * In case the product was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<productUpdateInput, productUncheckedUpdateInput>
-  }
-
-  /**
-   * product delete
-   */
-  export type productDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-    /**
-     * Filter which product to delete.
-     */
-    where: productWhereUniqueInput
-  }
-
-  /**
-   * product deleteMany
-   */
-  export type productDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which products to delete
-     */
-    where?: productWhereInput
-    /**
-     * Limit how many products to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * product without action
-   */
-  export type productDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the product
-     */
-    select?: productSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the product
-     */
-    omit?: productOmit<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -11175,39 +14067,6 @@ export namespace Prisma {
   export type EmailConfigScalarFieldEnum = (typeof EmailConfigScalarFieldEnum)[keyof typeof EmailConfigScalarFieldEnum]
 
 
-  export const StateScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    fipsCode: 'fipsCode',
-    iso2: 'iso2',
-    type: 'type',
-    latitude: 'latitude',
-    longitude: 'longitude',
-    flag: 'flag',
-    wikiDataId: 'wikiDataId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type StateScalarFieldEnum = (typeof StateScalarFieldEnum)[keyof typeof StateScalarFieldEnum]
-
-
-  export const CityScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    stateId: 'stateId',
-    stateCode: 'stateCode',
-    latitude: 'latitude',
-    longitude: 'longitude',
-    flag: 'flag',
-    wikiDataId: 'wikiDataId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type CityScalarFieldEnum = (typeof CityScalarFieldEnum)[keyof typeof CityScalarFieldEnum]
-
-
   export const AdminScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -11243,6 +14102,125 @@ export namespace Prisma {
   export type AdminStaffScalarFieldEnum = (typeof AdminStaffScalarFieldEnum)[keyof typeof AdminStaffScalarFieldEnum]
 
 
+  export const LoginLogScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    adminRole: 'adminRole',
+    action: 'action',
+    response: 'response',
+    ipv4: 'ipv4',
+    ipv6: 'ipv6',
+    internetServiceProvider: 'internetServiceProvider',
+    clientInformation: 'clientInformation',
+    userAgent: 'userAgent',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type LoginLogScalarFieldEnum = (typeof LoginLogScalarFieldEnum)[keyof typeof LoginLogScalarFieldEnum]
+
+
+  export const ActivityLogScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    adminRole: 'adminRole',
+    module: 'module',
+    action: 'action',
+    endpoint: 'endpoint',
+    method: 'method',
+    payload: 'payload',
+    response: 'response',
+    result: 'result',
+    data: 'data',
+    ipv4: 'ipv4',
+    ipv6: 'ipv6',
+    internetServiceProvider: 'internetServiceProvider',
+    clientInformation: 'clientInformation',
+    userAgent: 'userAgent',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+  export const CountryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    iso3: 'iso3',
+    iso2: 'iso2',
+    phonecode: 'phonecode',
+    currency: 'currency',
+    currencyName: 'currencyName',
+    currencySymbol: 'currencySymbol',
+    nationality: 'nationality',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum]
+
+
+  export const StateScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    countryId: 'countryId',
+    iso2: 'iso2',
+    type: 'type',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type StateScalarFieldEnum = (typeof StateScalarFieldEnum)[keyof typeof StateScalarFieldEnum]
+
+
+  export const CityScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    stateId: 'stateId',
+    countryId: 'countryId',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type CityScalarFieldEnum = (typeof CityScalarFieldEnum)[keyof typeof CityScalarFieldEnum]
+
+
   export const WarehouseScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -11253,6 +14231,7 @@ export namespace Prisma {
     address_line_1: 'address_line_1',
     address_line_2: 'address_line_2',
     postal_code: 'postal_code',
+    countryId: 'countryId',
     stateId: 'stateId',
     cityId: 'cityId',
     status: 'status',
@@ -11312,29 +14291,6 @@ export namespace Prisma {
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
 
 
-  export const ProductScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    slug: 'slug',
-    description: 'description',
-    image: 'image',
-    price: 'price',
-    quantity: 'quantity',
-    status: 'status',
-    createdAt: 'createdAt',
-    createdBy: 'createdBy',
-    createdByRole: 'createdByRole',
-    updatedAt: 'updatedAt',
-    updatedBy: 'updatedBy',
-    updatedByRole: 'updatedByRole',
-    deletedAt: 'deletedAt',
-    deletedBy: 'deletedBy',
-    deletedByRole: 'deletedByRole'
-  };
-
-  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
-
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -11369,26 +14325,6 @@ export namespace Prisma {
   export type emailConfigOrderByRelevanceFieldEnum = (typeof emailConfigOrderByRelevanceFieldEnum)[keyof typeof emailConfigOrderByRelevanceFieldEnum]
 
 
-  export const stateOrderByRelevanceFieldEnum: {
-    name: 'name',
-    fipsCode: 'fipsCode',
-    iso2: 'iso2',
-    type: 'type',
-    wikiDataId: 'wikiDataId'
-  };
-
-  export type stateOrderByRelevanceFieldEnum = (typeof stateOrderByRelevanceFieldEnum)[keyof typeof stateOrderByRelevanceFieldEnum]
-
-
-  export const cityOrderByRelevanceFieldEnum: {
-    name: 'name',
-    stateCode: 'stateCode',
-    wikiDataId: 'wikiDataId'
-  };
-
-  export type cityOrderByRelevanceFieldEnum = (typeof cityOrderByRelevanceFieldEnum)[keyof typeof cityOrderByRelevanceFieldEnum]
-
-
   export const adminOrderByRelevanceFieldEnum: {
     name: 'name',
     email: 'email',
@@ -11411,6 +14347,84 @@ export namespace Prisma {
   };
 
   export type adminStaffOrderByRelevanceFieldEnum = (typeof adminStaffOrderByRelevanceFieldEnum)[keyof typeof adminStaffOrderByRelevanceFieldEnum]
+
+
+  export const loginLogOrderByRelevanceFieldEnum: {
+    adminRole: 'adminRole',
+    action: 'action',
+    response: 'response',
+    ipv4: 'ipv4',
+    ipv6: 'ipv6',
+    internetServiceProvider: 'internetServiceProvider',
+    clientInformation: 'clientInformation',
+    userAgent: 'userAgent',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type loginLogOrderByRelevanceFieldEnum = (typeof loginLogOrderByRelevanceFieldEnum)[keyof typeof loginLogOrderByRelevanceFieldEnum]
+
+
+  export const activityLogOrderByRelevanceFieldEnum: {
+    adminRole: 'adminRole',
+    module: 'module',
+    action: 'action',
+    endpoint: 'endpoint',
+    method: 'method',
+    payload: 'payload',
+    response: 'response',
+    data: 'data',
+    ipv4: 'ipv4',
+    ipv6: 'ipv6',
+    internetServiceProvider: 'internetServiceProvider',
+    clientInformation: 'clientInformation',
+    userAgent: 'userAgent',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type activityLogOrderByRelevanceFieldEnum = (typeof activityLogOrderByRelevanceFieldEnum)[keyof typeof activityLogOrderByRelevanceFieldEnum]
+
+
+  export const countryOrderByRelevanceFieldEnum: {
+    name: 'name',
+    iso3: 'iso3',
+    iso2: 'iso2',
+    phonecode: 'phonecode',
+    currency: 'currency',
+    currencyName: 'currencyName',
+    currencySymbol: 'currencySymbol',
+    nationality: 'nationality',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type countryOrderByRelevanceFieldEnum = (typeof countryOrderByRelevanceFieldEnum)[keyof typeof countryOrderByRelevanceFieldEnum]
+
+
+  export const stateOrderByRelevanceFieldEnum: {
+    name: 'name',
+    iso2: 'iso2',
+    type: 'type',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type stateOrderByRelevanceFieldEnum = (typeof stateOrderByRelevanceFieldEnum)[keyof typeof stateOrderByRelevanceFieldEnum]
+
+
+  export const cityOrderByRelevanceFieldEnum: {
+    name: 'name',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type cityOrderByRelevanceFieldEnum = (typeof cityOrderByRelevanceFieldEnum)[keyof typeof cityOrderByRelevanceFieldEnum]
 
 
   export const warehouseOrderByRelevanceFieldEnum: {
@@ -11456,19 +14470,6 @@ export namespace Prisma {
   export type brandOrderByRelevanceFieldEnum = (typeof brandOrderByRelevanceFieldEnum)[keyof typeof brandOrderByRelevanceFieldEnum]
 
 
-  export const productOrderByRelevanceFieldEnum: {
-    name: 'name',
-    slug: 'slug',
-    description: 'description',
-    image: 'image',
-    createdByRole: 'createdByRole',
-    updatedByRole: 'updatedByRole',
-    deletedByRole: 'deletedByRole'
-  };
-
-  export type productOrderByRelevanceFieldEnum = (typeof productOrderByRelevanceFieldEnum)[keyof typeof productOrderByRelevanceFieldEnum]
-
-
   /**
    * Field references
    */
@@ -11510,13 +14511,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -11535,7 +14529,7 @@ export namespace Prisma {
     module?: StringFilter<"emailConfig"> | string
     subject?: StringFilter<"emailConfig"> | string
     action?: StringFilter<"emailConfig"> | string
-    html_template?: StringFilter<"emailConfig"> | string
+    html_template?: StringNullableFilter<"emailConfig"> | string | null
     smtp_host?: StringFilter<"emailConfig"> | string
     smtp_secure?: BoolFilter<"emailConfig"> | boolean
     smtp_port?: IntFilter<"emailConfig"> | number
@@ -11558,7 +14552,7 @@ export namespace Prisma {
     module?: SortOrder
     subject?: SortOrder
     action?: SortOrder
-    html_template?: SortOrder
+    html_template?: SortOrderInput | SortOrder
     smtp_host?: SortOrder
     smtp_secure?: SortOrder
     smtp_port?: SortOrder
@@ -11585,7 +14579,7 @@ export namespace Prisma {
     module?: StringFilter<"emailConfig"> | string
     subject?: StringFilter<"emailConfig"> | string
     action?: StringFilter<"emailConfig"> | string
-    html_template?: StringFilter<"emailConfig"> | string
+    html_template?: StringNullableFilter<"emailConfig"> | string | null
     smtp_host?: StringFilter<"emailConfig"> | string
     smtp_secure?: BoolFilter<"emailConfig"> | boolean
     smtp_port?: IntFilter<"emailConfig"> | number
@@ -11608,7 +14602,7 @@ export namespace Prisma {
     module?: SortOrder
     subject?: SortOrder
     action?: SortOrder
-    html_template?: SortOrder
+    html_template?: SortOrderInput | SortOrder
     smtp_host?: SortOrder
     smtp_secure?: SortOrder
     smtp_port?: SortOrder
@@ -11639,7 +14633,7 @@ export namespace Prisma {
     module?: StringWithAggregatesFilter<"emailConfig"> | string
     subject?: StringWithAggregatesFilter<"emailConfig"> | string
     action?: StringWithAggregatesFilter<"emailConfig"> | string
-    html_template?: StringWithAggregatesFilter<"emailConfig"> | string
+    html_template?: StringNullableWithAggregatesFilter<"emailConfig"> | string | null
     smtp_host?: StringWithAggregatesFilter<"emailConfig"> | string
     smtp_secure?: BoolWithAggregatesFilter<"emailConfig"> | boolean
     smtp_port?: IntWithAggregatesFilter<"emailConfig"> | number
@@ -11654,177 +14648,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"emailConfig"> | Date | string
     updatedBy?: IntNullableWithAggregatesFilter<"emailConfig"> | number | null
     updatedByRole?: StringNullableWithAggregatesFilter<"emailConfig"> | string | null
-  }
-
-  export type stateWhereInput = {
-    AND?: stateWhereInput | stateWhereInput[]
-    OR?: stateWhereInput[]
-    NOT?: stateWhereInput | stateWhereInput[]
-    id?: BigIntFilter<"state"> | bigint | number
-    name?: StringFilter<"state"> | string
-    fipsCode?: StringNullableFilter<"state"> | string | null
-    iso2?: StringNullableFilter<"state"> | string | null
-    type?: StringNullableFilter<"state"> | string | null
-    latitude?: DecimalNullableFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    longitude?: DecimalNullableFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFilter<"state"> | number
-    wikiDataId?: StringNullableFilter<"state"> | string | null
-    createdAt?: DateTimeFilter<"state"> | Date | string
-    updatedAt?: DateTimeFilter<"state"> | Date | string
-    city?: CityListRelationFilter
-  }
-
-  export type stateOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    fipsCode?: SortOrderInput | SortOrder
-    iso2?: SortOrderInput | SortOrder
-    type?: SortOrderInput | SortOrder
-    latitude?: SortOrderInput | SortOrder
-    longitude?: SortOrderInput | SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    city?: cityOrderByRelationAggregateInput
-    _relevance?: stateOrderByRelevanceInput
-  }
-
-  export type stateWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
-    AND?: stateWhereInput | stateWhereInput[]
-    OR?: stateWhereInput[]
-    NOT?: stateWhereInput | stateWhereInput[]
-    name?: StringFilter<"state"> | string
-    fipsCode?: StringNullableFilter<"state"> | string | null
-    iso2?: StringNullableFilter<"state"> | string | null
-    type?: StringNullableFilter<"state"> | string | null
-    latitude?: DecimalNullableFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    longitude?: DecimalNullableFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFilter<"state"> | number
-    wikiDataId?: StringNullableFilter<"state"> | string | null
-    createdAt?: DateTimeFilter<"state"> | Date | string
-    updatedAt?: DateTimeFilter<"state"> | Date | string
-    city?: CityListRelationFilter
-  }, "id">
-
-  export type stateOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    fipsCode?: SortOrderInput | SortOrder
-    iso2?: SortOrderInput | SortOrder
-    type?: SortOrderInput | SortOrder
-    latitude?: SortOrderInput | SortOrder
-    longitude?: SortOrderInput | SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: stateCountOrderByAggregateInput
-    _avg?: stateAvgOrderByAggregateInput
-    _max?: stateMaxOrderByAggregateInput
-    _min?: stateMinOrderByAggregateInput
-    _sum?: stateSumOrderByAggregateInput
-  }
-
-  export type stateScalarWhereWithAggregatesInput = {
-    AND?: stateScalarWhereWithAggregatesInput | stateScalarWhereWithAggregatesInput[]
-    OR?: stateScalarWhereWithAggregatesInput[]
-    NOT?: stateScalarWhereWithAggregatesInput | stateScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"state"> | bigint | number
-    name?: StringWithAggregatesFilter<"state"> | string
-    fipsCode?: StringNullableWithAggregatesFilter<"state"> | string | null
-    iso2?: StringNullableWithAggregatesFilter<"state"> | string | null
-    type?: StringNullableWithAggregatesFilter<"state"> | string | null
-    latitude?: DecimalNullableWithAggregatesFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    longitude?: DecimalNullableWithAggregatesFilter<"state"> | Decimal | DecimalJsLike | number | string | null
-    flag?: IntWithAggregatesFilter<"state"> | number
-    wikiDataId?: StringNullableWithAggregatesFilter<"state"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"state"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"state"> | Date | string
-  }
-
-  export type cityWhereInput = {
-    AND?: cityWhereInput | cityWhereInput[]
-    OR?: cityWhereInput[]
-    NOT?: cityWhereInput | cityWhereInput[]
-    id?: BigIntFilter<"city"> | bigint | number
-    name?: StringFilter<"city"> | string
-    stateId?: BigIntFilter<"city"> | bigint | number
-    stateCode?: StringFilter<"city"> | string
-    latitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    flag?: IntFilter<"city"> | number
-    wikiDataId?: StringNullableFilter<"city"> | string | null
-    createdAt?: DateTimeFilter<"city"> | Date | string
-    updatedAt?: DateTimeFilter<"city"> | Date | string
-    state?: XOR<StateScalarRelationFilter, stateWhereInput>
-  }
-
-  export type cityOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    stateId?: SortOrder
-    stateCode?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    state?: stateOrderByWithRelationInput
-    _relevance?: cityOrderByRelevanceInput
-  }
-
-  export type cityWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
-    AND?: cityWhereInput | cityWhereInput[]
-    OR?: cityWhereInput[]
-    NOT?: cityWhereInput | cityWhereInput[]
-    name?: StringFilter<"city"> | string
-    stateId?: BigIntFilter<"city"> | bigint | number
-    stateCode?: StringFilter<"city"> | string
-    latitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    flag?: IntFilter<"city"> | number
-    wikiDataId?: StringNullableFilter<"city"> | string | null
-    createdAt?: DateTimeFilter<"city"> | Date | string
-    updatedAt?: DateTimeFilter<"city"> | Date | string
-    state?: XOR<StateScalarRelationFilter, stateWhereInput>
-  }, "id">
-
-  export type cityOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    stateId?: SortOrder
-    stateCode?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: cityCountOrderByAggregateInput
-    _avg?: cityAvgOrderByAggregateInput
-    _max?: cityMaxOrderByAggregateInput
-    _min?: cityMinOrderByAggregateInput
-    _sum?: citySumOrderByAggregateInput
-  }
-
-  export type cityScalarWhereWithAggregatesInput = {
-    AND?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
-    OR?: cityScalarWhereWithAggregatesInput[]
-    NOT?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"city"> | bigint | number
-    name?: StringWithAggregatesFilter<"city"> | string
-    stateId?: BigIntWithAggregatesFilter<"city"> | bigint | number
-    stateCode?: StringWithAggregatesFilter<"city"> | string
-    latitude?: DecimalWithAggregatesFilter<"city"> | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalWithAggregatesFilter<"city"> | Decimal | DecimalJsLike | number | string
-    flag?: IntWithAggregatesFilter<"city"> | number
-    wikiDataId?: StringNullableWithAggregatesFilter<"city"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"city"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"city"> | Date | string
   }
 
   export type adminWhereInput = {
@@ -12008,6 +14831,628 @@ export namespace Prisma {
     pr_last_reset?: DateTimeNullableWithAggregatesFilter<"adminStaff"> | Date | string | null
   }
 
+  export type loginLogWhereInput = {
+    AND?: loginLogWhereInput | loginLogWhereInput[]
+    OR?: loginLogWhereInput[]
+    NOT?: loginLogWhereInput | loginLogWhereInput[]
+    id?: IntFilter<"loginLog"> | number
+    adminId?: IntFilter<"loginLog"> | number
+    adminRole?: StringFilter<"loginLog"> | string
+    action?: StringFilter<"loginLog"> | string
+    response?: StringNullableFilter<"loginLog"> | string | null
+    ipv4?: StringNullableFilter<"loginLog"> | string | null
+    ipv6?: StringNullableFilter<"loginLog"> | string | null
+    internetServiceProvider?: StringNullableFilter<"loginLog"> | string | null
+    clientInformation?: StringNullableFilter<"loginLog"> | string | null
+    userAgent?: StringNullableFilter<"loginLog"> | string | null
+    createdAt?: DateTimeFilter<"loginLog"> | Date | string
+    createdBy?: IntNullableFilter<"loginLog"> | number | null
+    createdByRole?: StringNullableFilter<"loginLog"> | string | null
+    updatedAt?: DateTimeFilter<"loginLog"> | Date | string
+    updatedBy?: IntNullableFilter<"loginLog"> | number | null
+    updatedByRole?: StringNullableFilter<"loginLog"> | string | null
+    deletedAt?: DateTimeNullableFilter<"loginLog"> | Date | string | null
+    deletedBy?: IntNullableFilter<"loginLog"> | number | null
+    deletedByRole?: StringNullableFilter<"loginLog"> | string | null
+  }
+
+  export type loginLogOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    action?: SortOrder
+    response?: SortOrderInput | SortOrder
+    ipv4?: SortOrderInput | SortOrder
+    ipv6?: SortOrderInput | SortOrder
+    internetServiceProvider?: SortOrderInput | SortOrder
+    clientInformation?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _relevance?: loginLogOrderByRelevanceInput
+  }
+
+  export type loginLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: loginLogWhereInput | loginLogWhereInput[]
+    OR?: loginLogWhereInput[]
+    NOT?: loginLogWhereInput | loginLogWhereInput[]
+    adminId?: IntFilter<"loginLog"> | number
+    adminRole?: StringFilter<"loginLog"> | string
+    action?: StringFilter<"loginLog"> | string
+    response?: StringNullableFilter<"loginLog"> | string | null
+    ipv4?: StringNullableFilter<"loginLog"> | string | null
+    ipv6?: StringNullableFilter<"loginLog"> | string | null
+    internetServiceProvider?: StringNullableFilter<"loginLog"> | string | null
+    clientInformation?: StringNullableFilter<"loginLog"> | string | null
+    userAgent?: StringNullableFilter<"loginLog"> | string | null
+    createdAt?: DateTimeFilter<"loginLog"> | Date | string
+    createdBy?: IntNullableFilter<"loginLog"> | number | null
+    createdByRole?: StringNullableFilter<"loginLog"> | string | null
+    updatedAt?: DateTimeFilter<"loginLog"> | Date | string
+    updatedBy?: IntNullableFilter<"loginLog"> | number | null
+    updatedByRole?: StringNullableFilter<"loginLog"> | string | null
+    deletedAt?: DateTimeNullableFilter<"loginLog"> | Date | string | null
+    deletedBy?: IntNullableFilter<"loginLog"> | number | null
+    deletedByRole?: StringNullableFilter<"loginLog"> | string | null
+  }, "id">
+
+  export type loginLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    action?: SortOrder
+    response?: SortOrderInput | SortOrder
+    ipv4?: SortOrderInput | SortOrder
+    ipv6?: SortOrderInput | SortOrder
+    internetServiceProvider?: SortOrderInput | SortOrder
+    clientInformation?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: loginLogCountOrderByAggregateInput
+    _avg?: loginLogAvgOrderByAggregateInput
+    _max?: loginLogMaxOrderByAggregateInput
+    _min?: loginLogMinOrderByAggregateInput
+    _sum?: loginLogSumOrderByAggregateInput
+  }
+
+  export type loginLogScalarWhereWithAggregatesInput = {
+    AND?: loginLogScalarWhereWithAggregatesInput | loginLogScalarWhereWithAggregatesInput[]
+    OR?: loginLogScalarWhereWithAggregatesInput[]
+    NOT?: loginLogScalarWhereWithAggregatesInput | loginLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"loginLog"> | number
+    adminId?: IntWithAggregatesFilter<"loginLog"> | number
+    adminRole?: StringWithAggregatesFilter<"loginLog"> | string
+    action?: StringWithAggregatesFilter<"loginLog"> | string
+    response?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    ipv4?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    ipv6?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    internetServiceProvider?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    clientInformation?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"loginLog"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"loginLog"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"loginLog"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"loginLog"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"loginLog"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"loginLog"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"loginLog"> | string | null
+  }
+
+  export type activityLogWhereInput = {
+    AND?: activityLogWhereInput | activityLogWhereInput[]
+    OR?: activityLogWhereInput[]
+    NOT?: activityLogWhereInput | activityLogWhereInput[]
+    id?: IntFilter<"activityLog"> | number
+    adminId?: IntFilter<"activityLog"> | number
+    adminRole?: StringFilter<"activityLog"> | string
+    module?: StringFilter<"activityLog"> | string
+    action?: StringFilter<"activityLog"> | string
+    endpoint?: StringFilter<"activityLog"> | string
+    method?: StringFilter<"activityLog"> | string
+    payload?: StringNullableFilter<"activityLog"> | string | null
+    response?: StringNullableFilter<"activityLog"> | string | null
+    result?: BoolFilter<"activityLog"> | boolean
+    data?: StringNullableFilter<"activityLog"> | string | null
+    ipv4?: StringNullableFilter<"activityLog"> | string | null
+    ipv6?: StringNullableFilter<"activityLog"> | string | null
+    internetServiceProvider?: StringNullableFilter<"activityLog"> | string | null
+    clientInformation?: StringNullableFilter<"activityLog"> | string | null
+    userAgent?: StringNullableFilter<"activityLog"> | string | null
+    createdAt?: DateTimeFilter<"activityLog"> | Date | string
+    createdBy?: IntNullableFilter<"activityLog"> | number | null
+    createdByRole?: StringNullableFilter<"activityLog"> | string | null
+    updatedAt?: DateTimeFilter<"activityLog"> | Date | string
+    updatedBy?: IntNullableFilter<"activityLog"> | number | null
+    updatedByRole?: StringNullableFilter<"activityLog"> | string | null
+    deletedAt?: DateTimeNullableFilter<"activityLog"> | Date | string | null
+    deletedBy?: IntNullableFilter<"activityLog"> | number | null
+    deletedByRole?: StringNullableFilter<"activityLog"> | string | null
+  }
+
+  export type activityLogOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    endpoint?: SortOrder
+    method?: SortOrder
+    payload?: SortOrderInput | SortOrder
+    response?: SortOrderInput | SortOrder
+    result?: SortOrder
+    data?: SortOrderInput | SortOrder
+    ipv4?: SortOrderInput | SortOrder
+    ipv6?: SortOrderInput | SortOrder
+    internetServiceProvider?: SortOrderInput | SortOrder
+    clientInformation?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _relevance?: activityLogOrderByRelevanceInput
+  }
+
+  export type activityLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: activityLogWhereInput | activityLogWhereInput[]
+    OR?: activityLogWhereInput[]
+    NOT?: activityLogWhereInput | activityLogWhereInput[]
+    adminId?: IntFilter<"activityLog"> | number
+    adminRole?: StringFilter<"activityLog"> | string
+    module?: StringFilter<"activityLog"> | string
+    action?: StringFilter<"activityLog"> | string
+    endpoint?: StringFilter<"activityLog"> | string
+    method?: StringFilter<"activityLog"> | string
+    payload?: StringNullableFilter<"activityLog"> | string | null
+    response?: StringNullableFilter<"activityLog"> | string | null
+    result?: BoolFilter<"activityLog"> | boolean
+    data?: StringNullableFilter<"activityLog"> | string | null
+    ipv4?: StringNullableFilter<"activityLog"> | string | null
+    ipv6?: StringNullableFilter<"activityLog"> | string | null
+    internetServiceProvider?: StringNullableFilter<"activityLog"> | string | null
+    clientInformation?: StringNullableFilter<"activityLog"> | string | null
+    userAgent?: StringNullableFilter<"activityLog"> | string | null
+    createdAt?: DateTimeFilter<"activityLog"> | Date | string
+    createdBy?: IntNullableFilter<"activityLog"> | number | null
+    createdByRole?: StringNullableFilter<"activityLog"> | string | null
+    updatedAt?: DateTimeFilter<"activityLog"> | Date | string
+    updatedBy?: IntNullableFilter<"activityLog"> | number | null
+    updatedByRole?: StringNullableFilter<"activityLog"> | string | null
+    deletedAt?: DateTimeNullableFilter<"activityLog"> | Date | string | null
+    deletedBy?: IntNullableFilter<"activityLog"> | number | null
+    deletedByRole?: StringNullableFilter<"activityLog"> | string | null
+  }, "id">
+
+  export type activityLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    endpoint?: SortOrder
+    method?: SortOrder
+    payload?: SortOrderInput | SortOrder
+    response?: SortOrderInput | SortOrder
+    result?: SortOrder
+    data?: SortOrderInput | SortOrder
+    ipv4?: SortOrderInput | SortOrder
+    ipv6?: SortOrderInput | SortOrder
+    internetServiceProvider?: SortOrderInput | SortOrder
+    clientInformation?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: activityLogCountOrderByAggregateInput
+    _avg?: activityLogAvgOrderByAggregateInput
+    _max?: activityLogMaxOrderByAggregateInput
+    _min?: activityLogMinOrderByAggregateInput
+    _sum?: activityLogSumOrderByAggregateInput
+  }
+
+  export type activityLogScalarWhereWithAggregatesInput = {
+    AND?: activityLogScalarWhereWithAggregatesInput | activityLogScalarWhereWithAggregatesInput[]
+    OR?: activityLogScalarWhereWithAggregatesInput[]
+    NOT?: activityLogScalarWhereWithAggregatesInput | activityLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"activityLog"> | number
+    adminId?: IntWithAggregatesFilter<"activityLog"> | number
+    adminRole?: StringWithAggregatesFilter<"activityLog"> | string
+    module?: StringWithAggregatesFilter<"activityLog"> | string
+    action?: StringWithAggregatesFilter<"activityLog"> | string
+    endpoint?: StringWithAggregatesFilter<"activityLog"> | string
+    method?: StringWithAggregatesFilter<"activityLog"> | string
+    payload?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    response?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    result?: BoolWithAggregatesFilter<"activityLog"> | boolean
+    data?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    ipv4?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    ipv6?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    internetServiceProvider?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    clientInformation?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"activityLog"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"activityLog"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"activityLog"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"activityLog"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"activityLog"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"activityLog"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"activityLog"> | string | null
+  }
+
+  export type countryWhereInput = {
+    AND?: countryWhereInput | countryWhereInput[]
+    OR?: countryWhereInput[]
+    NOT?: countryWhereInput | countryWhereInput[]
+    id?: BigIntFilter<"country"> | bigint | number
+    name?: StringFilter<"country"> | string
+    iso3?: StringNullableFilter<"country"> | string | null
+    iso2?: StringNullableFilter<"country"> | string | null
+    phonecode?: StringNullableFilter<"country"> | string | null
+    currency?: StringNullableFilter<"country"> | string | null
+    currencyName?: StringNullableFilter<"country"> | string | null
+    currencySymbol?: StringNullableFilter<"country"> | string | null
+    nationality?: StringNullableFilter<"country"> | string | null
+    createdAt?: DateTimeFilter<"country"> | Date | string
+    createdBy?: IntNullableFilter<"country"> | number | null
+    createdByRole?: StringNullableFilter<"country"> | string | null
+    updatedAt?: DateTimeFilter<"country"> | Date | string
+    updatedBy?: IntNullableFilter<"country"> | number | null
+    updatedByRole?: StringNullableFilter<"country"> | string | null
+    deletedAt?: DateTimeNullableFilter<"country"> | Date | string | null
+    deletedBy?: IntNullableFilter<"country"> | number | null
+    deletedByRole?: StringNullableFilter<"country"> | string | null
+    states?: StateListRelationFilter
+    cities?: CityListRelationFilter
+    warehouses?: WarehouseListRelationFilter
+  }
+
+  export type countryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    iso3?: SortOrderInput | SortOrder
+    iso2?: SortOrderInput | SortOrder
+    phonecode?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    currencyName?: SortOrderInput | SortOrder
+    currencySymbol?: SortOrderInput | SortOrder
+    nationality?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    states?: stateOrderByRelationAggregateInput
+    cities?: cityOrderByRelationAggregateInput
+    warehouses?: warehouseOrderByRelationAggregateInput
+    _relevance?: countryOrderByRelevanceInput
+  }
+
+  export type countryWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: countryWhereInput | countryWhereInput[]
+    OR?: countryWhereInput[]
+    NOT?: countryWhereInput | countryWhereInput[]
+    name?: StringFilter<"country"> | string
+    iso3?: StringNullableFilter<"country"> | string | null
+    iso2?: StringNullableFilter<"country"> | string | null
+    phonecode?: StringNullableFilter<"country"> | string | null
+    currency?: StringNullableFilter<"country"> | string | null
+    currencyName?: StringNullableFilter<"country"> | string | null
+    currencySymbol?: StringNullableFilter<"country"> | string | null
+    nationality?: StringNullableFilter<"country"> | string | null
+    createdAt?: DateTimeFilter<"country"> | Date | string
+    createdBy?: IntNullableFilter<"country"> | number | null
+    createdByRole?: StringNullableFilter<"country"> | string | null
+    updatedAt?: DateTimeFilter<"country"> | Date | string
+    updatedBy?: IntNullableFilter<"country"> | number | null
+    updatedByRole?: StringNullableFilter<"country"> | string | null
+    deletedAt?: DateTimeNullableFilter<"country"> | Date | string | null
+    deletedBy?: IntNullableFilter<"country"> | number | null
+    deletedByRole?: StringNullableFilter<"country"> | string | null
+    states?: StateListRelationFilter
+    cities?: CityListRelationFilter
+    warehouses?: WarehouseListRelationFilter
+  }, "id">
+
+  export type countryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    iso3?: SortOrderInput | SortOrder
+    iso2?: SortOrderInput | SortOrder
+    phonecode?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    currencyName?: SortOrderInput | SortOrder
+    currencySymbol?: SortOrderInput | SortOrder
+    nationality?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: countryCountOrderByAggregateInput
+    _avg?: countryAvgOrderByAggregateInput
+    _max?: countryMaxOrderByAggregateInput
+    _min?: countryMinOrderByAggregateInput
+    _sum?: countrySumOrderByAggregateInput
+  }
+
+  export type countryScalarWhereWithAggregatesInput = {
+    AND?: countryScalarWhereWithAggregatesInput | countryScalarWhereWithAggregatesInput[]
+    OR?: countryScalarWhereWithAggregatesInput[]
+    NOT?: countryScalarWhereWithAggregatesInput | countryScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"country"> | bigint | number
+    name?: StringWithAggregatesFilter<"country"> | string
+    iso3?: StringNullableWithAggregatesFilter<"country"> | string | null
+    iso2?: StringNullableWithAggregatesFilter<"country"> | string | null
+    phonecode?: StringNullableWithAggregatesFilter<"country"> | string | null
+    currency?: StringNullableWithAggregatesFilter<"country"> | string | null
+    currencyName?: StringNullableWithAggregatesFilter<"country"> | string | null
+    currencySymbol?: StringNullableWithAggregatesFilter<"country"> | string | null
+    nationality?: StringNullableWithAggregatesFilter<"country"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"country"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"country"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"country"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"country"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"country"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"country"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"country"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"country"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"country"> | string | null
+  }
+
+  export type stateWhereInput = {
+    AND?: stateWhereInput | stateWhereInput[]
+    OR?: stateWhereInput[]
+    NOT?: stateWhereInput | stateWhereInput[]
+    id?: BigIntFilter<"state"> | bigint | number
+    name?: StringFilter<"state"> | string
+    countryId?: BigIntFilter<"state"> | bigint | number
+    iso2?: StringNullableFilter<"state"> | string | null
+    type?: StringNullableFilter<"state"> | string | null
+    createdAt?: DateTimeFilter<"state"> | Date | string
+    createdBy?: IntNullableFilter<"state"> | number | null
+    createdByRole?: StringNullableFilter<"state"> | string | null
+    updatedAt?: DateTimeFilter<"state"> | Date | string
+    updatedBy?: IntNullableFilter<"state"> | number | null
+    updatedByRole?: StringNullableFilter<"state"> | string | null
+    deletedAt?: DateTimeNullableFilter<"state"> | Date | string | null
+    deletedBy?: IntNullableFilter<"state"> | number | null
+    deletedByRole?: StringNullableFilter<"state"> | string | null
+    country?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    cities?: CityListRelationFilter
+    warehouses?: WarehouseListRelationFilter
+  }
+
+  export type stateOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    countryId?: SortOrder
+    iso2?: SortOrderInput | SortOrder
+    type?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    country?: countryOrderByWithRelationInput
+    cities?: cityOrderByRelationAggregateInput
+    warehouses?: warehouseOrderByRelationAggregateInput
+    _relevance?: stateOrderByRelevanceInput
+  }
+
+  export type stateWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: stateWhereInput | stateWhereInput[]
+    OR?: stateWhereInput[]
+    NOT?: stateWhereInput | stateWhereInput[]
+    name?: StringFilter<"state"> | string
+    countryId?: BigIntFilter<"state"> | bigint | number
+    iso2?: StringNullableFilter<"state"> | string | null
+    type?: StringNullableFilter<"state"> | string | null
+    createdAt?: DateTimeFilter<"state"> | Date | string
+    createdBy?: IntNullableFilter<"state"> | number | null
+    createdByRole?: StringNullableFilter<"state"> | string | null
+    updatedAt?: DateTimeFilter<"state"> | Date | string
+    updatedBy?: IntNullableFilter<"state"> | number | null
+    updatedByRole?: StringNullableFilter<"state"> | string | null
+    deletedAt?: DateTimeNullableFilter<"state"> | Date | string | null
+    deletedBy?: IntNullableFilter<"state"> | number | null
+    deletedByRole?: StringNullableFilter<"state"> | string | null
+    country?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    cities?: CityListRelationFilter
+    warehouses?: WarehouseListRelationFilter
+  }, "id">
+
+  export type stateOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    countryId?: SortOrder
+    iso2?: SortOrderInput | SortOrder
+    type?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: stateCountOrderByAggregateInput
+    _avg?: stateAvgOrderByAggregateInput
+    _max?: stateMaxOrderByAggregateInput
+    _min?: stateMinOrderByAggregateInput
+    _sum?: stateSumOrderByAggregateInput
+  }
+
+  export type stateScalarWhereWithAggregatesInput = {
+    AND?: stateScalarWhereWithAggregatesInput | stateScalarWhereWithAggregatesInput[]
+    OR?: stateScalarWhereWithAggregatesInput[]
+    NOT?: stateScalarWhereWithAggregatesInput | stateScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"state"> | bigint | number
+    name?: StringWithAggregatesFilter<"state"> | string
+    countryId?: BigIntWithAggregatesFilter<"state"> | bigint | number
+    iso2?: StringNullableWithAggregatesFilter<"state"> | string | null
+    type?: StringNullableWithAggregatesFilter<"state"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"state"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"state"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"state"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"state"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"state"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"state"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"state"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"state"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"state"> | string | null
+  }
+
+  export type cityWhereInput = {
+    AND?: cityWhereInput | cityWhereInput[]
+    OR?: cityWhereInput[]
+    NOT?: cityWhereInput | cityWhereInput[]
+    id?: BigIntFilter<"city"> | bigint | number
+    name?: StringFilter<"city"> | string
+    stateId?: BigIntFilter<"city"> | bigint | number
+    countryId?: BigIntFilter<"city"> | bigint | number
+    createdAt?: DateTimeFilter<"city"> | Date | string
+    createdBy?: IntNullableFilter<"city"> | number | null
+    createdByRole?: StringNullableFilter<"city"> | string | null
+    updatedAt?: DateTimeFilter<"city"> | Date | string
+    updatedBy?: IntNullableFilter<"city"> | number | null
+    updatedByRole?: StringNullableFilter<"city"> | string | null
+    deletedAt?: DateTimeNullableFilter<"city"> | Date | string | null
+    deletedBy?: IntNullableFilter<"city"> | number | null
+    deletedByRole?: StringNullableFilter<"city"> | string | null
+    state?: XOR<StateScalarRelationFilter, stateWhereInput>
+    country?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    warehouses?: WarehouseListRelationFilter
+  }
+
+  export type cityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    state?: stateOrderByWithRelationInput
+    country?: countryOrderByWithRelationInput
+    warehouses?: warehouseOrderByRelationAggregateInput
+    _relevance?: cityOrderByRelevanceInput
+  }
+
+  export type cityWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: cityWhereInput | cityWhereInput[]
+    OR?: cityWhereInput[]
+    NOT?: cityWhereInput | cityWhereInput[]
+    name?: StringFilter<"city"> | string
+    stateId?: BigIntFilter<"city"> | bigint | number
+    countryId?: BigIntFilter<"city"> | bigint | number
+    createdAt?: DateTimeFilter<"city"> | Date | string
+    createdBy?: IntNullableFilter<"city"> | number | null
+    createdByRole?: StringNullableFilter<"city"> | string | null
+    updatedAt?: DateTimeFilter<"city"> | Date | string
+    updatedBy?: IntNullableFilter<"city"> | number | null
+    updatedByRole?: StringNullableFilter<"city"> | string | null
+    deletedAt?: DateTimeNullableFilter<"city"> | Date | string | null
+    deletedBy?: IntNullableFilter<"city"> | number | null
+    deletedByRole?: StringNullableFilter<"city"> | string | null
+    state?: XOR<StateScalarRelationFilter, stateWhereInput>
+    country?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    warehouses?: WarehouseListRelationFilter
+  }, "id">
+
+  export type cityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: cityCountOrderByAggregateInput
+    _avg?: cityAvgOrderByAggregateInput
+    _max?: cityMaxOrderByAggregateInput
+    _min?: cityMinOrderByAggregateInput
+    _sum?: citySumOrderByAggregateInput
+  }
+
+  export type cityScalarWhereWithAggregatesInput = {
+    AND?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
+    OR?: cityScalarWhereWithAggregatesInput[]
+    NOT?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"city"> | bigint | number
+    name?: StringWithAggregatesFilter<"city"> | string
+    stateId?: BigIntWithAggregatesFilter<"city"> | bigint | number
+    countryId?: BigIntWithAggregatesFilter<"city"> | bigint | number
+    createdAt?: DateTimeWithAggregatesFilter<"city"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"city"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"city"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"city"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"city"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"city"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"city"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"city"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"city"> | string | null
+  }
+
   export type warehouseWhereInput = {
     AND?: warehouseWhereInput | warehouseWhereInput[]
     OR?: warehouseWhereInput[]
@@ -12021,8 +15466,9 @@ export namespace Prisma {
     address_line_1?: StringFilter<"warehouse"> | string
     address_line_2?: StringNullableFilter<"warehouse"> | string | null
     postal_code?: StringFilter<"warehouse"> | string
-    stateId?: BigIntFilter<"warehouse"> | bigint | number
-    cityId?: BigIntFilter<"warehouse"> | bigint | number
+    countryId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
     status?: BoolFilter<"warehouse"> | boolean
     createdAt?: DateTimeFilter<"warehouse"> | Date | string
     createdBy?: IntNullableFilter<"warehouse"> | number | null
@@ -12033,6 +15479,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"warehouse"> | Date | string | null
     deletedBy?: IntNullableFilter<"warehouse"> | number | null
     deletedByRole?: StringNullableFilter<"warehouse"> | string | null
+    country?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    state?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    city?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
   }
 
   export type warehouseOrderByWithRelationInput = {
@@ -12045,8 +15494,9 @@ export namespace Prisma {
     address_line_1?: SortOrder
     address_line_2?: SortOrderInput | SortOrder
     postal_code?: SortOrder
-    stateId?: SortOrder
-    cityId?: SortOrder
+    countryId?: SortOrderInput | SortOrder
+    stateId?: SortOrderInput | SortOrder
+    cityId?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -12057,6 +15507,9 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
+    country?: countryOrderByWithRelationInput
+    state?: stateOrderByWithRelationInput
+    city?: cityOrderByWithRelationInput
     _relevance?: warehouseOrderByRelevanceInput
   }
 
@@ -12073,8 +15526,9 @@ export namespace Prisma {
     address_line_1?: StringFilter<"warehouse"> | string
     address_line_2?: StringNullableFilter<"warehouse"> | string | null
     postal_code?: StringFilter<"warehouse"> | string
-    stateId?: BigIntFilter<"warehouse"> | bigint | number
-    cityId?: BigIntFilter<"warehouse"> | bigint | number
+    countryId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
     status?: BoolFilter<"warehouse"> | boolean
     createdAt?: DateTimeFilter<"warehouse"> | Date | string
     createdBy?: IntNullableFilter<"warehouse"> | number | null
@@ -12085,6 +15539,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"warehouse"> | Date | string | null
     deletedBy?: IntNullableFilter<"warehouse"> | number | null
     deletedByRole?: StringNullableFilter<"warehouse"> | string | null
+    country?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    state?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    city?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
   }, "id" | "slug">
 
   export type warehouseOrderByWithAggregationInput = {
@@ -12097,8 +15554,9 @@ export namespace Prisma {
     address_line_1?: SortOrder
     address_line_2?: SortOrderInput | SortOrder
     postal_code?: SortOrder
-    stateId?: SortOrder
-    cityId?: SortOrder
+    countryId?: SortOrderInput | SortOrder
+    stateId?: SortOrderInput | SortOrder
+    cityId?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -12129,8 +15587,9 @@ export namespace Prisma {
     address_line_1?: StringWithAggregatesFilter<"warehouse"> | string
     address_line_2?: StringNullableWithAggregatesFilter<"warehouse"> | string | null
     postal_code?: StringWithAggregatesFilter<"warehouse"> | string
-    stateId?: BigIntWithAggregatesFilter<"warehouse"> | bigint | number
-    cityId?: BigIntWithAggregatesFilter<"warehouse"> | bigint | number
+    countryId?: BigIntNullableWithAggregatesFilter<"warehouse"> | bigint | number | null
+    stateId?: BigIntNullableWithAggregatesFilter<"warehouse"> | bigint | number | null
+    cityId?: BigIntNullableWithAggregatesFilter<"warehouse"> | bigint | number | null
     status?: BoolWithAggregatesFilter<"warehouse"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"warehouse"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"warehouse"> | number | null
@@ -12353,128 +15812,13 @@ export namespace Prisma {
     deletedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
   }
 
-  export type productWhereInput = {
-    AND?: productWhereInput | productWhereInput[]
-    OR?: productWhereInput[]
-    NOT?: productWhereInput | productWhereInput[]
-    id?: IntFilter<"product"> | number
-    name?: StringFilter<"product"> | string
-    slug?: StringFilter<"product"> | string
-    description?: StringNullableFilter<"product"> | string | null
-    image?: StringNullableFilter<"product"> | string | null
-    price?: DecimalFilter<"product"> | Decimal | DecimalJsLike | number | string
-    quantity?: IntFilter<"product"> | number
-    status?: BoolFilter<"product"> | boolean
-    createdAt?: DateTimeFilter<"product"> | Date | string
-    createdBy?: IntNullableFilter<"product"> | number | null
-    createdByRole?: StringNullableFilter<"product"> | string | null
-    updatedAt?: DateTimeFilter<"product"> | Date | string
-    updatedBy?: IntNullableFilter<"product"> | number | null
-    updatedByRole?: StringNullableFilter<"product"> | string | null
-    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
-    deletedBy?: IntNullableFilter<"product"> | number | null
-    deletedByRole?: StringNullableFilter<"product"> | string | null
-  }
-
-  export type productOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    description?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrderInput | SortOrder
-    createdByRole?: SortOrderInput | SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrderInput | SortOrder
-    updatedByRole?: SortOrderInput | SortOrder
-    deletedAt?: SortOrderInput | SortOrder
-    deletedBy?: SortOrderInput | SortOrder
-    deletedByRole?: SortOrderInput | SortOrder
-    _relevance?: productOrderByRelevanceInput
-  }
-
-  export type productWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    slug?: string
-    AND?: productWhereInput | productWhereInput[]
-    OR?: productWhereInput[]
-    NOT?: productWhereInput | productWhereInput[]
-    name?: StringFilter<"product"> | string
-    description?: StringNullableFilter<"product"> | string | null
-    image?: StringNullableFilter<"product"> | string | null
-    price?: DecimalFilter<"product"> | Decimal | DecimalJsLike | number | string
-    quantity?: IntFilter<"product"> | number
-    status?: BoolFilter<"product"> | boolean
-    createdAt?: DateTimeFilter<"product"> | Date | string
-    createdBy?: IntNullableFilter<"product"> | number | null
-    createdByRole?: StringNullableFilter<"product"> | string | null
-    updatedAt?: DateTimeFilter<"product"> | Date | string
-    updatedBy?: IntNullableFilter<"product"> | number | null
-    updatedByRole?: StringNullableFilter<"product"> | string | null
-    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
-    deletedBy?: IntNullableFilter<"product"> | number | null
-    deletedByRole?: StringNullableFilter<"product"> | string | null
-  }, "id" | "slug">
-
-  export type productOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    description?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrderInput | SortOrder
-    createdByRole?: SortOrderInput | SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrderInput | SortOrder
-    updatedByRole?: SortOrderInput | SortOrder
-    deletedAt?: SortOrderInput | SortOrder
-    deletedBy?: SortOrderInput | SortOrder
-    deletedByRole?: SortOrderInput | SortOrder
-    _count?: productCountOrderByAggregateInput
-    _avg?: productAvgOrderByAggregateInput
-    _max?: productMaxOrderByAggregateInput
-    _min?: productMinOrderByAggregateInput
-    _sum?: productSumOrderByAggregateInput
-  }
-
-  export type productScalarWhereWithAggregatesInput = {
-    AND?: productScalarWhereWithAggregatesInput | productScalarWhereWithAggregatesInput[]
-    OR?: productScalarWhereWithAggregatesInput[]
-    NOT?: productScalarWhereWithAggregatesInput | productScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"product"> | number
-    name?: StringWithAggregatesFilter<"product"> | string
-    slug?: StringWithAggregatesFilter<"product"> | string
-    description?: StringNullableWithAggregatesFilter<"product"> | string | null
-    image?: StringNullableWithAggregatesFilter<"product"> | string | null
-    price?: DecimalWithAggregatesFilter<"product"> | Decimal | DecimalJsLike | number | string
-    quantity?: IntWithAggregatesFilter<"product"> | number
-    status?: BoolWithAggregatesFilter<"product"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
-    createdBy?: IntNullableWithAggregatesFilter<"product"> | number | null
-    createdByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
-    updatedAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
-    updatedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
-    updatedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
-    deletedAt?: DateTimeNullableWithAggregatesFilter<"product"> | Date | string | null
-    deletedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
-    deletedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
-  }
-
   export type emailConfigCreateInput = {
     id?: bigint | number
     panel: string
     module: string
     subject: string
     action: string
-    html_template: string
+    html_template?: string | null
     smtp_host: string
     smtp_secure: boolean
     smtp_port: number
@@ -12497,7 +15841,7 @@ export namespace Prisma {
     module: string
     subject: string
     action: string
-    html_template: string
+    html_template?: string | null
     smtp_host: string
     smtp_secure: boolean
     smtp_port: number
@@ -12520,7 +15864,7 @@ export namespace Prisma {
     module?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
-    html_template?: StringFieldUpdateOperationsInput | string
+    html_template?: NullableStringFieldUpdateOperationsInput | string | null
     smtp_host?: StringFieldUpdateOperationsInput | string
     smtp_secure?: BoolFieldUpdateOperationsInput | boolean
     smtp_port?: IntFieldUpdateOperationsInput | number
@@ -12543,7 +15887,7 @@ export namespace Prisma {
     module?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
-    html_template?: StringFieldUpdateOperationsInput | string
+    html_template?: NullableStringFieldUpdateOperationsInput | string | null
     smtp_host?: StringFieldUpdateOperationsInput | string
     smtp_secure?: BoolFieldUpdateOperationsInput | boolean
     smtp_port?: IntFieldUpdateOperationsInput | number
@@ -12566,7 +15910,7 @@ export namespace Prisma {
     module: string
     subject: string
     action: string
-    html_template: string
+    html_template?: string | null
     smtp_host: string
     smtp_secure: boolean
     smtp_port: number
@@ -12589,7 +15933,7 @@ export namespace Prisma {
     module?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
-    html_template?: StringFieldUpdateOperationsInput | string
+    html_template?: NullableStringFieldUpdateOperationsInput | string | null
     smtp_host?: StringFieldUpdateOperationsInput | string
     smtp_secure?: BoolFieldUpdateOperationsInput | boolean
     smtp_port?: IntFieldUpdateOperationsInput | number
@@ -12612,7 +15956,7 @@ export namespace Prisma {
     module?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
-    html_template?: StringFieldUpdateOperationsInput | string
+    html_template?: NullableStringFieldUpdateOperationsInput | string | null
     smtp_host?: StringFieldUpdateOperationsInput | string
     smtp_secure?: BoolFieldUpdateOperationsInput | boolean
     smtp_port?: IntFieldUpdateOperationsInput | number
@@ -12627,198 +15971,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
     updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type stateCreateInput = {
-    id?: bigint | number
-    name: string
-    fipsCode?: string | null
-    iso2?: string | null
-    type?: string | null
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    city?: cityCreateNestedManyWithoutStateInput
-  }
-
-  export type stateUncheckedCreateInput = {
-    id?: bigint | number
-    name: string
-    fipsCode?: string | null
-    iso2?: string | null
-    type?: string | null
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    city?: cityUncheckedCreateNestedManyWithoutStateInput
-  }
-
-  export type stateUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: cityUpdateManyWithoutStateNestedInput
-  }
-
-  export type stateUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: cityUncheckedUpdateManyWithoutStateNestedInput
-  }
-
-  export type stateCreateManyInput = {
-    id?: bigint | number
-    name: string
-    fipsCode?: string | null
-    iso2?: string | null
-    type?: string | null
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type stateUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type stateUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type cityCreateInput = {
-    id?: bigint | number
-    name: string
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    state: stateCreateNestedOneWithoutCityInput
-  }
-
-  export type cityUncheckedCreateInput = {
-    id?: bigint | number
-    name: string
-    stateId: bigint | number
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type cityUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    state?: stateUpdateOneRequiredWithoutCityNestedInput
-  }
-
-  export type cityUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type cityCreateManyInput = {
-    id?: bigint | number
-    name: string
-    stateId: bigint | number
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type cityUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type cityUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type adminCreateInput = {
@@ -13021,6 +16173,749 @@ export namespace Prisma {
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type loginLogCreateInput = {
+    adminId: number
+    adminRole: string
+    action: string
+    response?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type loginLogUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    adminRole: string
+    action: string
+    response?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type loginLogUpdateInput = {
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type loginLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type loginLogCreateManyInput = {
+    id?: number
+    adminId: number
+    adminRole: string
+    action: string
+    response?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type loginLogUpdateManyMutationInput = {
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type loginLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type activityLogCreateInput = {
+    adminId: number
+    adminRole: string
+    module: string
+    action: string
+    endpoint: string
+    method: string
+    payload?: string | null
+    response?: string | null
+    result: boolean
+    data?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type activityLogUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    adminRole: string
+    module: string
+    action: string
+    endpoint: string
+    method: string
+    payload?: string | null
+    response?: string | null
+    result: boolean
+    data?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type activityLogUpdateInput = {
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    endpoint?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    payload?: NullableStringFieldUpdateOperationsInput | string | null
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    result?: BoolFieldUpdateOperationsInput | boolean
+    data?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type activityLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    endpoint?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    payload?: NullableStringFieldUpdateOperationsInput | string | null
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    result?: BoolFieldUpdateOperationsInput | boolean
+    data?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type activityLogCreateManyInput = {
+    id?: number
+    adminId: number
+    adminRole: string
+    module: string
+    action: string
+    endpoint: string
+    method: string
+    payload?: string | null
+    response?: string | null
+    result: boolean
+    data?: string | null
+    ipv4?: string | null
+    ipv6?: string | null
+    internetServiceProvider?: string | null
+    clientInformation?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type activityLogUpdateManyMutationInput = {
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    endpoint?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    payload?: NullableStringFieldUpdateOperationsInput | string | null
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    result?: BoolFieldUpdateOperationsInput | boolean
+    data?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type activityLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    adminRole?: StringFieldUpdateOperationsInput | string
+    module?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    endpoint?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    payload?: NullableStringFieldUpdateOperationsInput | string | null
+    response?: NullableStringFieldUpdateOperationsInput | string | null
+    result?: BoolFieldUpdateOperationsInput | boolean
+    data?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv4?: NullableStringFieldUpdateOperationsInput | string | null
+    ipv6?: NullableStringFieldUpdateOperationsInput | string | null
+    internetServiceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    clientInformation?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type countryCreateInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryUncheckedCreateInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+  }
+
+  export type countryCreateManyInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type countryUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type countryUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type stateCreateInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    cities?: cityCreateNestedManyWithoutStateInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
+  }
+
+  export type stateUncheckedCreateInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+  }
+
+  export type stateUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    cities?: cityUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateCreateManyInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type stateUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type stateUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type cityCreateInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    country: countryCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+  }
+
+  export type cityUncheckedCreateInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+  }
+
+  export type cityUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityCreateManyInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type cityUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type cityUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type warehouseCreateInput = {
     name: string
     slug: string
@@ -13030,8 +16925,6 @@ export namespace Prisma {
     address_line_1: string
     address_line_2?: string | null
     postal_code: string
-    stateId: bigint | number
-    cityId: bigint | number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -13042,6 +16935,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutWarehousesInput
+    state?: stateCreateNestedOneWithoutWarehousesInput
+    city?: cityCreateNestedOneWithoutWarehousesInput
   }
 
   export type warehouseUncheckedCreateInput = {
@@ -13054,8 +16950,9 @@ export namespace Prisma {
     address_line_1: string
     address_line_2?: string | null
     postal_code: string
-    stateId: bigint | number
-    cityId: bigint | number
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -13077,8 +16974,6 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    cityId?: BigIntFieldUpdateOperationsInput | bigint | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13089,6 +16984,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutWarehousesNestedInput
+    state?: stateUpdateOneWithoutWarehousesNestedInput
+    city?: cityUpdateOneWithoutWarehousesNestedInput
   }
 
   export type warehouseUncheckedUpdateInput = {
@@ -13101,8 +16999,9 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    cityId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13125,8 +17024,9 @@ export namespace Prisma {
     address_line_1: string
     address_line_2?: string | null
     postal_code: string
-    stateId: bigint | number
-    cityId: bigint | number
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -13148,8 +17048,6 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    cityId?: BigIntFieldUpdateOperationsInput | bigint | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13172,8 +17070,9 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
-    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
-    cityId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13432,143 +17331,6 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type productCreateInput = {
-    name: string
-    slug: string
-    description?: string | null
-    image?: string | null
-    price: Decimal | DecimalJsLike | number | string
-    quantity?: number
-    status?: boolean
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type productUncheckedCreateInput = {
-    id?: number
-    name: string
-    slug: string
-    description?: string | null
-    image?: string | null
-    price: Decimal | DecimalJsLike | number | string
-    quantity?: number
-    status?: boolean
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type productUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type productUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type productCreateManyInput = {
-    id?: number
-    name: string
-    slug: string
-    description?: string | null
-    image?: string | null
-    price: Decimal | DecimalJsLike | number | string
-    quantity?: number
-    status?: boolean
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type productUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type productUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -13593,6 +17355,21 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -13631,21 +17408,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type SortOrderInput = {
@@ -13776,6 +17538,24 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -13828,216 +17608,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type CityListRelationFilter = {
-    every?: cityWhereInput
-    some?: cityWhereInput
-    none?: cityWhereInput
-  }
-
-  export type cityOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type stateOrderByRelevanceInput = {
-    fields: stateOrderByRelevanceFieldEnum | stateOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type stateCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    fipsCode?: SortOrder
-    iso2?: SortOrder
-    type?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type stateAvgOrderByAggregateInput = {
-    id?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-  }
-
-  export type stateMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    fipsCode?: SortOrder
-    iso2?: SortOrder
-    type?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type stateMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    fipsCode?: SortOrder
-    iso2?: SortOrder
-    type?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type stateSumOrderByAggregateInput = {
-    id?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type StateScalarRelationFilter = {
-    is?: stateWhereInput
-    isNot?: stateWhereInput
-  }
-
-  export type cityOrderByRelevanceInput = {
-    fields: cityOrderByRelevanceFieldEnum | cityOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type cityCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    stateId?: SortOrder
-    stateCode?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type cityAvgOrderByAggregateInput = {
-    id?: SortOrder
-    stateId?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-  }
-
-  export type cityMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    stateId?: SortOrder
-    stateCode?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type cityMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    stateId?: SortOrder
-    stateCode?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-    wikiDataId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type citySumOrderByAggregateInput = {
-    id?: SortOrder
-    stateId?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
-    flag?: SortOrder
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -14197,6 +17767,494 @@ export namespace Prisma {
     admin_id?: SortOrder
   }
 
+  export type loginLogOrderByRelevanceInput = {
+    fields: loginLogOrderByRelevanceFieldEnum | loginLogOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type loginLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    action?: SortOrder
+    response?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type loginLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type loginLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    action?: SortOrder
+    response?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type loginLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    action?: SortOrder
+    response?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type loginLogSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type activityLogOrderByRelevanceInput = {
+    fields: activityLogOrderByRelevanceFieldEnum | activityLogOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type activityLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    endpoint?: SortOrder
+    method?: SortOrder
+    payload?: SortOrder
+    response?: SortOrder
+    result?: SortOrder
+    data?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type activityLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type activityLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    endpoint?: SortOrder
+    method?: SortOrder
+    payload?: SortOrder
+    response?: SortOrder
+    result?: SortOrder
+    data?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type activityLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    adminRole?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    endpoint?: SortOrder
+    method?: SortOrder
+    payload?: SortOrder
+    response?: SortOrder
+    result?: SortOrder
+    data?: SortOrder
+    ipv4?: SortOrder
+    ipv6?: SortOrder
+    internetServiceProvider?: SortOrder
+    clientInformation?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type activityLogSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type StateListRelationFilter = {
+    every?: stateWhereInput
+    some?: stateWhereInput
+    none?: stateWhereInput
+  }
+
+  export type CityListRelationFilter = {
+    every?: cityWhereInput
+    some?: cityWhereInput
+    none?: cityWhereInput
+  }
+
+  export type WarehouseListRelationFilter = {
+    every?: warehouseWhereInput
+    some?: warehouseWhereInput
+    none?: warehouseWhereInput
+  }
+
+  export type stateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type cityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type warehouseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type countryOrderByRelevanceInput = {
+    fields: countryOrderByRelevanceFieldEnum | countryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type countryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    iso3?: SortOrder
+    iso2?: SortOrder
+    phonecode?: SortOrder
+    currency?: SortOrder
+    currencyName?: SortOrder
+    currencySymbol?: SortOrder
+    nationality?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type countryAvgOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type countryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    iso3?: SortOrder
+    iso2?: SortOrder
+    phonecode?: SortOrder
+    currency?: SortOrder
+    currencyName?: SortOrder
+    currencySymbol?: SortOrder
+    nationality?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type countryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    iso3?: SortOrder
+    iso2?: SortOrder
+    phonecode?: SortOrder
+    currency?: SortOrder
+    currencyName?: SortOrder
+    currencySymbol?: SortOrder
+    nationality?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type countrySumOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type CountryScalarRelationFilter = {
+    is?: countryWhereInput
+    isNot?: countryWhereInput
+  }
+
+  export type stateOrderByRelevanceInput = {
+    fields: stateOrderByRelevanceFieldEnum | stateOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type stateCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    countryId?: SortOrder
+    iso2?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type stateAvgOrderByAggregateInput = {
+    id?: SortOrder
+    countryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type stateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    countryId?: SortOrder
+    iso2?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type stateMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    countryId?: SortOrder
+    iso2?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type stateSumOrderByAggregateInput = {
+    id?: SortOrder
+    countryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type StateScalarRelationFilter = {
+    is?: stateWhereInput
+    isNot?: stateWhereInput
+  }
+
+  export type cityOrderByRelevanceInput = {
+    fields: cityOrderByRelevanceFieldEnum | cityOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type cityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type cityAvgOrderByAggregateInput = {
+    id?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type cityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type cityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type citySumOrderByAggregateInput = {
+    id?: SortOrder
+    stateId?: SortOrder
+    countryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type CountryNullableScalarRelationFilter = {
+    is?: countryWhereInput | null
+    isNot?: countryWhereInput | null
+  }
+
+  export type StateNullableScalarRelationFilter = {
+    is?: stateWhereInput | null
+    isNot?: stateWhereInput | null
+  }
+
+  export type CityNullableScalarRelationFilter = {
+    is?: cityWhereInput | null
+    isNot?: cityWhereInput | null
+  }
+
   export type warehouseOrderByRelevanceInput = {
     fields: warehouseOrderByRelevanceFieldEnum | warehouseOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -14213,6 +18271,7 @@ export namespace Prisma {
     address_line_1?: SortOrder
     address_line_2?: SortOrder
     postal_code?: SortOrder
+    countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
     status?: SortOrder
@@ -14229,6 +18288,7 @@ export namespace Prisma {
 
   export type warehouseAvgOrderByAggregateInput = {
     id?: SortOrder
+    countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
     createdBy?: SortOrder
@@ -14246,6 +18306,7 @@ export namespace Prisma {
     address_line_1?: SortOrder
     address_line_2?: SortOrder
     postal_code?: SortOrder
+    countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
     status?: SortOrder
@@ -14270,6 +18331,7 @@ export namespace Prisma {
     address_line_1?: SortOrder
     address_line_2?: SortOrder
     postal_code?: SortOrder
+    countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
     status?: SortOrder
@@ -14286,11 +18348,28 @@ export namespace Prisma {
 
   export type warehouseSumOrderByAggregateInput = {
     id?: SortOrder
+    countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type categoryOrderByRelevanceInput = {
@@ -14441,90 +18520,6 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
-  export type productOrderByRelevanceInput = {
-    fields: productOrderByRelevanceFieldEnum | productOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type productCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type productAvgOrderByAggregateInput = {
-    id?: SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    createdBy?: SortOrder
-    updatedBy?: SortOrder
-    deletedBy?: SortOrder
-  }
-
-  export type productMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type productMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type productSumOrderByAggregateInput = {
-    id?: SortOrder
-    price?: SortOrder
-    quantity?: SortOrder
-    createdBy?: SortOrder
-    updatedBy?: SortOrder
-    deletedBy?: SortOrder
-  }
-
   export type BigIntFieldUpdateOperationsInput = {
     set?: bigint | number
     increment?: bigint | number
@@ -14535,6 +18530,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -14559,82 +18558,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type cityCreateNestedManyWithoutStateInput = {
-    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
-    createMany?: cityCreateManyStateInputEnvelope
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-  }
-
-  export type cityUncheckedCreateNestedManyWithoutStateInput = {
-    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
-    createMany?: cityCreateManyStateInputEnvelope
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type cityUpdateManyWithoutStateNestedInput = {
-    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
-    upsert?: cityUpsertWithWhereUniqueWithoutStateInput | cityUpsertWithWhereUniqueWithoutStateInput[]
-    createMany?: cityCreateManyStateInputEnvelope
-    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    update?: cityUpdateWithWhereUniqueWithoutStateInput | cityUpdateWithWhereUniqueWithoutStateInput[]
-    updateMany?: cityUpdateManyWithWhereWithoutStateInput | cityUpdateManyWithWhereWithoutStateInput[]
-    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
-  }
-
-  export type cityUncheckedUpdateManyWithoutStateNestedInput = {
-    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
-    upsert?: cityUpsertWithWhereUniqueWithoutStateInput | cityUpsertWithWhereUniqueWithoutStateInput[]
-    createMany?: cityCreateManyStateInputEnvelope
-    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    update?: cityUpdateWithWhereUniqueWithoutStateInput | cityUpdateWithWhereUniqueWithoutStateInput[]
-    updateMany?: cityUpdateManyWithWhereWithoutStateInput | cityUpdateManyWithWhereWithoutStateInput[]
-    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
-  }
-
-  export type stateCreateNestedOneWithoutCityInput = {
-    create?: XOR<stateCreateWithoutCityInput, stateUncheckedCreateWithoutCityInput>
-    connectOrCreate?: stateCreateOrConnectWithoutCityInput
-    connect?: stateWhereUniqueInput
-  }
-
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type stateUpdateOneRequiredWithoutCityNestedInput = {
-    create?: XOR<stateCreateWithoutCityInput, stateUncheckedCreateWithoutCityInput>
-    connectOrCreate?: stateCreateOrConnectWithoutCityInput
-    upsert?: stateUpsertWithoutCityInput
-    connect?: stateWhereUniqueInput
-    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutCityInput, stateUpdateWithoutCityInput>, stateUncheckedUpdateWithoutCityInput>
   }
 
   export type adminStaffCreateNestedManyWithoutAdminInput = {
@@ -14697,6 +18620,356 @@ export namespace Prisma {
     update?: XOR<XOR<adminUpdateToOneWithWhereWithoutStaffInput, adminUpdateWithoutStaffInput>, adminUncheckedUpdateWithoutStaffInput>
   }
 
+  export type stateCreateNestedManyWithoutCountryInput = {
+    create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
+    createMany?: stateCreateManyCountryInputEnvelope
+    connect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+  }
+
+  export type cityCreateNestedManyWithoutCountryInput = {
+    create?: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput> | cityCreateWithoutCountryInput[] | cityUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutCountryInput | cityCreateOrConnectWithoutCountryInput[]
+    createMany?: cityCreateManyCountryInputEnvelope
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  }
+
+  export type warehouseCreateNestedManyWithoutCountryInput = {
+    create?: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput> | warehouseCreateWithoutCountryInput[] | warehouseUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
+    createMany?: warehouseCreateManyCountryInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type stateUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
+    createMany?: stateCreateManyCountryInputEnvelope
+    connect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+  }
+
+  export type cityUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput> | cityCreateWithoutCountryInput[] | cityUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutCountryInput | cityCreateOrConnectWithoutCountryInput[]
+    createMany?: cityCreateManyCountryInputEnvelope
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  }
+
+  export type warehouseUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput> | warehouseCreateWithoutCountryInput[] | warehouseUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
+    createMany?: warehouseCreateManyCountryInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type stateUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
+    upsert?: stateUpsertWithWhereUniqueWithoutCountryInput | stateUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: stateCreateManyCountryInputEnvelope
+    set?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    disconnect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    delete?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    connect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    update?: stateUpdateWithWhereUniqueWithoutCountryInput | stateUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: stateUpdateManyWithWhereWithoutCountryInput | stateUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: stateScalarWhereInput | stateScalarWhereInput[]
+  }
+
+  export type cityUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput> | cityCreateWithoutCountryInput[] | cityUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutCountryInput | cityCreateOrConnectWithoutCountryInput[]
+    upsert?: cityUpsertWithWhereUniqueWithoutCountryInput | cityUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: cityCreateManyCountryInputEnvelope
+    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    update?: cityUpdateWithWhereUniqueWithoutCountryInput | cityUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: cityUpdateManyWithWhereWithoutCountryInput | cityUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  }
+
+  export type warehouseUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput> | warehouseCreateWithoutCountryInput[] | warehouseUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutCountryInput | warehouseUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: warehouseCreateManyCountryInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutCountryInput | warehouseUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutCountryInput | warehouseUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type stateUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
+    upsert?: stateUpsertWithWhereUniqueWithoutCountryInput | stateUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: stateCreateManyCountryInputEnvelope
+    set?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    disconnect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    delete?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    connect?: stateWhereUniqueInput | stateWhereUniqueInput[]
+    update?: stateUpdateWithWhereUniqueWithoutCountryInput | stateUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: stateUpdateManyWithWhereWithoutCountryInput | stateUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: stateScalarWhereInput | stateScalarWhereInput[]
+  }
+
+  export type cityUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput> | cityCreateWithoutCountryInput[] | cityUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutCountryInput | cityCreateOrConnectWithoutCountryInput[]
+    upsert?: cityUpsertWithWhereUniqueWithoutCountryInput | cityUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: cityCreateManyCountryInputEnvelope
+    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    update?: cityUpdateWithWhereUniqueWithoutCountryInput | cityUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: cityUpdateManyWithWhereWithoutCountryInput | cityUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput> | warehouseCreateWithoutCountryInput[] | warehouseUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutCountryInput | warehouseUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: warehouseCreateManyCountryInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutCountryInput | warehouseUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutCountryInput | warehouseUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type countryCreateNestedOneWithoutStatesInput = {
+    create?: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutStatesInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type cityCreateNestedManyWithoutStateInput = {
+    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
+    createMany?: cityCreateManyStateInputEnvelope
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  }
+
+  export type warehouseCreateNestedManyWithoutStateInput = {
+    create?: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput> | warehouseCreateWithoutStateInput[] | warehouseUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
+    createMany?: warehouseCreateManyStateInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type cityUncheckedCreateNestedManyWithoutStateInput = {
+    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
+    createMany?: cityCreateManyStateInputEnvelope
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  }
+
+  export type warehouseUncheckedCreateNestedManyWithoutStateInput = {
+    create?: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput> | warehouseCreateWithoutStateInput[] | warehouseUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
+    createMany?: warehouseCreateManyStateInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type countryUpdateOneRequiredWithoutStatesNestedInput = {
+    create?: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutStatesInput
+    upsert?: countryUpsertWithoutStatesInput
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutStatesInput, countryUpdateWithoutStatesInput>, countryUncheckedUpdateWithoutStatesInput>
+  }
+
+  export type cityUpdateManyWithoutStateNestedInput = {
+    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
+    upsert?: cityUpsertWithWhereUniqueWithoutStateInput | cityUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: cityCreateManyStateInputEnvelope
+    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    update?: cityUpdateWithWhereUniqueWithoutStateInput | cityUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: cityUpdateManyWithWhereWithoutStateInput | cityUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  }
+
+  export type warehouseUpdateManyWithoutStateNestedInput = {
+    create?: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput> | warehouseCreateWithoutStateInput[] | warehouseUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutStateInput | warehouseUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: warehouseCreateManyStateInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutStateInput | warehouseUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutStateInput | warehouseUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type cityUncheckedUpdateManyWithoutStateNestedInput = {
+    create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
+    upsert?: cityUpsertWithWhereUniqueWithoutStateInput | cityUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: cityCreateManyStateInputEnvelope
+    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+    update?: cityUpdateWithWhereUniqueWithoutStateInput | cityUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: cityUpdateManyWithWhereWithoutStateInput | cityUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutStateNestedInput = {
+    create?: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput> | warehouseCreateWithoutStateInput[] | warehouseUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutStateInput | warehouseUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: warehouseCreateManyStateInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutStateInput | warehouseUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutStateInput | warehouseUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type stateCreateNestedOneWithoutCitiesInput = {
+    create?: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: stateCreateOrConnectWithoutCitiesInput
+    connect?: stateWhereUniqueInput
+  }
+
+  export type countryCreateNestedOneWithoutCitiesInput = {
+    create?: XOR<countryCreateWithoutCitiesInput, countryUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutCitiesInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type warehouseCreateNestedManyWithoutCityInput = {
+    create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
+    createMany?: warehouseCreateManyCityInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type warehouseUncheckedCreateNestedManyWithoutCityInput = {
+    create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
+    createMany?: warehouseCreateManyCityInputEnvelope
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type stateUpdateOneRequiredWithoutCitiesNestedInput = {
+    create?: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: stateCreateOrConnectWithoutCitiesInput
+    upsert?: stateUpsertWithoutCitiesInput
+    connect?: stateWhereUniqueInput
+    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutCitiesInput, stateUpdateWithoutCitiesInput>, stateUncheckedUpdateWithoutCitiesInput>
+  }
+
+  export type countryUpdateOneRequiredWithoutCitiesNestedInput = {
+    create?: XOR<countryCreateWithoutCitiesInput, countryUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutCitiesInput
+    upsert?: countryUpsertWithoutCitiesInput
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutCitiesInput, countryUpdateWithoutCitiesInput>, countryUncheckedUpdateWithoutCitiesInput>
+  }
+
+  export type warehouseUpdateManyWithoutCityNestedInput = {
+    create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutCityInput | warehouseUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: warehouseCreateManyCityInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutCityInput | warehouseUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutCityInput | warehouseUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutCityNestedInput = {
+    create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
+    upsert?: warehouseUpsertWithWhereUniqueWithoutCityInput | warehouseUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: warehouseCreateManyCityInputEnvelope
+    set?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    disconnect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    delete?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+    update?: warehouseUpdateWithWhereUniqueWithoutCityInput | warehouseUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: warehouseUpdateManyWithWhereWithoutCityInput | warehouseUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type countryCreateNestedOneWithoutWarehousesInput = {
+    create?: XOR<countryCreateWithoutWarehousesInput, countryUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutWarehousesInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type stateCreateNestedOneWithoutWarehousesInput = {
+    create?: XOR<stateCreateWithoutWarehousesInput, stateUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: stateCreateOrConnectWithoutWarehousesInput
+    connect?: stateWhereUniqueInput
+  }
+
+  export type cityCreateNestedOneWithoutWarehousesInput = {
+    create?: XOR<cityCreateWithoutWarehousesInput, cityUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: cityCreateOrConnectWithoutWarehousesInput
+    connect?: cityWhereUniqueInput
+  }
+
+  export type countryUpdateOneWithoutWarehousesNestedInput = {
+    create?: XOR<countryCreateWithoutWarehousesInput, countryUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: countryCreateOrConnectWithoutWarehousesInput
+    upsert?: countryUpsertWithoutWarehousesInput
+    disconnect?: countryWhereInput | boolean
+    delete?: countryWhereInput | boolean
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutWarehousesInput, countryUpdateWithoutWarehousesInput>, countryUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type stateUpdateOneWithoutWarehousesNestedInput = {
+    create?: XOR<stateCreateWithoutWarehousesInput, stateUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: stateCreateOrConnectWithoutWarehousesInput
+    upsert?: stateUpsertWithoutWarehousesInput
+    disconnect?: stateWhereInput | boolean
+    delete?: stateWhereInput | boolean
+    connect?: stateWhereUniqueInput
+    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutWarehousesInput, stateUpdateWithoutWarehousesInput>, stateUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type cityUpdateOneWithoutWarehousesNestedInput = {
+    create?: XOR<cityCreateWithoutWarehousesInput, cityUncheckedCreateWithoutWarehousesInput>
+    connectOrCreate?: cityCreateOrConnectWithoutWarehousesInput
+    upsert?: cityUpsertWithoutWarehousesInput
+    disconnect?: cityWhereInput | boolean
+    delete?: cityWhereInput | boolean
+    connect?: cityWhereUniqueInput
+    update?: XOR<XOR<cityUpdateToOneWithWhereWithoutWarehousesInput, cityUpdateWithoutWarehousesInput>, cityUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type NestedBigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -14721,6 +18994,21 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -14759,21 +19047,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -14819,6 +19092,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -14886,78 +19177,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -14983,142 +19202,31 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type cityCreateWithoutStateInput = {
-    id?: bigint | number
-    name: string
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type cityUncheckedCreateWithoutStateInput = {
-    id?: bigint | number
-    name: string
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type cityCreateOrConnectWithoutStateInput = {
-    where: cityWhereUniqueInput
-    create: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput>
-  }
-
-  export type cityCreateManyStateInputEnvelope = {
-    data: cityCreateManyStateInput | cityCreateManyStateInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type cityUpsertWithWhereUniqueWithoutStateInput = {
-    where: cityWhereUniqueInput
-    update: XOR<cityUpdateWithoutStateInput, cityUncheckedUpdateWithoutStateInput>
-    create: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput>
-  }
-
-  export type cityUpdateWithWhereUniqueWithoutStateInput = {
-    where: cityWhereUniqueInput
-    data: XOR<cityUpdateWithoutStateInput, cityUncheckedUpdateWithoutStateInput>
-  }
-
-  export type cityUpdateManyWithWhereWithoutStateInput = {
-    where: cityScalarWhereInput
-    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyWithoutStateInput>
-  }
-
-  export type cityScalarWhereInput = {
-    AND?: cityScalarWhereInput | cityScalarWhereInput[]
-    OR?: cityScalarWhereInput[]
-    NOT?: cityScalarWhereInput | cityScalarWhereInput[]
-    id?: BigIntFilter<"city"> | bigint | number
-    name?: StringFilter<"city"> | string
-    stateId?: BigIntFilter<"city"> | bigint | number
-    stateCode?: StringFilter<"city"> | string
-    latitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFilter<"city"> | Decimal | DecimalJsLike | number | string
-    flag?: IntFilter<"city"> | number
-    wikiDataId?: StringNullableFilter<"city"> | string | null
-    createdAt?: DateTimeFilter<"city"> | Date | string
-    updatedAt?: DateTimeFilter<"city"> | Date | string
-  }
-
-  export type stateCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    fipsCode?: string | null
-    iso2?: string | null
-    type?: string | null
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type stateUncheckedCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    fipsCode?: string | null
-    iso2?: string | null
-    type?: string | null
-    latitude?: Decimal | DecimalJsLike | number | string | null
-    longitude?: Decimal | DecimalJsLike | number | string | null
-    flag?: number
-    wikiDataId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type stateCreateOrConnectWithoutCityInput = {
-    where: stateWhereUniqueInput
-    create: XOR<stateCreateWithoutCityInput, stateUncheckedCreateWithoutCityInput>
-  }
-
-  export type stateUpsertWithoutCityInput = {
-    update: XOR<stateUpdateWithoutCityInput, stateUncheckedUpdateWithoutCityInput>
-    create: XOR<stateCreateWithoutCityInput, stateUncheckedCreateWithoutCityInput>
-    where?: stateWhereInput
-  }
-
-  export type stateUpdateToOneWithWhereWithoutCityInput = {
-    where?: stateWhereInput
-    data: XOR<stateUpdateWithoutCityInput, stateUncheckedUpdateWithoutCityInput>
-  }
-
-  export type stateUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type stateUncheckedUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    fipsCode?: NullableStringFieldUpdateOperationsInput | string | null
-    iso2?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    longitude?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type adminStaffCreateWithoutAdminInput = {
@@ -15262,52 +19370,1048 @@ export namespace Prisma {
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type cityCreateManyStateInput = {
+  export type stateCreateWithoutCountryInput = {
     id?: bigint | number
     name: string
-    stateCode: string
-    latitude: Decimal | DecimalJsLike | number | string
-    longitude: Decimal | DecimalJsLike | number | string
-    flag?: number
-    wikiDataId?: string | null
+    iso2?: string | null
+    type?: string | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityCreateNestedManyWithoutStateInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
   }
 
-  export type cityUpdateWithoutStateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type stateUncheckedCreateWithoutCountryInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
   }
 
-  export type cityUncheckedUpdateWithoutStateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type stateCreateOrConnectWithoutCountryInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput>
   }
 
-  export type cityUncheckedUpdateManyWithoutStateInput = {
+  export type stateCreateManyCountryInputEnvelope = {
+    data: stateCreateManyCountryInput | stateCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type cityCreateWithoutCountryInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+  }
+
+  export type cityUncheckedCreateWithoutCountryInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+  }
+
+  export type cityCreateOrConnectWithoutCountryInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput>
+  }
+
+  export type cityCreateManyCountryInputEnvelope = {
+    data: cityCreateManyCountryInput | cityCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type warehouseCreateWithoutCountryInput = {
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state?: stateCreateNestedOneWithoutWarehousesInput
+    city?: cityCreateNestedOneWithoutWarehousesInput
+  }
+
+  export type warehouseUncheckedCreateWithoutCountryInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseCreateOrConnectWithoutCountryInput = {
+    where: warehouseWhereUniqueInput
+    create: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput>
+  }
+
+  export type warehouseCreateManyCountryInputEnvelope = {
+    data: warehouseCreateManyCountryInput | warehouseCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type stateUpsertWithWhereUniqueWithoutCountryInput = {
+    where: stateWhereUniqueInput
+    update: XOR<stateUpdateWithoutCountryInput, stateUncheckedUpdateWithoutCountryInput>
+    create: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput>
+  }
+
+  export type stateUpdateWithWhereUniqueWithoutCountryInput = {
+    where: stateWhereUniqueInput
+    data: XOR<stateUpdateWithoutCountryInput, stateUncheckedUpdateWithoutCountryInput>
+  }
+
+  export type stateUpdateManyWithWhereWithoutCountryInput = {
+    where: stateScalarWhereInput
+    data: XOR<stateUpdateManyMutationInput, stateUncheckedUpdateManyWithoutCountryInput>
+  }
+
+  export type stateScalarWhereInput = {
+    AND?: stateScalarWhereInput | stateScalarWhereInput[]
+    OR?: stateScalarWhereInput[]
+    NOT?: stateScalarWhereInput | stateScalarWhereInput[]
+    id?: BigIntFilter<"state"> | bigint | number
+    name?: StringFilter<"state"> | string
+    countryId?: BigIntFilter<"state"> | bigint | number
+    iso2?: StringNullableFilter<"state"> | string | null
+    type?: StringNullableFilter<"state"> | string | null
+    createdAt?: DateTimeFilter<"state"> | Date | string
+    createdBy?: IntNullableFilter<"state"> | number | null
+    createdByRole?: StringNullableFilter<"state"> | string | null
+    updatedAt?: DateTimeFilter<"state"> | Date | string
+    updatedBy?: IntNullableFilter<"state"> | number | null
+    updatedByRole?: StringNullableFilter<"state"> | string | null
+    deletedAt?: DateTimeNullableFilter<"state"> | Date | string | null
+    deletedBy?: IntNullableFilter<"state"> | number | null
+    deletedByRole?: StringNullableFilter<"state"> | string | null
+  }
+
+  export type cityUpsertWithWhereUniqueWithoutCountryInput = {
+    where: cityWhereUniqueInput
+    update: XOR<cityUpdateWithoutCountryInput, cityUncheckedUpdateWithoutCountryInput>
+    create: XOR<cityCreateWithoutCountryInput, cityUncheckedCreateWithoutCountryInput>
+  }
+
+  export type cityUpdateWithWhereUniqueWithoutCountryInput = {
+    where: cityWhereUniqueInput
+    data: XOR<cityUpdateWithoutCountryInput, cityUncheckedUpdateWithoutCountryInput>
+  }
+
+  export type cityUpdateManyWithWhereWithoutCountryInput = {
+    where: cityScalarWhereInput
+    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyWithoutCountryInput>
+  }
+
+  export type cityScalarWhereInput = {
+    AND?: cityScalarWhereInput | cityScalarWhereInput[]
+    OR?: cityScalarWhereInput[]
+    NOT?: cityScalarWhereInput | cityScalarWhereInput[]
+    id?: BigIntFilter<"city"> | bigint | number
+    name?: StringFilter<"city"> | string
+    stateId?: BigIntFilter<"city"> | bigint | number
+    countryId?: BigIntFilter<"city"> | bigint | number
+    createdAt?: DateTimeFilter<"city"> | Date | string
+    createdBy?: IntNullableFilter<"city"> | number | null
+    createdByRole?: StringNullableFilter<"city"> | string | null
+    updatedAt?: DateTimeFilter<"city"> | Date | string
+    updatedBy?: IntNullableFilter<"city"> | number | null
+    updatedByRole?: StringNullableFilter<"city"> | string | null
+    deletedAt?: DateTimeNullableFilter<"city"> | Date | string | null
+    deletedBy?: IntNullableFilter<"city"> | number | null
+    deletedByRole?: StringNullableFilter<"city"> | string | null
+  }
+
+  export type warehouseUpsertWithWhereUniqueWithoutCountryInput = {
+    where: warehouseWhereUniqueInput
+    update: XOR<warehouseUpdateWithoutCountryInput, warehouseUncheckedUpdateWithoutCountryInput>
+    create: XOR<warehouseCreateWithoutCountryInput, warehouseUncheckedCreateWithoutCountryInput>
+  }
+
+  export type warehouseUpdateWithWhereUniqueWithoutCountryInput = {
+    where: warehouseWhereUniqueInput
+    data: XOR<warehouseUpdateWithoutCountryInput, warehouseUncheckedUpdateWithoutCountryInput>
+  }
+
+  export type warehouseUpdateManyWithWhereWithoutCountryInput = {
+    where: warehouseScalarWhereInput
+    data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutCountryInput>
+  }
+
+  export type warehouseScalarWhereInput = {
+    AND?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+    OR?: warehouseScalarWhereInput[]
+    NOT?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+    id?: IntFilter<"warehouse"> | number
+    name?: StringFilter<"warehouse"> | string
+    slug?: StringFilter<"warehouse"> | string
+    gst_number?: StringFilter<"warehouse"> | string
+    contact_name?: StringFilter<"warehouse"> | string
+    contact_number?: StringFilter<"warehouse"> | string
+    address_line_1?: StringFilter<"warehouse"> | string
+    address_line_2?: StringNullableFilter<"warehouse"> | string | null
+    postal_code?: StringFilter<"warehouse"> | string
+    countryId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"warehouse"> | bigint | number | null
+    status?: BoolFilter<"warehouse"> | boolean
+    createdAt?: DateTimeFilter<"warehouse"> | Date | string
+    createdBy?: IntNullableFilter<"warehouse"> | number | null
+    createdByRole?: StringNullableFilter<"warehouse"> | string | null
+    updatedAt?: DateTimeFilter<"warehouse"> | Date | string
+    updatedBy?: IntNullableFilter<"warehouse"> | number | null
+    updatedByRole?: StringNullableFilter<"warehouse"> | string | null
+    deletedAt?: DateTimeNullableFilter<"warehouse"> | Date | string | null
+    deletedBy?: IntNullableFilter<"warehouse"> | number | null
+    deletedByRole?: StringNullableFilter<"warehouse"> | string | null
+  }
+
+  export type countryCreateWithoutStatesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutStatesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutStatesInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
+  }
+
+  export type cityCreateWithoutStateInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+  }
+
+  export type cityUncheckedCreateWithoutStateInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+  }
+
+  export type cityCreateOrConnectWithoutStateInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput>
+  }
+
+  export type cityCreateManyStateInputEnvelope = {
+    data: cityCreateManyStateInput | cityCreateManyStateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type warehouseCreateWithoutStateInput = {
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutWarehousesInput
+    city?: cityCreateNestedOneWithoutWarehousesInput
+  }
+
+  export type warehouseUncheckedCreateWithoutStateInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    countryId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseCreateOrConnectWithoutStateInput = {
+    where: warehouseWhereUniqueInput
+    create: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput>
+  }
+
+  export type warehouseCreateManyStateInputEnvelope = {
+    data: warehouseCreateManyStateInput | warehouseCreateManyStateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type countryUpsertWithoutStatesInput = {
+    update: XOR<countryUpdateWithoutStatesInput, countryUncheckedUpdateWithoutStatesInput>
+    create: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutStatesInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutStatesInput, countryUncheckedUpdateWithoutStatesInput>
+  }
+
+  export type countryUpdateWithoutStatesInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
-    stateCode?: StringFieldUpdateOperationsInput | string
-    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    flag?: IntFieldUpdateOperationsInput | number
-    wikiDataId?: NullableStringFieldUpdateOperationsInput | string | null
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutStatesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+  }
+
+  export type cityUpsertWithWhereUniqueWithoutStateInput = {
+    where: cityWhereUniqueInput
+    update: XOR<cityUpdateWithoutStateInput, cityUncheckedUpdateWithoutStateInput>
+    create: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput>
+  }
+
+  export type cityUpdateWithWhereUniqueWithoutStateInput = {
+    where: cityWhereUniqueInput
+    data: XOR<cityUpdateWithoutStateInput, cityUncheckedUpdateWithoutStateInput>
+  }
+
+  export type cityUpdateManyWithWhereWithoutStateInput = {
+    where: cityScalarWhereInput
+    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyWithoutStateInput>
+  }
+
+  export type warehouseUpsertWithWhereUniqueWithoutStateInput = {
+    where: warehouseWhereUniqueInput
+    update: XOR<warehouseUpdateWithoutStateInput, warehouseUncheckedUpdateWithoutStateInput>
+    create: XOR<warehouseCreateWithoutStateInput, warehouseUncheckedCreateWithoutStateInput>
+  }
+
+  export type warehouseUpdateWithWhereUniqueWithoutStateInput = {
+    where: warehouseWhereUniqueInput
+    data: XOR<warehouseUpdateWithoutStateInput, warehouseUncheckedUpdateWithoutStateInput>
+  }
+
+  export type warehouseUpdateManyWithWhereWithoutStateInput = {
+    where: warehouseScalarWhereInput
+    data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutStateInput>
+  }
+
+  export type stateCreateWithoutCitiesInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
+  }
+
+  export type stateUncheckedCreateWithoutCitiesInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+  }
+
+  export type stateCreateOrConnectWithoutCitiesInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
+  }
+
+  export type countryCreateWithoutCitiesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutCitiesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutCitiesInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutCitiesInput, countryUncheckedCreateWithoutCitiesInput>
+  }
+
+  export type warehouseCreateWithoutCityInput = {
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutWarehousesInput
+    state?: stateCreateNestedOneWithoutWarehousesInput
+  }
+
+  export type warehouseUncheckedCreateWithoutCityInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseCreateOrConnectWithoutCityInput = {
+    where: warehouseWhereUniqueInput
+    create: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput>
+  }
+
+  export type warehouseCreateManyCityInputEnvelope = {
+    data: warehouseCreateManyCityInput | warehouseCreateManyCityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type stateUpsertWithoutCitiesInput = {
+    update: XOR<stateUpdateWithoutCitiesInput, stateUncheckedUpdateWithoutCitiesInput>
+    create: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
+    where?: stateWhereInput
+  }
+
+  export type stateUpdateToOneWithWhereWithoutCitiesInput = {
+    where?: stateWhereInput
+    data: XOR<stateUpdateWithoutCitiesInput, stateUncheckedUpdateWithoutCitiesInput>
+  }
+
+  export type stateUpdateWithoutCitiesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutCitiesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+  }
+
+  export type countryUpsertWithoutCitiesInput = {
+    update: XOR<countryUpdateWithoutCitiesInput, countryUncheckedUpdateWithoutCitiesInput>
+    create: XOR<countryCreateWithoutCitiesInput, countryUncheckedCreateWithoutCitiesInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutCitiesInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutCitiesInput, countryUncheckedUpdateWithoutCitiesInput>
+  }
+
+  export type countryUpdateWithoutCitiesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutCitiesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+  }
+
+  export type warehouseUpsertWithWhereUniqueWithoutCityInput = {
+    where: warehouseWhereUniqueInput
+    update: XOR<warehouseUpdateWithoutCityInput, warehouseUncheckedUpdateWithoutCityInput>
+    create: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput>
+  }
+
+  export type warehouseUpdateWithWhereUniqueWithoutCityInput = {
+    where: warehouseWhereUniqueInput
+    data: XOR<warehouseUpdateWithoutCityInput, warehouseUncheckedUpdateWithoutCityInput>
+  }
+
+  export type warehouseUpdateManyWithWhereWithoutCityInput = {
+    where: warehouseScalarWhereInput
+    data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type countryCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutWarehousesInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutWarehousesInput, countryUncheckedCreateWithoutWarehousesInput>
+  }
+
+  export type stateCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    cities?: cityCreateNestedManyWithoutStateInput
+  }
+
+  export type stateUncheckedCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+  }
+
+  export type stateCreateOrConnectWithoutWarehousesInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutWarehousesInput, stateUncheckedCreateWithoutWarehousesInput>
+  }
+
+  export type cityCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    country: countryCreateNestedOneWithoutCitiesInput
+  }
+
+  export type cityUncheckedCreateWithoutWarehousesInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type cityCreateOrConnectWithoutWarehousesInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutWarehousesInput, cityUncheckedCreateWithoutWarehousesInput>
+  }
+
+  export type countryUpsertWithoutWarehousesInput = {
+    update: XOR<countryUpdateWithoutWarehousesInput, countryUncheckedUpdateWithoutWarehousesInput>
+    create: XOR<countryCreateWithoutWarehousesInput, countryUncheckedCreateWithoutWarehousesInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutWarehousesInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutWarehousesInput, countryUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type countryUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+  }
+
+  export type stateUpsertWithoutWarehousesInput = {
+    update: XOR<stateUpdateWithoutWarehousesInput, stateUncheckedUpdateWithoutWarehousesInput>
+    create: XOR<stateCreateWithoutWarehousesInput, stateUncheckedCreateWithoutWarehousesInput>
+    where?: stateWhereInput
+  }
+
+  export type stateUpdateToOneWithWhereWithoutWarehousesInput = {
+    where?: stateWhereInput
+    data: XOR<stateUpdateWithoutWarehousesInput, stateUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type stateUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    cities?: cityUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+  }
+
+  export type cityUpsertWithoutWarehousesInput = {
+    update: XOR<cityUpdateWithoutWarehousesInput, cityUncheckedUpdateWithoutWarehousesInput>
+    create: XOR<cityCreateWithoutWarehousesInput, cityUncheckedCreateWithoutWarehousesInput>
+    where?: cityWhereInput
+  }
+
+  export type cityUpdateToOneWithWhereWithoutWarehousesInput = {
+    where?: cityWhereInput
+    data: XOR<cityUpdateWithoutWarehousesInput, cityUncheckedUpdateWithoutWarehousesInput>
+  }
+
+  export type cityUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutWarehousesInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffCreateManyAdminInput = {
@@ -15363,6 +20467,483 @@ export namespace Prisma {
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type stateCreateManyCountryInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type cityCreateManyCountryInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseCreateManyCountryInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type stateUpdateWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateManyWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type cityUpdateWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateManyWithoutCountryInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseUpdateWithoutCountryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneWithoutWarehousesNestedInput
+    city?: cityUpdateOneWithoutWarehousesNestedInput
+  }
+
+  export type warehouseUncheckedUpdateWithoutCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type cityCreateManyStateInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseCreateManyStateInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    countryId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type cityUpdateWithoutStateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutStateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateManyWithoutStateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseUpdateWithoutStateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutWarehousesNestedInput
+    city?: cityUpdateOneWithoutWarehousesNestedInput
+  }
+
+  export type warehouseUncheckedUpdateWithoutStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseCreateManyCityInput = {
+    id?: number
+    name: string
+    slug: string
+    gst_number: string
+    contact_name: string
+    contact_number: string
+    address_line_1: string
+    address_line_2?: string | null
+    postal_code: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type warehouseUpdateWithoutCityInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutWarehousesNestedInput
+    state?: stateUpdateOneWithoutWarehousesNestedInput
+  }
+
+  export type warehouseUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type warehouseUncheckedUpdateManyWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    gst_number?: StringFieldUpdateOperationsInput | string
+    contact_name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address_line_1?: StringFieldUpdateOperationsInput | string
+    address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
+    postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
