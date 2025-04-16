@@ -562,6 +562,12 @@
     gap: 32px;
   }
 
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .rounded {
     border-radius: .25rem;
   }
