@@ -82,8 +82,8 @@ export async function createWarehouse(adminId: number, adminRole: string, wareho
         // Convert BigInt to string for serialization
         const warehouseWithStringBigInts = {
             ...newWarehouse,
-            cityId: newWarehouse.cityId.toString(),
-            stateId: newWarehouse.stateId.toString(),
+            cityId: newWarehouse.cityId !== null && newWarehouse.cityId !== undefined ? newWarehouse.cityId.toString() : null,
+            stateId: newWarehouse.stateId !== null && newWarehouse.stateId !== undefined ? newWarehouse.stateId.toString() : null,
         };
 
         return { status: true, warehouse: warehouseWithStringBigInts };
@@ -113,8 +113,8 @@ export const updateWarehouse = async (
         // Convert BigInt to string for serialization
         const warehouseWithStringBigInts = {
             ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString(),
+            cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
+            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
         };
 
         return { status: true, warehouse: warehouseWithStringBigInts };
@@ -136,8 +136,8 @@ export const getWarehouseById = async (id: number) => {
         // Convert BigInt to string for serialization
         const warehouseWithStringBigInts = {
             ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString(),
+            cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
+            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
         };
         return { status: true, warehouse: warehouseWithStringBigInts };
     } catch (error) {
@@ -156,8 +156,8 @@ export const getAllWarehouses = async () => {
         // Convert BigInt to string for serialization
         const warehousesWithStringBigInts = warehouses.map(warehouse => ({
             ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString(),
+            cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
+            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
         }));
 
         return { status: true, warehouses: warehousesWithStringBigInts };
@@ -196,8 +196,8 @@ export const getWarehousesByStatus = async (status: "active" | "inactive" | "del
         // Convert BigInt to string for serialization
         const warehousesWithStringBigInts = warehouses.map(warehouse => ({
             ...warehouse,
-            cityId: warehouse.cityId.toString(),
-            stateId: warehouse.stateId.toString(),
+            cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
+            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
         }));
 
         return { status: true, warehouses: warehousesWithStringBigInts };
@@ -243,8 +243,8 @@ export const restoreWarehouse = async (adminId: number, adminRole: string, id: n
         // Convert BigInt to string for serialization
         const warehouseWithStringBigInts = {
             ...restoredWarehouse,
-            cityId: restoredWarehouse.cityId.toString(),
-            stateId: restoredWarehouse.stateId.toString(),
+            cityId: restoredWarehouse.cityId !== null && restoredWarehouse.cityId !== undefined ? restoredWarehouse.cityId.toString() : null,
+            stateId: restoredWarehouse.stateId !== null && restoredWarehouse.stateId !== undefined ? restoredWarehouse.stateId.toString() : null,
         };
 
         return { status: true, message: "Warehouse restored successfully", warehouse: warehouseWithStringBigInts };
