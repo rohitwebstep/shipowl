@@ -152,7 +152,10 @@ export async function handleForgetPassword(
             "{{appName}}": "Shipping OWL",
         };
 
-        let htmlBody = htmlTemplate;
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
+
         Object.keys(replacements).forEach((key) => {
             htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
         });
@@ -272,7 +275,11 @@ export async function handleResetPassword(
             "{{appName}}": "Shipping OWL",
         };
 
-        let htmlBody = htmlTemplate;
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
+
+        // Replace placeholders in the HTML template
         Object.keys(replacements).forEach((key) => {
             htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
         });
