@@ -7,6 +7,8 @@ import { getCityById, updateCity, softDeleteCity, restoreCity } from '@/app/mode
 import { isStateInCountry } from '@/app/models/location/state';
 import { getCountryById } from '@/app/models/location/country';
 import { getStateById } from '@/app/models/location/state';
+import { getCountriesByStatus } from '@/app/models/location/country';
+import { getStatesByCountry } from '@/app/models/location/state';
 
 export async function GET(req: NextRequest) {
   try {
@@ -38,7 +40,34 @@ export async function GET(req: NextRequest) {
     const cityResult = await getCityById(cityIdNum);
     if (cityResult?.status) {
       logMessage('info', 'City found:', cityResult.city);
-      return NextResponse.json({ status: true, city: cityResult.city }, { status: 200 });
+
+      // Fetch all countries
+      const countriesResult = await getCountriesByStatus("notDeleted");
+
+      if (!countriesResult?.status) {
+        logMessage('warn', 'No countries found');
+        return NextResponse.json(
+          { status: false, message: 'No countries found' },
+          { status: 404 }
+        );
+      }
+
+      // Fetch all states
+      const statesResult = await getStatesByCountry(Number(cityResult?.city?.countryId));
+
+      if (!statesResult?.status) {
+        logMessage('warn', 'No states found');
+        return NextResponse.json(
+          { status: false, message: 'No states found' },
+          { status: 404 }
+        );
+      }
+
+      logMessage('info', 'Countries fetched successfully:', countriesResult.countries);
+      return NextResponse.json(
+        { status: true, city: cityResult.city, states: statesResult.states, countries: countriesResult.countries },
+        { status: 200 }
+      );
     }
 
     logMessage('info', 'City found:', cityResult.city);

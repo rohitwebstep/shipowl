@@ -5,6 +5,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { getStateById, updateState, softDeleteState, restoreState } from '@/app/models/location/state';
 import { getCountryById } from '@/app/models/location/country';
+import { getCountriesByStatus } from '@/app/models/location/country';
 
 export async function GET(req: NextRequest) {
   try {
@@ -36,7 +37,23 @@ export async function GET(req: NextRequest) {
     const stateResult = await getStateById(stateIdNum);
     if (stateResult?.status) {
       logMessage('info', 'State found:', stateResult.state);
-      return NextResponse.json({ status: true, state: stateResult.state }, { status: 200 });
+
+      // Fetch all countries
+      const countriesResult = await getCountriesByStatus("notDeleted");
+
+      if (!countriesResult?.status) {
+        logMessage('warn', 'No countries found');
+        return NextResponse.json(
+          { status: false, message: 'No countries found' },
+          { status: 404 }
+        );
+      }
+
+      logMessage('info', 'Countries fetched successfully:', countriesResult.countries);
+      return NextResponse.json(
+        { status: true, state: stateResult.state, countries: countriesResult.countries },
+        { status: 200 }
+      );
     }
 
     logMessage('info', 'State found:', stateResult.state);
