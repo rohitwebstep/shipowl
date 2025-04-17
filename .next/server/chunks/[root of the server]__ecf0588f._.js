@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/location/state/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/location/city/[cityId]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -8844,36 +8844,30 @@ function validateFormData(formData, { requiredFields = [], patternValidations = 
     };
 }
 }}),
-"[project]/src/app/models/location/state.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/location/city.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "createState": (()=>createState),
-    "deleteState": (()=>deleteState),
-    "getAllStates": (()=>getAllStates),
-    "getStateById": (()=>getStateById),
-    "getStatesByStatus": (()=>getStatesByStatus),
-    "restoreState": (()=>restoreState),
-    "softDeleteState": (()=>softDeleteState),
-    "updateState": (()=>updateState)
+    "createCity": (()=>createCity),
+    "deleteCity": (()=>deleteCity),
+    "getAllCities": (()=>getAllCities),
+    "getCitiesByStatus": (()=>getCitiesByStatus),
+    "getCityById": (()=>getCityById),
+    "restoreCity": (()=>restoreCity),
+    "softDeleteCity": (()=>softDeleteCity),
+    "updateCity": (()=>updateCity)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
-;
-const isValidDate = (date)=>{
-    return date instanceof Date && !isNaN(date.getTime());
-};
-async function createState(adminId, adminRole, state) {
+async function createCity(adminId, adminRole, city) {
     try {
-        const { name, iso2, type, country } = state;
-        const newState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.create({
+        const { name, state, country } = city;
+        const newCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.create({
             data: {
                 name,
-                iso2,
-                type,
+                state,
                 country,
                 createdAt: new Date(),
                 createdBy: adminId,
@@ -8881,115 +8875,118 @@ async function createState(adminId, adminRole, state) {
             }
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...newState,
-            id: newState.id.toString(),
-            countryId: newState.countryId.toString()
+        const cityWithStringBigInts = {
+            ...newCity,
+            id: newCity.id.toString(),
+            stateId: newCity.stateId.toString(),
+            countryId: newCity.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error creating state:`, error);
+        console.error(`Error creating city:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateState = async (adminId, adminRole, stateId, data)=>{
+const updateCity = async (adminId, adminRole, cityId, data)=>{
     try {
-        const { name, iso2, type, country } = data;
+        const { name, state, country } = data;
         // Construct the payload safely
         const updateData = {
             name,
-            iso2,
-            type,
+            state,
             country,
             updatedBy: adminId,
             updatedAt: new Date(),
             updatedByRole: adminRole
         };
-        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
-                id: stateId
+                id: cityId
             },
             data: updateData
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...state,
-            id: state.id.toString(),
-            countryId: state.countryId.toString()
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ updateState Error:", error);
+        console.error("❌ updateCity Error:", error);
         return {
             status: false,
-            message: "Error updating state"
+            message: "Error updating city"
         };
     }
 };
-const getStateById = async (id)=>{
+const getCityById = async (id)=>{
     try {
-        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findUnique({
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
             where: {
                 id
             }
         });
-        if (!state) return {
+        if (!city) return {
             status: false,
-            message: "State not found"
+            message: "City not found"
         };
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...state,
-            id: state.id.toString(),
-            countryId: state.countryId.toString()
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ getStateById Error:", error);
+        console.error("❌ getCityById Error:", error);
         return {
             status: false,
-            message: "Error fetching state"
+            message: "Error fetching city"
         };
     }
 };
-const getAllStates = async ()=>{
+const getAllCities = async ()=>{
     try {
-        const states = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findMany({
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
             orderBy: {
                 name: 'asc'
             }
         });
         // Convert BigInt to string for serialization
-        const statesWithStringBigInts = states.map((state)=>({
-                ...state,
-                id: state.id.toString(),
-                countryId: state.countryId.toString()
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
             }));
         return {
             status: true,
-            states: statesWithStringBigInts
+            cities: citiesWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ getAllStates Error:", error);
+        console.error("❌ getAllCities Error:", error);
         return {
             status: false,
-            message: "Error fetching states"
+            message: "Error fetching cities"
         };
     }
 };
-const getStatesByStatus = async (status)=>{
+const getCitiesByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -9020,45 +9017,34 @@ const getStatesByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const states = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findMany({
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
             where: whereCondition,
-            include: {
-                country: true
-            },
             orderBy: {
                 name: "asc"
             }
         });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `states fetched by status (${status}):`, states);
         // Convert BigInt to string for serialization
-        const statesWithStringBigInts = states.map((state)=>({
-                ...state,
-                id: state.id.toString(),
-                countryId: state.countryId.toString(),
-                createdAt: isValidDate(state.createdAt) ? state.createdAt : new Date(),
-                updatedAt: isValidDate(state.updatedAt) ? state.updatedAt : new Date(),
-                country: {
-                    ...state.country,
-                    id: state.country.id.toString(),
-                    createdAt: isValidDate(state.country.createdAt) ? state.country.createdAt : new Date(),
-                    updatedAt: isValidDate(state.country.updatedAt) ? state.country.updatedAt : new Date()
-                }
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
             }));
         return {
             status: true,
-            states: statesWithStringBigInts
+            cities: citiesWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error fetching states by status (${status}):`, error);
+        console.error(`Error fetching cities by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching states"
+            message: "Error fetching cities"
         };
     }
 };
-const softDeleteState = async (adminId, adminRole, id)=>{
+const softDeleteCity = async (adminId, adminRole, id)=>{
     try {
-        const updatedState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const updatedCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
                 id
             },
@@ -9070,20 +9056,20 @@ const softDeleteState = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "State soft deleted successfully",
-            updatedState
+            message: "City soft deleted successfully",
+            updatedCity
         };
     } catch (error) {
-        console.error("❌ softDeleteState Error:", error);
+        console.error("❌ softDeleteCity Error:", error);
         return {
             status: false,
-            message: "Error soft deleting state"
+            message: "Error soft deleting city"
         };
     }
 };
-const restoreState = async (adminId, adminRole, id)=>{
+const restoreCity = async (adminId, adminRole, id)=>{
     try {
-        const restoredState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const restoredCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
                 id
             },
@@ -9097,72 +9083,147 @@ const restoreState = async (adminId, adminRole, id)=>{
             }
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...restoredState,
-            id: restoredState.id.toString(),
-            countryId: restoredState.countryId.toString()
+        const cityWithStringBigInts = {
+            ...restoredCity,
+            id: restoredCity.id.toString(),
+            stateId: restoredCity.stateId.toString(),
+            countryId: restoredCity.countryId.toString()
         };
         return {
             status: true,
-            message: "State restored successfully",
-            state: stateWithStringBigInts
+            message: "City restored successfully",
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ restoreState Error:", error);
+        console.error("❌ restoreCity Error:", error);
         return {
             status: false,
-            message: "Error restoring state"
+            message: "Error restoring city"
         };
     }
 };
-const deleteState = async (id)=>{
+const deleteCity = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.delete({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "State deleted successfully"
+            message: "City deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteState Error:", error);
+        console.error("❌ deleteCity Error:", error);
         return {
             status: false,
-            message: "Error deleting state"
+            message: "Error deleting city"
         };
     }
 };
 }}),
-"[project]/src/app/api/location/state/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/location/city/[cityId]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
+    "DELETE": (()=>DELETE),
     "GET": (()=>GET),
-    "POST": (()=>POST)
+    "PATCH": (()=>PATCH),
+    "PUT": (()=>PUT)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/state.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/city.ts [app-route] (ecmascript)");
 ;
 ;
 ;
 ;
 ;
-async function POST(req) {
+async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for state creation');
+        // Extract cityId directly from the URL path
+        const cityId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested City ID:', cityId);
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID', {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid or missing admin ID'
+            }, {
+                status: 400
+            });
+        }
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const cityIdNum = Number(cityId);
+        if (isNaN(cityIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid city ID', {
+                cityId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid city ID'
+            }, {
+                status: 400
+            });
+        }
+        const cityResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCityById"])(cityIdNum);
+        if (cityResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City found:', cityResult.city);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                city: cityResult.city
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City found:', cityResult.city);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'City not found'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ Error fetching single city:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function PUT(req) {
+    try {
+        // Extract cityId directly from the URL path
+        const cityId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested City ID:', cityId);
         // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID header', {
+                adminIdHeader,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "User ID is missing or invalid in request"
             }, {
@@ -9172,9 +9233,36 @@ async function POST(req) {
         // Check if admin exists
         const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
         if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const cityIdNum = Number(cityId);
+        if (isNaN(cityIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid city ID', {
+                cityId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid city ID'
+            }, {
+                status: 400
+            });
+        }
+        const cityResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCityById"])(cityIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'City fetch result:', cityResult);
+        if (!cityResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'City not found', {
+                cityIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'City not found'
             }, {
                 status: 404
             });
@@ -9200,45 +9288,47 @@ async function POST(req) {
         }
         // Extract fields
         const name = formData.get('name');
-        const iso2 = formData.get('iso2') || '';
-        const type = formData.get('type') || '';
         const countryId = Number(formData.get('country'));
-        // Prepare the payload for state creation
-        const statePayload = {
+        const stateId = Number(formData.get('state'));
+        // Prepare the payload for city creation
+        const cityPayload = {
             name,
-            iso2,
-            type,
+            state: {
+                connect: {
+                    id: stateId
+                }
+            },
             country: {
                 connect: {
                     id: countryId
                 }
             },
-            createdAt: new Date(),
-            createdBy: adminId,
-            createdByRole: adminRole
+            updatedAt: new Date(),
+            updatedBy: adminId,
+            updatedByRole: adminRole
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'State payload created:', statePayload);
-        const stateCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createState"])(adminId, String(adminRole), statePayload);
-        if (stateCreateResult?.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'State created successfully:', stateCreateResult.state);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City payload:', cityPayload);
+        const cityCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateCity"])(adminId, String(adminRole), cityIdNum, cityPayload);
+        if (cityCreateResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City updated successfully:', cityCreateResult.city);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                message: "State created successfully",
-                state: stateCreateResult.state
+                message: "City updated successfully",
+                city: cityCreateResult.city
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'State creation failed:', stateCreateResult?.message || 'Unknown error');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'City update failed', cityCreateResult?.message);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: stateCreateResult?.message || 'State creation failed'
+            error: cityCreateResult?.message || 'City creation failed'
         }, {
             status: 500
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'State Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ City Updation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9247,32 +9337,180 @@ async function POST(req) {
         });
     }
 }
-async function GET() {
+async function PATCH(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching states');
-        // Fetch all states
-        const statesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getStatesByStatus"])("notDeleted");
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'States fetched successfully:', statesResult);
-        if (statesResult?.status) {
+        // Extract cityId directly from the URL path
+        const cityId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested City ID:', cityId);
+        // Get headers
+        const adminIdHeader = req.headers.get("x-admin-id");
+        const adminRole = req.headers.get("x-admin-role");
+        const adminId = Number(adminIdHeader);
+        if (!adminIdHeader || isNaN(adminId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID header', {
+                adminIdHeader,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "User ID is missing or invalid in request"
+            }, {
+                status: 400
+            });
+        }
+        // Check if admin exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const cityIdNum = Number(cityId);
+        if (isNaN(cityIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid city ID', {
+                cityId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid city ID'
+            }, {
+                status: 400
+            });
+        }
+        const cityResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCityById"])(cityIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'City fetch result:', cityResult);
+        if (!cityResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'City not found', {
+                cityIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'City not found'
+            }, {
+                status: 404
+            });
+        }
+        // Restore the city (i.e., reset deletedAt, deletedBy, deletedByRole)
+        const restoreResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["restoreCity"])(adminId, String(adminRole), cityIdNum);
+        if (restoreResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City restored successfully:', restoreResult.city);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                states: statesResult.states
+                city: restoreResult.city
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No states found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'City restore failed');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No states found"
+            error: 'City restore failed'
+        }, {
+            status: 500
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ City restore error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function DELETE(req) {
+    try {
+        // Extract cityId directly from the URL path
+        const cityId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Delete City Request:', {
+            cityId
+        });
+        // Extract admin ID and role from headers
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Validate admin ID
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID', {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Admin ID is missing or invalid'
+            }, {
+                status: 400
+            });
+        }
+        // Check if the admin user exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Admin not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `Admin not found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        // Validate city ID
+        const cityIdNum = Number(cityId);
+        if (isNaN(cityIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid city ID format', {
+                cityId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'City ID is invalid'
+            }, {
+                status: 400
+            });
+        }
+        const cityResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCityById"])(cityIdNum);
+        if (!cityResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'City not found', {
+                cityIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'City not found'
+            }, {
+                status: 404
+            });
+        }
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["softDeleteCity"])(Number(adminId), String(adminRole), cityIdNum); // Assuming softDeleteCity marks the city as deleted
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Soft delete request for city: ${cityIdNum}`, {
+            adminId
+        });
+        if (result?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `City soft deleted successfully: ${cityIdNum}`, {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: `City soft deleted successfully`
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `City not found or could not be deleted: ${cityIdNum}`, {
+            adminId
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'City not found or deletion failed'
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching states:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error during city deletion', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch states"
+            error: 'Internal server error'
         }, {
             status: 500
         });
@@ -9282,4 +9520,4 @@ async function GET() {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a7d1cffe._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__ecf0588f._.js.map

@@ -134,7 +134,9 @@ function middleware(req) {
         "/api/location/country",
         "/api/location/country/:path*",
         "/api/location/state",
-        "/api/location/state/:path*"
+        "/api/location/state/:path*",
+        "/api/location/city",
+        "/api/location/city/:path*"
     ];
     if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
         const applicableRoles = [
@@ -192,7 +194,9 @@ const config = {
         "/api/location/country",
         "/api/location/country/:path*",
         "/api/location/state",
-        "/api/location/state/:path*"
+        "/api/location/state/:path*",
+        "/api/location/city",
+        "/api/location/city/:path*"
     ]
 };
 }}),

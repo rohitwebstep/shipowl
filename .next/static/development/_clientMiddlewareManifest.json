@@ -66,5 +66,13 @@
   {
     "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/location\\/state(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
     "originalSource": "/api/location/state/:path*"
+  },
+  {
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/location\\/city(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/location/city"
+  },
+  {
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/location\\/city(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/location/city/:path*"
   }
 ]

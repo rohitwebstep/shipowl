@@ -77,6 +77,14 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/location/state/:path*{(\\\\.json)}?",
           "originalSource": "/api/location/state/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/location/city{(\\\\.json)}?",
+          "originalSource": "/api/location/city"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/location/city/:path*{(\\\\.json)}?",
+          "originalSource": "/api/location/city/:path*"
         }
       ],
       "wasm": [],
@@ -84,9 +92,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "f5816cd6cb4e2966b9b81410e2a9be96",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "56c3872617d932315763114500d9450aa852bba7e1b4ba654993c8f693f22b0a",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "d2a8e6c36a1ff53a6d3e0a1ad640d25cde9d57a1318200edc476bb0d85adfa43"
+        "__NEXT_PREVIEW_MODE_ID": "e6d6373e26f19ea2703ba82efb6b71cf",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "67a6f292ee1e43eec3bef465cc5a29e7993051a92bb587db70cbda7127cdb0ae",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "7ccad5eed423a9f546413bcefd410d841e506071eb82a7a376e799344a1b6ae5"
       }
     }
   },

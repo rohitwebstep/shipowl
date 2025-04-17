@@ -1,5 +1,4 @@
 {
-  "/api/location/state/[stateId]/destroy/route": "app/api/location/state/[stateId]/destroy/route.js",
-  "/api/location/state/route": "app/api/location/state/route.js",
-  "/api/location/state/trashed/route": "app/api/location/state/trashed/route.js"
+  "/api/location/city/[cityId]/route": "app/api/location/city/[cityId]/route.js",
+  "/api/location/city/route": "app/api/location/city/route.js"
 }

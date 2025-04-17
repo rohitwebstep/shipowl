@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
-import { createState, getStatesByStatus } from '@/app/models/location/state';
+import { createCity, getCitiesByStatus } from '@/app/models/location/city';
 
 export async function POST(req: NextRequest) {
   try {
-    logMessage('debug', 'POST request received for state creation');
+    logMessage('debug', 'POST request received for city creation');
 
     // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
@@ -49,15 +49,17 @@ export async function POST(req: NextRequest) {
 
     // Extract fields
     const name = formData.get('name') as string;
-    const iso2 = (formData.get('iso2') as string) || '';
-    const type = (formData.get('type') as string) || '';
     const countryId = Number(formData.get('country'));
+    const stateId = Number(formData.get('state'));
 
-    // Prepare the payload for state creation
-    const statePayload = {
+    // Prepare the payload for city creation
+    const cityPayload = {
       name,
-      iso2,
-      type,
+      state: {
+        connect: {
+          id: stateId,
+        },
+      },
       country: {
         connect: {
           id: countryId,
@@ -68,50 +70,50 @@ export async function POST(req: NextRequest) {
       createdByRole: adminRole,
     };
 
-    logMessage('info', 'State payload created:', statePayload);
+    logMessage('info', 'City payload created:', cityPayload);
 
-    const stateCreateResult = await createState(adminId, String(adminRole), statePayload);
+    const cityCreateResult = await createCity(adminId, String(adminRole), cityPayload);
 
-    if (stateCreateResult?.status) {
-      logMessage('info', 'State created successfully:', stateCreateResult.state);
-      return NextResponse.json({ status: true, message: "State created successfully", state: stateCreateResult.state }, { status: 200 });
+    if (cityCreateResult?.status) {
+      logMessage('info', 'City created successfully:', cityCreateResult.city);
+      return NextResponse.json({ status: true, message: "City created successfully", city: cityCreateResult.city }, { status: 200 });
     }
 
-    logMessage('error', 'State creation failed:', stateCreateResult?.message || 'Unknown error');
+    logMessage('error', 'City creation failed:', cityCreateResult?.message || 'Unknown error');
     return NextResponse.json(
-      { status: false, error: stateCreateResult?.message || 'State creation failed' },
+      { status: false, error: cityCreateResult?.message || 'City creation failed' },
       { status: 500 }
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'State Creation Error:', error);
+    logMessage('error', 'City Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
 
 export async function GET() {
   try {
-    logMessage('debug', 'GET request received for fetching states');
+    logMessage('debug', 'GET request received for fetching cities');
 
-    // Fetch all states
-    const statesResult = await getStatesByStatus("notDeleted");
-    logMessage('info', 'States fetched successfully:', statesResult);
-    if (statesResult?.status) {
+    // Fetch all cities
+    const citiesResult = await getCitiesByStatus("notDeleted");
+    logMessage('info', 'Cities fetched successfully:', citiesResult);
+    if (citiesResult?.status) {
       return NextResponse.json(
-        { status: true, states: statesResult.states },
+        { status: true, cities: citiesResult.cities },
         { status: 200 }
       );
     }
 
-    logMessage('warn', 'No states found');
+    logMessage('warn', 'No cities found');
     return NextResponse.json(
-      { status: false, error: "No states found" },
+      { status: false, error: "No cities found" },
       { status: 404 }
     );
   } catch (error) {
-    logMessage('error', 'Error fetching states:', error);
+    logMessage('error', 'Error fetching cities:', error);
     return NextResponse.json(
-      { status: false, error: "Failed to fetch states" },
+      { status: false, error: "Failed to fetch cities" },
       { status: 500 }
     );
   }

@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/location/state/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/location/city/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -8844,36 +8844,30 @@ function validateFormData(formData, { requiredFields = [], patternValidations = 
     };
 }
 }}),
-"[project]/src/app/models/location/state.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/location/city.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "createState": (()=>createState),
-    "deleteState": (()=>deleteState),
-    "getAllStates": (()=>getAllStates),
-    "getStateById": (()=>getStateById),
-    "getStatesByStatus": (()=>getStatesByStatus),
-    "restoreState": (()=>restoreState),
-    "softDeleteState": (()=>softDeleteState),
-    "updateState": (()=>updateState)
+    "createCity": (()=>createCity),
+    "deleteCity": (()=>deleteCity),
+    "getAllCities": (()=>getAllCities),
+    "getCitiesByStatus": (()=>getCitiesByStatus),
+    "getCityById": (()=>getCityById),
+    "restoreCity": (()=>restoreCity),
+    "softDeleteCity": (()=>softDeleteCity),
+    "updateCity": (()=>updateCity)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
-;
-const isValidDate = (date)=>{
-    return date instanceof Date && !isNaN(date.getTime());
-};
-async function createState(adminId, adminRole, state) {
+async function createCity(adminId, adminRole, city) {
     try {
-        const { name, iso2, type, country } = state;
-        const newState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.create({
+        const { name, state, country } = city;
+        const newCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.create({
             data: {
                 name,
-                iso2,
-                type,
+                state,
                 country,
                 createdAt: new Date(),
                 createdBy: adminId,
@@ -8881,115 +8875,118 @@ async function createState(adminId, adminRole, state) {
             }
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...newState,
-            id: newState.id.toString(),
-            countryId: newState.countryId.toString()
+        const cityWithStringBigInts = {
+            ...newCity,
+            id: newCity.id.toString(),
+            stateId: newCity.stateId.toString(),
+            countryId: newCity.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error creating state:`, error);
+        console.error(`Error creating city:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateState = async (adminId, adminRole, stateId, data)=>{
+const updateCity = async (adminId, adminRole, cityId, data)=>{
     try {
-        const { name, iso2, type, country } = data;
+        const { name, state, country } = data;
         // Construct the payload safely
         const updateData = {
             name,
-            iso2,
-            type,
+            state,
             country,
             updatedBy: adminId,
             updatedAt: new Date(),
             updatedByRole: adminRole
         };
-        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
-                id: stateId
+                id: cityId
             },
             data: updateData
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...state,
-            id: state.id.toString(),
-            countryId: state.countryId.toString()
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ updateState Error:", error);
+        console.error("❌ updateCity Error:", error);
         return {
             status: false,
-            message: "Error updating state"
+            message: "Error updating city"
         };
     }
 };
-const getStateById = async (id)=>{
+const getCityById = async (id)=>{
     try {
-        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findUnique({
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
             where: {
                 id
             }
         });
-        if (!state) return {
+        if (!city) return {
             status: false,
-            message: "State not found"
+            message: "City not found"
         };
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...state,
-            id: state.id.toString(),
-            countryId: state.countryId.toString()
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
         };
         return {
             status: true,
-            state: stateWithStringBigInts
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ getStateById Error:", error);
+        console.error("❌ getCityById Error:", error);
         return {
             status: false,
-            message: "Error fetching state"
+            message: "Error fetching city"
         };
     }
 };
-const getAllStates = async ()=>{
+const getAllCities = async ()=>{
     try {
-        const states = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findMany({
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
             orderBy: {
                 name: 'asc'
             }
         });
         // Convert BigInt to string for serialization
-        const statesWithStringBigInts = states.map((state)=>({
-                ...state,
-                id: state.id.toString(),
-                countryId: state.countryId.toString()
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
             }));
         return {
             status: true,
-            states: statesWithStringBigInts
+            cities: citiesWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ getAllStates Error:", error);
+        console.error("❌ getAllCities Error:", error);
         return {
             status: false,
-            message: "Error fetching states"
+            message: "Error fetching cities"
         };
     }
 };
-const getStatesByStatus = async (status)=>{
+const getCitiesByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -9020,45 +9017,34 @@ const getStatesByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const states = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findMany({
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
             where: whereCondition,
-            include: {
-                country: true
-            },
             orderBy: {
                 name: "asc"
             }
         });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `states fetched by status (${status}):`, states);
         // Convert BigInt to string for serialization
-        const statesWithStringBigInts = states.map((state)=>({
-                ...state,
-                id: state.id.toString(),
-                countryId: state.countryId.toString(),
-                createdAt: isValidDate(state.createdAt) ? state.createdAt : new Date(),
-                updatedAt: isValidDate(state.updatedAt) ? state.updatedAt : new Date(),
-                country: {
-                    ...state.country,
-                    id: state.country.id.toString(),
-                    createdAt: isValidDate(state.country.createdAt) ? state.country.createdAt : new Date(),
-                    updatedAt: isValidDate(state.country.updatedAt) ? state.country.updatedAt : new Date()
-                }
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
             }));
         return {
             status: true,
-            states: statesWithStringBigInts
+            cities: citiesWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error fetching states by status (${status}):`, error);
+        console.error(`Error fetching cities by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching states"
+            message: "Error fetching cities"
         };
     }
 };
-const softDeleteState = async (adminId, adminRole, id)=>{
+const softDeleteCity = async (adminId, adminRole, id)=>{
     try {
-        const updatedState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const updatedCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
                 id
             },
@@ -9070,20 +9056,20 @@ const softDeleteState = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "State soft deleted successfully",
-            updatedState
+            message: "City soft deleted successfully",
+            updatedCity
         };
     } catch (error) {
-        console.error("❌ softDeleteState Error:", error);
+        console.error("❌ softDeleteCity Error:", error);
         return {
             status: false,
-            message: "Error soft deleting state"
+            message: "Error soft deleting city"
         };
     }
 };
-const restoreState = async (adminId, adminRole, id)=>{
+const restoreCity = async (adminId, adminRole, id)=>{
     try {
-        const restoredState = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.update({
+        const restoredCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
                 id
             },
@@ -9097,45 +9083,46 @@ const restoreState = async (adminId, adminRole, id)=>{
             }
         });
         // Convert BigInt to string for serialization
-        const stateWithStringBigInts = {
-            ...restoredState,
-            id: restoredState.id.toString(),
-            countryId: restoredState.countryId.toString()
+        const cityWithStringBigInts = {
+            ...restoredCity,
+            id: restoredCity.id.toString(),
+            stateId: restoredCity.stateId.toString(),
+            countryId: restoredCity.countryId.toString()
         };
         return {
             status: true,
-            message: "State restored successfully",
-            state: stateWithStringBigInts
+            message: "City restored successfully",
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ restoreState Error:", error);
+        console.error("❌ restoreCity Error:", error);
         return {
             status: false,
-            message: "Error restoring state"
+            message: "Error restoring city"
         };
     }
 };
-const deleteState = async (id)=>{
+const deleteCity = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.delete({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "State deleted successfully"
+            message: "City deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteState Error:", error);
+        console.error("❌ deleteCity Error:", error);
         return {
             status: false,
-            message: "Error deleting state"
+            message: "Error deleting city"
         };
     }
 };
 }}),
-"[project]/src/app/api/location/state/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/location/city/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -9148,7 +9135,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$serv
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/state.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/city.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -9156,7 +9143,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$loca
 ;
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for state creation');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for city creation');
         // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
@@ -9200,14 +9187,16 @@ async function POST(req) {
         }
         // Extract fields
         const name = formData.get('name');
-        const iso2 = formData.get('iso2') || '';
-        const type = formData.get('type') || '';
         const countryId = Number(formData.get('country'));
-        // Prepare the payload for state creation
-        const statePayload = {
+        const stateId = Number(formData.get('state'));
+        // Prepare the payload for city creation
+        const cityPayload = {
             name,
-            iso2,
-            type,
+            state: {
+                connect: {
+                    id: stateId
+                }
+            },
             country: {
                 connect: {
                     id: countryId
@@ -9217,28 +9206,28 @@ async function POST(req) {
             createdBy: adminId,
             createdByRole: adminRole
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'State payload created:', statePayload);
-        const stateCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createState"])(adminId, String(adminRole), statePayload);
-        if (stateCreateResult?.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'State created successfully:', stateCreateResult.state);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City payload created:', cityPayload);
+        const cityCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCity"])(adminId, String(adminRole), cityPayload);
+        if (cityCreateResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'City created successfully:', cityCreateResult.city);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                message: "State created successfully",
-                state: stateCreateResult.state
+                message: "City created successfully",
+                city: cityCreateResult.city
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'State creation failed:', stateCreateResult?.message || 'Unknown error');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'City creation failed:', cityCreateResult?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: stateCreateResult?.message || 'State creation failed'
+            error: cityCreateResult?.message || 'City creation failed'
         }, {
             status: 500
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'State Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'City Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9249,30 +9238,30 @@ async function POST(req) {
 }
 async function GET() {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching states');
-        // Fetch all states
-        const statesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$state$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getStatesByStatus"])("notDeleted");
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'States fetched successfully:', statesResult);
-        if (statesResult?.status) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching cities');
+        // Fetch all cities
+        const citiesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCitiesByStatus"])("notDeleted");
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Cities fetched successfully:', citiesResult);
+        if (citiesResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                states: statesResult.states
+                cities: citiesResult.cities
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No states found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No cities found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No states found"
+            error: "No cities found"
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching states:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching cities:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch states"
+            error: "Failed to fetch cities"
         }, {
             status: 500
         });
@@ -9282,4 +9271,4 @@ async function GET() {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a7d1cffe._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__9d022f9b._.js.map
