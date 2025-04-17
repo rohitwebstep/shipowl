@@ -4,6 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { getWarehouseById, updateWarehouse, softDeleteWarehouse, restoreWarehouse } from '@/app/models/warehouse';
+import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 
 export async function GET(req: NextRequest) {
   try {
@@ -115,25 +116,33 @@ export async function PUT(req: NextRequest) {
     const address_line_1 = (formData.get('address_line_1') as string) || '';
     const address_line_2 = (formData.get('address_line_2') as string) || '';
 
-    const cityRaw = formData.get('city');
-    const stateRaw = formData.get('state');
-    // Ensure cityRaw and stateRaw are strings before converting them to BigInt
-    const cityId = cityRaw && typeof cityRaw === 'string' ? BigInt(cityRaw) : null;
-    const stateId = stateRaw && typeof stateRaw === 'string' ? BigInt(stateRaw) : null;
+    const countryId = Number(formData.get('country'));
+    const stateId = Number(formData.get('state'));
+    const cityId = Number(formData.get('city'));
+
+    const countryIdNum = Number(countryId);
+    const stateIdNum = Number(stateId);
+    const cityIdNum = Number(cityId);
 
     const postal_code = (formData.get('postal_code') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
+
     logMessage('debug', 'Extracted fields:', {
       name,
-      cityId,
-      stateId,
+      cityIdNum,
+      stateIdNum,
+      countryIdNum
     });
 
-    // Validate required fields
-    if (!name || cityId === null || stateId === null) {
-      throw new Error("Missing required fields: name, city, or state");
+    const isLocationHierarchyCorrectResult = await isLocationHierarchyCorrect(cityIdNum, stateIdNum, countryIdNum);
+    if (!isLocationHierarchyCorrectResult.status) {
+      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectResult.message}`);
+      return NextResponse.json(
+        { status: false, message: isLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect' },
+        { status: 400 }
+      );
     }
 
     // Prepare the payload for warehouse creation
@@ -144,13 +153,26 @@ export async function PUT(req: NextRequest) {
       contact_number,
       address_line_1,
       address_line_2,
-      cityId,
-      stateId,
+      city: {
+        connect: {
+          id: cityIdNum,
+        },
+      },
+      state: {
+        connect: {
+          id: stateIdNum,
+        },
+      },
+      country: {
+        connect: {
+          id: countryIdNum,
+        },
+      },
       postal_code,
       status,
-      createdAt: new Date(),
-      createdBy: adminId,
-      createdByRole: adminRole,
+      updatedAt: new Date(),
+      updatedBy: adminId,
+      updatedByRole: adminRole,
     };
 
     logMessage('info', 'Warehouse payload:', warehousePayload);
@@ -216,7 +238,7 @@ export async function PATCH(req: NextRequest) {
 
     // Restore the warehouse (i.e., reset deletedAt, deletedBy, deletedByRole)
     const restoreResult = await restoreWarehouse(adminId, String(adminRole), warehouseIdNum);
-    
+
     if (restoreResult?.status) {
       logMessage('info', 'Warehouse restored successfully:', restoreResult.warehouse);
       return NextResponse.json({ status: true, warehouse: restoreResult.warehouse }, { status: 200 });

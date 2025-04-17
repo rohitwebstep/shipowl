@@ -9,17 +9,24 @@ interface Warehouse {
     contact_number: string;
     address_line_1: string;
     address_line_2: string;
-    cityId: bigint;
-    stateId: bigint;
+    city: {
+        connect: { id: number };
+    };
+    state: {
+        connect: { id: number };
+    };
+    country: {
+        connect: { id: number };
+    };
     postal_code: string;
     status: boolean;
-    createdAt: Date;
+    createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date | null;
-    createdBy: number;
+    createdBy?: number;
     updatedBy?: number;
     deletedBy?: number;
-    createdByRole: string | null;
+    createdByRole?: string | null;
     updatedByRole?: string | null;
     deletedByRole?: string | null;
 }
@@ -51,11 +58,7 @@ export async function generateWarehouseSlug(name: string) {
 export async function createWarehouse(adminId: number, adminRole: string, warehouse: Warehouse) {
 
     try {
-        const { name, gst_number, contact_name, contact_number, address_line_1, address_line_2, cityId, stateId, postal_code, status } = warehouse;
-
-        // Convert cityId and stateId to numbers
-        const numCityId = BigInt(cityId);
-        const numStateId = BigInt(stateId);
+        const { name, gst_number, contact_name, contact_number, address_line_1, address_line_2, city, state, country, postal_code, status } = warehouse;
 
         // Generate a unique slug for the warehouse
         const slug = await generateWarehouseSlug(name);
@@ -69,8 +72,9 @@ export async function createWarehouse(adminId: number, adminRole: string, wareho
                 contact_number,
                 address_line_1,
                 address_line_2,
-                cityId: numCityId,
-                stateId: numStateId,
+                city,
+                state,
+                country,
                 postal_code,
                 status,
                 createdAt: new Date(),
@@ -84,6 +88,7 @@ export async function createWarehouse(adminId: number, adminRole: string, wareho
             ...newWarehouse,
             cityId: newWarehouse.cityId !== null && newWarehouse.cityId !== undefined ? newWarehouse.cityId.toString() : null,
             stateId: newWarehouse.stateId !== null && newWarehouse.stateId !== undefined ? newWarehouse.stateId.toString() : null,
+            countryId: newWarehouse.countryId !== null && newWarehouse.countryId !== undefined ? newWarehouse.countryId.toString() : null,
         };
 
         return { status: true, warehouse: warehouseWithStringBigInts };
@@ -101,13 +106,26 @@ export const updateWarehouse = async (
     data: Warehouse
 ) => {
     try {
-        data.updatedBy = adminId;
-        data.updatedAt = new Date();
-        data.updatedByRole = adminRole;
+        const { name, gst_number, contact_name, contact_number, address_line_1, address_line_2, city, state, country, postal_code, status } = data;
 
         const warehouse = await prisma.warehouse.update({
             where: { id: warehouseId }, // Assuming 'id' is the correct primary key field
-            data: data,
+            data: {
+                name,
+                gst_number,
+                contact_name,
+                contact_number,
+                address_line_1,
+                address_line_2,
+                city,
+                state,
+                country,
+                postal_code,
+                status,
+                updatedAt: new Date(),
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+            },
         });
 
         // Convert BigInt to string for serialization
@@ -115,6 +133,7 @@ export const updateWarehouse = async (
             ...warehouse,
             cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
             stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+            countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null,
         };
 
         return { status: true, warehouse: warehouseWithStringBigInts };

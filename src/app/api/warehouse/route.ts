@@ -4,6 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createWarehouse, getWarehousesByStatus } from '@/app/models/warehouse';
+import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,11 +34,12 @@ export async function POST(req: NextRequest) {
 
     // Validate input
     const validation = validateFormData(formData, {
-      requiredFields: ['name', 'gst_number', 'contact_name', 'contact_number', 'address_line_1', 'address_line_2', 'city', 'state', 'postal_code'],
+      requiredFields: ['name', 'gst_number', 'contact_name', 'contact_number', 'address_line_1', 'address_line_2', 'city', 'state', 'country', 'postal_code'],
       patternValidations: {
         status: 'boolean',
         city: 'number',
         state: 'number',
+        country: 'number',
       },
     });
 
@@ -59,11 +61,13 @@ export async function POST(req: NextRequest) {
     const address_line_1 = (formData.get('address_line_1') as string) || '';
     const address_line_2 = (formData.get('address_line_2') as string) || '';
 
-    const cityRaw = formData.get('city');
-    const stateRaw = formData.get('state');
-    // Ensure cityRaw and stateRaw are strings before converting them to BigInt
-    const cityId = cityRaw && typeof cityRaw === 'string' ? BigInt(cityRaw) : null;
-    const stateId = stateRaw && typeof stateRaw === 'string' ? BigInt(stateRaw) : null;
+    const countryId = Number(formData.get('country'));
+    const stateId = Number(formData.get('state'));
+    const cityId = Number(formData.get('city'));
+
+    const countryIdNum = Number(countryId);
+    const stateIdNum = Number(stateId);
+    const cityIdNum = Number(cityId);
 
     const postal_code = (formData.get('postal_code') as string) || '';
     const statusRaw = formData.get('status')?.toString().toLowerCase();
@@ -71,13 +75,19 @@ export async function POST(req: NextRequest) {
 
     logMessage('debug', 'Extracted fields:', {
       name,
-      cityId,
-      stateId,
+      cityIdNum,
+      stateIdNum,
+      countryIdNum
     });
 
-    // Validate required fields
-    if (!name || cityId === null || stateId === null) {
-      throw new Error("Missing required fields: name, city, or state");
+    const isLocationHierarchyCorrectResult = await isLocationHierarchyCorrect(cityIdNum, stateIdNum, countryIdNum);
+    logMessage('debug', 'Location hierarchy check result:', isLocationHierarchyCorrectResult);
+    if (!isLocationHierarchyCorrectResult.status) {
+      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectResult.message}`);
+      return NextResponse.json(
+        { status: false, message: isLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect' },
+        { status: 400 }
+      );
     }
 
     // Prepare the payload for warehouse creation
@@ -88,8 +98,21 @@ export async function POST(req: NextRequest) {
       contact_number,
       address_line_1,
       address_line_2,
-      cityId,
-      stateId,
+      city: {
+        connect: {
+          id: cityIdNum,
+        },
+      },
+      state: {
+        connect: {
+          id: stateIdNum,
+        },
+      },
+      country: {
+        connect: {
+          id: countryIdNum,
+        },
+      },
       postal_code,
       status,
       createdAt: new Date(),

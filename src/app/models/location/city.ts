@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
 
 interface City {
     id?: bigint;
@@ -198,6 +199,76 @@ export const getCitiesByState = async (
     } catch (error) {
         console.error(`Error fetching cities by status (${status}):`, error);
         return { status: false, message: "Error fetching cities" };
+    }
+};
+
+export const isLocationHierarchyCorrect = async (
+    cityId: number,
+    stateId: number,
+    countryId: number,
+) => {
+    try {
+        // First, check if the country exists
+        const country = await prisma.country.findUnique({
+            where: { id: countryId },
+        });
+
+        if (!country) {
+            logMessage("debug", `Country not found for ID: ${countryId}`);
+            return { status: false, message: "The specified country could not be found. Please check the country ID." };
+        }
+        logMessage("debug", `Country found:`, country);
+
+        // Next, check if the state exists in the given country
+        const state = await prisma.state.findUnique({
+            where: { id: stateId },
+            include: { country: true }, // Include country to verify relationship
+        });
+
+        if (!state) {
+            logMessage("debug", `State not found for ID: ${stateId}`);
+            return { status: false, message: "The specified state could not be found. Please check the state ID." };
+        }
+
+        if (state.countryId.toString() !== countryId.toString()) {
+            logMessage("debug", `State ID ${stateId} does not belong to country ID ${countryId}`);
+            return { status: false, message: "The specified state does not belong to the given country. Please check the state and country relationship." };
+        }
+        logMessage("debug", `State found and belongs to the country:`, state);
+
+        // Finally, check if the city exists in the given state
+        const city = await prisma.city.findUnique({
+            where: { id: cityId },
+            include: { state: true }, // Include state to verify relationship
+        });
+
+        if (!city) {
+            logMessage("debug", `City not found for ID: ${cityId}`);
+            return { status: false, message: "The specified city could not be found. Please check the city ID." };
+        }
+
+        if (city.stateId.toString() !== stateId.toString()) {
+            logMessage("debug", `City ID ${cityId} does not belong to state ID ${stateId}`);
+            return { status: false, message: "The specified city does not belong to the given state. Please check the city and state relationship." };
+        }
+        logMessage("debug", `City found and belongs to the state:`, city);
+
+        // If all checks pass, return the linked data
+        logMessage("debug", "Successfully validated the hierarchy: city, state, and country.");
+        return {
+            status: true,
+            message: "Successfully found the linked city, state, and country.",
+            data: {
+                country: { id: country.id.toString(), name: country.name },
+                state: { id: state.id.toString(), name: state.name },
+                city: { id: city.id.toString(), name: city.name },
+            },
+        };
+
+    } catch (error) {
+        console.error("Error fetching city, state, and country details:", error);
+        logMessage("debug", "Error fetching city, state, and country details:", error);
+        return { status: false, message: "There was an error while retrieving the location hierarchy. Please try again later." };
     }
 };
 
