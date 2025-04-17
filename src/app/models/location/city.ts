@@ -176,20 +176,10 @@ export const getCitiesByState = async (
     status: "deleted" | "notDeleted" = "notDeleted"
 ) => {
     try {
-        let whereCondition: any = {
-            stateId: state
+        const whereCondition: { stateId: number; deletedAt?: null | { not: null } } = {
+            stateId: state,
+            deletedAt: status === "notDeleted" ? null : { not: null },
         };
-
-        switch (status) {
-            case "notDeleted":
-                whereCondition.deletedAt = null;
-                break;
-            case "deleted":
-                whereCondition.deletedAt = { not: null };
-                break;
-            default:
-                throw new Error("Invalid status");
-        }
 
         const cities = await prisma.city.findMany({
             where: whereCondition,
@@ -197,17 +187,17 @@ export const getCitiesByState = async (
         });
 
         // Convert BigInt to string for serialization
-        const citiesWithStringBigInts = cities.map(city => ({
+        const citiesWithStringBigInts = cities.map(({ id, stateId, countryId, ...city }) => ({
             ...city,
-            id: city.id.toString(),
-            stateId: city.stateId.toString(),
-            countryId: city.countryId.toString(),
+            id: id.toString(),
+            stateId: stateId.toString(),
+            countryId: countryId.toString(),
         }));
 
         return { status: true, cities: citiesWithStringBigInts };
     } catch (error) {
-        console.error(`Error fetching states by status (${status}):`, error);
-        return { status: false, message: "Error fetching states" };
+        console.error(`Error fetching cities by status (${status}):`, error);
+        return { status: false, message: "Error fetching cities" };
     }
 };
 

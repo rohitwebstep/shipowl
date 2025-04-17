@@ -4,6 +4,9 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { getCityById, updateCity, softDeleteCity, restoreCity } from '@/app/models/location/city';
+import { isStateInCountry } from '@/app/models/location/state';
+import { getCountryById } from '@/app/models/location/country';
+import { getStateById } from '@/app/models/location/state';
 
 export async function GET(req: NextRequest) {
   try {
@@ -107,6 +110,37 @@ export async function PUT(req: NextRequest) {
     const name = formData.get('name') as string;
     const countryId = Number(formData.get('country'));
     const stateId = Number(formData.get('state'));
+
+    const countryIdNum = Number(countryId);
+    const stateIdNum = Number(stateId);
+
+    if (isNaN(countryIdNum) || isNaN(stateIdNum)) {
+      logMessage('warn', 'Invalid country or state ID', { countryId, stateId });
+      return NextResponse.json({ error: 'Invalid country or state ID' }, { status: 400 });
+    }
+
+    const countryResult = await getCountryById(countryIdNum);
+    logMessage('debug', 'Country fetch result:', countryResult);
+    if (!countryResult?.status) {
+      logMessage('warn', 'Country not found', { countryIdNum });
+      return NextResponse.json({ status: false, message: 'Country not found' }, { status: 404 });
+    }
+
+    const stateResult = await getStateById(stateIdNum);
+    logMessage('debug', 'State fetch result:', stateResult);
+    if (!stateResult?.status) {
+      logMessage('warn', 'State not found', { stateIdNum });
+      return NextResponse.json({ status: false, message: 'State not found' }, { status: 404 });
+    }
+
+    const isStateInCountryResult = await isStateInCountry(stateId, countryId);
+    if (!isStateInCountryResult.status) {
+      logMessage('warn', `State not found in country: ${isStateInCountryResult.message}`);
+      return NextResponse.json(
+        { status: false, error: isStateInCountryResult.message },
+        { status: 400 }
+      );
+    }
 
     // Prepare the payload for city creation
     const cityPayload = {

@@ -4,6 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { getStateById, updateState, softDeleteState, restoreState } from '@/app/models/location/state';
+import { getCountryById } from '@/app/models/location/country';
 
 export async function GET(req: NextRequest) {
   try {
@@ -108,6 +109,20 @@ export async function PUT(req: NextRequest) {
     const iso2 = (formData.get('iso2') as string) || '';
     const type = (formData.get('type') as string) || '';
     const countryId = Number(formData.get('country'));
+
+    const countryIdNum = Number(countryId);
+
+    if (isNaN(countryIdNum)) {
+      logMessage('warn', 'Invalid country ID', { countryId });
+      return NextResponse.json({ error: 'Invalid country or state ID' }, { status: 400 });
+    }
+
+    const countryResult = await getCountryById(countryIdNum);
+    logMessage('debug', 'Country fetch result:', countryResult);
+    if (!countryResult?.status) {
+      logMessage('warn', 'Country not found', { countryIdNum });
+      return NextResponse.json({ status: false, message: 'Country not found' }, { status: 404 });
+    }
 
     // Prepare the payload for state creation
     const statePayload = {

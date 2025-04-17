@@ -112,6 +112,28 @@ export const getStateById = async (id: number) => {
     }
 };
 
+export const isStateInCountry = async (stateId: number, countryId: number) => {
+    try {
+        const state = await prisma.state.findUnique({
+            where: { id: stateId },
+            select: { countryId: true },
+        });
+
+        if (!state) {
+            return { status: false, message: "State not found" };
+        }
+
+        if (state.countryId.toString() === countryId.toString()) {
+            return { status: true, message: "State belongs to the specified country" };
+        } else {
+            return { status: false, message: "State does not belong to the specified country" };
+        }
+    } catch (error) {
+        console.error("❌ isStateInCountry Error:", error);
+        return { status: false, message: "Error checking state-country relationship" };
+    }
+};
+
 // 🟣 GET ALL
 export const getAllStates = async () => {
     try {
@@ -172,20 +194,10 @@ export const getStatesByCountry = async (
     status: "deleted" | "notDeleted" = "notDeleted"
 ) => {
     try {
-        let whereCondition: any = {
-            countryId: country
+        const whereCondition: { countryId: number; deletedAt?: null | { not: null } } = {
+            countryId: country,
+            deletedAt: status === "notDeleted" ? null : { not: null },
         };
-
-        switch (status) {
-            case "notDeleted":
-                whereCondition.deletedAt = null;
-                break;
-            case "deleted":
-                whereCondition.deletedAt = { not: null };
-                break;
-            default:
-                throw new Error("Invalid status");
-        }
 
         const states = await prisma.state.findMany({
             where: whereCondition,
@@ -193,10 +205,10 @@ export const getStatesByCountry = async (
         });
 
         // Convert BigInt to string for serialization
-        const statesWithStringBigInts = states.map((state) => ({
+        const statesWithStringBigInts = states.map(({ id, countryId, ...state }) => ({
             ...state,
-            id: state.id.toString(),
-            countryId: state.countryId.toString(),
+            id: id.toString(),
+            countryId: countryId.toString(),
         }));
 
         return { status: true, states: statesWithStringBigInts };

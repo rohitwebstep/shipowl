@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { validateFormData } from '@/utils/validateFormData';
 import { getCountryById } from '@/app/models/location/country';
 import { getStatesByCountry } from '@/app/models/location/state';
 
