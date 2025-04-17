@@ -5,6 +5,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createState, getStatesByStatus } from '@/app/models/location/state';
 import { getCountryById } from '@/app/models/location/country';
+import { getCountriesByStatus } from '@/app/models/location/country';
 
 export async function POST(req: NextRequest) {
   try {
@@ -108,12 +109,23 @@ export async function GET() {
   try {
     logMessage('debug', 'GET request received for fetching states');
 
+    // Fetch all countries
+    const countriesResult = await getCountriesByStatus("notDeleted");
+
+    if (!countriesResult?.status) {
+      logMessage('warn', 'No countries found');
+      return NextResponse.json(
+        { status: false, error: "No countries found" },
+        { status: 404 }
+      );
+    }
+
     // Fetch all states
     const statesResult = await getStatesByStatus("notDeleted");
     logMessage('info', 'States fetched successfully:', statesResult);
     if (statesResult?.status) {
       return NextResponse.json(
-        { status: true, states: statesResult.states },
+        { status: true, states: statesResult.states, countries: countriesResult.countries },
         { status: 200 }
       );
     }

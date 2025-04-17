@@ -7,6 +7,8 @@ import { createCity, getCitiesByStatus } from '@/app/models/location/city';
 import { isStateInCountry } from '@/app/models/location/state';
 import { getCountryById } from '@/app/models/location/country';
 import { getStateById } from '@/app/models/location/state';
+import { getCountriesByStatus } from '@/app/models/location/country';
+import { getStatesByStatus } from '@/app/models/location/state';
 
 export async function POST(req: NextRequest) {
   try {
@@ -129,12 +131,34 @@ export async function GET() {
   try {
     logMessage('debug', 'GET request received for fetching cities');
 
+    // Fetch all countries
+    const countriesResult = await getCountriesByStatus("notDeleted");
+
+    if (!countriesResult?.status) {
+      logMessage('warn', 'No countries found');
+      return NextResponse.json(
+        { status: false, error: "No countries found" },
+        { status: 404 }
+      );
+    }
+
+    // Fetch all countries
+    const statesResult = await getStatesByStatus("notDeleted");
+
+    if (!statesResult?.status) {
+      logMessage('warn', 'No states found');
+      return NextResponse.json(
+        { status: false, error: "No states found" },
+        { status: 404 }
+      );
+    }
+
     // Fetch all cities
     const citiesResult = await getCitiesByStatus("notDeleted");
     logMessage('info', 'Cities fetched successfully:', citiesResult);
     if (citiesResult?.status) {
       return NextResponse.json(
-        { status: true, cities: citiesResult.cities },
+        { status: true, cities: citiesResult.cities, states: statesResult.states, countries: countriesResult.countries },
         { status: 200 }
       );
     }

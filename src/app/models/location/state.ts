@@ -179,7 +179,7 @@ export const getStatesByStatus = async (status: "deleted" | "notDeleted") => {
         const statesWithStringBigInts = states.map(state => ({
             ...state,
             id: state.id.toString(),
-            countryId: state.countryId.toString(),
+            countryId: state.countryId.toString()
         }));
 
         return { status: true, states: statesWithStringBigInts };

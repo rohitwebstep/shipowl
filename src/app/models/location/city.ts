@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
+import { log } from "console";
 
 interface City {
     id?: bigint;
@@ -154,7 +155,7 @@ export const getCitiesByStatus = async (status: "deleted" | "notDeleted" = "notD
 
         const cities = await prisma.city.findMany({
             where: whereCondition,
-            orderBy: { name: "asc" },
+            orderBy: { name: "asc" }
         });
 
         // Convert BigInt to string for serialization
