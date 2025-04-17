@@ -1,6 +1,5 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
-import { log } from "console";
 
 interface City {
     id?: bigint;
