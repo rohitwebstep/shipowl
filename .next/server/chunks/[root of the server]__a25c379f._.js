@@ -9196,7 +9196,7 @@ async function handleForgetPassword(req, adminRole, adminStaffRole) {
             "{{year}}": new Date().getFullYear().toString(),
             "{{appName}}": "Shipping OWL"
         };
-        let htmlBody = htmlTemplate;
+        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
         Object.keys(replacements).forEach((key)=>{
             htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
         });
@@ -9307,7 +9307,8 @@ async function handleResetPassword(req, adminRole, adminStaffRole) {
             "{{year}}": new Date().getFullYear().toString(),
             "{{appName}}": "Shipping OWL"
         };
-        let htmlBody = htmlTemplate;
+        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
+        // Replace placeholders in the HTML template
         Object.keys(replacements).forEach((key)=>{
             htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
         });

@@ -1,0 +1,118 @@
+import { NextRequest, NextResponse } from 'next/server';
+
+import { logMessage } from "@/utils/commonUtils";
+import { isUserExist } from "@/utils/authUtils";
+import { validateFormData } from '@/utils/validateFormData';
+import { createState, getStatesByStatus } from '@/app/models/location/state';
+
+export async function POST(req: NextRequest) {
+  try {
+    logMessage('debug', 'POST request received for state creation');
+
+    // Get headers
+    const adminIdHeader = req.headers.get("x-admin-id");
+    const adminRole = req.headers.get("x-admin-role");
+
+    const adminId = Number(adminIdHeader);
+    if (!adminIdHeader || isNaN(adminId)) {
+      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+      return NextResponse.json(
+        { error: "User ID is missing or invalid in request" },
+        { status: 400 }
+      );
+    }
+
+    // Check if admin exists
+    const userCheck = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`);
+      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const formData = await req.formData();
+
+    // Validate input
+    const validation = validateFormData(formData, {
+      requiredFields: ['name'],
+      patternValidations: {},
+    });
+
+    logMessage('debug', 'Form validation result:', validation);
+
+    if (!validation.isValid) {
+      logMessage('warn', 'Form validation failed', validation.error);
+      return NextResponse.json(
+        { status: false, error: validation.error, message: validation.message },
+        { status: 400 }
+      );
+    }
+
+    // Extract fields
+    const name = formData.get('name') as string;
+    const iso2 = (formData.get('iso2') as string) || '';
+    const type = (formData.get('type') as string) || '';
+    const countryId = Number(formData.get('country'));
+
+    // Prepare the payload for state creation
+    const statePayload = {
+      name,
+      iso2,
+      type,
+      country: {
+        connect: {
+          id: countryId,
+        },
+      },
+      createdAt: new Date(),
+      createdBy: adminId,
+      createdByRole: adminRole,
+    };
+
+    logMessage('info', 'State payload created:', statePayload);
+
+    const stateCreateResult = await createState(adminId, String(adminRole), statePayload);
+
+    if (stateCreateResult?.status) {
+      logMessage('info', 'State created successfully:', stateCreateResult.state);
+      return NextResponse.json({ status: true, message: "State created successfully", state: stateCreateResult.state }, { status: 200 });
+    }
+
+    logMessage('error', 'State creation failed:', stateCreateResult?.message || 'Unknown error');
+    return NextResponse.json(
+      { status: false, error: stateCreateResult?.message || 'State creation failed' },
+      { status: 500 }
+    );
+  } catch (err: unknown) {
+    const error = err instanceof Error ? err.message : 'Internal Server Error';
+    logMessage('error', 'State Creation Error:', error);
+    return NextResponse.json({ status: false, error }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    logMessage('debug', 'GET request received for fetching states');
+
+    // Fetch all states
+    const statesResult = await getStatesByStatus("notDeleted");
+
+    if (statesResult?.status) {
+      return NextResponse.json(
+        { status: true, states: statesResult.states },
+        { status: 200 }
+      );
+    }
+
+    logMessage('warn', 'No states found');
+    return NextResponse.json(
+      { status: false, error: "No states found" },
+      { status: 404 }
+    );
+  } catch (error) {
+    logMessage('error', 'Error fetching states:', error);
+    return NextResponse.json(
+      { status: false, error: "Failed to fetch states" },
+      { status: 500 }
+    );
+  }
+}
