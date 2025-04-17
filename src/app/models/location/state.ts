@@ -133,22 +133,16 @@ export const getAllStates = async () => {
     }
 };
 
-export const getStatesByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+export const getStatesByStatus = async (status: "deleted" | "notDeleted") => {
     try {
         let whereCondition = {};
 
         switch (status) {
-            case "active":
-                whereCondition = { status: true, deletedAt: null };
-                break;
-            case "inactive":
-                whereCondition = { status: false, deletedAt: null };
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
                 break;
             case "deleted":
                 whereCondition = { deletedAt: { not: null } };
-                break;
-            case "notDeleted":
-                whereCondition = { deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");
@@ -161,6 +155,45 @@ export const getStatesByStatus = async (status: "active" | "inactive" | "deleted
 
         // Convert BigInt to string for serialization
         const statesWithStringBigInts = states.map(state => ({
+            ...state,
+            id: state.id.toString(),
+            countryId: state.countryId.toString(),
+        }));
+
+        return { status: true, states: statesWithStringBigInts };
+    } catch (error) {
+        console.error(`Error fetching states by status (${status}):`, error);
+        return { status: false, message: "Error fetching states" };
+    }
+};
+
+export const getStatesByCountry = async (
+    country: number,
+    status: "deleted" | "notDeleted" = "notDeleted"
+) => {
+    try {
+        let whereCondition: any = {
+            countryId: country
+        };
+
+        switch (status) {
+            case "notDeleted":
+                whereCondition.deletedAt = null;
+                break;
+            case "deleted":
+                whereCondition.deletedAt = { not: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const states = await prisma.state.findMany({
+            where: whereCondition,
+            orderBy: { name: "asc" },
+        });
+
+        // Convert BigInt to string for serialization
+        const statesWithStringBigInts = states.map((state) => ({
             ...state,
             id: state.id.toString(),
             countryId: state.countryId.toString(),

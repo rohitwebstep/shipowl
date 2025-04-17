@@ -136,22 +136,16 @@ export const getAllCities = async () => {
     }
 };
 
-export const getCitiesByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+export const getCitiesByStatus = async (status: "deleted" | "notDeleted" = "notDeleted") => {
     try {
         let whereCondition = {};
 
         switch (status) {
-            case "active":
-                whereCondition = { status: true, deletedAt: null };
-                break;
-            case "inactive":
-                whereCondition = { status: false, deletedAt: null };
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
                 break;
             case "deleted":
                 whereCondition = { deletedAt: { not: null } };
-                break;
-            case "notDeleted":
-                whereCondition = { deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");
@@ -174,6 +168,46 @@ export const getCitiesByStatus = async (status: "active" | "inactive" | "deleted
     } catch (error) {
         console.error(`Error fetching cities by status (${status}):`, error);
         return { status: false, message: "Error fetching cities" };
+    }
+};
+
+export const getCitiesByState = async (
+    state: number,
+    status: "deleted" | "notDeleted" = "notDeleted"
+) => {
+    try {
+        let whereCondition: any = {
+            stateId: state
+        };
+
+        switch (status) {
+            case "notDeleted":
+                whereCondition.deletedAt = null;
+                break;
+            case "deleted":
+                whereCondition.deletedAt = { not: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const cities = await prisma.city.findMany({
+            where: whereCondition,
+            orderBy: { name: "asc" },
+        });
+
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map(city => ({
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString(),
+        }));
+
+        return { status: true, cities: citiesWithStringBigInts };
+    } catch (error) {
+        console.error(`Error fetching states by status (${status}):`, error);
+        return { status: false, message: "Error fetching states" };
     }
 };
 
