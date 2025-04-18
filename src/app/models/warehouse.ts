@@ -158,6 +158,7 @@ export const getWarehouseById = async (id: number) => {
             ...warehouse,
             cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
             stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+            countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null,
         };
         return { status: true, warehouse: warehouseWithStringBigInts };
     } catch (error) {
@@ -178,6 +179,7 @@ export const getAllWarehouses = async () => {
             ...warehouse,
             cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
             stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+            countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null,
         }));
 
         return { status: true, warehouses: warehousesWithStringBigInts };
@@ -268,6 +270,7 @@ export const restoreWarehouse = async (adminId: number, adminRole: string, id: n
             ...restoredWarehouse,
             cityId: restoredWarehouse.cityId !== null && restoredWarehouse.cityId !== undefined ? restoredWarehouse.cityId.toString() : null,
             stateId: restoredWarehouse.stateId !== null && restoredWarehouse.stateId !== undefined ? restoredWarehouse.stateId.toString() : null,
+            countryId: restoredWarehouse.countryId !== null && restoredWarehouse.countryId !== undefined ? restoredWarehouse.countryId.toString() : null,
         };
 
         return { status: true, message: "Warehouse restored successfully", warehouse: warehouseWithStringBigInts };
