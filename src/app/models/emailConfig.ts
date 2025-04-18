@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-type PanelType = "admin" | "dropshipper" | "supplier";
+// type PanelType = "admin" | "dropshipper" | "supplier";
 
 /**
  * Retrieves email configurations for a specific panel, module, and action.
