@@ -12,7 +12,7 @@ type PanelType = "admin" | "dropshipper" | "supplier";
  * @returns A response object with status and data or an error message
  */
 export const getEmailConfig = async (
-    panel: PanelType,
+    panel: string,
     module: string,
     action: string,
     status: boolean = true // Default value is true
