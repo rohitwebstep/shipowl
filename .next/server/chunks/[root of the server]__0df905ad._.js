@@ -8861,6 +8861,8 @@ __turbopack_context__.s({
     "updateWarehouse": (()=>updateWarehouse)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
 ;
 async function generateWarehouseSlug(name) {
     let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
@@ -8912,7 +8914,8 @@ async function createWarehouse(adminId, adminRole, warehouse) {
         const warehouseWithStringBigInts = {
             ...newWarehouse,
             cityId: newWarehouse.cityId !== null && newWarehouse.cityId !== undefined ? newWarehouse.cityId.toString() : null,
-            stateId: newWarehouse.stateId !== null && newWarehouse.stateId !== undefined ? newWarehouse.stateId.toString() : null
+            stateId: newWarehouse.stateId !== null && newWarehouse.stateId !== undefined ? newWarehouse.stateId.toString() : null,
+            countryId: newWarehouse.countryId !== null && newWarehouse.countryId !== undefined ? newWarehouse.countryId.toString() : null
         };
         return {
             status: true,
@@ -8954,7 +8957,8 @@ const updateWarehouse = async (adminId, adminRole, warehouseId, data)=>{
         const warehouseWithStringBigInts = {
             ...warehouse,
             cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
-            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null
+            stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+            countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null
         };
         return {
             status: true,
@@ -9059,11 +9063,13 @@ const getWarehousesByStatus = async (status)=>{
                 id: "desc"
             }
         });
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `Warehouses fetched with status ${status}:`, warehouses);
         // Convert BigInt to string for serialization
         const warehousesWithStringBigInts = warehouses.map((warehouse)=>({
                 ...warehouse,
                 cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
-                stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null
+                stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+                countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null
             }));
         return {
             status: true,

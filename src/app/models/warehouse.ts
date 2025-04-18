@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
 
 interface Warehouse {
     id?: number;
@@ -212,11 +213,14 @@ export const getWarehousesByStatus = async (status: "active" | "inactive" | "del
             orderBy: { id: "desc" },
         });
 
+        logMessage("debug", `Warehouses fetched with status ${status}:`, warehouses);
+
         // Convert BigInt to string for serialization
         const warehousesWithStringBigInts = warehouses.map(warehouse => ({
             ...warehouse,
             cityId: warehouse.cityId !== null && warehouse.cityId !== undefined ? warehouse.cityId.toString() : null,
             stateId: warehouse.stateId !== null && warehouse.stateId !== undefined ? warehouse.stateId.toString() : null,
+            countryId: warehouse.countryId !== null && warehouse.countryId !== undefined ? warehouse.countryId.toString() : null,
         }));
 
         return { status: true, warehouses: warehousesWithStringBigInts };
