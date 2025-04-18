@@ -143,12 +143,17 @@ export async function handleForgetPassword(
             );
         }
 
-        const resetUrl = `https://yourdomain.com/admin/auth/password/reset?token=${token}`;
+        let urlPanel;
+        if (panel == 'dropshipper') {
+            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
+        } else {
+            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
+        }
 
         // Use index signature to avoid TS error
         const replacements: Record<string, string> = {
             "{{name}}": admin.name,
-            "{{resetUrl}}": resetUrl,
+            "{{resetUrl}}": urlPanel,
             "{{year}}": new Date().getFullYear().toString(),
             "{{appName}}": "Shipping OWL",
         };
