@@ -6,6 +6,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getBrandById } from '@/app/models/brand';
+import { getCategoryById } from '@/app/models/category';
 import { getCountryById } from '@/app/models/location/country'
 import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product';
 
@@ -132,6 +133,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, message: brandResult.message || 'Brand not found' }, { status: 404 });
     }
 
+    const categoryId = extractNumber('category') || 0;
+    const categoryResult = await getCategoryById(categoryId);
+    if (!categoryResult?.status) {
+      logMessage('info', 'Category found:', categoryResult.category);
+      return NextResponse.json({ status: false, message: categoryResult.message || 'Category not found' }, { status: 404 });
+    }
+
     const originCountryId = extractNumber('origin_country') || 0;
     const originCountryResult = await getCountryById(originCountryId);
     if (!originCountryResult?.status) {
@@ -177,7 +185,7 @@ export async function POST(req: NextRequest) {
     logMessage('info', 'Uploaded files:', uploadedFiles);
     const productPayload = {
       name: extractString('name') || '',
-      categoryId: extractNumber('category') || 0,
+      categoryId,
       main_sku,
       ean: extractString('ean') || '',
       hsnCode: extractString('hsn_ode') || '',

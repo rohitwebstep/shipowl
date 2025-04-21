@@ -10415,7 +10415,10 @@ async function GET(req) {
         // Retrieve x-admin-id and x-admin-role from request headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
-        console.log(`adminIdHeader`, adminIdHeader);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Admin ID and Role:', {
+            adminIdHeader,
+            adminRole
+        });
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
