@@ -152,6 +152,9 @@ CREATE TABLE `country` (
     `deletedBy` INTEGER NULL,
     `deletedByRole` VARCHAR(191) NULL,
 
+    INDEX `country_createdBy_idx`(`createdBy`),
+    INDEX `country_updatedBy_idx`(`updatedBy`),
+    INDEX `country_deletedAt_idx`(`deletedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -282,6 +285,72 @@ CREATE TABLE `brand` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `product` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `categoryId` INTEGER NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `slug` VARCHAR(191) NOT NULL,
+    `main_sku` VARCHAR(191) NOT NULL,
+    `description` LONGTEXT NULL,
+    `tags` JSON NULL,
+    `brandId` INTEGER NOT NULL,
+    `originCountryId` BIGINT NOT NULL,
+    `shippingCountryId` BIGINT NOT NULL,
+    `video_url` VARCHAR(191) NULL,
+    `list_as` VARCHAR(191) NULL,
+    `shipping_time` VARCHAR(191) NULL,
+    `weight` DOUBLE NULL,
+    `package_length` DOUBLE NULL,
+    `package_width` DOUBLE NULL,
+    `package_height` DOUBLE NULL,
+    `chargeable_weight` DOUBLE NULL,
+    `package_weight_image` VARCHAR(191) NULL,
+    `package_length_image` VARCHAR(191) NULL,
+    `package_width_image` VARCHAR(191) NULL,
+    `package_height_image` VARCHAR(191) NULL,
+    `product_detail_video` VARCHAR(191) NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `product_slug_key`(`slug`),
+    UNIQUE INDEX `product_main_sku_key`(`main_sku`),
+    INDEX `product_categoryId_idx`(`categoryId`),
+    INDEX `product_brandId_idx`(`brandId`),
+    INDEX `product_originCountryId_idx`(`originCountryId`),
+    INDEX `product_shippingCountryId_idx`(`shippingCountryId`),
+    INDEX `product_createdBy_idx`(`createdBy`),
+    INDEX `product_updatedBy_idx`(`updatedBy`),
+    INDEX `product_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `productVariant` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `productId` INTEGER NOT NULL,
+    `image` VARCHAR(191) NOT NULL,
+    `color` VARCHAR(191) NOT NULL,
+    `sku` VARCHAR(191) NOT NULL,
+    `qty` INTEGER NOT NULL,
+    `currency` VARCHAR(191) NOT NULL,
+    `article_id` VARCHAR(191) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `productVariant_sku_key`(`sku`),
+    INDEX `productVariant_productId_idx`(`productId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_admin_id_fkey` FOREIGN KEY (`admin_id`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -302,3 +371,18 @@ ALTER TABLE `warehouse` ADD CONSTRAINT `warehouse_stateId_fkey` FOREIGN KEY (`st
 
 -- AddForeignKey
 ALTER TABLE `warehouse` ADD CONSTRAINT `warehouse_cityId_fkey` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `product` ADD CONSTRAINT `product_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `product` ADD CONSTRAINT `product_brandId_fkey` FOREIGN KEY (`brandId`) REFERENCES `brand`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `product` ADD CONSTRAINT `product_originCountryId_fkey` FOREIGN KEY (`originCountryId`) REFERENCES `country`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `product` ADD CONSTRAINT `product_shippingCountryId_fkey` FOREIGN KEY (`shippingCountryId`) REFERENCES `country`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `productVariant` ADD CONSTRAINT `productVariant_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

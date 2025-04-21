@@ -168,6 +168,14 @@ model country {
   states     state[]
   cities     city[]
   warehouses warehouse[]
+
+  // Add the relation fields for `originCountry` and `shippingCountry`
+  originProducts   product[] @relation("OriginCountryRelation")
+  shippingProducts product[] @relation("ShippingCountryRelation")
+
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model state {
@@ -272,6 +280,8 @@ model category {
   deletedBy     Int?
   deletedByRole String?
 
+  products product[]
+
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -294,7 +304,82 @@ model brand {
   deletedBy     Int?
   deletedByRole String?
 
+  products product[]
+
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
+}
+
+model product {
+  id              Int     @id @default(autoincrement())
+  categoryId      Int
+  name            String
+  slug            String  @unique
+  main_sku        String  @unique
+  description     String? @db.LongText
+  tags            Json? // store as array of strings
+  brandId         Int
+  originCountryId BigInt
+
+  shippingCountryId BigInt
+  video_url         String?
+  list_as           String? // e.g., featured, trending, etc.
+
+  shipping_time String?
+  weight        Float?
+
+  package_length       Float? // Updated from package_len
+  package_width        Float? // Updated from pack_width
+  package_height       Float? // Updated from package_heig
+  chargeable_weight    Float? // Updated from chargab_weig
+  package_weight_image String? // Updated from package_wei_image
+  package_length_image String? // Updated from package_leng_image
+  package_width_image  String? // Updated from package_wid_image
+  package_height_image String? // Updated from package_heig_image
+  product_detail_video String?
+
+  status        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  category        category @relation(fields: [categoryId], references: [id])
+  brand           brand    @relation(fields: [brandId], references: [id])
+  originCountry   country  @relation("OriginCountryRelation", fields: [originCountryId], references: [id])
+  shippingCountry country  @relation("ShippingCountryRelation", fields: [shippingCountryId], references: [id])
+
+  variants productVariant[]
+
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([originCountryId])
+  @@index([shippingCountryId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
+model productVariant {
+  id         Int     @id @default(autoincrement())
+  productId  Int
+  image      String
+  color      String
+  sku        String  @unique
+  qty        Int
+  currency   String
+  article_id String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product product @relation(fields: [productId], references: [id])
+
+  @@index([productId])
 }

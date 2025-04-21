@@ -334,9 +334,63 @@ exports.Prisma.BrandScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  name: 'name',
+  slug: 'slug',
+  main_sku: 'main_sku',
+  description: 'description',
+  tags: 'tags',
+  brandId: 'brandId',
+  originCountryId: 'originCountryId',
+  shippingCountryId: 'shippingCountryId',
+  video_url: 'video_url',
+  list_as: 'list_as',
+  shipping_time: 'shipping_time',
+  weight: 'weight',
+  package_length: 'package_length',
+  package_width: 'package_width',
+  package_height: 'package_height',
+  chargeable_weight: 'chargeable_weight',
+  package_weight_image: 'package_weight_image',
+  package_length_image: 'package_length_image',
+  package_width_image: 'package_width_image',
+  package_height_image: 'package_height_image',
+  product_detail_video: 'product_detail_video',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.ProductVariantScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  image: 'image',
+  color: 'color',
+  sku: 'sku',
+  qty: 'qty',
+  currency: 'currency',
+  article_id: 'article_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -474,6 +528,43 @@ exports.Prisma.brandOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.productOrderByRelevanceFieldEnum = {
+  name: 'name',
+  slug: 'slug',
+  main_sku: 'main_sku',
+  description: 'description',
+  video_url: 'video_url',
+  list_as: 'list_as',
+  shipping_time: 'shipping_time',
+  package_weight_image: 'package_weight_image',
+  package_length_image: 'package_length_image',
+  package_width_image: 'package_width_image',
+  package_height_image: 'package_height_image',
+  product_detail_video: 'product_detail_video',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
+  image: 'image',
+  color: 'color',
+  sku: 'sku',
+  currency: 'currency',
+  article_id: 'article_id'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -486,7 +577,9 @@ exports.Prisma.ModelName = {
   city: 'city',
   warehouse: 'warehouse',
   category: 'category',
-  brand: 'brand'
+  brand: 'brand',
+  product: 'product',
+  productVariant: 'productVariant'
 };
 
 /**

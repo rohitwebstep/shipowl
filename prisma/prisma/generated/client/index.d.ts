@@ -68,6 +68,16 @@ export type category = $Result.DefaultSelection<Prisma.$categoryPayload>
  * 
  */
 export type brand = $Result.DefaultSelection<Prisma.$brandPayload>
+/**
+ * Model product
+ * 
+ */
+export type product = $Result.DefaultSelection<Prisma.$productPayload>
+/**
+ * Model productVariant
+ * 
+ */
+export type productVariant = $Result.DefaultSelection<Prisma.$productVariantPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -303,6 +313,26 @@ export class PrismaClient<
     * ```
     */
   get brand(): Prisma.brandDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.product`: Exposes CRUD operations for the **product** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Products
+    * const products = await prisma.product.findMany()
+    * ```
+    */
+  get product(): Prisma.productDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productVariant`: Exposes CRUD operations for the **productVariant** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductVariants
+    * const productVariants = await prisma.productVariant.findMany()
+    * ```
+    */
+  get productVariant(): Prisma.productVariantDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -753,7 +783,9 @@ export namespace Prisma {
     city: 'city',
     warehouse: 'warehouse',
     category: 'category',
-    brand: 'brand'
+    brand: 'brand',
+    product: 'product',
+    productVariant: 'productVariant'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -772,7 +804,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand"
+      modelProps: "emailConfig" | "admin" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "product" | "productVariant"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1502,6 +1534,138 @@ export namespace Prisma {
           }
         }
       }
+      product: {
+        payload: Prisma.$productPayload<ExtArgs>
+        fields: Prisma.productFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.productFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.productFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          findFirst: {
+            args: Prisma.productFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.productFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          findMany: {
+            args: Prisma.productFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>[]
+          }
+          create: {
+            args: Prisma.productCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          createMany: {
+            args: Prisma.productCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.productDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          update: {
+            args: Prisma.productUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          deleteMany: {
+            args: Prisma.productDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.productUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.productUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProduct>
+          }
+          groupBy: {
+            args: Prisma.productGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.productCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductCountAggregateOutputType> | number
+          }
+        }
+      }
+      productVariant: {
+        payload: Prisma.$productVariantPayload<ExtArgs>
+        fields: Prisma.productVariantFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.productVariantFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.productVariantFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          findFirst: {
+            args: Prisma.productVariantFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.productVariantFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          findMany: {
+            args: Prisma.productVariantFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>[]
+          }
+          create: {
+            args: Prisma.productVariantCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          createMany: {
+            args: Prisma.productVariantCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.productVariantDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          update: {
+            args: Prisma.productVariantUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          deleteMany: {
+            args: Prisma.productVariantDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.productVariantUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.productVariantUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productVariantPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductVariantAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductVariant>
+          }
+          groupBy: {
+            args: Prisma.productVariantGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductVariantGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.productVariantCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductVariantCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1597,6 +1761,8 @@ export namespace Prisma {
     warehouse?: warehouseOmit
     category?: categoryOmit
     brand?: brandOmit
+    product?: productOmit
+    productVariant?: productVariantOmit
   }
 
   /* Types for Logging */
@@ -1725,12 +1891,16 @@ export namespace Prisma {
     states: number
     cities: number
     warehouses: number
+    originProducts: number
+    shippingProducts: number
   }
 
   export type CountryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     states?: boolean | CountryCountOutputTypeCountStatesArgs
     cities?: boolean | CountryCountOutputTypeCountCitiesArgs
     warehouses?: boolean | CountryCountOutputTypeCountWarehousesArgs
+    originProducts?: boolean | CountryCountOutputTypeCountOriginProductsArgs
+    shippingProducts?: boolean | CountryCountOutputTypeCountShippingProductsArgs
   }
 
   // Custom InputTypes
@@ -1763,6 +1933,20 @@ export namespace Prisma {
    */
   export type CountryCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: warehouseWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountOriginProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountShippingProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productWhereInput
   }
 
 
@@ -1834,6 +2018,99 @@ export namespace Prisma {
    */
   export type CityCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: warehouseWhereInput
+  }
+
+
+  /**
+   * Count Type CategoryCountOutputType
+   */
+
+  export type CategoryCountOutputType = {
+    products: number
+  }
+
+  export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    products?: boolean | CategoryCountOutputTypeCountProductsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategoryCountOutputType
+     */
+    select?: CategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productWhereInput
+  }
+
+
+  /**
+   * Count Type BrandCountOutputType
+   */
+
+  export type BrandCountOutputType = {
+    products: number
+  }
+
+  export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    products?: boolean | BrandCountOutputTypeCountProductsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCountOutputType
+     */
+    select?: BrandCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productWhereInput
+  }
+
+
+  /**
+   * Count Type ProductCountOutputType
+   */
+
+  export type ProductCountOutputType = {
+    variants: number
+  }
+
+  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    variants?: boolean | ProductCountOutputTypeCountVariantsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductCountOutputType
+     */
+    select?: ProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountVariantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productVariantWhereInput
   }
 
 
@@ -7588,6 +7865,8 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    originProducts?: boolean | country$originProductsArgs<ExtArgs>
+    shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["country"]>
 
@@ -7619,6 +7898,8 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    originProducts?: boolean | country$originProductsArgs<ExtArgs>
+    shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7628,6 +7909,8 @@ export namespace Prisma {
       states: Prisma.$statePayload<ExtArgs>[]
       cities: Prisma.$cityPayload<ExtArgs>[]
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      originProducts: Prisma.$productPayload<ExtArgs>[]
+      shippingProducts: Prisma.$productPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -7991,6 +8274,8 @@ export namespace Prisma {
     states<T extends country$statesArgs<ExtArgs> = {}>(args?: Subset<T, country$statesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cities<T extends country$citiesArgs<ExtArgs> = {}>(args?: Subset<T, country$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     warehouses<T extends country$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, country$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    originProducts<T extends country$originProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$originProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    shippingProducts<T extends country$shippingProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$shippingProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8450,6 +8735,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * country.originProducts
+   */
+  export type country$originProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    where?: productWhereInput
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    cursor?: productWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * country.shippingProducts
+   */
+  export type country$shippingProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    where?: productWhereInput
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    cursor?: productWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
   }
 
   /**
@@ -12241,6 +12574,8 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
+    products?: boolean | category$productsArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
 
@@ -12264,10 +12599,16 @@ export namespace Prisma {
   }
 
   export type categoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["category"]>
+  export type categoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    products?: boolean | category$productsArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $categoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "category"
-    objects: {}
+    objects: {
+      products: Prisma.$productPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -12624,6 +12965,7 @@ export namespace Prisma {
    */
   export interface Prisma__categoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    products<T extends category$productsArgs<ExtArgs> = {}>(args?: Subset<T, category$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12685,6 +13027,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * Filter, which category to fetch.
      */
     where: categoryWhereUniqueInput
@@ -12703,6 +13049,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * Filter, which category to fetch.
      */
     where: categoryWhereUniqueInput
@@ -12720,6 +13070,10 @@ export namespace Prisma {
      * Omit specific fields from the category
      */
     omit?: categoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
     /**
      * Filter, which category to fetch.
      */
@@ -12769,6 +13123,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * Filter, which category to fetch.
      */
     where?: categoryWhereInput
@@ -12817,6 +13175,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * Filter, which categories to fetch.
      */
     where?: categoryWhereInput
@@ -12860,6 +13222,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * The data needed to create a category.
      */
     data: XOR<categoryCreateInput, categoryUncheckedCreateInput>
@@ -12888,6 +13254,10 @@ export namespace Prisma {
      * Omit specific fields from the category
      */
     omit?: categoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
     /**
      * The data needed to update a category.
      */
@@ -12929,6 +13299,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * The filter to search for the category to update in case it exists.
      */
     where: categoryWhereUniqueInput
@@ -12955,6 +13329,10 @@ export namespace Prisma {
      */
     omit?: categoryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
+    /**
      * Filter which category to delete.
      */
     where: categoryWhereUniqueInput
@@ -12975,6 +13353,30 @@ export namespace Prisma {
   }
 
   /**
+   * category.products
+   */
+  export type category$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    where?: productWhereInput
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    cursor?: productWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
    * category without action
    */
   export type categoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12986,6 +13388,10 @@ export namespace Prisma {
      * Omit specific fields from the category
      */
     omit?: categoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: categoryInclude<ExtArgs> | null
   }
 
 
@@ -13279,6 +13685,8 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
+    products?: boolean | brand$productsArgs<ExtArgs>
+    _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
 
@@ -13302,10 +13710,16 @@ export namespace Prisma {
   }
 
   export type brandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["brand"]>
+  export type brandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    products?: boolean | brand$productsArgs<ExtArgs>
+    _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $brandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "brand"
-    objects: {}
+    objects: {
+      products: Prisma.$productPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -13662,6 +14076,7 @@ export namespace Prisma {
    */
   export interface Prisma__brandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    products<T extends brand$productsArgs<ExtArgs> = {}>(args?: Subset<T, brand$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13723,6 +14138,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * Filter, which brand to fetch.
      */
     where: brandWhereUniqueInput
@@ -13741,6 +14160,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * Filter, which brand to fetch.
      */
     where: brandWhereUniqueInput
@@ -13758,6 +14181,10 @@ export namespace Prisma {
      * Omit specific fields from the brand
      */
     omit?: brandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
     /**
      * Filter, which brand to fetch.
      */
@@ -13807,6 +14234,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * Filter, which brand to fetch.
      */
     where?: brandWhereInput
@@ -13855,6 +14286,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * Filter, which brands to fetch.
      */
     where?: brandWhereInput
@@ -13898,6 +14333,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * The data needed to create a brand.
      */
     data: XOR<brandCreateInput, brandUncheckedCreateInput>
@@ -13926,6 +14365,10 @@ export namespace Prisma {
      * Omit specific fields from the brand
      */
     omit?: brandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
     /**
      * The data needed to update a brand.
      */
@@ -13967,6 +14410,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * The filter to search for the brand to update in case it exists.
      */
     where: brandWhereUniqueInput
@@ -13993,6 +14440,10 @@ export namespace Prisma {
      */
     omit?: brandOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+    /**
      * Filter which brand to delete.
      */
     where: brandWhereUniqueInput
@@ -14013,6 +14464,30 @@ export namespace Prisma {
   }
 
   /**
+   * brand.products
+   */
+  export type brand$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    where?: productWhereInput
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    cursor?: productWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
    * brand without action
    */
   export type brandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14024,6 +14499,2393 @@ export namespace Prisma {
      * Omit specific fields from the brand
      */
     omit?: brandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: brandInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model product
+   */
+
+  export type AggregateProduct = {
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  export type ProductAvgAggregateOutputType = {
+    id: number | null
+    categoryId: number | null
+    brandId: number | null
+    originCountryId: number | null
+    shippingCountryId: number | null
+    weight: number | null
+    package_length: number | null
+    package_width: number | null
+    package_height: number | null
+    chargeable_weight: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ProductSumAggregateOutputType = {
+    id: number | null
+    categoryId: number | null
+    brandId: number | null
+    originCountryId: bigint | null
+    shippingCountryId: bigint | null
+    weight: number | null
+    package_length: number | null
+    package_width: number | null
+    package_height: number | null
+    chargeable_weight: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ProductMinAggregateOutputType = {
+    id: number | null
+    categoryId: number | null
+    name: string | null
+    slug: string | null
+    main_sku: string | null
+    description: string | null
+    brandId: number | null
+    originCountryId: bigint | null
+    shippingCountryId: bigint | null
+    video_url: string | null
+    list_as: string | null
+    shipping_time: string | null
+    weight: number | null
+    package_length: number | null
+    package_width: number | null
+    package_height: number | null
+    chargeable_weight: number | null
+    package_weight_image: string | null
+    package_length_image: string | null
+    package_width_image: string | null
+    package_height_image: string | null
+    product_detail_video: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ProductMaxAggregateOutputType = {
+    id: number | null
+    categoryId: number | null
+    name: string | null
+    slug: string | null
+    main_sku: string | null
+    description: string | null
+    brandId: number | null
+    originCountryId: bigint | null
+    shippingCountryId: bigint | null
+    video_url: string | null
+    list_as: string | null
+    shipping_time: string | null
+    weight: number | null
+    package_length: number | null
+    package_width: number | null
+    package_height: number | null
+    chargeable_weight: number | null
+    package_weight_image: string | null
+    package_length_image: string | null
+    package_width_image: string | null
+    package_height_image: string | null
+    product_detail_video: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ProductCountAggregateOutputType = {
+    id: number
+    categoryId: number
+    name: number
+    slug: number
+    main_sku: number
+    description: number
+    tags: number
+    brandId: number
+    originCountryId: number
+    shippingCountryId: number
+    video_url: number
+    list_as: number
+    shipping_time: number
+    weight: number
+    package_length: number
+    package_width: number
+    package_height: number
+    chargeable_weight: number
+    package_weight_image: number
+    package_length_image: number
+    package_width_image: number
+    package_height_image: number
+    product_detail_video: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type ProductAvgAggregateInputType = {
+    id?: true
+    categoryId?: true
+    brandId?: true
+    originCountryId?: true
+    shippingCountryId?: true
+    weight?: true
+    package_length?: true
+    package_width?: true
+    package_height?: true
+    chargeable_weight?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ProductSumAggregateInputType = {
+    id?: true
+    categoryId?: true
+    brandId?: true
+    originCountryId?: true
+    shippingCountryId?: true
+    weight?: true
+    package_length?: true
+    package_width?: true
+    package_height?: true
+    chargeable_weight?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ProductMinAggregateInputType = {
+    id?: true
+    categoryId?: true
+    name?: true
+    slug?: true
+    main_sku?: true
+    description?: true
+    brandId?: true
+    originCountryId?: true
+    shippingCountryId?: true
+    video_url?: true
+    list_as?: true
+    shipping_time?: true
+    weight?: true
+    package_length?: true
+    package_width?: true
+    package_height?: true
+    chargeable_weight?: true
+    package_weight_image?: true
+    package_length_image?: true
+    package_width_image?: true
+    package_height_image?: true
+    product_detail_video?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ProductMaxAggregateInputType = {
+    id?: true
+    categoryId?: true
+    name?: true
+    slug?: true
+    main_sku?: true
+    description?: true
+    brandId?: true
+    originCountryId?: true
+    shippingCountryId?: true
+    video_url?: true
+    list_as?: true
+    shipping_time?: true
+    weight?: true
+    package_length?: true
+    package_width?: true
+    package_height?: true
+    chargeable_weight?: true
+    package_weight_image?: true
+    package_length_image?: true
+    package_width_image?: true
+    package_height_image?: true
+    product_detail_video?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ProductCountAggregateInputType = {
+    id?: true
+    categoryId?: true
+    name?: true
+    slug?: true
+    main_sku?: true
+    description?: true
+    tags?: true
+    brandId?: true
+    originCountryId?: true
+    shippingCountryId?: true
+    video_url?: true
+    list_as?: true
+    shipping_time?: true
+    weight?: true
+    package_length?: true
+    package_width?: true
+    package_height?: true
+    chargeable_weight?: true
+    package_weight_image?: true
+    package_length_image?: true
+    package_width_image?: true
+    package_height_image?: true
+    product_detail_video?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which product to aggregate.
+     */
+    where?: productWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of products to fetch.
+     */
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: productWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned products
+    **/
+    _count?: true | ProductCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type GetProductAggregateType<T extends ProductAggregateArgs> = {
+        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProduct[P]>
+      : GetScalarType<T[P], AggregateProduct[P]>
+  }
+
+
+
+
+  export type productGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productWhereInput
+    orderBy?: productOrderByWithAggregationInput | productOrderByWithAggregationInput[]
+    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
+    having?: productScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductCountAggregateInputType | true
+    _avg?: ProductAvgAggregateInputType
+    _sum?: ProductSumAggregateInputType
+    _min?: ProductMinAggregateInputType
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type ProductGroupByOutputType = {
+    id: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description: string | null
+    tags: JsonValue | null
+    brandId: number
+    originCountryId: bigint
+    shippingCountryId: bigint
+    video_url: string | null
+    list_as: string | null
+    shipping_time: string | null
+    weight: number | null
+    package_length: number | null
+    package_width: number | null
+    package_height: number | null
+    chargeable_weight: number | null
+    package_weight_image: string | null
+    package_length_image: string | null
+    package_width_image: string | null
+    package_height_image: string | null
+    product_detail_video: string | null
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  type GetProductGroupByPayload<T extends productGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type productSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categoryId?: boolean
+    name?: boolean
+    slug?: boolean
+    main_sku?: boolean
+    description?: boolean
+    tags?: boolean
+    brandId?: boolean
+    originCountryId?: boolean
+    shippingCountryId?: boolean
+    video_url?: boolean
+    list_as?: boolean
+    shipping_time?: boolean
+    weight?: boolean
+    package_length?: boolean
+    package_width?: boolean
+    package_height?: boolean
+    chargeable_weight?: boolean
+    package_weight_image?: boolean
+    package_length_image?: boolean
+    package_width_image?: boolean
+    package_height_image?: boolean
+    product_detail_video?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    category?: boolean | categoryDefaultArgs<ExtArgs>
+    brand?: boolean | brandDefaultArgs<ExtArgs>
+    originCountry?: boolean | countryDefaultArgs<ExtArgs>
+    shippingCountry?: boolean | countryDefaultArgs<ExtArgs>
+    variants?: boolean | product$variantsArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["product"]>
+
+
+
+  export type productSelectScalar = {
+    id?: boolean
+    categoryId?: boolean
+    name?: boolean
+    slug?: boolean
+    main_sku?: boolean
+    description?: boolean
+    tags?: boolean
+    brandId?: boolean
+    originCountryId?: boolean
+    shippingCountryId?: boolean
+    video_url?: boolean
+    list_as?: boolean
+    shipping_time?: boolean
+    weight?: boolean
+    package_length?: boolean
+    package_width?: boolean
+    package_height?: boolean
+    chargeable_weight?: boolean
+    package_weight_image?: boolean
+    package_length_image?: boolean
+    package_width_image?: boolean
+    package_height_image?: boolean
+    product_detail_video?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "name" | "slug" | "main_sku" | "description" | "tags" | "brandId" | "originCountryId" | "shippingCountryId" | "video_url" | "list_as" | "shipping_time" | "weight" | "package_length" | "package_width" | "package_height" | "chargeable_weight" | "package_weight_image" | "package_length_image" | "package_width_image" | "package_height_image" | "product_detail_video" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
+  export type productInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | categoryDefaultArgs<ExtArgs>
+    brand?: boolean | brandDefaultArgs<ExtArgs>
+    originCountry?: boolean | countryDefaultArgs<ExtArgs>
+    shippingCountry?: boolean | countryDefaultArgs<ExtArgs>
+    variants?: boolean | product$variantsArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $productPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "product"
+    objects: {
+      category: Prisma.$categoryPayload<ExtArgs>
+      brand: Prisma.$brandPayload<ExtArgs>
+      originCountry: Prisma.$countryPayload<ExtArgs>
+      shippingCountry: Prisma.$countryPayload<ExtArgs>
+      variants: Prisma.$productVariantPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      categoryId: number
+      name: string
+      slug: string
+      main_sku: string
+      description: string | null
+      tags: Prisma.JsonValue | null
+      brandId: number
+      originCountryId: bigint
+      shippingCountryId: bigint
+      video_url: string | null
+      list_as: string | null
+      shipping_time: string | null
+      weight: number | null
+      package_length: number | null
+      package_width: number | null
+      package_height: number | null
+      chargeable_weight: number | null
+      package_weight_image: string | null
+      package_length_image: string | null
+      package_width_image: string | null
+      package_height_image: string | null
+      product_detail_video: string | null
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["product"]>
+    composites: {}
+  }
+
+  type productGetPayload<S extends boolean | null | undefined | productDefaultArgs> = $Result.GetResult<Prisma.$productPayload, S>
+
+  type productCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<productFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductCountAggregateInputType | true
+    }
+
+  export interface productDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['product'], meta: { name: 'product' } }
+    /**
+     * Find zero or one Product that matches the filter.
+     * @param {productFindUniqueArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends productFindUniqueArgs>(args: SelectSubset<T, productFindUniqueArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Product that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {productFindUniqueOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends productFindUniqueOrThrowArgs>(args: SelectSubset<T, productFindUniqueOrThrowArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productFindFirstArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends productFindFirstArgs>(args?: SelectSubset<T, productFindFirstArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productFindFirstOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends productFindFirstOrThrowArgs>(args?: SelectSubset<T, productFindFirstOrThrowArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Products that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Products
+     * const products = await prisma.product.findMany()
+     * 
+     * // Get first 10 Products
+     * const products = await prisma.product.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends productFindManyArgs>(args?: SelectSubset<T, productFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Product.
+     * @param {productCreateArgs} args - Arguments to create a Product.
+     * @example
+     * // Create one Product
+     * const Product = await prisma.product.create({
+     *   data: {
+     *     // ... data to create a Product
+     *   }
+     * })
+     * 
+     */
+    create<T extends productCreateArgs>(args: SelectSubset<T, productCreateArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Products.
+     * @param {productCreateManyArgs} args - Arguments to create many Products.
+     * @example
+     * // Create many Products
+     * const product = await prisma.product.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends productCreateManyArgs>(args?: SelectSubset<T, productCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Product.
+     * @param {productDeleteArgs} args - Arguments to delete one Product.
+     * @example
+     * // Delete one Product
+     * const Product = await prisma.product.delete({
+     *   where: {
+     *     // ... filter to delete one Product
+     *   }
+     * })
+     * 
+     */
+    delete<T extends productDeleteArgs>(args: SelectSubset<T, productDeleteArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Product.
+     * @param {productUpdateArgs} args - Arguments to update one Product.
+     * @example
+     * // Update one Product
+     * const product = await prisma.product.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends productUpdateArgs>(args: SelectSubset<T, productUpdateArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Products.
+     * @param {productDeleteManyArgs} args - Arguments to filter Products to delete.
+     * @example
+     * // Delete a few Products
+     * const { count } = await prisma.product.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends productDeleteManyArgs>(args?: SelectSubset<T, productDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Products
+     * const product = await prisma.product.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends productUpdateManyArgs>(args: SelectSubset<T, productUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Product.
+     * @param {productUpsertArgs} args - Arguments to update or create a Product.
+     * @example
+     * // Update or create a Product
+     * const product = await prisma.product.upsert({
+     *   create: {
+     *     // ... data to create a Product
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Product we want to update
+     *   }
+     * })
+     */
+    upsert<T extends productUpsertArgs>(args: SelectSubset<T, productUpsertArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productCountArgs} args - Arguments to filter Products to count.
+     * @example
+     * // Count the number of Products
+     * const count = await prisma.product.count({
+     *   where: {
+     *     // ... the filter for the Products we want to count
+     *   }
+     * })
+    **/
+    count<T extends productCountArgs>(
+      args?: Subset<T, productCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
+
+    /**
+     * Group by Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends productGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: productGroupByArgs['orderBy'] }
+        : { orderBy?: productGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, productGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the product model
+   */
+  readonly fields: productFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for product.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__productClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends categoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, categoryDefaultArgs<ExtArgs>>): Prisma__categoryClient<$Result.GetResult<Prisma.$categoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    brand<T extends brandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, brandDefaultArgs<ExtArgs>>): Prisma__brandClient<$Result.GetResult<Prisma.$brandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    originCountry<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    shippingCountry<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    variants<T extends product$variantsArgs<ExtArgs> = {}>(args?: Subset<T, product$variantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the product model
+   */
+  interface productFieldRefs {
+    readonly id: FieldRef<"product", 'Int'>
+    readonly categoryId: FieldRef<"product", 'Int'>
+    readonly name: FieldRef<"product", 'String'>
+    readonly slug: FieldRef<"product", 'String'>
+    readonly main_sku: FieldRef<"product", 'String'>
+    readonly description: FieldRef<"product", 'String'>
+    readonly tags: FieldRef<"product", 'Json'>
+    readonly brandId: FieldRef<"product", 'Int'>
+    readonly originCountryId: FieldRef<"product", 'BigInt'>
+    readonly shippingCountryId: FieldRef<"product", 'BigInt'>
+    readonly video_url: FieldRef<"product", 'String'>
+    readonly list_as: FieldRef<"product", 'String'>
+    readonly shipping_time: FieldRef<"product", 'String'>
+    readonly weight: FieldRef<"product", 'Float'>
+    readonly package_length: FieldRef<"product", 'Float'>
+    readonly package_width: FieldRef<"product", 'Float'>
+    readonly package_height: FieldRef<"product", 'Float'>
+    readonly chargeable_weight: FieldRef<"product", 'Float'>
+    readonly package_weight_image: FieldRef<"product", 'String'>
+    readonly package_length_image: FieldRef<"product", 'String'>
+    readonly package_width_image: FieldRef<"product", 'String'>
+    readonly package_height_image: FieldRef<"product", 'String'>
+    readonly product_detail_video: FieldRef<"product", 'String'>
+    readonly status: FieldRef<"product", 'Boolean'>
+    readonly createdAt: FieldRef<"product", 'DateTime'>
+    readonly createdBy: FieldRef<"product", 'Int'>
+    readonly createdByRole: FieldRef<"product", 'String'>
+    readonly updatedAt: FieldRef<"product", 'DateTime'>
+    readonly updatedBy: FieldRef<"product", 'Int'>
+    readonly updatedByRole: FieldRef<"product", 'String'>
+    readonly deletedAt: FieldRef<"product", 'DateTime'>
+    readonly deletedBy: FieldRef<"product", 'Int'>
+    readonly deletedByRole: FieldRef<"product", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * product findUnique
+   */
+  export type productFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter, which product to fetch.
+     */
+    where: productWhereUniqueInput
+  }
+
+  /**
+   * product findUniqueOrThrow
+   */
+  export type productFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter, which product to fetch.
+     */
+    where: productWhereUniqueInput
+  }
+
+  /**
+   * product findFirst
+   */
+  export type productFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter, which product to fetch.
+     */
+    where?: productWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of products to fetch.
+     */
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for products.
+     */
+    cursor?: productWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * product findFirstOrThrow
+   */
+  export type productFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter, which product to fetch.
+     */
+    where?: productWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of products to fetch.
+     */
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for products.
+     */
+    cursor?: productWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * product findMany
+   */
+  export type productFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter, which products to fetch.
+     */
+    where?: productWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of products to fetch.
+     */
+    orderBy?: productOrderByWithRelationInput | productOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing products.
+     */
+    cursor?: productWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` products.
+     */
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * product create
+   */
+  export type productCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * The data needed to create a product.
+     */
+    data: XOR<productCreateInput, productUncheckedCreateInput>
+  }
+
+  /**
+   * product createMany
+   */
+  export type productCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many products.
+     */
+    data: productCreateManyInput | productCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * product update
+   */
+  export type productUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * The data needed to update a product.
+     */
+    data: XOR<productUpdateInput, productUncheckedUpdateInput>
+    /**
+     * Choose, which product to update.
+     */
+    where: productWhereUniqueInput
+  }
+
+  /**
+   * product updateMany
+   */
+  export type productUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update products.
+     */
+    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyInput>
+    /**
+     * Filter which products to update
+     */
+    where?: productWhereInput
+    /**
+     * Limit how many products to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * product upsert
+   */
+  export type productUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * The filter to search for the product to update in case it exists.
+     */
+    where: productWhereUniqueInput
+    /**
+     * In case the product found by the `where` argument doesn't exist, create a new product with this data.
+     */
+    create: XOR<productCreateInput, productUncheckedCreateInput>
+    /**
+     * In case the product was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<productUpdateInput, productUncheckedUpdateInput>
+  }
+
+  /**
+   * product delete
+   */
+  export type productDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+    /**
+     * Filter which product to delete.
+     */
+    where: productWhereUniqueInput
+  }
+
+  /**
+   * product deleteMany
+   */
+  export type productDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which products to delete
+     */
+    where?: productWhereInput
+    /**
+     * Limit how many products to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * product.variants
+   */
+  export type product$variantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    where?: productVariantWhereInput
+    orderBy?: productVariantOrderByWithRelationInput | productVariantOrderByWithRelationInput[]
+    cursor?: productVariantWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductVariantScalarFieldEnum | ProductVariantScalarFieldEnum[]
+  }
+
+  /**
+   * product without action
+   */
+  export type productDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the product
+     */
+    select?: productSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the product
+     */
+    omit?: productOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model productVariant
+   */
+
+  export type AggregateProductVariant = {
+    _count: ProductVariantCountAggregateOutputType | null
+    _avg: ProductVariantAvgAggregateOutputType | null
+    _sum: ProductVariantSumAggregateOutputType | null
+    _min: ProductVariantMinAggregateOutputType | null
+    _max: ProductVariantMaxAggregateOutputType | null
+  }
+
+  export type ProductVariantAvgAggregateOutputType = {
+    id: number | null
+    productId: number | null
+    qty: number | null
+  }
+
+  export type ProductVariantSumAggregateOutputType = {
+    id: number | null
+    productId: number | null
+    qty: number | null
+  }
+
+  export type ProductVariantMinAggregateOutputType = {
+    id: number | null
+    productId: number | null
+    image: string | null
+    color: string | null
+    sku: string | null
+    qty: number | null
+    currency: string | null
+    article_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductVariantMaxAggregateOutputType = {
+    id: number | null
+    productId: number | null
+    image: string | null
+    color: string | null
+    sku: string | null
+    qty: number | null
+    currency: string | null
+    article_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductVariantCountAggregateOutputType = {
+    id: number
+    productId: number
+    image: number
+    color: number
+    sku: number
+    qty: number
+    currency: number
+    article_id: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductVariantAvgAggregateInputType = {
+    id?: true
+    productId?: true
+    qty?: true
+  }
+
+  export type ProductVariantSumAggregateInputType = {
+    id?: true
+    productId?: true
+    qty?: true
+  }
+
+  export type ProductVariantMinAggregateInputType = {
+    id?: true
+    productId?: true
+    image?: true
+    color?: true
+    sku?: true
+    qty?: true
+    currency?: true
+    article_id?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductVariantMaxAggregateInputType = {
+    id?: true
+    productId?: true
+    image?: true
+    color?: true
+    sku?: true
+    qty?: true
+    currency?: true
+    article_id?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductVariantCountAggregateInputType = {
+    id?: true
+    productId?: true
+    image?: true
+    color?: true
+    sku?: true
+    qty?: true
+    currency?: true
+    article_id?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductVariantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which productVariant to aggregate.
+     */
+    where?: productVariantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productVariants to fetch.
+     */
+    orderBy?: productVariantOrderByWithRelationInput | productVariantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: productVariantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productVariants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productVariants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned productVariants
+    **/
+    _count?: true | ProductVariantCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductVariantAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductVariantSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductVariantMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductVariantMaxAggregateInputType
+  }
+
+  export type GetProductVariantAggregateType<T extends ProductVariantAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductVariant]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductVariant[P]>
+      : GetScalarType<T[P], AggregateProductVariant[P]>
+  }
+
+
+
+
+  export type productVariantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productVariantWhereInput
+    orderBy?: productVariantOrderByWithAggregationInput | productVariantOrderByWithAggregationInput[]
+    by: ProductVariantScalarFieldEnum[] | ProductVariantScalarFieldEnum
+    having?: productVariantScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductVariantCountAggregateInputType | true
+    _avg?: ProductVariantAvgAggregateInputType
+    _sum?: ProductVariantSumAggregateInputType
+    _min?: ProductVariantMinAggregateInputType
+    _max?: ProductVariantMaxAggregateInputType
+  }
+
+  export type ProductVariantGroupByOutputType = {
+    id: number
+    productId: number
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductVariantCountAggregateOutputType | null
+    _avg: ProductVariantAvgAggregateOutputType | null
+    _sum: ProductVariantSumAggregateOutputType | null
+    _min: ProductVariantMinAggregateOutputType | null
+    _max: ProductVariantMaxAggregateOutputType | null
+  }
+
+  type GetProductVariantGroupByPayload<T extends productVariantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductVariantGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductVariantGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type productVariantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    image?: boolean
+    color?: boolean
+    sku?: boolean
+    qty?: boolean
+    currency?: boolean
+    article_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productVariant"]>
+
+
+
+  export type productVariantSelectScalar = {
+    id?: boolean
+    productId?: boolean
+    image?: boolean
+    color?: boolean
+    sku?: boolean
+    qty?: boolean
+    currency?: boolean
+    article_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }
+
+  export type $productVariantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "productVariant"
+    objects: {
+      product: Prisma.$productPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      productId: number
+      image: string
+      color: string
+      sku: string
+      qty: number
+      currency: string
+      article_id: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productVariant"]>
+    composites: {}
+  }
+
+  type productVariantGetPayload<S extends boolean | null | undefined | productVariantDefaultArgs> = $Result.GetResult<Prisma.$productVariantPayload, S>
+
+  type productVariantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<productVariantFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductVariantCountAggregateInputType | true
+    }
+
+  export interface productVariantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['productVariant'], meta: { name: 'productVariant' } }
+    /**
+     * Find zero or one ProductVariant that matches the filter.
+     * @param {productVariantFindUniqueArgs} args - Arguments to find a ProductVariant
+     * @example
+     * // Get one ProductVariant
+     * const productVariant = await prisma.productVariant.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends productVariantFindUniqueArgs>(args: SelectSubset<T, productVariantFindUniqueArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductVariant that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {productVariantFindUniqueOrThrowArgs} args - Arguments to find a ProductVariant
+     * @example
+     * // Get one ProductVariant
+     * const productVariant = await prisma.productVariant.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends productVariantFindUniqueOrThrowArgs>(args: SelectSubset<T, productVariantFindUniqueOrThrowArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductVariant that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantFindFirstArgs} args - Arguments to find a ProductVariant
+     * @example
+     * // Get one ProductVariant
+     * const productVariant = await prisma.productVariant.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends productVariantFindFirstArgs>(args?: SelectSubset<T, productVariantFindFirstArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductVariant that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantFindFirstOrThrowArgs} args - Arguments to find a ProductVariant
+     * @example
+     * // Get one ProductVariant
+     * const productVariant = await prisma.productVariant.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends productVariantFindFirstOrThrowArgs>(args?: SelectSubset<T, productVariantFindFirstOrThrowArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductVariants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductVariants
+     * const productVariants = await prisma.productVariant.findMany()
+     * 
+     * // Get first 10 ProductVariants
+     * const productVariants = await prisma.productVariant.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productVariantWithIdOnly = await prisma.productVariant.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends productVariantFindManyArgs>(args?: SelectSubset<T, productVariantFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductVariant.
+     * @param {productVariantCreateArgs} args - Arguments to create a ProductVariant.
+     * @example
+     * // Create one ProductVariant
+     * const ProductVariant = await prisma.productVariant.create({
+     *   data: {
+     *     // ... data to create a ProductVariant
+     *   }
+     * })
+     * 
+     */
+    create<T extends productVariantCreateArgs>(args: SelectSubset<T, productVariantCreateArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductVariants.
+     * @param {productVariantCreateManyArgs} args - Arguments to create many ProductVariants.
+     * @example
+     * // Create many ProductVariants
+     * const productVariant = await prisma.productVariant.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends productVariantCreateManyArgs>(args?: SelectSubset<T, productVariantCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProductVariant.
+     * @param {productVariantDeleteArgs} args - Arguments to delete one ProductVariant.
+     * @example
+     * // Delete one ProductVariant
+     * const ProductVariant = await prisma.productVariant.delete({
+     *   where: {
+     *     // ... filter to delete one ProductVariant
+     *   }
+     * })
+     * 
+     */
+    delete<T extends productVariantDeleteArgs>(args: SelectSubset<T, productVariantDeleteArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductVariant.
+     * @param {productVariantUpdateArgs} args - Arguments to update one ProductVariant.
+     * @example
+     * // Update one ProductVariant
+     * const productVariant = await prisma.productVariant.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends productVariantUpdateArgs>(args: SelectSubset<T, productVariantUpdateArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductVariants.
+     * @param {productVariantDeleteManyArgs} args - Arguments to filter ProductVariants to delete.
+     * @example
+     * // Delete a few ProductVariants
+     * const { count } = await prisma.productVariant.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends productVariantDeleteManyArgs>(args?: SelectSubset<T, productVariantDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductVariants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductVariants
+     * const productVariant = await prisma.productVariant.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends productVariantUpdateManyArgs>(args: SelectSubset<T, productVariantUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProductVariant.
+     * @param {productVariantUpsertArgs} args - Arguments to update or create a ProductVariant.
+     * @example
+     * // Update or create a ProductVariant
+     * const productVariant = await prisma.productVariant.upsert({
+     *   create: {
+     *     // ... data to create a ProductVariant
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductVariant we want to update
+     *   }
+     * })
+     */
+    upsert<T extends productVariantUpsertArgs>(args: SelectSubset<T, productVariantUpsertArgs<ExtArgs>>): Prisma__productVariantClient<$Result.GetResult<Prisma.$productVariantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductVariants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantCountArgs} args - Arguments to filter ProductVariants to count.
+     * @example
+     * // Count the number of ProductVariants
+     * const count = await prisma.productVariant.count({
+     *   where: {
+     *     // ... the filter for the ProductVariants we want to count
+     *   }
+     * })
+    **/
+    count<T extends productVariantCountArgs>(
+      args?: Subset<T, productVariantCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductVariantCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductVariant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductVariantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductVariantAggregateArgs>(args: Subset<T, ProductVariantAggregateArgs>): Prisma.PrismaPromise<GetProductVariantAggregateType<T>>
+
+    /**
+     * Group by ProductVariant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productVariantGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends productVariantGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: productVariantGroupByArgs['orderBy'] }
+        : { orderBy?: productVariantGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, productVariantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductVariantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the productVariant model
+   */
+  readonly fields: productVariantFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for productVariant.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__productVariantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends productDefaultArgs<ExtArgs> = {}>(args?: Subset<T, productDefaultArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the productVariant model
+   */
+  interface productVariantFieldRefs {
+    readonly id: FieldRef<"productVariant", 'Int'>
+    readonly productId: FieldRef<"productVariant", 'Int'>
+    readonly image: FieldRef<"productVariant", 'String'>
+    readonly color: FieldRef<"productVariant", 'String'>
+    readonly sku: FieldRef<"productVariant", 'String'>
+    readonly qty: FieldRef<"productVariant", 'Int'>
+    readonly currency: FieldRef<"productVariant", 'String'>
+    readonly article_id: FieldRef<"productVariant", 'String'>
+    readonly createdAt: FieldRef<"productVariant", 'DateTime'>
+    readonly updatedAt: FieldRef<"productVariant", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * productVariant findUnique
+   */
+  export type productVariantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter, which productVariant to fetch.
+     */
+    where: productVariantWhereUniqueInput
+  }
+
+  /**
+   * productVariant findUniqueOrThrow
+   */
+  export type productVariantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter, which productVariant to fetch.
+     */
+    where: productVariantWhereUniqueInput
+  }
+
+  /**
+   * productVariant findFirst
+   */
+  export type productVariantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter, which productVariant to fetch.
+     */
+    where?: productVariantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productVariants to fetch.
+     */
+    orderBy?: productVariantOrderByWithRelationInput | productVariantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for productVariants.
+     */
+    cursor?: productVariantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productVariants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productVariants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of productVariants.
+     */
+    distinct?: ProductVariantScalarFieldEnum | ProductVariantScalarFieldEnum[]
+  }
+
+  /**
+   * productVariant findFirstOrThrow
+   */
+  export type productVariantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter, which productVariant to fetch.
+     */
+    where?: productVariantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productVariants to fetch.
+     */
+    orderBy?: productVariantOrderByWithRelationInput | productVariantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for productVariants.
+     */
+    cursor?: productVariantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productVariants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productVariants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of productVariants.
+     */
+    distinct?: ProductVariantScalarFieldEnum | ProductVariantScalarFieldEnum[]
+  }
+
+  /**
+   * productVariant findMany
+   */
+  export type productVariantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter, which productVariants to fetch.
+     */
+    where?: productVariantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productVariants to fetch.
+     */
+    orderBy?: productVariantOrderByWithRelationInput | productVariantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing productVariants.
+     */
+    cursor?: productVariantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productVariants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productVariants.
+     */
+    skip?: number
+    distinct?: ProductVariantScalarFieldEnum | ProductVariantScalarFieldEnum[]
+  }
+
+  /**
+   * productVariant create
+   */
+  export type productVariantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * The data needed to create a productVariant.
+     */
+    data: XOR<productVariantCreateInput, productVariantUncheckedCreateInput>
+  }
+
+  /**
+   * productVariant createMany
+   */
+  export type productVariantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many productVariants.
+     */
+    data: productVariantCreateManyInput | productVariantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * productVariant update
+   */
+  export type productVariantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * The data needed to update a productVariant.
+     */
+    data: XOR<productVariantUpdateInput, productVariantUncheckedUpdateInput>
+    /**
+     * Choose, which productVariant to update.
+     */
+    where: productVariantWhereUniqueInput
+  }
+
+  /**
+   * productVariant updateMany
+   */
+  export type productVariantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update productVariants.
+     */
+    data: XOR<productVariantUpdateManyMutationInput, productVariantUncheckedUpdateManyInput>
+    /**
+     * Filter which productVariants to update
+     */
+    where?: productVariantWhereInput
+    /**
+     * Limit how many productVariants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * productVariant upsert
+   */
+  export type productVariantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * The filter to search for the productVariant to update in case it exists.
+     */
+    where: productVariantWhereUniqueInput
+    /**
+     * In case the productVariant found by the `where` argument doesn't exist, create a new productVariant with this data.
+     */
+    create: XOR<productVariantCreateInput, productVariantUncheckedCreateInput>
+    /**
+     * In case the productVariant was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<productVariantUpdateInput, productVariantUncheckedUpdateInput>
+  }
+
+  /**
+   * productVariant delete
+   */
+  export type productVariantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
+    /**
+     * Filter which productVariant to delete.
+     */
+    where: productVariantWhereUniqueInput
+  }
+
+  /**
+   * productVariant deleteMany
+   */
+  export type productVariantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which productVariants to delete
+     */
+    where?: productVariantWhereInput
+    /**
+     * Limit how many productVariants to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * productVariant without action
+   */
+  export type productVariantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productVariant
+     */
+    select?: productVariantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productVariant
+     */
+    omit?: productVariantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productVariantInclude<ExtArgs> | null
   }
 
 
@@ -14291,12 +17153,75 @@ export namespace Prisma {
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
 
 
+  export const ProductScalarFieldEnum: {
+    id: 'id',
+    categoryId: 'categoryId',
+    name: 'name',
+    slug: 'slug',
+    main_sku: 'main_sku',
+    description: 'description',
+    tags: 'tags',
+    brandId: 'brandId',
+    originCountryId: 'originCountryId',
+    shippingCountryId: 'shippingCountryId',
+    video_url: 'video_url',
+    list_as: 'list_as',
+    shipping_time: 'shipping_time',
+    weight: 'weight',
+    package_length: 'package_length',
+    package_width: 'package_width',
+    package_height: 'package_height',
+    chargeable_weight: 'chargeable_weight',
+    package_weight_image: 'package_weight_image',
+    package_length_image: 'package_length_image',
+    package_width_image: 'package_width_image',
+    package_height_image: 'package_height_image',
+    product_detail_video: 'product_detail_video',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+  export const ProductVariantScalarFieldEnum: {
+    id: 'id',
+    productId: 'productId',
+    image: 'image',
+    color: 'color',
+    sku: 'sku',
+    qty: 'qty',
+    currency: 'currency',
+    article_id: 'article_id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductVariantScalarFieldEnum = (typeof ProductVariantScalarFieldEnum)[keyof typeof ProductVariantScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const NullsOrder: {
@@ -14470,6 +17395,55 @@ export namespace Prisma {
   export type brandOrderByRelevanceFieldEnum = (typeof brandOrderByRelevanceFieldEnum)[keyof typeof brandOrderByRelevanceFieldEnum]
 
 
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const productOrderByRelevanceFieldEnum: {
+    name: 'name',
+    slug: 'slug',
+    main_sku: 'main_sku',
+    description: 'description',
+    video_url: 'video_url',
+    list_as: 'list_as',
+    shipping_time: 'shipping_time',
+    package_weight_image: 'package_weight_image',
+    package_length_image: 'package_length_image',
+    package_width_image: 'package_width_image',
+    package_height_image: 'package_height_image',
+    product_detail_video: 'product_detail_video',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type productOrderByRelevanceFieldEnum = (typeof productOrderByRelevanceFieldEnum)[keyof typeof productOrderByRelevanceFieldEnum]
+
+
+  export const productVariantOrderByRelevanceFieldEnum: {
+    image: 'image',
+    color: 'color',
+    sku: 'sku',
+    currency: 'currency',
+    article_id: 'article_id'
+  };
+
+  export type productVariantOrderByRelevanceFieldEnum = (typeof productVariantOrderByRelevanceFieldEnum)[keyof typeof productVariantOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -14507,6 +17481,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -15136,6 +18124,8 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    originProducts?: ProductListRelationFilter
+    shippingProducts?: ProductListRelationFilter
   }
 
   export type countryOrderByWithRelationInput = {
@@ -15160,6 +18150,8 @@ export namespace Prisma {
     states?: stateOrderByRelationAggregateInput
     cities?: cityOrderByRelationAggregateInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    originProducts?: productOrderByRelationAggregateInput
+    shippingProducts?: productOrderByRelationAggregateInput
     _relevance?: countryOrderByRelevanceInput
   }
 
@@ -15188,6 +18180,8 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    originProducts?: ProductListRelationFilter
+    shippingProducts?: ProductListRelationFilter
   }, "id">
 
   export type countryOrderByWithAggregationInput = {
@@ -15621,6 +18615,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
     deletedBy?: IntNullableFilter<"category"> | number | null
     deletedByRole?: StringNullableFilter<"category"> | string | null
+    products?: ProductListRelationFilter
   }
 
   export type categoryOrderByWithRelationInput = {
@@ -15639,6 +18634,7 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
+    products?: productOrderByRelationAggregateInput
     _relevance?: categoryOrderByRelevanceInput
   }
 
@@ -15661,6 +18657,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"category"> | Date | string | null
     deletedBy?: IntNullableFilter<"category"> | number | null
     deletedByRole?: StringNullableFilter<"category"> | string | null
+    products?: ProductListRelationFilter
   }, "id" | "slug">
 
   export type categoryOrderByWithAggregationInput = {
@@ -15726,6 +18723,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableFilter<"brand"> | number | null
     deletedByRole?: StringNullableFilter<"brand"> | string | null
+    products?: ProductListRelationFilter
   }
 
   export type brandOrderByWithRelationInput = {
@@ -15744,6 +18742,7 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
+    products?: productOrderByRelationAggregateInput
     _relevance?: brandOrderByRelevanceInput
   }
 
@@ -15766,6 +18765,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableFilter<"brand"> | number | null
     deletedByRole?: StringNullableFilter<"brand"> | string | null
+    products?: ProductListRelationFilter
   }, "id" | "slug">
 
   export type brandOrderByWithAggregationInput = {
@@ -15810,6 +18810,299 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"brand"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"brand"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"brand"> | string | null
+  }
+
+  export type productWhereInput = {
+    AND?: productWhereInput | productWhereInput[]
+    OR?: productWhereInput[]
+    NOT?: productWhereInput | productWhereInput[]
+    id?: IntFilter<"product"> | number
+    categoryId?: IntFilter<"product"> | number
+    name?: StringFilter<"product"> | string
+    slug?: StringFilter<"product"> | string
+    main_sku?: StringFilter<"product"> | string
+    description?: StringNullableFilter<"product"> | string | null
+    tags?: JsonNullableFilter<"product">
+    brandId?: IntFilter<"product"> | number
+    originCountryId?: BigIntFilter<"product"> | bigint | number
+    shippingCountryId?: BigIntFilter<"product"> | bigint | number
+    video_url?: StringNullableFilter<"product"> | string | null
+    list_as?: StringNullableFilter<"product"> | string | null
+    shipping_time?: StringNullableFilter<"product"> | string | null
+    weight?: FloatNullableFilter<"product"> | number | null
+    package_length?: FloatNullableFilter<"product"> | number | null
+    package_width?: FloatNullableFilter<"product"> | number | null
+    package_height?: FloatNullableFilter<"product"> | number | null
+    chargeable_weight?: FloatNullableFilter<"product"> | number | null
+    package_weight_image?: StringNullableFilter<"product"> | string | null
+    package_length_image?: StringNullableFilter<"product"> | string | null
+    package_width_image?: StringNullableFilter<"product"> | string | null
+    package_height_image?: StringNullableFilter<"product"> | string | null
+    product_detail_video?: StringNullableFilter<"product"> | string | null
+    status?: BoolFilter<"product"> | boolean
+    createdAt?: DateTimeFilter<"product"> | Date | string
+    createdBy?: IntNullableFilter<"product"> | number | null
+    createdByRole?: StringNullableFilter<"product"> | string | null
+    updatedAt?: DateTimeFilter<"product"> | Date | string
+    updatedBy?: IntNullableFilter<"product"> | number | null
+    updatedByRole?: StringNullableFilter<"product"> | string | null
+    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableFilter<"product"> | number | null
+    deletedByRole?: StringNullableFilter<"product"> | string | null
+    category?: XOR<CategoryScalarRelationFilter, categoryWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, brandWhereInput>
+    originCountry?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    shippingCountry?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    variants?: ProductVariantListRelationFilter
+  }
+
+  export type productOrderByWithRelationInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    main_sku?: SortOrder
+    description?: SortOrderInput | SortOrder
+    tags?: SortOrderInput | SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    video_url?: SortOrderInput | SortOrder
+    list_as?: SortOrderInput | SortOrder
+    shipping_time?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    package_length?: SortOrderInput | SortOrder
+    package_width?: SortOrderInput | SortOrder
+    package_height?: SortOrderInput | SortOrder
+    chargeable_weight?: SortOrderInput | SortOrder
+    package_weight_image?: SortOrderInput | SortOrder
+    package_length_image?: SortOrderInput | SortOrder
+    package_width_image?: SortOrderInput | SortOrder
+    package_height_image?: SortOrderInput | SortOrder
+    product_detail_video?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    category?: categoryOrderByWithRelationInput
+    brand?: brandOrderByWithRelationInput
+    originCountry?: countryOrderByWithRelationInput
+    shippingCountry?: countryOrderByWithRelationInput
+    variants?: productVariantOrderByRelationAggregateInput
+    _relevance?: productOrderByRelevanceInput
+  }
+
+  export type productWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    main_sku?: string
+    AND?: productWhereInput | productWhereInput[]
+    OR?: productWhereInput[]
+    NOT?: productWhereInput | productWhereInput[]
+    categoryId?: IntFilter<"product"> | number
+    name?: StringFilter<"product"> | string
+    description?: StringNullableFilter<"product"> | string | null
+    tags?: JsonNullableFilter<"product">
+    brandId?: IntFilter<"product"> | number
+    originCountryId?: BigIntFilter<"product"> | bigint | number
+    shippingCountryId?: BigIntFilter<"product"> | bigint | number
+    video_url?: StringNullableFilter<"product"> | string | null
+    list_as?: StringNullableFilter<"product"> | string | null
+    shipping_time?: StringNullableFilter<"product"> | string | null
+    weight?: FloatNullableFilter<"product"> | number | null
+    package_length?: FloatNullableFilter<"product"> | number | null
+    package_width?: FloatNullableFilter<"product"> | number | null
+    package_height?: FloatNullableFilter<"product"> | number | null
+    chargeable_weight?: FloatNullableFilter<"product"> | number | null
+    package_weight_image?: StringNullableFilter<"product"> | string | null
+    package_length_image?: StringNullableFilter<"product"> | string | null
+    package_width_image?: StringNullableFilter<"product"> | string | null
+    package_height_image?: StringNullableFilter<"product"> | string | null
+    product_detail_video?: StringNullableFilter<"product"> | string | null
+    status?: BoolFilter<"product"> | boolean
+    createdAt?: DateTimeFilter<"product"> | Date | string
+    createdBy?: IntNullableFilter<"product"> | number | null
+    createdByRole?: StringNullableFilter<"product"> | string | null
+    updatedAt?: DateTimeFilter<"product"> | Date | string
+    updatedBy?: IntNullableFilter<"product"> | number | null
+    updatedByRole?: StringNullableFilter<"product"> | string | null
+    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableFilter<"product"> | number | null
+    deletedByRole?: StringNullableFilter<"product"> | string | null
+    category?: XOR<CategoryScalarRelationFilter, categoryWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, brandWhereInput>
+    originCountry?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    shippingCountry?: XOR<CountryScalarRelationFilter, countryWhereInput>
+    variants?: ProductVariantListRelationFilter
+  }, "id" | "slug" | "main_sku">
+
+  export type productOrderByWithAggregationInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    main_sku?: SortOrder
+    description?: SortOrderInput | SortOrder
+    tags?: SortOrderInput | SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    video_url?: SortOrderInput | SortOrder
+    list_as?: SortOrderInput | SortOrder
+    shipping_time?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    package_length?: SortOrderInput | SortOrder
+    package_width?: SortOrderInput | SortOrder
+    package_height?: SortOrderInput | SortOrder
+    chargeable_weight?: SortOrderInput | SortOrder
+    package_weight_image?: SortOrderInput | SortOrder
+    package_length_image?: SortOrderInput | SortOrder
+    package_width_image?: SortOrderInput | SortOrder
+    package_height_image?: SortOrderInput | SortOrder
+    product_detail_video?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: productCountOrderByAggregateInput
+    _avg?: productAvgOrderByAggregateInput
+    _max?: productMaxOrderByAggregateInput
+    _min?: productMinOrderByAggregateInput
+    _sum?: productSumOrderByAggregateInput
+  }
+
+  export type productScalarWhereWithAggregatesInput = {
+    AND?: productScalarWhereWithAggregatesInput | productScalarWhereWithAggregatesInput[]
+    OR?: productScalarWhereWithAggregatesInput[]
+    NOT?: productScalarWhereWithAggregatesInput | productScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"product"> | number
+    categoryId?: IntWithAggregatesFilter<"product"> | number
+    name?: StringWithAggregatesFilter<"product"> | string
+    slug?: StringWithAggregatesFilter<"product"> | string
+    main_sku?: StringWithAggregatesFilter<"product"> | string
+    description?: StringNullableWithAggregatesFilter<"product"> | string | null
+    tags?: JsonNullableWithAggregatesFilter<"product">
+    brandId?: IntWithAggregatesFilter<"product"> | number
+    originCountryId?: BigIntWithAggregatesFilter<"product"> | bigint | number
+    shippingCountryId?: BigIntWithAggregatesFilter<"product"> | bigint | number
+    video_url?: StringNullableWithAggregatesFilter<"product"> | string | null
+    list_as?: StringNullableWithAggregatesFilter<"product"> | string | null
+    shipping_time?: StringNullableWithAggregatesFilter<"product"> | string | null
+    weight?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    package_length?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    package_width?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    package_height?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    chargeable_weight?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    package_weight_image?: StringNullableWithAggregatesFilter<"product"> | string | null
+    package_length_image?: StringNullableWithAggregatesFilter<"product"> | string | null
+    package_width_image?: StringNullableWithAggregatesFilter<"product"> | string | null
+    package_height_image?: StringNullableWithAggregatesFilter<"product"> | string | null
+    product_detail_video?: StringNullableWithAggregatesFilter<"product"> | string | null
+    status?: BoolWithAggregatesFilter<"product"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"product"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"product"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"product"> | string | null
+  }
+
+  export type productVariantWhereInput = {
+    AND?: productVariantWhereInput | productVariantWhereInput[]
+    OR?: productVariantWhereInput[]
+    NOT?: productVariantWhereInput | productVariantWhereInput[]
+    id?: IntFilter<"productVariant"> | number
+    productId?: IntFilter<"productVariant"> | number
+    image?: StringFilter<"productVariant"> | string
+    color?: StringFilter<"productVariant"> | string
+    sku?: StringFilter<"productVariant"> | string
+    qty?: IntFilter<"productVariant"> | number
+    currency?: StringFilter<"productVariant"> | string
+    article_id?: StringNullableFilter<"productVariant"> | string | null
+    createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, productWhereInput>
+  }
+
+  export type productVariantOrderByWithRelationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    image?: SortOrder
+    color?: SortOrder
+    sku?: SortOrder
+    qty?: SortOrder
+    currency?: SortOrder
+    article_id?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    product?: productOrderByWithRelationInput
+    _relevance?: productVariantOrderByRelevanceInput
+  }
+
+  export type productVariantWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    sku?: string
+    AND?: productVariantWhereInput | productVariantWhereInput[]
+    OR?: productVariantWhereInput[]
+    NOT?: productVariantWhereInput | productVariantWhereInput[]
+    productId?: IntFilter<"productVariant"> | number
+    image?: StringFilter<"productVariant"> | string
+    color?: StringFilter<"productVariant"> | string
+    qty?: IntFilter<"productVariant"> | number
+    currency?: StringFilter<"productVariant"> | string
+    article_id?: StringNullableFilter<"productVariant"> | string | null
+    createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, productWhereInput>
+  }, "id" | "sku">
+
+  export type productVariantOrderByWithAggregationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    image?: SortOrder
+    color?: SortOrder
+    sku?: SortOrder
+    qty?: SortOrder
+    currency?: SortOrder
+    article_id?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: productVariantCountOrderByAggregateInput
+    _avg?: productVariantAvgOrderByAggregateInput
+    _max?: productVariantMaxOrderByAggregateInput
+    _min?: productVariantMinOrderByAggregateInput
+    _sum?: productVariantSumOrderByAggregateInput
+  }
+
+  export type productVariantScalarWhereWithAggregatesInput = {
+    AND?: productVariantScalarWhereWithAggregatesInput | productVariantScalarWhereWithAggregatesInput[]
+    OR?: productVariantScalarWhereWithAggregatesInput[]
+    NOT?: productVariantScalarWhereWithAggregatesInput | productVariantScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"productVariant"> | number
+    productId?: IntWithAggregatesFilter<"productVariant"> | number
+    image?: StringWithAggregatesFilter<"productVariant"> | string
+    color?: StringWithAggregatesFilter<"productVariant"> | string
+    sku?: StringWithAggregatesFilter<"productVariant"> | string
+    qty?: IntWithAggregatesFilter<"productVariant"> | number
+    currency?: StringWithAggregatesFilter<"productVariant"> | string
+    article_id?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
   }
 
   export type emailConfigCreateInput = {
@@ -16539,6 +19832,8 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryUncheckedCreateInput = {
@@ -16563,6 +19858,8 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryUpdateInput = {
@@ -16587,6 +19884,8 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type countryUncheckedUpdateInput = {
@@ -16611,6 +19910,8 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type countryCreateManyInput = {
@@ -17100,6 +20401,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    products?: productCreateNestedManyWithoutCategoryInput
   }
 
   export type categoryUncheckedCreateInput = {
@@ -17118,6 +20420,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    products?: productUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type categoryUpdateInput = {
@@ -17135,6 +20438,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    products?: productUpdateManyWithoutCategoryNestedInput
   }
 
   export type categoryUncheckedUpdateInput = {
@@ -17153,6 +20457,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    products?: productUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type categoryCreateManyInput = {
@@ -17223,6 +20528,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    products?: productCreateNestedManyWithoutBrandInput
   }
 
   export type brandUncheckedCreateInput = {
@@ -17241,6 +20547,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    products?: productUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type brandUpdateInput = {
@@ -17258,6 +20565,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    products?: productUpdateManyWithoutBrandNestedInput
   }
 
   export type brandUncheckedUpdateInput = {
@@ -17276,6 +20584,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    products?: productUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type brandCreateManyInput = {
@@ -17329,6 +20638,342 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productCreateInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    category: categoryCreateNestedOneWithoutProductsInput
+    brand: brandCreateNestedOneWithoutProductsInput
+    originCountry: countryCreateNestedOneWithoutOriginProductsInput
+    shippingCountry: countryCreateNestedOneWithoutShippingProductsInput
+    variants?: productVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    variants?: productVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: categoryUpdateOneRequiredWithoutProductsNestedInput
+    brand?: brandUpdateOneRequiredWithoutProductsNestedInput
+    originCountry?: countryUpdateOneRequiredWithoutOriginProductsNestedInput
+    shippingCountry?: countryUpdateOneRequiredWithoutShippingProductsNestedInput
+    variants?: productVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type productCreateManyInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productVariantCreateInput = {
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: productCreateNestedOneWithoutVariantsInput
+  }
+
+  export type productVariantUncheckedCreateInput = {
+    id?: number
+    productId: number
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productVariantUpdateInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: productUpdateOneRequiredWithoutVariantsNestedInput
+  }
+
+  export type productVariantUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productVariantCreateManyInput = {
+    id?: number
+    productId: number
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productVariantUpdateManyMutationInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productVariantUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -17979,6 +21624,12 @@ export namespace Prisma {
     none?: warehouseWhereInput
   }
 
+  export type ProductListRelationFilter = {
+    every?: productWhereInput
+    some?: productWhereInput
+    none?: productWhereInput
+  }
+
   export type stateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -17988,6 +21639,10 @@ export namespace Prisma {
   }
 
   export type warehouseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type productOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18519,6 +22174,308 @@ export namespace Prisma {
     updatedBy?: SortOrder
     deletedBy?: SortOrder
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type CategoryScalarRelationFilter = {
+    is?: categoryWhereInput
+    isNot?: categoryWhereInput
+  }
+
+  export type BrandScalarRelationFilter = {
+    is?: brandWhereInput
+    isNot?: brandWhereInput
+  }
+
+  export type ProductVariantListRelationFilter = {
+    every?: productVariantWhereInput
+    some?: productVariantWhereInput
+    none?: productVariantWhereInput
+  }
+
+  export type productVariantOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type productOrderByRelevanceInput = {
+    fields: productOrderByRelevanceFieldEnum | productOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type productCountOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    main_sku?: SortOrder
+    description?: SortOrder
+    tags?: SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    video_url?: SortOrder
+    list_as?: SortOrder
+    shipping_time?: SortOrder
+    weight?: SortOrder
+    package_length?: SortOrder
+    package_width?: SortOrder
+    package_height?: SortOrder
+    chargeable_weight?: SortOrder
+    package_weight_image?: SortOrder
+    package_length_image?: SortOrder
+    package_width_image?: SortOrder
+    package_height_image?: SortOrder
+    product_detail_video?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type productAvgOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    weight?: SortOrder
+    package_length?: SortOrder
+    package_width?: SortOrder
+    package_height?: SortOrder
+    chargeable_weight?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type productMaxOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    main_sku?: SortOrder
+    description?: SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    video_url?: SortOrder
+    list_as?: SortOrder
+    shipping_time?: SortOrder
+    weight?: SortOrder
+    package_length?: SortOrder
+    package_width?: SortOrder
+    package_height?: SortOrder
+    chargeable_weight?: SortOrder
+    package_weight_image?: SortOrder
+    package_length_image?: SortOrder
+    package_width_image?: SortOrder
+    package_height_image?: SortOrder
+    product_detail_video?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type productMinOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    main_sku?: SortOrder
+    description?: SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    video_url?: SortOrder
+    list_as?: SortOrder
+    shipping_time?: SortOrder
+    weight?: SortOrder
+    package_length?: SortOrder
+    package_width?: SortOrder
+    package_height?: SortOrder
+    chargeable_weight?: SortOrder
+    package_weight_image?: SortOrder
+    package_length_image?: SortOrder
+    package_width_image?: SortOrder
+    package_height_image?: SortOrder
+    product_detail_video?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type productSumOrderByAggregateInput = {
+    id?: SortOrder
+    categoryId?: SortOrder
+    brandId?: SortOrder
+    originCountryId?: SortOrder
+    shippingCountryId?: SortOrder
+    weight?: SortOrder
+    package_length?: SortOrder
+    package_width?: SortOrder
+    package_height?: SortOrder
+    chargeable_weight?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: productWhereInput
+    isNot?: productWhereInput
+  }
+
+  export type productVariantOrderByRelevanceInput = {
+    fields: productVariantOrderByRelevanceFieldEnum | productVariantOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type productVariantCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    image?: SortOrder
+    color?: SortOrder
+    sku?: SortOrder
+    qty?: SortOrder
+    currency?: SortOrder
+    article_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productVariantAvgOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    qty?: SortOrder
+  }
+
+  export type productVariantMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    image?: SortOrder
+    color?: SortOrder
+    sku?: SortOrder
+    qty?: SortOrder
+    currency?: SortOrder
+    article_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productVariantMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    image?: SortOrder
+    color?: SortOrder
+    sku?: SortOrder
+    qty?: SortOrder
+    currency?: SortOrder
+    article_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productVariantSumOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    qty?: SortOrder
+  }
 
   export type BigIntFieldUpdateOperationsInput = {
     set?: bigint | number
@@ -18641,6 +22598,20 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type productCreateNestedManyWithoutOriginCountryInput = {
+    create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
+    createMany?: productCreateManyOriginCountryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productCreateNestedManyWithoutShippingCountryInput = {
+    create?: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput> | productCreateWithoutShippingCountryInput[] | productUncheckedCreateWithoutShippingCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutShippingCountryInput | productCreateOrConnectWithoutShippingCountryInput[]
+    createMany?: productCreateManyShippingCountryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
   export type stateUncheckedCreateNestedManyWithoutCountryInput = {
     create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
@@ -18660,6 +22631,20 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
     createMany?: warehouseCreateManyCountryInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type productUncheckedCreateNestedManyWithoutOriginCountryInput = {
+    create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
+    createMany?: productCreateManyOriginCountryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productUncheckedCreateNestedManyWithoutShippingCountryInput = {
+    create?: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput> | productCreateWithoutShippingCountryInput[] | productUncheckedCreateWithoutShippingCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutShippingCountryInput | productCreateOrConnectWithoutShippingCountryInput[]
+    createMany?: productCreateManyShippingCountryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
   }
 
   export type stateUpdateManyWithoutCountryNestedInput = {
@@ -18704,6 +22689,34 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type productUpdateManyWithoutOriginCountryNestedInput = {
+    create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutOriginCountryInput | productUpsertWithWhereUniqueWithoutOriginCountryInput[]
+    createMany?: productCreateManyOriginCountryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutOriginCountryInput | productUpdateWithWhereUniqueWithoutOriginCountryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutOriginCountryInput | productUpdateManyWithWhereWithoutOriginCountryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type productUpdateManyWithoutShippingCountryNestedInput = {
+    create?: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput> | productCreateWithoutShippingCountryInput[] | productUncheckedCreateWithoutShippingCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutShippingCountryInput | productCreateOrConnectWithoutShippingCountryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutShippingCountryInput | productUpsertWithWhereUniqueWithoutShippingCountryInput[]
+    createMany?: productCreateManyShippingCountryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutShippingCountryInput | productUpdateWithWhereUniqueWithoutShippingCountryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutShippingCountryInput | productUpdateManyWithWhereWithoutShippingCountryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
   export type stateUncheckedUpdateManyWithoutCountryNestedInput = {
     create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
@@ -18744,6 +22757,34 @@ export namespace Prisma {
     update?: warehouseUpdateWithWhereUniqueWithoutCountryInput | warehouseUpdateWithWhereUniqueWithoutCountryInput[]
     updateMany?: warehouseUpdateManyWithWhereWithoutCountryInput | warehouseUpdateManyWithWhereWithoutCountryInput[]
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type productUncheckedUpdateManyWithoutOriginCountryNestedInput = {
+    create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutOriginCountryInput | productUpsertWithWhereUniqueWithoutOriginCountryInput[]
+    createMany?: productCreateManyOriginCountryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutOriginCountryInput | productUpdateWithWhereUniqueWithoutOriginCountryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutOriginCountryInput | productUpdateManyWithWhereWithoutOriginCountryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type productUncheckedUpdateManyWithoutShippingCountryNestedInput = {
+    create?: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput> | productCreateWithoutShippingCountryInput[] | productUncheckedCreateWithoutShippingCountryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutShippingCountryInput | productCreateOrConnectWithoutShippingCountryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutShippingCountryInput | productUpsertWithWhereUniqueWithoutShippingCountryInput[]
+    createMany?: productCreateManyShippingCountryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutShippingCountryInput | productUpdateWithWhereUniqueWithoutShippingCountryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutShippingCountryInput | productUpdateManyWithWhereWithoutShippingCountryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
   }
 
   export type countryCreateNestedOneWithoutStatesInput = {
@@ -18968,6 +23009,210 @@ export namespace Prisma {
     decrement?: bigint | number
     multiply?: bigint | number
     divide?: bigint | number
+  }
+
+  export type productCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput> | productCreateWithoutCategoryInput[] | productUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutCategoryInput | productCreateOrConnectWithoutCategoryInput[]
+    createMany?: productCreateManyCategoryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput> | productCreateWithoutCategoryInput[] | productUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutCategoryInput | productCreateOrConnectWithoutCategoryInput[]
+    createMany?: productCreateManyCategoryInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput> | productCreateWithoutCategoryInput[] | productUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutCategoryInput | productCreateOrConnectWithoutCategoryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutCategoryInput | productUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: productCreateManyCategoryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutCategoryInput | productUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutCategoryInput | productUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type productUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput> | productCreateWithoutCategoryInput[] | productUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: productCreateOrConnectWithoutCategoryInput | productCreateOrConnectWithoutCategoryInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutCategoryInput | productUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: productCreateManyCategoryInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutCategoryInput | productUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: productUpdateManyWithWhereWithoutCategoryInput | productUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type productCreateNestedManyWithoutBrandInput = {
+    create?: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput> | productCreateWithoutBrandInput[] | productUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: productCreateOrConnectWithoutBrandInput | productCreateOrConnectWithoutBrandInput[]
+    createMany?: productCreateManyBrandInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput> | productCreateWithoutBrandInput[] | productUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: productCreateOrConnectWithoutBrandInput | productCreateOrConnectWithoutBrandInput[]
+    createMany?: productCreateManyBrandInputEnvelope
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+  }
+
+  export type productUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput> | productCreateWithoutBrandInput[] | productUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: productCreateOrConnectWithoutBrandInput | productCreateOrConnectWithoutBrandInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutBrandInput | productUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: productCreateManyBrandInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutBrandInput | productUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: productUpdateManyWithWhereWithoutBrandInput | productUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type productUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput> | productCreateWithoutBrandInput[] | productUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: productCreateOrConnectWithoutBrandInput | productCreateOrConnectWithoutBrandInput[]
+    upsert?: productUpsertWithWhereUniqueWithoutBrandInput | productUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: productCreateManyBrandInputEnvelope
+    set?: productWhereUniqueInput | productWhereUniqueInput[]
+    disconnect?: productWhereUniqueInput | productWhereUniqueInput[]
+    delete?: productWhereUniqueInput | productWhereUniqueInput[]
+    connect?: productWhereUniqueInput | productWhereUniqueInput[]
+    update?: productUpdateWithWhereUniqueWithoutBrandInput | productUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: productUpdateManyWithWhereWithoutBrandInput | productUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: productScalarWhereInput | productScalarWhereInput[]
+  }
+
+  export type categoryCreateNestedOneWithoutProductsInput = {
+    create?: XOR<categoryCreateWithoutProductsInput, categoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: categoryCreateOrConnectWithoutProductsInput
+    connect?: categoryWhereUniqueInput
+  }
+
+  export type brandCreateNestedOneWithoutProductsInput = {
+    create?: XOR<brandCreateWithoutProductsInput, brandUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: brandCreateOrConnectWithoutProductsInput
+    connect?: brandWhereUniqueInput
+  }
+
+  export type countryCreateNestedOneWithoutOriginProductsInput = {
+    create?: XOR<countryCreateWithoutOriginProductsInput, countryUncheckedCreateWithoutOriginProductsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutOriginProductsInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type countryCreateNestedOneWithoutShippingProductsInput = {
+    create?: XOR<countryCreateWithoutShippingProductsInput, countryUncheckedCreateWithoutShippingProductsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutShippingProductsInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type productVariantCreateNestedManyWithoutProductInput = {
+    create?: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput> | productVariantCreateWithoutProductInput[] | productVariantUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: productVariantCreateOrConnectWithoutProductInput | productVariantCreateOrConnectWithoutProductInput[]
+    createMany?: productVariantCreateManyProductInputEnvelope
+    connect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+  }
+
+  export type productVariantUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput> | productVariantCreateWithoutProductInput[] | productVariantUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: productVariantCreateOrConnectWithoutProductInput | productVariantCreateOrConnectWithoutProductInput[]
+    createMany?: productVariantCreateManyProductInputEnvelope
+    connect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type categoryUpdateOneRequiredWithoutProductsNestedInput = {
+    create?: XOR<categoryCreateWithoutProductsInput, categoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: categoryCreateOrConnectWithoutProductsInput
+    upsert?: categoryUpsertWithoutProductsInput
+    connect?: categoryWhereUniqueInput
+    update?: XOR<XOR<categoryUpdateToOneWithWhereWithoutProductsInput, categoryUpdateWithoutProductsInput>, categoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type brandUpdateOneRequiredWithoutProductsNestedInput = {
+    create?: XOR<brandCreateWithoutProductsInput, brandUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: brandCreateOrConnectWithoutProductsInput
+    upsert?: brandUpsertWithoutProductsInput
+    connect?: brandWhereUniqueInput
+    update?: XOR<XOR<brandUpdateToOneWithWhereWithoutProductsInput, brandUpdateWithoutProductsInput>, brandUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type countryUpdateOneRequiredWithoutOriginProductsNestedInput = {
+    create?: XOR<countryCreateWithoutOriginProductsInput, countryUncheckedCreateWithoutOriginProductsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutOriginProductsInput
+    upsert?: countryUpsertWithoutOriginProductsInput
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutOriginProductsInput, countryUpdateWithoutOriginProductsInput>, countryUncheckedUpdateWithoutOriginProductsInput>
+  }
+
+  export type countryUpdateOneRequiredWithoutShippingProductsNestedInput = {
+    create?: XOR<countryCreateWithoutShippingProductsInput, countryUncheckedCreateWithoutShippingProductsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutShippingProductsInput
+    upsert?: countryUpsertWithoutShippingProductsInput
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutShippingProductsInput, countryUpdateWithoutShippingProductsInput>, countryUncheckedUpdateWithoutShippingProductsInput>
+  }
+
+  export type productVariantUpdateManyWithoutProductNestedInput = {
+    create?: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput> | productVariantCreateWithoutProductInput[] | productVariantUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: productVariantCreateOrConnectWithoutProductInput | productVariantCreateOrConnectWithoutProductInput[]
+    upsert?: productVariantUpsertWithWhereUniqueWithoutProductInput | productVariantUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: productVariantCreateManyProductInputEnvelope
+    set?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    disconnect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    delete?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    connect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    update?: productVariantUpdateWithWhereUniqueWithoutProductInput | productVariantUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: productVariantUpdateManyWithWhereWithoutProductInput | productVariantUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: productVariantScalarWhereInput | productVariantScalarWhereInput[]
+  }
+
+  export type productVariantUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput> | productVariantCreateWithoutProductInput[] | productVariantUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: productVariantCreateOrConnectWithoutProductInput | productVariantCreateOrConnectWithoutProductInput[]
+    upsert?: productVariantUpsertWithWhereUniqueWithoutProductInput | productVariantUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: productVariantCreateManyProductInputEnvelope
+    set?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    disconnect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    delete?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    connect?: productVariantWhereUniqueInput | productVariantWhereUniqueInput[]
+    update?: productVariantUpdateWithWhereUniqueWithoutProductInput | productVariantUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: productVariantUpdateManyWithWhereWithoutProductInput | productVariantUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: productVariantScalarWhereInput | productVariantScalarWhereInput[]
+  }
+
+  export type productCreateNestedOneWithoutVariantsInput = {
+    create?: XOR<productCreateWithoutVariantsInput, productUncheckedCreateWithoutVariantsInput>
+    connectOrCreate?: productCreateOrConnectWithoutVariantsInput
+    connect?: productWhereUniqueInput
+  }
+
+  export type productUpdateOneRequiredWithoutVariantsNestedInput = {
+    create?: XOR<productCreateWithoutVariantsInput, productUncheckedCreateWithoutVariantsInput>
+    connectOrCreate?: productCreateOrConnectWithoutVariantsInput
+    upsert?: productUpsertWithoutVariantsInput
+    connect?: productWhereUniqueInput
+    update?: XOR<XOR<productUpdateToOneWithWhereWithoutVariantsInput, productUpdateWithoutVariantsInput>, productUncheckedUpdateWithoutVariantsInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -19227,6 +23472,45 @@ export namespace Prisma {
     _sum?: NestedBigIntNullableFilter<$PrismaModel>
     _min?: NestedBigIntNullableFilter<$PrismaModel>
     _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type adminStaffCreateWithoutAdminInput = {
@@ -19515,6 +23799,168 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type productCreateWithoutOriginCountryInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    category: categoryCreateNestedOneWithoutProductsInput
+    brand: brandCreateNestedOneWithoutProductsInput
+    shippingCountry: countryCreateNestedOneWithoutShippingProductsInput
+    variants?: productVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateWithoutOriginCountryInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    variants?: productVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productCreateOrConnectWithoutOriginCountryInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput>
+  }
+
+  export type productCreateManyOriginCountryInputEnvelope = {
+    data: productCreateManyOriginCountryInput | productCreateManyOriginCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type productCreateWithoutShippingCountryInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    category: categoryCreateNestedOneWithoutProductsInput
+    brand: brandCreateNestedOneWithoutProductsInput
+    originCountry: countryCreateNestedOneWithoutOriginProductsInput
+    variants?: productVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateWithoutShippingCountryInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    variants?: productVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productCreateOrConnectWithoutShippingCountryInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput>
+  }
+
+  export type productCreateManyShippingCountryInputEnvelope = {
+    data: productCreateManyShippingCountryInput | productCreateManyShippingCountryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type stateUpsertWithWhereUniqueWithoutCountryInput = {
     where: stateWhereUniqueInput
     update: XOR<stateUpdateWithoutCountryInput, stateUncheckedUpdateWithoutCountryInput>
@@ -19630,6 +24076,77 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"warehouse"> | string | null
   }
 
+  export type productUpsertWithWhereUniqueWithoutOriginCountryInput = {
+    where: productWhereUniqueInput
+    update: XOR<productUpdateWithoutOriginCountryInput, productUncheckedUpdateWithoutOriginCountryInput>
+    create: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput>
+  }
+
+  export type productUpdateWithWhereUniqueWithoutOriginCountryInput = {
+    where: productWhereUniqueInput
+    data: XOR<productUpdateWithoutOriginCountryInput, productUncheckedUpdateWithoutOriginCountryInput>
+  }
+
+  export type productUpdateManyWithWhereWithoutOriginCountryInput = {
+    where: productScalarWhereInput
+    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyWithoutOriginCountryInput>
+  }
+
+  export type productScalarWhereInput = {
+    AND?: productScalarWhereInput | productScalarWhereInput[]
+    OR?: productScalarWhereInput[]
+    NOT?: productScalarWhereInput | productScalarWhereInput[]
+    id?: IntFilter<"product"> | number
+    categoryId?: IntFilter<"product"> | number
+    name?: StringFilter<"product"> | string
+    slug?: StringFilter<"product"> | string
+    main_sku?: StringFilter<"product"> | string
+    description?: StringNullableFilter<"product"> | string | null
+    tags?: JsonNullableFilter<"product">
+    brandId?: IntFilter<"product"> | number
+    originCountryId?: BigIntFilter<"product"> | bigint | number
+    shippingCountryId?: BigIntFilter<"product"> | bigint | number
+    video_url?: StringNullableFilter<"product"> | string | null
+    list_as?: StringNullableFilter<"product"> | string | null
+    shipping_time?: StringNullableFilter<"product"> | string | null
+    weight?: FloatNullableFilter<"product"> | number | null
+    package_length?: FloatNullableFilter<"product"> | number | null
+    package_width?: FloatNullableFilter<"product"> | number | null
+    package_height?: FloatNullableFilter<"product"> | number | null
+    chargeable_weight?: FloatNullableFilter<"product"> | number | null
+    package_weight_image?: StringNullableFilter<"product"> | string | null
+    package_length_image?: StringNullableFilter<"product"> | string | null
+    package_width_image?: StringNullableFilter<"product"> | string | null
+    package_height_image?: StringNullableFilter<"product"> | string | null
+    product_detail_video?: StringNullableFilter<"product"> | string | null
+    status?: BoolFilter<"product"> | boolean
+    createdAt?: DateTimeFilter<"product"> | Date | string
+    createdBy?: IntNullableFilter<"product"> | number | null
+    createdByRole?: StringNullableFilter<"product"> | string | null
+    updatedAt?: DateTimeFilter<"product"> | Date | string
+    updatedBy?: IntNullableFilter<"product"> | number | null
+    updatedByRole?: StringNullableFilter<"product"> | string | null
+    deletedAt?: DateTimeNullableFilter<"product"> | Date | string | null
+    deletedBy?: IntNullableFilter<"product"> | number | null
+    deletedByRole?: StringNullableFilter<"product"> | string | null
+  }
+
+  export type productUpsertWithWhereUniqueWithoutShippingCountryInput = {
+    where: productWhereUniqueInput
+    update: XOR<productUpdateWithoutShippingCountryInput, productUncheckedUpdateWithoutShippingCountryInput>
+    create: XOR<productCreateWithoutShippingCountryInput, productUncheckedCreateWithoutShippingCountryInput>
+  }
+
+  export type productUpdateWithWhereUniqueWithoutShippingCountryInput = {
+    where: productWhereUniqueInput
+    data: XOR<productUpdateWithoutShippingCountryInput, productUncheckedUpdateWithoutShippingCountryInput>
+  }
+
+  export type productUpdateManyWithWhereWithoutShippingCountryInput = {
+    where: productScalarWhereInput
+    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyWithoutShippingCountryInput>
+  }
+
   export type countryCreateWithoutStatesInput = {
     id?: bigint | number
     name: string
@@ -19651,6 +24168,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryUncheckedCreateWithoutStatesInput = {
@@ -19674,6 +24193,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryCreateOrConnectWithoutStatesInput = {
@@ -19812,6 +24333,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutStatesInput = {
@@ -19835,6 +24358,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type cityUpsertWithWhereUniqueWithoutStateInput = {
@@ -19931,6 +24456,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryUncheckedCreateWithoutCitiesInput = {
@@ -19954,6 +24481,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryCreateOrConnectWithoutCitiesInput = {
@@ -20097,6 +24626,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutCitiesInput = {
@@ -20120,6 +24651,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type warehouseUpsertWithWhereUniqueWithoutCityInput = {
@@ -20159,6 +24692,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryUncheckedCreateWithoutWarehousesInput = {
@@ -20182,6 +24717,8 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
 
   export type countryCreateOrConnectWithoutWarehousesInput = {
@@ -20299,6 +24836,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutWarehousesInput = {
@@ -20322,6 +24861,8 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type stateUpsertWithoutWarehousesInput = {
@@ -20403,6 +24944,827 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     stateId?: BigIntFieldUpdateOperationsInput | bigint | number
     countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productCreateWithoutCategoryInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    brand: brandCreateNestedOneWithoutProductsInput
+    originCountry: countryCreateNestedOneWithoutOriginProductsInput
+    shippingCountry: countryCreateNestedOneWithoutShippingProductsInput
+    variants?: productVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateWithoutCategoryInput = {
+    id?: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    variants?: productVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productCreateOrConnectWithoutCategoryInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type productCreateManyCategoryInputEnvelope = {
+    data: productCreateManyCategoryInput | productCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type productUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: productWhereUniqueInput
+    update: XOR<productUpdateWithoutCategoryInput, productUncheckedUpdateWithoutCategoryInput>
+    create: XOR<productCreateWithoutCategoryInput, productUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type productUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: productWhereUniqueInput
+    data: XOR<productUpdateWithoutCategoryInput, productUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type productUpdateManyWithWhereWithoutCategoryInput = {
+    where: productScalarWhereInput
+    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type productCreateWithoutBrandInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    category: categoryCreateNestedOneWithoutProductsInput
+    originCountry: countryCreateNestedOneWithoutOriginProductsInput
+    shippingCountry: countryCreateNestedOneWithoutShippingProductsInput
+    variants?: productVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateWithoutBrandInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    variants?: productVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productCreateOrConnectWithoutBrandInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput>
+  }
+
+  export type productCreateManyBrandInputEnvelope = {
+    data: productCreateManyBrandInput | productCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type productUpsertWithWhereUniqueWithoutBrandInput = {
+    where: productWhereUniqueInput
+    update: XOR<productUpdateWithoutBrandInput, productUncheckedUpdateWithoutBrandInput>
+    create: XOR<productCreateWithoutBrandInput, productUncheckedCreateWithoutBrandInput>
+  }
+
+  export type productUpdateWithWhereUniqueWithoutBrandInput = {
+    where: productWhereUniqueInput
+    data: XOR<productUpdateWithoutBrandInput, productUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type productUpdateManyWithWhereWithoutBrandInput = {
+    where: productScalarWhereInput
+    data: XOR<productUpdateManyMutationInput, productUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type categoryCreateWithoutProductsInput = {
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type categoryUncheckedCreateWithoutProductsInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type categoryCreateOrConnectWithoutProductsInput = {
+    where: categoryWhereUniqueInput
+    create: XOR<categoryCreateWithoutProductsInput, categoryUncheckedCreateWithoutProductsInput>
+  }
+
+  export type brandCreateWithoutProductsInput = {
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type brandUncheckedCreateWithoutProductsInput = {
+    id?: number
+    name: string
+    slug: string
+    description?: string | null
+    image?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type brandCreateOrConnectWithoutProductsInput = {
+    where: brandWhereUniqueInput
+    create: XOR<brandCreateWithoutProductsInput, brandUncheckedCreateWithoutProductsInput>
+  }
+
+  export type countryCreateWithoutOriginProductsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutOriginProductsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutOriginProductsInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutOriginProductsInput, countryUncheckedCreateWithoutOriginProductsInput>
+  }
+
+  export type countryCreateWithoutShippingProductsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutShippingProductsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutShippingProductsInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutShippingProductsInput, countryUncheckedCreateWithoutShippingProductsInput>
+  }
+
+  export type productVariantCreateWithoutProductInput = {
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productVariantUncheckedCreateWithoutProductInput = {
+    id?: number
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productVariantCreateOrConnectWithoutProductInput = {
+    where: productVariantWhereUniqueInput
+    create: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput>
+  }
+
+  export type productVariantCreateManyProductInputEnvelope = {
+    data: productVariantCreateManyProductInput | productVariantCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type categoryUpsertWithoutProductsInput = {
+    update: XOR<categoryUpdateWithoutProductsInput, categoryUncheckedUpdateWithoutProductsInput>
+    create: XOR<categoryCreateWithoutProductsInput, categoryUncheckedCreateWithoutProductsInput>
+    where?: categoryWhereInput
+  }
+
+  export type categoryUpdateToOneWithWhereWithoutProductsInput = {
+    where?: categoryWhereInput
+    data: XOR<categoryUpdateWithoutProductsInput, categoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type categoryUpdateWithoutProductsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type categoryUncheckedUpdateWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type brandUpsertWithoutProductsInput = {
+    update: XOR<brandUpdateWithoutProductsInput, brandUncheckedUpdateWithoutProductsInput>
+    create: XOR<brandCreateWithoutProductsInput, brandUncheckedCreateWithoutProductsInput>
+    where?: brandWhereInput
+  }
+
+  export type brandUpdateToOneWithWhereWithoutProductsInput = {
+    where?: brandWhereInput
+    data: XOR<brandUpdateWithoutProductsInput, brandUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type brandUpdateWithoutProductsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type brandUncheckedUpdateWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type countryUpsertWithoutOriginProductsInput = {
+    update: XOR<countryUpdateWithoutOriginProductsInput, countryUncheckedUpdateWithoutOriginProductsInput>
+    create: XOR<countryCreateWithoutOriginProductsInput, countryUncheckedCreateWithoutOriginProductsInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutOriginProductsInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutOriginProductsInput, countryUncheckedUpdateWithoutOriginProductsInput>
+  }
+
+  export type countryUpdateWithoutOriginProductsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutOriginProductsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
+  }
+
+  export type countryUpsertWithoutShippingProductsInput = {
+    update: XOR<countryUpdateWithoutShippingProductsInput, countryUncheckedUpdateWithoutShippingProductsInput>
+    create: XOR<countryCreateWithoutShippingProductsInput, countryUncheckedCreateWithoutShippingProductsInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutShippingProductsInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutShippingProductsInput, countryUncheckedUpdateWithoutShippingProductsInput>
+  }
+
+  export type countryUpdateWithoutShippingProductsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutShippingProductsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+  }
+
+  export type productVariantUpsertWithWhereUniqueWithoutProductInput = {
+    where: productVariantWhereUniqueInput
+    update: XOR<productVariantUpdateWithoutProductInput, productVariantUncheckedUpdateWithoutProductInput>
+    create: XOR<productVariantCreateWithoutProductInput, productVariantUncheckedCreateWithoutProductInput>
+  }
+
+  export type productVariantUpdateWithWhereUniqueWithoutProductInput = {
+    where: productVariantWhereUniqueInput
+    data: XOR<productVariantUpdateWithoutProductInput, productVariantUncheckedUpdateWithoutProductInput>
+  }
+
+  export type productVariantUpdateManyWithWhereWithoutProductInput = {
+    where: productVariantScalarWhereInput
+    data: XOR<productVariantUpdateManyMutationInput, productVariantUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type productVariantScalarWhereInput = {
+    AND?: productVariantScalarWhereInput | productVariantScalarWhereInput[]
+    OR?: productVariantScalarWhereInput[]
+    NOT?: productVariantScalarWhereInput | productVariantScalarWhereInput[]
+    id?: IntFilter<"productVariant"> | number
+    productId?: IntFilter<"productVariant"> | number
+    image?: StringFilter<"productVariant"> | string
+    color?: StringFilter<"productVariant"> | string
+    sku?: StringFilter<"productVariant"> | string
+    qty?: IntFilter<"productVariant"> | number
+    currency?: StringFilter<"productVariant"> | string
+    article_id?: StringNullableFilter<"productVariant"> | string | null
+    createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+  }
+
+  export type productCreateWithoutVariantsInput = {
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    category: categoryCreateNestedOneWithoutProductsInput
+    brand: brandCreateNestedOneWithoutProductsInput
+    originCountry: countryCreateNestedOneWithoutOriginProductsInput
+    shippingCountry: countryCreateNestedOneWithoutShippingProductsInput
+  }
+
+  export type productUncheckedCreateWithoutVariantsInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productCreateOrConnectWithoutVariantsInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutVariantsInput, productUncheckedCreateWithoutVariantsInput>
+  }
+
+  export type productUpsertWithoutVariantsInput = {
+    update: XOR<productUpdateWithoutVariantsInput, productUncheckedUpdateWithoutVariantsInput>
+    create: XOR<productCreateWithoutVariantsInput, productUncheckedCreateWithoutVariantsInput>
+    where?: productWhereInput
+  }
+
+  export type productUpdateToOneWithWhereWithoutVariantsInput = {
+    where?: productWhereInput
+    data: XOR<productUpdateWithoutVariantsInput, productUncheckedUpdateWithoutVariantsInput>
+  }
+
+  export type productUpdateWithoutVariantsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: categoryUpdateOneRequiredWithoutProductsNestedInput
+    brand?: brandUpdateOneRequiredWithoutProductsNestedInput
+    originCountry?: countryUpdateOneRequiredWithoutOriginProductsNestedInput
+    shippingCountry?: countryUpdateOneRequiredWithoutShippingProductsNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutVariantsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20512,6 +25874,76 @@ export namespace Prisma {
     postal_code: string
     stateId?: bigint | number | null
     cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productCreateManyOriginCountryInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productCreateManyShippingCountryInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -20682,6 +26114,218 @@ export namespace Prisma {
     postal_code?: StringFieldUpdateOperationsInput | string
     stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productUpdateWithoutOriginCountryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: categoryUpdateOneRequiredWithoutProductsNestedInput
+    brand?: brandUpdateOneRequiredWithoutProductsNestedInput
+    shippingCountry?: countryUpdateOneRequiredWithoutShippingProductsNestedInput
+    variants?: productVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutOriginCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateManyWithoutOriginCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productUpdateWithoutShippingCountryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: categoryUpdateOneRequiredWithoutProductsNestedInput
+    brand?: brandUpdateOneRequiredWithoutProductsNestedInput
+    originCountry?: countryUpdateOneRequiredWithoutOriginProductsNestedInput
+    variants?: productVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutShippingCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateManyWithoutShippingCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20944,6 +26588,335 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productCreateManyCategoryInput = {
+    id?: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId: number
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productUpdateWithoutCategoryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: brandUpdateOneRequiredWithoutProductsNestedInput
+    originCountry?: countryUpdateOneRequiredWithoutOriginProductsNestedInput
+    shippingCountry?: countryUpdateOneRequiredWithoutShippingProductsNestedInput
+    variants?: productVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateManyWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    brandId?: IntFieldUpdateOperationsInput | number
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productCreateManyBrandInput = {
+    id?: number
+    categoryId: number
+    name: string
+    slug: string
+    main_sku: string
+    description?: string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    originCountryId: bigint | number
+    shippingCountryId: bigint | number
+    video_url?: string | null
+    list_as?: string | null
+    shipping_time?: string | null
+    weight?: number | null
+    package_length?: number | null
+    package_width?: number | null
+    package_height?: number | null
+    chargeable_weight?: number | null
+    package_weight_image?: string | null
+    package_length_image?: string | null
+    package_width_image?: string | null
+    package_height_image?: string | null
+    product_detail_video?: string | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type productUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: categoryUpdateOneRequiredWithoutProductsNestedInput
+    originCountry?: countryUpdateOneRequiredWithoutOriginProductsNestedInput
+    shippingCountry?: countryUpdateOneRequiredWithoutShippingProductsNestedInput
+    variants?: productVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutBrandInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateManyWithoutBrandInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    main_sku?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: NullableJsonNullValueInput | InputJsonValue
+    originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    list_as?: NullableStringFieldUpdateOperationsInput | string | null
+    shipping_time?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_length?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_width?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_height?: NullableFloatFieldUpdateOperationsInput | number | null
+    chargeable_weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    package_weight_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_length_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
+    package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
+    product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type productVariantCreateManyProductInput = {
+    id?: number
+    image: string
+    color: string
+    sku: string
+    qty: number
+    currency: string
+    article_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productVariantUpdateWithoutProductInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productVariantUncheckedUpdateWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productVariantUncheckedUpdateManyWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    qty?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
