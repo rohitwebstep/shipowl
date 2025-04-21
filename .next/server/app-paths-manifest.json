@@ -1,3 +1,4 @@
 {
+  "/api/product/[productId]/route": "app/api/product/[productId]/route.js",
   "/api/product/route": "app/api/product/route.js"
 }

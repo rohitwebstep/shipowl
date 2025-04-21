@@ -10,6 +10,11 @@ interface Variant {
     images: string;
 }
 
+interface VariantSKUInput {
+    sku: string;
+    id?: number | null;
+}
+
 interface Product {
     name: string;
     categoryId: number;
@@ -143,41 +148,50 @@ export async function checkVariantSKUsAvailability(skus: string[]) {
     }
 }
 
-export async function checkVariantSKUsAvailabilityForUpdate(skus: string[], productId: number) {
+export async function checkVariantSKUsAvailabilityForUpdate(variants: VariantSKUInput[], productId: number) {
     try {
-        // Get existing SKUs from the database
+        const skus = variants.map(v => v.sku);
+
+        // Fetch existing variants with matching SKUs, excluding current productId
         const existingVariants = await prisma.productVariant.findMany({
             where: {
                 sku: {
-                    in: skus
+                    in: skus,
                 },
                 NOT: {
-                    productId: productId, // Exclude variants belonging to the product being updated
+                    productId,
                 },
             },
             select: {
-                sku: true
-            }
+                sku: true,
+                id: true,
+            },
         });
 
-        if (existingVariants.length > 0) {
-            const usedSkus = existingVariants.map(v => v.sku);
+        // Filter out variants that match the same id (i.e., currently being updated)
+        const conflictingSkus = existingVariants.filter(ev => {
+            const incomingVariant = variants.find(v => v.sku === ev.sku);
+            return !incomingVariant?.id || incomingVariant.id !== ev.id;
+        });
+
+        if (conflictingSkus.length > 0) {
+            const usedSkus = conflictingSkus.map(v => v.sku);
             return {
                 status: false,
                 message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
-                usedSkus
+                usedSkus,
             };
         }
 
         return {
             status: true,
-            message: `All SKUs are available.`,
+            message: 'All SKUs are available.',
         };
     } catch (error) {
-        console.error("Error checking variant SKUs:", error);
+        console.error('Error checking variant SKUs:', error);
         return {
             status: false,
-            message: "Error while checking variant SKU availability.",
+            message: 'Error while checking variant SKU availability.',
         };
     }
 }
