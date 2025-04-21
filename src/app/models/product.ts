@@ -1,6 +1,4 @@
 import prisma from "@/lib/prisma";
-import path from "path";
-import { deleteFile } from '@/utils/saveFiles';
 
 interface Variant {
     color: string;

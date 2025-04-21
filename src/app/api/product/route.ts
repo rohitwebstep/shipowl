@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
     const extractJSON = (key: string): any | null => {
-      const value = extractString('variants');
+      const value = extractString(key);
 
       let parsedData;
       if (typeof value === 'string') {
