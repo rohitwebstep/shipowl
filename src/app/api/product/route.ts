@@ -15,6 +15,15 @@ type UploadedFileInfo = {
   url: string;
 };
 
+interface Variant {
+  color: string;
+  sku: string;
+  qty: number;
+  currency: string;
+  article_id: string;
+  images: string;
+}
+
 export async function POST(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for product creation');
@@ -48,7 +57,7 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
-    const extractJSON = (key: string): any | null => {
+    const extractJSON = (key: string): Record<string, any> | object | null => { // Changed type from `any` to `Record<string, any>`
       const value = extractString(key);
 
       let parsedData;
@@ -90,13 +99,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: checkMainSKUAvailabilityMessage }, { status: 400 });
     }
 
-    const variants = extractJSON('variants');
-    if (!Array.isArray(variants) || variants.length === 0) {
+    const rawVariants = extractJSON('rawVariants ');
+    if (!Array.isArray(rawVariants) || rawVariants.length === 0) {
       logMessage('warn', 'Variants are not valid or empty');
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
     }
+    const variants: Variant[] = Array.isArray(rawVariants) ? rawVariants as Variant[] : [];
 
-    const allUniqeSkus = new Set(variants.map((variant: any) => variant.sku));
+    const allUniqeSkus = new Set(variants.map((variant: { sku: string }) => variant.sku)); // Typed the variant as an object with a sku
     if (allUniqeSkus.size !== variants.length) {
       logMessage('warn', 'Duplicate SKUs found in variants');
       return NextResponse.json({ status: false, error: 'Duplicate SKUs found in variants' }, { status: 400 });
@@ -127,7 +137,6 @@ export async function POST(req: NextRequest) {
         multiple: true,
       });
 
-
       if (fileData) {
         logMessage('info', 'uploaded fileData:', fileData);
         if (Array.isArray(fileData)) {
@@ -144,7 +153,7 @@ export async function POST(req: NextRequest) {
       categoryId: extractNumber('category') || 0,
       main_sku,
       description: extractString('description'),
-      tags: extractJSON('tags'),
+      tags: extractString('tags') || '',
       brandId: extractNumber('brand') || 0,
       originCountryId: extractNumber('origin_country') || 0,
       shippingCountryId: extractNumber('shipping_country') || 0,
@@ -155,7 +164,7 @@ export async function POST(req: NextRequest) {
       package_width: extractNumber('package_width'),
       package_height: extractNumber('package_height'),
       chargeable_weight: extractNumber('chargeable_weight'),
-      variants: extractJSON('variants'),
+      variants,
       product_detail_video: uploadedFiles['product_detail_video'],
       status,
       package_weight_image: uploadedFiles['package_weight_image'],
@@ -167,31 +176,33 @@ export async function POST(req: NextRequest) {
       createdByRole: adminRole,
     };
 
-    for (let index = 0; index < productPayload.variants.length; index++) {
-      const variant = productPayload.variants[index];
-      console.log(`🔁 Index: ${index}`);
-      const variantImagesIndex = `variant_images_${index}`;
+    if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
+      for (let index = 0; index < productPayload.variants.length; index++) {
+        const variant = productPayload.variants[index];
+        console.log(`🔁 Index: ${index}`);
+        const variantImagesIndex = `variant_images_${index}`;
 
-      // File upload
-      const fileData = await saveFilesFromFormData(formData, variantImagesIndex, {
-        dir: uploadDir,
-        pattern: 'slug-unique',
-        multiple: true,
-      });
+        // File upload
+        const fileData = await saveFilesFromFormData(formData, variantImagesIndex, {
+          dir: uploadDir,
+          pattern: 'slug-unique',
+          multiple: true,
+        });
 
-      let image = '';
+        let image = '';
 
-      if (fileData) {
-        logMessage('info', 'uploaded fileData:', fileData);
+        if (fileData) {
+          logMessage('info', 'uploaded fileData:', fileData);
 
-        if (Array.isArray(fileData)) {
-          image = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
-        } else {
-          image = (fileData as UploadedFileInfo).url;
+          if (Array.isArray(fileData)) {
+            image = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
+          } else {
+            image = (fileData as UploadedFileInfo).url;
+          }
         }
-      }
 
-      productPayload.variants[index].images = image;
+        productPayload.variants[index].images = image;
+      }
     }
 
     logMessage('info', 'Product payload created:', productPayload);
