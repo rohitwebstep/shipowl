@@ -126,16 +126,16 @@ export async function POST(req: NextRequest) {
 
     const brandId = extractNumber('brand') || 0;
     const brandResult = await getBrandById(brandId);
-    if (brandResult?.status) {
+    if (!brandResult?.status) {
       logMessage('info', 'Brand found:', brandResult.brand);
-      return NextResponse.json({ status: true, brand: brandResult.brand }, { status: 200 });
+      return NextResponse.json({ status: false, message: brandResult.message || 'Brand not found' }, { status: 404 });
     }
 
     const originCountryId = extractNumber('origin_country') || 0;
     const originCountryResult = await getCountryById(originCountryId);
-    if (originCountryResult?.status) {
+    if (!originCountryResult?.status) {
       logMessage('info', 'Country found:', originCountryResult.country);
-      return NextResponse.json({ status: true, country: originCountryResult.country }, { status: 200 });
+      return NextResponse.json({ status: false, message: originCountryResult.message || 'Country not found' }, { status: 404 });
     }
 
     const shippingCountryId = extractNumber('shipping_country') || 0;
