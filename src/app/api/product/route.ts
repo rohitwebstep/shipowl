@@ -135,14 +135,14 @@ export async function POST(req: NextRequest) {
     const originCountryResult = await getCountryById(originCountryId);
     if (!originCountryResult?.status) {
       logMessage('info', 'Country found:', originCountryResult.country);
-      return NextResponse.json({ status: false, message: originCountryResult.message || 'Country not found' }, { status: 404 });
+      return NextResponse.json({ status: false, message: 'Origin Country not found' }, { status: 404 });
     }
 
     const shippingCountryId = extractNumber('shipping_country') || 0;
     const shippingCountryResult = await getCountryById(shippingCountryId);
-    if (shippingCountryResult?.status) {
+    if (!shippingCountryResult?.status) {
       logMessage('info', 'Country found:', shippingCountryResult.country);
-      return NextResponse.json({ status: true, country: shippingCountryResult.country }, { status: 200 });
+      return NextResponse.json({ status: false, message: 'Shipping Country not found' }, { status: 404 });
     }
 
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'product');
