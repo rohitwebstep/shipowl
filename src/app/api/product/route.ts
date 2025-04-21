@@ -57,7 +57,8 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
-    const extractJSON = (key: string): Record<string, any> | object | null => { // Changed type from `any` to `Record<string, any>`
+    const extractJSON = (key: string): Record<string, unknown> | null => {
+
       const value = extractString(key);
 
       let parsedData;
@@ -178,7 +179,6 @@ export async function POST(req: NextRequest) {
 
     if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
       for (let index = 0; index < productPayload.variants.length; index++) {
-        const variant = productPayload.variants[index];
         console.log(`🔁 Index: ${index}`);
         const variantImagesIndex = `variant_images_${index}`;
 
