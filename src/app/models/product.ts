@@ -226,3 +226,36 @@ export async function createProduct(adminId: number, adminRole: string, product:
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export const getProductsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+    try {
+        let whereCondition = {};
+
+        switch (status) {
+            case "active":
+                whereCondition = { status: true, deletedAt: null };
+                break;
+            case "inactive":
+                whereCondition = { status: false, deletedAt: null };
+                break;
+            case "deleted":
+                whereCondition = { deletedAt: { not: null } };
+                break;
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const products = await prisma.product.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+        });
+
+        return { status: true, products };
+    } catch (error) {
+        console.error(`Error fetching products by status (${status}):`, error);
+        return { status: false, message: "Error fetching products" };
+    }
+};
