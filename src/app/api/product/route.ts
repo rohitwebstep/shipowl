@@ -8,7 +8,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { getBrandById } from '@/app/models/brand';
 import { getCountryById } from '@/app/models/location/country'
 import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product';
-import { log } from 'console';
 
 type UploadedFileInfo = {
   originalName: string;
