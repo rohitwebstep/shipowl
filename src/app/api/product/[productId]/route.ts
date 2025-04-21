@@ -7,7 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getBrandById } from '@/app/models/brand';
 import { getCountryById } from '@/app/models/location/country'
-import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product';
+import { getProductById, checkMainSKUAvailabilityForUpdate, checkVariantSKUsAvailabilityForUpdate, updateProduct, softDeleteProduct, restoreProduct } from '@/app/models/product';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -27,9 +27,67 @@ interface Variant {
   images: string;
 }
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
+  try {
+    // Extract productId directly from the URL path
+    const productId = req.nextUrl.pathname.split('/').pop();
+
+    logMessage('debug', 'Requested Product ID:', productId);
+
+    const adminId = req.headers.get('x-admin-id');
+    const adminRole = req.headers.get('x-admin-role');
+
+    if (!adminId || isNaN(Number(adminId))) {
+      logMessage('warn', 'Invalid or missing admin ID', { adminId });
+      return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
+    }
+
+    const userCheck = await isUserExist(Number(adminId), String(adminRole));
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
+      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const productIdNum = Number(productId);
+    if (isNaN(productIdNum)) {
+      logMessage('warn', 'Invalid product ID', { productId });
+      return NextResponse.json({ error: 'Invalid product ID' }, { status: 400 });
+    }
+
+    const productResult = await getProductById(productIdNum);
+    if (productResult?.status) {
+      logMessage('info', 'Product found:', productResult.product);
+      return NextResponse.json({ status: true, product: productResult.product }, { status: 200 });
+    }
+
+    logMessage('info', 'Product found:', productResult.product);
+    return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
+  } catch (error) {
+    logMessage('error', '❌ Error fetching single product:', error);
+    return NextResponse.json({ status: false, error: 'Server error' }, { status: 500 });
+  }
+}
+
+export async function PUT(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for product creation');
+
+    // Extract productId directly from the URL path
+    const productId = req.nextUrl.pathname.split('/').pop();
+    logMessage('debug', 'Requested Product ID:', productId);
+
+    const productIdNum = Number(productId);
+    if (isNaN(productIdNum)) {
+      logMessage('warn', 'Invalid product ID', { productId });
+      return NextResponse.json({ error: 'Invalid product ID' }, { status: 400 });
+    }
+
+    const productResult = await getProductById(productIdNum);
+    logMessage('debug', 'Product fetch result:', productResult);
+    if (!productResult?.status) {
+      logMessage('warn', 'Product not found', { productIdNum });
+      return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
+    }
 
     const adminIdHeader = req.headers.get('x-admin-id');
     const adminRole = req.headers.get('x-admin-role');
@@ -96,7 +154,7 @@ export async function POST(req: NextRequest) {
     const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
 
     const main_sku = extractString('main_sku') || '';
-    const { status: checkMainSKUAvailabilityResult, message: checkMainSKUAvailabilityMessage } = await checkMainSKUAvailability(main_sku);
+    const { status: checkMainSKUAvailabilityResult, message: checkMainSKUAvailabilityMessage } = await checkMainSKUAvailabilityForUpdate(main_sku, productIdNum);
 
     if (!checkMainSKUAvailabilityResult) {
       logMessage('warn', `SKU availability check failed: ${checkMainSKUAvailabilityMessage}`);
@@ -118,7 +176,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: 'Duplicate SKUs found in variants' }, { status: 400 });
     }
 
-    const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } = await checkVariantSKUsAvailability(Array.from(allUniqeSkus));
+    const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } = await checkVariantSKUsAvailabilityForUpdate(Array.from(allUniqeSkus), productIdNum);
 
     if (!checkVariantSKUsAvailabilityResult) {
       logMessage('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
@@ -238,7 +296,7 @@ export async function POST(req: NextRequest) {
 
     logMessage('info', 'Product payload created:', productPayload);
 
-    const productCreateResult = await createProduct(adminId, String(adminRole), productPayload);
+    const productCreateResult = await updateProduct(adminId, String(adminRole), productIdNum, productPayload);
 
     if (productCreateResult?.status) {
       return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
@@ -260,53 +318,113 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function PATCH(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching products');
+    // Extract productId directly from the URL path
+    const productId = req.nextUrl.pathname.split('/').pop();
 
-    // Retrieve x-admin-id and x-admin-role from request headers
+    logMessage('debug', 'Requested Product ID:', productId);
+
+    // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
 
     const adminId = Number(adminIdHeader);
     if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+      logMessage('warn', 'Invalid or missing admin ID header', { adminIdHeader, adminRole });
       return NextResponse.json(
-        { status: false, error: "User ID is missing or invalid in request" },
+        { error: "User ID is missing or invalid in request" },
         { status: 400 }
       );
     }
 
     // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
-      return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
-        { status: 404 }
-      );
+    const userCheck = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
+      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    // Fetch all products
-    const productsResult = await getProductsByStatus("notDeleted");
-
-    if (productsResult?.status) {
-      return NextResponse.json(
-        { status: true, products: productsResult.products },
-        { status: 200 }
-      );
+    const productIdNum = Number(productId);
+    if (isNaN(productIdNum)) {
+      logMessage('warn', 'Invalid product ID', { productId });
+      return NextResponse.json({ error: 'Invalid product ID' }, { status: 400 });
     }
 
-    logMessage('warn', 'No products found');
-    return NextResponse.json(
-      { status: false, error: "No products found" },
-      { status: 404 }
-    );
+    const productResult = await getProductById(productIdNum);
+    logMessage('debug', 'Product fetch result:', productResult);
+    if (!productResult?.status) {
+      logMessage('warn', 'Product not found', { productIdNum });
+      return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
+    }
+
+    // Restore the product (i.e., reset deletedAt, deletedBy, deletedByRole)
+    const restoreResult = await restoreProduct(adminId, String(adminRole), productIdNum);
+
+    if (restoreResult?.status) {
+      logMessage('info', 'Product restored successfully:', restoreResult.restoredProduct);
+      return NextResponse.json({ status: true, product: restoreResult.restoredProduct }, { status: 200 });
+    }
+
+    logMessage('error', 'Product restore failed');
+    return NextResponse.json({ status: false, error: 'Product restore failed' }, { status: 500 });
+
   } catch (error) {
-    logMessage('error', 'Error fetching products:', error);
-    return NextResponse.json(
-      { status: false, error: "Failed to fetch products" },
-      { status: 500 }
-    );
+    logMessage('error', '❌ Product restore error:', error);
+    return NextResponse.json({ status: false, error: 'Server error' }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    // Extract productId directly from the URL path
+    const productId = req.nextUrl.pathname.split('/').pop();
+
+    logMessage('debug', 'Delete Product Request:', { productId });
+
+    // Extract admin ID and role from headers
+    const adminId = req.headers.get('x-admin-id');
+    const adminRole = req.headers.get('x-admin-role');
+
+    // Validate admin ID
+    if (!adminId || isNaN(Number(adminId))) {
+      logMessage('warn', 'Invalid or missing admin ID', { adminId });
+      return NextResponse.json({ error: 'Admin ID is missing or invalid' }, { status: 400 });
+    }
+
+    // Check if the admin user exists
+    const userCheck = await isUserExist(Number(adminId), String(adminRole));
+    if (!userCheck.status) {
+      logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
+      return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    // Validate product ID
+    const productIdNum = Number(productId);
+    if (isNaN(productIdNum)) {
+      logMessage('warn', 'Invalid product ID format', { productId });
+      return NextResponse.json({ error: 'Product ID is invalid' }, { status: 400 });
+    }
+
+    const productResult = await getProductById(productIdNum);
+    if (!productResult?.status) {
+      logMessage('warn', 'Product not found', { productIdNum });
+      return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
+    }
+
+    const result = await softDeleteProduct(Number(adminId), String(adminRole), productIdNum);  // Assuming softDeleteProduct marks the product as deleted
+    logMessage('info', `Soft delete request for product: ${productIdNum}`, { adminId });
+
+    if (result?.status) {
+      logMessage('info', `Product soft deleted successfully: ${productIdNum}`, { adminId });
+      return NextResponse.json({ status: true, message: `Product soft deleted successfully` }, { status: 200 });
+    }
+
+    logMessage('info', `Product not found or could not be deleted: ${productIdNum}`, { adminId });
+    return NextResponse.json({ status: false, message: 'Product not found or deletion failed' }, { status: 404 });
+  } catch (error) {
+    logMessage('error', 'Error during product deletion', { error });
+    return NextResponse.json({ status: false, error: 'Internal server error' }, { status: 500 });
+  }
+}
+

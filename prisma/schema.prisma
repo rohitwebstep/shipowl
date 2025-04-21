@@ -320,6 +320,11 @@ model product {
   tags                            Json?            // store as array of strings
   brandId                         Int
   originCountryId                 BigInt
+  ean                             String?
+  hsnCode                         String?
+  taxRate                         Float?
+  rtoAddress                      String?
+  pickupAddress                   String?
 
   shippingCountryId               BigInt
   video_url                       String?
