@@ -24,10 +24,6 @@
     "originalSource": "/api/supplier/auth/verify"
   },
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/product\\/create(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/product/create"
-  },
-  {
     "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/category(\\\\.json)?[\\/#\\?]?$",
     "originalSource": "/api/category"
   },

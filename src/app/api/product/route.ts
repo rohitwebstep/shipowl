@@ -8,6 +8,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { getBrandById } from '@/app/models/brand';
 import { getCountryById } from '@/app/models/location/country'
 import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product';
+import { log } from 'console';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -268,6 +269,7 @@ export async function GET(req: NextRequest) {
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
 
+    logMessage('info', 'Admin ID and Role:', { adminIdHeader, adminRole });
     const adminId = Number(adminIdHeader);
     if (!adminIdHeader || isNaN(adminId)) {
       logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);

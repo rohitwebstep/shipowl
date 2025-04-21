@@ -20,6 +20,7 @@ export async function adminAuthMiddleware(req: NextRequest, adminRole: string, a
             return NextResponse.json({ error: "Access denied. Admin privileges required." }, { status: 403 });
         }
 
+        console.log(`Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
         // Clone the request and set custom headers
         const response = NextResponse.next();
         response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());

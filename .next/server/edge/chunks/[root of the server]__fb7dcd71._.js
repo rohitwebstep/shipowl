@@ -57,6 +57,7 @@ async function adminAuthMiddleware(req, adminRole, applicableRoles) {
                 status: 403
             });
         }
+        console.log(`Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
         // Clone the request and set custom headers
         const response = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
         response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());
@@ -124,7 +125,6 @@ function middleware(req) {
         "/api/supplier/auth/verify"
     ];
     const restProtectedRoutes = [
-        "/api/product/create",
         "/api/category",
         "/api/category/:path*",
         "/api/brand",
@@ -186,7 +186,6 @@ const config = {
         "/api/dropshipper/auth/verify",
         "/api/supplier/list",
         "/api/supplier/auth/verify",
-        "/api/product/create",
         "/api/category",
         "/api/category/:path*",
         "/api/brand",
