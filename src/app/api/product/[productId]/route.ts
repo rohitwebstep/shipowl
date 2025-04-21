@@ -222,7 +222,6 @@ export async function PUT(req: NextRequest) {
 
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'product');
     const fileFields = [
-      'video',
       'package_weight_image',
       'package_length_image',
       'package_width_image',
@@ -277,7 +276,7 @@ export async function PUT(req: NextRequest) {
       package_length_image: uploadedFiles['package_length_image'],
       package_width_image: uploadedFiles['package_width_image'],
       package_height_image: uploadedFiles['package_height_image'],
-      video_url: uploadedFiles['video'],
+      video_url: extractString('video'),
       createdBy: adminId,
       createdByRole: adminRole,
     };

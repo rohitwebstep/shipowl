@@ -10080,24 +10080,31 @@ async function checkVariantSKUsAvailability(skus) {
         };
     }
 }
-async function checkVariantSKUsAvailabilityForUpdate(skus, productId) {
+async function checkVariantSKUsAvailabilityForUpdate(variants, productId) {
     try {
-        // Get existing SKUs from the database
+        const skus = variants.map((v)=>v.sku);
+        // Fetch existing variants with matching SKUs, excluding current productId
         const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
             where: {
                 sku: {
                     in: skus
                 },
                 NOT: {
-                    productId: productId
+                    productId
                 }
             },
             select: {
-                sku: true
+                sku: true,
+                id: true
             }
         });
-        if (existingVariants.length > 0) {
-            const usedSkus = existingVariants.map((v)=>v.sku);
+        // Filter out variants that match the same id (i.e., currently being updated)
+        const conflictingSkus = existingVariants.filter((ev)=>{
+            const incomingVariant = variants.find((v)=>v.sku === ev.sku);
+            return !incomingVariant?.id || incomingVariant.id !== ev.id;
+        });
+        if (conflictingSkus.length > 0) {
+            const usedSkus = conflictingSkus.map((v)=>v.sku);
             return {
                 status: false,
                 message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
@@ -10106,13 +10113,13 @@ async function checkVariantSKUsAvailabilityForUpdate(skus, productId) {
         }
         return {
             status: true,
-            message: `All SKUs are available.`
+            message: 'All SKUs are available.'
         };
     } catch (error) {
-        console.error("Error checking variant SKUs:", error);
+        console.error('Error checking variant SKUs:', error);
         return {
             status: false,
-            message: "Error while checking variant SKU availability."
+            message: 'Error while checking variant SKU availability.'
         };
     }
 }
@@ -10671,7 +10678,8 @@ async function PUT(req) {
             });
         }
         const variants = Array.isArray(rawVariants) ? rawVariants : [];
-        const allUniqeSkus = new Set(variants.map((variant)=>variant.sku)); // Typed the variant as an object with a sku
+        // Ensure variants have unique SKUs
+        const allUniqeSkus = new Set(variants.map((variant)=>variant.sku));
         if (allUniqeSkus.size !== variants.length) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Duplicate SKUs found in variants');
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -10681,7 +10689,12 @@ async function PUT(req) {
                 status: 400
             });
         }
-        const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkVariantSKUsAvailabilityForUpdate"])(Array.from(allUniqeSkus), productIdNum);
+        // Map variant SKUs with optional IDs to check for availability
+        const variantSKUsWithIds = variants.map((variant)=>({
+                sku: variant.sku,
+                id: variant.id || null
+            }));
+        const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkVariantSKUsAvailabilityForUpdate"])(variantSKUsWithIds, productIdNum);
         if (!checkVariantSKUsAvailabilityResult) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
