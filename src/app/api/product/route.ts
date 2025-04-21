@@ -5,6 +5,8 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
+import { getBrandById } from '@/app/models/brand';
+import { getCountryById } from '@/app/models/location/country'
 import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product';
 
 type UploadedFileInfo = {
@@ -100,7 +102,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: checkMainSKUAvailabilityMessage }, { status: 400 });
     }
 
-    const rawVariants = extractJSON('rawVariants');
+    const rawVariants = extractJSON('variants');
+
+    console.log(`rawVariants`, rawVariants);
     if (!Array.isArray(rawVariants) || rawVariants.length === 0) {
       logMessage('warn', 'Variants are not valid or empty');
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
@@ -118,6 +122,27 @@ export async function POST(req: NextRequest) {
     if (!checkVariantSKUsAvailabilityResult) {
       logMessage('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
       return NextResponse.json({ status: false, error: checkVariantSKUsAvailabilityMessage }, { status: 400 });
+    }
+
+    const brandId = extractNumber('brand') || 0;
+    const brandResult = await getBrandById(brandId);
+    if (brandResult?.status) {
+      logMessage('info', 'Brand found:', brandResult.brand);
+      return NextResponse.json({ status: true, brand: brandResult.brand }, { status: 200 });
+    }
+
+    const originCountryId = extractNumber('origin_country') || 0;
+    const originCountryResult = await getCountryById(originCountryId);
+    if (originCountryResult?.status) {
+      logMessage('info', 'Country found:', originCountryResult.country);
+      return NextResponse.json({ status: true, country: originCountryResult.country }, { status: 200 });
+    }
+
+    const shippingCountryId = extractNumber('shipping_country') || 0;
+    const shippingCountryResult = await getCountryById(shippingCountryId);
+    if (shippingCountryResult?.status) {
+      logMessage('info', 'Country found:', shippingCountryResult.country);
+      return NextResponse.json({ status: true, country: shippingCountryResult.country }, { status: 200 });
     }
 
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'product');
@@ -156,8 +181,8 @@ export async function POST(req: NextRequest) {
       description: extractString('description'),
       tags: extractString('tags') || '',
       brandId: extractNumber('brand') || 0,
-      originCountryId: extractNumber('origin_country') || 0,
-      shippingCountryId: extractNumber('shipping_country') || 0,
+      originCountryId,
+      shippingCountryId,
       list_as: extractString('list_as'),
       shipping_time: extractString('shipping_time'),
       weight: extractNumber('weight'),
