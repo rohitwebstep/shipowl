@@ -396,80 +396,78 @@ export const updateProduct = async (
             video_url
         } = product;
 
-        // Build the data object for updating the product
-        const productUpdateData: any = {
-            name,
-            categoryId,
-            main_sku,
-            description,
-            tags,
-            brandId,
-            originCountryId,
-            shippingCountryId,
-            list_as,
-            shipping_time,
-            weight,
-            package_length,
-            package_width,
-            package_height,
-            chargeable_weight,
-            product_detail_video,
-            status,
-            updatedBy: adminId,
-            updatedAt: new Date(),
-            updatedByRole: adminRole,
-        };
-
-        // Conditionally include images and video only if they are not empty or null
-        if (package_weight_image) productUpdateData.package_weight_image = package_weight_image;
-        if (package_length_image) productUpdateData.package_length_image = package_length_image;
-        if (package_width_image) productUpdateData.package_width_image = package_width_image;
-        if (package_height_image) productUpdateData.package_height_image = package_height_image;
-        if (product_detail_video) productUpdateData.product_detail_video = product_detail_video;
-        if (video_url) productUpdateData.video_url = video_url;
-
-        // Update the product in the database
+        // Update the product details
         const updatedProduct = await prisma.product.update({
             where: { id: productId },
-            data: productUpdateData,
+            data: {
+                name,
+                categoryId,
+                main_sku,
+                description,
+                tags,
+                brandId,
+                originCountryId,
+                shippingCountryId,
+                list_as,
+                shipping_time,
+                weight,
+                package_length,
+                package_width,
+                package_height,
+                chargeable_weight,
+                product_detail_video,
+                status,
+                package_weight_image,
+                package_length_image,
+                package_width_image,
+                package_height_image,
+                video_url,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date(),
+            },
         });
 
-        // Convert BigInt to string for serialization
-        const productWithStringBigInts = {
-            ...updatedProduct,
-            originCountryId: updatedProduct.originCountryId.toString(),
-            shippingCountryId: updatedProduct.shippingCountryId.toString()
-        };
-
-        // If there are variants, update them in the related productVariant model
+        // Handle variants: update if id exists, else create new
         if (variants && variants.length > 0) {
-            for (let variant of variants) {
-                const variantUpdateData: any = {
-                    color: variant.color,
-                    sku: variant.sku,
-                    qty: variant.qty,
-                    currency: variant.currency,
-                    article_id: variant.article_id,
-                    productId: productWithStringBigInts.id // This associates the variant with the product
-                };
-
-                // Conditionally include variant image if it's not empty or null
-                if (variant.images) variantUpdateData.image = variant.images;
-
-                // Update the existing variant in the database
-                await prisma.productVariant.update({
-                    where: { id: variant.id }, // Assuming `variant.id` is the identifier for the existing variant
-                    data: variantUpdateData,
-                });
+            for (const variant of variants) {
+                if (variant.id) {
+                    // Update existing variant
+                    await prisma.productVariant.update({
+                        where: { id: variant.id },
+                        data: {
+                            color: variant.color,
+                            sku: variant.sku,
+                            qty: variant.qty,
+                            currency: variant.currency,
+                            article_id: variant.article_id,
+                            image: variant.images,
+                        },
+                    });
+                } else {
+                    // Create new variant
+                    await prisma.productVariant.create({
+                        data: {
+                            color: variant.color,
+                            sku: variant.sku,
+                            qty: variant.qty,
+                            currency: variant.currency,
+                            article_id: variant.article_id,
+                            image: variant.images,
+                            productId: productId,
+                        },
+                    });
+                }
             }
         }
 
-        return { status: true, product: productWithStringBigInts };
+        return { status: true, product: updatedProduct };
     } catch (error) {
-        console.error(`Error updating product:`, error);
-        return { status: false, message: "Internal Server Error" };
+        console.error("❌ updateProduct Error:", error);
+        return { status: false, message: "Error updating product" };
     }
 };
+
 
 // 🔴 Soft DELETE (marks as deleted by setting deletedAt field)
 export const softDeleteProduct = async (adminId: number, adminRole: string, id: number) => {
