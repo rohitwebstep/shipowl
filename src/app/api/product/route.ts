@@ -51,8 +51,7 @@ export async function POST(req: NextRequest) {
     const extractJSON = (key: string): any | null => {
       const value = extractString(key);
 
-      let parsedData: any = null;
-
+      let parsedData;
       if (typeof value === 'string') {
         try {
           parsedData = JSON.parse(value);
