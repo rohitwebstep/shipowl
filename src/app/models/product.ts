@@ -7,6 +7,10 @@ interface Variant {
     qty: number;
     currency: string;
     article_id: string;
+    suggested_price: number;
+    shipowl_price: number;
+    rto_suggested_price: number;
+    rto_price: number;
     images: string;
 }
 
@@ -22,6 +26,7 @@ interface Product {
     ean: string | null;
     hsnCode: string | null;
     taxRate: number | null;
+    upc: string | null;
     rtoAddress: string | null;
     pickupAddress: string | null;
     description: string | null;
@@ -44,8 +49,9 @@ interface Product {
     package_width_image?: string | null;
     package_height_image?: string | null;
     video_url?: string | null;
-    createdBy: number | null;
-    createdByRole: string | null;
+    training_guidance_video?: string | null;
+    createdBy?: number | null;
+    createdByRole?: string | null;
     updatedBy?: number | null;
     updatedAt?: Date;
     updatedByRole?: string | null;
@@ -229,6 +235,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
             ean,
             hsnCode,
             taxRate,
+            upc,
             rtoAddress,
             pickupAddress,
             description,
@@ -245,6 +252,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
             chargeable_weight,
             variants,
             product_detail_video,
+            training_guidance_video,
             status,
             package_weight_image,
             package_length_image,
@@ -267,6 +275,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 ean,
                 hsnCode,
                 taxRate,
+                upc,
                 rtoAddress,
                 pickupAddress,
                 description,
@@ -282,6 +291,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 package_height,
                 chargeable_weight,
                 product_detail_video,
+                training_guidance_video,
                 status,
                 package_weight_image,
                 package_length_image,
@@ -311,6 +321,10 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 qty: variant.qty,
                 currency: variant.currency,
                 article_id: variant.article_id,
+                suggested_price: variant.suggested_price,
+                shipowl_price: variant.shipowl_price,
+                rto_suggested_price: variant.rto_suggested_price,
+                rto_price: variant.rto_price,
                 image: variant.images,
                 productId: productWithStringBigInts.id // This associates the variant with the product
             }));
@@ -388,6 +402,12 @@ export const updateProduct = async (
             name,
             categoryId,
             main_sku,
+            ean,
+            hsnCode,
+            taxRate,
+            upc,
+            rtoAddress,
+            pickupAddress,
             description,
             tags,
             brandId,
@@ -407,7 +427,7 @@ export const updateProduct = async (
             package_length_image,
             package_width_image,
             package_height_image,
-            video_url
+            video_url,
         } = product;
 
         // Update the product details
@@ -417,6 +437,12 @@ export const updateProduct = async (
                 name,
                 categoryId,
                 main_sku,
+                ean,
+                hsnCode,
+                taxRate,
+                upc,
+                rtoAddress,
+                pickupAddress,
                 description,
                 tags,
                 brandId,
@@ -455,6 +481,10 @@ export const updateProduct = async (
                             qty: variant.qty,
                             currency: variant.currency,
                             article_id: variant.article_id,
+                            suggested_price: variant.suggested_price,
+                            shipowl_price: variant.shipowl_price,
+                            rto_suggested_price: variant.rto_suggested_price,
+                            rto_price: variant.rto_price,
                             image: variant.images,
                         },
                     });
@@ -467,6 +497,10 @@ export const updateProduct = async (
                             qty: variant.qty,
                             currency: variant.currency,
                             article_id: variant.article_id,
+                            suggested_price: variant.suggested_price,
+                            shipowl_price: variant.shipowl_price,
+                            rto_suggested_price: variant.rto_suggested_price,
+                            rto_price: variant.rto_price,
                             image: variant.images,
                             productId: productId,
                         },

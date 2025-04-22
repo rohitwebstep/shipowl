@@ -324,6 +324,7 @@ model product {
   ean             String?
   hsnCode         String?
   taxRate         Float?
+  upc             String?
   rtoAddress      String?
   pickupAddress   String?
 
@@ -334,15 +335,16 @@ model product {
   shipping_time String?
   weight        Float?
 
-  package_length       Float? // Updated from package_len
-  package_width        Float? // Updated from pack_width
-  package_height       Float? // Updated from package_heig
-  chargeable_weight    Float? // Updated from chargab_weig
-  package_weight_image String? // Updated from package_wei_image
-  package_length_image String? // Updated from package_leng_image
-  package_width_image  String? // Updated from package_wid_image
-  package_height_image String? // Updated from package_heig_image
-  product_detail_video String?
+  package_length          Float? // Updated from package_len
+  package_width           Float? // Updated from pack_width
+  package_height          Float? // Updated from package_heig
+  chargeable_weight       Float? // Updated from chargab_weig
+  package_weight_image    String? // Updated from package_wei_image
+  package_length_image    String? // Updated from package_leng_image
+  package_width_image     String? // Updated from package_wid_image
+  package_height_image    String? // Updated from package_heig_image
+  product_detail_video    String?
+  training_guidance_video String?
 
   status        Boolean   @default(true)
   createdAt     DateTime  @default(now())
@@ -372,14 +374,18 @@ model product {
 }
 
 model productVariant {
-  id         Int     @id @default(autoincrement())
-  productId  Int
-  image      String
-  color      String
-  sku        String  @unique
-  qty        Int
-  currency   String
-  article_id String?
+  id                  Int     @id @default(autoincrement())
+  productId           Int
+  image               String
+  color               String
+  sku                 String  @unique
+  qty                 Int
+  currency            String
+  article_id          String?
+  suggested_price     Float?
+  shipowl_price       Float?
+  rto_suggested_price Float?
+  rto_price           Float?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -347,6 +347,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   ean: 'ean',
   hsnCode: 'hsnCode',
   taxRate: 'taxRate',
+  upc: 'upc',
   rtoAddress: 'rtoAddress',
   pickupAddress: 'pickupAddress',
   shippingCountryId: 'shippingCountryId',
@@ -363,6 +364,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   package_width_image: 'package_width_image',
   package_height_image: 'package_height_image',
   product_detail_video: 'product_detail_video',
+  training_guidance_video: 'training_guidance_video',
   status: 'status',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
@@ -384,6 +386,10 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   qty: 'qty',
   currency: 'currency',
   article_id: 'article_id',
+  suggested_price: 'suggested_price',
+  shipowl_price: 'shipowl_price',
+  rto_suggested_price: 'rto_suggested_price',
+  rto_price: 'rto_price',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -551,6 +557,7 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
   description: 'description',
   ean: 'ean',
   hsnCode: 'hsnCode',
+  upc: 'upc',
   rtoAddress: 'rtoAddress',
   pickupAddress: 'pickupAddress',
   video_url: 'video_url',
@@ -561,6 +568,7 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
   package_width_image: 'package_width_image',
   package_height_image: 'package_height_image',
   product_detail_video: 'product_detail_video',
+  training_guidance_video: 'training_guidance_video',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'

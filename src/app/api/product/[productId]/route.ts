@@ -25,6 +25,10 @@ interface Variant {
   qty: number;
   currency: string;
   article_id: string;
+  suggested_price: number;
+  shipowl_price: number;
+  rto_suggested_price: number;
+  rto_price: number;
   images: string;
 }
 
@@ -255,6 +259,7 @@ export async function PUT(req: NextRequest) {
       ean: extractString('ean') || '',
       hsnCode: extractString('hsn_ode') || '',
       taxRate: extractNumber('tax_rate') || 0,
+      upc: extractString('upc') || '',
       rtoAddress: extractString('rto_address') || '',
       pickupAddress: extractString('pickup_address') || '',
       description: extractString('description'),
@@ -276,9 +281,7 @@ export async function PUT(req: NextRequest) {
       package_length_image: uploadedFiles['package_length_image'],
       package_width_image: uploadedFiles['package_width_image'],
       package_height_image: uploadedFiles['package_height_image'],
-      video_url: extractString('video'),
-      createdBy: adminId,
-      createdByRole: adminRole,
+      video_url: extractString('video_url'),
     };
 
     if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {

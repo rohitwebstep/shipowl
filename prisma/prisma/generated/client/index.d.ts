@@ -14564,6 +14564,7 @@ export namespace Prisma {
     ean: string | null
     hsnCode: string | null
     taxRate: number | null
+    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint | null
@@ -14580,6 +14581,7 @@ export namespace Prisma {
     package_width_image: string | null
     package_height_image: string | null
     product_detail_video: string | null
+    training_guidance_video: string | null
     status: boolean | null
     createdAt: Date | null
     createdBy: number | null
@@ -14604,6 +14606,7 @@ export namespace Prisma {
     ean: string | null
     hsnCode: string | null
     taxRate: number | null
+    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint | null
@@ -14620,6 +14623,7 @@ export namespace Prisma {
     package_width_image: string | null
     package_height_image: string | null
     product_detail_video: string | null
+    training_guidance_video: string | null
     status: boolean | null
     createdAt: Date | null
     createdBy: number | null
@@ -14645,6 +14649,7 @@ export namespace Prisma {
     ean: number
     hsnCode: number
     taxRate: number
+    upc: number
     rtoAddress: number
     pickupAddress: number
     shippingCountryId: number
@@ -14661,6 +14666,7 @@ export namespace Prisma {
     package_width_image: number
     package_height_image: number
     product_detail_video: number
+    training_guidance_video: number
     status: number
     createdAt: number
     createdBy: number
@@ -14721,6 +14727,7 @@ export namespace Prisma {
     ean?: true
     hsnCode?: true
     taxRate?: true
+    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -14737,6 +14744,7 @@ export namespace Prisma {
     package_width_image?: true
     package_height_image?: true
     product_detail_video?: true
+    training_guidance_video?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -14761,6 +14769,7 @@ export namespace Prisma {
     ean?: true
     hsnCode?: true
     taxRate?: true
+    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -14777,6 +14786,7 @@ export namespace Prisma {
     package_width_image?: true
     package_height_image?: true
     product_detail_video?: true
+    training_guidance_video?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -14802,6 +14812,7 @@ export namespace Prisma {
     ean?: true
     hsnCode?: true
     taxRate?: true
+    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -14818,6 +14829,7 @@ export namespace Prisma {
     package_width_image?: true
     package_height_image?: true
     product_detail_video?: true
+    training_guidance_video?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -14930,6 +14942,7 @@ export namespace Prisma {
     ean: string | null
     hsnCode: string | null
     taxRate: number | null
+    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint
@@ -14946,6 +14959,7 @@ export namespace Prisma {
     package_width_image: string | null
     package_height_image: string | null
     product_detail_video: string | null
+    training_guidance_video: string | null
     status: boolean
     createdAt: Date
     createdBy: number | null
@@ -14990,6 +15004,7 @@ export namespace Prisma {
     ean?: boolean
     hsnCode?: boolean
     taxRate?: boolean
+    upc?: boolean
     rtoAddress?: boolean
     pickupAddress?: boolean
     shippingCountryId?: boolean
@@ -15006,6 +15021,7 @@ export namespace Prisma {
     package_width_image?: boolean
     package_height_image?: boolean
     product_detail_video?: boolean
+    training_guidance_video?: boolean
     status?: boolean
     createdAt?: boolean
     createdBy?: boolean
@@ -15039,6 +15055,7 @@ export namespace Prisma {
     ean?: boolean
     hsnCode?: boolean
     taxRate?: boolean
+    upc?: boolean
     rtoAddress?: boolean
     pickupAddress?: boolean
     shippingCountryId?: boolean
@@ -15055,6 +15072,7 @@ export namespace Prisma {
     package_width_image?: boolean
     package_height_image?: boolean
     product_detail_video?: boolean
+    training_guidance_video?: boolean
     status?: boolean
     createdAt?: boolean
     createdBy?: boolean
@@ -15067,7 +15085,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "name" | "slug" | "main_sku" | "description" | "tags" | "brandId" | "originCountryId" | "ean" | "hsnCode" | "taxRate" | "rtoAddress" | "pickupAddress" | "shippingCountryId" | "video_url" | "list_as" | "shipping_time" | "weight" | "package_length" | "package_width" | "package_height" | "chargeable_weight" | "package_weight_image" | "package_length_image" | "package_width_image" | "package_height_image" | "product_detail_video" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
+  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "name" | "slug" | "main_sku" | "description" | "tags" | "brandId" | "originCountryId" | "ean" | "hsnCode" | "taxRate" | "upc" | "rtoAddress" | "pickupAddress" | "shippingCountryId" | "video_url" | "list_as" | "shipping_time" | "weight" | "package_length" | "package_width" | "package_height" | "chargeable_weight" | "package_weight_image" | "package_length_image" | "package_width_image" | "package_height_image" | "product_detail_video" | "training_guidance_video" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
   export type productInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | categoryDefaultArgs<ExtArgs>
     brand?: boolean | brandDefaultArgs<ExtArgs>
@@ -15099,6 +15117,7 @@ export namespace Prisma {
       ean: string | null
       hsnCode: string | null
       taxRate: number | null
+      upc: string | null
       rtoAddress: string | null
       pickupAddress: string | null
       shippingCountryId: bigint
@@ -15115,6 +15134,7 @@ export namespace Prisma {
       package_width_image: string | null
       package_height_image: string | null
       product_detail_video: string | null
+      training_guidance_video: string | null
       status: boolean
       createdAt: Date
       createdBy: number | null
@@ -15511,6 +15531,7 @@ export namespace Prisma {
     readonly ean: FieldRef<"product", 'String'>
     readonly hsnCode: FieldRef<"product", 'String'>
     readonly taxRate: FieldRef<"product", 'Float'>
+    readonly upc: FieldRef<"product", 'String'>
     readonly rtoAddress: FieldRef<"product", 'String'>
     readonly pickupAddress: FieldRef<"product", 'String'>
     readonly shippingCountryId: FieldRef<"product", 'BigInt'>
@@ -15527,6 +15548,7 @@ export namespace Prisma {
     readonly package_width_image: FieldRef<"product", 'String'>
     readonly package_height_image: FieldRef<"product", 'String'>
     readonly product_detail_video: FieldRef<"product", 'String'>
+    readonly training_guidance_video: FieldRef<"product", 'String'>
     readonly status: FieldRef<"product", 'Boolean'>
     readonly createdAt: FieldRef<"product", 'DateTime'>
     readonly createdBy: FieldRef<"product", 'Int'>
@@ -15938,12 +15960,20 @@ export namespace Prisma {
     id: number | null
     productId: number | null
     qty: number | null
+    suggested_price: number | null
+    shipowl_price: number | null
+    rto_suggested_price: number | null
+    rto_price: number | null
   }
 
   export type ProductVariantSumAggregateOutputType = {
     id: number | null
     productId: number | null
     qty: number | null
+    suggested_price: number | null
+    shipowl_price: number | null
+    rto_suggested_price: number | null
+    rto_price: number | null
   }
 
   export type ProductVariantMinAggregateOutputType = {
@@ -15955,6 +15985,10 @@ export namespace Prisma {
     qty: number | null
     currency: string | null
     article_id: string | null
+    suggested_price: number | null
+    shipowl_price: number | null
+    rto_suggested_price: number | null
+    rto_price: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15968,6 +16002,10 @@ export namespace Prisma {
     qty: number | null
     currency: string | null
     article_id: string | null
+    suggested_price: number | null
+    shipowl_price: number | null
+    rto_suggested_price: number | null
+    rto_price: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15981,6 +16019,10 @@ export namespace Prisma {
     qty: number
     currency: number
     article_id: number
+    suggested_price: number
+    shipowl_price: number
+    rto_suggested_price: number
+    rto_price: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -15991,12 +16033,20 @@ export namespace Prisma {
     id?: true
     productId?: true
     qty?: true
+    suggested_price?: true
+    shipowl_price?: true
+    rto_suggested_price?: true
+    rto_price?: true
   }
 
   export type ProductVariantSumAggregateInputType = {
     id?: true
     productId?: true
     qty?: true
+    suggested_price?: true
+    shipowl_price?: true
+    rto_suggested_price?: true
+    rto_price?: true
   }
 
   export type ProductVariantMinAggregateInputType = {
@@ -16008,6 +16058,10 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    suggested_price?: true
+    shipowl_price?: true
+    rto_suggested_price?: true
+    rto_price?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16021,6 +16075,10 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    suggested_price?: true
+    shipowl_price?: true
+    rto_suggested_price?: true
+    rto_price?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16034,6 +16092,10 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    suggested_price?: true
+    shipowl_price?: true
+    rto_suggested_price?: true
+    rto_price?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -16134,6 +16196,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id: string | null
+    suggested_price: number | null
+    shipowl_price: number | null
+    rto_suggested_price: number | null
+    rto_price: number | null
     createdAt: Date
     updatedAt: Date
     _count: ProductVariantCountAggregateOutputType | null
@@ -16166,6 +16232,10 @@ export namespace Prisma {
     qty?: boolean
     currency?: boolean
     article_id?: boolean
+    suggested_price?: boolean
+    shipowl_price?: boolean
+    rto_suggested_price?: boolean
+    rto_price?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | productDefaultArgs<ExtArgs>
@@ -16182,11 +16252,15 @@ export namespace Prisma {
     qty?: boolean
     currency?: boolean
     article_id?: boolean
+    suggested_price?: boolean
+    shipowl_price?: boolean
+    rto_suggested_price?: boolean
+    rto_price?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
   }
@@ -16205,6 +16279,10 @@ export namespace Prisma {
       qty: number
       currency: string
       article_id: string | null
+      suggested_price: number | null
+      shipowl_price: number | null
+      rto_suggested_price: number | null
+      rto_price: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productVariant"]>
@@ -16585,6 +16663,10 @@ export namespace Prisma {
     readonly qty: FieldRef<"productVariant", 'Int'>
     readonly currency: FieldRef<"productVariant", 'String'>
     readonly article_id: FieldRef<"productVariant", 'String'>
+    readonly suggested_price: FieldRef<"productVariant", 'Float'>
+    readonly shipowl_price: FieldRef<"productVariant", 'Float'>
+    readonly rto_suggested_price: FieldRef<"productVariant", 'Float'>
+    readonly rto_price: FieldRef<"productVariant", 'Float'>
     readonly createdAt: FieldRef<"productVariant", 'DateTime'>
     readonly updatedAt: FieldRef<"productVariant", 'DateTime'>
   }
@@ -17225,6 +17307,7 @@ export namespace Prisma {
     ean: 'ean',
     hsnCode: 'hsnCode',
     taxRate: 'taxRate',
+    upc: 'upc',
     rtoAddress: 'rtoAddress',
     pickupAddress: 'pickupAddress',
     shippingCountryId: 'shippingCountryId',
@@ -17241,6 +17324,7 @@ export namespace Prisma {
     package_width_image: 'package_width_image',
     package_height_image: 'package_height_image',
     product_detail_video: 'product_detail_video',
+    training_guidance_video: 'training_guidance_video',
     status: 'status',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
@@ -17265,6 +17349,10 @@ export namespace Prisma {
     qty: 'qty',
     currency: 'currency',
     article_id: 'article_id',
+    suggested_price: 'suggested_price',
+    shipowl_price: 'shipowl_price',
+    rto_suggested_price: 'rto_suggested_price',
+    rto_price: 'rto_price',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -17483,6 +17571,7 @@ export namespace Prisma {
     description: 'description',
     ean: 'ean',
     hsnCode: 'hsnCode',
+    upc: 'upc',
     rtoAddress: 'rtoAddress',
     pickupAddress: 'pickupAddress',
     video_url: 'video_url',
@@ -17493,6 +17582,7 @@ export namespace Prisma {
     package_width_image: 'package_width_image',
     package_height_image: 'package_height_image',
     product_detail_video: 'product_detail_video',
+    training_guidance_video: 'training_guidance_video',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
     deletedByRole: 'deletedByRole'
@@ -18896,6 +18986,7 @@ export namespace Prisma {
     ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
+    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -18912,6 +19003,7 @@ export namespace Prisma {
     package_width_image?: StringNullableFilter<"product"> | string | null
     package_height_image?: StringNullableFilter<"product"> | string | null
     product_detail_video?: StringNullableFilter<"product"> | string | null
+    training_guidance_video?: StringNullableFilter<"product"> | string | null
     status?: BoolFilter<"product"> | boolean
     createdAt?: DateTimeFilter<"product"> | Date | string
     createdBy?: IntNullableFilter<"product"> | number | null
@@ -18942,6 +19034,7 @@ export namespace Prisma {
     ean?: SortOrderInput | SortOrder
     hsnCode?: SortOrderInput | SortOrder
     taxRate?: SortOrderInput | SortOrder
+    upc?: SortOrderInput | SortOrder
     rtoAddress?: SortOrderInput | SortOrder
     pickupAddress?: SortOrderInput | SortOrder
     shippingCountryId?: SortOrder
@@ -18958,6 +19051,7 @@ export namespace Prisma {
     package_width_image?: SortOrderInput | SortOrder
     package_height_image?: SortOrderInput | SortOrder
     product_detail_video?: SortOrderInput | SortOrder
+    training_guidance_video?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -18992,6 +19086,7 @@ export namespace Prisma {
     ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
+    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -19008,6 +19103,7 @@ export namespace Prisma {
     package_width_image?: StringNullableFilter<"product"> | string | null
     package_height_image?: StringNullableFilter<"product"> | string | null
     product_detail_video?: StringNullableFilter<"product"> | string | null
+    training_guidance_video?: StringNullableFilter<"product"> | string | null
     status?: BoolFilter<"product"> | boolean
     createdAt?: DateTimeFilter<"product"> | Date | string
     createdBy?: IntNullableFilter<"product"> | number | null
@@ -19038,6 +19134,7 @@ export namespace Prisma {
     ean?: SortOrderInput | SortOrder
     hsnCode?: SortOrderInput | SortOrder
     taxRate?: SortOrderInput | SortOrder
+    upc?: SortOrderInput | SortOrder
     rtoAddress?: SortOrderInput | SortOrder
     pickupAddress?: SortOrderInput | SortOrder
     shippingCountryId?: SortOrder
@@ -19054,6 +19151,7 @@ export namespace Prisma {
     package_width_image?: SortOrderInput | SortOrder
     package_height_image?: SortOrderInput | SortOrder
     product_detail_video?: SortOrderInput | SortOrder
+    training_guidance_video?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -19087,6 +19185,7 @@ export namespace Prisma {
     ean?: StringNullableWithAggregatesFilter<"product"> | string | null
     hsnCode?: StringNullableWithAggregatesFilter<"product"> | string | null
     taxRate?: FloatNullableWithAggregatesFilter<"product"> | number | null
+    upc?: StringNullableWithAggregatesFilter<"product"> | string | null
     rtoAddress?: StringNullableWithAggregatesFilter<"product"> | string | null
     pickupAddress?: StringNullableWithAggregatesFilter<"product"> | string | null
     shippingCountryId?: BigIntWithAggregatesFilter<"product"> | bigint | number
@@ -19103,6 +19202,7 @@ export namespace Prisma {
     package_width_image?: StringNullableWithAggregatesFilter<"product"> | string | null
     package_height_image?: StringNullableWithAggregatesFilter<"product"> | string | null
     product_detail_video?: StringNullableWithAggregatesFilter<"product"> | string | null
+    training_guidance_video?: StringNullableWithAggregatesFilter<"product"> | string | null
     status?: BoolWithAggregatesFilter<"product"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"product"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"product"> | number | null
@@ -19127,6 +19227,10 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
@@ -19141,6 +19245,10 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrderInput | SortOrder
+    suggested_price?: SortOrderInput | SortOrder
+    shipowl_price?: SortOrderInput | SortOrder
+    rto_suggested_price?: SortOrderInput | SortOrder
+    rto_price?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: productOrderByWithRelationInput
@@ -19159,6 +19267,10 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
@@ -19173,6 +19285,10 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrderInput | SortOrder
+    suggested_price?: SortOrderInput | SortOrder
+    shipowl_price?: SortOrderInput | SortOrder
+    rto_suggested_price?: SortOrderInput | SortOrder
+    rto_price?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: productVariantCountOrderByAggregateInput
@@ -19194,6 +19310,10 @@ export namespace Prisma {
     qty?: IntWithAggregatesFilter<"productVariant"> | number
     currency?: StringWithAggregatesFilter<"productVariant"> | string
     article_id?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
+    suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
+    shipowl_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
+    rto_suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
+    rto_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
   }
@@ -20742,6 +20862,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -20757,6 +20878,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -20787,6 +20909,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -20803,6 +20926,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -20825,6 +20949,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20840,6 +20965,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20870,6 +20996,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -20886,6 +21013,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20912,6 +21040,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -20928,6 +21057,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -20949,6 +21079,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20964,6 +21095,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20989,6 +21121,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -21005,6 +21138,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -21024,6 +21158,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: productCreateNestedOneWithoutVariantsInput
@@ -21038,6 +21176,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21049,6 +21191,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: productUpdateOneRequiredWithoutVariantsNestedInput
@@ -21063,6 +21209,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21076,6 +21226,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21087,6 +21241,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21100,6 +21258,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22376,6 +22538,7 @@ export namespace Prisma {
     ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
+    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -22392,6 +22555,7 @@ export namespace Prisma {
     package_width_image?: SortOrder
     package_height_image?: SortOrder
     product_detail_video?: SortOrder
+    training_guidance_video?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -22433,6 +22597,7 @@ export namespace Prisma {
     ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
+    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -22449,6 +22614,7 @@ export namespace Prisma {
     package_width_image?: SortOrder
     package_height_image?: SortOrder
     product_detail_video?: SortOrder
+    training_guidance_video?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -22473,6 +22639,7 @@ export namespace Prisma {
     ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
+    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -22489,6 +22656,7 @@ export namespace Prisma {
     package_width_image?: SortOrder
     package_height_image?: SortOrder
     product_detail_video?: SortOrder
+    training_guidance_video?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -22580,6 +22748,10 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    suggested_price?: SortOrder
+    shipowl_price?: SortOrder
+    rto_suggested_price?: SortOrder
+    rto_price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22588,6 +22760,10 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     qty?: SortOrder
+    suggested_price?: SortOrder
+    shipowl_price?: SortOrder
+    rto_suggested_price?: SortOrder
+    rto_price?: SortOrder
   }
 
   export type productVariantMaxOrderByAggregateInput = {
@@ -22599,6 +22775,10 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    suggested_price?: SortOrder
+    shipowl_price?: SortOrder
+    rto_suggested_price?: SortOrder
+    rto_price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22612,6 +22792,10 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    suggested_price?: SortOrder
+    shipowl_price?: SortOrder
+    rto_suggested_price?: SortOrder
+    rto_price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22620,6 +22804,10 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     qty?: SortOrder
+    suggested_price?: SortOrder
+    shipowl_price?: SortOrder
+    rto_suggested_price?: SortOrder
+    rto_price?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -23953,6 +24141,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -23968,6 +24157,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -23996,6 +24186,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -24012,6 +24203,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -24044,6 +24236,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -24059,6 +24252,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -24088,6 +24282,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -24103,6 +24298,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -24273,6 +24469,7 @@ export namespace Prisma {
     ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
+    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -24289,6 +24486,7 @@ export namespace Prisma {
     package_width_image?: StringNullableFilter<"product"> | string | null
     package_height_image?: StringNullableFilter<"product"> | string | null
     product_detail_video?: StringNullableFilter<"product"> | string | null
+    training_guidance_video?: StringNullableFilter<"product"> | string | null
     status?: BoolFilter<"product"> | boolean
     createdAt?: DateTimeFilter<"product"> | Date | string
     createdBy?: IntNullableFilter<"product"> | number | null
@@ -25134,6 +25332,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -25149,6 +25348,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25177,6 +25377,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -25193,6 +25394,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25241,6 +25443,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -25256,6 +25459,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25284,6 +25488,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -25300,6 +25505,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25536,6 +25742,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25548,6 +25758,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25804,6 +26018,10 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
+    rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
   }
@@ -25817,6 +26035,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -25832,6 +26051,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25861,6 +26081,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -25877,6 +26098,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -25914,6 +26136,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25929,6 +26152,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25958,6 +26182,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -25974,6 +26199,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26108,6 +26334,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -26124,6 +26351,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -26149,6 +26377,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -26164,6 +26393,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -26355,6 +26585,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26370,6 +26601,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26398,6 +26630,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -26414,6 +26647,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26439,6 +26673,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -26455,6 +26690,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26476,6 +26712,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26491,6 +26728,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26520,6 +26758,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26535,6 +26774,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26561,6 +26801,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26576,6 +26817,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26852,6 +27094,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -26868,6 +27111,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -26889,6 +27133,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26904,6 +27149,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26932,6 +27178,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -26948,6 +27195,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26973,6 +27221,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -26989,6 +27238,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27013,6 +27263,7 @@ export namespace Prisma {
     ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
+    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -27029,6 +27280,7 @@ export namespace Prisma {
     package_width_image?: string | null
     package_height_image?: string | null
     product_detail_video?: string | null
+    training_guidance_video?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -27050,6 +27302,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27065,6 +27318,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27093,6 +27347,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -27109,6 +27364,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27134,6 +27390,7 @@ export namespace Prisma {
     ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -27150,6 +27407,7 @@ export namespace Prisma {
     package_width_image?: NullableStringFieldUpdateOperationsInput | string | null
     package_height_image?: NullableStringFieldUpdateOperationsInput | string | null
     product_detail_video?: NullableStringFieldUpdateOperationsInput | string | null
+    training_guidance_video?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27170,6 +27428,10 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    suggested_price?: number | null
+    shipowl_price?: number | null
+    rto_suggested_price?: number | null
+    rto_price?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27181,6 +27443,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27193,6 +27459,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27205,6 +27475,10 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -323,6 +323,7 @@ model product {
   ean                             String?
   hsnCode                         String?
   taxRate                         Float?
+  upc                             String?
   rtoAddress                      String?
   pickupAddress                   String?
 
@@ -342,6 +343,7 @@ model product {
   package_width_image             String?          // Updated from package_wid_image
   package_height_image            String?          // Updated from package_heig_image
   product_detail_video            String?
+  training_guidance_video         String?
 
   status                          Boolean          @default(true)
   createdAt                       DateTime         @default(now())
@@ -371,14 +373,18 @@ model product {
 }
 
 model productVariant {
-  id              Int              @id @default(autoincrement())
-  productId       Int
-  image           String
-  color           String
-  sku             String           @unique
-  qty             Int
-  currency        String
-  article_id      String?
+  id                        Int              @id @default(autoincrement())
+  productId                 Int
+  image                     String
+  color                     String
+  sku                       String           @unique
+  qty                       Int
+  currency                  String
+  article_id                String?
+  suggested_price           Float?
+  shipowl_price             Float?
+  rto_suggested_price       Float?
+  rto_price                 Float?
 
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
