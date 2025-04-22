@@ -61,15 +61,15 @@ interface Product {
     deletedByRole?: string | null;
 }
 
-const serializeBigInt = (obj: any): any => {
+const serializeBigInt = <T>(obj: T): T => {
     if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
+        return obj.map(serializeBigInt) as T;
     } else if (obj && typeof obj === 'object') {
         return Object.fromEntries(
             Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-        );
+        ) as T;
     } else if (typeof obj === 'bigint') {
-        return obj.toString(); // ✅ fixed
+        return obj.toString() as T;
     }
     return obj;
 };
