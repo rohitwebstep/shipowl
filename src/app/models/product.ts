@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
 
 interface Variant {
     id?: number; // Assuming you have an ID for the variant
@@ -59,6 +60,19 @@ interface Product {
     deletedAt?: Date;
     deletedByRole?: string | null;
 }
+
+const serializeBigInt = (obj: any): any => {
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        );
+    } else if (typeof obj === 'bigint') {
+        return obj.toString(); // ✅ fixed
+    }
+    return obj;
+};
 
 export async function checkMainSKUAvailability(main_sku: string) {
     try {
@@ -366,9 +380,12 @@ export const getProductsByStatus = async (status: "active" | "inactive" | "delet
         const products = await prisma.product.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
+            include: { variants: true },
         });
 
-        return { status: true, products };
+        const sanitizedProducts = serializeBigInt(products);
+        logMessage('debug', 'fetched products :', sanitizedProducts);
+        return { status: true, products: sanitizedProducts };
     } catch (error) {
         console.error(`Error fetching products by status (${status}):`, error);
         return { status: false, message: "Error fetching products" };
