@@ -19,7 +19,7 @@ type UploadedFileInfo = {
 };
 
 interface Variant {
-  id?: number; // Assuming you have an ID for the variant
+  id?: number;
   color: string;
   sku: string;
   qty: number;
@@ -257,8 +257,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
     }
 
-    for (const fileUrl of Object.values(uploadedFiles)) {
-      await deleteFile(path.join(uploadDir, path.basename(fileUrl)));
+    // Check if there are any uploaded files before attempting to delete
+    if (Object.keys(uploadedFiles).length > 0) {
+      // Iterate over each field in uploadedFiles
+      for (const field in uploadedFiles) {
+        // Split the comma-separated URLs into an array of individual file URLs
+        const fileUrls = uploadedFiles[field].split(',').map((url) => url.trim());
+
+        // Iterate over each file URL in the array
+        for (const fileUrl of fileUrls) {
+          if (fileUrl) {  // Check if the file URL is valid
+            const filePath = path.join(uploadDir, path.basename(fileUrl));
+
+            // Attempt to delete the file
+            await deleteFile(filePath);
+            logMessage('info', `Deleted file: ${filePath}`);
+          }
+        }
+      }
+    } else {
+      logMessage('info', 'No uploaded files to delete.');
     }
 
     logMessage('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');

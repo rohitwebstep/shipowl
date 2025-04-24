@@ -10005,6 +10005,7 @@ __turbopack_context__.s({
     "deleteProduct": (()=>deleteProduct),
     "generateProductSlug": (()=>generateProductSlug),
     "getProductById": (()=>getProductById),
+    "getProductVariantById": (()=>getProductVariantById),
     "getProductsByStatus": (()=>getProductsByStatus),
     "removeProductImageByIndex": (()=>removeProductImageByIndex),
     "restoreProduct": (()=>restoreProduct),
@@ -10329,18 +10330,48 @@ const removeProductImageByIndex = async (productId, type, imageIndex)=>{
                 message: message || "Product not found."
             };
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])(`debug`, `product: `, product);
-        return;
-        "TURBOPACK unreachable";
-        const images = undefined;
-        const removedImage = undefined; // Remove image at given index
-        const updatedImages = undefined;
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])(`debug`, `product (${type}):`, product);
+        const allowedImages = {
+            package_weight_image: product.package_weight_image,
+            package_length_image: product.package_length_image,
+            package_width_image: product.package_width_image,
+            package_height_image: product.package_height_image
+        };
+        const images = allowedImages[type]; // ✅ No TS error now
+        console.log(`Images of type '${type}':`, images);
+        if (!images) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const imagesArr = images.split(",");
+        if (imageIndex < 0 || imageIndex >= imagesArr.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = imagesArr.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = imagesArr.join(",");
         // Update product in DB
-        const updatedProduct = undefined;
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                [type]: updatedImages
+            }
+        });
         // 🔥 Attempt to delete the image file from storage
-        const imageFileName = undefined;
-        const filePath = undefined;
-        const fileDeleted = undefined;
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "product", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            product: updatedProduct
+        };
     } catch (error) {
         console.error("❌ Error removing product image:", error);
         return {
@@ -10377,9 +10408,64 @@ const getProductById = async (id)=>{
         };
     }
 };
+const getProductVariantById = async (id)=>{
+    try {
+        const productVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!productVariant) return {
+            status: false,
+            message: "productVariant Variant not found"
+        };
+        const sanitizedProductVariant = serializeBigInt(productVariant);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedProductVariant);
+        return {
+            status: true,
+            variant: sanitizedProductVariant
+        };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product variant"
+        };
+    }
+};
 const updateProduct = async (adminId, adminRole, productId, product)=>{
     try {
         const { name, categoryId, main_sku, ean, hsnCode, taxRate, upc, rtoAddress, pickupAddress, description, tags, brandId, originCountryId, shippingCountryId, list_as, shipping_time, weight, package_length, package_width, package_height, chargeable_weight, variants, product_detail_video, status, package_weight_image, package_length_image, package_width_image, package_height_image, video_url } = product;
+        // Image fields to process
+        const imageFields = [
+            'package_weight_image',
+            'package_length_image',
+            'package_width_image',
+            'package_height_image'
+        ];
+        // Fetch existing product once
+        const productResponse = await getProductById(productId);
+        if (!productResponse.status || !productResponse.product) {
+            return {
+                status: false,
+                message: productResponse.message || "Product not found."
+            };
+        }
+        const existingProduct = productResponse.product;
+        for (const field of imageFields){
+            const newValue = product[field];
+            if (typeof newValue === 'string' && newValue.trim()) {
+                const newImages = newValue.split(',').map((img)=>img.trim()).filter(Boolean);
+                const existingValue = existingProduct[field];
+                const existingImages = typeof existingValue === 'string' ? existingValue.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedImages = Array.from(new Set([
+                    ...existingImages,
+                    ...newImages
+                ]));
+                // ✅ Type-safe update
+                product[field] = mergedImages.join(',');
+            }
+        }
         // Update the product details
         const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
             where: {
@@ -10422,39 +10508,50 @@ const updateProduct = async (adminId, adminRole, productId, product)=>{
         // Handle variants: update if id exists, else create new
         if (variants && variants.length > 0) {
             for (const variant of variants){
+                // Get existing variant if ID exists
+                let existingVariantImages = [];
                 if (variant.id) {
-                    // Update existing variant
+                    // Fetch existing product once
+                    const productVariantResponse = await getProductVariantById(variant.id);
+                    if (!productVariantResponse.status || !productVariantResponse.variant) {
+                        return {
+                            status: false,
+                            message: productVariantResponse.message || "Product Variant not found."
+                        };
+                    }
+                    const existingProductVariant = productVariantResponse.variant;
+                    if (existingProductVariant?.image && typeof existingProductVariant.image === 'string') {
+                        existingVariantImages = existingProductVariant.image.split(',').map((img)=>img.trim()).filter(Boolean);
+                    }
+                }
+                const newVariantImages = typeof variant.images === 'string' ? variant.images.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedVariantImages = Array.from(new Set([
+                    ...existingVariantImages,
+                    ...newVariantImages
+                ])).join(',');
+                const variantData = {
+                    color: variant.color,
+                    sku: variant.sku,
+                    qty: variant.qty,
+                    currency: variant.currency,
+                    article_id: variant.article_id,
+                    suggested_price: variant.suggested_price,
+                    shipowl_price: variant.shipowl_price,
+                    rto_suggested_price: variant.rto_suggested_price,
+                    rto_price: variant.rto_price,
+                    image: mergedVariantImages
+                };
+                if (variant.id) {
                     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.update({
                         where: {
                             id: Number(variant.id)
                         },
-                        data: {
-                            color: variant.color,
-                            sku: variant.sku,
-                            qty: variant.qty,
-                            currency: variant.currency,
-                            article_id: variant.article_id,
-                            suggested_price: variant.suggested_price,
-                            shipowl_price: variant.shipowl_price,
-                            rto_suggested_price: variant.rto_suggested_price,
-                            rto_price: variant.rto_price,
-                            image: variant.images
-                        }
+                        data: variantData
                     });
                 } else {
-                    // Create new variant
                     await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.create({
                         data: {
-                            color: variant.color,
-                            sku: variant.sku,
-                            qty: variant.qty,
-                            currency: variant.currency,
-                            article_id: variant.article_id,
-                            suggested_price: variant.suggested_price,
-                            shipowl_price: variant.shipowl_price,
-                            rto_suggested_price: variant.rto_suggested_price,
-                            rto_price: variant.rto_price,
-                            image: variant.images,
+                            ...variantData,
                             productId: productId
                         }
                     });
@@ -10533,7 +10630,7 @@ const restoreProduct = async (adminId, adminRole, id)=>{
             }
         });
         // Restore the variants of this product
-        const restoredVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
             where: {
                 productId: id
             },
@@ -10806,82 +10903,12 @@ async function POST(req) {
                 }
             }
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Uploaded files:', uploadedFiles);
-        const productPayload = {
-            name: extractString('name') || '',
-            categoryId,
-            main_sku,
-            ean: extractString('ean') || '',
-            hsnCode: extractString('hsn_ode') || '',
-            taxRate: extractNumber('tax_rate') || 0,
-            upc: extractString('upc') || '',
-            rtoAddress: extractString('rto_address') || '',
-            pickupAddress: extractString('pickup_address') || '',
-            description: extractString('description'),
-            tags: extractString('tags') || '',
-            brandId: extractNumber('brand') || 0,
-            originCountryId,
-            shippingCountryId,
-            list_as: extractString('list_as'),
-            shipping_time: extractString('shipping_time'),
-            weight: extractNumber('weight'),
-            package_length: extractNumber('package_length'),
-            package_width: extractNumber('package_width'),
-            package_height: extractNumber('package_height'),
-            chargeable_weight: extractNumber('chargeable_weight'),
-            variants,
-            product_detail_video: uploadedFiles['product_detail_video'],
-            status,
-            package_weight_image: uploadedFiles['package_weight_image'],
-            package_length_image: uploadedFiles['package_length_image'],
-            package_width_image: uploadedFiles['package_width_image'],
-            package_height_image: uploadedFiles['package_height_image'],
-            video_url: extractString('video_url'),
-            createdBy: adminId,
-            createdByRole: adminRole
-        };
-        if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
-            for(let index = 0; index < productPayload.variants.length; index++){
-                console.log(`🔁 Index: ${index}`);
-                const variantImagesIndex = `variant_images_${index}`;
-                // File upload
-                const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, variantImagesIndex, {
-                    dir: uploadDir,
-                    pattern: 'slug-unique',
-                    multiple: true
-                });
-                let image = '';
-                if (fileData) {
-                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
-                    if (Array.isArray(fileData)) {
-                        image = fileData.map((file)=>file.url).join(', ');
-                    } else {
-                        image = fileData.url;
-                    }
-                }
-                productPayload.variants[index].images = image;
-            }
-        }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product payload created:', productPayload);
-        const productCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createProduct"])(adminId, String(adminRole), productPayload);
-        if (productCreateResult?.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                product: productCreateResult.product
-            }, {
-                status: 200
-            });
-        }
-        for (const fileUrl of Object.values(uploadedFiles)){
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(fileUrl)));
-        }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: productCreateResult?.message || 'Product creation failed'
-        }, {
-            status: 500
-        });
+        console.log(`uploadedFiles - `, uploadedFiles);
+        return;
+        "TURBOPACK unreachable";
+        const productPayload = undefined;
+        const productCreateResult = undefined;
+        const fileUrl = undefined;
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Error:', error);
