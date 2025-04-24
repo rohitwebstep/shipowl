@@ -755,7 +755,7 @@ export const restoreProduct = async (adminId: number, adminRole: string, id: num
         });
 
         // Restore the variants of this product
-        const restoredVariants = await prisma.productVariant.updateMany({
+        await prisma.productVariant.updateMany({
             where: { productId: id },  // assuming `productId` is the foreign key in the variant table
             data: {
                 deletedBy: null,      // Reset the deletedBy field for variants
