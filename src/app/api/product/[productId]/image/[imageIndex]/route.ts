@@ -4,6 +4,12 @@ import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/authUtils';
 import { getProductById, removeProductImageByIndex } from '@/app/models/product';
 
+type ImageType =
+  | 'package_weight_image'
+  | 'package_length_image'
+  | 'package_width_image'
+  | 'package_height_image';
+
 export async function DELETE(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
@@ -44,8 +50,20 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
     }
 
+    const allowedTypes: ImageType[] = [
+      'package_weight_image',
+      'package_length_image',
+      'package_width_image',
+      'package_height_image',
+    ];
+
+    // Validate the type before calling
+    if (!allowedTypes.includes(type as ImageType)) {
+      return Response.json({ status: false, message: 'Invalid image type provided.' }, { status: 400 });
+    }
+
     // Perform image removal
-    const result = await removeProductImageByIndex(productId, type, imageIndex);
+    const result = await removeProductImageByIndex(productId, type as ImageType, imageIndex);
 
     if (result.status) {
       logMessage('info', `Image index ${imageIndex} removed from product ${productId} by admin ${adminId}`);
