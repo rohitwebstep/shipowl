@@ -15964,6 +15964,9 @@ export namespace Prisma {
     shipowl_price: number | null
     rto_suggested_price: number | null
     rto_price: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type ProductVariantSumAggregateOutputType = {
@@ -15974,6 +15977,9 @@ export namespace Prisma {
     shipowl_price: number | null
     rto_suggested_price: number | null
     rto_price: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type ProductVariantMinAggregateOutputType = {
@@ -15990,7 +15996,14 @@ export namespace Prisma {
     rto_suggested_price: number | null
     rto_price: number | null
     createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
     updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type ProductVariantMaxAggregateOutputType = {
@@ -16007,7 +16020,14 @@ export namespace Prisma {
     rto_suggested_price: number | null
     rto_price: number | null
     createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
     updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type ProductVariantCountAggregateOutputType = {
@@ -16024,7 +16044,14 @@ export namespace Prisma {
     rto_suggested_price: number
     rto_price: number
     createdAt: number
+    createdBy: number
+    createdByRole: number
     updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
@@ -16037,6 +16064,9 @@ export namespace Prisma {
     shipowl_price?: true
     rto_suggested_price?: true
     rto_price?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type ProductVariantSumAggregateInputType = {
@@ -16047,6 +16077,9 @@ export namespace Prisma {
     shipowl_price?: true
     rto_suggested_price?: true
     rto_price?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type ProductVariantMinAggregateInputType = {
@@ -16063,7 +16096,14 @@ export namespace Prisma {
     rto_suggested_price?: true
     rto_price?: true
     createdAt?: true
+    createdBy?: true
+    createdByRole?: true
     updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type ProductVariantMaxAggregateInputType = {
@@ -16080,7 +16120,14 @@ export namespace Prisma {
     rto_suggested_price?: true
     rto_price?: true
     createdAt?: true
+    createdBy?: true
+    createdByRole?: true
     updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type ProductVariantCountAggregateInputType = {
@@ -16097,7 +16144,14 @@ export namespace Prisma {
     rto_suggested_price?: true
     rto_price?: true
     createdAt?: true
+    createdBy?: true
+    createdByRole?: true
     updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -16201,7 +16255,14 @@ export namespace Prisma {
     rto_suggested_price: number | null
     rto_price: number | null
     createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
     updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: ProductVariantCountAggregateOutputType | null
     _avg: ProductVariantAvgAggregateOutputType | null
     _sum: ProductVariantSumAggregateOutputType | null
@@ -16237,7 +16298,14 @@ export namespace Prisma {
     rto_suggested_price?: boolean
     rto_price?: boolean
     createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
     updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
     product?: boolean | productDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productVariant"]>
 
@@ -16257,10 +16325,17 @@ export namespace Prisma {
     rto_suggested_price?: boolean
     rto_price?: boolean
     createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
     updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
   }
@@ -16284,7 +16359,14 @@ export namespace Prisma {
       rto_suggested_price: number | null
       rto_price: number | null
       createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
       updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["productVariant"]>
     composites: {}
   }
@@ -16668,7 +16750,14 @@ export namespace Prisma {
     readonly rto_suggested_price: FieldRef<"productVariant", 'Float'>
     readonly rto_price: FieldRef<"productVariant", 'Float'>
     readonly createdAt: FieldRef<"productVariant", 'DateTime'>
+    readonly createdBy: FieldRef<"productVariant", 'Int'>
+    readonly createdByRole: FieldRef<"productVariant", 'String'>
     readonly updatedAt: FieldRef<"productVariant", 'DateTime'>
+    readonly updatedBy: FieldRef<"productVariant", 'Int'>
+    readonly updatedByRole: FieldRef<"productVariant", 'String'>
+    readonly deletedAt: FieldRef<"productVariant", 'DateTime'>
+    readonly deletedBy: FieldRef<"productVariant", 'Int'>
+    readonly deletedByRole: FieldRef<"productVariant", 'String'>
   }
     
 
@@ -17354,7 +17443,14 @@ export namespace Prisma {
     rto_suggested_price: 'rto_suggested_price',
     rto_price: 'rto_price',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type ProductVariantScalarFieldEnum = (typeof ProductVariantScalarFieldEnum)[keyof typeof ProductVariantScalarFieldEnum]
@@ -17596,7 +17692,10 @@ export namespace Prisma {
     color: 'color',
     sku: 'sku',
     currency: 'currency',
-    article_id: 'article_id'
+    article_id: 'article_id',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type productVariantOrderByRelevanceFieldEnum = (typeof productVariantOrderByRelevanceFieldEnum)[keyof typeof productVariantOrderByRelevanceFieldEnum]
@@ -19232,7 +19331,14 @@ export namespace Prisma {
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    createdBy?: IntNullableFilter<"productVariant"> | number | null
+    createdByRole?: StringNullableFilter<"productVariant"> | string | null
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedBy?: IntNullableFilter<"productVariant"> | number | null
+    updatedByRole?: StringNullableFilter<"productVariant"> | string | null
+    deletedAt?: DateTimeNullableFilter<"productVariant"> | Date | string | null
+    deletedBy?: IntNullableFilter<"productVariant"> | number | null
+    deletedByRole?: StringNullableFilter<"productVariant"> | string | null
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
   }
 
@@ -19250,7 +19356,14 @@ export namespace Prisma {
     rto_suggested_price?: SortOrderInput | SortOrder
     rto_price?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     product?: productOrderByWithRelationInput
     _relevance?: productVariantOrderByRelevanceInput
   }
@@ -19272,7 +19385,14 @@ export namespace Prisma {
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    createdBy?: IntNullableFilter<"productVariant"> | number | null
+    createdByRole?: StringNullableFilter<"productVariant"> | string | null
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedBy?: IntNullableFilter<"productVariant"> | number | null
+    updatedByRole?: StringNullableFilter<"productVariant"> | string | null
+    deletedAt?: DateTimeNullableFilter<"productVariant"> | Date | string | null
+    deletedBy?: IntNullableFilter<"productVariant"> | number | null
+    deletedByRole?: StringNullableFilter<"productVariant"> | string | null
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
   }, "id" | "sku">
 
@@ -19290,7 +19410,14 @@ export namespace Prisma {
     rto_suggested_price?: SortOrderInput | SortOrder
     rto_price?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: productVariantCountOrderByAggregateInput
     _avg?: productVariantAvgOrderByAggregateInput
     _max?: productVariantMaxOrderByAggregateInput
@@ -19315,7 +19442,14 @@ export namespace Prisma {
     rto_suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     rto_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"productVariant"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"productVariant"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"productVariant"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"productVariant"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"productVariant"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
   }
 
   export type emailConfigCreateInput = {
@@ -21163,7 +21297,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
     product: productCreateNestedOneWithoutVariantsInput
   }
 
@@ -21181,7 +21322,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productVariantUpdateInput = {
@@ -21196,7 +21344,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     product?: productUpdateOneRequiredWithoutVariantsNestedInput
   }
 
@@ -21214,7 +21369,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productVariantCreateManyInput = {
@@ -21231,7 +21393,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productVariantUpdateManyMutationInput = {
@@ -21246,7 +21415,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productVariantUncheckedUpdateManyInput = {
@@ -21263,7 +21439,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -22753,7 +22936,14 @@ export namespace Prisma {
     rto_suggested_price?: SortOrder
     rto_price?: SortOrder
     createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
     updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productVariantAvgOrderByAggregateInput = {
@@ -22764,6 +22954,9 @@ export namespace Prisma {
     shipowl_price?: SortOrder
     rto_suggested_price?: SortOrder
     rto_price?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type productVariantMaxOrderByAggregateInput = {
@@ -22780,7 +22973,14 @@ export namespace Prisma {
     rto_suggested_price?: SortOrder
     rto_price?: SortOrder
     createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
     updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productVariantMinOrderByAggregateInput = {
@@ -22797,7 +22997,14 @@ export namespace Prisma {
     rto_suggested_price?: SortOrder
     rto_price?: SortOrder
     createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
     updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type productVariantSumOrderByAggregateInput = {
@@ -22808,6 +23015,9 @@ export namespace Prisma {
     shipowl_price?: SortOrder
     rto_suggested_price?: SortOrder
     rto_price?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -25747,7 +25957,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productVariantUncheckedCreateWithoutProductInput = {
@@ -25763,7 +25980,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productVariantCreateOrConnectWithoutProductInput = {
@@ -26023,7 +26247,14 @@ export namespace Prisma {
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
+    createdBy?: IntNullableFilter<"productVariant"> | number | null
+    createdByRole?: StringNullableFilter<"productVariant"> | string | null
     updatedAt?: DateTimeFilter<"productVariant"> | Date | string
+    updatedBy?: IntNullableFilter<"productVariant"> | number | null
+    updatedByRole?: StringNullableFilter<"productVariant"> | string | null
+    deletedAt?: DateTimeNullableFilter<"productVariant"> | Date | string | null
+    deletedBy?: IntNullableFilter<"productVariant"> | number | null
+    deletedByRole?: StringNullableFilter<"productVariant"> | string | null
   }
 
   export type productCreateWithoutVariantsInput = {
@@ -27433,7 +27664,14 @@ export namespace Prisma {
     rto_suggested_price?: number | null
     rto_price?: number | null
     createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
     updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type productVariantUpdateWithoutProductInput = {
@@ -27448,7 +27686,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productVariantUncheckedUpdateWithoutProductInput = {
@@ -27464,7 +27709,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type productVariantUncheckedUpdateManyWithoutProductInput = {
@@ -27480,7 +27732,14 @@ export namespace Prisma {
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_price?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

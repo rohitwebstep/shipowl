@@ -355,7 +355,14 @@ CREATE TABLE `productVariant` (
     `rto_suggested_price` DOUBLE NULL,
     `rto_price` DOUBLE NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
     `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
 
     UNIQUE INDEX `productVariant_sku_key`(`sku`),
     INDEX `productVariant_productId_idx`(`productId`),
@@ -396,4 +403,4 @@ ALTER TABLE `product` ADD CONSTRAINT `product_originCountryId_fkey` FOREIGN KEY 
 ALTER TABLE `product` ADD CONSTRAINT `product_shippingCountryId_fkey` FOREIGN KEY (`shippingCountryId`) REFERENCES `country`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `productVariant` ADD CONSTRAINT `productVariant_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `productVariant` ADD CONSTRAINT `productVariant_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

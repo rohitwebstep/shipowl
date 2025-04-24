@@ -391,7 +391,14 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   rto_suggested_price: 'rto_suggested_price',
   rto_price: 'rto_price',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.SortOrder = {
@@ -579,7 +586,10 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   color: 'color',
   sku: 'sku',
   currency: 'currency',
-  article_id: 'article_id'
+  article_id: 'article_id',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 

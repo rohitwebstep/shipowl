@@ -126,11 +126,12 @@ export async function PUT(req: NextRequest) {
     const extractJSON = (key: string): Record<string, unknown> | null => {
 
       const value = extractString(key);
+      const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
 
       let parsedData;
-      if (typeof value === 'string') {
+      if (typeof cleanedValue === 'string') {
         try {
-          parsedData = JSON.parse(value);
+          parsedData = JSON.parse(cleanedValue);
           logMessage('info', "✅ Parsed value: 1", parsedData);
           return parsedData;
         } catch (error) {
@@ -138,7 +139,7 @@ export async function PUT(req: NextRequest) {
         }
 
         try {
-          parsedData = JSON.parse(value);
+          parsedData = JSON.parse(cleanedValue);
           logMessage('info', "✅ Parsed value: 2", parsedData);
           return parsedData;
         } catch (error) {
@@ -147,9 +148,9 @@ export async function PUT(req: NextRequest) {
         }
       }
 
-      if (typeof value === 'object' && value !== null) {
-        logMessage('info', "✅ Parsed value: 3", value);
-        return value;
+      if (typeof cleanedValue === 'object' && cleanedValue !== null) {
+        logMessage('info', "✅ Parsed value: 3", cleanedValue);
+        return cleanedValue;
       }
 
       return null;
@@ -331,7 +332,7 @@ export async function PUT(req: NextRequest) {
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'Product Creation Error:', error);
+    logMessage('error', 'Product Updation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }

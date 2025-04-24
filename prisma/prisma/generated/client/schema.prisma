@@ -387,10 +387,17 @@ model productVariant {
   rto_suggested_price Float?
   rto_price           Float?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
 
-  product product @relation(fields: [productId], references: [id])
+  product product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([productId])
 }

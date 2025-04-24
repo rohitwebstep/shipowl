@@ -1,0 +1,3 @@
+{
+  "/api/product/[productId]/restore/route": "app/api/product/[productId]/restore/route.js"
+}
