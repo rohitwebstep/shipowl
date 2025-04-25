@@ -177,25 +177,27 @@ export async function PUT(req: NextRequest) {
     }
     const variants: Variant[] = Array.isArray(rawVariants) ? rawVariants as Variant[] : [];
 
-    // Ensure variants have unique SKUs
-    const allUniqeSkus = new Set(variants.map((variant: { sku: string }) => variant.sku));
-    if (allUniqeSkus.size !== variants.length) {
-      logMessage('warn', 'Duplicate SKUs found in variants');
-      return NextResponse.json({ status: false, error: 'Duplicate SKUs found in variants' }, { status: 400 });
-    }
+    if (variants.length > 0) {
+      // Ensure variants have unique SKUs
+      const allUniqeSkus = new Set(variants.map((variant: { sku: string }) => variant.sku));
+      if (allUniqeSkus.size !== variants.length) {
+        logMessage('warn', 'Duplicate SKUs found in variants');
+        return NextResponse.json({ status: false, error: 'Duplicate SKUs found in variants' }, { status: 400 });
+      }
 
-    // Map variant SKUs with optional IDs to check for availability
-    const variantSKUsWithIds = variants.map((variant: { sku: string; id?: number }) => ({
-      sku: variant.sku,
-      id: variant.id || null
-    }));
+      // Map variant SKUs with optional IDs to check for availability
+      const variantSKUsWithIds = variants.map((variant: { sku: string; id?: number }) => ({
+        sku: variant.sku,
+        id: variant.id || null
+      }));
 
-    const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } =
-      await checkVariantSKUsAvailabilityForUpdate(variantSKUsWithIds, productIdNum);
+      const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } =
+        await checkVariantSKUsAvailabilityForUpdate(variantSKUsWithIds, productIdNum);
 
-    if (!checkVariantSKUsAvailabilityResult) {
-      logMessage('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
-      return NextResponse.json({ status: false, error: checkVariantSKUsAvailabilityMessage }, { status: 400 });
+      if (!checkVariantSKUsAvailabilityResult) {
+        logMessage('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
+        return NextResponse.json({ status: false, error: checkVariantSKUsAvailabilityMessage }, { status: 400 });
+      }
     }
 
     const brandId = extractNumber('brand') || 0;
