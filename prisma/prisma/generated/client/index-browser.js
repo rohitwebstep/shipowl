@@ -386,6 +386,7 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   qty: 'qty',
   currency: 'currency',
   article_id: 'article_id',
+  product_link: 'product_link',
   suggested_price: 'suggested_price',
   shipowl_price: 'shipowl_price',
   rto_suggested_price: 'rto_suggested_price',
@@ -587,6 +588,7 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   sku: 'sku',
   currency: 'currency',
   article_id: 'article_id',
+  product_link: 'product_link',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'

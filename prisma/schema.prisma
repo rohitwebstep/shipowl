@@ -381,6 +381,7 @@ model productVariant {
   qty                       Int
   currency                  String
   article_id                String?
+  product_link              String?
   suggested_price           Float?
   shipowl_price             Float?
   rto_suggested_price       Float?

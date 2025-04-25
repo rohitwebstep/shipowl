@@ -15991,6 +15991,7 @@ export namespace Prisma {
     qty: number | null
     currency: string | null
     article_id: string | null
+    product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
     rto_suggested_price: number | null
@@ -16015,6 +16016,7 @@ export namespace Prisma {
     qty: number | null
     currency: string | null
     article_id: string | null
+    product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
     rto_suggested_price: number | null
@@ -16039,6 +16041,7 @@ export namespace Prisma {
     qty: number
     currency: number
     article_id: number
+    product_link: number
     suggested_price: number
     shipowl_price: number
     rto_suggested_price: number
@@ -16091,6 +16094,7 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    product_link?: true
     suggested_price?: true
     shipowl_price?: true
     rto_suggested_price?: true
@@ -16115,6 +16119,7 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    product_link?: true
     suggested_price?: true
     shipowl_price?: true
     rto_suggested_price?: true
@@ -16139,6 +16144,7 @@ export namespace Prisma {
     qty?: true
     currency?: true
     article_id?: true
+    product_link?: true
     suggested_price?: true
     shipowl_price?: true
     rto_suggested_price?: true
@@ -16250,6 +16256,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id: string | null
+    product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
     rto_suggested_price: number | null
@@ -16293,6 +16300,7 @@ export namespace Prisma {
     qty?: boolean
     currency?: boolean
     article_id?: boolean
+    product_link?: boolean
     suggested_price?: boolean
     shipowl_price?: boolean
     rto_suggested_price?: boolean
@@ -16320,6 +16328,7 @@ export namespace Prisma {
     qty?: boolean
     currency?: boolean
     article_id?: boolean
+    product_link?: boolean
     suggested_price?: boolean
     shipowl_price?: boolean
     rto_suggested_price?: boolean
@@ -16335,7 +16344,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "product_link" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
   }
@@ -16354,6 +16363,7 @@ export namespace Prisma {
       qty: number
       currency: string
       article_id: string | null
+      product_link: string | null
       suggested_price: number | null
       shipowl_price: number | null
       rto_suggested_price: number | null
@@ -16745,6 +16755,7 @@ export namespace Prisma {
     readonly qty: FieldRef<"productVariant", 'Int'>
     readonly currency: FieldRef<"productVariant", 'String'>
     readonly article_id: FieldRef<"productVariant", 'String'>
+    readonly product_link: FieldRef<"productVariant", 'String'>
     readonly suggested_price: FieldRef<"productVariant", 'Float'>
     readonly shipowl_price: FieldRef<"productVariant", 'Float'>
     readonly rto_suggested_price: FieldRef<"productVariant", 'Float'>
@@ -17438,6 +17449,7 @@ export namespace Prisma {
     qty: 'qty',
     currency: 'currency',
     article_id: 'article_id',
+    product_link: 'product_link',
     suggested_price: 'suggested_price',
     shipowl_price: 'shipowl_price',
     rto_suggested_price: 'rto_suggested_price',
@@ -17693,6 +17705,7 @@ export namespace Prisma {
     sku: 'sku',
     currency: 'currency',
     article_id: 'article_id',
+    product_link: 'product_link',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
     deletedByRole: 'deletedByRole'
@@ -19326,6 +19339,7 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -19351,6 +19365,7 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrderInput | SortOrder
+    product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
     shipowl_price?: SortOrderInput | SortOrder
     rto_suggested_price?: SortOrderInput | SortOrder
@@ -19380,6 +19395,7 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -19405,6 +19421,7 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrderInput | SortOrder
+    product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
     shipowl_price?: SortOrderInput | SortOrder
     rto_suggested_price?: SortOrderInput | SortOrder
@@ -19437,6 +19454,7 @@ export namespace Prisma {
     qty?: IntWithAggregatesFilter<"productVariant"> | number
     currency?: StringWithAggregatesFilter<"productVariant"> | string
     article_id?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
+    product_link?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     rto_suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
@@ -21292,6 +21310,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -21317,6 +21336,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -21339,6 +21359,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -21364,6 +21385,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -21388,6 +21410,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -21410,6 +21433,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -21434,6 +21458,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -22931,6 +22956,7 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
     rto_suggested_price?: SortOrder
@@ -22968,6 +22994,7 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
     rto_suggested_price?: SortOrder
@@ -22992,6 +23019,7 @@ export namespace Prisma {
     qty?: SortOrder
     currency?: SortOrder
     article_id?: SortOrder
+    product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
     rto_suggested_price?: SortOrder
@@ -25952,6 +25980,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -25975,6 +26004,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -26242,6 +26272,7 @@ export namespace Prisma {
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
     article_id?: StringNullableFilter<"productVariant"> | string | null
+    product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
     rto_suggested_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -27659,6 +27690,7 @@ export namespace Prisma {
     qty: number
     currency: string
     article_id?: string | null
+    product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
     rto_suggested_price?: number | null
@@ -27681,6 +27713,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27704,6 +27737,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27727,6 +27761,7 @@ export namespace Prisma {
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     article_id?: NullableStringFieldUpdateOperationsInput | string | null
+    product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
     rto_suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null

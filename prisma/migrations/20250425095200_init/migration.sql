@@ -350,6 +350,7 @@ CREATE TABLE `productVariant` (
     `qty` INTEGER NOT NULL,
     `currency` VARCHAR(191) NOT NULL,
     `article_id` VARCHAR(191) NULL,
+    `product_link` VARCHAR(191) NULL,
     `suggested_price` DOUBLE NULL,
     `shipowl_price` DOUBLE NULL,
     `rto_suggested_price` DOUBLE NULL,
