@@ -14,6 +14,7 @@ interface Variant {
     shipowl_price: number;
     rto_suggested_price: number;
     rto_price: number;
+    product_link: string;
     images: string;
 }
 

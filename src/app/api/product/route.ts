@@ -29,6 +29,7 @@ interface Variant {
   shipowl_price: number;
   rto_suggested_price: number;
   rto_price: number;
+  product_link: string;
   images: string;
 }
 
@@ -166,6 +167,7 @@ export async function POST(req: NextRequest) {
       'package_width_image',
       'package_height_image',
       'product_detail_video',
+      'training_guidance_video',
     ];
 
     const uploadedFiles: Record<string, string> = {};
@@ -216,6 +218,7 @@ export async function POST(req: NextRequest) {
       package_length_image: uploadedFiles['package_length_image'],
       package_width_image: uploadedFiles['package_width_image'],
       package_height_image: uploadedFiles['package_height_image'],
+      training_guidance_video: uploadedFiles['training_guidance_video'],
       video_url: extractString('video_url'),
       createdBy: adminId,
       createdByRole: adminRole,
