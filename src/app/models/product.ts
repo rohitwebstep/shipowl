@@ -355,6 +355,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 rto_suggested_price: variant.rto_suggested_price,
                 rto_price: variant.rto_price,
                 image: variant.images,
+                product_link: variant.product_link,
                 productId: productWithStringBigInts.id // This associates the variant with the product
             }));
 
@@ -545,6 +546,7 @@ export const updateProduct = async (
             chargeable_weight,
             variants,
             product_detail_video,
+            training_guidance_video,
             status,
             package_weight_image,
             package_length_image,
@@ -616,6 +618,7 @@ export const updateProduct = async (
                 package_height,
                 chargeable_weight,
                 product_detail_video,
+                training_guidance_video,
                 status,
                 package_weight_image,
                 package_length_image,
@@ -671,6 +674,7 @@ export const updateProduct = async (
                     shipowl_price: variant.shipowl_price,
                     rto_suggested_price: variant.rto_suggested_price,
                     rto_price: variant.rto_price,
+                    product_link: variant.product_link,
                     image: mergedVariantImages,
                 };
 

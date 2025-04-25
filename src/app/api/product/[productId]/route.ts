@@ -258,7 +258,7 @@ export async function PUT(req: NextRequest) {
       categoryId,
       main_sku,
       ean: extractString('ean') || '',
-      hsnCode: extractString('hsn_ode') || '',
+      hsnCode: extractString('hsn_code') || '',
       taxRate: extractNumber('tax_rate') || 0,
       upc: extractString('upc') || '',
       rtoAddress: extractString('rto_address') || '',
@@ -274,7 +274,7 @@ export async function PUT(req: NextRequest) {
       package_length: extractNumber('package_length'),
       package_width: extractNumber('package_width'),
       package_height: extractNumber('package_height'),
-      chargeable_weight: extractNumber('chargeable_weight'),
+      chargeable_weight: extractNumber('chargable_weight'),
       variants,
       product_detail_video: uploadedFiles['product_detail_video'],
       status,
@@ -283,6 +283,8 @@ export async function PUT(req: NextRequest) {
       package_width_image: uploadedFiles['package_width_image'],
       package_height_image: uploadedFiles['package_height_image'],
       video_url: extractString('video_url'),
+      createdBy: adminId,
+      createdByRole: adminRole,
     };
 
     if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
