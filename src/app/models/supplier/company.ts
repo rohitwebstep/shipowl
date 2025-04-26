@@ -210,31 +210,36 @@ export async function updateSupplierCompany(
         // Only add image fields if they are non-empty
         if (gstDocument && gstDocument.trim() !== '' && currentBankAccount?.gstDocument?.trim()) {
             const imageFileName = path.basename(currentBankAccount.gstDocument.trim());
-            const fileDeleted = await deleteFile(filePath);
+            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+            await deleteFile(filePath);
             updateData.gstDocument = gstDocument.trim();
         }
 
         if (panCardImage && panCardImage.trim() !== '' && currentBankAccount?.panCardImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.panCardImage.trim());
-            const fileDeleted = await deleteFile(filePath);
+            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+            await deleteFile(filePath);
             updateData.panCardImage = panCardImage.trim();
         }
 
         if (aadharCardImage && aadharCardImage.trim() !== '' && currentBankAccount?.aadharCardImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.aadharCardImage.trim());
-            const fileDeleted = await deleteFile(filePath);
+            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+            await deleteFile(filePath);
             updateData.aadharCardImage = aadharCardImage.trim();
         }
 
         if (additionalDocumentUpload && additionalDocumentUpload.trim() !== '' && currentBankAccount?.additionalDocumentUpload?.trim()) {
             const imageFileName = path.basename(currentBankAccount.additionalDocumentUpload.trim());
-            const fileDeleted = await deleteFile(filePath);
+            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+            await deleteFile(filePath);
             updateData.additionalDocumentUpload = additionalDocumentUpload.trim();
         }
 
         if (documentImage && documentImage.trim() !== '' && currentBankAccount?.documentImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.documentImage.trim());
-            const fileDeleted = await deleteFile(filePath);
+            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+            await deleteFile(filePath);
             updateData.documentImage = documentImage.trim();
         }
 

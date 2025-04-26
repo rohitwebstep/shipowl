@@ -35,9 +35,6 @@ interface Supplier {
     deletedByRole?: string | null; // Role of the admin who deleted the supplier
 }
 
-type ImageType =
-    | 'profilePicture';
-
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
     if (Array.isArray(obj)) {
