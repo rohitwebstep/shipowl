@@ -40,7 +40,7 @@ export function validateFormData(
             const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
             const isInvalidBoolean =
                 expectedType === 'boolean' &&
-                !['true', 'false', '1', '0', true, false, 1, 0].includes(val.toString().toLowerCase());
+                !['true', 'false', '1', '0', true, false, 1, 0, 'active', 'inactive'].includes(val.toString().toLowerCase());
 
             if (isInvalidNumber || isInvalidBoolean) {
                 error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;

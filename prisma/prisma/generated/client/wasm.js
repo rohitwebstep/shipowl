@@ -143,15 +143,86 @@ exports.Prisma.EmailConfigScalarFieldEnum = {
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  username: 'username',
   email: 'email',
   password: 'password',
   role: 'role',
   status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
+  dateOfBirth: 'dateOfBirth',
+  currentAddress: 'currentAddress',
+  permanentAddress: 'permanentAddress',
+  permanentPostalCode: 'permanentPostalCode',
+  permanentCityId: 'permanentCityId',
+  permanentStateId: 'permanentStateId',
+  permanentCountryId: 'permanentCountryId',
   pr_token: 'pr_token',
   pr_expires_at: 'pr_expires_at',
-  pr_last_reset: 'pr_last_reset'
+  pr_last_reset: 'pr_last_reset',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.CompanyDetailScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  companyName: 'companyName',
+  brandName: 'brandName',
+  brandShortName: 'brandShortName',
+  billingAddress: 'billingAddress',
+  billingPincode: 'billingPincode',
+  billingState: 'billingState',
+  billingCity: 'billingCity',
+  businessType: 'businessType',
+  clientEntryType: 'clientEntryType',
+  gstNumber: 'gstNumber',
+  companyPanNumber: 'companyPanNumber',
+  aadharNumber: 'aadharNumber',
+  gstDocument: 'gstDocument',
+  panCardHolderName: 'panCardHolderName',
+  aadharCardHolderName: 'aadharCardHolderName',
+  panCardImage: 'panCardImage',
+  aadharCardImage: 'aadharCardImage',
+  additionalDocumentUpload: 'additionalDocumentUpload',
+  documentId: 'documentId',
+  documentName: 'documentName',
+  documentImage: 'documentImage',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.BankAccountScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  accountHolderName: 'accountHolderName',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountType: 'accountType',
+  ifscCode: 'ifscCode',
+  cancelledChequeImage: 'cancelledChequeImage',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.AdminStaffScalarFieldEnum = {
@@ -162,11 +233,18 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   pr_token: 'pr_token',
   pr_expires_at: 'pr_expires_at',
-  pr_last_reset: 'pr_last_reset'
+  pr_last_reset: 'pr_last_reset',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.LoginLogScalarFieldEnum = {
@@ -434,11 +512,58 @@ exports.Prisma.emailConfigOrderByRelevanceFieldEnum = {
 
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
   name: 'name',
+  username: 'username',
   email: 'email',
   password: 'password',
   role: 'role',
   status: 'status',
-  pr_token: 'pr_token'
+  currentAddress: 'currentAddress',
+  permanentAddress: 'permanentAddress',
+  permanentPostalCode: 'permanentPostalCode',
+  pr_token: 'pr_token',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.companyDetailOrderByRelevanceFieldEnum = {
+  companyName: 'companyName',
+  brandName: 'brandName',
+  brandShortName: 'brandShortName',
+  billingAddress: 'billingAddress',
+  billingPincode: 'billingPincode',
+  billingState: 'billingState',
+  billingCity: 'billingCity',
+  businessType: 'businessType',
+  clientEntryType: 'clientEntryType',
+  gstNumber: 'gstNumber',
+  companyPanNumber: 'companyPanNumber',
+  aadharNumber: 'aadharNumber',
+  gstDocument: 'gstDocument',
+  panCardHolderName: 'panCardHolderName',
+  aadharCardHolderName: 'aadharCardHolderName',
+  panCardImage: 'panCardImage',
+  aadharCardImage: 'aadharCardImage',
+  additionalDocumentUpload: 'additionalDocumentUpload',
+  documentId: 'documentId',
+  documentName: 'documentName',
+  documentImage: 'documentImage',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.bankAccountOrderByRelevanceFieldEnum = {
+  accountHolderName: 'accountHolderName',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountType: 'accountType',
+  ifscCode: 'ifscCode',
+  cancelledChequeImage: 'cancelledChequeImage',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
@@ -447,7 +572,10 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
-  pr_token: 'pr_token'
+  pr_token: 'pr_token',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.loginLogOrderByRelevanceFieldEnum = {
@@ -598,6 +726,8 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
   admin: 'admin',
+  companyDetail: 'companyDetail',
+  bankAccount: 'bankAccount',
   adminStaff: 'adminStaff',
   loginLog: 'loginLog',
   activityLog: 'activityLog',

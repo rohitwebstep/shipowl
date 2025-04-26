@@ -215,7 +215,7 @@ export const isLocationHierarchyCorrect = async (
 
         if (!country) {
             logMessage("debug", `Country not found for ID: ${countryId}`);
-            return { status: false, message: "The specified country could not be found. Please check the country ID." };
+            return { status: false, message: "We couldn't find a country with the given ID. Please check and try again." };
         }
         logMessage("debug", `Country found:`, country);
 
@@ -227,12 +227,12 @@ export const isLocationHierarchyCorrect = async (
 
         if (!state) {
             logMessage("debug", `State not found for ID: ${stateId}`);
-            return { status: false, message: "The specified state could not be found. Please check the state ID." };
+            return { status: false, message: "We couldn't find a state with the given ID. Please check the state ID and try again." };
         }
 
         if (state.countryId.toString() !== countryId.toString()) {
             logMessage("debug", `State ID ${stateId} does not belong to country ID ${countryId}`);
-            return { status: false, message: "The specified state does not belong to the given country. Please check the state and country relationship." };
+            return { status: false, message: "This state does not belong to the specified country. Please verify the state and country relationship." };
         }
         logMessage("debug", `State found and belongs to the country:`, state);
 
@@ -244,12 +244,12 @@ export const isLocationHierarchyCorrect = async (
 
         if (!city) {
             logMessage("debug", `City not found for ID: ${cityId}`);
-            return { status: false, message: "The specified city could not be found. Please check the city ID." };
+            return { status: false, message: "We couldn't find a city with the given ID. Please check the city ID and try again." };
         }
 
         if (city.stateId.toString() !== stateId.toString()) {
             logMessage("debug", `City ID ${cityId} does not belong to state ID ${stateId}`);
-            return { status: false, message: "The specified city does not belong to the given state. Please check the city and state relationship." };
+            return { status: false, message: "This city does not belong to the specified state. Please verify the city and state relationship." };
         }
         logMessage("debug", `City found and belongs to the state:`, city);
 

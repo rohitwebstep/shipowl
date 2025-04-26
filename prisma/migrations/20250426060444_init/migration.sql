@@ -30,17 +30,96 @@ CREATE TABLE `emailConfig` (
 CREATE TABLE `admin` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `username` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `role` VARCHAR(191) NOT NULL DEFAULT 'admin',
     `status` VARCHAR(191) NOT NULL DEFAULT 'active',
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `dateOfBirth` DATETIME(3) NULL,
+    `currentAddress` VARCHAR(191) NULL,
+    `permanentAddress` VARCHAR(191) NULL,
+    `permanentPostalCode` VARCHAR(191) NULL,
+    `permanentCityId` BIGINT NULL,
+    `permanentStateId` BIGINT NULL,
+    `permanentCountryId` BIGINT NULL,
     `pr_token` VARCHAR(191) NULL,
     `pr_expires_at` DATETIME(3) NULL,
     `pr_last_reset` DATETIME(3) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `admin_username_key`(`username`),
     UNIQUE INDEX `admin_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `companyDetail` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminId` INTEGER NOT NULL,
+    `companyName` VARCHAR(191) NOT NULL,
+    `brandName` VARCHAR(191) NOT NULL,
+    `brandShortName` VARCHAR(191) NOT NULL,
+    `billingAddress` VARCHAR(191) NOT NULL,
+    `billingPincode` VARCHAR(191) NOT NULL,
+    `billingState` VARCHAR(191) NOT NULL,
+    `billingCity` VARCHAR(191) NOT NULL,
+    `businessType` VARCHAR(191) NOT NULL,
+    `clientEntryType` VARCHAR(191) NOT NULL,
+    `gstNumber` VARCHAR(191) NOT NULL,
+    `companyPanNumber` VARCHAR(191) NOT NULL,
+    `aadharNumber` VARCHAR(191) NOT NULL,
+    `gstDocument` VARCHAR(191) NOT NULL,
+    `panCardHolderName` VARCHAR(191) NOT NULL,
+    `aadharCardHolderName` VARCHAR(191) NOT NULL,
+    `panCardImage` VARCHAR(191) NOT NULL,
+    `aadharCardImage` VARCHAR(191) NOT NULL,
+    `additionalDocumentUpload` VARCHAR(191) NULL,
+    `documentId` VARCHAR(191) NOT NULL,
+    `documentName` VARCHAR(191) NOT NULL,
+    `documentImage` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `companyDetail_adminId_key`(`adminId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `bankAccount` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminId` INTEGER NOT NULL,
+    `accountHolderName` VARCHAR(191) NOT NULL,
+    `accountNumber` VARCHAR(191) NOT NULL,
+    `bankName` VARCHAR(191) NOT NULL,
+    `bankBranch` VARCHAR(191) NOT NULL,
+    `accountType` VARCHAR(191) NOT NULL,
+    `ifscCode` VARCHAR(191) NOT NULL,
+    `cancelledChequeImage` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -53,11 +132,18 @@ CREATE TABLE `adminStaff` (
     `password` VARCHAR(191) NOT NULL,
     `role` VARCHAR(191) NOT NULL DEFAULT 'admin',
     `status` VARCHAR(191) NOT NULL DEFAULT 'active',
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
     `pr_token` VARCHAR(191) NULL,
     `pr_expires_at` DATETIME(3) NULL,
     `pr_last_reset` DATETIME(3) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
 
     UNIQUE INDEX `adminStaff_admin_id_key`(`admin_id`),
     UNIQUE INDEX `adminStaff_email_key`(`email`),
@@ -369,6 +455,21 @@ CREATE TABLE `productVariant` (
     INDEX `productVariant_productId_idx`(`productId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentStateId_fkey` FOREIGN KEY (`permanentStateId`) REFERENCES `state`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCountryId_fkey` FOREIGN KEY (`permanentCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `bankAccount` ADD CONSTRAINT `bankAccount_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_admin_id_fkey` FOREIGN KEY (`admin_id`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

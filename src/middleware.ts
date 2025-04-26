@@ -22,7 +22,7 @@ export function middleware(req: NextRequest) {
     const adminProtectedRoutes = ["/api/admin/list", "/api/admin/auth/verify"];
     const dropshipperProtectedRoutes = ["/api/dropshipper/list", "/api/dropshipper/auth/verify"];
     const supplierProtectedRoutes = ["/api/supplier/list", "/api/supplier/auth/verify"];
-    const restProtectedRoutes = ["/api/category", "/api/category/:path*", "/api/brand", "/api/brand/:path*", "/api/warehouse", "/api/warehouse/:path*", "/api/location/country", "/api/location/country/:path*", "/api/location/state", "/api/location/state/:path*", "/api/location/city", "/api/location/city/:path*", "/api/product", "/api/product/:path*"];
+    const restProtectedRoutes = ["/api/category", "/api/category/:path*", "/api/brand", "/api/brand/:path*", "/api/warehouse", "/api/warehouse/:path*", "/api/location/country", "/api/location/country/:path*", "/api/location/state", "/api/location/state/:path*", "/api/location/city", "/api/location/city/:path*", "/api/product", "/api/product/:path*", "/api/supplier", "/api/supplier/:path*"];
 
     if (adminProtectedRoutes.some(route => req.url.includes(route))) {
         const applicableRoles = ["admin", "admin_staff"];
@@ -53,5 +53,5 @@ export function middleware(req: NextRequest) {
 
 // Define the matcher for specific routes
 export const config = {
-    matcher: ["/api/admin/list", "/api/admin/auth/verify", "/api/dropshipper/list", "/api/dropshipper/auth/verify", "/api/supplier/list", "/api/supplier/auth/verify", "/api/category", "/api/category/:path*", "/api/brand", "/api/brand/:path*", "/api/warehouse", "/api/warehouse/:path*", "/api/location/country", "/api/location/country/:path*", "/api/location/state", "/api/location/state/:path*", "/api/location/city", "/api/location/city/:path*", "/api/product", "/api/product/:path*"],
+    matcher: ["/api/admin/list", "/api/admin/auth/verify", "/api/dropshipper/list", "/api/dropshipper/auth/verify", "/api/supplier/list", "/api/supplier/auth/verify", "/api/category", "/api/category/:path*", "/api/brand", "/api/brand/:path*", "/api/warehouse", "/api/warehouse/:path*", "/api/location/country", "/api/location/country/:path*", "/api/location/state", "/api/location/state/:path*", "/api/location/city", "/api/location/city/:path*", "/api/product", "/api/product/:path*", "/api/supplier", "/api/supplier/:path*"],
 };

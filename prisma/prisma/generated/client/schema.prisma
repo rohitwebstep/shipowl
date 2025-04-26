@@ -46,19 +46,103 @@ model emailConfig {
 }
 
 model admin {
-  id            Int       @id @default(autoincrement())
-  name          String
-  email         String    @unique
-  password      String
-  role          String    @default("admin")
-  status        String    @default("active")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  pr_token      String?
-  pr_expires_at DateTime?
-  pr_last_reset DateTime?
+  id                  Int       @id @default(autoincrement())
+  name                String
+  username            String    @unique
+  email               String    @unique
+  password            String
+  role                String    @default("admin")
+  status              String    @default("active")
+  dateOfBirth         DateTime?
+  currentAddress      String?
+  permanentAddress    String?
+  permanentPostalCode String?
+  permanentCityId     BigInt?
+  permanentStateId    BigInt?
+  permanentCountryId  BigInt?
+  pr_token            String?
+  pr_expires_at       DateTime?
+  pr_last_reset       DateTime?
 
-  staff adminStaff[]
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  permanentCity    city?    @relation(fields: [permanentCityId], references: [id], onDelete: SetNull)
+  permanentState   state?   @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
+  permanentCountry country? @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
+
+  staff         adminStaff[]
+  companyDetail companyDetail? @relation
+  bankAccounts  bankAccount[]
+}
+
+model companyDetail {
+  id                       Int     @id @default(autoincrement())
+  adminId                  Int     @unique
+  companyName              String
+  brandName                String
+  brandShortName           String
+  billingAddress           String
+  billingPincode           String
+  billingState             String
+  billingCity              String
+  businessType             String
+  clientEntryType          String
+  gstNumber                String
+  companyPanNumber         String
+  aadharNumber             String
+  gstDocument              String // File path or URL
+  panCardHolderName        String
+  aadharCardHolderName     String
+  panCardImage             String // File path or URL
+  aadharCardImage          String // File path or URL
+  additionalDocumentUpload String? // Optional file or zip path
+  documentId               String
+  documentName             String
+  documentImage            String // File path or URL
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  admin admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+model bankAccount {
+  id                   Int    @id @default(autoincrement())
+  adminId              Int
+  accountHolderName    String
+  accountNumber        String
+  bankName             String
+  bankBranch           String
+  accountType          String
+  ifscCode             String
+  cancelledChequeImage String // File path or URL
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  admin admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
 }
 
 model adminStaff {
@@ -69,11 +153,19 @@ model adminStaff {
   password      String
   role          String    @default("admin")
   status        String    @default("active")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
   pr_token      String?
   pr_expires_at DateTime?
   pr_last_reset DateTime?
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
 
   admin admin @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }
@@ -168,6 +260,7 @@ model country {
   states     state[]
   cities     city[]
   warehouses warehouse[]
+  admins     admin[]
 
   // Add the relation fields for `originCountry` and `shippingCountry`
   originProducts   product[] @relation("OriginCountryRelation")
@@ -197,6 +290,7 @@ model state {
   country    country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
   cities     city[]
   warehouses warehouse[]
+  admins     admin[]
 
   @@index([countryId])
 }
@@ -219,6 +313,7 @@ model city {
   state      state       @relation(fields: [stateId], references: [id], onDelete: Cascade)
   country    country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
   warehouses warehouse[]
+  admins     admin[]
 
   @@index([stateId])
   @@index([countryId])

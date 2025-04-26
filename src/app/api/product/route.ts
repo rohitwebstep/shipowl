@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     };
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', 1, true].includes(statusRaw as string | number | boolean);
+    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
     const main_sku = extractString('main_sku') || '';
     const { status: checkMainSKUAvailabilityResult, message: checkMainSKUAvailabilityMessage } = await checkMainSKUAvailability(main_sku);

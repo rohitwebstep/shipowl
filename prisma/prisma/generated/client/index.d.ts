@@ -24,6 +24,16 @@ export type emailConfig = $Result.DefaultSelection<Prisma.$emailConfigPayload>
  */
 export type admin = $Result.DefaultSelection<Prisma.$adminPayload>
 /**
+ * Model companyDetail
+ * 
+ */
+export type companyDetail = $Result.DefaultSelection<Prisma.$companyDetailPayload>
+/**
+ * Model bankAccount
+ * 
+ */
+export type bankAccount = $Result.DefaultSelection<Prisma.$bankAccountPayload>
+/**
  * Model adminStaff
  * 
  */
@@ -223,6 +233,26 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.adminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.companyDetail`: Exposes CRUD operations for the **companyDetail** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CompanyDetails
+    * const companyDetails = await prisma.companyDetail.findMany()
+    * ```
+    */
+  get companyDetail(): Prisma.companyDetailDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bankAccount`: Exposes CRUD operations for the **bankAccount** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BankAccounts
+    * const bankAccounts = await prisma.bankAccount.findMany()
+    * ```
+    */
+  get bankAccount(): Prisma.bankAccountDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.adminStaff`: Exposes CRUD operations for the **adminStaff** model.
@@ -775,6 +805,8 @@ export namespace Prisma {
   export const ModelName: {
     emailConfig: 'emailConfig',
     admin: 'admin',
+    companyDetail: 'companyDetail',
+    bankAccount: 'bankAccount',
     adminStaff: 'adminStaff',
     loginLog: 'loginLog',
     activityLog: 'activityLog',
@@ -804,7 +836,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "product" | "productVariant"
+      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "product" | "productVariant"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -937,6 +969,138 @@ export namespace Prisma {
           count: {
             args: Prisma.adminCountArgs<ExtArgs>
             result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      companyDetail: {
+        payload: Prisma.$companyDetailPayload<ExtArgs>
+        fields: Prisma.companyDetailFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.companyDetailFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.companyDetailFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          findFirst: {
+            args: Prisma.companyDetailFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.companyDetailFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          findMany: {
+            args: Prisma.companyDetailFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>[]
+          }
+          create: {
+            args: Prisma.companyDetailCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          createMany: {
+            args: Prisma.companyDetailCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.companyDetailDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          update: {
+            args: Prisma.companyDetailUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          deleteMany: {
+            args: Prisma.companyDetailDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.companyDetailUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.companyDetailUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyDetailPayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyDetailAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompanyDetail>
+          }
+          groupBy: {
+            args: Prisma.companyDetailGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyDetailGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.companyDetailCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyDetailCountAggregateOutputType> | number
+          }
+        }
+      }
+      bankAccount: {
+        payload: Prisma.$bankAccountPayload<ExtArgs>
+        fields: Prisma.bankAccountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.bankAccountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.bankAccountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          findFirst: {
+            args: Prisma.bankAccountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.bankAccountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          findMany: {
+            args: Prisma.bankAccountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>[]
+          }
+          create: {
+            args: Prisma.bankAccountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          createMany: {
+            args: Prisma.bankAccountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.bankAccountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          update: {
+            args: Prisma.bankAccountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          deleteMany: {
+            args: Prisma.bankAccountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.bankAccountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.bankAccountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountPayload>
+          }
+          aggregate: {
+            args: Prisma.BankAccountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBankAccount>
+          }
+          groupBy: {
+            args: Prisma.bankAccountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BankAccountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.bankAccountCountArgs<ExtArgs>
+            result: $Utils.Optional<BankAccountCountAggregateOutputType> | number
           }
         }
       }
@@ -1752,6 +1916,8 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     emailConfig?: emailConfigOmit
     admin?: adminOmit
+    companyDetail?: companyDetailOmit
+    bankAccount?: bankAccountOmit
     adminStaff?: adminStaffOmit
     loginLog?: loginLogOmit
     activityLog?: activityLogOmit
@@ -1858,10 +2024,12 @@ export namespace Prisma {
 
   export type AdminCountOutputType = {
     staff: number
+    bankAccounts: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     staff?: boolean | AdminCountOutputTypeCountStaffArgs
+    bankAccounts?: boolean | AdminCountOutputTypeCountBankAccountsArgs
   }
 
   // Custom InputTypes
@@ -1882,6 +2050,13 @@ export namespace Prisma {
     where?: adminStaffWhereInput
   }
 
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountBankAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bankAccountWhereInput
+  }
+
 
   /**
    * Count Type CountryCountOutputType
@@ -1891,6 +2066,7 @@ export namespace Prisma {
     states: number
     cities: number
     warehouses: number
+    admins: number
     originProducts: number
     shippingProducts: number
   }
@@ -1899,6 +2075,7 @@ export namespace Prisma {
     states?: boolean | CountryCountOutputTypeCountStatesArgs
     cities?: boolean | CountryCountOutputTypeCountCitiesArgs
     warehouses?: boolean | CountryCountOutputTypeCountWarehousesArgs
+    admins?: boolean | CountryCountOutputTypeCountAdminsArgs
     originProducts?: boolean | CountryCountOutputTypeCountOriginProductsArgs
     shippingProducts?: boolean | CountryCountOutputTypeCountShippingProductsArgs
   }
@@ -1938,6 +2115,13 @@ export namespace Prisma {
   /**
    * CountryCountOutputType without action
    */
+  export type CountryCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: adminWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
   export type CountryCountOutputTypeCountOriginProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: productWhereInput
   }
@@ -1957,11 +2141,13 @@ export namespace Prisma {
   export type StateCountOutputType = {
     cities: number
     warehouses: number
+    admins: number
   }
 
   export type StateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cities?: boolean | StateCountOutputTypeCountCitiesArgs
     warehouses?: boolean | StateCountOutputTypeCountWarehousesArgs
+    admins?: boolean | StateCountOutputTypeCountAdminsArgs
   }
 
   // Custom InputTypes
@@ -1989,6 +2175,13 @@ export namespace Prisma {
     where?: warehouseWhereInput
   }
 
+  /**
+   * StateCountOutputType without action
+   */
+  export type StateCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: adminWhereInput
+  }
+
 
   /**
    * Count Type CityCountOutputType
@@ -1996,10 +2189,12 @@ export namespace Prisma {
 
   export type CityCountOutputType = {
     warehouses: number
+    admins: number
   }
 
   export type CityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     warehouses?: boolean | CityCountOutputTypeCountWarehousesArgs
+    admins?: boolean | CityCountOutputTypeCountAdminsArgs
   }
 
   // Custom InputTypes
@@ -2018,6 +2213,13 @@ export namespace Prisma {
    */
   export type CityCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: warehouseWhereInput
+  }
+
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: adminWhereInput
   }
 
 
@@ -3225,104 +3427,218 @@ export namespace Prisma {
 
   export type AdminAvgAggregateOutputType = {
     id: number | null
+    permanentCityId: number | null
+    permanentStateId: number | null
+    permanentCountryId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type AdminSumAggregateOutputType = {
     id: number | null
+    permanentCityId: bigint | null
+    permanentStateId: bigint | null
+    permanentCountryId: bigint | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type AdminMinAggregateOutputType = {
     id: number | null
     name: string | null
+    username: string | null
     email: string | null
     password: string | null
     role: string | null
     status: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    dateOfBirth: Date | null
+    currentAddress: string | null
+    permanentAddress: string | null
+    permanentPostalCode: string | null
+    permanentCityId: bigint | null
+    permanentStateId: bigint | null
+    permanentCountryId: bigint | null
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type AdminMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    username: string | null
     email: string | null
     password: string | null
     role: string | null
     status: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    dateOfBirth: Date | null
+    currentAddress: string | null
+    permanentAddress: string | null
+    permanentPostalCode: string | null
+    permanentCityId: bigint | null
+    permanentStateId: bigint | null
+    permanentCountryId: bigint | null
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type AdminCountAggregateOutputType = {
     id: number
     name: number
+    username: number
     email: number
     password: number
     role: number
     status: number
-    createdAt: number
-    updatedAt: number
+    dateOfBirth: number
+    currentAddress: number
+    permanentAddress: number
+    permanentPostalCode: number
+    permanentCityId: number
+    permanentStateId: number
+    permanentCountryId: number
     pr_token: number
     pr_expires_at: number
     pr_last_reset: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
 
   export type AdminAvgAggregateInputType = {
     id?: true
+    permanentCityId?: true
+    permanentStateId?: true
+    permanentCountryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type AdminSumAggregateInputType = {
     id?: true
+    permanentCityId?: true
+    permanentStateId?: true
+    permanentCountryId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type AdminMinAggregateInputType = {
     id?: true
     name?: true
+    username?: true
     email?: true
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
+    dateOfBirth?: true
+    currentAddress?: true
+    permanentAddress?: true
+    permanentPostalCode?: true
+    permanentCityId?: true
+    permanentStateId?: true
+    permanentCountryId?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type AdminMaxAggregateInputType = {
     id?: true
     name?: true
+    username?: true
     email?: true
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
+    dateOfBirth?: true
+    currentAddress?: true
+    permanentAddress?: true
+    permanentPostalCode?: true
+    permanentCityId?: true
+    permanentStateId?: true
+    permanentCountryId?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type AdminCountAggregateInputType = {
     id?: true
     name?: true
+    username?: true
     email?: true
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
+    dateOfBirth?: true
+    currentAddress?: true
+    permanentAddress?: true
+    permanentPostalCode?: true
+    permanentCityId?: true
+    permanentStateId?: true
+    permanentCountryId?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -3415,15 +3731,30 @@ export namespace Prisma {
   export type AdminGroupByOutputType = {
     id: number
     name: string
+    username: string
     email: string
     password: string
     role: string
     status: string
-    createdAt: Date
-    updatedAt: Date
+    dateOfBirth: Date | null
+    currentAddress: string | null
+    permanentAddress: string | null
+    permanentPostalCode: string | null
+    permanentCityId: bigint | null
+    permanentStateId: bigint | null
+    permanentCountryId: bigint | null
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: AdminCountAggregateOutputType | null
     _avg: AdminAvgAggregateOutputType | null
     _sum: AdminSumAggregateOutputType | null
@@ -3448,16 +3779,36 @@ export namespace Prisma {
   export type adminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
     status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    dateOfBirth?: boolean
+    currentAddress?: boolean
+    permanentAddress?: boolean
+    permanentPostalCode?: boolean
+    permanentCityId?: boolean
+    permanentStateId?: boolean
+    permanentCountryId?: boolean
     pr_token?: boolean
     pr_expires_at?: boolean
     pr_last_reset?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
+    permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
+    permanentCountry?: boolean | admin$permanentCountryArgs<ExtArgs>
     staff?: boolean | admin$staffArgs<ExtArgs>
+    companyDetail?: boolean | admin$companyDetailArgs<ExtArgs>
+    bankAccounts?: boolean | admin$bankAccountsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -3466,40 +3817,80 @@ export namespace Prisma {
   export type adminSelectScalar = {
     id?: boolean
     name?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
     status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    dateOfBirth?: boolean
+    currentAddress?: boolean
+    permanentAddress?: boolean
+    permanentPostalCode?: boolean
+    permanentCityId?: boolean
+    permanentStateId?: boolean
+    permanentCountryId?: boolean
     pr_token?: boolean
     pr_expires_at?: boolean
     pr_last_reset?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "status" | "createdAt" | "updatedAt" | "pr_token" | "pr_expires_at" | "pr_last_reset", ExtArgs["result"]["admin"]>
+  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
   export type adminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
+    permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
+    permanentCountry?: boolean | admin$permanentCountryArgs<ExtArgs>
     staff?: boolean | admin$staffArgs<ExtArgs>
+    companyDetail?: boolean | admin$companyDetailArgs<ExtArgs>
+    bankAccounts?: boolean | admin$bankAccountsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $adminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "admin"
     objects: {
+      permanentCity: Prisma.$cityPayload<ExtArgs> | null
+      permanentState: Prisma.$statePayload<ExtArgs> | null
+      permanentCountry: Prisma.$countryPayload<ExtArgs> | null
       staff: Prisma.$adminStaffPayload<ExtArgs>[]
+      companyDetail: Prisma.$companyDetailPayload<ExtArgs> | null
+      bankAccounts: Prisma.$bankAccountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      username: string
       email: string
       password: string
       role: string
       status: string
-      createdAt: Date
-      updatedAt: Date
+      dateOfBirth: Date | null
+      currentAddress: string | null
+      permanentAddress: string | null
+      permanentPostalCode: string | null
+      permanentCityId: bigint | null
+      permanentStateId: bigint | null
+      permanentCountryId: bigint | null
       pr_token: string | null
       pr_expires_at: Date | null
       pr_last_reset: Date | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["admin"]>
     composites: {}
   }
@@ -3840,7 +4231,12 @@ export namespace Prisma {
    */
   export interface Prisma__adminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    permanentCity<T extends admin$permanentCityArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentCityArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    permanentState<T extends admin$permanentStateArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentStateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    permanentCountry<T extends admin$permanentCountryArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentCountryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     staff<T extends admin$staffArgs<ExtArgs> = {}>(args?: Subset<T, admin$staffArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    companyDetail<T extends admin$companyDetailArgs<ExtArgs> = {}>(args?: Subset<T, admin$companyDetailArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    bankAccounts<T extends admin$bankAccountsArgs<ExtArgs> = {}>(args?: Subset<T, admin$bankAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3872,15 +4268,30 @@ export namespace Prisma {
   interface adminFieldRefs {
     readonly id: FieldRef<"admin", 'Int'>
     readonly name: FieldRef<"admin", 'String'>
+    readonly username: FieldRef<"admin", 'String'>
     readonly email: FieldRef<"admin", 'String'>
     readonly password: FieldRef<"admin", 'String'>
     readonly role: FieldRef<"admin", 'String'>
     readonly status: FieldRef<"admin", 'String'>
-    readonly createdAt: FieldRef<"admin", 'DateTime'>
-    readonly updatedAt: FieldRef<"admin", 'DateTime'>
+    readonly dateOfBirth: FieldRef<"admin", 'DateTime'>
+    readonly currentAddress: FieldRef<"admin", 'String'>
+    readonly permanentAddress: FieldRef<"admin", 'String'>
+    readonly permanentPostalCode: FieldRef<"admin", 'String'>
+    readonly permanentCityId: FieldRef<"admin", 'BigInt'>
+    readonly permanentStateId: FieldRef<"admin", 'BigInt'>
+    readonly permanentCountryId: FieldRef<"admin", 'BigInt'>
     readonly pr_token: FieldRef<"admin", 'String'>
     readonly pr_expires_at: FieldRef<"admin", 'DateTime'>
     readonly pr_last_reset: FieldRef<"admin", 'DateTime'>
+    readonly createdAt: FieldRef<"admin", 'DateTime'>
+    readonly createdBy: FieldRef<"admin", 'Int'>
+    readonly createdByRole: FieldRef<"admin", 'String'>
+    readonly updatedAt: FieldRef<"admin", 'DateTime'>
+    readonly updatedBy: FieldRef<"admin", 'Int'>
+    readonly updatedByRole: FieldRef<"admin", 'String'>
+    readonly deletedAt: FieldRef<"admin", 'DateTime'>
+    readonly deletedBy: FieldRef<"admin", 'Int'>
+    readonly deletedByRole: FieldRef<"admin", 'String'>
   }
     
 
@@ -4224,6 +4635,63 @@ export namespace Prisma {
   }
 
   /**
+   * admin.permanentCity
+   */
+  export type admin$permanentCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
+  }
+
+  /**
+   * admin.permanentState
+   */
+  export type admin$permanentStateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    where?: stateWhereInput
+  }
+
+  /**
+   * admin.permanentCountry
+   */
+  export type admin$permanentCountryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    where?: countryWhereInput
+  }
+
+  /**
    * admin.staff
    */
   export type admin$staffArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4248,6 +4716,49 @@ export namespace Prisma {
   }
 
   /**
+   * admin.companyDetail
+   */
+  export type admin$companyDetailArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    where?: companyDetailWhereInput
+  }
+
+  /**
+   * admin.bankAccounts
+   */
+  export type admin$bankAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    where?: bankAccountWhereInput
+    orderBy?: bankAccountOrderByWithRelationInput | bankAccountOrderByWithRelationInput[]
+    cursor?: bankAccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
+  }
+
+  /**
    * admin without action
    */
   export type adminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4267,6 +4778,2404 @@ export namespace Prisma {
 
 
   /**
+   * Model companyDetail
+   */
+
+  export type AggregateCompanyDetail = {
+    _count: CompanyDetailCountAggregateOutputType | null
+    _avg: CompanyDetailAvgAggregateOutputType | null
+    _sum: CompanyDetailSumAggregateOutputType | null
+    _min: CompanyDetailMinAggregateOutputType | null
+    _max: CompanyDetailMaxAggregateOutputType | null
+  }
+
+  export type CompanyDetailAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CompanyDetailSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type CompanyDetailMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    companyName: string | null
+    brandName: string | null
+    brandShortName: string | null
+    billingAddress: string | null
+    billingPincode: string | null
+    billingState: string | null
+    billingCity: string | null
+    businessType: string | null
+    clientEntryType: string | null
+    gstNumber: string | null
+    companyPanNumber: string | null
+    aadharNumber: string | null
+    gstDocument: string | null
+    panCardHolderName: string | null
+    aadharCardHolderName: string | null
+    panCardImage: string | null
+    aadharCardImage: string | null
+    additionalDocumentUpload: string | null
+    documentId: string | null
+    documentName: string | null
+    documentImage: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CompanyDetailMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    companyName: string | null
+    brandName: string | null
+    brandShortName: string | null
+    billingAddress: string | null
+    billingPincode: string | null
+    billingState: string | null
+    billingCity: string | null
+    businessType: string | null
+    clientEntryType: string | null
+    gstNumber: string | null
+    companyPanNumber: string | null
+    aadharNumber: string | null
+    gstDocument: string | null
+    panCardHolderName: string | null
+    aadharCardHolderName: string | null
+    panCardImage: string | null
+    aadharCardImage: string | null
+    additionalDocumentUpload: string | null
+    documentId: string | null
+    documentName: string | null
+    documentImage: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type CompanyDetailCountAggregateOutputType = {
+    id: number
+    adminId: number
+    companyName: number
+    brandName: number
+    brandShortName: number
+    billingAddress: number
+    billingPincode: number
+    billingState: number
+    billingCity: number
+    businessType: number
+    clientEntryType: number
+    gstNumber: number
+    companyPanNumber: number
+    aadharNumber: number
+    gstDocument: number
+    panCardHolderName: number
+    aadharCardHolderName: number
+    panCardImage: number
+    aadharCardImage: number
+    additionalDocumentUpload: number
+    documentId: number
+    documentName: number
+    documentImage: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type CompanyDetailAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CompanyDetailSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type CompanyDetailMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    companyName?: true
+    brandName?: true
+    brandShortName?: true
+    billingAddress?: true
+    billingPincode?: true
+    billingState?: true
+    billingCity?: true
+    businessType?: true
+    clientEntryType?: true
+    gstNumber?: true
+    companyPanNumber?: true
+    aadharNumber?: true
+    gstDocument?: true
+    panCardHolderName?: true
+    aadharCardHolderName?: true
+    panCardImage?: true
+    aadharCardImage?: true
+    additionalDocumentUpload?: true
+    documentId?: true
+    documentName?: true
+    documentImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CompanyDetailMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    companyName?: true
+    brandName?: true
+    brandShortName?: true
+    billingAddress?: true
+    billingPincode?: true
+    billingState?: true
+    billingCity?: true
+    businessType?: true
+    clientEntryType?: true
+    gstNumber?: true
+    companyPanNumber?: true
+    aadharNumber?: true
+    gstDocument?: true
+    panCardHolderName?: true
+    aadharCardHolderName?: true
+    panCardImage?: true
+    aadharCardImage?: true
+    additionalDocumentUpload?: true
+    documentId?: true
+    documentName?: true
+    documentImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type CompanyDetailCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    companyName?: true
+    brandName?: true
+    brandShortName?: true
+    billingAddress?: true
+    billingPincode?: true
+    billingState?: true
+    billingCity?: true
+    businessType?: true
+    clientEntryType?: true
+    gstNumber?: true
+    companyPanNumber?: true
+    aadharNumber?: true
+    gstDocument?: true
+    panCardHolderName?: true
+    aadharCardHolderName?: true
+    panCardImage?: true
+    aadharCardImage?: true
+    additionalDocumentUpload?: true
+    documentId?: true
+    documentName?: true
+    documentImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type CompanyDetailAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyDetail to aggregate.
+     */
+    where?: companyDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyDetails to fetch.
+     */
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: companyDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned companyDetails
+    **/
+    _count?: true | CompanyDetailCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CompanyDetailAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CompanyDetailSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyDetailMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyDetailMaxAggregateInputType
+  }
+
+  export type GetCompanyDetailAggregateType<T extends CompanyDetailAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompanyDetail]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompanyDetail[P]>
+      : GetScalarType<T[P], AggregateCompanyDetail[P]>
+  }
+
+
+
+
+  export type companyDetailGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyDetailWhereInput
+    orderBy?: companyDetailOrderByWithAggregationInput | companyDetailOrderByWithAggregationInput[]
+    by: CompanyDetailScalarFieldEnum[] | CompanyDetailScalarFieldEnum
+    having?: companyDetailScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyDetailCountAggregateInputType | true
+    _avg?: CompanyDetailAvgAggregateInputType
+    _sum?: CompanyDetailSumAggregateInputType
+    _min?: CompanyDetailMinAggregateInputType
+    _max?: CompanyDetailMaxAggregateInputType
+  }
+
+  export type CompanyDetailGroupByOutputType = {
+    id: number
+    adminId: number
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: CompanyDetailCountAggregateOutputType | null
+    _avg: CompanyDetailAvgAggregateOutputType | null
+    _sum: CompanyDetailSumAggregateOutputType | null
+    _min: CompanyDetailMinAggregateOutputType | null
+    _max: CompanyDetailMaxAggregateOutputType | null
+  }
+
+  type GetCompanyDetailGroupByPayload<T extends companyDetailGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyDetailGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyDetailGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyDetailGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyDetailGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type companyDetailSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    companyName?: boolean
+    brandName?: boolean
+    brandShortName?: boolean
+    billingAddress?: boolean
+    billingPincode?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+    businessType?: boolean
+    clientEntryType?: boolean
+    gstNumber?: boolean
+    companyPanNumber?: boolean
+    aadharNumber?: boolean
+    gstDocument?: boolean
+    panCardHolderName?: boolean
+    aadharCardHolderName?: boolean
+    panCardImage?: boolean
+    aadharCardImage?: boolean
+    additionalDocumentUpload?: boolean
+    documentId?: boolean
+    documentName?: boolean
+    documentImage?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyDetail"]>
+
+
+
+  export type companyDetailSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    companyName?: boolean
+    brandName?: boolean
+    brandShortName?: boolean
+    billingAddress?: boolean
+    billingPincode?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+    businessType?: boolean
+    clientEntryType?: boolean
+    gstNumber?: boolean
+    companyPanNumber?: boolean
+    aadharNumber?: boolean
+    gstDocument?: boolean
+    panCardHolderName?: boolean
+    aadharCardHolderName?: boolean
+    panCardImage?: boolean
+    aadharCardImage?: boolean
+    additionalDocumentUpload?: boolean
+    documentId?: boolean
+    documentName?: boolean
+    documentImage?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type companyDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "companyName" | "brandName" | "brandShortName" | "billingAddress" | "billingPincode" | "billingState" | "billingCity" | "businessType" | "clientEntryType" | "gstNumber" | "companyPanNumber" | "aadharNumber" | "gstDocument" | "panCardHolderName" | "aadharCardHolderName" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentId" | "documentName" | "documentImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["companyDetail"]>
+  export type companyDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }
+
+  export type $companyDetailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "companyDetail"
+    objects: {
+      admin: Prisma.$adminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      companyName: string
+      brandName: string
+      brandShortName: string
+      billingAddress: string
+      billingPincode: string
+      billingState: string
+      billingCity: string
+      businessType: string
+      clientEntryType: string
+      gstNumber: string
+      companyPanNumber: string
+      aadharNumber: string
+      gstDocument: string
+      panCardHolderName: string
+      aadharCardHolderName: string
+      panCardImage: string
+      aadharCardImage: string
+      additionalDocumentUpload: string | null
+      documentId: string
+      documentName: string
+      documentImage: string
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["companyDetail"]>
+    composites: {}
+  }
+
+  type companyDetailGetPayload<S extends boolean | null | undefined | companyDetailDefaultArgs> = $Result.GetResult<Prisma.$companyDetailPayload, S>
+
+  type companyDetailCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<companyDetailFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyDetailCountAggregateInputType | true
+    }
+
+  export interface companyDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['companyDetail'], meta: { name: 'companyDetail' } }
+    /**
+     * Find zero or one CompanyDetail that matches the filter.
+     * @param {companyDetailFindUniqueArgs} args - Arguments to find a CompanyDetail
+     * @example
+     * // Get one CompanyDetail
+     * const companyDetail = await prisma.companyDetail.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends companyDetailFindUniqueArgs>(args: SelectSubset<T, companyDetailFindUniqueArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CompanyDetail that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {companyDetailFindUniqueOrThrowArgs} args - Arguments to find a CompanyDetail
+     * @example
+     * // Get one CompanyDetail
+     * const companyDetail = await prisma.companyDetail.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends companyDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, companyDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyDetail that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailFindFirstArgs} args - Arguments to find a CompanyDetail
+     * @example
+     * // Get one CompanyDetail
+     * const companyDetail = await prisma.companyDetail.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends companyDetailFindFirstArgs>(args?: SelectSubset<T, companyDetailFindFirstArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyDetail that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailFindFirstOrThrowArgs} args - Arguments to find a CompanyDetail
+     * @example
+     * // Get one CompanyDetail
+     * const companyDetail = await prisma.companyDetail.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends companyDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, companyDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CompanyDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CompanyDetails
+     * const companyDetails = await prisma.companyDetail.findMany()
+     * 
+     * // Get first 10 CompanyDetails
+     * const companyDetails = await prisma.companyDetail.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyDetailWithIdOnly = await prisma.companyDetail.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends companyDetailFindManyArgs>(args?: SelectSubset<T, companyDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CompanyDetail.
+     * @param {companyDetailCreateArgs} args - Arguments to create a CompanyDetail.
+     * @example
+     * // Create one CompanyDetail
+     * const CompanyDetail = await prisma.companyDetail.create({
+     *   data: {
+     *     // ... data to create a CompanyDetail
+     *   }
+     * })
+     * 
+     */
+    create<T extends companyDetailCreateArgs>(args: SelectSubset<T, companyDetailCreateArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CompanyDetails.
+     * @param {companyDetailCreateManyArgs} args - Arguments to create many CompanyDetails.
+     * @example
+     * // Create many CompanyDetails
+     * const companyDetail = await prisma.companyDetail.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends companyDetailCreateManyArgs>(args?: SelectSubset<T, companyDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a CompanyDetail.
+     * @param {companyDetailDeleteArgs} args - Arguments to delete one CompanyDetail.
+     * @example
+     * // Delete one CompanyDetail
+     * const CompanyDetail = await prisma.companyDetail.delete({
+     *   where: {
+     *     // ... filter to delete one CompanyDetail
+     *   }
+     * })
+     * 
+     */
+    delete<T extends companyDetailDeleteArgs>(args: SelectSubset<T, companyDetailDeleteArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CompanyDetail.
+     * @param {companyDetailUpdateArgs} args - Arguments to update one CompanyDetail.
+     * @example
+     * // Update one CompanyDetail
+     * const companyDetail = await prisma.companyDetail.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends companyDetailUpdateArgs>(args: SelectSubset<T, companyDetailUpdateArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CompanyDetails.
+     * @param {companyDetailDeleteManyArgs} args - Arguments to filter CompanyDetails to delete.
+     * @example
+     * // Delete a few CompanyDetails
+     * const { count } = await prisma.companyDetail.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends companyDetailDeleteManyArgs>(args?: SelectSubset<T, companyDetailDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CompanyDetails
+     * const companyDetail = await prisma.companyDetail.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends companyDetailUpdateManyArgs>(args: SelectSubset<T, companyDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CompanyDetail.
+     * @param {companyDetailUpsertArgs} args - Arguments to update or create a CompanyDetail.
+     * @example
+     * // Update or create a CompanyDetail
+     * const companyDetail = await prisma.companyDetail.upsert({
+     *   create: {
+     *     // ... data to create a CompanyDetail
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CompanyDetail we want to update
+     *   }
+     * })
+     */
+    upsert<T extends companyDetailUpsertArgs>(args: SelectSubset<T, companyDetailUpsertArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CompanyDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailCountArgs} args - Arguments to filter CompanyDetails to count.
+     * @example
+     * // Count the number of CompanyDetails
+     * const count = await prisma.companyDetail.count({
+     *   where: {
+     *     // ... the filter for the CompanyDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends companyDetailCountArgs>(
+      args?: Subset<T, companyDetailCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyDetailCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CompanyDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyDetailAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyDetailAggregateArgs>(args: Subset<T, CompanyDetailAggregateArgs>): Prisma.PrismaPromise<GetCompanyDetailAggregateType<T>>
+
+    /**
+     * Group by CompanyDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyDetailGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends companyDetailGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: companyDetailGroupByArgs['orderBy'] }
+        : { orderBy?: companyDetailGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, companyDetailGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyDetailGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the companyDetail model
+   */
+  readonly fields: companyDetailFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for companyDetail.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__companyDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the companyDetail model
+   */
+  interface companyDetailFieldRefs {
+    readonly id: FieldRef<"companyDetail", 'Int'>
+    readonly adminId: FieldRef<"companyDetail", 'Int'>
+    readonly companyName: FieldRef<"companyDetail", 'String'>
+    readonly brandName: FieldRef<"companyDetail", 'String'>
+    readonly brandShortName: FieldRef<"companyDetail", 'String'>
+    readonly billingAddress: FieldRef<"companyDetail", 'String'>
+    readonly billingPincode: FieldRef<"companyDetail", 'String'>
+    readonly billingState: FieldRef<"companyDetail", 'String'>
+    readonly billingCity: FieldRef<"companyDetail", 'String'>
+    readonly businessType: FieldRef<"companyDetail", 'String'>
+    readonly clientEntryType: FieldRef<"companyDetail", 'String'>
+    readonly gstNumber: FieldRef<"companyDetail", 'String'>
+    readonly companyPanNumber: FieldRef<"companyDetail", 'String'>
+    readonly aadharNumber: FieldRef<"companyDetail", 'String'>
+    readonly gstDocument: FieldRef<"companyDetail", 'String'>
+    readonly panCardHolderName: FieldRef<"companyDetail", 'String'>
+    readonly aadharCardHolderName: FieldRef<"companyDetail", 'String'>
+    readonly panCardImage: FieldRef<"companyDetail", 'String'>
+    readonly aadharCardImage: FieldRef<"companyDetail", 'String'>
+    readonly additionalDocumentUpload: FieldRef<"companyDetail", 'String'>
+    readonly documentId: FieldRef<"companyDetail", 'String'>
+    readonly documentName: FieldRef<"companyDetail", 'String'>
+    readonly documentImage: FieldRef<"companyDetail", 'String'>
+    readonly createdAt: FieldRef<"companyDetail", 'DateTime'>
+    readonly createdBy: FieldRef<"companyDetail", 'Int'>
+    readonly createdByRole: FieldRef<"companyDetail", 'String'>
+    readonly updatedAt: FieldRef<"companyDetail", 'DateTime'>
+    readonly updatedBy: FieldRef<"companyDetail", 'Int'>
+    readonly updatedByRole: FieldRef<"companyDetail", 'String'>
+    readonly deletedAt: FieldRef<"companyDetail", 'DateTime'>
+    readonly deletedBy: FieldRef<"companyDetail", 'Int'>
+    readonly deletedByRole: FieldRef<"companyDetail", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * companyDetail findUnique
+   */
+  export type companyDetailFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which companyDetail to fetch.
+     */
+    where: companyDetailWhereUniqueInput
+  }
+
+  /**
+   * companyDetail findUniqueOrThrow
+   */
+  export type companyDetailFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which companyDetail to fetch.
+     */
+    where: companyDetailWhereUniqueInput
+  }
+
+  /**
+   * companyDetail findFirst
+   */
+  export type companyDetailFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which companyDetail to fetch.
+     */
+    where?: companyDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyDetails to fetch.
+     */
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyDetails.
+     */
+    cursor?: companyDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyDetails.
+     */
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
+  }
+
+  /**
+   * companyDetail findFirstOrThrow
+   */
+  export type companyDetailFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which companyDetail to fetch.
+     */
+    where?: companyDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyDetails to fetch.
+     */
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyDetails.
+     */
+    cursor?: companyDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyDetails.
+     */
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
+  }
+
+  /**
+   * companyDetail findMany
+   */
+  export type companyDetailFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which companyDetails to fetch.
+     */
+    where?: companyDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyDetails to fetch.
+     */
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing companyDetails.
+     */
+    cursor?: companyDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyDetails.
+     */
+    skip?: number
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
+  }
+
+  /**
+   * companyDetail create
+   */
+  export type companyDetailCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to create a companyDetail.
+     */
+    data: XOR<companyDetailCreateInput, companyDetailUncheckedCreateInput>
+  }
+
+  /**
+   * companyDetail createMany
+   */
+  export type companyDetailCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many companyDetails.
+     */
+    data: companyDetailCreateManyInput | companyDetailCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * companyDetail update
+   */
+  export type companyDetailUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to update a companyDetail.
+     */
+    data: XOR<companyDetailUpdateInput, companyDetailUncheckedUpdateInput>
+    /**
+     * Choose, which companyDetail to update.
+     */
+    where: companyDetailWhereUniqueInput
+  }
+
+  /**
+   * companyDetail updateMany
+   */
+  export type companyDetailUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update companyDetails.
+     */
+    data: XOR<companyDetailUpdateManyMutationInput, companyDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which companyDetails to update
+     */
+    where?: companyDetailWhereInput
+    /**
+     * Limit how many companyDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyDetail upsert
+   */
+  export type companyDetailUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * The filter to search for the companyDetail to update in case it exists.
+     */
+    where: companyDetailWhereUniqueInput
+    /**
+     * In case the companyDetail found by the `where` argument doesn't exist, create a new companyDetail with this data.
+     */
+    create: XOR<companyDetailCreateInput, companyDetailUncheckedCreateInput>
+    /**
+     * In case the companyDetail was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<companyDetailUpdateInput, companyDetailUncheckedUpdateInput>
+  }
+
+  /**
+   * companyDetail delete
+   */
+  export type companyDetailDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    /**
+     * Filter which companyDetail to delete.
+     */
+    where: companyDetailWhereUniqueInput
+  }
+
+  /**
+   * companyDetail deleteMany
+   */
+  export type companyDetailDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyDetails to delete
+     */
+    where?: companyDetailWhereInput
+    /**
+     * Limit how many companyDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyDetail without action
+   */
+  export type companyDetailDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model bankAccount
+   */
+
+  export type AggregateBankAccount = {
+    _count: BankAccountCountAggregateOutputType | null
+    _avg: BankAccountAvgAggregateOutputType | null
+    _sum: BankAccountSumAggregateOutputType | null
+    _min: BankAccountMinAggregateOutputType | null
+    _max: BankAccountMaxAggregateOutputType | null
+  }
+
+  export type BankAccountAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BankAccountSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BankAccountMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    accountHolderName: string | null
+    accountNumber: string | null
+    bankName: string | null
+    bankBranch: string | null
+    accountType: string | null
+    ifscCode: string | null
+    cancelledChequeImage: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BankAccountMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    accountHolderName: string | null
+    accountNumber: string | null
+    bankName: string | null
+    bankBranch: string | null
+    accountType: string | null
+    ifscCode: string | null
+    cancelledChequeImage: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BankAccountCountAggregateOutputType = {
+    id: number
+    adminId: number
+    accountHolderName: number
+    accountNumber: number
+    bankName: number
+    bankBranch: number
+    accountType: number
+    ifscCode: number
+    cancelledChequeImage: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type BankAccountAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BankAccountSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BankAccountMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BankAccountMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BankAccountCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type BankAccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bankAccount to aggregate.
+     */
+    where?: bankAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccounts to fetch.
+     */
+    orderBy?: bankAccountOrderByWithRelationInput | bankAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: bankAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned bankAccounts
+    **/
+    _count?: true | BankAccountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BankAccountAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BankAccountSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BankAccountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BankAccountMaxAggregateInputType
+  }
+
+  export type GetBankAccountAggregateType<T extends BankAccountAggregateArgs> = {
+        [P in keyof T & keyof AggregateBankAccount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBankAccount[P]>
+      : GetScalarType<T[P], AggregateBankAccount[P]>
+  }
+
+
+
+
+  export type bankAccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bankAccountWhereInput
+    orderBy?: bankAccountOrderByWithAggregationInput | bankAccountOrderByWithAggregationInput[]
+    by: BankAccountScalarFieldEnum[] | BankAccountScalarFieldEnum
+    having?: bankAccountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BankAccountCountAggregateInputType | true
+    _avg?: BankAccountAvgAggregateInputType
+    _sum?: BankAccountSumAggregateInputType
+    _min?: BankAccountMinAggregateInputType
+    _max?: BankAccountMaxAggregateInputType
+  }
+
+  export type BankAccountGroupByOutputType = {
+    id: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: BankAccountCountAggregateOutputType | null
+    _avg: BankAccountAvgAggregateOutputType | null
+    _sum: BankAccountSumAggregateOutputType | null
+    _min: BankAccountMinAggregateOutputType | null
+    _max: BankAccountMaxAggregateOutputType | null
+  }
+
+  type GetBankAccountGroupByPayload<T extends bankAccountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BankAccountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BankAccountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BankAccountGroupByOutputType[P]>
+            : GetScalarType<T[P], BankAccountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type bankAccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    accountHolderName?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    bankBranch?: boolean
+    accountType?: boolean
+    ifscCode?: boolean
+    cancelledChequeImage?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bankAccount"]>
+
+
+
+  export type bankAccountSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    accountHolderName?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    bankBranch?: boolean
+    accountType?: boolean
+    ifscCode?: boolean
+    cancelledChequeImage?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type bankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccount"]>
+  export type bankAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }
+
+  export type $bankAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "bankAccount"
+    objects: {
+      admin: Prisma.$adminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      accountHolderName: string
+      accountNumber: string
+      bankName: string
+      bankBranch: string
+      accountType: string
+      ifscCode: string
+      cancelledChequeImage: string
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["bankAccount"]>
+    composites: {}
+  }
+
+  type bankAccountGetPayload<S extends boolean | null | undefined | bankAccountDefaultArgs> = $Result.GetResult<Prisma.$bankAccountPayload, S>
+
+  type bankAccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<bankAccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BankAccountCountAggregateInputType | true
+    }
+
+  export interface bankAccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['bankAccount'], meta: { name: 'bankAccount' } }
+    /**
+     * Find zero or one BankAccount that matches the filter.
+     * @param {bankAccountFindUniqueArgs} args - Arguments to find a BankAccount
+     * @example
+     * // Get one BankAccount
+     * const bankAccount = await prisma.bankAccount.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends bankAccountFindUniqueArgs>(args: SelectSubset<T, bankAccountFindUniqueArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BankAccount that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {bankAccountFindUniqueOrThrowArgs} args - Arguments to find a BankAccount
+     * @example
+     * // Get one BankAccount
+     * const bankAccount = await prisma.bankAccount.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends bankAccountFindUniqueOrThrowArgs>(args: SelectSubset<T, bankAccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BankAccount that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountFindFirstArgs} args - Arguments to find a BankAccount
+     * @example
+     * // Get one BankAccount
+     * const bankAccount = await prisma.bankAccount.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends bankAccountFindFirstArgs>(args?: SelectSubset<T, bankAccountFindFirstArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BankAccount that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountFindFirstOrThrowArgs} args - Arguments to find a BankAccount
+     * @example
+     * // Get one BankAccount
+     * const bankAccount = await prisma.bankAccount.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends bankAccountFindFirstOrThrowArgs>(args?: SelectSubset<T, bankAccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BankAccounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BankAccounts
+     * const bankAccounts = await prisma.bankAccount.findMany()
+     * 
+     * // Get first 10 BankAccounts
+     * const bankAccounts = await prisma.bankAccount.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bankAccountWithIdOnly = await prisma.bankAccount.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends bankAccountFindManyArgs>(args?: SelectSubset<T, bankAccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BankAccount.
+     * @param {bankAccountCreateArgs} args - Arguments to create a BankAccount.
+     * @example
+     * // Create one BankAccount
+     * const BankAccount = await prisma.bankAccount.create({
+     *   data: {
+     *     // ... data to create a BankAccount
+     *   }
+     * })
+     * 
+     */
+    create<T extends bankAccountCreateArgs>(args: SelectSubset<T, bankAccountCreateArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BankAccounts.
+     * @param {bankAccountCreateManyArgs} args - Arguments to create many BankAccounts.
+     * @example
+     * // Create many BankAccounts
+     * const bankAccount = await prisma.bankAccount.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends bankAccountCreateManyArgs>(args?: SelectSubset<T, bankAccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BankAccount.
+     * @param {bankAccountDeleteArgs} args - Arguments to delete one BankAccount.
+     * @example
+     * // Delete one BankAccount
+     * const BankAccount = await prisma.bankAccount.delete({
+     *   where: {
+     *     // ... filter to delete one BankAccount
+     *   }
+     * })
+     * 
+     */
+    delete<T extends bankAccountDeleteArgs>(args: SelectSubset<T, bankAccountDeleteArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BankAccount.
+     * @param {bankAccountUpdateArgs} args - Arguments to update one BankAccount.
+     * @example
+     * // Update one BankAccount
+     * const bankAccount = await prisma.bankAccount.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends bankAccountUpdateArgs>(args: SelectSubset<T, bankAccountUpdateArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BankAccounts.
+     * @param {bankAccountDeleteManyArgs} args - Arguments to filter BankAccounts to delete.
+     * @example
+     * // Delete a few BankAccounts
+     * const { count } = await prisma.bankAccount.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends bankAccountDeleteManyArgs>(args?: SelectSubset<T, bankAccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BankAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BankAccounts
+     * const bankAccount = await prisma.bankAccount.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends bankAccountUpdateManyArgs>(args: SelectSubset<T, bankAccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BankAccount.
+     * @param {bankAccountUpsertArgs} args - Arguments to update or create a BankAccount.
+     * @example
+     * // Update or create a BankAccount
+     * const bankAccount = await prisma.bankAccount.upsert({
+     *   create: {
+     *     // ... data to create a BankAccount
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BankAccount we want to update
+     *   }
+     * })
+     */
+    upsert<T extends bankAccountUpsertArgs>(args: SelectSubset<T, bankAccountUpsertArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BankAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountCountArgs} args - Arguments to filter BankAccounts to count.
+     * @example
+     * // Count the number of BankAccounts
+     * const count = await prisma.bankAccount.count({
+     *   where: {
+     *     // ... the filter for the BankAccounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends bankAccountCountArgs>(
+      args?: Subset<T, bankAccountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BankAccountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BankAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BankAccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BankAccountAggregateArgs>(args: Subset<T, BankAccountAggregateArgs>): Prisma.PrismaPromise<GetBankAccountAggregateType<T>>
+
+    /**
+     * Group by BankAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends bankAccountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: bankAccountGroupByArgs['orderBy'] }
+        : { orderBy?: bankAccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, bankAccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBankAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the bankAccount model
+   */
+  readonly fields: bankAccountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for bankAccount.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__bankAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the bankAccount model
+   */
+  interface bankAccountFieldRefs {
+    readonly id: FieldRef<"bankAccount", 'Int'>
+    readonly adminId: FieldRef<"bankAccount", 'Int'>
+    readonly accountHolderName: FieldRef<"bankAccount", 'String'>
+    readonly accountNumber: FieldRef<"bankAccount", 'String'>
+    readonly bankName: FieldRef<"bankAccount", 'String'>
+    readonly bankBranch: FieldRef<"bankAccount", 'String'>
+    readonly accountType: FieldRef<"bankAccount", 'String'>
+    readonly ifscCode: FieldRef<"bankAccount", 'String'>
+    readonly cancelledChequeImage: FieldRef<"bankAccount", 'String'>
+    readonly createdAt: FieldRef<"bankAccount", 'DateTime'>
+    readonly createdBy: FieldRef<"bankAccount", 'Int'>
+    readonly createdByRole: FieldRef<"bankAccount", 'String'>
+    readonly updatedAt: FieldRef<"bankAccount", 'DateTime'>
+    readonly updatedBy: FieldRef<"bankAccount", 'Int'>
+    readonly updatedByRole: FieldRef<"bankAccount", 'String'>
+    readonly deletedAt: FieldRef<"bankAccount", 'DateTime'>
+    readonly deletedBy: FieldRef<"bankAccount", 'Int'>
+    readonly deletedByRole: FieldRef<"bankAccount", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * bankAccount findUnique
+   */
+  export type bankAccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccount to fetch.
+     */
+    where: bankAccountWhereUniqueInput
+  }
+
+  /**
+   * bankAccount findUniqueOrThrow
+   */
+  export type bankAccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccount to fetch.
+     */
+    where: bankAccountWhereUniqueInput
+  }
+
+  /**
+   * bankAccount findFirst
+   */
+  export type bankAccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccount to fetch.
+     */
+    where?: bankAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccounts to fetch.
+     */
+    orderBy?: bankAccountOrderByWithRelationInput | bankAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bankAccounts.
+     */
+    cursor?: bankAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bankAccounts.
+     */
+    distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccount findFirstOrThrow
+   */
+  export type bankAccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccount to fetch.
+     */
+    where?: bankAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccounts to fetch.
+     */
+    orderBy?: bankAccountOrderByWithRelationInput | bankAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bankAccounts.
+     */
+    cursor?: bankAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bankAccounts.
+     */
+    distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccount findMany
+   */
+  export type bankAccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccounts to fetch.
+     */
+    where?: bankAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccounts to fetch.
+     */
+    orderBy?: bankAccountOrderByWithRelationInput | bankAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing bankAccounts.
+     */
+    cursor?: bankAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccounts.
+     */
+    skip?: number
+    distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccount create
+   */
+  export type bankAccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a bankAccount.
+     */
+    data: XOR<bankAccountCreateInput, bankAccountUncheckedCreateInput>
+  }
+
+  /**
+   * bankAccount createMany
+   */
+  export type bankAccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many bankAccounts.
+     */
+    data: bankAccountCreateManyInput | bankAccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * bankAccount update
+   */
+  export type bankAccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a bankAccount.
+     */
+    data: XOR<bankAccountUpdateInput, bankAccountUncheckedUpdateInput>
+    /**
+     * Choose, which bankAccount to update.
+     */
+    where: bankAccountWhereUniqueInput
+  }
+
+  /**
+   * bankAccount updateMany
+   */
+  export type bankAccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update bankAccounts.
+     */
+    data: XOR<bankAccountUpdateManyMutationInput, bankAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which bankAccounts to update
+     */
+    where?: bankAccountWhereInput
+    /**
+     * Limit how many bankAccounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * bankAccount upsert
+   */
+  export type bankAccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the bankAccount to update in case it exists.
+     */
+    where: bankAccountWhereUniqueInput
+    /**
+     * In case the bankAccount found by the `where` argument doesn't exist, create a new bankAccount with this data.
+     */
+    create: XOR<bankAccountCreateInput, bankAccountUncheckedCreateInput>
+    /**
+     * In case the bankAccount was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bankAccountUpdateInput, bankAccountUncheckedUpdateInput>
+  }
+
+  /**
+   * bankAccount delete
+   */
+  export type bankAccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    /**
+     * Filter which bankAccount to delete.
+     */
+    where: bankAccountWhereUniqueInput
+  }
+
+  /**
+   * bankAccount deleteMany
+   */
+  export type bankAccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bankAccounts to delete
+     */
+    where?: bankAccountWhereInput
+    /**
+     * Limit how many bankAccounts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * bankAccount without action
+   */
+  export type bankAccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model adminStaff
    */
 
@@ -4281,11 +7190,17 @@ export namespace Prisma {
   export type AdminStaffAvgAggregateOutputType = {
     id: number | null
     admin_id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type AdminStaffSumAggregateOutputType = {
     id: number | null
     admin_id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
   }
 
   export type AdminStaffMinAggregateOutputType = {
@@ -4296,11 +7211,18 @@ export namespace Prisma {
     password: string | null
     role: string | null
     status: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type AdminStaffMaxAggregateOutputType = {
@@ -4311,11 +7233,18 @@ export namespace Prisma {
     password: string | null
     role: string | null
     status: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
   }
 
   export type AdminStaffCountAggregateOutputType = {
@@ -4326,11 +7255,18 @@ export namespace Prisma {
     password: number
     role: number
     status: number
-    createdAt: number
-    updatedAt: number
     pr_token: number
     pr_expires_at: number
     pr_last_reset: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
     _all: number
   }
 
@@ -4338,11 +7274,17 @@ export namespace Prisma {
   export type AdminStaffAvgAggregateInputType = {
     id?: true
     admin_id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type AdminStaffSumAggregateInputType = {
     id?: true
     admin_id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
   }
 
   export type AdminStaffMinAggregateInputType = {
@@ -4353,11 +7295,18 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type AdminStaffMaxAggregateInputType = {
@@ -4368,11 +7317,18 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
   }
 
   export type AdminStaffCountAggregateInputType = {
@@ -4383,11 +7339,18 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
-    createdAt?: true
-    updatedAt?: true
     pr_token?: true
     pr_expires_at?: true
     pr_last_reset?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
     _all?: true
   }
 
@@ -4485,11 +7448,18 @@ export namespace Prisma {
     password: string
     role: string
     status: string
-    createdAt: Date
-    updatedAt: Date
     pr_token: string | null
     pr_expires_at: Date | null
     pr_last_reset: Date | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
     _count: AdminStaffCountAggregateOutputType | null
     _avg: AdminStaffAvgAggregateOutputType | null
     _sum: AdminStaffSumAggregateOutputType | null
@@ -4519,11 +7489,18 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     pr_token?: boolean
     pr_expires_at?: boolean
     pr_last_reset?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminStaff"]>
 
@@ -4537,14 +7514,21 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     pr_token?: boolean
     pr_expires_at?: boolean
     pr_last_reset?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
   }
 
-  export type adminStaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "admin_id" | "name" | "email" | "password" | "role" | "status" | "createdAt" | "updatedAt" | "pr_token" | "pr_expires_at" | "pr_last_reset", ExtArgs["result"]["adminStaff"]>
+  export type adminStaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "admin_id" | "name" | "email" | "password" | "role" | "status" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["adminStaff"]>
   export type adminStaffInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }
@@ -4562,11 +7546,18 @@ export namespace Prisma {
       password: string
       role: string
       status: string
-      createdAt: Date
-      updatedAt: Date
       pr_token: string | null
       pr_expires_at: Date | null
       pr_last_reset: Date | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
     }, ExtArgs["result"]["adminStaff"]>
     composites: {}
   }
@@ -4944,11 +7935,18 @@ export namespace Prisma {
     readonly password: FieldRef<"adminStaff", 'String'>
     readonly role: FieldRef<"adminStaff", 'String'>
     readonly status: FieldRef<"adminStaff", 'String'>
-    readonly createdAt: FieldRef<"adminStaff", 'DateTime'>
-    readonly updatedAt: FieldRef<"adminStaff", 'DateTime'>
     readonly pr_token: FieldRef<"adminStaff", 'String'>
     readonly pr_expires_at: FieldRef<"adminStaff", 'DateTime'>
     readonly pr_last_reset: FieldRef<"adminStaff", 'DateTime'>
+    readonly createdAt: FieldRef<"adminStaff", 'DateTime'>
+    readonly createdBy: FieldRef<"adminStaff", 'Int'>
+    readonly createdByRole: FieldRef<"adminStaff", 'String'>
+    readonly updatedAt: FieldRef<"adminStaff", 'DateTime'>
+    readonly updatedBy: FieldRef<"adminStaff", 'Int'>
+    readonly updatedByRole: FieldRef<"adminStaff", 'String'>
+    readonly deletedAt: FieldRef<"adminStaff", 'DateTime'>
+    readonly deletedBy: FieldRef<"adminStaff", 'Int'>
+    readonly deletedByRole: FieldRef<"adminStaff", 'String'>
   }
     
 
@@ -7865,6 +10863,7 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    admins?: boolean | country$adminsArgs<ExtArgs>
     originProducts?: boolean | country$originProductsArgs<ExtArgs>
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
@@ -7898,6 +10897,7 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    admins?: boolean | country$adminsArgs<ExtArgs>
     originProducts?: boolean | country$originProductsArgs<ExtArgs>
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
@@ -7909,6 +10909,7 @@ export namespace Prisma {
       states: Prisma.$statePayload<ExtArgs>[]
       cities: Prisma.$cityPayload<ExtArgs>[]
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      admins: Prisma.$adminPayload<ExtArgs>[]
       originProducts: Prisma.$productPayload<ExtArgs>[]
       shippingProducts: Prisma.$productPayload<ExtArgs>[]
     }
@@ -8274,6 +11275,7 @@ export namespace Prisma {
     states<T extends country$statesArgs<ExtArgs> = {}>(args?: Subset<T, country$statesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cities<T extends country$citiesArgs<ExtArgs> = {}>(args?: Subset<T, country$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     warehouses<T extends country$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, country$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    admins<T extends country$adminsArgs<ExtArgs> = {}>(args?: Subset<T, country$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     originProducts<T extends country$originProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$originProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shippingProducts<T extends country$shippingProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$shippingProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -8738,6 +11740,30 @@ export namespace Prisma {
   }
 
   /**
+   * country.admins
+   */
+  export type country$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the admin
+     */
+    select?: adminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the admin
+     */
+    omit?: adminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: adminInclude<ExtArgs> | null
+    where?: adminWhereInput
+    orderBy?: adminOrderByWithRelationInput | adminOrderByWithRelationInput[]
+    cursor?: adminWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
    * country.originProducts
    */
   export type country$originProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9093,6 +12119,7 @@ export namespace Prisma {
     country?: boolean | countryDefaultArgs<ExtArgs>
     cities?: boolean | state$citiesArgs<ExtArgs>
     warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    admins?: boolean | state$adminsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["state"]>
 
@@ -9120,6 +12147,7 @@ export namespace Prisma {
     country?: boolean | countryDefaultArgs<ExtArgs>
     cities?: boolean | state$citiesArgs<ExtArgs>
     warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    admins?: boolean | state$adminsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9129,6 +12157,7 @@ export namespace Prisma {
       country: Prisma.$countryPayload<ExtArgs>
       cities: Prisma.$cityPayload<ExtArgs>[]
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      admins: Prisma.$adminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -9488,6 +12517,7 @@ export namespace Prisma {
     country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     cities<T extends state$citiesArgs<ExtArgs> = {}>(args?: Subset<T, state$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     warehouses<T extends state$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, state$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    admins<T extends state$adminsArgs<ExtArgs> = {}>(args?: Subset<T, state$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9922,6 +12952,30 @@ export namespace Prisma {
   }
 
   /**
+   * state.admins
+   */
+  export type state$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the admin
+     */
+    select?: adminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the admin
+     */
+    omit?: adminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: adminInclude<ExtArgs> | null
+    where?: adminWhereInput
+    orderBy?: adminOrderByWithRelationInput | adminOrderByWithRelationInput[]
+    cursor?: adminWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
    * state without action
    */
   export type stateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10225,6 +13279,7 @@ export namespace Prisma {
     state?: boolean | stateDefaultArgs<ExtArgs>
     country?: boolean | countryDefaultArgs<ExtArgs>
     warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    admins?: boolean | city$adminsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["city"]>
 
@@ -10251,6 +13306,7 @@ export namespace Prisma {
     state?: boolean | stateDefaultArgs<ExtArgs>
     country?: boolean | countryDefaultArgs<ExtArgs>
     warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    admins?: boolean | city$adminsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -10260,6 +13316,7 @@ export namespace Prisma {
       state: Prisma.$statePayload<ExtArgs>
       country: Prisma.$countryPayload<ExtArgs>
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      admins: Prisma.$adminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -10618,6 +13675,7 @@ export namespace Prisma {
     state<T extends stateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stateDefaultArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     warehouses<T extends city$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, city$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    admins<T extends city$adminsArgs<ExtArgs> = {}>(args?: Subset<T, city$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11024,6 +14082,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * city.admins
+   */
+  export type city$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the admin
+     */
+    select?: adminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the admin
+     */
+    omit?: adminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: adminInclude<ExtArgs> | null
+    where?: adminWhereInput
+    orderBy?: adminOrderByWithRelationInput | adminOrderByWithRelationInput[]
+    cursor?: adminWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
   }
 
   /**
@@ -17173,18 +20255,95 @@ export namespace Prisma {
   export const AdminScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    username: 'username',
     email: 'email',
     password: 'password',
     role: 'role',
     status: 'status',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
+    dateOfBirth: 'dateOfBirth',
+    currentAddress: 'currentAddress',
+    permanentAddress: 'permanentAddress',
+    permanentPostalCode: 'permanentPostalCode',
+    permanentCityId: 'permanentCityId',
+    permanentStateId: 'permanentStateId',
+    permanentCountryId: 'permanentCountryId',
     pr_token: 'pr_token',
     pr_expires_at: 'pr_expires_at',
-    pr_last_reset: 'pr_last_reset'
+    pr_last_reset: 'pr_last_reset',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+  export const CompanyDetailScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    companyName: 'companyName',
+    brandName: 'brandName',
+    brandShortName: 'brandShortName',
+    billingAddress: 'billingAddress',
+    billingPincode: 'billingPincode',
+    billingState: 'billingState',
+    billingCity: 'billingCity',
+    businessType: 'businessType',
+    clientEntryType: 'clientEntryType',
+    gstNumber: 'gstNumber',
+    companyPanNumber: 'companyPanNumber',
+    aadharNumber: 'aadharNumber',
+    gstDocument: 'gstDocument',
+    panCardHolderName: 'panCardHolderName',
+    aadharCardHolderName: 'aadharCardHolderName',
+    panCardImage: 'panCardImage',
+    aadharCardImage: 'aadharCardImage',
+    additionalDocumentUpload: 'additionalDocumentUpload',
+    documentId: 'documentId',
+    documentName: 'documentName',
+    documentImage: 'documentImage',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type CompanyDetailScalarFieldEnum = (typeof CompanyDetailScalarFieldEnum)[keyof typeof CompanyDetailScalarFieldEnum]
+
+
+  export const BankAccountScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    accountHolderName: 'accountHolderName',
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    bankBranch: 'bankBranch',
+    accountType: 'accountType',
+    ifscCode: 'ifscCode',
+    cancelledChequeImage: 'cancelledChequeImage',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
 
 
   export const AdminStaffScalarFieldEnum: {
@@ -17195,11 +20354,18 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     status: 'status',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
     pr_token: 'pr_token',
     pr_expires_at: 'pr_expires_at',
-    pr_last_reset: 'pr_last_reset'
+    pr_last_reset: 'pr_last_reset',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
   };
 
   export type AdminStaffScalarFieldEnum = (typeof AdminStaffScalarFieldEnum)[keyof typeof AdminStaffScalarFieldEnum]
@@ -17512,14 +20678,67 @@ export namespace Prisma {
 
   export const adminOrderByRelevanceFieldEnum: {
     name: 'name',
+    username: 'username',
     email: 'email',
     password: 'password',
     role: 'role',
     status: 'status',
-    pr_token: 'pr_token'
+    currentAddress: 'currentAddress',
+    permanentAddress: 'permanentAddress',
+    permanentPostalCode: 'permanentPostalCode',
+    pr_token: 'pr_token',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type adminOrderByRelevanceFieldEnum = (typeof adminOrderByRelevanceFieldEnum)[keyof typeof adminOrderByRelevanceFieldEnum]
+
+
+  export const companyDetailOrderByRelevanceFieldEnum: {
+    companyName: 'companyName',
+    brandName: 'brandName',
+    brandShortName: 'brandShortName',
+    billingAddress: 'billingAddress',
+    billingPincode: 'billingPincode',
+    billingState: 'billingState',
+    billingCity: 'billingCity',
+    businessType: 'businessType',
+    clientEntryType: 'clientEntryType',
+    gstNumber: 'gstNumber',
+    companyPanNumber: 'companyPanNumber',
+    aadharNumber: 'aadharNumber',
+    gstDocument: 'gstDocument',
+    panCardHolderName: 'panCardHolderName',
+    aadharCardHolderName: 'aadharCardHolderName',
+    panCardImage: 'panCardImage',
+    aadharCardImage: 'aadharCardImage',
+    additionalDocumentUpload: 'additionalDocumentUpload',
+    documentId: 'documentId',
+    documentName: 'documentName',
+    documentImage: 'documentImage',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type companyDetailOrderByRelevanceFieldEnum = (typeof companyDetailOrderByRelevanceFieldEnum)[keyof typeof companyDetailOrderByRelevanceFieldEnum]
+
+
+  export const bankAccountOrderByRelevanceFieldEnum: {
+    accountHolderName: 'accountHolderName',
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    bankBranch: 'bankBranch',
+    accountType: 'accountType',
+    ifscCode: 'ifscCode',
+    cancelledChequeImage: 'cancelledChequeImage',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type bankAccountOrderByRelevanceFieldEnum = (typeof bankAccountOrderByRelevanceFieldEnum)[keyof typeof bankAccountOrderByRelevanceFieldEnum]
 
 
   export const adminStaffOrderByRelevanceFieldEnum: {
@@ -17528,7 +20747,10 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     status: 'status',
-    pr_token: 'pr_token'
+    pr_token: 'pr_token',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
   };
 
   export type adminStaffOrderByRelevanceFieldEnum = (typeof adminStaffOrderByRelevanceFieldEnum)[keyof typeof adminStaffOrderByRelevanceFieldEnum]
@@ -17914,36 +21136,77 @@ export namespace Prisma {
     NOT?: adminWhereInput | adminWhereInput[]
     id?: IntFilter<"admin"> | number
     name?: StringFilter<"admin"> | string
+    username?: StringFilter<"admin"> | string
     email?: StringFilter<"admin"> | string
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
-    createdAt?: DateTimeFilter<"admin"> | Date | string
-    updatedAt?: DateTimeFilter<"admin"> | Date | string
+    dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    currentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentPostalCode?: StringNullableFilter<"admin"> | string | null
+    permanentCityId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentStateId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentCountryId?: BigIntNullableFilter<"admin"> | bigint | number | null
     pr_token?: StringNullableFilter<"admin"> | string | null
     pr_expires_at?: DateTimeNullableFilter<"admin"> | Date | string | null
     pr_last_reset?: DateTimeNullableFilter<"admin"> | Date | string | null
+    createdAt?: DateTimeFilter<"admin"> | Date | string
+    createdBy?: IntNullableFilter<"admin"> | number | null
+    createdByRole?: StringNullableFilter<"admin"> | string | null
+    updatedAt?: DateTimeFilter<"admin"> | Date | string
+    updatedBy?: IntNullableFilter<"admin"> | number | null
+    updatedByRole?: StringNullableFilter<"admin"> | string | null
+    deletedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
+    deletedBy?: IntNullableFilter<"admin"> | number | null
+    deletedByRole?: StringNullableFilter<"admin"> | string | null
+    permanentCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
+    permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
     staff?: AdminStaffListRelationFilter
+    companyDetail?: XOR<CompanyDetailNullableScalarRelationFilter, companyDetailWhereInput> | null
+    bankAccounts?: BankAccountListRelationFilter
   }
 
   export type adminOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    currentAddress?: SortOrderInput | SortOrder
+    permanentAddress?: SortOrderInput | SortOrder
+    permanentPostalCode?: SortOrderInput | SortOrder
+    permanentCityId?: SortOrderInput | SortOrder
+    permanentStateId?: SortOrderInput | SortOrder
+    permanentCountryId?: SortOrderInput | SortOrder
     pr_token?: SortOrderInput | SortOrder
     pr_expires_at?: SortOrderInput | SortOrder
     pr_last_reset?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    permanentCity?: cityOrderByWithRelationInput
+    permanentState?: stateOrderByWithRelationInput
+    permanentCountry?: countryOrderByWithRelationInput
     staff?: adminStaffOrderByRelationAggregateInput
+    companyDetail?: companyDetailOrderByWithRelationInput
+    bankAccounts?: bankAccountOrderByRelationAggregateInput
     _relevance?: adminOrderByRelevanceInput
   }
 
   export type adminWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    username?: string
     email?: string
     AND?: adminWhereInput | adminWhereInput[]
     OR?: adminWhereInput[]
@@ -17952,26 +21215,60 @@ export namespace Prisma {
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
-    createdAt?: DateTimeFilter<"admin"> | Date | string
-    updatedAt?: DateTimeFilter<"admin"> | Date | string
+    dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    currentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentPostalCode?: StringNullableFilter<"admin"> | string | null
+    permanentCityId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentStateId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentCountryId?: BigIntNullableFilter<"admin"> | bigint | number | null
     pr_token?: StringNullableFilter<"admin"> | string | null
     pr_expires_at?: DateTimeNullableFilter<"admin"> | Date | string | null
     pr_last_reset?: DateTimeNullableFilter<"admin"> | Date | string | null
+    createdAt?: DateTimeFilter<"admin"> | Date | string
+    createdBy?: IntNullableFilter<"admin"> | number | null
+    createdByRole?: StringNullableFilter<"admin"> | string | null
+    updatedAt?: DateTimeFilter<"admin"> | Date | string
+    updatedBy?: IntNullableFilter<"admin"> | number | null
+    updatedByRole?: StringNullableFilter<"admin"> | string | null
+    deletedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
+    deletedBy?: IntNullableFilter<"admin"> | number | null
+    deletedByRole?: StringNullableFilter<"admin"> | string | null
+    permanentCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
+    permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
     staff?: AdminStaffListRelationFilter
-  }, "id" | "email">
+    companyDetail?: XOR<CompanyDetailNullableScalarRelationFilter, companyDetailWhereInput> | null
+    bankAccounts?: BankAccountListRelationFilter
+  }, "id" | "username" | "email">
 
   export type adminOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    currentAddress?: SortOrderInput | SortOrder
+    permanentAddress?: SortOrderInput | SortOrder
+    permanentPostalCode?: SortOrderInput | SortOrder
+    permanentCityId?: SortOrderInput | SortOrder
+    permanentStateId?: SortOrderInput | SortOrder
+    permanentCountryId?: SortOrderInput | SortOrder
     pr_token?: SortOrderInput | SortOrder
     pr_expires_at?: SortOrderInput | SortOrder
     pr_last_reset?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: adminCountOrderByAggregateInput
     _avg?: adminAvgOrderByAggregateInput
     _max?: adminMaxOrderByAggregateInput
@@ -17985,15 +21282,346 @@ export namespace Prisma {
     NOT?: adminScalarWhereWithAggregatesInput | adminScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"admin"> | number
     name?: StringWithAggregatesFilter<"admin"> | string
+    username?: StringWithAggregatesFilter<"admin"> | string
     email?: StringWithAggregatesFilter<"admin"> | string
     password?: StringWithAggregatesFilter<"admin"> | string
     role?: StringWithAggregatesFilter<"admin"> | string
     status?: StringWithAggregatesFilter<"admin"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"admin"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"admin"> | Date | string
+    dateOfBirth?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
+    currentAddress?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    permanentAddress?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    permanentPostalCode?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    permanentCityId?: BigIntNullableWithAggregatesFilter<"admin"> | bigint | number | null
+    permanentStateId?: BigIntNullableWithAggregatesFilter<"admin"> | bigint | number | null
+    permanentCountryId?: BigIntNullableWithAggregatesFilter<"admin"> | bigint | number | null
     pr_token?: StringNullableWithAggregatesFilter<"admin"> | string | null
     pr_expires_at?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
     pr_last_reset?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"admin"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"admin"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"admin"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"admin"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"admin"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"admin"> | string | null
+  }
+
+  export type companyDetailWhereInput = {
+    AND?: companyDetailWhereInput | companyDetailWhereInput[]
+    OR?: companyDetailWhereInput[]
+    NOT?: companyDetailWhereInput | companyDetailWhereInput[]
+    id?: IntFilter<"companyDetail"> | number
+    adminId?: IntFilter<"companyDetail"> | number
+    companyName?: StringFilter<"companyDetail"> | string
+    brandName?: StringFilter<"companyDetail"> | string
+    brandShortName?: StringFilter<"companyDetail"> | string
+    billingAddress?: StringFilter<"companyDetail"> | string
+    billingPincode?: StringFilter<"companyDetail"> | string
+    billingState?: StringFilter<"companyDetail"> | string
+    billingCity?: StringFilter<"companyDetail"> | string
+    businessType?: StringFilter<"companyDetail"> | string
+    clientEntryType?: StringFilter<"companyDetail"> | string
+    gstNumber?: StringFilter<"companyDetail"> | string
+    companyPanNumber?: StringFilter<"companyDetail"> | string
+    aadharNumber?: StringFilter<"companyDetail"> | string
+    gstDocument?: StringFilter<"companyDetail"> | string
+    panCardHolderName?: StringFilter<"companyDetail"> | string
+    aadharCardHolderName?: StringFilter<"companyDetail"> | string
+    panCardImage?: StringFilter<"companyDetail"> | string
+    aadharCardImage?: StringFilter<"companyDetail"> | string
+    additionalDocumentUpload?: StringNullableFilter<"companyDetail"> | string | null
+    documentId?: StringFilter<"companyDetail"> | string
+    documentName?: StringFilter<"companyDetail"> | string
+    documentImage?: StringFilter<"companyDetail"> | string
+    createdAt?: DateTimeFilter<"companyDetail"> | Date | string
+    createdBy?: IntNullableFilter<"companyDetail"> | number | null
+    createdByRole?: StringNullableFilter<"companyDetail"> | string | null
+    updatedAt?: DateTimeFilter<"companyDetail"> | Date | string
+    updatedBy?: IntNullableFilter<"companyDetail"> | number | null
+    updatedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    deletedAt?: DateTimeNullableFilter<"companyDetail"> | Date | string | null
+    deletedBy?: IntNullableFilter<"companyDetail"> | number | null
+    deletedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }
+
+  export type companyDetailOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    companyName?: SortOrder
+    brandName?: SortOrder
+    brandShortName?: SortOrder
+    billingAddress?: SortOrder
+    billingPincode?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    businessType?: SortOrder
+    clientEntryType?: SortOrder
+    gstNumber?: SortOrder
+    companyPanNumber?: SortOrder
+    aadharNumber?: SortOrder
+    gstDocument?: SortOrder
+    panCardHolderName?: SortOrder
+    aadharCardHolderName?: SortOrder
+    panCardImage?: SortOrder
+    aadharCardImage?: SortOrder
+    additionalDocumentUpload?: SortOrderInput | SortOrder
+    documentId?: SortOrder
+    documentName?: SortOrder
+    documentImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    admin?: adminOrderByWithRelationInput
+    _relevance?: companyDetailOrderByRelevanceInput
+  }
+
+  export type companyDetailWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    adminId?: number
+    AND?: companyDetailWhereInput | companyDetailWhereInput[]
+    OR?: companyDetailWhereInput[]
+    NOT?: companyDetailWhereInput | companyDetailWhereInput[]
+    companyName?: StringFilter<"companyDetail"> | string
+    brandName?: StringFilter<"companyDetail"> | string
+    brandShortName?: StringFilter<"companyDetail"> | string
+    billingAddress?: StringFilter<"companyDetail"> | string
+    billingPincode?: StringFilter<"companyDetail"> | string
+    billingState?: StringFilter<"companyDetail"> | string
+    billingCity?: StringFilter<"companyDetail"> | string
+    businessType?: StringFilter<"companyDetail"> | string
+    clientEntryType?: StringFilter<"companyDetail"> | string
+    gstNumber?: StringFilter<"companyDetail"> | string
+    companyPanNumber?: StringFilter<"companyDetail"> | string
+    aadharNumber?: StringFilter<"companyDetail"> | string
+    gstDocument?: StringFilter<"companyDetail"> | string
+    panCardHolderName?: StringFilter<"companyDetail"> | string
+    aadharCardHolderName?: StringFilter<"companyDetail"> | string
+    panCardImage?: StringFilter<"companyDetail"> | string
+    aadharCardImage?: StringFilter<"companyDetail"> | string
+    additionalDocumentUpload?: StringNullableFilter<"companyDetail"> | string | null
+    documentId?: StringFilter<"companyDetail"> | string
+    documentName?: StringFilter<"companyDetail"> | string
+    documentImage?: StringFilter<"companyDetail"> | string
+    createdAt?: DateTimeFilter<"companyDetail"> | Date | string
+    createdBy?: IntNullableFilter<"companyDetail"> | number | null
+    createdByRole?: StringNullableFilter<"companyDetail"> | string | null
+    updatedAt?: DateTimeFilter<"companyDetail"> | Date | string
+    updatedBy?: IntNullableFilter<"companyDetail"> | number | null
+    updatedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    deletedAt?: DateTimeNullableFilter<"companyDetail"> | Date | string | null
+    deletedBy?: IntNullableFilter<"companyDetail"> | number | null
+    deletedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }, "id" | "adminId">
+
+  export type companyDetailOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    companyName?: SortOrder
+    brandName?: SortOrder
+    brandShortName?: SortOrder
+    billingAddress?: SortOrder
+    billingPincode?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    businessType?: SortOrder
+    clientEntryType?: SortOrder
+    gstNumber?: SortOrder
+    companyPanNumber?: SortOrder
+    aadharNumber?: SortOrder
+    gstDocument?: SortOrder
+    panCardHolderName?: SortOrder
+    aadharCardHolderName?: SortOrder
+    panCardImage?: SortOrder
+    aadharCardImage?: SortOrder
+    additionalDocumentUpload?: SortOrderInput | SortOrder
+    documentId?: SortOrder
+    documentName?: SortOrder
+    documentImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: companyDetailCountOrderByAggregateInput
+    _avg?: companyDetailAvgOrderByAggregateInput
+    _max?: companyDetailMaxOrderByAggregateInput
+    _min?: companyDetailMinOrderByAggregateInput
+    _sum?: companyDetailSumOrderByAggregateInput
+  }
+
+  export type companyDetailScalarWhereWithAggregatesInput = {
+    AND?: companyDetailScalarWhereWithAggregatesInput | companyDetailScalarWhereWithAggregatesInput[]
+    OR?: companyDetailScalarWhereWithAggregatesInput[]
+    NOT?: companyDetailScalarWhereWithAggregatesInput | companyDetailScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"companyDetail"> | number
+    adminId?: IntWithAggregatesFilter<"companyDetail"> | number
+    companyName?: StringWithAggregatesFilter<"companyDetail"> | string
+    brandName?: StringWithAggregatesFilter<"companyDetail"> | string
+    brandShortName?: StringWithAggregatesFilter<"companyDetail"> | string
+    billingAddress?: StringWithAggregatesFilter<"companyDetail"> | string
+    billingPincode?: StringWithAggregatesFilter<"companyDetail"> | string
+    billingState?: StringWithAggregatesFilter<"companyDetail"> | string
+    billingCity?: StringWithAggregatesFilter<"companyDetail"> | string
+    businessType?: StringWithAggregatesFilter<"companyDetail"> | string
+    clientEntryType?: StringWithAggregatesFilter<"companyDetail"> | string
+    gstNumber?: StringWithAggregatesFilter<"companyDetail"> | string
+    companyPanNumber?: StringWithAggregatesFilter<"companyDetail"> | string
+    aadharNumber?: StringWithAggregatesFilter<"companyDetail"> | string
+    gstDocument?: StringWithAggregatesFilter<"companyDetail"> | string
+    panCardHolderName?: StringWithAggregatesFilter<"companyDetail"> | string
+    aadharCardHolderName?: StringWithAggregatesFilter<"companyDetail"> | string
+    panCardImage?: StringWithAggregatesFilter<"companyDetail"> | string
+    aadharCardImage?: StringWithAggregatesFilter<"companyDetail"> | string
+    additionalDocumentUpload?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    documentId?: StringWithAggregatesFilter<"companyDetail"> | string
+    documentName?: StringWithAggregatesFilter<"companyDetail"> | string
+    documentImage?: StringWithAggregatesFilter<"companyDetail"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"companyDetail"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"companyDetail"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"companyDetail"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"companyDetail"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"companyDetail"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"companyDetail"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+  }
+
+  export type bankAccountWhereInput = {
+    AND?: bankAccountWhereInput | bankAccountWhereInput[]
+    OR?: bankAccountWhereInput[]
+    NOT?: bankAccountWhereInput | bankAccountWhereInput[]
+    id?: IntFilter<"bankAccount"> | number
+    adminId?: IntFilter<"bankAccount"> | number
+    accountHolderName?: StringFilter<"bankAccount"> | string
+    accountNumber?: StringFilter<"bankAccount"> | string
+    bankName?: StringFilter<"bankAccount"> | string
+    bankBranch?: StringFilter<"bankAccount"> | string
+    accountType?: StringFilter<"bankAccount"> | string
+    ifscCode?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    createdAt?: DateTimeFilter<"bankAccount"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccount"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccount"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccount"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccount"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccount"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccount"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccount"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccount"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }
+
+  export type bankAccountOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    admin?: adminOrderByWithRelationInput
+    _relevance?: bankAccountOrderByRelevanceInput
+  }
+
+  export type bankAccountWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: bankAccountWhereInput | bankAccountWhereInput[]
+    OR?: bankAccountWhereInput[]
+    NOT?: bankAccountWhereInput | bankAccountWhereInput[]
+    adminId?: IntFilter<"bankAccount"> | number
+    accountHolderName?: StringFilter<"bankAccount"> | string
+    accountNumber?: StringFilter<"bankAccount"> | string
+    bankName?: StringFilter<"bankAccount"> | string
+    bankBranch?: StringFilter<"bankAccount"> | string
+    accountType?: StringFilter<"bankAccount"> | string
+    ifscCode?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    createdAt?: DateTimeFilter<"bankAccount"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccount"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccount"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccount"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccount"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccount"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccount"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccount"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccount"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }, "id">
+
+  export type bankAccountOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: bankAccountCountOrderByAggregateInput
+    _avg?: bankAccountAvgOrderByAggregateInput
+    _max?: bankAccountMaxOrderByAggregateInput
+    _min?: bankAccountMinOrderByAggregateInput
+    _sum?: bankAccountSumOrderByAggregateInput
+  }
+
+  export type bankAccountScalarWhereWithAggregatesInput = {
+    AND?: bankAccountScalarWhereWithAggregatesInput | bankAccountScalarWhereWithAggregatesInput[]
+    OR?: bankAccountScalarWhereWithAggregatesInput[]
+    NOT?: bankAccountScalarWhereWithAggregatesInput | bankAccountScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"bankAccount"> | number
+    adminId?: IntWithAggregatesFilter<"bankAccount"> | number
+    accountHolderName?: StringWithAggregatesFilter<"bankAccount"> | string
+    accountNumber?: StringWithAggregatesFilter<"bankAccount"> | string
+    bankName?: StringWithAggregatesFilter<"bankAccount"> | string
+    bankBranch?: StringWithAggregatesFilter<"bankAccount"> | string
+    accountType?: StringWithAggregatesFilter<"bankAccount"> | string
+    ifscCode?: StringWithAggregatesFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringWithAggregatesFilter<"bankAccount"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"bankAccount"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"bankAccount"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"bankAccount"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"bankAccount"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"bankAccount"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"bankAccount"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
   }
 
   export type adminStaffWhereInput = {
@@ -18007,11 +21635,18 @@ export namespace Prisma {
     password?: StringFilter<"adminStaff"> | string
     role?: StringFilter<"adminStaff"> | string
     status?: StringFilter<"adminStaff"> | string
-    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
-    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
     pr_token?: StringNullableFilter<"adminStaff"> | string | null
     pr_expires_at?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
     pr_last_reset?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
+    createdBy?: IntNullableFilter<"adminStaff"> | number | null
+    createdByRole?: StringNullableFilter<"adminStaff"> | string | null
+    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
+    updatedBy?: IntNullableFilter<"adminStaff"> | number | null
+    updatedByRole?: StringNullableFilter<"adminStaff"> | string | null
+    deletedAt?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    deletedBy?: IntNullableFilter<"adminStaff"> | number | null
+    deletedByRole?: StringNullableFilter<"adminStaff"> | string | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
   }
 
@@ -18023,11 +21658,18 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     pr_token?: SortOrderInput | SortOrder
     pr_expires_at?: SortOrderInput | SortOrder
     pr_last_reset?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     admin?: adminOrderByWithRelationInput
     _relevance?: adminStaffOrderByRelevanceInput
   }
@@ -18043,11 +21685,18 @@ export namespace Prisma {
     password?: StringFilter<"adminStaff"> | string
     role?: StringFilter<"adminStaff"> | string
     status?: StringFilter<"adminStaff"> | string
-    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
-    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
     pr_token?: StringNullableFilter<"adminStaff"> | string | null
     pr_expires_at?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
     pr_last_reset?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
+    createdBy?: IntNullableFilter<"adminStaff"> | number | null
+    createdByRole?: StringNullableFilter<"adminStaff"> | string | null
+    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
+    updatedBy?: IntNullableFilter<"adminStaff"> | number | null
+    updatedByRole?: StringNullableFilter<"adminStaff"> | string | null
+    deletedAt?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    deletedBy?: IntNullableFilter<"adminStaff"> | number | null
+    deletedByRole?: StringNullableFilter<"adminStaff"> | string | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
   }, "id" | "admin_id" | "email">
 
@@ -18059,11 +21708,18 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     pr_token?: SortOrderInput | SortOrder
     pr_expires_at?: SortOrderInput | SortOrder
     pr_last_reset?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
     _count?: adminStaffCountOrderByAggregateInput
     _avg?: adminStaffAvgOrderByAggregateInput
     _max?: adminStaffMaxOrderByAggregateInput
@@ -18082,11 +21738,18 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"adminStaff"> | string
     role?: StringWithAggregatesFilter<"adminStaff"> | string
     status?: StringWithAggregatesFilter<"adminStaff"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"adminStaff"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"adminStaff"> | Date | string
     pr_token?: StringNullableWithAggregatesFilter<"adminStaff"> | string | null
     pr_expires_at?: DateTimeNullableWithAggregatesFilter<"adminStaff"> | Date | string | null
     pr_last_reset?: DateTimeNullableWithAggregatesFilter<"adminStaff"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"adminStaff"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"adminStaff"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"adminStaff"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"adminStaff"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"adminStaff"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"adminStaff"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"adminStaff"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"adminStaff"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"adminStaff"> | string | null
   }
 
   export type loginLogWhereInput = {
@@ -18394,6 +22057,7 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
     originProducts?: ProductListRelationFilter
     shippingProducts?: ProductListRelationFilter
   }
@@ -18420,6 +22084,7 @@ export namespace Prisma {
     states?: stateOrderByRelationAggregateInput
     cities?: cityOrderByRelationAggregateInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    admins?: adminOrderByRelationAggregateInput
     originProducts?: productOrderByRelationAggregateInput
     shippingProducts?: productOrderByRelationAggregateInput
     _relevance?: countryOrderByRelevanceInput
@@ -18450,6 +22115,7 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
     originProducts?: ProductListRelationFilter
     shippingProducts?: ProductListRelationFilter
   }, "id">
@@ -18525,6 +22191,7 @@ export namespace Prisma {
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
   }
 
   export type stateOrderByWithRelationInput = {
@@ -18545,6 +22212,7 @@ export namespace Prisma {
     country?: countryOrderByWithRelationInput
     cities?: cityOrderByRelationAggregateInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    admins?: adminOrderByRelationAggregateInput
     _relevance?: stateOrderByRelevanceInput
   }
 
@@ -18569,6 +22237,7 @@ export namespace Prisma {
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
   }, "id">
 
   export type stateOrderByWithAggregationInput = {
@@ -18633,6 +22302,7 @@ export namespace Prisma {
     state?: XOR<StateScalarRelationFilter, stateWhereInput>
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
   }
 
   export type cityOrderByWithRelationInput = {
@@ -18652,6 +22322,7 @@ export namespace Prisma {
     state?: stateOrderByWithRelationInput
     country?: countryOrderByWithRelationInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    admins?: adminOrderByRelationAggregateInput
     _relevance?: cityOrderByRelevanceInput
   }
 
@@ -18675,6 +22346,7 @@ export namespace Prisma {
     state?: XOR<StateScalarRelationFilter, stateWhereInput>
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     warehouses?: WarehouseListRelationFilter
+    admins?: AdminListRelationFilter
   }, "id">
 
   export type cityOrderByWithAggregationInput = {
@@ -19633,101 +23305,595 @@ export namespace Prisma {
 
   export type adminCreateInput = {
     name: string
+    username: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
   }
 
   export type adminUncheckedCreateInput = {
     id?: number
     name: string
+    username: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type adminUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
   }
 
   export type adminUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type adminCreateManyInput = {
     id?: number
     name: string
+    username: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailCreateInput = {
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload?: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    admin: adminCreateNestedOneWithoutCompanyDetailInput
+  }
+
+  export type companyDetailUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload?: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailUpdateInput = {
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    admin?: adminUpdateOneRequiredWithoutCompanyDetailNestedInput
+  }
+
+  export type companyDetailUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailCreateManyInput = {
+    id?: number
+    adminId: number
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload?: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailUpdateManyMutationInput = {
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountCreateInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    admin: adminCreateNestedOneWithoutBankAccountsInput
+  }
+
+  export type bankAccountUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountUpdateInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    admin?: adminUpdateOneRequiredWithoutBankAccountsNestedInput
+  }
+
+  export type bankAccountUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountCreateManyInput = {
+    id?: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountUpdateManyMutationInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffCreateInput = {
@@ -19736,11 +23902,18 @@ export namespace Prisma {
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
     admin: adminCreateNestedOneWithoutStaffInput
   }
 
@@ -19752,11 +23925,18 @@ export namespace Prisma {
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminStaffUpdateInput = {
@@ -19765,11 +23945,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: adminUpdateOneRequiredWithoutStaffNestedInput
   }
 
@@ -19781,11 +23968,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffCreateManyInput = {
@@ -19796,11 +23990,18 @@ export namespace Prisma {
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminStaffUpdateManyMutationInput = {
@@ -19809,11 +24010,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffUncheckedUpdateManyInput = {
@@ -19824,11 +24032,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type loginLogCreateInput = {
@@ -20197,6 +24412,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -20223,6 +24439,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -20249,6 +24466,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -20275,6 +24493,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -20359,6 +24578,7 @@ export namespace Prisma {
     country: countryCreateNestedOneWithoutStatesInput
     cities?: cityCreateNestedManyWithoutStateInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateUncheckedCreateInput = {
@@ -20378,6 +24598,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateUpdateInput = {
@@ -20397,6 +24618,7 @@ export namespace Prisma {
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     cities?: cityUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateUncheckedUpdateInput = {
@@ -20416,6 +24638,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateCreateManyInput = {
@@ -20483,6 +24706,7 @@ export namespace Prisma {
     state: stateCreateNestedOneWithoutCitiesInput
     country: countryCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityUncheckedCreateInput = {
@@ -20500,6 +24724,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityUpdateInput = {
@@ -20517,6 +24742,7 @@ export namespace Prisma {
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateInput = {
@@ -20534,6 +24760,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityCreateManyInput = {
@@ -21764,13 +25991,54 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type CityNullableScalarRelationFilter = {
+    is?: cityWhereInput | null
+    isNot?: cityWhereInput | null
+  }
+
+  export type StateNullableScalarRelationFilter = {
+    is?: stateWhereInput | null
+    isNot?: stateWhereInput | null
+  }
+
+  export type CountryNullableScalarRelationFilter = {
+    is?: countryWhereInput | null
+    isNot?: countryWhereInput | null
+  }
+
   export type AdminStaffListRelationFilter = {
     every?: adminStaffWhereInput
     some?: adminStaffWhereInput
     none?: adminStaffWhereInput
   }
 
+  export type CompanyDetailNullableScalarRelationFilter = {
+    is?: companyDetailWhereInput | null
+    isNot?: companyDetailWhereInput | null
+  }
+
+  export type BankAccountListRelationFilter = {
+    every?: bankAccountWhereInput
+    some?: bankAccountWhereInput
+    none?: bankAccountWhereInput
+  }
+
   export type adminStaffOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type bankAccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21783,51 +26051,108 @@ export namespace Prisma {
   export type adminCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    dateOfBirth?: SortOrder
+    currentAddress?: SortOrder
+    permanentAddress?: SortOrder
+    permanentPostalCode?: SortOrder
+    permanentCityId?: SortOrder
+    permanentStateId?: SortOrder
+    permanentCountryId?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminAvgOrderByAggregateInput = {
     id?: SortOrder
+    permanentCityId?: SortOrder
+    permanentStateId?: SortOrder
+    permanentCountryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type adminMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    dateOfBirth?: SortOrder
+    currentAddress?: SortOrder
+    permanentAddress?: SortOrder
+    permanentPostalCode?: SortOrder
+    permanentCityId?: SortOrder
+    permanentStateId?: SortOrder
+    permanentCountryId?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    dateOfBirth?: SortOrder
+    currentAddress?: SortOrder
+    permanentAddress?: SortOrder
+    permanentPostalCode?: SortOrder
+    permanentCityId?: SortOrder
+    permanentStateId?: SortOrder
+    permanentCountryId?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminSumOrderByAggregateInput = {
     id?: SortOrder
+    permanentCityId?: SortOrder
+    permanentStateId?: SortOrder
+    permanentCountryId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -21844,9 +26169,237 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
   export type AdminScalarRelationFilter = {
     is?: adminWhereInput
     isNot?: adminWhereInput
+  }
+
+  export type companyDetailOrderByRelevanceInput = {
+    fields: companyDetailOrderByRelevanceFieldEnum | companyDetailOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type companyDetailCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    companyName?: SortOrder
+    brandName?: SortOrder
+    brandShortName?: SortOrder
+    billingAddress?: SortOrder
+    billingPincode?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    businessType?: SortOrder
+    clientEntryType?: SortOrder
+    gstNumber?: SortOrder
+    companyPanNumber?: SortOrder
+    aadharNumber?: SortOrder
+    gstDocument?: SortOrder
+    panCardHolderName?: SortOrder
+    aadharCardHolderName?: SortOrder
+    panCardImage?: SortOrder
+    aadharCardImage?: SortOrder
+    additionalDocumentUpload?: SortOrder
+    documentId?: SortOrder
+    documentName?: SortOrder
+    documentImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type companyDetailAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type companyDetailMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    companyName?: SortOrder
+    brandName?: SortOrder
+    brandShortName?: SortOrder
+    billingAddress?: SortOrder
+    billingPincode?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    businessType?: SortOrder
+    clientEntryType?: SortOrder
+    gstNumber?: SortOrder
+    companyPanNumber?: SortOrder
+    aadharNumber?: SortOrder
+    gstDocument?: SortOrder
+    panCardHolderName?: SortOrder
+    aadharCardHolderName?: SortOrder
+    panCardImage?: SortOrder
+    aadharCardImage?: SortOrder
+    additionalDocumentUpload?: SortOrder
+    documentId?: SortOrder
+    documentName?: SortOrder
+    documentImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type companyDetailMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    companyName?: SortOrder
+    brandName?: SortOrder
+    brandShortName?: SortOrder
+    billingAddress?: SortOrder
+    billingPincode?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    businessType?: SortOrder
+    clientEntryType?: SortOrder
+    gstNumber?: SortOrder
+    companyPanNumber?: SortOrder
+    aadharNumber?: SortOrder
+    gstDocument?: SortOrder
+    panCardHolderName?: SortOrder
+    aadharCardHolderName?: SortOrder
+    panCardImage?: SortOrder
+    aadharCardImage?: SortOrder
+    additionalDocumentUpload?: SortOrder
+    documentId?: SortOrder
+    documentName?: SortOrder
+    documentImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type companyDetailSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type bankAccountOrderByRelevanceInput = {
+    fields: bankAccountOrderByRelevanceFieldEnum | bankAccountOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type bankAccountCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type bankAccountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type adminStaffOrderByRelevanceInput = {
@@ -21863,16 +26416,26 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminStaffAvgOrderByAggregateInput = {
     id?: SortOrder
     admin_id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type adminStaffMaxOrderByAggregateInput = {
@@ -21883,11 +26446,18 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminStaffMinOrderByAggregateInput = {
@@ -21898,16 +26468,26 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     pr_token?: SortOrder
     pr_expires_at?: SortOrder
     pr_last_reset?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
   }
 
   export type adminStaffSumOrderByAggregateInput = {
     id?: SortOrder
     admin_id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type loginLogOrderByRelevanceInput = {
@@ -22122,6 +26702,12 @@ export namespace Prisma {
     none?: warehouseWhereInput
   }
 
+  export type AdminListRelationFilter = {
+    every?: adminWhereInput
+    some?: adminWhereInput
+    none?: adminWhereInput
+  }
+
   export type ProductListRelationFilter = {
     every?: productWhereInput
     some?: productWhereInput
@@ -22137,6 +26723,10 @@ export namespace Prisma {
   }
 
   export type warehouseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type adminOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22382,32 +26972,6 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
-  export type BigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
-  export type CountryNullableScalarRelationFilter = {
-    is?: countryWhereInput | null
-    isNot?: countryWhereInput | null
-  }
-
-  export type StateNullableScalarRelationFilter = {
-    is?: stateWhereInput | null
-    isNot?: stateWhereInput | null
-  }
-
-  export type CityNullableScalarRelationFilter = {
-    is?: cityWhereInput | null
-    isNot?: cityWhereInput | null
-  }
-
   export type warehouseOrderByRelevanceInput = {
     fields: warehouseOrderByRelevanceFieldEnum | warehouseOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -22507,22 +27071,6 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
-  }
-
-  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type categoryOrderByRelevanceInput = {
@@ -23088,11 +27636,42 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type cityCreateNestedOneWithoutAdminsInput = {
+    create?: XOR<cityCreateWithoutAdminsInput, cityUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: cityCreateOrConnectWithoutAdminsInput
+    connect?: cityWhereUniqueInput
+  }
+
+  export type stateCreateNestedOneWithoutAdminsInput = {
+    create?: XOR<stateCreateWithoutAdminsInput, stateUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: stateCreateOrConnectWithoutAdminsInput
+    connect?: stateWhereUniqueInput
+  }
+
+  export type countryCreateNestedOneWithoutAdminsInput = {
+    create?: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutAdminsInput
+    connect?: countryWhereUniqueInput
+  }
+
   export type adminStaffCreateNestedManyWithoutAdminInput = {
     create?: XOR<adminStaffCreateWithoutAdminInput, adminStaffUncheckedCreateWithoutAdminInput> | adminStaffCreateWithoutAdminInput[] | adminStaffUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
     createMany?: adminStaffCreateManyAdminInputEnvelope
     connect?: adminStaffWhereUniqueInput | adminStaffWhereUniqueInput[]
+  }
+
+  export type companyDetailCreateNestedOneWithoutAdminInput = {
+    create?: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: companyDetailCreateOrConnectWithoutAdminInput
+    connect?: companyDetailWhereUniqueInput
+  }
+
+  export type bankAccountCreateNestedManyWithoutAdminInput = {
+    create?: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput> | bankAccountCreateWithoutAdminInput[] | bankAccountUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: bankAccountCreateOrConnectWithoutAdminInput | bankAccountCreateOrConnectWithoutAdminInput[]
+    createMany?: bankAccountCreateManyAdminInputEnvelope
+    connect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
   }
 
   export type adminStaffUncheckedCreateNestedManyWithoutAdminInput = {
@@ -23102,8 +27681,51 @@ export namespace Prisma {
     connect?: adminStaffWhereUniqueInput | adminStaffWhereUniqueInput[]
   }
 
+  export type companyDetailUncheckedCreateNestedOneWithoutAdminInput = {
+    create?: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: companyDetailCreateOrConnectWithoutAdminInput
+    connect?: companyDetailWhereUniqueInput
+  }
+
+  export type bankAccountUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput> | bankAccountCreateWithoutAdminInput[] | bankAccountUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: bankAccountCreateOrConnectWithoutAdminInput | bankAccountCreateOrConnectWithoutAdminInput[]
+    createMany?: bankAccountCreateManyAdminInputEnvelope
+    connect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type cityUpdateOneWithoutAdminsNestedInput = {
+    create?: XOR<cityCreateWithoutAdminsInput, cityUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: cityCreateOrConnectWithoutAdminsInput
+    upsert?: cityUpsertWithoutAdminsInput
+    disconnect?: cityWhereInput | boolean
+    delete?: cityWhereInput | boolean
+    connect?: cityWhereUniqueInput
+    update?: XOR<XOR<cityUpdateToOneWithWhereWithoutAdminsInput, cityUpdateWithoutAdminsInput>, cityUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type stateUpdateOneWithoutAdminsNestedInput = {
+    create?: XOR<stateCreateWithoutAdminsInput, stateUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: stateCreateOrConnectWithoutAdminsInput
+    upsert?: stateUpsertWithoutAdminsInput
+    disconnect?: stateWhereInput | boolean
+    delete?: stateWhereInput | boolean
+    connect?: stateWhereUniqueInput
+    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutAdminsInput, stateUpdateWithoutAdminsInput>, stateUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type countryUpdateOneWithoutAdminsNestedInput = {
+    create?: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutAdminsInput
+    upsert?: countryUpsertWithoutAdminsInput
+    disconnect?: countryWhereInput | boolean
+    delete?: countryWhereInput | boolean
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutAdminsInput, countryUpdateWithoutAdminsInput>, countryUncheckedUpdateWithoutAdminsInput>
   }
 
   export type adminStaffUpdateManyWithoutAdminNestedInput = {
@@ -23120,6 +27742,38 @@ export namespace Prisma {
     deleteMany?: adminStaffScalarWhereInput | adminStaffScalarWhereInput[]
   }
 
+  export type companyDetailUpdateOneWithoutAdminNestedInput = {
+    create?: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: companyDetailCreateOrConnectWithoutAdminInput
+    upsert?: companyDetailUpsertWithoutAdminInput
+    disconnect?: companyDetailWhereInput | boolean
+    delete?: companyDetailWhereInput | boolean
+    connect?: companyDetailWhereUniqueInput
+    update?: XOR<XOR<companyDetailUpdateToOneWithWhereWithoutAdminInput, companyDetailUpdateWithoutAdminInput>, companyDetailUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type bankAccountUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput> | bankAccountCreateWithoutAdminInput[] | bankAccountUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: bankAccountCreateOrConnectWithoutAdminInput | bankAccountCreateOrConnectWithoutAdminInput[]
+    upsert?: bankAccountUpsertWithWhereUniqueWithoutAdminInput | bankAccountUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: bankAccountCreateManyAdminInputEnvelope
+    set?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    disconnect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    delete?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    connect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    update?: bankAccountUpdateWithWhereUniqueWithoutAdminInput | bankAccountUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: bankAccountUpdateManyWithWhereWithoutAdminInput | bankAccountUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: bankAccountScalarWhereInput | bankAccountScalarWhereInput[]
+  }
+
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type adminStaffUncheckedUpdateManyWithoutAdminNestedInput = {
     create?: XOR<adminStaffCreateWithoutAdminInput, adminStaffUncheckedCreateWithoutAdminInput> | adminStaffCreateWithoutAdminInput[] | adminStaffUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
@@ -23132,6 +27786,58 @@ export namespace Prisma {
     update?: adminStaffUpdateWithWhereUniqueWithoutAdminInput | adminStaffUpdateWithWhereUniqueWithoutAdminInput[]
     updateMany?: adminStaffUpdateManyWithWhereWithoutAdminInput | adminStaffUpdateManyWithWhereWithoutAdminInput[]
     deleteMany?: adminStaffScalarWhereInput | adminStaffScalarWhereInput[]
+  }
+
+  export type companyDetailUncheckedUpdateOneWithoutAdminNestedInput = {
+    create?: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: companyDetailCreateOrConnectWithoutAdminInput
+    upsert?: companyDetailUpsertWithoutAdminInput
+    disconnect?: companyDetailWhereInput | boolean
+    delete?: companyDetailWhereInput | boolean
+    connect?: companyDetailWhereUniqueInput
+    update?: XOR<XOR<companyDetailUpdateToOneWithWhereWithoutAdminInput, companyDetailUpdateWithoutAdminInput>, companyDetailUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type bankAccountUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput> | bankAccountCreateWithoutAdminInput[] | bankAccountUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: bankAccountCreateOrConnectWithoutAdminInput | bankAccountCreateOrConnectWithoutAdminInput[]
+    upsert?: bankAccountUpsertWithWhereUniqueWithoutAdminInput | bankAccountUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: bankAccountCreateManyAdminInputEnvelope
+    set?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    disconnect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    delete?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    connect?: bankAccountWhereUniqueInput | bankAccountWhereUniqueInput[]
+    update?: bankAccountUpdateWithWhereUniqueWithoutAdminInput | bankAccountUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: bankAccountUpdateManyWithWhereWithoutAdminInput | bankAccountUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: bankAccountScalarWhereInput | bankAccountScalarWhereInput[]
+  }
+
+  export type adminCreateNestedOneWithoutCompanyDetailInput = {
+    create?: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
+    connectOrCreate?: adminCreateOrConnectWithoutCompanyDetailInput
+    connect?: adminWhereUniqueInput
+  }
+
+  export type adminUpdateOneRequiredWithoutCompanyDetailNestedInput = {
+    create?: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
+    connectOrCreate?: adminCreateOrConnectWithoutCompanyDetailInput
+    upsert?: adminUpsertWithoutCompanyDetailInput
+    connect?: adminWhereUniqueInput
+    update?: XOR<XOR<adminUpdateToOneWithWhereWithoutCompanyDetailInput, adminUpdateWithoutCompanyDetailInput>, adminUncheckedUpdateWithoutCompanyDetailInput>
+  }
+
+  export type adminCreateNestedOneWithoutBankAccountsInput = {
+    create?: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
+    connectOrCreate?: adminCreateOrConnectWithoutBankAccountsInput
+    connect?: adminWhereUniqueInput
+  }
+
+  export type adminUpdateOneRequiredWithoutBankAccountsNestedInput = {
+    create?: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
+    connectOrCreate?: adminCreateOrConnectWithoutBankAccountsInput
+    upsert?: adminUpsertWithoutBankAccountsInput
+    connect?: adminWhereUniqueInput
+    update?: XOR<XOR<adminUpdateToOneWithWhereWithoutBankAccountsInput, adminUpdateWithoutBankAccountsInput>, adminUncheckedUpdateWithoutBankAccountsInput>
   }
 
   export type adminCreateNestedOneWithoutStaffInput = {
@@ -23169,6 +27875,13 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type adminCreateNestedManyWithoutPermanentCountryInput = {
+    create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
+    createMany?: adminCreateManyPermanentCountryInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+  }
+
   export type productCreateNestedManyWithoutOriginCountryInput = {
     create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
     connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
@@ -23202,6 +27915,13 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
     createMany?: warehouseCreateManyCountryInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type adminUncheckedCreateNestedManyWithoutPermanentCountryInput = {
+    create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
+    createMany?: adminCreateManyPermanentCountryInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
   }
 
   export type productUncheckedCreateNestedManyWithoutOriginCountryInput = {
@@ -23258,6 +27978,20 @@ export namespace Prisma {
     update?: warehouseUpdateWithWhereUniqueWithoutCountryInput | warehouseUpdateWithWhereUniqueWithoutCountryInput[]
     updateMany?: warehouseUpdateManyWithWhereWithoutCountryInput | warehouseUpdateManyWithWhereWithoutCountryInput[]
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type adminUpdateManyWithoutPermanentCountryNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentCountryInput | adminUpsertWithWhereUniqueWithoutPermanentCountryInput[]
+    createMany?: adminCreateManyPermanentCountryInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentCountryInput | adminUpdateWithWhereUniqueWithoutPermanentCountryInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentCountryInput | adminUpdateManyWithWhereWithoutPermanentCountryInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
   }
 
   export type productUpdateManyWithoutOriginCountryNestedInput = {
@@ -23330,6 +28064,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type adminUncheckedUpdateManyWithoutPermanentCountryNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentCountryInput | adminUpsertWithWhereUniqueWithoutPermanentCountryInput[]
+    createMany?: adminCreateManyPermanentCountryInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentCountryInput | adminUpdateWithWhereUniqueWithoutPermanentCountryInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentCountryInput | adminUpdateManyWithWhereWithoutPermanentCountryInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
+  }
+
   export type productUncheckedUpdateManyWithoutOriginCountryNestedInput = {
     create?: XOR<productCreateWithoutOriginCountryInput, productUncheckedCreateWithoutOriginCountryInput> | productCreateWithoutOriginCountryInput[] | productUncheckedCreateWithoutOriginCountryInput[]
     connectOrCreate?: productCreateOrConnectWithoutOriginCountryInput | productCreateOrConnectWithoutOriginCountryInput[]
@@ -23378,6 +28126,13 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type adminCreateNestedManyWithoutPermanentStateInput = {
+    create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
+    createMany?: adminCreateManyPermanentStateInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+  }
+
   export type cityUncheckedCreateNestedManyWithoutStateInput = {
     create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
     connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
@@ -23390,6 +28145,13 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
     createMany?: warehouseCreateManyStateInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type adminUncheckedCreateNestedManyWithoutPermanentStateInput = {
+    create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
+    createMany?: adminCreateManyPermanentStateInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
   }
 
   export type countryUpdateOneRequiredWithoutStatesNestedInput = {
@@ -23428,6 +28190,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type adminUpdateManyWithoutPermanentStateNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentStateInput | adminUpsertWithWhereUniqueWithoutPermanentStateInput[]
+    createMany?: adminCreateManyPermanentStateInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentStateInput | adminUpdateWithWhereUniqueWithoutPermanentStateInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentStateInput | adminUpdateManyWithWhereWithoutPermanentStateInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
+  }
+
   export type cityUncheckedUpdateManyWithoutStateNestedInput = {
     create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
     connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
@@ -23456,6 +28232,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type adminUncheckedUpdateManyWithoutPermanentStateNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentStateInput | adminUpsertWithWhereUniqueWithoutPermanentStateInput[]
+    createMany?: adminCreateManyPermanentStateInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentStateInput | adminUpdateWithWhereUniqueWithoutPermanentStateInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentStateInput | adminUpdateManyWithWhereWithoutPermanentStateInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
+  }
+
   export type stateCreateNestedOneWithoutCitiesInput = {
     create?: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
     connectOrCreate?: stateCreateOrConnectWithoutCitiesInput
@@ -23475,11 +28265,25 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type adminCreateNestedManyWithoutPermanentCityInput = {
+    create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
+    createMany?: adminCreateManyPermanentCityInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+  }
+
   export type warehouseUncheckedCreateNestedManyWithoutCityInput = {
     create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
     connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
     createMany?: warehouseCreateManyCityInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type adminUncheckedCreateNestedManyWithoutPermanentCityInput = {
+    create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
+    createMany?: adminCreateManyPermanentCityInputEnvelope
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
   }
 
   export type stateUpdateOneRequiredWithoutCitiesNestedInput = {
@@ -23512,6 +28316,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type adminUpdateManyWithoutPermanentCityNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentCityInput | adminUpsertWithWhereUniqueWithoutPermanentCityInput[]
+    createMany?: adminCreateManyPermanentCityInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentCityInput | adminUpdateWithWhereUniqueWithoutPermanentCityInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentCityInput | adminUpdateManyWithWhereWithoutPermanentCityInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
+  }
+
   export type warehouseUncheckedUpdateManyWithoutCityNestedInput = {
     create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
     connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
@@ -23524,6 +28342,20 @@ export namespace Prisma {
     update?: warehouseUpdateWithWhereUniqueWithoutCityInput | warehouseUpdateWithWhereUniqueWithoutCityInput[]
     updateMany?: warehouseUpdateManyWithWhereWithoutCityInput | warehouseUpdateManyWithWhereWithoutCityInput[]
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type adminUncheckedUpdateManyWithoutPermanentCityNestedInput = {
+    create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
+    connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
+    upsert?: adminUpsertWithWhereUniqueWithoutPermanentCityInput | adminUpsertWithWhereUniqueWithoutPermanentCityInput[]
+    createMany?: adminCreateManyPermanentCityInputEnvelope
+    set?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    disconnect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    delete?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    connect?: adminWhereUniqueInput | adminWhereUniqueInput[]
+    update?: adminUpdateWithWhereUniqueWithoutPermanentCityInput | adminUpdateWithWhereUniqueWithoutPermanentCityInput[]
+    updateMany?: adminUpdateManyWithWhereWithoutPermanentCityInput | adminUpdateManyWithWhereWithoutPermanentCityInput[]
+    deleteMany?: adminScalarWhereInput | adminScalarWhereInput[]
   }
 
   export type countryCreateNestedOneWithoutWarehousesInput = {
@@ -23572,14 +28404,6 @@ export namespace Prisma {
     delete?: cityWhereInput | boolean
     connect?: cityWhereUniqueInput
     update?: XOR<XOR<cityUpdateToOneWithWhereWithoutWarehousesInput, cityUpdateWithoutWarehousesInput>, cityUncheckedUpdateWithoutWarehousesInput>
-  }
-
-  export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: bigint | number | null
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
   }
 
   export type productCreateNestedManyWithoutCategoryInput = {
@@ -24004,6 +28828,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | null
+    notIn?: bigint[] | number[] | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -24016,17 +28851,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | null
-    notIn?: bigint[] | number[] | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -24084,17 +28908,163 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type cityCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    country: countryCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+  }
+
+  export type cityUncheckedCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+  }
+
+  export type cityCreateOrConnectWithoutAdminsInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutAdminsInput, cityUncheckedCreateWithoutAdminsInput>
+  }
+
+  export type stateCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    cities?: cityCreateNestedManyWithoutStateInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
+  }
+
+  export type stateUncheckedCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+  }
+
+  export type stateCreateOrConnectWithoutAdminsInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutAdminsInput, stateUncheckedCreateWithoutAdminsInput>
+  }
+
+  export type countryCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutAdminsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutAdminsInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
+  }
+
   export type adminStaffCreateWithoutAdminInput = {
     name: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminStaffUncheckedCreateWithoutAdminInput = {
@@ -24104,11 +29074,18 @@ export namespace Prisma {
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminStaffCreateOrConnectWithoutAdminInput = {
@@ -24119,6 +29096,284 @@ export namespace Prisma {
   export type adminStaffCreateManyAdminInputEnvelope = {
     data: adminStaffCreateManyAdminInput | adminStaffCreateManyAdminInput[]
     skipDuplicates?: boolean
+  }
+
+  export type companyDetailCreateWithoutAdminInput = {
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload?: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailUncheckedCreateWithoutAdminInput = {
+    id?: number
+    companyName: string
+    brandName: string
+    brandShortName: string
+    billingAddress: string
+    billingPincode: string
+    billingState: string
+    billingCity: string
+    businessType: string
+    clientEntryType: string
+    gstNumber: string
+    companyPanNumber: string
+    aadharNumber: string
+    gstDocument: string
+    panCardHolderName: string
+    aadharCardHolderName: string
+    panCardImage: string
+    aadharCardImage: string
+    additionalDocumentUpload?: string | null
+    documentId: string
+    documentName: string
+    documentImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailCreateOrConnectWithoutAdminInput = {
+    where: companyDetailWhereUniqueInput
+    create: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+  }
+
+  export type bankAccountCreateWithoutAdminInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountUncheckedCreateWithoutAdminInput = {
+    id?: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountCreateOrConnectWithoutAdminInput = {
+    where: bankAccountWhereUniqueInput
+    create: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput>
+  }
+
+  export type bankAccountCreateManyAdminInputEnvelope = {
+    data: bankAccountCreateManyAdminInput | bankAccountCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type cityUpsertWithoutAdminsInput = {
+    update: XOR<cityUpdateWithoutAdminsInput, cityUncheckedUpdateWithoutAdminsInput>
+    create: XOR<cityCreateWithoutAdminsInput, cityUncheckedCreateWithoutAdminsInput>
+    where?: cityWhereInput
+  }
+
+  export type cityUpdateToOneWithWhereWithoutAdminsInput = {
+    where?: cityWhereInput
+    data: XOR<cityUpdateWithoutAdminsInput, cityUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type cityUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+  }
+
+  export type stateUpsertWithoutAdminsInput = {
+    update: XOR<stateUpdateWithoutAdminsInput, stateUncheckedUpdateWithoutAdminsInput>
+    create: XOR<stateCreateWithoutAdminsInput, stateUncheckedCreateWithoutAdminsInput>
+    where?: stateWhereInput
+  }
+
+  export type stateUpdateToOneWithWhereWithoutAdminsInput = {
+    where?: stateWhereInput
+    data: XOR<stateUpdateWithoutAdminsInput, stateUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type stateUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    cities?: cityUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+  }
+
+  export type countryUpsertWithoutAdminsInput = {
+    update: XOR<countryUpdateWithoutAdminsInput, countryUncheckedUpdateWithoutAdminsInput>
+    create: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutAdminsInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutAdminsInput, countryUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type countryUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutAdminsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
   export type adminStaffUpsertWithWhereUniqueWithoutAdminInput = {
@@ -24148,38 +29403,473 @@ export namespace Prisma {
     password?: StringFilter<"adminStaff"> | string
     role?: StringFilter<"adminStaff"> | string
     status?: StringFilter<"adminStaff"> | string
-    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
-    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
     pr_token?: StringNullableFilter<"adminStaff"> | string | null
     pr_expires_at?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
     pr_last_reset?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    createdAt?: DateTimeFilter<"adminStaff"> | Date | string
+    createdBy?: IntNullableFilter<"adminStaff"> | number | null
+    createdByRole?: StringNullableFilter<"adminStaff"> | string | null
+    updatedAt?: DateTimeFilter<"adminStaff"> | Date | string
+    updatedBy?: IntNullableFilter<"adminStaff"> | number | null
+    updatedByRole?: StringNullableFilter<"adminStaff"> | string | null
+    deletedAt?: DateTimeNullableFilter<"adminStaff"> | Date | string | null
+    deletedBy?: IntNullableFilter<"adminStaff"> | number | null
+    deletedByRole?: StringNullableFilter<"adminStaff"> | string | null
   }
 
-  export type adminCreateWithoutStaffInput = {
+  export type companyDetailUpsertWithoutAdminInput = {
+    update: XOR<companyDetailUpdateWithoutAdminInput, companyDetailUncheckedUpdateWithoutAdminInput>
+    create: XOR<companyDetailCreateWithoutAdminInput, companyDetailUncheckedCreateWithoutAdminInput>
+    where?: companyDetailWhereInput
+  }
+
+  export type companyDetailUpdateToOneWithWhereWithoutAdminInput = {
+    where?: companyDetailWhereInput
+    data: XOR<companyDetailUpdateWithoutAdminInput, companyDetailUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type companyDetailUpdateWithoutAdminInput = {
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyName?: StringFieldUpdateOperationsInput | string
+    brandName?: StringFieldUpdateOperationsInput | string
+    brandShortName?: StringFieldUpdateOperationsInput | string
+    billingAddress?: StringFieldUpdateOperationsInput | string
+    billingPincode?: StringFieldUpdateOperationsInput | string
+    billingState?: StringFieldUpdateOperationsInput | string
+    billingCity?: StringFieldUpdateOperationsInput | string
+    businessType?: StringFieldUpdateOperationsInput | string
+    clientEntryType?: StringFieldUpdateOperationsInput | string
+    gstNumber?: StringFieldUpdateOperationsInput | string
+    companyPanNumber?: StringFieldUpdateOperationsInput | string
+    aadharNumber?: StringFieldUpdateOperationsInput | string
+    gstDocument?: StringFieldUpdateOperationsInput | string
+    panCardHolderName?: StringFieldUpdateOperationsInput | string
+    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
+    panCardImage?: StringFieldUpdateOperationsInput | string
+    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: StringFieldUpdateOperationsInput | string
+    documentName?: StringFieldUpdateOperationsInput | string
+    documentImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountUpsertWithWhereUniqueWithoutAdminInput = {
+    where: bankAccountWhereUniqueInput
+    update: XOR<bankAccountUpdateWithoutAdminInput, bankAccountUncheckedUpdateWithoutAdminInput>
+    create: XOR<bankAccountCreateWithoutAdminInput, bankAccountUncheckedCreateWithoutAdminInput>
+  }
+
+  export type bankAccountUpdateWithWhereUniqueWithoutAdminInput = {
+    where: bankAccountWhereUniqueInput
+    data: XOR<bankAccountUpdateWithoutAdminInput, bankAccountUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type bankAccountUpdateManyWithWhereWithoutAdminInput = {
+    where: bankAccountScalarWhereInput
+    data: XOR<bankAccountUpdateManyMutationInput, bankAccountUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type bankAccountScalarWhereInput = {
+    AND?: bankAccountScalarWhereInput | bankAccountScalarWhereInput[]
+    OR?: bankAccountScalarWhereInput[]
+    NOT?: bankAccountScalarWhereInput | bankAccountScalarWhereInput[]
+    id?: IntFilter<"bankAccount"> | number
+    adminId?: IntFilter<"bankAccount"> | number
+    accountHolderName?: StringFilter<"bankAccount"> | string
+    accountNumber?: StringFilter<"bankAccount"> | string
+    bankName?: StringFilter<"bankAccount"> | string
+    bankBranch?: StringFilter<"bankAccount"> | string
+    accountType?: StringFilter<"bankAccount"> | string
+    ifscCode?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    createdAt?: DateTimeFilter<"bankAccount"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccount"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccount"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccount"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccount"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccount"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccount"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccount"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccount"> | string | null
+  }
+
+  export type adminCreateWithoutCompanyDetailInput = {
     name: string
+    username: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminUncheckedCreateWithoutCompanyDetailInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminCreateOrConnectWithoutCompanyDetailInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
+  }
+
+  export type adminUpsertWithoutCompanyDetailInput = {
+    update: XOR<adminUpdateWithoutCompanyDetailInput, adminUncheckedUpdateWithoutCompanyDetailInput>
+    create: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
+    where?: adminWhereInput
+  }
+
+  export type adminUpdateToOneWithWhereWithoutCompanyDetailInput = {
+    where?: adminWhereInput
+    data: XOR<adminUpdateWithoutCompanyDetailInput, adminUncheckedUpdateWithoutCompanyDetailInput>
+  }
+
+  export type adminUpdateWithoutCompanyDetailInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutCompanyDetailInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminCreateWithoutBankAccountsInput = {
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+  }
+
+  export type adminUncheckedCreateWithoutBankAccountsInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+  }
+
+  export type adminCreateOrConnectWithoutBankAccountsInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
+  }
+
+  export type adminUpsertWithoutBankAccountsInput = {
+    update: XOR<adminUpdateWithoutBankAccountsInput, adminUncheckedUpdateWithoutBankAccountsInput>
+    create: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
+    where?: adminWhereInput
+  }
+
+  export type adminUpdateToOneWithWhereWithoutBankAccountsInput = {
+    where?: adminWhereInput
+    data: XOR<adminUpdateWithoutBankAccountsInput, adminUncheckedUpdateWithoutBankAccountsInput>
+  }
+
+  export type adminUpdateWithoutBankAccountsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutBankAccountsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+  }
+
+  export type adminCreateWithoutStaffInput = {
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
   }
 
   export type adminUncheckedCreateWithoutStaffInput = {
     id?: number
     name: string
+    username: string
     email: string
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type adminCreateOrConnectWithoutStaffInput = {
@@ -24200,29 +29890,63 @@ export namespace Prisma {
 
   export type adminUpdateWithoutStaffInput = {
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
   }
 
   export type adminUncheckedUpdateWithoutStaffInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type stateCreateWithoutCountryInput = {
@@ -24241,6 +29965,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityCreateNestedManyWithoutStateInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateUncheckedCreateWithoutCountryInput = {
@@ -24259,6 +29984,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateCreateOrConnectWithoutCountryInput = {
@@ -24285,6 +30011,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     state: stateCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityUncheckedCreateWithoutCountryInput = {
@@ -24301,6 +30028,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityCreateOrConnectWithoutCountryInput = {
@@ -24367,6 +30095,77 @@ export namespace Prisma {
 
   export type warehouseCreateManyCountryInputEnvelope = {
     data: warehouseCreateManyCountryInput | warehouseCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type adminCreateWithoutPermanentCountryInput = {
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminUncheckedCreateWithoutPermanentCountryInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminCreateOrConnectWithoutPermanentCountryInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput>
+  }
+
+  export type adminCreateManyPermanentCountryInputEnvelope = {
+    data: adminCreateManyPermanentCountryInput | adminCreateManyPermanentCountryInput[]
     skipDuplicates?: boolean
   }
 
@@ -24675,6 +30474,54 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"warehouse"> | string | null
   }
 
+  export type adminUpsertWithWhereUniqueWithoutPermanentCountryInput = {
+    where: adminWhereUniqueInput
+    update: XOR<adminUpdateWithoutPermanentCountryInput, adminUncheckedUpdateWithoutPermanentCountryInput>
+    create: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput>
+  }
+
+  export type adminUpdateWithWhereUniqueWithoutPermanentCountryInput = {
+    where: adminWhereUniqueInput
+    data: XOR<adminUpdateWithoutPermanentCountryInput, adminUncheckedUpdateWithoutPermanentCountryInput>
+  }
+
+  export type adminUpdateManyWithWhereWithoutPermanentCountryInput = {
+    where: adminScalarWhereInput
+    data: XOR<adminUpdateManyMutationInput, adminUncheckedUpdateManyWithoutPermanentCountryInput>
+  }
+
+  export type adminScalarWhereInput = {
+    AND?: adminScalarWhereInput | adminScalarWhereInput[]
+    OR?: adminScalarWhereInput[]
+    NOT?: adminScalarWhereInput | adminScalarWhereInput[]
+    id?: IntFilter<"admin"> | number
+    name?: StringFilter<"admin"> | string
+    username?: StringFilter<"admin"> | string
+    email?: StringFilter<"admin"> | string
+    password?: StringFilter<"admin"> | string
+    role?: StringFilter<"admin"> | string
+    status?: StringFilter<"admin"> | string
+    dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    currentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentAddress?: StringNullableFilter<"admin"> | string | null
+    permanentPostalCode?: StringNullableFilter<"admin"> | string | null
+    permanentCityId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentStateId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    permanentCountryId?: BigIntNullableFilter<"admin"> | bigint | number | null
+    pr_token?: StringNullableFilter<"admin"> | string | null
+    pr_expires_at?: DateTimeNullableFilter<"admin"> | Date | string | null
+    pr_last_reset?: DateTimeNullableFilter<"admin"> | Date | string | null
+    createdAt?: DateTimeFilter<"admin"> | Date | string
+    createdBy?: IntNullableFilter<"admin"> | number | null
+    createdByRole?: StringNullableFilter<"admin"> | string | null
+    updatedAt?: DateTimeFilter<"admin"> | Date | string
+    updatedBy?: IntNullableFilter<"admin"> | number | null
+    updatedByRole?: StringNullableFilter<"admin"> | string | null
+    deletedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
+    deletedBy?: IntNullableFilter<"admin"> | number | null
+    deletedByRole?: StringNullableFilter<"admin"> | string | null
+  }
+
   export type productUpsertWithWhereUniqueWithoutOriginCountryInput = {
     where: productWhereUniqueInput
     update: XOR<productUpdateWithoutOriginCountryInput, productUncheckedUpdateWithoutOriginCountryInput>
@@ -24774,6 +30621,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -24799,6 +30647,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -24822,6 +30671,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityUncheckedCreateWithoutStateInput = {
@@ -24838,6 +30688,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityCreateOrConnectWithoutStateInput = {
@@ -24907,6 +30758,77 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type adminCreateWithoutPermanentStateInput = {
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminUncheckedCreateWithoutPermanentStateInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminCreateOrConnectWithoutPermanentStateInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput>
+  }
+
+  export type adminCreateManyPermanentStateInputEnvelope = {
+    data: adminCreateManyPermanentStateInput | adminCreateManyPermanentStateInput[]
+    skipDuplicates?: boolean
+  }
+
   export type countryUpsertWithoutStatesInput = {
     update: XOR<countryUpdateWithoutStatesInput, countryUncheckedUpdateWithoutStatesInput>
     create: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
@@ -24939,6 +30861,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -24964,6 +30887,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -25000,6 +30924,22 @@ export namespace Prisma {
     data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutStateInput>
   }
 
+  export type adminUpsertWithWhereUniqueWithoutPermanentStateInput = {
+    where: adminWhereUniqueInput
+    update: XOR<adminUpdateWithoutPermanentStateInput, adminUncheckedUpdateWithoutPermanentStateInput>
+    create: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput>
+  }
+
+  export type adminUpdateWithWhereUniqueWithoutPermanentStateInput = {
+    where: adminWhereUniqueInput
+    data: XOR<adminUpdateWithoutPermanentStateInput, adminUncheckedUpdateWithoutPermanentStateInput>
+  }
+
+  export type adminUpdateManyWithWhereWithoutPermanentStateInput = {
+    where: adminScalarWhereInput
+    data: XOR<adminUpdateManyMutationInput, adminUncheckedUpdateManyWithoutPermanentStateInput>
+  }
+
   export type stateCreateWithoutCitiesInput = {
     id?: bigint | number
     name: string
@@ -25016,6 +30956,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutStatesInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateUncheckedCreateWithoutCitiesInput = {
@@ -25034,6 +30975,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateCreateOrConnectWithoutCitiesInput = {
@@ -25062,6 +31004,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -25087,6 +31030,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -25153,6 +31097,77 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type adminCreateWithoutPermanentCityInput = {
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminUncheckedCreateWithoutPermanentCityInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type adminCreateOrConnectWithoutPermanentCityInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput>
+  }
+
+  export type adminCreateManyPermanentCityInputEnvelope = {
+    data: adminCreateManyPermanentCityInput | adminCreateManyPermanentCityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type stateUpsertWithoutCitiesInput = {
     update: XOR<stateUpdateWithoutCitiesInput, stateUncheckedUpdateWithoutCitiesInput>
     create: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
@@ -25180,6 +31195,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutCitiesInput = {
@@ -25198,6 +31214,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type countryUpsertWithoutCitiesInput = {
@@ -25232,6 +31249,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -25257,6 +31275,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -25275,6 +31294,22 @@ export namespace Prisma {
   export type warehouseUpdateManyWithWhereWithoutCityInput = {
     where: warehouseScalarWhereInput
     data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type adminUpsertWithWhereUniqueWithoutPermanentCityInput = {
+    where: adminWhereUniqueInput
+    update: XOR<adminUpdateWithoutPermanentCityInput, adminUncheckedUpdateWithoutPermanentCityInput>
+    create: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput>
+  }
+
+  export type adminUpdateWithWhereUniqueWithoutPermanentCityInput = {
+    where: adminWhereUniqueInput
+    data: XOR<adminUpdateWithoutPermanentCityInput, adminUncheckedUpdateWithoutPermanentCityInput>
+  }
+
+  export type adminUpdateManyWithWhereWithoutPermanentCityInput = {
+    where: adminScalarWhereInput
+    data: XOR<adminUpdateManyMutationInput, adminUncheckedUpdateManyWithoutPermanentCityInput>
   }
 
   export type countryCreateWithoutWarehousesInput = {
@@ -25298,6 +31333,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -25323,6 +31359,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -25348,6 +31385,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutStatesInput
     cities?: cityCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateUncheckedCreateWithoutWarehousesInput = {
@@ -25366,6 +31404,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
   export type stateCreateOrConnectWithoutWarehousesInput = {
@@ -25387,6 +31426,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     state: stateCreateNestedOneWithoutCitiesInput
     country: countryCreateNestedOneWithoutCitiesInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityUncheckedCreateWithoutWarehousesInput = {
@@ -25403,6 +31443,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
   export type cityCreateOrConnectWithoutWarehousesInput = {
@@ -25442,6 +31483,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -25467,6 +31509,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -25498,6 +31541,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     cities?: cityUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutWarehousesInput = {
@@ -25516,6 +31560,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type cityUpsertWithoutWarehousesInput = {
@@ -25543,6 +31588,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutWarehousesInput = {
@@ -25559,6 +31605,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type productCreateWithoutCategoryInput = {
@@ -25885,6 +31932,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
 
@@ -25910,6 +31958,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
 
@@ -25940,6 +31989,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
   }
 
@@ -25965,6 +32015,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
   }
 
@@ -26155,6 +32206,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
 
@@ -26180,6 +32232,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
 
@@ -26216,6 +32269,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
   }
 
@@ -26241,6 +32295,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
   }
 
@@ -26481,11 +32536,38 @@ export namespace Prisma {
     password: string
     role?: string
     status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
     pr_token?: string | null
     pr_expires_at?: Date | string | null
     pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountCreateManyAdminInput = {
+    id?: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
   }
 
   export type adminStaffUpdateWithoutAdminInput = {
@@ -26494,11 +32576,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffUncheckedUpdateWithoutAdminInput = {
@@ -26508,11 +32597,18 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffUncheckedUpdateManyWithoutAdminInput = {
@@ -26522,11 +32618,77 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountUpdateWithoutAdminInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountUncheckedUpdateManyWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type stateCreateManyCountryInput = {
@@ -26573,6 +32735,34 @@ export namespace Prisma {
     stateId?: bigint | number | null
     cityId?: bigint | number | null
     status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type adminCreateManyPermanentCountryInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -26684,6 +32874,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutCountryInput = {
@@ -26702,6 +32893,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
   export type stateUncheckedUpdateManyWithoutCountryInput = {
@@ -26734,6 +32926,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutCountryInput = {
@@ -26750,6 +32943,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateManyWithoutCountryInput = {
@@ -26827,6 +33021,95 @@ export namespace Prisma {
     stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type adminUpdateWithoutPermanentCountryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutPermanentCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateManyWithoutPermanentCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27131,6 +33414,34 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type adminCreateManyPermanentStateInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type cityUpdateWithoutStateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
@@ -27145,6 +33456,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutStateInput = {
@@ -27161,6 +33473,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
   export type cityUncheckedUpdateManyWithoutStateInput = {
@@ -27249,6 +33562,95 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type adminUpdateWithoutPermanentStateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutPermanentStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateManyWithoutPermanentStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type warehouseCreateManyCityInput = {
     id?: number
     name: string
@@ -27262,6 +33664,34 @@ export namespace Prisma {
     countryId?: bigint | number | null
     stateId?: bigint | number | null
     status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type adminCreateManyPermanentCityInput = {
+    id?: number
+    name: string
+    username: string
+    email: string
+    password: string
+    role?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -27333,6 +33763,95 @@ export namespace Prisma {
     countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type adminUpdateWithoutPermanentCityInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutPermanentCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type adminUncheckedUpdateManyWithoutPermanentCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
