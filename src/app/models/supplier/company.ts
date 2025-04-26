@@ -125,3 +125,77 @@ export async function createSupplierCompany(adminId: number, adminRole: string, 
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export async function updateSupplierCompany(
+    adminId: number,
+    adminRole: string,
+    supplierId: number,
+    supplierCompany: SupplierCompany) {
+
+    try {
+        const {
+            admin,
+            companyName,
+            brandName,
+            brandShortName,
+            billingAddress,
+            billingPincode,
+            billingState,
+            billingCity,
+            businessType,
+            clientEntryType,
+            gstNumber,
+            companyPanNumber,
+            aadharNumber,
+            gstDocument,
+            panCardHolderName,
+            aadharCardHolderName,
+            panCardImage,
+            aadharCardImage,
+            additionalDocumentUpload,
+            documentId,
+            documentName,
+            documentImage,
+            updatedBy,
+            updatedByRole,
+            updatedAt,
+        } = supplierCompany;
+
+        const newSupplier = await prisma.companyDetail.update({
+            where: { adminId: supplierId },
+            data: {
+                admin,
+                companyName,
+                brandName,
+                brandShortName,
+                billingAddress,
+                billingPincode,
+                billingState,
+                billingCity,
+                businessType,
+                clientEntryType,
+                gstNumber,
+                companyPanNumber,
+                aadharNumber,
+                gstDocument,
+                panCardHolderName,
+                aadharCardHolderName,
+                panCardImage,
+                aadharCardImage,
+                additionalDocumentUpload,
+                documentId,
+                documentName,
+                documentImage,
+                updatedBy,
+                updatedByRole,
+                updatedAt,
+            },
+        });
+
+        const sanitizedSupplier = serializeBigInt(newSupplier);
+        return { status: true, supplier: sanitizedSupplier };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}

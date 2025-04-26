@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
 
 interface Supplier {
     id?: bigint; // Optional: ID of the supplier (if exists)
@@ -114,7 +115,6 @@ export async function checkUsernameAvailability(username: string) {
 }
 
 export async function createSupplier(adminId: number, adminRole: string, supplier: Supplier) {
-
     try {
         const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
 
@@ -179,5 +179,182 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
     } catch (error) {
         console.error(`Error fetching suppliers by status (${status}):`, error);
         return { status: false, message: "Error fetching suppliers" };
+    }
+};
+
+// 🔵 GET BY ID
+export const getSupplierById = async (id: number) => {
+    try {
+        const supplier = await prisma.admin.findUnique({
+            where: { id, role: 'supplier' },
+        });
+
+        if (!supplier) return { status: false, message: "Supplier not found" };
+        return { status: true, supplier };
+    } catch (error) {
+        console.error("❌ getSupplierById Error:", error);
+        return { status: false, message: "Error fetching supplier" };
+    }
+};
+
+// 🟡 UPDATE
+export const updateSupplier = async (
+    adminId: number,
+    adminRole: string,
+    supplierId: number,
+    supplier: Supplier
+) => {
+    try {
+        const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
+
+        // Convert statusRaw to a boolean using the includes check
+        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+
+        // Convert boolean status to string ('active' or 'inactive')
+        const statusString = status ? 'active' : 'inactive';
+
+        const newSupplier = await prisma.admin.update({
+            where: { id: supplierId },
+            data: {
+                name,
+                username,
+                email,
+                password,
+                role: 'supplier',
+                dateOfBirth: new Date(dateOfBirth),
+                currentAddress,
+                permanentAddress,
+                permanentPostalCode,
+                permanentCity,
+                permanentState,
+                permanentCountry,
+                status: statusString,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date(),
+            },
+        });
+
+        const sanitizedSupplier = serializeBigInt(newSupplier);
+        return { status: true, supplier: sanitizedSupplier };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+};
+
+// 🔴 Soft DELETE (marks as deleted by setting deletedAt field for supplier and variants)
+export const softDeleteSupplier = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        // Soft delete the supplier
+        const updatedSupplier = await prisma.admin.update({
+            where: { id, role: 'supplier' },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+
+        // Soft delete the companyDetails of this supplier
+        const updatedCompanyDeatil = await prisma.companyDetail.update({
+            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+
+        // Soft delete the bankAccounts of this supplier
+        const updatedBankAccounts = await prisma.bankAccount.updateMany({
+            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole,
+            },
+        });
+
+        return {
+            status: true,
+            message: "Supplier soft deleted successfully",
+            updatedSupplier,
+            updatedCompanyDeatil,
+            updatedBankAccounts
+        };
+    } catch (error) {
+        console.error("❌ softDeleteSupplier Error:", error);
+        return { status: false, message: "Error soft deleting supplier" };
+    }
+};
+
+
+// 🟢 RESTORE (Restores a soft-deleted supplier setting deletedAt to null)
+export const restoreSupplier = async (adminId: number, adminRole: string, id: number) => {
+    try {
+        // Restore the supplier
+        const restoredSupplier = await prisma.admin.update({
+            where: { id },
+            include: { companyDetail: true, bankAccounts: true },
+            data: {
+                deletedBy: null,      // Reset the deletedBy field
+                deletedAt: null,      // Set deletedAt to null
+                deletedByRole: null,  // Reset the deletedByRole field
+                updatedBy: adminId,   // Record the user restoring the supplier
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field
+            },
+        });
+
+        // Restore the variants of this supplier
+        await prisma.companyDetail.updateMany({
+            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
+            data: {
+                deletedBy: null,      // Reset the deletedBy field for variants
+                deletedAt: null,      // Set deletedAt to null for variants
+                deletedByRole: null,  // Reset the deletedByRole field for variants
+                updatedBy: adminId,   // Record the user restoring the variant
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field for variants
+            },
+        });
+
+        // Restore the variants of this supplier
+        await prisma.bankAccount.updateMany({
+            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
+            data: {
+                deletedBy: null,      // Reset the deletedBy field for variants
+                deletedAt: null,      // Set deletedAt to null for variants
+                deletedByRole: null,  // Reset the deletedByRole field for variants
+                updatedBy: adminId,   // Record the user restoring the variant
+                updatedByRole: adminRole, // Record the role of the user
+                updatedAt: new Date(), // Update the updatedAt field for variants
+            },
+        });
+
+        const sanitizedSupplier = serializeBigInt(restoredSupplier);
+        logMessage('debug', 'fetched suppliers :', sanitizedSupplier);
+
+        return {
+            status: true,
+            message: "Supplier restored successfully",
+            restoredSupplier: sanitizedSupplier
+        };
+    } catch (error) {
+        console.error("❌ restoreSupplier Error:", error);
+        return { status: false, message: "Error restoring supplier" };
+    }
+};
+
+// 🔴 DELETE
+export const deleteSupplier = async (id: number) => {
+    try {
+        console.log(`id - `, id);
+        await prisma.admin.delete({ where: { id, role: 'supplier' } });
+        return { status: true, message: "Supplier deleted successfully" };
+    } catch (error) {
+        console.error("❌ deleteSupplier Error:", error);
+        return { status: false, message: "Error deleting supplier" };
     }
 };

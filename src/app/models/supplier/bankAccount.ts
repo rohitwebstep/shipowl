@@ -58,3 +58,61 @@ export async function createSupplierBankAccount(
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export async function updateSupplierBankAccount(
+    adminId: number,
+    adminRole: string,
+    supplierId: number,
+    payload: SupplierBankAccountPayload
+) {
+    try {
+        const { admin, bankAccounts, updatedAt, updatedBy, updatedByRole } = payload;
+
+        const updateOrCreatePromises = bankAccounts.map((account) => {
+            if (account.id) {
+                // If account has an ID, update it
+                return prisma.bankAccount.update({
+                    where: { id: account.id },
+                    data: {
+                        adminId: admin.connect.id,
+                        accountHolderName: account.accountHolderName,
+                        accountNumber: account.accountNumber,
+                        bankName: account.bankName,
+                        bankBranch: account.bankBranch,
+                        accountType: account.accountType,
+                        ifscCode: account.ifscCode,
+                        cancelledChequeImage: account.cancelledChequeImage,
+                        updatedAt,
+                        updatedBy,
+                        updatedByRole
+                    }
+                });
+            } else {
+                // Else create a new bank account
+                return prisma.bankAccount.create({
+                    data: {
+                        adminId: admin.connect.id,
+                        accountHolderName: account.accountHolderName,
+                        accountNumber: account.accountNumber,
+                        bankName: account.bankName,
+                        bankBranch: account.bankBranch,
+                        accountType: account.accountType,
+                        ifscCode: account.ifscCode,
+                        cancelledChequeImage: account.cancelledChequeImage,
+                        updatedAt,
+                        updatedBy,
+                        updatedByRole
+                    }
+                });
+            }
+        });
+
+        const results = await Promise.all(updateOrCreatePromises);
+
+        return { status: true, bankAccounts: results };
+    } catch (error) {
+        logMessage("error", "Error updating/creating supplier bank account", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
