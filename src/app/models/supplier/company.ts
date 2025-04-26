@@ -146,8 +146,8 @@ export async function updateSupplierCompany(
     adminId: number,
     adminRole: string,
     supplierId: number,
-    supplierCompany: SupplierCompany
-) {
+    supplierCompany: SupplierCompany) {
+
     try {
         const {
             admin,
@@ -177,81 +177,85 @@ export async function updateSupplierCompany(
             updatedAt,
         } = supplierCompany;
 
-        const updateData: { [key: string]: any } = {
-            admin,
-            companyName,
-            brandName,
-            brandShortName,
-            billingAddress,
-            billingPincode,
-            billingState,
-            billingCity,
-            businessType,
-            clientEntryType,
-            gstNumber,
-            companyPanNumber,
-            aadharNumber,
-            panCardHolderName,
-            aadharCardHolderName,
-            documentId,
-            documentName,
-            updatedBy,
-            updatedByRole,
-            updatedAt,
-        };
-
         const { status: supplierStatus, bankAccount: currentBankAccount, message } = await getCompanyDeailBySupplierId(supplierId);
 
         if (!supplierStatus || !currentBankAccount) {
             return { status: false, message: message || "Bank Account not found." };
         }
 
-        const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company');
+        let gstDocumentNew, panCardImageNew, aadharCardImageNew, additionalDocumentUploadNew, documentImageNew;
+
         // Only add image fields if they are non-empty
         if (gstDocument && gstDocument.trim() !== '' && currentBankAccount?.gstDocument?.trim()) {
             const imageFileName = path.basename(currentBankAccount.gstDocument.trim());
             const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
             await deleteFile(filePath);
-            updateData.gstDocument = gstDocument.trim();
+            gstDocumentNew = gstDocument.trim();
         }
 
         if (panCardImage && panCardImage.trim() !== '' && currentBankAccount?.panCardImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.panCardImage.trim());
             const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
             await deleteFile(filePath);
-            updateData.panCardImage = panCardImage.trim();
+            panCardImageNew = panCardImage.trim();
         }
 
         if (aadharCardImage && aadharCardImage.trim() !== '' && currentBankAccount?.aadharCardImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.aadharCardImage.trim());
             const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
             await deleteFile(filePath);
-            updateData.aadharCardImage = aadharCardImage.trim();
+            aadharCardImageNew = aadharCardImage.trim();
         }
 
         if (additionalDocumentUpload && additionalDocumentUpload.trim() !== '' && currentBankAccount?.additionalDocumentUpload?.trim()) {
             const imageFileName = path.basename(currentBankAccount.additionalDocumentUpload.trim());
             const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
             await deleteFile(filePath);
-            updateData.additionalDocumentUpload = additionalDocumentUpload.trim();
+            additionalDocumentUploadNew = additionalDocumentUpload.trim();
         }
 
         if (documentImage && documentImage.trim() !== '' && currentBankAccount?.documentImage?.trim()) {
             const imageFileName = path.basename(currentBankAccount.documentImage.trim());
             const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
             await deleteFile(filePath);
-            updateData.documentImage = documentImage.trim();
+            documentImageNew = documentImage.trim();
         }
 
         const newSupplier = await prisma.companyDetail.update({
             where: { adminId: supplierId },
-            data: updateData,
+            data: {
+                admin,
+                companyName,
+                brandName,
+                brandShortName,
+                billingAddress,
+                billingPincode,
+                billingState,
+                billingCity,
+                businessType,
+                clientEntryType,
+                gstNumber,
+                companyPanNumber,
+                aadharNumber,
+                gstDocument: gstDocumentNew,
+                panCardHolderName,
+                aadharCardHolderName,
+                panCardImage: panCardImageNew,
+                aadharCardImage: aadharCardImageNew,
+                additionalDocumentUpload: additionalDocumentUploadNew,
+                documentId,
+                documentName,
+                documentImage: documentImageNew,
+                updatedBy,
+                updatedByRole,
+                updatedAt,
+            },
         });
 
         const sanitizedSupplier = serializeBigInt(newSupplier);
         return { status: true, supplier: sanitizedSupplier };
     } catch (error) {
-        console.error(`Error updating company:`, error);
+        console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };
     }
 }
