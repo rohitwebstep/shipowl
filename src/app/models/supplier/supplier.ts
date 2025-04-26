@@ -205,7 +205,7 @@ export const updateSupplier = async (
     supplier: Supplier
 ) => {
     try {
-        const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
+        const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, updatedAt, updatedBy, updatedByRole } = supplier;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -229,9 +229,9 @@ export const updateSupplier = async (
                 permanentState,
                 permanentCountry,
                 status: statusString,
-                updatedBy: adminId,
-                updatedByRole: adminRole,
-                updatedAt: new Date(),
+                updatedBy,
+                updatedByRole,
+                updatedAt,
             },
         });
 
