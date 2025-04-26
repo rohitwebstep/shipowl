@@ -6,6 +6,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createBrand, getBrandsByStatus } from '@/app/models/brand';
+import { fetchLogInfo } from '@/utils/commonUtils';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -121,6 +122,9 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     logMessage('debug', 'GET request received for fetching brands');
+
+    const fetchLogInfoResult = await fetchLogInfo('brand', 'view', req);
+    logMessage('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
 
     // Retrieve x-admin-id and x-admin-role from request headers
     const adminIdHeader = req.headers.get("x-admin-id");

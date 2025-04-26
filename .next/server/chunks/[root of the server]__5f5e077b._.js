@@ -61,47 +61,6 @@ const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
-"[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const e = new Error(`Could not parse module '[project]/src/utils/commonUtils.ts'
-
-Expected ident`);
-e.code = 'MODULE_UNPARSEABLE';
-throw e;}}),
-"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("buffer", () => require("buffer"));
-
-module.exports = mod;
-}}),
-"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}}),
-"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("util", () => require("util"));
-
-module.exports = mod;
-}}),
-"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("crypto", () => require("crypto"));
-
-module.exports = mod;
-}}),
 "[externals]/node:os [external] (node:os, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -8869,6 +8828,190 @@ connectToDatabase().catch((error)=>{
 });
 const __TURBOPACK__default__export__ = prisma;
 }}),
+"[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "ActivityLog": (()=>ActivityLog),
+    "fetchLogInfo": (()=>fetchLogInfo),
+    "logMessage": (()=>logMessage)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/ua-parser-js/src/main/ua-parser.mjs [app-route] (ecmascript)");
+;
+;
+async function logMessage(type, message, item) {
+    try {
+        const isDev = process.env.DEBUG === 'true' || ("TURBOPACK compile-time value", "development") === 'development';
+        if ("TURBOPACK compile-time falsy", 0) {
+            "TURBOPACK unreachable";
+        }
+        const logWithMessage = (logFn, prefix = '')=>{
+            if (item !== undefined) {
+                logFn(`${prefix}${message}`, item);
+            } else {
+                logFn(`${prefix}${message}`);
+            }
+        };
+        switch(type.toLowerCase()){
+            case 'error':
+                logWithMessage(console.error, '❌ ');
+                break;
+            case 'warn':
+                logWithMessage(console.warn, '⚠️ ');
+                break;
+            case 'info':
+                logWithMessage(console.info, 'ℹ️ ');
+                break;
+            case 'debug':
+                logWithMessage(console.debug, '🔍 ');
+                break;
+            case 'log':
+                logWithMessage(console.log);
+                break;
+            case 'trace':
+                logWithMessage(console.trace, '🔍 ');
+                break;
+            case 'table':
+                if (item !== undefined) console.table(item);
+                break;
+            case 'group':
+                console.group(message);
+                break;
+            case 'groupend':
+                console.groupEnd();
+                break;
+            default:
+                logWithMessage(console.log, '📌 ');
+                break;
+        }
+    } catch (error) {
+        console.error('❌ Error in logMessage:', error);
+    }
+}
+async function ActivityLog(params) {
+    try {
+        const { adminId, adminRole, module, action, endpoint, method, payload, response, result, data, ipv4, ipv6, internetServiceProvider, clientInformation, userAgent } = params;
+        // Save the activity log to the database
+        const activityLog = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].activityLog.create({
+            data: {
+                adminId,
+                adminRole,
+                module,
+                action,
+                endpoint,
+                method,
+                payload: JSON.stringify(payload),
+                response: JSON.stringify(response),
+                result,
+                data: data ? JSON.stringify(data) : null,
+                ipv4,
+                ipv6,
+                internetServiceProvider,
+                clientInformation,
+                userAgent
+            }
+        });
+        console.info('Activity Log saved successfully:', activityLog);
+    } catch (error) {
+        console.error('❌ Error saving activity log:', error);
+    }
+}
+async function fetchLogInfo(module, action, req) {
+    try {
+        // Get the IP address from the 'x-forwarded-for' header or fallback to 'host' header
+        const forwardedFor = req.headers.get('x-forwarded-for');
+        const ipAddress = forwardedFor ? forwardedFor.split(',')[0] : req.headers.get('host');
+        // Construct the full URL
+        const protocol = req.headers.get('x-forwarded-proto') || 'http'; // Default to 'http' if missing
+        const host = req.headers.get('host'); // Get host from headers
+        const url = `${protocol}://${host}${req.nextUrl.pathname}${req.nextUrl.search || ''}`; // Build complete URL
+        // Get the HTTP method and the payload if applicable (POST, PUT, PATCH)
+        const method = req.method;
+        let payload = null;
+        if ([
+            'POST',
+            'PUT',
+            'PATCH'
+        ].includes(method)) {
+            try {
+                payload = await req.json(); // Parse JSON payload
+            } catch (error) {
+                console.error('❌ Error parsing request body:', error);
+            }
+        }
+        // Parse the User-Agent string for client details
+        const userAgent = req.headers.get('user-agent') || 'Unknown';
+        const parser = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UAParser"](userAgent);
+        const clientInfo = parser.getResult();
+        // Extract browser, OS, and device details
+        const { browser, os, device } = clientInfo;
+        const browserName = browser.name || 'Unknown Browser';
+        const browserVersion = browser.version || 'Unknown Version';
+        const osName = os.name || 'Unknown OS';
+        const osVersion = os.version || 'Unknown OS Version';
+        const deviceType = device.type || 'Unknown Device';
+        // Log the gathered information
+        const logInfo = {
+            module,
+            action,
+            url,
+            method,
+            payload,
+            response: true,
+            result: [],
+            data: [],
+            ipAddress,
+            clientInfo: {
+                browser: browserName,
+                browserVersion,
+                os: osName,
+                osVersion,
+                device: deviceType
+            },
+            userAgent
+        };
+        // Example of logging the activity info
+        logMessage('info', `Activity log Info:`, logInfo);
+    } catch (error) {
+        console.error('❌ Error saving activity log:', error);
+    }
+}
+}}),
+"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("buffer", () => require("buffer"));
+
+module.exports = mod;
+}}),
+"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}}),
+"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}}),
+"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}}),
 "[project]/src/utils/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9607,7 +9750,7 @@ async function POST(req) {
 async function GET(req) {
     try {
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching brands');
-        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('view', req);
+        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('brand', 'view', req);
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
         // Retrieve x-admin-id and x-admin-role from request headers
         const adminIdHeader = req.headers.get("x-admin-id");
@@ -9664,4 +9807,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__76cb0113._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__5f5e077b._.js.map
