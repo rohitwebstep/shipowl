@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/supplier/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/supplier/[supplierId]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -10407,14 +10407,16 @@ async function updateSupplierBankAccount(adminId, adminRole, supplierId, payload
     }
 }
 }}),
-"[project]/src/app/api/supplier/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/supplier/[supplierId]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
+    "DELETE": (()=>DELETE),
     "GET": (()=>GET),
-    "POST": (()=>POST)
+    "PATCH": (()=>PATCH),
+    "PUT": (()=>PUT)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
@@ -10438,9 +10440,103 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supp
 ;
 ;
 ;
-async function POST(req) {
+async function GET(req) {
+    try {
+        // Extract supplierId directly from the URL path
+        const supplierId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested Supplier ID:', supplierId);
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID', {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid or missing admin ID'
+            }, {
+                status: 400
+            });
+        }
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const supplierIdNum = Number(supplierId);
+        if (isNaN(supplierIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID', {
+                supplierId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid supplier ID'
+            }, {
+                status: 400
+            });
+        }
+        const supplierResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSupplierById"])(supplierIdNum);
+        if (supplierResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier found:', supplierResult.supplier);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                supplier: supplierResult.supplier
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier found:', supplierResult.supplier);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'Supplier not found'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ Error fetching single supplier:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function PUT(req) {
     try {
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for supplier creation');
+        // Extract supplierId directly from the URL path
+        const supplierId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested Supplier ID:', supplierId);
+        const supplierIdNum = Number(supplierId);
+        if (isNaN(supplierIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID', {
+                supplierId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid supplier ID'
+            }, {
+                status: 400
+            });
+        }
+        const supplierResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSupplierById"])(supplierIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Supplier fetch result:', supplierResult);
+        if (!supplierResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Supplier not found', {
+                supplierIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Supplier not found'
+            }, {
+                status: 404
+            });
+        }
         const adminIdHeader = req.headers.get('x-admin-id');
         const adminRole = req.headers.get('x-admin-role');
         const adminId = Number(adminIdHeader);
@@ -10581,7 +10677,7 @@ async function POST(req) {
             'active'
         ].includes(statusRaw);
         const email = extractString('email') || '';
-        const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkEmailAvailability"])(email);
+        const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkEmailAvailabilityForUpdate"])(email, supplierIdNum);
         if (!checkEmailAvailabilityResult) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Email availability check failed: ${checkEmailAvailabilityMessage}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -10592,7 +10688,7 @@ async function POST(req) {
             });
         }
         const username = extractString('username') || '';
-        const { status: checkUsernameAvailabilityResult, message: checkUsernameAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkUsernameAvailability"])(username);
+        const { status: checkUsernameAvailabilityResult, message: checkUsernameAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkUsernameAvailabilityForUpdate"])(username, supplierIdNum);
         if (!checkUsernameAvailabilityResult) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Username availability check failed: ${checkUsernameAvailabilityMessage}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -10678,12 +10774,12 @@ async function POST(req) {
                 }
             },
             status,
-            createdAt: new Date(),
-            createdBy: adminId,
-            createdByRole: adminRole
+            updatedAt: new Date(),
+            updatedBy: adminId,
+            updatedByRole: adminRole
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier payload created:', supplierPayload);
-        const supplierCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createSupplier"])(adminId, String(adminRole), supplierPayload);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier payload updated:', supplierPayload);
+        const supplierCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateSupplier"])(adminId, String(adminRole), supplierIdNum, supplierPayload);
         if (!supplierCreateResult || !supplierCreateResult.status || !supplierCreateResult.supplier) {
             // Check if there are any uploaded files before attempting to delete
             if (Object.keys(supplierUploadedFiles).length > 0) {
@@ -10763,12 +10859,12 @@ async function POST(req) {
             documentId: extractString('gstNumber') || '',
             documentName: extractString('companyPanNumber') || '',
             documentImage: supplierCompanyUploadedFiles['documentImage'],
-            createdAt: new Date(),
-            createdBy: adminId,
-            createdByRole: adminRole
+            updatedAt: new Date(),
+            updatedBy: adminId,
+            updatedByRole: adminRole
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier payload created:', supplierCompanyPayload);
-        const supplierCompanyCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$company$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createSupplierCompany"])(adminId, String(adminRole), supplierCompanyPayload);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier payload updated:', supplierCompanyPayload);
+        const supplierCompanyCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$company$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateSupplierCompany"])(adminId, String(adminRole), supplierIdNum, supplierCompanyPayload);
         if (!supplierCompanyCreateResult || !supplierCompanyCreateResult.status || !supplierCompanyCreateResult.supplier) {
             // Check if there are any uploaded files before attempting to delete
             if (Object.keys(supplierCompanyUploadedFiles).length > 0) {
@@ -10805,6 +10901,9 @@ async function POST(req) {
                 }
             },
             bankAccounts,
+            updatedAt: new Date(),
+            updatedBy: adminId,
+            updatedByRole: adminRole,
             createdAt: new Date(),
             createdBy: adminId,
             createdByRole: adminRole
@@ -10835,7 +10934,7 @@ async function POST(req) {
                 supplierBankAccountPayload.bankAccounts[index].cancelledChequeImage = image;
             }
         }
-        const supplierBankAccountCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$bankAccount$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createSupplierBankAccount"])(adminId, String(adminRole), supplierBankAccountPayload);
+        const supplierBankAccountCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$bankAccount$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateSupplierBankAccount"])(adminId, String(adminRole), supplierIdNum, supplierBankAccountPayload);
         if (!supplierBankAccountCreateResult || !supplierBankAccountCreateResult.status || !supplierBankAccountCreateResult.bankAccounts) {
             // Check if there are any uploaded files before attempting to delete
             if (Object.keys(supplierBankAccountUploadedFiles).length > 0) {
@@ -10866,7 +10965,7 @@ async function POST(req) {
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: true,
-            error: supplierCreateResult?.message || 'Supplier created Successfuly'
+            error: supplierCreateResult?.message || 'Supplier updated Successfuly'
         }, {
             status: 200
         });
@@ -10881,59 +10980,180 @@ async function POST(req) {
         });
     }
 }
-async function GET(req) {
+async function PATCH(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching suppliers');
-        // Retrieve x-admin-id and x-admin-role from request headers
+        // Extract supplierId directly from the URL path
+        const supplierId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested Supplier ID:', supplierId);
+        // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Admin ID and Role:', {
-            adminIdHeader,
-            adminRole
-        });
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID header', {
+                adminIdHeader,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
                 error: "User ID is missing or invalid in request"
             }, {
                 status: 400
             });
         }
         // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: `User Not Found: ${result.message}`
+                error: `User Not Found: ${userCheck.message}`
             }, {
                 status: 404
             });
         }
-        // Fetch all suppliers
-        const suppliersResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSuppliersByStatus"])("notDeleted");
-        if (suppliersResult?.status) {
+        const supplierIdNum = Number(supplierId);
+        if (isNaN(supplierIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID', {
+                supplierId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid supplier ID'
+            }, {
+                status: 400
+            });
+        }
+        const supplierResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSupplierById"])(supplierIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Supplier fetch result:', supplierResult);
+        if (!supplierResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Supplier not found', {
+                supplierIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Supplier not found'
+            }, {
+                status: 404
+            });
+        }
+        // Restore the supplier (i.e., reset deletedAt, deletedBy, deletedByRole)
+        const restoreResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["restoreSupplier"])(adminId, String(adminRole), supplierIdNum);
+        if (restoreResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier restored successfully:', restoreResult.restoredSupplier);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                suppliers: suppliersResult.suppliers
+                supplier: restoreResult.restoredSupplier
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No suppliers found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Supplier restore failed');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No suppliers found"
+            error: 'Supplier restore failed'
+        }, {
+            status: 500
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ Supplier restore error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function DELETE(req) {
+    try {
+        // Extract supplierId directly from the URL path
+        const supplierId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Delete Supplier Request:', {
+            supplierId
+        });
+        // Extract admin ID and role from headers
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Validate admin ID
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID', {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Admin ID is missing or invalid'
+            }, {
+                status: 400
+            });
+        }
+        // Check if the admin user exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Admin not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `Admin not found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        // Validate supplier ID
+        const supplierIdNum = Number(supplierId);
+        if (isNaN(supplierIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID format', {
+                supplierId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Supplier ID is invalid'
+            }, {
+                status: 400
+            });
+        }
+        const supplierResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSupplierById"])(supplierIdNum);
+        if (!supplierResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Supplier not found', {
+                supplierIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Supplier not found'
+            }, {
+                status: 404
+            });
+        }
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$supplier$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["softDeleteSupplier"])(Number(adminId), String(adminRole), supplierIdNum); // Assuming softDeleteSupplier marks the supplier as deleted
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Soft delete request for supplier: ${supplierIdNum}`, {
+            adminId
+        });
+        if (result?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Supplier soft deleted successfully: ${supplierIdNum}`, {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: `Supplier soft deleted successfully`
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Supplier not found or could not be deleted: ${supplierIdNum}`, {
+            adminId
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'Supplier not found or deletion failed'
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching suppliers:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error during supplier deletion', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch suppliers"
+            error: 'Internal server error'
         }, {
             status: 500
         });
@@ -10943,4 +11163,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__00ca2650._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__6c2defa1._.js.map

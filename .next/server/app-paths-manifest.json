@@ -1,3 +1,5 @@
 {
-  "/api/supplier/[supplierId]/bank-account/[bankAccountId]/image/[imageIndex]/route": "app/api/supplier/[supplierId]/bank-account/[bankAccountId]/image/[imageIndex]/route.js"
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
+  "/api/supplier/[supplierId]/route": "app/api/supplier/[supplierId]/route.js",
+  "/api/supplier/route": "app/api/supplier/route.js"
 }

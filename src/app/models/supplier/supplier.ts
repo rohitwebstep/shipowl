@@ -86,11 +86,83 @@ export async function checkEmailAvailability(email: string) {
     }
 }
 
+export async function checkEmailAvailabilityForUpdate(email: string, supplierId: number) {
+    try {
+        // Query to find if an email already exists with role 'supplier'
+        const existingSupplier = await prisma.admin.findUnique({
+            where: {
+                email,
+                NOT: {
+                    id: supplierId,  // Exclude the current product being updated
+                },
+            },
+            select: { email: true, role: true },
+        });
+
+        // If the email is already in use by a supplier
+        if (existingSupplier && existingSupplier.role === 'supplier') {
+            return {
+                status: false,
+                message: `Email "${email}" is already in use by a supplier.`,
+            };
+        }
+
+        // If no record is found, the email is available
+        return {
+            status: true,
+            message: `Email "${email}" is available.`,
+        };
+    } catch (error) {
+        // Log the error and return a general error message
+        console.error('Error checking email availability:', error);
+        return {
+            status: false,
+            message: 'Error while checking email availability.',
+        };
+    }
+}
+
 export async function checkUsernameAvailability(username: string) {
     try {
         // Query to find if an username already exists with role 'supplier'
         const existingSupplier = await prisma.admin.findUnique({
             where: { username },
+            select: { username: true, role: true },
+        });
+
+        // If the username is already in use by a supplier
+        if (existingSupplier && existingSupplier.role === 'supplier') {
+            return {
+                status: false,
+                message: `Username "${username}" is already in use by a supplier.`,
+            };
+        }
+
+        // If no record is found, the username is available
+        return {
+            status: true,
+            message: `Username "${username}" is available.`,
+        };
+    } catch (error) {
+        // Log the error and return a general error message
+        console.error('Error checking username availability:', error);
+        return {
+            status: false,
+            message: 'Error while checking username availability.',
+        };
+    }
+}
+
+export async function checkUsernameAvailabilityForUpdate(username: string, supplierId: number) {
+    try {
+        // Query to find if an username already exists with role 'supplier'
+        const existingSupplier = await prisma.admin.findUnique({
+            where: {
+                username,
+                NOT: {
+                    id: supplierId,  // Exclude the current product being updated
+                },
+            },
             select: { username: true, role: true },
         });
 
@@ -174,7 +246,8 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
 
         const suppliers = await prisma.admin.findMany({
             where: whereCondition,
-            orderBy: { name: "asc" }
+            orderBy: { name: "asc" },
+            include: { companyDetail: true, bankAccounts: true }
         });
 
         const sanitizedCities = serializeBigInt(suppliers);
@@ -191,6 +264,7 @@ export const getSupplierById = async (id: number) => {
     try {
         const supplier = await prisma.admin.findUnique({
             where: { id, role: 'supplier' },
+            include: { companyDetail: true, bankAccounts: true }
         });
 
         if (!supplier) return { status: false, message: "Supplier not found" };

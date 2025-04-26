@@ -7,7 +7,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
-import { getSupplierById, checkEmailAvailability, checkUsernameAvailability, updateSupplier, restoreSupplier, softDeleteSupplier } from '@/app/models/supplier/supplier';
+import { getSupplierById, checkEmailAvailabilityForUpdate, checkUsernameAvailabilityForUpdate, updateSupplier, restoreSupplier, softDeleteSupplier } from '@/app/models/supplier/supplier';
 import { updateSupplierCompany } from '@/app/models/supplier/company';
 import { updateSupplierBankAccount } from '@/app/models/supplier/bankAccount';
 
@@ -214,7 +214,7 @@ export async function PUT(req: NextRequest) {
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
     const email = extractString('email') || '';
-    const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await checkEmailAvailability(email);
+    const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await checkEmailAvailabilityForUpdate(email, supplierIdNum);
 
     if (!checkEmailAvailabilityResult) {
       logMessage('warn', `Email availability check failed: ${checkEmailAvailabilityMessage}`);
@@ -222,7 +222,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const username = extractString('username') || '';
-    const { status: checkUsernameAvailabilityResult, message: checkUsernameAvailabilityMessage } = await checkUsernameAvailability(username);
+    const { status: checkUsernameAvailabilityResult, message: checkUsernameAvailabilityMessage } = await checkUsernameAvailabilityForUpdate(username, supplierIdNum);
 
     if (!checkUsernameAvailabilityResult) {
       logMessage('warn', `Username availability check failed: ${checkUsernameAvailabilityMessage}`);
