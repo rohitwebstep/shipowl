@@ -47,6 +47,7 @@ model emailConfig {
 
 model admin {
   id                   Int         @id @default(autoincrement())
+  profilePicture       String?     @db.LongText
   name                 String
   username             String      @unique
   email                String      @unique

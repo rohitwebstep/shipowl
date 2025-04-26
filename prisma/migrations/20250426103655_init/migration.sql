@@ -29,6 +29,7 @@ CREATE TABLE `emailConfig` (
 -- CreateTable
 CREATE TABLE `admin` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `profilePicture` LONGTEXT NULL,
     `name` VARCHAR(191) NOT NULL,
     `username` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,

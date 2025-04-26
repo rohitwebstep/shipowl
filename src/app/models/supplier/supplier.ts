@@ -1,9 +1,12 @@
 import prisma from "@/lib/prisma";
+import path from "path";
+import { deleteFile } from '@/utils/saveFiles';
 import { logMessage } from "@/utils/commonUtils";
 
 interface Supplier {
     id?: bigint; // Optional: ID of the supplier (if exists)
     name: string; // Name of the supplier
+    profilePicture: string,
     username: string; // Username of the supplier
     email: string; // Email address of the supplier
     password: string; // Password for the supplier account
@@ -31,6 +34,9 @@ interface Supplier {
     updatedByRole?: string | null; // Role of the admin who last updated the supplier
     deletedByRole?: string | null; // Role of the admin who deleted the supplier
 }
+
+type ImageType =
+    | 'profilePicture';
 
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
@@ -116,7 +122,7 @@ export async function checkUsernameAvailability(username: string) {
 
 export async function createSupplier(adminId: number, adminRole: string, supplier: Supplier) {
     try {
-        const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
+        const { name, profilePicture, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -127,6 +133,7 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
         const newSupplier = await prisma.admin.create({
             data: {
                 name,
+                profilePicture,
                 username,
                 email,
                 password,
@@ -205,7 +212,24 @@ export const updateSupplier = async (
     supplier: Supplier
 ) => {
     try {
-        const { name, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, updatedAt, updatedBy, updatedByRole } = supplier;
+        const {
+            name,
+            profilePicture,
+            username,
+            email,
+            password,
+            dateOfBirth,
+            currentAddress,
+            permanentAddress,
+            permanentPostalCode,
+            permanentCity,
+            permanentState,
+            permanentCountry,
+            status: statusRaw,
+            updatedAt,
+            updatedBy,
+            updatedByRole
+        } = supplier;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -213,32 +237,56 @@ export const updateSupplier = async (
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
 
+        const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId);
+
+        if (!supplierStatus || !supplier) {
+            return { status: false, message: message || "Supplier not found." };
+        }
+
+        if (profilePicture && profilePicture.trim() !== '' && currentSupplier?.profilePicture?.trim()) {
+            try {
+                const imageFileName = path.basename(currentSupplier.profilePicture.trim());
+                const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+
+                const fileDeleted = await deleteFile(filePath);
+
+                if (!fileDeleted) {
+                    console.warn(`Failed to delete old profile picture: ${imageFileName}`);
+                }
+            } catch (error) {
+                console.error("Error deleting profile picture:", error);
+            }
+        }
+
+        const updateData = {
+            name,
+            username,
+            email,
+            password,
+            role: 'supplier',
+            dateOfBirth: new Date(dateOfBirth),
+            currentAddress,
+            permanentAddress,
+            permanentPostalCode,
+            permanentCity,
+            permanentState,
+            permanentCountry,
+            status: statusString,
+            updatedBy,
+            updatedByRole,
+            updatedAt,
+            ...(profilePicture && profilePicture.trim() !== '' ? { profilePicture: profilePicture.trim() } : {})
+        };
+
         const newSupplier = await prisma.admin.update({
             where: { id: supplierId },
-            data: {
-                name,
-                username,
-                email,
-                password,
-                role: 'supplier',
-                dateOfBirth: new Date(dateOfBirth),
-                currentAddress,
-                permanentAddress,
-                permanentPostalCode,
-                permanentCity,
-                permanentState,
-                permanentCountry,
-                status: statusString,
-                updatedBy,
-                updatedByRole,
-                updatedAt,
-            },
+            data: updateData,
         });
 
         const sanitizedSupplier = serializeBigInt(newSupplier);
         return { status: true, supplier: sanitizedSupplier };
     } catch (error) {
-        console.error(`Error creating city:`, error);
+        console.error(`Error updating supplier:`, error);
         return { status: false, message: "Internal Server Error" };
     }
 };

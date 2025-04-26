@@ -142,6 +142,7 @@ exports.Prisma.EmailConfigScalarFieldEnum = {
 
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
+  profilePicture: 'profilePicture',
   name: 'name',
   username: 'username',
   email: 'email',
@@ -511,6 +512,7 @@ exports.Prisma.emailConfigOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.adminOrderByRelevanceFieldEnum = {
+  profilePicture: 'profilePicture',
   name: 'name',
   username: 'username',
   email: 'email',

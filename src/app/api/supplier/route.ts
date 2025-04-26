@@ -198,8 +198,32 @@ export async function POST(req: NextRequest) {
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+    const supplierFileFields = [
+      'profilePicture'
+    ];
+
+    const supplierUploadedFiles: Record<string, string> = {};
+    for (const field of supplierFileFields) {
+      const fileData = await saveFilesFromFormData(formData, field, {
+        dir: supplierUploadDir,
+        pattern: 'slug-unique',
+        multiple: true,
+      });
+
+      if (fileData) {
+        logMessage('info', 'uploaded fileData:', fileData);
+        if (Array.isArray(fileData)) {
+          supplierUploadedFiles[field] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
+        } else {
+          supplierUploadedFiles[field] = (fileData as UploadedFileInfo).url;
+        }
+      }
+    }
+
     const supplierPayload = {
       name: extractString('name') || '',
+      profilePicture: supplierUploadedFiles['profilePicture'],
       username,
       email,
       password: hashedPassword,
@@ -233,13 +257,33 @@ export async function POST(req: NextRequest) {
     const supplierCreateResult = await createSupplier(adminId, String(adminRole), supplierPayload);
 
     if (!supplierCreateResult || !supplierCreateResult.status || !supplierCreateResult.supplier) {
+      // Check if there are any uploaded files before attempting to delete
+      if (Object.keys(supplierUploadedFiles).length > 0) {
+        // Iterate over each field in supplierUploadedFiles
+        for (const field in supplierUploadedFiles) {
+          // Split the comma-separated URLs into an array of individual file URLs
+          const fileUrls = supplierUploadedFiles[field].split(',').map((url) => url.trim());
+
+          // Iterate over each file URL in the array
+          for (const fileUrl of fileUrls) {
+            if (fileUrl) {  // Check if the file URL is valid
+              const filePath = path.join(supplierUploadDir, path.basename(fileUrl));
+
+              // Attempt to delete the file
+              await deleteFile(filePath);
+              logMessage('info', `Deleted file: ${filePath}`);
+            }
+          }
+        }
+      } else {
+        logMessage('info', 'No uploaded files to delete.');
+      }
       logMessage('error', 'Supplier creation failed:', supplierCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: supplierCreateResult?.message || 'Supplier creation failed' }, { status: 500 });
     }
 
     const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
-    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
-    const fileFields = [
+    const supplierCompanyFileFields = [
       'gstDocument',
       'panCardImage',
       'aadharCardImage',
@@ -247,8 +291,8 @@ export async function POST(req: NextRequest) {
       'documentImage'
     ];
 
-    const uploadedFiles: Record<string, string> = {};
-    for (const field of fileFields) {
+    const supplierCompanyUploadedFiles: Record<string, string> = {};
+    for (const field of supplierCompanyFileFields) {
       const fileData = await saveFilesFromFormData(formData, field, {
         dir: companyUploadDir,
         pattern: 'slug-unique',
@@ -258,9 +302,9 @@ export async function POST(req: NextRequest) {
       if (fileData) {
         logMessage('info', 'uploaded fileData:', fileData);
         if (Array.isArray(fileData)) {
-          uploadedFiles[field] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
+          supplierCompanyUploadedFiles[field] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
         } else {
-          uploadedFiles[field] = (fileData as UploadedFileInfo).url;
+          supplierCompanyUploadedFiles[field] = (fileData as UploadedFileInfo).url;
         }
       }
     }
@@ -279,15 +323,15 @@ export async function POST(req: NextRequest) {
       gstNumber: extractString('gstNumber') || '',
       companyPanNumber: extractString('companyPanNumber') || '',
       aadharNumber: extractString('aadharNumber') || '',
-      gstDocument: uploadedFiles['gstDocument'],
+      gstDocument: supplierCompanyUploadedFiles['gstDocument'],
       panCardHolderName: extractString('panCardHolderName') || '',
       aadharCardHolderName: extractString('aadharCardHolderName') || '',
-      panCardImage: uploadedFiles['panCardImage'],
-      aadharCardImage: uploadedFiles['aadharCardImage'],
-      additionalDocumentUpload: uploadedFiles['additionalDocumentUpload'] || '',
+      panCardImage: supplierCompanyUploadedFiles['panCardImage'],
+      aadharCardImage: supplierCompanyUploadedFiles['aadharCardImage'],
+      additionalDocumentUpload: supplierCompanyUploadedFiles['additionalDocumentUpload'] || '',
       documentId: extractString('gstNumber') || '',
       documentName: extractString('companyPanNumber') || '',
-      documentImage: uploadedFiles['documentImage'],
+      documentImage: supplierCompanyUploadedFiles['documentImage'],
       createdAt: new Date(),
       createdBy: adminId,
       createdByRole: adminRole,
@@ -299,11 +343,11 @@ export async function POST(req: NextRequest) {
     if (!supplierCompanyCreateResult || !supplierCompanyCreateResult.status || !supplierCompanyCreateResult.supplier) {
 
       // Check if there are any uploaded files before attempting to delete
-      if (Object.keys(uploadedFiles).length > 0) {
-        // Iterate over each field in uploadedFiles
-        for (const field in uploadedFiles) {
+      if (Object.keys(supplierCompanyUploadedFiles).length > 0) {
+        // Iterate over each field in supplierCompanyUploadedFiles
+        for (const field in supplierCompanyUploadedFiles) {
           // Split the comma-separated URLs into an array of individual file URLs
-          const fileUrls = uploadedFiles[field].split(',').map((url) => url.trim());
+          const fileUrls = supplierCompanyUploadedFiles[field].split(',').map((url) => url.trim());
 
           // Iterate over each file URL in the array
           for (const fileUrl of fileUrls) {
@@ -334,6 +378,8 @@ export async function POST(req: NextRequest) {
       createdByRole: adminRole,
     }
 
+    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
+    const supplierBankAccountUploadedFiles: Record<string, string> = {};
     if (Array.isArray(supplierBankAccountPayload.bankAccounts) && supplierBankAccountPayload.bankAccounts.length > 0) {
       for (let index = 0; index < supplierBankAccountPayload.bankAccounts.length; index++) {
         console.log(`🔁 Index: ${index}`);
@@ -352,8 +398,10 @@ export async function POST(req: NextRequest) {
           logMessage('info', 'uploaded fileData:', fileData);
 
           if (Array.isArray(fileData)) {
+            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
             image = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
           } else {
+            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = (fileData as UploadedFileInfo).url;
             image = (fileData as UploadedFileInfo).url;
           }
         }
@@ -368,6 +416,27 @@ export async function POST(req: NextRequest) {
       !supplierBankAccountCreateResult.status ||
       !supplierBankAccountCreateResult.bankAccounts
     ) {
+      // Check if there are any uploaded files before attempting to delete
+      if (Object.keys(supplierBankAccountUploadedFiles).length > 0) {
+        // Iterate over each field in supplierBankAccountUploadedFiles
+        for (const field in supplierBankAccountUploadedFiles) {
+          // Split the comma-separated URLs into an array of individual file URLs
+          const fileUrls = supplierBankAccountUploadedFiles[field].split(',').map((url) => url.trim());
+
+          // Iterate over each file URL in the array
+          for (const fileUrl of fileUrls) {
+            if (fileUrl) {  // Check if the file URL is valid
+              const filePath = path.join(companyUploadDir, path.basename(fileUrl));
+
+              // Attempt to delete the file
+              await deleteFile(filePath);
+              logMessage('info', `Deleted file: ${filePath}`);
+            }
+          }
+        }
+      } else {
+        logMessage('info', 'No uploaded files to delete.');
+      }
       logMessage('error', 'Supplier company creation failed', supplierBankAccountCreateResult?.message);
       return NextResponse.json({
         status: false,

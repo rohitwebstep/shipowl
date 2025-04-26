@@ -3447,6 +3447,7 @@ export namespace Prisma {
 
   export type AdminMinAggregateOutputType = {
     id: number | null
+    profilePicture: string | null
     name: string | null
     username: string | null
     email: string | null
@@ -3476,6 +3477,7 @@ export namespace Prisma {
 
   export type AdminMaxAggregateOutputType = {
     id: number | null
+    profilePicture: string | null
     name: string | null
     username: string | null
     email: string | null
@@ -3505,6 +3507,7 @@ export namespace Prisma {
 
   export type AdminCountAggregateOutputType = {
     id: number
+    profilePicture: number
     name: number
     username: number
     email: number
@@ -3556,6 +3559,7 @@ export namespace Prisma {
 
   export type AdminMinAggregateInputType = {
     id?: true
+    profilePicture?: true
     name?: true
     username?: true
     email?: true
@@ -3585,6 +3589,7 @@ export namespace Prisma {
 
   export type AdminMaxAggregateInputType = {
     id?: true
+    profilePicture?: true
     name?: true
     username?: true
     email?: true
@@ -3614,6 +3619,7 @@ export namespace Prisma {
 
   export type AdminCountAggregateInputType = {
     id?: true
+    profilePicture?: true
     name?: true
     username?: true
     email?: true
@@ -3730,6 +3736,7 @@ export namespace Prisma {
 
   export type AdminGroupByOutputType = {
     id: number
+    profilePicture: string | null
     name: string
     username: string
     email: string
@@ -3778,6 +3785,7 @@ export namespace Prisma {
 
   export type adminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    profilePicture?: boolean
     name?: boolean
     username?: boolean
     email?: boolean
@@ -3816,6 +3824,7 @@ export namespace Prisma {
 
   export type adminSelectScalar = {
     id?: boolean
+    profilePicture?: boolean
     name?: boolean
     username?: boolean
     email?: boolean
@@ -3843,7 +3852,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
+  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
   export type adminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
@@ -3866,6 +3875,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      profilePicture: string | null
       name: string
       username: string
       email: string
@@ -4267,6 +4277,7 @@ export namespace Prisma {
    */
   interface adminFieldRefs {
     readonly id: FieldRef<"admin", 'Int'>
+    readonly profilePicture: FieldRef<"admin", 'String'>
     readonly name: FieldRef<"admin", 'String'>
     readonly username: FieldRef<"admin", 'String'>
     readonly email: FieldRef<"admin", 'String'>
@@ -20254,6 +20265,7 @@ export namespace Prisma {
 
   export const AdminScalarFieldEnum: {
     id: 'id',
+    profilePicture: 'profilePicture',
     name: 'name',
     username: 'username',
     email: 'email',
@@ -20677,6 +20689,7 @@ export namespace Prisma {
 
 
   export const adminOrderByRelevanceFieldEnum: {
+    profilePicture: 'profilePicture',
     name: 'name',
     username: 'username',
     email: 'email',
@@ -21135,6 +21148,7 @@ export namespace Prisma {
     OR?: adminWhereInput[]
     NOT?: adminWhereInput | adminWhereInput[]
     id?: IntFilter<"admin"> | number
+    profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     username?: StringFilter<"admin"> | string
     email?: StringFilter<"admin"> | string
@@ -21170,6 +21184,7 @@ export namespace Prisma {
 
   export type adminOrderByWithRelationInput = {
     id?: SortOrder
+    profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
     username?: SortOrder
     email?: SortOrder
@@ -21211,6 +21226,7 @@ export namespace Prisma {
     AND?: adminWhereInput | adminWhereInput[]
     OR?: adminWhereInput[]
     NOT?: adminWhereInput | adminWhereInput[]
+    profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
@@ -21244,6 +21260,7 @@ export namespace Prisma {
 
   export type adminOrderByWithAggregationInput = {
     id?: SortOrder
+    profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
     username?: SortOrder
     email?: SortOrder
@@ -21281,6 +21298,7 @@ export namespace Prisma {
     OR?: adminScalarWhereWithAggregatesInput[]
     NOT?: adminScalarWhereWithAggregatesInput | adminScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"admin"> | number
+    profilePicture?: StringNullableWithAggregatesFilter<"admin"> | string | null
     name?: StringWithAggregatesFilter<"admin"> | string
     username?: StringWithAggregatesFilter<"admin"> | string
     email?: StringWithAggregatesFilter<"admin"> | string
@@ -23304,6 +23322,7 @@ export namespace Prisma {
   }
 
   export type adminCreateInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -23336,6 +23355,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -23367,6 +23387,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -23399,6 +23420,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -23431,6 +23453,7 @@ export namespace Prisma {
 
   export type adminCreateManyInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -23459,6 +23482,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateManyMutationInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -23485,6 +23509,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -26050,6 +26075,7 @@ export namespace Prisma {
 
   export type adminCountOrderByAggregateInput = {
     id?: SortOrder
+    profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
     email?: SortOrder
@@ -26089,6 +26115,7 @@ export namespace Prisma {
 
   export type adminMaxOrderByAggregateInput = {
     id?: SortOrder
+    profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
     email?: SortOrder
@@ -26118,6 +26145,7 @@ export namespace Prisma {
 
   export type adminMinOrderByAggregateInput = {
     id?: SortOrder
+    profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
     email?: SortOrder
@@ -29536,6 +29564,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutCompanyDetailInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29567,6 +29596,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutCompanyDetailInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29613,6 +29643,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutCompanyDetailInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29644,6 +29675,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutCompanyDetailInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29674,6 +29706,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutBankAccountsInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29705,6 +29738,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutBankAccountsInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29751,6 +29785,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutBankAccountsInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29782,6 +29817,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutBankAccountsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29812,6 +29848,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutStaffInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29843,6 +29880,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutStaffInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -29889,6 +29927,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutStaffInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29920,6 +29959,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutStaffInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -30099,6 +30139,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutPermanentCountryInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -30130,6 +30171,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutPermanentCountryInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -30495,6 +30537,7 @@ export namespace Prisma {
     OR?: adminScalarWhereInput[]
     NOT?: adminScalarWhereInput | adminScalarWhereInput[]
     id?: IntFilter<"admin"> | number
+    profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     username?: StringFilter<"admin"> | string
     email?: StringFilter<"admin"> | string
@@ -30759,6 +30802,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutPermanentStateInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -30790,6 +30834,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutPermanentStateInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -31098,6 +31143,7 @@ export namespace Prisma {
   }
 
   export type adminCreateWithoutPermanentCityInput = {
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -31129,6 +31175,7 @@ export namespace Prisma {
 
   export type adminUncheckedCreateWithoutPermanentCityInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -32748,6 +32795,7 @@ export namespace Prisma {
 
   export type adminCreateManyPermanentCountryInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -33033,6 +33081,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutPermanentCountryInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33064,6 +33113,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutPermanentCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33095,6 +33145,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateManyWithoutPermanentCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33416,6 +33467,7 @@ export namespace Prisma {
 
   export type adminCreateManyPermanentStateInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -33563,6 +33615,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutPermanentStateInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33594,6 +33647,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutPermanentStateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33625,6 +33679,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateManyWithoutPermanentStateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33677,6 +33732,7 @@ export namespace Prisma {
 
   export type adminCreateManyPermanentCityInput = {
     id?: number
+    profilePicture?: string | null
     name: string
     username: string
     email: string
@@ -33775,6 +33831,7 @@ export namespace Prisma {
   }
 
   export type adminUpdateWithoutPermanentCityInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33806,6 +33863,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateWithoutPermanentCityInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -33837,6 +33895,7 @@ export namespace Prisma {
 
   export type adminUncheckedUpdateManyWithoutPermanentCityInput = {
     id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string

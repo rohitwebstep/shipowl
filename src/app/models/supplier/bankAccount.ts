@@ -66,7 +66,7 @@ export async function updateSupplierBankAccount(
     payload: SupplierBankAccountPayload
 ) {
     try {
-        const { admin, bankAccounts, updatedAt, updatedBy, updatedByRole } = payload;
+        const { admin, bankAccounts, createdAt, createdBy, createdByRole, updatedAt, updatedBy, updatedByRole } = payload;
 
         const updateOrCreatePromises = bankAccounts.map((account) => {
             if (account.id) {
@@ -81,7 +81,9 @@ export async function updateSupplierBankAccount(
                         bankBranch: account.bankBranch,
                         accountType: account.accountType,
                         ifscCode: account.ifscCode,
-                        cancelledChequeImage: account.cancelledChequeImage,
+                        ...(account.cancelledChequeImage && account.cancelledChequeImage.trim() !== ''
+                            ? { cancelledChequeImage: account.cancelledChequeImage.trim() }
+                            : {}),
                         updatedAt,
                         updatedBy,
                         updatedByRole
@@ -99,9 +101,9 @@ export async function updateSupplierBankAccount(
                         accountType: account.accountType,
                         ifscCode: account.ifscCode,
                         cancelledChequeImage: account.cancelledChequeImage,
-                        updatedAt,
-                        updatedBy,
-                        updatedByRole
+                        createdAt,
+                        createdBy,
+                        createdByRole,
                     }
                 });
             }
