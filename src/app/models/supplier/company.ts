@@ -1,7 +1,4 @@
 import prisma from "@/lib/prisma";
-import path from "path";
-import { deleteFile } from '@/utils/saveFiles';
-import { logMessage } from "@/utils/commonUtils";
 
 interface SupplierCompany {
     admin: {

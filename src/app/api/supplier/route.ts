@@ -6,11 +6,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
-import { getBrandById } from '@/app/models/brand';
-import { getCategoryById } from '@/app/models/category';
-import { getCountryById } from '@/app/models/location/country';
-import { getStateById } from '@/app/models/location/state';
-import { getCityById, isLocationHierarchyCorrect } from '@/app/models/location/city';
+import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getSuppliersByStatus } from '@/app/models/supplier/supplier';
 import { createSupplierCompany } from '@/app/models/supplier/company';
 import { createSupplierBankAccount } from '@/app/models/supplier/bankAccount';
@@ -114,7 +110,7 @@ export async function POST(req: NextRequest) {
       let parsedDate: Date | null = null;
 
       // Try to match the input value to the known formats
-      for (let { format, regex } of regexPatterns) {
+      for (const { format, regex } of regexPatterns) {
         const match = value.match(regex);
         if (match) {
           const [, day, month, year] = match;
@@ -139,7 +135,7 @@ export async function POST(req: NextRequest) {
           day: '2-digit',
         };
 
-        let formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+        const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
 
         switch (format) {
           case 'DD-MM-YYYY':
