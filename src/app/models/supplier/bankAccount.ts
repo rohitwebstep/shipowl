@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
+import path from "path";
+import { deleteFile } from '@/utils/saveFiles';
 
 interface BankAccount {
     id?: number;
@@ -26,6 +28,8 @@ interface SupplierBankAccountPayload {
     deletedByRole?: string | null; // Role of the admin who deleted the supplier
 }
 
+type ImageType = "cancelledChequeImage";
+
 export const getBankAccountById = async (id: number) => {
     try {
         const bankAccount = await prisma.bankAccount.findUnique({
@@ -35,11 +39,10 @@ export const getBankAccountById = async (id: number) => {
         if (!bankAccount) return { status: false, message: "Company Bank Account not found" };
         return { status: true, bankAccount };
     } catch (error) {
-        console.error("❌ getCompanyDeailBySupplierId Error:", error);
+        console.error("❌ getbankAccountIdBySupplierId Error:", error);
         return { status: false, message: "Error fetching supplier bank account" };
     }
 };
-
 
 export async function createSupplierBankAccount(
     adminId: number,
@@ -73,6 +76,58 @@ export async function createSupplierBankAccount(
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export const removeBankAccountImageByIndex = async (bankAccountId: number, supplierId: number, imageType: ImageType, imageIndex: number) => {
+    try {
+        const { status, bankAccount, message } = await getBankAccountById(bankAccountId);
+
+        if (!status || !bankAccount) {
+            return { status: false, message: message || "bankAccount not found." };
+        }
+
+        logMessage(`debbug`, `bankAccount:`, bankAccount);
+        logMessage(`debbug`, `imageType:`, imageType);
+        if (!bankAccount[imageType]) {
+            return { status: false, message: "No images available to delete." };
+        }
+
+        const images = bankAccount[imageType].split(",");
+
+        logMessage(`debbug`, `images.length:`, images.length);
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return { status: false, message: "Invalid image index provided." };
+        }
+
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+
+        // Update category in DB
+        const updatedBankAccount = await prisma.bankAccount.update({
+            where: { id: bankAccountId },
+            data: { [imageType]: updatedImages },
+        });
+
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = path.basename(removedImage.trim());
+        const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+
+        const fileDeleted = await deleteFile(filePath);
+
+        return {
+            status: true,
+            message: fileDeleted
+                ? "Image removed and file deleted successfully."
+                : "Image removed, but file deletion failed.",
+            bankAccount: updatedBankAccount,
+        };
+    } catch (error) {
+        console.error("❌ Error removing Bank Account Deatil image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image.",
+        };
+    }
+};
 
 export async function updateSupplierBankAccount(
     adminId: number,

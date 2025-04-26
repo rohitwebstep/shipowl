@@ -10101,9 +10101,14 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "createSupplierCompany": (()=>createSupplierCompany),
     "getCompanyDeailBySupplierId": (()=>getCompanyDeailBySupplierId),
+    "removeCompanyDetailImageByIndex": (()=>removeCompanyDetailImageByIndex),
     "updateSupplierCompany": (()=>updateSupplierCompany)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+;
+;
 ;
 const serializeBigInt = (obj)=>{
     // If it's an array, recursively apply serializeBigInt to each element
@@ -10188,6 +10193,56 @@ async function createSupplierCompany(adminId, adminRole, supplierCompany) {
         };
     }
 }
+const removeCompanyDetailImageByIndex = async (companyDetailId, supplierId, imageType, imageIndex)=>{
+    try {
+        const { status, companyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
+        if (!status || !companyDetail) {
+            return {
+                status: false,
+                message: message || "companyDetail not found."
+            };
+        }
+        if (!companyDetail[imageType]) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = companyDetail[imageType].split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update category in DB
+        const updatedCompanyDeatil = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].companyDetail.update({
+            where: {
+                id: companyDetailId
+            },
+            data: {
+                [imageType]: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            companyDetail: updatedCompanyDeatil
+        };
+    } catch (error) {
+        console.error("❌ Error removing Company Deatil image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
 async function updateSupplierCompany(adminId, adminRole, supplierId, supplierCompany) {
     try {
         const { status: supplierStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
@@ -10269,10 +10324,15 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "createSupplierBankAccount": (()=>createSupplierBankAccount),
     "getBankAccountById": (()=>getBankAccountById),
+    "removeBankAccountImageByIndex": (()=>removeBankAccountImageByIndex),
     "updateSupplierBankAccount": (()=>updateSupplierBankAccount)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+;
+;
 ;
 ;
 const getBankAccountById = async (id)=>{
@@ -10291,7 +10351,7 @@ const getBankAccountById = async (id)=>{
             bankAccount
         };
     } catch (error) {
-        console.error("❌ getCompanyDeailBySupplierId Error:", error);
+        console.error("❌ getbankAccountIdBySupplierId Error:", error);
         return {
             status: false,
             message: "Error fetching supplier bank account"
@@ -10329,6 +10389,56 @@ async function createSupplierBankAccount(adminId, adminRole, payload) {
         };
     }
 }
+const removeBankAccountImageByIndex = async (bankAccountId, supplierId, imageType, imageIndex)=>{
+    try {
+        const { status, bankAccount, message } = await getBankAccountById(bankAccountId);
+        if (!status || !bankAccount) {
+            return {
+                status: false,
+                message: message || "bankAccount not found."
+            };
+        }
+        if (!bankAccount[imageType]) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = bankAccount[imageType].split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update category in DB
+        const updatedBankAccount = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].bankAccount.update({
+            where: {
+                id: bankAccountId
+            },
+            data: {
+                [imageType]: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            bankAccount: updatedBankAccount
+        };
+    } catch (error) {
+        console.error("❌ Error removing Bank Account Deatil image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
 async function updateSupplierBankAccount(adminId, adminRole, supplierId, payload) {
     try {
         const updateOrCreatePromises = payload.bankAccounts.map(async (account)=>{

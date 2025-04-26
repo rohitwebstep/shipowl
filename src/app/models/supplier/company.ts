@@ -1,4 +1,6 @@
 import prisma from "@/lib/prisma";
+import path from "path";
+import { deleteFile } from '@/utils/saveFiles';
 
 interface SupplierCompany {
     admin: {
@@ -36,6 +38,8 @@ interface SupplierCompany {
     updatedByRole?: string | null; // Role of the admin who last updated the supplier
     deletedByRole?: string | null; // Role of the admin who deleted the supplier
 }
+
+type ImageType = "gstDocument" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentImage";
 
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
@@ -139,6 +143,55 @@ export async function createSupplierCompany(adminId: number, adminRole: string, 
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export const removeCompanyDetailImageByIndex = async (companyDetailId: number, supplierId: number, imageType: ImageType, imageIndex: number) => {
+    try {
+        const { status, companyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
+
+        if (!status || !companyDetail) {
+            return { status: false, message: message || "companyDetail not found." };
+        }
+
+        if (!companyDetail[imageType]) {
+            return { status: false, message: "No images available to delete." };
+        }
+
+        const images = companyDetail[imageType].split(",");
+
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return { status: false, message: "Invalid image index provided." };
+        }
+
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+
+        // Update category in DB
+        const updatedCompanyDeatil = await prisma.companyDetail.update({
+            where: { id: companyDetailId },
+            data: { [imageType]: updatedImages },
+        });
+
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = path.basename(removedImage.trim());
+        const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+
+        const fileDeleted = await deleteFile(filePath);
+
+        return {
+            status: true,
+            message: fileDeleted
+                ? "Image removed and file deleted successfully."
+                : "Image removed, but file deletion failed.",
+            companyDetail: updatedCompanyDeatil,
+        };
+    } catch (error) {
+        console.error("❌ Error removing Company Deatil image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image.",
+        };
+    }
+};
 
 export async function updateSupplierCompany(
     adminId: number,
