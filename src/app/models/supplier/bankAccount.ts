@@ -26,6 +26,21 @@ interface SupplierBankAccountPayload {
     deletedByRole?: string | null; // Role of the admin who deleted the supplier
 }
 
+export const getBankAccountById = async (id: number) => {
+    try {
+        const bankAccount = await prisma.bankAccount.findUnique({
+            where: { id },
+        });
+
+        if (!bankAccount) return { status: false, message: "Company Bank Account not found" };
+        return { status: true, bankAccount };
+    } catch (error) {
+        console.error("❌ getCompanyDeailBySupplierId Error:", error);
+        return { status: false, message: "Error fetching supplier bank account" };
+    }
+};
+
+
 export async function createSupplierBankAccount(
     adminId: number,
     adminRole: string,
@@ -66,34 +81,51 @@ export async function updateSupplierBankAccount(
     payload: SupplierBankAccountPayload
 ) {
     try {
-        const { admin, bankAccounts, createdAt, createdBy, createdByRole, updatedAt, updatedBy, updatedByRole } = payload;
-
-        const updateOrCreatePromises = bankAccounts.map((account) => {
+        const updateOrCreatePromises = payload.bankAccounts.map(async (account) => {
             if (account.id) {
+
+                const { status: supplierStatus, bankAccount: currentBankAccount, message } = await getBankAccountById(account.id);
+                if (!supplierStatus || !currentBankAccount) {
+                    return { status: false, message: message || "Bank Account not found." };
+                }
+
+                const fields = ['cancelledChequeImage'] as const;
+                const mergedImages: Partial<Record<typeof fields[number], string>> = {};
+
+                for (const field of fields) {
+                    const newImages = account[field];
+                    const existingImages = currentBankAccount[field];
+                    if (newImages && newImages.trim()) {
+                        const merged = Array.from(new Set([
+                            ...(existingImages ? existingImages.split(',').map(x => x.trim()) : []),
+                            ...newImages.split(',').map(x => x.trim())
+                        ])).join(',');
+                        mergedImages[field] = merged;
+                    }
+                }
+
                 // If account has an ID, update it
                 return prisma.bankAccount.update({
                     where: { id: account.id },
                     data: {
-                        adminId: admin.connect.id,
+                        adminId: payload.admin.connect.id,
                         accountHolderName: account.accountHolderName,
                         accountNumber: account.accountNumber,
                         bankName: account.bankName,
                         bankBranch: account.bankBranch,
                         accountType: account.accountType,
                         ifscCode: account.ifscCode,
-                        ...(account.cancelledChequeImage && account.cancelledChequeImage.trim() !== ''
-                            ? { cancelledChequeImage: account.cancelledChequeImage.trim() }
-                            : {}),
-                        updatedAt,
-                        updatedBy,
-                        updatedByRole
+                        cancelledChequeImage: mergedImages.cancelledChequeImage,
+                        updatedAt: payload.updatedAt,
+                        updatedBy: payload.updatedBy,
+                        updatedByRole: payload.updatedByRole,
                     }
                 });
             } else {
                 // Else create a new bank account
                 return prisma.bankAccount.create({
                     data: {
-                        adminId: admin.connect.id,
+                        adminId: payload.admin.connect.id,
                         accountHolderName: account.accountHolderName,
                         accountNumber: account.accountNumber,
                         bankName: account.bankName,
@@ -101,9 +133,9 @@ export async function updateSupplierBankAccount(
                         accountType: account.accountType,
                         ifscCode: account.ifscCode,
                         cancelledChequeImage: account.cancelledChequeImage,
-                        createdAt,
-                        createdBy,
-                        createdByRole,
+                        createdAt: payload.createdAt,
+                        createdBy: payload.createdBy,
+                        createdByRole: payload.createdByRole,
                     }
                 });
             }

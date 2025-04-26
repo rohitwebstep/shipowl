@@ -61,12 +61,12 @@ const serializeBigInt = <T>(obj: T): T => {
 
 export const getCompanyDeailBySupplierId = async (supplierId: number) => {
     try {
-        const bankAccount = await prisma.companyDetail.findUnique({
+        const companyDetail = await prisma.companyDetail.findUnique({
             where: { adminId: supplierId },
         });
 
-        if (!bankAccount) return { status: false, message: "Company Bank Account not found" };
-        return { status: true, bankAccount };
+        if (!companyDetail) return { status: false, message: "Company Bank Account not found" };
+        return { status: true, companyDetail };
     } catch (error) {
         console.error("❌ getCompanyDeailBySupplierId Error:", error);
         return { status: false, message: "Error fetching supplier bank account" };
@@ -146,116 +146,63 @@ export async function updateSupplierCompany(
     adminId: number,
     adminRole: string,
     supplierId: number,
-    supplierCompany: SupplierCompany) {
-
+    supplierCompany: SupplierCompany
+) {
     try {
-        const {
-            admin,
-            companyName,
-            brandName,
-            brandShortName,
-            billingAddress,
-            billingPincode,
-            billingState,
-            billingCity,
-            businessType,
-            clientEntryType,
-            gstNumber,
-            companyPanNumber,
-            aadharNumber,
-            gstDocument,
-            panCardHolderName,
-            aadharCardHolderName,
-            panCardImage,
-            aadharCardImage,
-            additionalDocumentUpload,
-            documentId,
-            documentName,
-            documentImage,
-            updatedBy,
-            updatedByRole,
-            updatedAt,
-        } = supplierCompany;
-
-        const { status: supplierStatus, bankAccount: currentBankAccount, message } = await getCompanyDeailBySupplierId(supplierId);
-
-        if (!supplierStatus || !currentBankAccount) {
+        const { status: supplierStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
+        if (!supplierStatus || !currentCompanyDetail) {
             return { status: false, message: message || "Bank Account not found." };
         }
 
-        let gstDocumentNew, panCardImageNew, aadharCardImageNew, additionalDocumentUploadNew, documentImageNew;
+        const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
+        const mergedImages: Partial<Record<typeof fields[number], string>> = {};
 
-        // Only add image fields if they are non-empty
-        if (gstDocument && gstDocument.trim() !== '' && currentBankAccount?.gstDocument?.trim()) {
-            const imageFileName = path.basename(currentBankAccount.gstDocument.trim());
-            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
-            await deleteFile(filePath);
-            gstDocumentNew = gstDocument.trim();
+        for (const field of fields) {
+            const newImages = supplierCompany[field];
+            const existingImages = currentCompanyDetail[field];
+            if (newImages && newImages.trim()) {
+                const merged = Array.from(new Set([
+                    ...(existingImages ? existingImages.split(',').map(x => x.trim()) : []),
+                    ...newImages.split(',').map(x => x.trim())
+                ])).join(',');
+                mergedImages[field] = merged;
+            }
         }
 
-        if (panCardImage && panCardImage.trim() !== '' && currentBankAccount?.panCardImage?.trim()) {
-            const imageFileName = path.basename(currentBankAccount.panCardImage.trim());
-            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
-            await deleteFile(filePath);
-            panCardImageNew = panCardImage.trim();
-        }
-
-        if (aadharCardImage && aadharCardImage.trim() !== '' && currentBankAccount?.aadharCardImage?.trim()) {
-            const imageFileName = path.basename(currentBankAccount.aadharCardImage.trim());
-            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
-            await deleteFile(filePath);
-            aadharCardImageNew = aadharCardImage.trim();
-        }
-
-        if (additionalDocumentUpload && additionalDocumentUpload.trim() !== '' && currentBankAccount?.additionalDocumentUpload?.trim()) {
-            const imageFileName = path.basename(currentBankAccount.additionalDocumentUpload.trim());
-            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
-            await deleteFile(filePath);
-            additionalDocumentUploadNew = additionalDocumentUpload.trim();
-        }
-
-        if (documentImage && documentImage.trim() !== '' && currentBankAccount?.documentImage?.trim()) {
-            const imageFileName = path.basename(currentBankAccount.documentImage.trim());
-            const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
-            await deleteFile(filePath);
-            documentImageNew = documentImage.trim();
-        }
-
-        const newSupplier = await prisma.companyDetail.update({
+        const updatedSupplier = await prisma.companyDetail.update({
             where: { adminId: supplierId },
             data: {
-                admin,
-                companyName,
-                brandName,
-                brandShortName,
-                billingAddress,
-                billingPincode,
-                billingState,
-                billingCity,
-                businessType,
-                clientEntryType,
-                gstNumber,
-                companyPanNumber,
-                aadharNumber,
-                gstDocument: gstDocumentNew,
-                panCardHolderName,
-                aadharCardHolderName,
-                panCardImage: panCardImageNew,
-                aadharCardImage: aadharCardImageNew,
-                additionalDocumentUpload: additionalDocumentUploadNew,
-                documentId,
-                documentName,
-                documentImage: documentImageNew,
-                updatedBy,
-                updatedByRole,
-                updatedAt,
+                admin: supplierCompany.admin,
+                companyName: supplierCompany.companyName,
+                brandName: supplierCompany.brandName,
+                brandShortName: supplierCompany.brandShortName,
+                billingAddress: supplierCompany.billingAddress,
+                billingPincode: supplierCompany.billingPincode,
+                billingState: supplierCompany.billingState,
+                billingCity: supplierCompany.billingCity,
+                businessType: supplierCompany.businessType,
+                clientEntryType: supplierCompany.clientEntryType,
+                gstNumber: supplierCompany.gstNumber,
+                companyPanNumber: supplierCompany.companyPanNumber,
+                aadharNumber: supplierCompany.aadharNumber,
+                panCardHolderName: supplierCompany.panCardHolderName,
+                aadharCardHolderName: supplierCompany.aadharCardHolderName,
+                documentId: supplierCompany.documentId,
+                documentName: supplierCompany.documentName,
+                updatedBy: supplierCompany.updatedBy,
+                updatedByRole: supplierCompany.updatedByRole,
+                updatedAt: supplierCompany.updatedAt,
+                gstDocument: mergedImages.gstDocument,
+                panCardImage: mergedImages.panCardImage,
+                aadharCardImage: mergedImages.aadharCardImage,
+                additionalDocumentUpload: mergedImages.additionalDocumentUpload,
+                documentImage: mergedImages.documentImage,
             },
         });
 
-        const sanitizedSupplier = serializeBigInt(newSupplier);
-        return { status: true, supplier: sanitizedSupplier };
+        return { status: true, supplier: serializeBigInt(updatedSupplier) };
     } catch (error) {
-        console.error(`Error creating city:`, error);
+        console.error("Error updating supplier company:", error);
         return { status: false, message: "Internal Server Error" };
     }
 }
