@@ -221,8 +221,7 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
             },
         });
 
-        const sanitizedSupplier = serializeBigInt(newSupplier);
-        return { status: true, supplier: sanitizedSupplier };
+        return { status: true, supplier: serializeBigInt(newSupplier) };
     } catch (error) {
         console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };
@@ -250,9 +249,7 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
             include: { companyDetail: true, bankAccounts: true }
         });
 
-        const sanitizedCities = serializeBigInt(suppliers);
-
-        return { status: true, suppliers: sanitizedCities };
+        return { status: true, suppliers: serializeBigInt(suppliers) };
     } catch (error) {
         console.error(`Error fetching suppliers by status (${status}):`, error);
         return { status: false, message: "Error fetching suppliers" };
@@ -268,7 +265,8 @@ export const getSupplierById = async (id: number) => {
         });
 
         if (!supplier) return { status: false, message: "Supplier not found" };
-        return { status: true, supplier };
+
+        return { status: true, supplier: serializeBigInt(supplier) };
     } catch (error) {
         console.error("❌ getSupplierById Error:", error);
         return { status: false, message: "Error fetching supplier" };
@@ -354,8 +352,7 @@ export const updateSupplier = async (
             data: updateData,
         });
 
-        const sanitizedSupplier = serializeBigInt(newSupplier);
-        return { status: true, supplier: sanitizedSupplier };
+        return { status: true, supplier: serializeBigInt(newSupplier) };
     } catch (error) {
         console.error(`Error updating supplier:`, error);
         return { status: false, message: "Internal Server Error" };
@@ -398,9 +395,9 @@ export const softDeleteSupplier = async (adminId: number, adminRole: string, id:
         return {
             status: true,
             message: "Supplier soft deleted successfully",
-            updatedSupplier,
-            updatedCompanyDeatil,
-            updatedBankAccounts
+            updatedSupplier: serializeBigInt(updatedSupplier),
+            updatedCompanyDeatil: serializeBigInt(updatedCompanyDeatil),
+            updatedBankAccounts: serializeBigInt(updatedBankAccounts)
         };
     } catch (error) {
         console.error("❌ softDeleteSupplier Error:", error);
@@ -452,13 +449,10 @@ export const restoreSupplier = async (adminId: number, adminRole: string, id: nu
             },
         });
 
-        const sanitizedSupplier = serializeBigInt(restoredSupplier);
-        logMessage('debug', 'fetched suppliers :', sanitizedSupplier);
-
         return {
             status: true,
             message: "Supplier restored successfully",
-            restoredSupplier: sanitizedSupplier
+            restoredSupplier: serializeBigInt(restoredSupplier)
         };
     } catch (error) {
         console.error("❌ restoreSupplier Error:", error);

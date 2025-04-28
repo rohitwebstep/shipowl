@@ -148,8 +148,7 @@ export async function createDropshipper(adminId: number, adminRole: string, drop
             },
         });
 
-        const sanitizedDropshipper = serializeBigInt(newDropshipper);
-        return { status: true, dropshipper: sanitizedDropshipper };
+        return { status: true, dropshipper: serializeBigInt(newDropshipper) };
     } catch (error) {
         console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };
@@ -177,9 +176,7 @@ export const getDropshippersByStatus = async (status: "deleted" | "notDeleted" =
             include: { companyDetail: true, bankAccounts: true }
         });
 
-        const sanitizedCities = serializeBigInt(dropshippers);
-
-        return { status: true, dropshippers: sanitizedCities };
+        return { status: true, dropshippers: serializeBigInt(dropshippers) };
     } catch (error) {
         console.error(`Error fetching dropshippers by status (${status}):`, error);
         return { status: false, message: "Error fetching dropshippers" };
@@ -195,7 +192,7 @@ export const getDropshipperById = async (id: number) => {
         });
 
         if (!dropshipper) return { status: false, message: "Dropshipper not found" };
-        return { status: true, dropshipper };
+        return { status: true, dropshipper: serializeBigInt(dropshipper) };
     } catch (error) {
         console.error("❌ getDropshipperById Error:", error);
         return { status: false, message: "Error fetching dropshipper" };
@@ -275,8 +272,7 @@ export const updateDropshipper = async (
             data: updateData,
         });
 
-        const sanitizedDropshipper = serializeBigInt(newDropshipper);
-        return { status: true, dropshipper: sanitizedDropshipper };
+        return { status: true, dropshipper: serializeBigInt(newDropshipper) };
     } catch (error) {
         console.error(`Error updating dropshipper:`, error);
         return { status: false, message: "Internal Server Error" };
@@ -319,9 +315,9 @@ export const softDeleteDropshipper = async (adminId: number, adminRole: string, 
         return {
             status: true,
             message: "Dropshipper soft deleted successfully",
-            updatedDropshipper,
-            updatedCompanyDeatil,
-            updatedBankAccounts
+            updatedDropshipper: serializeBigInt(updatedDropshipper),
+            updatedCompanyDeatil: serializeBigInt(updatedCompanyDeatil),
+            updatedBankAccounts: serializeBigInt(updatedBankAccounts)
         };
     } catch (error) {
         console.error("❌ softDeleteDropshipper Error:", error);
@@ -373,13 +369,10 @@ export const restoreDropshipper = async (adminId: number, adminRole: string, id:
             },
         });
 
-        const sanitizedDropshipper = serializeBigInt(restoredDropshipper);
-        logMessage('debug', 'fetched dropshippers :', sanitizedDropshipper);
-
         return {
             status: true,
             message: "Dropshipper restored successfully",
-            restoredDropshipper: sanitizedDropshipper
+            restoredDropshipper: serializeBigInt(restoredDropshipper)
         };
     } catch (error) {
         console.error("❌ restoreDropshipper Error:", error);
