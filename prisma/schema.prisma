@@ -49,12 +49,13 @@ model admin {
   id                   Int         @id @default(autoincrement())
   profilePicture       String?     @db.LongText
   name                 String
-  username             String      @unique
+  username             String?      @unique
   email                String      @unique
   password             String
   role                 String      @default("admin")
   status               String      @default("active")
   dateOfBirth          DateTime?
+  phoneNumber          String?
   currentAddress       String?
   permanentAddress     String?
   permanentPostalCode  String?
@@ -87,27 +88,27 @@ model admin {
 model companyDetail {
   id                              Int       @id @default(autoincrement())
   adminId                         Int       @unique
-  companyName                     String
-  brandName                       String
-  brandShortName                  String
-  billingAddress                  String
-  billingPincode                  String
-  billingState                    String
-  billingCity                     String
-  businessType                    String
-  clientEntryType                 String
-  gstNumber                       String
-  companyPanNumber                String
-  aadharNumber                    String
-  gstDocument                     String     // File path or URL
-  panCardHolderName               String
-  aadharCardHolderName            String
-  panCardImage                    String     // File path or URL
-  aadharCardImage                 String     // File path or URL
+  companyName                     String?
+  brandName                       String?
+  brandShortName                  String?
+  billingAddress                  String?
+  billingPincode                  String?
+  billingState                    String?
+  billingCity                     String?
+  businessType                    String?
+  clientEntryType                 String?
+  gstNumber                       String?
+  companyPanNumber                String?
+  aadharNumber                    String?
+  gstDocument                     String?     // File path or URL
+  panCardHolderName               String?
+  aadharCardHolderName            String?
+  panCardImage                    String?     // File path or URL
+  aadharCardImage                 String?     // File path or URL
   additionalDocumentUpload        String?  // Optional file or zip path
-  documentId                      String
-  documentName                    String
-  documentImage                   String     // File path or URL
+  documentId                      String?
+  documentName                    String?
+  documentImage                   String?     // File path or URL
 
   createdAt                       DateTime  @default(now())
   createdBy                       Int?
@@ -131,7 +132,8 @@ model bankAccount {
   bankBranch             String
   accountType            String
   ifscCode               String
-  cancelledChequeImage   String     // File path or URL
+  cancelledChequeImage   String?     // File path or URL
+  paymentMethod          String?
 
   createdAt              DateTime  @default(now())
   createdBy              Int?

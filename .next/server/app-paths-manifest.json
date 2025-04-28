@@ -1,3 +1,4 @@
 {
-  "/api/brand/route": "app/api/brand/route.js"
+  "/api/dropshipper/[dropshipperId]/route": "app/api/dropshipper/[dropshipperId]/route.js",
+  "/api/dropshipper/route": "app/api/dropshipper/route.js"
 }

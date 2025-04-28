@@ -3455,6 +3455,7 @@ export namespace Prisma {
     role: string | null
     status: string | null
     dateOfBirth: Date | null
+    phoneNumber: string | null
     currentAddress: string | null
     permanentAddress: string | null
     permanentPostalCode: string | null
@@ -3485,6 +3486,7 @@ export namespace Prisma {
     role: string | null
     status: string | null
     dateOfBirth: Date | null
+    phoneNumber: string | null
     currentAddress: string | null
     permanentAddress: string | null
     permanentPostalCode: string | null
@@ -3515,6 +3517,7 @@ export namespace Prisma {
     role: number
     status: number
     dateOfBirth: number
+    phoneNumber: number
     currentAddress: number
     permanentAddress: number
     permanentPostalCode: number
@@ -3567,6 +3570,7 @@ export namespace Prisma {
     role?: true
     status?: true
     dateOfBirth?: true
+    phoneNumber?: true
     currentAddress?: true
     permanentAddress?: true
     permanentPostalCode?: true
@@ -3597,6 +3601,7 @@ export namespace Prisma {
     role?: true
     status?: true
     dateOfBirth?: true
+    phoneNumber?: true
     currentAddress?: true
     permanentAddress?: true
     permanentPostalCode?: true
@@ -3627,6 +3632,7 @@ export namespace Prisma {
     role?: true
     status?: true
     dateOfBirth?: true
+    phoneNumber?: true
     currentAddress?: true
     permanentAddress?: true
     permanentPostalCode?: true
@@ -3738,12 +3744,13 @@ export namespace Prisma {
     id: number
     profilePicture: string | null
     name: string
-    username: string
+    username: string | null
     email: string
     password: string
     role: string
     status: string
     dateOfBirth: Date | null
+    phoneNumber: string | null
     currentAddress: string | null
     permanentAddress: string | null
     permanentPostalCode: string | null
@@ -3793,6 +3800,7 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     dateOfBirth?: boolean
+    phoneNumber?: boolean
     currentAddress?: boolean
     permanentAddress?: boolean
     permanentPostalCode?: boolean
@@ -3832,6 +3840,7 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     dateOfBirth?: boolean
+    phoneNumber?: boolean
     currentAddress?: boolean
     permanentAddress?: boolean
     permanentPostalCode?: boolean
@@ -3852,7 +3861,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
+  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "phoneNumber" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
   export type adminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
@@ -3877,12 +3886,13 @@ export namespace Prisma {
       id: number
       profilePicture: string | null
       name: string
-      username: string
+      username: string | null
       email: string
       password: string
       role: string
       status: string
       dateOfBirth: Date | null
+      phoneNumber: string | null
       currentAddress: string | null
       permanentAddress: string | null
       permanentPostalCode: string | null
@@ -4285,6 +4295,7 @@ export namespace Prisma {
     readonly role: FieldRef<"admin", 'String'>
     readonly status: FieldRef<"admin", 'String'>
     readonly dateOfBirth: FieldRef<"admin", 'DateTime'>
+    readonly phoneNumber: FieldRef<"admin", 'String'>
     readonly currentAddress: FieldRef<"admin", 'String'>
     readonly permanentAddress: FieldRef<"admin", 'String'>
     readonly permanentPostalCode: FieldRef<"admin", 'String'>
@@ -5134,27 +5145,27 @@ export namespace Prisma {
   export type CompanyDetailGroupByOutputType = {
     id: number
     adminId: number
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName: string | null
+    brandName: string | null
+    brandShortName: string | null
+    billingAddress: string | null
+    billingPincode: string | null
+    billingState: string | null
+    billingCity: string | null
+    businessType: string | null
+    clientEntryType: string | null
+    gstNumber: string | null
+    companyPanNumber: string | null
+    aadharNumber: string | null
+    gstDocument: string | null
+    panCardHolderName: string | null
+    aadharCardHolderName: string | null
+    panCardImage: string | null
+    aadharCardImage: string | null
     additionalDocumentUpload: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId: string | null
+    documentName: string | null
+    documentImage: string | null
     createdAt: Date
     createdBy: number | null
     createdByRole: string | null
@@ -5271,27 +5282,27 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       adminId: number
-      companyName: string
-      brandName: string
-      brandShortName: string
-      billingAddress: string
-      billingPincode: string
-      billingState: string
-      billingCity: string
-      businessType: string
-      clientEntryType: string
-      gstNumber: string
-      companyPanNumber: string
-      aadharNumber: string
-      gstDocument: string
-      panCardHolderName: string
-      aadharCardHolderName: string
-      panCardImage: string
-      aadharCardImage: string
+      companyName: string | null
+      brandName: string | null
+      brandShortName: string | null
+      billingAddress: string | null
+      billingPincode: string | null
+      billingState: string | null
+      billingCity: string | null
+      businessType: string | null
+      clientEntryType: string | null
+      gstNumber: string | null
+      companyPanNumber: string | null
+      aadharNumber: string | null
+      gstDocument: string | null
+      panCardHolderName: string | null
+      aadharCardHolderName: string | null
+      panCardImage: string | null
+      aadharCardImage: string | null
       additionalDocumentUpload: string | null
-      documentId: string
-      documentName: string
-      documentImage: string
+      documentId: string | null
+      documentName: string | null
+      documentImage: string | null
       createdAt: Date
       createdBy: number | null
       createdByRole: string | null
@@ -6102,6 +6113,7 @@ export namespace Prisma {
     accountType: string | null
     ifscCode: string | null
     cancelledChequeImage: string | null
+    paymentMethod: string | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -6123,6 +6135,7 @@ export namespace Prisma {
     accountType: string | null
     ifscCode: string | null
     cancelledChequeImage: string | null
+    paymentMethod: string | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -6144,6 +6157,7 @@ export namespace Prisma {
     accountType: number
     ifscCode: number
     cancelledChequeImage: number
+    paymentMethod: number
     createdAt: number
     createdBy: number
     createdByRole: number
@@ -6183,6 +6197,7 @@ export namespace Prisma {
     accountType?: true
     ifscCode?: true
     cancelledChequeImage?: true
+    paymentMethod?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -6204,6 +6219,7 @@ export namespace Prisma {
     accountType?: true
     ifscCode?: true
     cancelledChequeImage?: true
+    paymentMethod?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -6225,6 +6241,7 @@ export namespace Prisma {
     accountType?: true
     ifscCode?: true
     cancelledChequeImage?: true
+    paymentMethod?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -6332,7 +6349,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage: string | null
+    paymentMethod: string | null
     createdAt: Date
     createdBy: number | null
     createdByRole: string | null
@@ -6373,6 +6391,7 @@ export namespace Prisma {
     accountType?: boolean
     ifscCode?: boolean
     cancelledChequeImage?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -6397,6 +6416,7 @@ export namespace Prisma {
     accountType?: boolean
     ifscCode?: boolean
     cancelledChequeImage?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -6408,7 +6428,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type bankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccount"]>
+  export type bankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "paymentMethod" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccount"]>
   export type bankAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }
@@ -6427,7 +6447,8 @@ export namespace Prisma {
       bankBranch: string
       accountType: string
       ifscCode: string
-      cancelledChequeImage: string
+      cancelledChequeImage: string | null
+      paymentMethod: string | null
       createdAt: Date
       createdBy: number | null
       createdByRole: string | null
@@ -6816,6 +6837,7 @@ export namespace Prisma {
     readonly accountType: FieldRef<"bankAccount", 'String'>
     readonly ifscCode: FieldRef<"bankAccount", 'String'>
     readonly cancelledChequeImage: FieldRef<"bankAccount", 'String'>
+    readonly paymentMethod: FieldRef<"bankAccount", 'String'>
     readonly createdAt: FieldRef<"bankAccount", 'DateTime'>
     readonly createdBy: FieldRef<"bankAccount", 'Int'>
     readonly createdByRole: FieldRef<"bankAccount", 'String'>
@@ -20273,6 +20295,7 @@ export namespace Prisma {
     role: 'role',
     status: 'status',
     dateOfBirth: 'dateOfBirth',
+    phoneNumber: 'phoneNumber',
     currentAddress: 'currentAddress',
     permanentAddress: 'permanentAddress',
     permanentPostalCode: 'permanentPostalCode',
@@ -20344,6 +20367,7 @@ export namespace Prisma {
     accountType: 'accountType',
     ifscCode: 'ifscCode',
     cancelledChequeImage: 'cancelledChequeImage',
+    paymentMethod: 'paymentMethod',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
@@ -20696,6 +20720,7 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     status: 'status',
+    phoneNumber: 'phoneNumber',
     currentAddress: 'currentAddress',
     permanentAddress: 'permanentAddress',
     permanentPostalCode: 'permanentPostalCode',
@@ -20746,6 +20771,7 @@ export namespace Prisma {
     accountType: 'accountType',
     ifscCode: 'ifscCode',
     cancelledChequeImage: 'cancelledChequeImage',
+    paymentMethod: 'paymentMethod',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
     deletedByRole: 'deletedByRole'
@@ -21150,12 +21176,13 @@ export namespace Prisma {
     id?: IntFilter<"admin"> | number
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
-    username?: StringFilter<"admin"> | string
+    username?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    phoneNumber?: StringNullableFilter<"admin"> | string | null
     currentAddress?: StringNullableFilter<"admin"> | string | null
     permanentAddress?: StringNullableFilter<"admin"> | string | null
     permanentPostalCode?: StringNullableFilter<"admin"> | string | null
@@ -21186,12 +21213,13 @@ export namespace Prisma {
     id?: SortOrder
     profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
-    username?: SortOrder
+    username?: SortOrderInput | SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
     currentAddress?: SortOrderInput | SortOrder
     permanentAddress?: SortOrderInput | SortOrder
     permanentPostalCode?: SortOrderInput | SortOrder
@@ -21232,6 +21260,7 @@ export namespace Prisma {
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    phoneNumber?: StringNullableFilter<"admin"> | string | null
     currentAddress?: StringNullableFilter<"admin"> | string | null
     permanentAddress?: StringNullableFilter<"admin"> | string | null
     permanentPostalCode?: StringNullableFilter<"admin"> | string | null
@@ -21262,12 +21291,13 @@ export namespace Prisma {
     id?: SortOrder
     profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
-    username?: SortOrder
+    username?: SortOrderInput | SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
     currentAddress?: SortOrderInput | SortOrder
     permanentAddress?: SortOrderInput | SortOrder
     permanentPostalCode?: SortOrderInput | SortOrder
@@ -21300,12 +21330,13 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"admin"> | number
     profilePicture?: StringNullableWithAggregatesFilter<"admin"> | string | null
     name?: StringWithAggregatesFilter<"admin"> | string
-    username?: StringWithAggregatesFilter<"admin"> | string
+    username?: StringNullableWithAggregatesFilter<"admin"> | string | null
     email?: StringWithAggregatesFilter<"admin"> | string
     password?: StringWithAggregatesFilter<"admin"> | string
     role?: StringWithAggregatesFilter<"admin"> | string
     status?: StringWithAggregatesFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
+    phoneNumber?: StringNullableWithAggregatesFilter<"admin"> | string | null
     currentAddress?: StringNullableWithAggregatesFilter<"admin"> | string | null
     permanentAddress?: StringNullableWithAggregatesFilter<"admin"> | string | null
     permanentPostalCode?: StringNullableWithAggregatesFilter<"admin"> | string | null
@@ -21332,27 +21363,27 @@ export namespace Prisma {
     NOT?: companyDetailWhereInput | companyDetailWhereInput[]
     id?: IntFilter<"companyDetail"> | number
     adminId?: IntFilter<"companyDetail"> | number
-    companyName?: StringFilter<"companyDetail"> | string
-    brandName?: StringFilter<"companyDetail"> | string
-    brandShortName?: StringFilter<"companyDetail"> | string
-    billingAddress?: StringFilter<"companyDetail"> | string
-    billingPincode?: StringFilter<"companyDetail"> | string
-    billingState?: StringFilter<"companyDetail"> | string
-    billingCity?: StringFilter<"companyDetail"> | string
-    businessType?: StringFilter<"companyDetail"> | string
-    clientEntryType?: StringFilter<"companyDetail"> | string
-    gstNumber?: StringFilter<"companyDetail"> | string
-    companyPanNumber?: StringFilter<"companyDetail"> | string
-    aadharNumber?: StringFilter<"companyDetail"> | string
-    gstDocument?: StringFilter<"companyDetail"> | string
-    panCardHolderName?: StringFilter<"companyDetail"> | string
-    aadharCardHolderName?: StringFilter<"companyDetail"> | string
-    panCardImage?: StringFilter<"companyDetail"> | string
-    aadharCardImage?: StringFilter<"companyDetail"> | string
+    companyName?: StringNullableFilter<"companyDetail"> | string | null
+    brandName?: StringNullableFilter<"companyDetail"> | string | null
+    brandShortName?: StringNullableFilter<"companyDetail"> | string | null
+    billingAddress?: StringNullableFilter<"companyDetail"> | string | null
+    billingPincode?: StringNullableFilter<"companyDetail"> | string | null
+    billingState?: StringNullableFilter<"companyDetail"> | string | null
+    billingCity?: StringNullableFilter<"companyDetail"> | string | null
+    businessType?: StringNullableFilter<"companyDetail"> | string | null
+    clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
+    gstNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
+    gstDocument?: StringNullableFilter<"companyDetail"> | string | null
+    panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    panCardImage?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardImage?: StringNullableFilter<"companyDetail"> | string | null
     additionalDocumentUpload?: StringNullableFilter<"companyDetail"> | string | null
-    documentId?: StringFilter<"companyDetail"> | string
-    documentName?: StringFilter<"companyDetail"> | string
-    documentImage?: StringFilter<"companyDetail"> | string
+    documentId?: StringNullableFilter<"companyDetail"> | string | null
+    documentName?: StringNullableFilter<"companyDetail"> | string | null
+    documentImage?: StringNullableFilter<"companyDetail"> | string | null
     createdAt?: DateTimeFilter<"companyDetail"> | Date | string
     createdBy?: IntNullableFilter<"companyDetail"> | number | null
     createdByRole?: StringNullableFilter<"companyDetail"> | string | null
@@ -21368,27 +21399,27 @@ export namespace Prisma {
   export type companyDetailOrderByWithRelationInput = {
     id?: SortOrder
     adminId?: SortOrder
-    companyName?: SortOrder
-    brandName?: SortOrder
-    brandShortName?: SortOrder
-    billingAddress?: SortOrder
-    billingPincode?: SortOrder
-    billingState?: SortOrder
-    billingCity?: SortOrder
-    businessType?: SortOrder
-    clientEntryType?: SortOrder
-    gstNumber?: SortOrder
-    companyPanNumber?: SortOrder
-    aadharNumber?: SortOrder
-    gstDocument?: SortOrder
-    panCardHolderName?: SortOrder
-    aadharCardHolderName?: SortOrder
-    panCardImage?: SortOrder
-    aadharCardImage?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    brandName?: SortOrderInput | SortOrder
+    brandShortName?: SortOrderInput | SortOrder
+    billingAddress?: SortOrderInput | SortOrder
+    billingPincode?: SortOrderInput | SortOrder
+    billingState?: SortOrderInput | SortOrder
+    billingCity?: SortOrderInput | SortOrder
+    businessType?: SortOrderInput | SortOrder
+    clientEntryType?: SortOrderInput | SortOrder
+    gstNumber?: SortOrderInput | SortOrder
+    companyPanNumber?: SortOrderInput | SortOrder
+    aadharNumber?: SortOrderInput | SortOrder
+    gstDocument?: SortOrderInput | SortOrder
+    panCardHolderName?: SortOrderInput | SortOrder
+    aadharCardHolderName?: SortOrderInput | SortOrder
+    panCardImage?: SortOrderInput | SortOrder
+    aadharCardImage?: SortOrderInput | SortOrder
     additionalDocumentUpload?: SortOrderInput | SortOrder
-    documentId?: SortOrder
-    documentName?: SortOrder
-    documentImage?: SortOrder
+    documentId?: SortOrderInput | SortOrder
+    documentName?: SortOrderInput | SortOrder
+    documentImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -21408,27 +21439,27 @@ export namespace Prisma {
     AND?: companyDetailWhereInput | companyDetailWhereInput[]
     OR?: companyDetailWhereInput[]
     NOT?: companyDetailWhereInput | companyDetailWhereInput[]
-    companyName?: StringFilter<"companyDetail"> | string
-    brandName?: StringFilter<"companyDetail"> | string
-    brandShortName?: StringFilter<"companyDetail"> | string
-    billingAddress?: StringFilter<"companyDetail"> | string
-    billingPincode?: StringFilter<"companyDetail"> | string
-    billingState?: StringFilter<"companyDetail"> | string
-    billingCity?: StringFilter<"companyDetail"> | string
-    businessType?: StringFilter<"companyDetail"> | string
-    clientEntryType?: StringFilter<"companyDetail"> | string
-    gstNumber?: StringFilter<"companyDetail"> | string
-    companyPanNumber?: StringFilter<"companyDetail"> | string
-    aadharNumber?: StringFilter<"companyDetail"> | string
-    gstDocument?: StringFilter<"companyDetail"> | string
-    panCardHolderName?: StringFilter<"companyDetail"> | string
-    aadharCardHolderName?: StringFilter<"companyDetail"> | string
-    panCardImage?: StringFilter<"companyDetail"> | string
-    aadharCardImage?: StringFilter<"companyDetail"> | string
+    companyName?: StringNullableFilter<"companyDetail"> | string | null
+    brandName?: StringNullableFilter<"companyDetail"> | string | null
+    brandShortName?: StringNullableFilter<"companyDetail"> | string | null
+    billingAddress?: StringNullableFilter<"companyDetail"> | string | null
+    billingPincode?: StringNullableFilter<"companyDetail"> | string | null
+    billingState?: StringNullableFilter<"companyDetail"> | string | null
+    billingCity?: StringNullableFilter<"companyDetail"> | string | null
+    businessType?: StringNullableFilter<"companyDetail"> | string | null
+    clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
+    gstNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
+    gstDocument?: StringNullableFilter<"companyDetail"> | string | null
+    panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    panCardImage?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardImage?: StringNullableFilter<"companyDetail"> | string | null
     additionalDocumentUpload?: StringNullableFilter<"companyDetail"> | string | null
-    documentId?: StringFilter<"companyDetail"> | string
-    documentName?: StringFilter<"companyDetail"> | string
-    documentImage?: StringFilter<"companyDetail"> | string
+    documentId?: StringNullableFilter<"companyDetail"> | string | null
+    documentName?: StringNullableFilter<"companyDetail"> | string | null
+    documentImage?: StringNullableFilter<"companyDetail"> | string | null
     createdAt?: DateTimeFilter<"companyDetail"> | Date | string
     createdBy?: IntNullableFilter<"companyDetail"> | number | null
     createdByRole?: StringNullableFilter<"companyDetail"> | string | null
@@ -21444,27 +21475,27 @@ export namespace Prisma {
   export type companyDetailOrderByWithAggregationInput = {
     id?: SortOrder
     adminId?: SortOrder
-    companyName?: SortOrder
-    brandName?: SortOrder
-    brandShortName?: SortOrder
-    billingAddress?: SortOrder
-    billingPincode?: SortOrder
-    billingState?: SortOrder
-    billingCity?: SortOrder
-    businessType?: SortOrder
-    clientEntryType?: SortOrder
-    gstNumber?: SortOrder
-    companyPanNumber?: SortOrder
-    aadharNumber?: SortOrder
-    gstDocument?: SortOrder
-    panCardHolderName?: SortOrder
-    aadharCardHolderName?: SortOrder
-    panCardImage?: SortOrder
-    aadharCardImage?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    brandName?: SortOrderInput | SortOrder
+    brandShortName?: SortOrderInput | SortOrder
+    billingAddress?: SortOrderInput | SortOrder
+    billingPincode?: SortOrderInput | SortOrder
+    billingState?: SortOrderInput | SortOrder
+    billingCity?: SortOrderInput | SortOrder
+    businessType?: SortOrderInput | SortOrder
+    clientEntryType?: SortOrderInput | SortOrder
+    gstNumber?: SortOrderInput | SortOrder
+    companyPanNumber?: SortOrderInput | SortOrder
+    aadharNumber?: SortOrderInput | SortOrder
+    gstDocument?: SortOrderInput | SortOrder
+    panCardHolderName?: SortOrderInput | SortOrder
+    aadharCardHolderName?: SortOrderInput | SortOrder
+    panCardImage?: SortOrderInput | SortOrder
+    aadharCardImage?: SortOrderInput | SortOrder
     additionalDocumentUpload?: SortOrderInput | SortOrder
-    documentId?: SortOrder
-    documentName?: SortOrder
-    documentImage?: SortOrder
+    documentId?: SortOrderInput | SortOrder
+    documentName?: SortOrderInput | SortOrder
+    documentImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -21487,27 +21518,27 @@ export namespace Prisma {
     NOT?: companyDetailScalarWhereWithAggregatesInput | companyDetailScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"companyDetail"> | number
     adminId?: IntWithAggregatesFilter<"companyDetail"> | number
-    companyName?: StringWithAggregatesFilter<"companyDetail"> | string
-    brandName?: StringWithAggregatesFilter<"companyDetail"> | string
-    brandShortName?: StringWithAggregatesFilter<"companyDetail"> | string
-    billingAddress?: StringWithAggregatesFilter<"companyDetail"> | string
-    billingPincode?: StringWithAggregatesFilter<"companyDetail"> | string
-    billingState?: StringWithAggregatesFilter<"companyDetail"> | string
-    billingCity?: StringWithAggregatesFilter<"companyDetail"> | string
-    businessType?: StringWithAggregatesFilter<"companyDetail"> | string
-    clientEntryType?: StringWithAggregatesFilter<"companyDetail"> | string
-    gstNumber?: StringWithAggregatesFilter<"companyDetail"> | string
-    companyPanNumber?: StringWithAggregatesFilter<"companyDetail"> | string
-    aadharNumber?: StringWithAggregatesFilter<"companyDetail"> | string
-    gstDocument?: StringWithAggregatesFilter<"companyDetail"> | string
-    panCardHolderName?: StringWithAggregatesFilter<"companyDetail"> | string
-    aadharCardHolderName?: StringWithAggregatesFilter<"companyDetail"> | string
-    panCardImage?: StringWithAggregatesFilter<"companyDetail"> | string
-    aadharCardImage?: StringWithAggregatesFilter<"companyDetail"> | string
+    companyName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    brandName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    brandShortName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    billingAddress?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    billingPincode?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    billingState?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    billingCity?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    businessType?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    clientEntryType?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    gstNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    companyPanNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    aadharNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    gstDocument?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    panCardHolderName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    aadharCardHolderName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    panCardImage?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    aadharCardImage?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     additionalDocumentUpload?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
-    documentId?: StringWithAggregatesFilter<"companyDetail"> | string
-    documentName?: StringWithAggregatesFilter<"companyDetail"> | string
-    documentImage?: StringWithAggregatesFilter<"companyDetail"> | string
+    documentId?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    documentName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    documentImage?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"companyDetail"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"companyDetail"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
@@ -21531,7 +21562,8 @@ export namespace Prisma {
     bankBranch?: StringFilter<"bankAccount"> | string
     accountType?: StringFilter<"bankAccount"> | string
     ifscCode?: StringFilter<"bankAccount"> | string
-    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccount"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccount"> | string | null
     createdAt?: DateTimeFilter<"bankAccount"> | Date | string
     createdBy?: IntNullableFilter<"bankAccount"> | number | null
     createdByRole?: StringNullableFilter<"bankAccount"> | string | null
@@ -21553,7 +21585,8 @@ export namespace Prisma {
     bankBranch?: SortOrder
     accountType?: SortOrder
     ifscCode?: SortOrder
-    cancelledChequeImage?: SortOrder
+    cancelledChequeImage?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -21579,7 +21612,8 @@ export namespace Prisma {
     bankBranch?: StringFilter<"bankAccount"> | string
     accountType?: StringFilter<"bankAccount"> | string
     ifscCode?: StringFilter<"bankAccount"> | string
-    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccount"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccount"> | string | null
     createdAt?: DateTimeFilter<"bankAccount"> | Date | string
     createdBy?: IntNullableFilter<"bankAccount"> | number | null
     createdByRole?: StringNullableFilter<"bankAccount"> | string | null
@@ -21601,7 +21635,8 @@ export namespace Prisma {
     bankBranch?: SortOrder
     accountType?: SortOrder
     ifscCode?: SortOrder
-    cancelledChequeImage?: SortOrder
+    cancelledChequeImage?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -21630,7 +21665,8 @@ export namespace Prisma {
     bankBranch?: StringWithAggregatesFilter<"bankAccount"> | string
     accountType?: StringWithAggregatesFilter<"bankAccount"> | string
     ifscCode?: StringWithAggregatesFilter<"bankAccount"> | string
-    cancelledChequeImage?: StringWithAggregatesFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
+    paymentMethod?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"bankAccount"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"bankAccount"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
@@ -23324,12 +23360,13 @@ export namespace Prisma {
   export type adminCreateInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -23357,12 +23394,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -23389,12 +23427,13 @@ export namespace Prisma {
   export type adminUpdateInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23422,12 +23461,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23455,12 +23495,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -23484,12 +23525,13 @@ export namespace Prisma {
   export type adminUpdateManyMutationInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23511,12 +23553,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23538,27 +23581,27 @@ export namespace Prisma {
   }
 
   export type companyDetailCreateInput = {
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingState?: string | null
+    billingCity?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
     additionalDocumentUpload?: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23574,27 +23617,27 @@ export namespace Prisma {
   export type companyDetailUncheckedCreateInput = {
     id?: number
     adminId: number
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingState?: string | null
+    billingCity?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
     additionalDocumentUpload?: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23607,27 +23650,27 @@ export namespace Prisma {
   }
 
   export type companyDetailUpdateInput = {
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23643,27 +23686,27 @@ export namespace Prisma {
   export type companyDetailUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminId?: IntFieldUpdateOperationsInput | number
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23678,27 +23721,27 @@ export namespace Prisma {
   export type companyDetailCreateManyInput = {
     id?: number
     adminId: number
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingState?: string | null
+    billingCity?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
     additionalDocumentUpload?: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23711,27 +23754,27 @@ export namespace Prisma {
   }
 
   export type companyDetailUpdateManyMutationInput = {
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23746,27 +23789,27 @@ export namespace Prisma {
   export type companyDetailUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminId?: IntFieldUpdateOperationsInput | number
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23785,7 +23828,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23807,7 +23851,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23826,7 +23871,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23848,7 +23894,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23869,7 +23916,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -23888,7 +23936,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23909,7 +23958,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26083,6 +26133,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
+    phoneNumber?: SortOrder
     currentAddress?: SortOrder
     permanentAddress?: SortOrder
     permanentPostalCode?: SortOrder
@@ -26123,6 +26174,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
+    phoneNumber?: SortOrder
     currentAddress?: SortOrder
     permanentAddress?: SortOrder
     permanentPostalCode?: SortOrder
@@ -26153,6 +26205,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
+    phoneNumber?: SortOrder
     currentAddress?: SortOrder
     permanentAddress?: SortOrder
     permanentPostalCode?: SortOrder
@@ -26361,6 +26414,7 @@ export namespace Prisma {
     accountType?: SortOrder
     ifscCode?: SortOrder
     cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -26390,6 +26444,7 @@ export namespace Prisma {
     accountType?: SortOrder
     ifscCode?: SortOrder
     cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -26411,6 +26466,7 @@ export namespace Prisma {
     accountType?: SortOrder
     ifscCode?: SortOrder
     cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -29127,27 +29183,27 @@ export namespace Prisma {
   }
 
   export type companyDetailCreateWithoutAdminInput = {
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingState?: string | null
+    billingCity?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
     additionalDocumentUpload?: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -29161,27 +29217,27 @@ export namespace Prisma {
 
   export type companyDetailUncheckedCreateWithoutAdminInput = {
     id?: number
-    companyName: string
-    brandName: string
-    brandShortName: string
-    billingAddress: string
-    billingPincode: string
-    billingState: string
-    billingCity: string
-    businessType: string
-    clientEntryType: string
-    gstNumber: string
-    companyPanNumber: string
-    aadharNumber: string
-    gstDocument: string
-    panCardHolderName: string
-    aadharCardHolderName: string
-    panCardImage: string
-    aadharCardImage: string
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingState?: string | null
+    billingCity?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
     additionalDocumentUpload?: string | null
-    documentId: string
-    documentName: string
-    documentImage: string
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -29205,7 +29261,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -29225,7 +29282,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -29457,27 +29515,27 @@ export namespace Prisma {
   }
 
   export type companyDetailUpdateWithoutAdminInput = {
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29491,27 +29549,27 @@ export namespace Prisma {
 
   export type companyDetailUncheckedUpdateWithoutAdminInput = {
     id?: IntFieldUpdateOperationsInput | number
-    companyName?: StringFieldUpdateOperationsInput | string
-    brandName?: StringFieldUpdateOperationsInput | string
-    brandShortName?: StringFieldUpdateOperationsInput | string
-    billingAddress?: StringFieldUpdateOperationsInput | string
-    billingPincode?: StringFieldUpdateOperationsInput | string
-    billingState?: StringFieldUpdateOperationsInput | string
-    billingCity?: StringFieldUpdateOperationsInput | string
-    businessType?: StringFieldUpdateOperationsInput | string
-    clientEntryType?: StringFieldUpdateOperationsInput | string
-    gstNumber?: StringFieldUpdateOperationsInput | string
-    companyPanNumber?: StringFieldUpdateOperationsInput | string
-    aadharNumber?: StringFieldUpdateOperationsInput | string
-    gstDocument?: StringFieldUpdateOperationsInput | string
-    panCardHolderName?: StringFieldUpdateOperationsInput | string
-    aadharCardHolderName?: StringFieldUpdateOperationsInput | string
-    panCardImage?: StringFieldUpdateOperationsInput | string
-    aadharCardImage?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
-    documentId?: StringFieldUpdateOperationsInput | string
-    documentName?: StringFieldUpdateOperationsInput | string
-    documentImage?: StringFieldUpdateOperationsInput | string
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29551,7 +29609,8 @@ export namespace Prisma {
     bankBranch?: StringFilter<"bankAccount"> | string
     accountType?: StringFilter<"bankAccount"> | string
     ifscCode?: StringFilter<"bankAccount"> | string
-    cancelledChequeImage?: StringFilter<"bankAccount"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccount"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccount"> | string | null
     createdAt?: DateTimeFilter<"bankAccount"> | Date | string
     createdBy?: IntNullableFilter<"bankAccount"> | number | null
     createdByRole?: StringNullableFilter<"bankAccount"> | string | null
@@ -29566,12 +29625,13 @@ export namespace Prisma {
   export type adminCreateWithoutCompanyDetailInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29598,12 +29658,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29645,12 +29706,13 @@ export namespace Prisma {
   export type adminUpdateWithoutCompanyDetailInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29677,12 +29739,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29708,12 +29771,13 @@ export namespace Prisma {
   export type adminCreateWithoutBankAccountsInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29740,12 +29804,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29787,12 +29852,13 @@ export namespace Prisma {
   export type adminUpdateWithoutBankAccountsInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29819,12 +29885,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29850,12 +29917,13 @@ export namespace Prisma {
   export type adminCreateWithoutStaffInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29882,12 +29950,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -29929,12 +29998,13 @@ export namespace Prisma {
   export type adminUpdateWithoutStaffInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29961,12 +30031,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30141,12 +30212,13 @@ export namespace Prisma {
   export type adminCreateWithoutPermanentCountryInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -30173,12 +30245,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -30539,12 +30612,13 @@ export namespace Prisma {
     id?: IntFilter<"admin"> | number
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
-    username?: StringFilter<"admin"> | string
+    username?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
+    phoneNumber?: StringNullableFilter<"admin"> | string | null
     currentAddress?: StringNullableFilter<"admin"> | string | null
     permanentAddress?: StringNullableFilter<"admin"> | string | null
     permanentPostalCode?: StringNullableFilter<"admin"> | string | null
@@ -30804,12 +30878,13 @@ export namespace Prisma {
   export type adminCreateWithoutPermanentStateInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -30836,12 +30911,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -31145,12 +31221,13 @@ export namespace Prisma {
   export type adminCreateWithoutPermanentCityInput = {
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -31177,12 +31254,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -32605,7 +32683,8 @@ export namespace Prisma {
     bankBranch: string
     accountType: string
     ifscCode: string
-    cancelledChequeImage: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -32686,7 +32765,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32706,7 +32786,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32726,7 +32807,8 @@ export namespace Prisma {
     bankBranch?: StringFieldUpdateOperationsInput | string
     accountType?: StringFieldUpdateOperationsInput | string
     ifscCode?: StringFieldUpdateOperationsInput | string
-    cancelledChequeImage?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32797,12 +32879,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -33083,12 +33166,13 @@ export namespace Prisma {
   export type adminUpdateWithoutPermanentCountryInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33115,12 +33199,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33147,12 +33232,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33469,12 +33555,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -33617,12 +33704,13 @@ export namespace Prisma {
   export type adminUpdateWithoutPermanentStateInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33649,12 +33737,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33681,12 +33770,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33734,12 +33824,13 @@ export namespace Prisma {
     id?: number
     profilePicture?: string | null
     name: string
-    username: string
+    username?: string | null
     email: string
     password: string
     role?: string
     status?: string
     dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
     currentAddress?: string | null
     permanentAddress?: string | null
     permanentPostalCode?: string | null
@@ -33833,12 +33924,13 @@ export namespace Prisma {
   export type adminUpdateWithoutPermanentCityInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33865,12 +33957,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33897,12 +33990,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
     permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
