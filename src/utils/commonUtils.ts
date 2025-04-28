@@ -130,7 +130,7 @@ export async function fetchLogInfo(module: string, action: string, req: NextRequ
 
         // Get the HTTP method and the payload if applicable (POST, PUT, PATCH)
         const method = req.method;
-        let payload: any = null;
+        let payload: unknown = null;
         if (['POST', 'PUT', 'PATCH'].includes(method)) {
             try {
                 payload = await req.json(); // Parse JSON payload
