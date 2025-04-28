@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
+import { logMessage } from "@/utils/commonUtils";
 
 interface Supplier {
     id?: bigint; // Optional: ID of the supplier (if exists)
@@ -325,6 +326,8 @@ export const updateSupplier = async (
                 console.error("Error deleting profile picture:", error);
             }
         }
+
+        logMessage(`debug`, `waste password: `, password);
 
         const updateData = {
             name,
