@@ -211,7 +211,6 @@ export const updateDropshipper = async (
             name,
             profilePicture,
             email,
-            password,
             permanentAddress,
             permanentPostalCode,
             permanentCity,
@@ -231,7 +230,7 @@ export const updateDropshipper = async (
 
         const { status: dropshipperStatus, dropshipper: currentDropshipper, message } = await getDropshipperById(dropshipperId);
 
-        if (!dropshipperStatus || !dropshipper) {
+        if (!dropshipperStatus || !currentDropshipper) {
             return { status: false, message: message || "Dropshipper not found." };
         }
 
@@ -253,7 +252,7 @@ export const updateDropshipper = async (
         const updateData = {
             name,
             email,
-            password,
+            password: currentDropshipper?.password,
             role: 'dropshipper',
             permanentAddress,
             permanentPostalCode,

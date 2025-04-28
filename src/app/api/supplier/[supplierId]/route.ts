@@ -108,7 +108,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const requiredFields = ['name', 'username', 'email', 'password'];
+    const requiredFields = ['name', 'username', 'email'];
     const formData = await req.formData();
     const validation = validateFormData(formData, {
       requiredFields: requiredFields,
@@ -252,11 +252,6 @@ export async function PUT(req: NextRequest) {
     }
     const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
-    const password = extractString('password') || '';
-    // Hash the password using bcrypt
-    const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
     const supplierFileFields = [
       'profilePicture'
@@ -285,7 +280,7 @@ export async function PUT(req: NextRequest) {
       profilePicture: supplierUploadedFiles['profilePicture'],
       username,
       email,
-      password: hashedPassword,
+      password: '',
       dateOfBirth: extractDate('dateOfBirth', 'YYYY-MM-DD') || '',
       currentAddress: extractString('currentAddress') || '',
       permanentAddress: extractString('permanentAddress') || '',

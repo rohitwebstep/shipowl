@@ -109,7 +109,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const requiredFields = ['name', 'email', 'password'];
+    const requiredFields = ['name', 'email'];
     const formData = await req.formData();
     const validation = validateFormData(formData, {
       requiredFields: requiredFields,
@@ -190,11 +190,6 @@ export async function PUT(req: NextRequest) {
     }
     const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
-    const password = extractString('password') || '';
-    // Hash the password using bcrypt
-    const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
       'profilePicture'
@@ -222,7 +217,7 @@ export async function PUT(req: NextRequest) {
       name: extractString('name') || '',
       profilePicture: dropshipperUploadedFiles['profilePicture'],
       email,
-      password: hashedPassword,
+      password: '',
       permanentAddress: extractString('permanentAddress') || '',
       permanentPostalCode: extractString('permanentPostalCode') || '',
       permanentCity: {

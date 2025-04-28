@@ -308,7 +308,7 @@ export const updateSupplier = async (
 
         const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId);
 
-        if (!supplierStatus || !supplier) {
+        if (!supplierStatus || !currentSupplier) {
             return { status: false, message: message || "Supplier not found." };
         }
 
@@ -331,7 +331,7 @@ export const updateSupplier = async (
             name,
             username,
             email,
-            password,
+            password: currentSupplier?.password,
             role: 'supplier',
             dateOfBirth: new Date(dateOfBirth),
             currentAddress,
