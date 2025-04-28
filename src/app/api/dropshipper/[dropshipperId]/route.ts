@@ -155,61 +155,6 @@ export async function PUT(req: NextRequest) {
 
       return null;
     };
-    const extractDate = (key: string, outputFormat: string): string | null => {
-      const value = extractString(key);
-      if (!value) return null;
-
-      // Define regular expressions for different date formats
-      const regexPatterns = [
-        { format: 'DD-MM-YYYY', regex: /^(\d{2})-(\d{2})-(\d{4})$/ },
-        { format: 'YYYY-MM-DD', regex: /^(\d{4})-(\d{2})-(\d{2})$/ },
-        { format: 'DD/MM/YYYY', regex: /^(\d{2})\/(\d{2})\/(\d{4})$/ },
-        { format: 'YYYY/MM/DD', regex: /^(\d{4})\/(\d{2})\/(\d{2})$/ }
-      ];
-
-      let parsedDate: Date | null = null;
-
-      // Try to match the input value to the known formats
-      for (const { format, regex } of regexPatterns) {
-        const match = value.match(regex);
-        if (match) {
-          const [, day, month, year] = match;
-          // Convert matched values into a Date object
-          parsedDate = new Date(`${year}-${month}-${day}`);
-          logMessage('info', `✅ Parsed date from "${value}" using format "${format}"`);
-          break;
-        }
-      }
-
-      // If no valid date was parsed, return null
-      if (!parsedDate) {
-        logMessage('warn', `Failed to parse date for "${value}"`);
-        return null;
-      }
-
-      // Helper function to format the date in a specific output format
-      const formatDate = (date: Date, format: string): string => {
-        const options: Intl.DateTimeFormatOptions = {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        };
-
-        const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
-
-        switch (format) {
-          case 'DD-MM-YYYY':
-            return formattedDate.replace(/\//g, '-');
-          case 'YYYY-MM-DD':
-            return formattedDate.split('/').reverse().join('-');
-          default:
-            return formattedDate;
-        }
-      };
-
-      // Return the formatted date in the desired output format
-      return formatDate(parsedDate, outputFormat);
-    };
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
