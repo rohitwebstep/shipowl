@@ -170,7 +170,6 @@ export async function updateDropshipperCompany(
     dropshipperCompany: DropshipperCompany
 ) {
     try {
-        logMessage(`debug`, `dropshipperId:`, dropshipperId);
 
         const { companyDetail: currentCompanyDetail } = await getCompanyDeailByDropshipperId(dropshipperId);
 
