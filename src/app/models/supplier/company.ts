@@ -200,7 +200,7 @@ export async function updateSupplierCompany(
     supplierCompany: SupplierCompany
 ) {
     try {
-        const { status: supplierStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
+        const { companyDetail: currentCompanyDetail } = await getCompanyDeailBySupplierId(supplierId);
 
         const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
         const mergedImages: Partial<Record<typeof fields[number], string>> = {};

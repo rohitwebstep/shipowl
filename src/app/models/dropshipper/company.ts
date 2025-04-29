@@ -172,7 +172,7 @@ export async function updateDropshipperCompany(
     try {
         logMessage(`debug`, `dropshipperId:`, dropshipperId);
 
-        const { status: dropshipperStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailByDropshipperId(dropshipperId);
+        const { companyDetail: currentCompanyDetail } = await getCompanyDeailByDropshipperId(dropshipperId);
 
         const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
         const mergedImages: Partial<Record<typeof fields[number], string>> = {};
