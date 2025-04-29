@@ -3450,7 +3450,9 @@ export namespace Prisma {
     profilePicture: string | null
     name: string | null
     username: string | null
+    website: string | null
     email: string | null
+    referralCode: string | null
     password: string | null
     role: string | null
     status: string | null
@@ -3481,7 +3483,9 @@ export namespace Prisma {
     profilePicture: string | null
     name: string | null
     username: string | null
+    website: string | null
     email: string | null
+    referralCode: string | null
     password: string | null
     role: string | null
     status: string | null
@@ -3512,7 +3516,9 @@ export namespace Prisma {
     profilePicture: number
     name: number
     username: number
+    website: number
     email: number
+    referralCode: number
     password: number
     role: number
     status: number
@@ -3565,7 +3571,9 @@ export namespace Prisma {
     profilePicture?: true
     name?: true
     username?: true
+    website?: true
     email?: true
+    referralCode?: true
     password?: true
     role?: true
     status?: true
@@ -3596,7 +3604,9 @@ export namespace Prisma {
     profilePicture?: true
     name?: true
     username?: true
+    website?: true
     email?: true
+    referralCode?: true
     password?: true
     role?: true
     status?: true
@@ -3627,7 +3637,9 @@ export namespace Prisma {
     profilePicture?: true
     name?: true
     username?: true
+    website?: true
     email?: true
+    referralCode?: true
     password?: true
     role?: true
     status?: true
@@ -3745,7 +3757,9 @@ export namespace Prisma {
     profilePicture: string | null
     name: string
     username: string | null
+    website: string | null
     email: string
+    referralCode: string | null
     password: string
     role: string
     status: string
@@ -3795,7 +3809,9 @@ export namespace Prisma {
     profilePicture?: boolean
     name?: boolean
     username?: boolean
+    website?: boolean
     email?: boolean
+    referralCode?: boolean
     password?: boolean
     role?: boolean
     status?: boolean
@@ -3835,7 +3851,9 @@ export namespace Prisma {
     profilePicture?: boolean
     name?: boolean
     username?: boolean
+    website?: boolean
     email?: boolean
+    referralCode?: boolean
     password?: boolean
     role?: boolean
     status?: boolean
@@ -3861,7 +3879,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "username" | "email" | "password" | "role" | "status" | "dateOfBirth" | "phoneNumber" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
+  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "username" | "website" | "email" | "referralCode" | "password" | "role" | "status" | "dateOfBirth" | "phoneNumber" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
   export type adminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
@@ -3887,7 +3905,9 @@ export namespace Prisma {
       profilePicture: string | null
       name: string
       username: string | null
+      website: string | null
       email: string
+      referralCode: string | null
       password: string
       role: string
       status: string
@@ -4290,7 +4310,9 @@ export namespace Prisma {
     readonly profilePicture: FieldRef<"admin", 'String'>
     readonly name: FieldRef<"admin", 'String'>
     readonly username: FieldRef<"admin", 'String'>
+    readonly website: FieldRef<"admin", 'String'>
     readonly email: FieldRef<"admin", 'String'>
+    readonly referralCode: FieldRef<"admin", 'String'>
     readonly password: FieldRef<"admin", 'String'>
     readonly role: FieldRef<"admin", 'String'>
     readonly status: FieldRef<"admin", 'String'>
@@ -20290,7 +20312,9 @@ export namespace Prisma {
     profilePicture: 'profilePicture',
     name: 'name',
     username: 'username',
+    website: 'website',
     email: 'email',
+    referralCode: 'referralCode',
     password: 'password',
     role: 'role',
     status: 'status',
@@ -20716,7 +20740,9 @@ export namespace Prisma {
     profilePicture: 'profilePicture',
     name: 'name',
     username: 'username',
+    website: 'website',
     email: 'email',
+    referralCode: 'referralCode',
     password: 'password',
     role: 'role',
     status: 'status',
@@ -21177,7 +21203,9 @@ export namespace Prisma {
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     username?: StringNullableFilter<"admin"> | string | null
+    website?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
+    referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
@@ -21214,7 +21242,9 @@ export namespace Prisma {
     profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
     username?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
     email?: SortOrder
+    referralCode?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -21256,6 +21286,8 @@ export namespace Prisma {
     NOT?: adminWhereInput | adminWhereInput[]
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
+    website?: StringNullableFilter<"admin"> | string | null
+    referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
@@ -21292,7 +21324,9 @@ export namespace Prisma {
     profilePicture?: SortOrderInput | SortOrder
     name?: SortOrder
     username?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
     email?: SortOrder
+    referralCode?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -21331,7 +21365,9 @@ export namespace Prisma {
     profilePicture?: StringNullableWithAggregatesFilter<"admin"> | string | null
     name?: StringWithAggregatesFilter<"admin"> | string
     username?: StringNullableWithAggregatesFilter<"admin"> | string | null
+    website?: StringNullableWithAggregatesFilter<"admin"> | string | null
     email?: StringWithAggregatesFilter<"admin"> | string
+    referralCode?: StringNullableWithAggregatesFilter<"admin"> | string | null
     password?: StringWithAggregatesFilter<"admin"> | string
     role?: StringWithAggregatesFilter<"admin"> | string
     status?: StringWithAggregatesFilter<"admin"> | string
@@ -23361,7 +23397,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -23395,7 +23433,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -23428,7 +23468,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -23462,7 +23504,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -23496,7 +23540,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -23526,7 +23572,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -23554,7 +23602,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -26128,7 +26178,9 @@ export namespace Prisma {
     profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
+    website?: SortOrder
     email?: SortOrder
+    referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -26169,7 +26221,9 @@ export namespace Prisma {
     profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
+    website?: SortOrder
     email?: SortOrder
+    referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -26200,7 +26254,9 @@ export namespace Prisma {
     profilePicture?: SortOrder
     name?: SortOrder
     username?: SortOrder
+    website?: SortOrder
     email?: SortOrder
+    referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -29626,7 +29682,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29659,7 +29717,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29707,7 +29767,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -29740,7 +29802,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -29772,7 +29836,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29805,7 +29871,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29853,7 +29921,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -29886,7 +29956,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -29918,7 +29990,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29951,7 +30025,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -29999,7 +30075,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -30032,7 +30110,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -30213,7 +30293,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -30246,7 +30328,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -30613,7 +30697,9 @@ export namespace Prisma {
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     username?: StringNullableFilter<"admin"> | string | null
+    website?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
+    referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     status?: StringFilter<"admin"> | string
@@ -30879,7 +30965,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -30912,7 +31000,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -31222,7 +31312,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -31255,7 +31347,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -32880,7 +32974,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -33167,7 +33263,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33200,7 +33298,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33233,7 +33333,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33556,7 +33658,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -33705,7 +33809,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33738,7 +33844,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33771,7 +33879,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33825,7 +33935,9 @@ export namespace Prisma {
     profilePicture?: string | null
     name: string
     username?: string | null
+    website?: string | null
     email: string
+    referralCode?: string | null
     password: string
     role?: string
     status?: string
@@ -33925,7 +34037,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33958,7 +34072,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -33991,7 +34107,9 @@ export namespace Prisma {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string

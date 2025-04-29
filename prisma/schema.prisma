@@ -49,8 +49,10 @@ model admin {
   id                   Int         @id @default(autoincrement())
   profilePicture       String?     @db.LongText
   name                 String
-  username             String?      @unique
+  username             String?     @unique
+  website              String?
   email                String      @unique
+  referralCode         String?
   password             String
   role                 String      @default("admin")
   status               String      @default("active")

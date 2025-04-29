@@ -7,6 +7,9 @@ interface Dropshipper {
     name: string; // Name of the dropshipper
     profilePicture: string,
     email: string; // Email address of the dropshipper
+    website?: string;
+    referralCode: string,
+    phoneNumber: string;
     password: string; // Password for the dropshipper account
     permanentAddress: string; // Permanent address of the dropshipper
     permanentPostalCode: string; // Postal code of the permanent address
@@ -120,7 +123,7 @@ export async function checkEmailAvailabilityForUpdate(email: string, dropshipper
 
 export async function createDropshipper(adminId: number, adminRole: string, dropshipper: Dropshipper) {
     try {
-        const { name, profilePicture, email, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = dropshipper;
+        const { name, profilePicture, email, website, referralCode, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = dropshipper;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -133,6 +136,9 @@ export async function createDropshipper(adminId: number, adminRole: string, drop
                 name,
                 profilePicture,
                 email,
+                website,
+                phoneNumber,
+                referralCode,
                 password,
                 role: 'dropshipper',
                 permanentAddress,
@@ -210,6 +216,9 @@ export const updateDropshipper = async (
             name,
             profilePicture,
             email,
+            website,
+            referralCode,
+            phoneNumber,
             permanentAddress,
             permanentPostalCode,
             permanentCity,
@@ -251,6 +260,9 @@ export const updateDropshipper = async (
         const updateData = {
             name,
             email,
+            website,
+            phoneNumber,
+            referralCode,
             password: currentDropshipper?.password,
             role: 'dropshipper',
             permanentAddress,
