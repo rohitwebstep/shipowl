@@ -67,11 +67,11 @@ export const getCompanyDeailBySupplierId = async (supplierId: number) => {
             where: { adminId: supplierId },
         });
 
-        if (!companyDetail) return { status: false, message: "Company Bank Account not found" };
+        if (!companyDetail) return { status: false, message: "Company Detail not found" };
         return { status: true, companyDetail };
     } catch (error) {
         console.error("❌ getCompanyDeailBySupplierId Error:", error);
-        return { status: false, message: "Error fetching supplier bank account" };
+        return { status: false, message: "Error fetching supplier Detail" };
     }
 };
 
@@ -201,16 +201,13 @@ export async function updateSupplierCompany(
 ) {
     try {
         const { status: supplierStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailBySupplierId(supplierId);
-        if (!supplierStatus || !currentCompanyDetail) {
-            return { status: false, message: message || "Bank Account not found." };
-        }
 
         const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
         const mergedImages: Partial<Record<typeof fields[number], string>> = {};
 
         for (const field of fields) {
             const newImages = supplierCompany[field];
-            const existingImages = currentCompanyDetail[field];
+            const existingImages = currentCompanyDetail?.[field];
             if (newImages && newImages.trim()) {
                 const merged = Array.from(new Set([
                     ...(existingImages ? existingImages.split(',').map(x => x.trim()) : []),
@@ -220,36 +217,42 @@ export async function updateSupplierCompany(
             }
         }
 
-        const updatedSupplier = await prisma.companyDetail.update({
-            where: { adminId: supplierId },
-            data: {
-                admin: supplierCompany.admin,
-                companyName: supplierCompany.companyName,
-                brandName: supplierCompany.brandName,
-                brandShortName: supplierCompany.brandShortName,
-                billingAddress: supplierCompany.billingAddress,
-                billingPincode: supplierCompany.billingPincode,
-                billingState: supplierCompany.billingState,
-                billingCity: supplierCompany.billingCity,
-                businessType: supplierCompany.businessType,
-                clientEntryType: supplierCompany.clientEntryType,
-                gstNumber: supplierCompany.gstNumber,
-                companyPanNumber: supplierCompany.companyPanNumber,
-                aadharNumber: supplierCompany.aadharNumber,
-                panCardHolderName: supplierCompany.panCardHolderName,
-                aadharCardHolderName: supplierCompany.aadharCardHolderName,
-                documentId: supplierCompany.documentId,
-                documentName: supplierCompany.documentName,
-                updatedBy: supplierCompany.updatedBy,
-                updatedByRole: supplierCompany.updatedByRole,
-                updatedAt: supplierCompany.updatedAt,
-                gstDocument: mergedImages.gstDocument,
-                panCardImage: mergedImages.panCardImage,
-                aadharCardImage: mergedImages.aadharCardImage,
-                additionalDocumentUpload: mergedImages.additionalDocumentUpload,
-                documentImage: mergedImages.documentImage,
-            },
-        });
+        const data = {
+            admin: supplierCompany.admin,
+            companyName: supplierCompany.companyName,
+            brandName: supplierCompany.brandName,
+            brandShortName: supplierCompany.brandShortName,
+            billingAddress: supplierCompany.billingAddress,
+            billingPincode: supplierCompany.billingPincode,
+            billingState: supplierCompany.billingState,
+            billingCity: supplierCompany.billingCity,
+            businessType: supplierCompany.businessType,
+            clientEntryType: supplierCompany.clientEntryType,
+            gstNumber: supplierCompany.gstNumber,
+            companyPanNumber: supplierCompany.companyPanNumber,
+            aadharNumber: supplierCompany.aadharNumber,
+            panCardHolderName: supplierCompany.panCardHolderName,
+            aadharCardHolderName: supplierCompany.aadharCardHolderName,
+            documentId: supplierCompany.documentId,
+            documentName: supplierCompany.documentName,
+            updatedBy: supplierCompany.updatedBy,
+            updatedByRole: supplierCompany.updatedByRole,
+            updatedAt: supplierCompany.updatedAt,
+            gstDocument: mergedImages.gstDocument,
+            panCardImage: mergedImages.panCardImage,
+            aadharCardImage: mergedImages.aadharCardImage,
+            additionalDocumentUpload: mergedImages.additionalDocumentUpload,
+            documentImage: mergedImages.documentImage,
+        };
+
+        const updatedSupplier = currentCompanyDetail
+            ? await prisma.companyDetail.update({
+                where: { adminId: supplierId },
+                data,
+            })
+            : await prisma.companyDetail.create({
+                data,
+            });
 
         return { status: true, supplier: serializeBigInt(updatedSupplier) };
     } catch (error) {

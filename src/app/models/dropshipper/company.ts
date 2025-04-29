@@ -67,11 +67,11 @@ export const getCompanyDeailByDropshipperId = async (dropshipperId: number) => {
             where: { adminId: dropshipperId },
         });
 
-        if (!companyDetail) return { status: false, message: "Company Bank Account not found" };
+        if (!companyDetail) return { status: false, message: "Company Detail not found" };
         return { status: true, companyDetail };
     } catch (error) {
         console.error("❌ getCompanyDeailByDropshipperId Error:", error);
-        return { status: false, message: "Error fetching dropshipper bank account" };
+        return { status: false, message: "Error fetching dropshipper Detail" };
     }
 };
 
@@ -170,17 +170,16 @@ export async function updateDropshipperCompany(
     dropshipperCompany: DropshipperCompany
 ) {
     try {
+        logMessage(`debug`, `dropshipperId:`, dropshipperId);
+
         const { status: dropshipperStatus, companyDetail: currentCompanyDetail, message } = await getCompanyDeailByDropshipperId(dropshipperId);
-        if (!dropshipperStatus || !currentCompanyDetail) {
-            return { status: false, message: message || "Bank Account not found." };
-        }
 
         const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
         const mergedImages: Partial<Record<typeof fields[number], string>> = {};
 
         for (const field of fields) {
             const newImages = dropshipperCompany[field];
-            const existingImages = currentCompanyDetail[field];
+            const existingImages = currentCompanyDetail?.[field];
             if (newImages && newImages.trim()) {
                 const merged = Array.from(new Set([
                     ...(existingImages ? existingImages.split(',').map(x => x.trim()) : []),
@@ -190,40 +189,46 @@ export async function updateDropshipperCompany(
             }
         }
 
-        const updatedDropshipper = await prisma.companyDetail.update({
-            where: { adminId: dropshipperId },
-            data: {
-                admin: dropshipperCompany.admin,
-                companyName: dropshipperCompany.companyName,
-                brandName: dropshipperCompany.brandName,
-                brandShortName: dropshipperCompany.brandShortName,
-                billingAddress: dropshipperCompany.billingAddress,
-                billingPincode: dropshipperCompany.billingPincode,
-                billingState: dropshipperCompany.billingState,
-                billingCity: dropshipperCompany.billingCity,
-                businessType: dropshipperCompany.businessType,
-                clientEntryType: dropshipperCompany.clientEntryType,
-                gstNumber: dropshipperCompany.gstNumber,
-                companyPanNumber: dropshipperCompany.companyPanNumber,
-                aadharNumber: dropshipperCompany.aadharNumber,
-                panCardHolderName: dropshipperCompany.panCardHolderName,
-                aadharCardHolderName: dropshipperCompany.aadharCardHolderName,
-                documentId: dropshipperCompany.documentId,
-                documentName: dropshipperCompany.documentName,
-                updatedBy: dropshipperCompany.updatedBy,
-                updatedByRole: dropshipperCompany.updatedByRole,
-                updatedAt: dropshipperCompany.updatedAt,
-                gstDocument: mergedImages.gstDocument,
-                panCardImage: mergedImages.panCardImage,
-                aadharCardImage: mergedImages.aadharCardImage,
-                additionalDocumentUpload: mergedImages.additionalDocumentUpload,
-                documentImage: mergedImages.documentImage,
-            },
-        });
+        const data = {
+            admin: { connect: { id: dropshipperId } },
+            companyName: dropshipperCompany.companyName,
+            brandName: dropshipperCompany.brandName,
+            brandShortName: dropshipperCompany.brandShortName,
+            billingAddress: dropshipperCompany.billingAddress,
+            billingPincode: dropshipperCompany.billingPincode,
+            billingState: dropshipperCompany.billingState,
+            billingCity: dropshipperCompany.billingCity,
+            businessType: dropshipperCompany.businessType,
+            clientEntryType: dropshipperCompany.clientEntryType,
+            gstNumber: dropshipperCompany.gstNumber,
+            companyPanNumber: dropshipperCompany.companyPanNumber,
+            aadharNumber: dropshipperCompany.aadharNumber,
+            panCardHolderName: dropshipperCompany.panCardHolderName,
+            aadharCardHolderName: dropshipperCompany.aadharCardHolderName,
+            documentId: dropshipperCompany.documentId,
+            documentName: dropshipperCompany.documentName,
+            updatedBy: dropshipperCompany.updatedBy,
+            updatedByRole: dropshipperCompany.updatedByRole,
+            updatedAt: dropshipperCompany.updatedAt,
+            gstDocument: mergedImages.gstDocument,
+            panCardImage: mergedImages.panCardImage,
+            aadharCardImage: mergedImages.aadharCardImage,
+            additionalDocumentUpload: mergedImages.additionalDocumentUpload,
+            documentImage: mergedImages.documentImage,
+        };
 
-        return { status: true, dropshipper: serializeBigInt(updatedDropshipper) };
+        const updatedOrCreated = currentCompanyDetail
+            ? await prisma.companyDetail.update({
+                where: { adminId: dropshipperId },
+                data,
+            })
+            : await prisma.companyDetail.create({
+                data,
+            });
+
+        return { status: true, dropshipper: serializeBigInt(updatedOrCreated) };
     } catch (error) {
-        console.error("Error updating dropshipper company:", error);
+        console.error("Error updating or creating dropshipper company:", error);
         return { status: false, message: "Internal Server Error" };
     }
 }
