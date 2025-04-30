@@ -178,7 +178,10 @@ export const getDropshippersByStatus = async (status: "deleted" | "notDeleted" =
         const dropshippers = await prisma.admin.findMany({
             where: whereCondition,
             orderBy: { name: "asc" },
-            include: { companyDetail: true, bankAccounts: true }
+            include: {
+                companyDetail: true,
+                bankAccounts: true,
+            }
         });
 
         return { status: true, dropshippers: serializeBigInt(dropshippers) };
@@ -189,11 +192,15 @@ export const getDropshippersByStatus = async (status: "deleted" | "notDeleted" =
 };
 
 // 🔵 GET BY ID
-export const getDropshipperById = async (id: number) => {
+export const getDropshipperById = async (id: number, withPassword: boolean | string | number = false) => {
     try {
         const dropshipper = await prisma.admin.findUnique({
             where: { id, role: 'dropshipper' },
-            include: { companyDetail: true, bankAccounts: true }
+            include: {
+                companyDetail: true,
+                bankAccounts: true,
+            }
+
         });
 
         if (!dropshipper) return { status: false, message: "Dropshipper not found" };
@@ -209,7 +216,8 @@ export const updateDropshipper = async (
     adminId: number,
     adminRole: string,
     dropshipperId: number,
-    dropshipper: Dropshipper
+    dropshipper: Dropshipper,
+    withPassword: boolean | string | number = false
 ) => {
     try {
         const {
@@ -236,11 +244,15 @@ export const updateDropshipper = async (
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
 
-        const { status: dropshipperStatus, dropshipper: currentDropshipper, message } = await getDropshipperById(dropshipperId);
+        // Fetch current dropshipper details, including password based on withPassword flag
+        const { status: dropshipperStatus, dropshipper: currentDropshipper, message } = await getDropshipperById(dropshipperId, withPassword);
 
         if (!dropshipperStatus || !currentDropshipper) {
             return { status: false, message: message || "Dropshipper not found." };
         }
+
+        // Check if currentSupplier has a password (it should if the supplier is valid)
+        const password = (withPassword && currentDropshipper.password) ? currentDropshipper.password : '123456'; // Default password
 
         if (profilePicture && profilePicture.trim() !== '' && currentDropshipper?.profilePicture?.trim()) {
             try {
@@ -263,7 +275,7 @@ export const updateDropshipper = async (
             website,
             phoneNumber,
             referralCode,
-            password: currentDropshipper?.password,
+            password,
             role: 'dropshipper',
             permanentAddress,
             permanentPostalCode,

@@ -133,7 +133,9 @@ function middleware(req) {
         {
             routes: [
                 "/api/dropshipper/list",
-                "/api/dropshipper/auth/verify"
+                "/api/dropshipper/auth/verify",
+                "/api/dropshipper/profile",
+                "/api/dropshipper/profile/update"
             ],
             role: "dropshipper",
             applicableRoles: [
@@ -202,6 +204,7 @@ const config = {
         "/api/supplier/list",
         "/api/supplier/auth/verify",
         "/api/supplier/profile/:path*",
+        "/api/dropshipper/profile/:path*",
         "/api/category",
         "/api/category/:path*",
         "/api/brand",

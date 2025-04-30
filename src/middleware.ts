@@ -34,12 +34,20 @@ export function middleware(req: NextRequest) {
 
     const routeProtections: RouteProtection[] = [
         {
-            routes: ["/api/admin/list", "/api/admin/auth/verify"],
+            routes: [
+                "/api/admin/list",
+                "/api/admin/auth/verify"
+            ],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
         },
         {
-            routes: ["/api/dropshipper/list", "/api/dropshipper/auth/verify"],
+            routes: [
+                "/api/dropshipper/list",
+                "/api/dropshipper/auth/verify",
+                "/api/dropshipper/profile",
+                "/api/dropshipper/profile/update",
+            ],
             role: "dropshipper",
             applicableRoles: ["dropshipper", "dropshipper_staff"],
         },
@@ -104,6 +112,7 @@ export const config = {
         "/api/supplier/list",
         "/api/supplier/auth/verify",
         "/api/supplier/profile/:path*",
+        "/api/dropshipper/profile/:path*",
         "/api/category",
         "/api/category/:path*",
         "/api/brand",

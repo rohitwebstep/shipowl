@@ -39,6 +39,10 @@
           "originalSource": "/api/supplier/profile/:path*"
         },
         {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/profile/:path*{(\\\\.json)}?",
+          "originalSource": "/api/dropshipper/profile/:path*"
+        },
+        {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category{(\\\\.json)}?",
           "originalSource": "/api/category"
         },

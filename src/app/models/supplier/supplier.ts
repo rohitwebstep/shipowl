@@ -229,7 +229,7 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
 
 export const getSuppliersByStatus = async (
     status: "deleted" | "notDeleted" = "notDeleted",
-    withPassword?: boolean | string | number
+    withPassword: boolean | string | number = false
 ) => {
     try {
         let whereCondition = {};
@@ -252,7 +252,6 @@ export const getSuppliersByStatus = async (
             include: {
                 companyDetail: true,
                 bankAccounts: true,
-                ...(withPassword ? { password: true } : {}) // Conditionally include password
             }
         });
 
@@ -264,16 +263,14 @@ export const getSuppliersByStatus = async (
 };
 
 // 🔵 GET BY ID
-export const getSupplierById = async (id: number, withPassword?: boolean | string | number) => {
+export const getSupplierById = async (id: number, withPassword: boolean | string | number = false) => {
     try {
         // Fetch the supplier with password if withPassword is true
         const supplier = await prisma.admin.findUnique({
             where: { id, role: 'supplier' },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
-                // Conditionally include the password if withPassword is true
-                ...(withPassword ? { password: true } : {})
+                bankAccounts: true
             }
         });
 
@@ -293,7 +290,7 @@ export const updateSupplier = async (
     adminRole: string,
     supplierId: number,
     supplier: Supplier,
-    withPassword?: boolean | string | number // Optional parameter to control if the password is included
+    withPassword: boolean | string | number = false // Optional parameter to control if the password is included
 ) => {
     try {
         const {

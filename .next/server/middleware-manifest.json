@@ -39,6 +39,10 @@
           "originalSource": "/api/supplier/profile/:path*"
         },
         {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper\\/profile(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/dropshipper/profile/:path*"
+        },
+        {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/category(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/category"
         },
