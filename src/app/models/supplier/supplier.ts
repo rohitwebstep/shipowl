@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
-import { logMessage } from "@/utils/commonUtils";
 
 interface Supplier {
     id?: bigint; // Optional: ID of the supplier (if exists)
@@ -228,7 +227,10 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
     }
 }
 
-export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "notDeleted") => {
+export const getSuppliersByStatus = async (
+    status: "deleted" | "notDeleted" = "notDeleted",
+    withPassword?: boolean | string | number
+) => {
     try {
         let whereCondition = {};
 
@@ -243,16 +245,18 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
                 throw new Error("Invalid status");
         }
 
+        // Fetch suppliers based on the status and include the password field if requested
         const suppliers = await prisma.admin.findMany({
             where: whereCondition,
             orderBy: { name: "asc" },
-            include: { companyDetail: true, bankAccounts: true }
+            include: {
+                companyDetail: true,
+                bankAccounts: true,
+                ...(withPassword ? { password: true } : {}) // Conditionally include password
+            }
         });
 
-        // Remove password field
-        const sanitizedSuppliers = suppliers.map(({ password, ...rest }) => rest);
-
-        return { status: true, suppliers: serializeBigInt(sanitizedSuppliers) };
+        return { status: true, suppliers: serializeBigInt(suppliers) };
     } catch (error) {
         console.error(`Error fetching suppliers by status (${status}):`, error);
         return { status: false, message: "Error fetching suppliers" };
