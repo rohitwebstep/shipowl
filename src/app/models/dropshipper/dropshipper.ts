@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
+import { logMessage } from "@/utils/commonUtils";
 
 interface Dropshipper {
     id?: bigint; // Optional: ID of the dropshipper (if exists)
@@ -160,7 +161,10 @@ export async function createDropshipper(adminId: number, adminRole: string, drop
     }
 }
 
-export const getDropshippersByStatus = async (status: "deleted" | "notDeleted" = "notDeleted") => {
+export const getDropshippersByStatus = async (
+    status: "deleted" | "notDeleted" = "notDeleted",
+    withPassword: boolean | string | number = false
+) => {
     try {
         let whereCondition = {};
 
@@ -184,6 +188,8 @@ export const getDropshippersByStatus = async (status: "deleted" | "notDeleted" =
             }
         });
 
+        logMessage(`debug`, `withPassword:`, withPassword);
+
         return { status: true, dropshippers: serializeBigInt(dropshippers) };
     } catch (error) {
         console.error(`Error fetching dropshippers by status (${status}):`, error);
@@ -202,6 +208,8 @@ export const getDropshipperById = async (id: number, withPassword: boolean | str
             }
 
         });
+
+        logMessage(`debug`, `withPassword:`, withPassword);
 
         if (!dropshipper) return { status: false, message: "Dropshipper not found" };
         return { status: true, dropshipper: serializeBigInt(dropshipper) };

@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
+import { logMessage } from "@/utils/commonUtils";
 
 interface Supplier {
     id?: bigint; // Optional: ID of the supplier (if exists)
@@ -255,6 +256,8 @@ export const getSuppliersByStatus = async (
             }
         });
 
+        logMessage(`debug`, `withPassword:`, withPassword);
+
         return { status: true, suppliers: serializeBigInt(suppliers) };
     } catch (error) {
         console.error(`Error fetching suppliers by status (${status}):`, error);
@@ -273,6 +276,8 @@ export const getSupplierById = async (id: number, withPassword: boolean | string
                 bankAccounts: true
             }
         });
+
+        logMessage(`debug`, `withPassword:`, withPassword);
 
         if (!supplier) return { status: false, message: "Supplier not found" };
 
