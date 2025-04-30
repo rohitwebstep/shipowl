@@ -21280,13 +21280,13 @@ export namespace Prisma {
   export type adminWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     username?: string
-    email?: string
     AND?: adminWhereInput | adminWhereInput[]
     OR?: adminWhereInput[]
     NOT?: adminWhereInput | adminWhereInput[]
     profilePicture?: StringNullableFilter<"admin"> | string | null
     name?: StringFilter<"admin"> | string
     website?: StringNullableFilter<"admin"> | string | null
+    email?: StringFilter<"admin"> | string
     referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
@@ -21317,7 +21317,7 @@ export namespace Prisma {
     staff?: AdminStaffListRelationFilter
     companyDetail?: XOR<CompanyDetailNullableScalarRelationFilter, companyDetailWhereInput> | null
     bankAccounts?: BankAccountListRelationFilter
-  }, "id" | "username" | "email">
+  }, "id" | "username">
 
   export type adminOrderByWithAggregationInput = {
     id?: SortOrder

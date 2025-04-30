@@ -51,7 +51,7 @@ model admin {
   name                String
   username            String?   @unique
   website             String?
-  email               String    @unique
+  email               String
   referralCode        String?
   password            String
   role                String    @default("admin")

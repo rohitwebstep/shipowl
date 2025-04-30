@@ -58,7 +58,7 @@ const serializeBigInt = <T>(obj: T): T => {
 export async function checkEmailAvailability(email: string) {
     try {
         // Query to find if an email already exists with role 'supplier'
-        const existingSupplier = await prisma.admin.findUnique({
+        const existingSupplier = await prisma.admin.findFirst({
             where: { email },
             select: { email: true, role: true },
         });
@@ -89,7 +89,7 @@ export async function checkEmailAvailability(email: string) {
 export async function checkEmailAvailabilityForUpdate(email: string, supplierId: number) {
     try {
         // Query to find if an email already exists with role 'supplier'
-        const existingSupplier = await prisma.admin.findUnique({
+        const existingSupplier = await prisma.admin.findFirst({
             where: {
                 email,
                 NOT: {
