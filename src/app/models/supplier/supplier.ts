@@ -249,7 +249,10 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
             include: { companyDetail: true, bankAccounts: true }
         });
 
-        return { status: true, suppliers: serializeBigInt(suppliers) };
+        // Remove password field
+        const sanitizedSuppliers = suppliers.map(({ password, ...rest }) => rest);
+
+        return { status: true, suppliers: serializeBigInt(sanitizedSuppliers) };
     } catch (error) {
         console.error(`Error fetching suppliers by status (${status}):`, error);
         return { status: false, message: "Error fetching suppliers" };
@@ -257,15 +260,22 @@ export const getSuppliersByStatus = async (status: "deleted" | "notDeleted" = "n
 };
 
 // 🔵 GET BY ID
-export const getSupplierById = async (id: number) => {
+export const getSupplierById = async (id: number, withPassword?: boolean | string | number) => {
     try {
+        // Fetch the supplier with password if withPassword is true
         const supplier = await prisma.admin.findUnique({
             where: { id, role: 'supplier' },
-            include: { companyDetail: true, bankAccounts: true }
+            include: {
+                companyDetail: true,
+                bankAccounts: true,
+                // Conditionally include the password if withPassword is true
+                ...(withPassword ? { password: true } : {})
+            }
         });
 
         if (!supplier) return { status: false, message: "Supplier not found" };
 
+        // Return supplier data after serializing big integers, and include password if requested
         return { status: true, supplier: serializeBigInt(supplier) };
     } catch (error) {
         console.error("❌ getSupplierById Error:", error);
@@ -278,7 +288,8 @@ export const updateSupplier = async (
     adminId: number,
     adminRole: string,
     supplierId: number,
-    supplier: Supplier
+    supplier: Supplier,
+    withPassword?: boolean | string | number // Optional parameter to control if the password is included
 ) => {
     try {
         const {
@@ -286,7 +297,6 @@ export const updateSupplier = async (
             profilePicture,
             username,
             email,
-            password,
             dateOfBirth,
             currentAddress,
             permanentAddress,
@@ -306,12 +316,17 @@ export const updateSupplier = async (
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
 
-        const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId);
+        // Fetch current supplier details, including password based on withPassword flag
+        const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId, withPassword);
 
         if (!supplierStatus || !currentSupplier) {
             return { status: false, message: message || "Supplier not found." };
         }
 
+        // Check if currentSupplier has a password (it should if the supplier is valid)
+        const password = (withPassword && currentSupplier.password) ? currentSupplier.password : '123456'; // Default password
+
+        // Handle profile picture deletion if a new one is being uploaded
         if (profilePicture && profilePicture.trim() !== '' && currentSupplier?.profilePicture?.trim()) {
             try {
                 const imageFileName = path.basename(currentSupplier.profilePicture.trim());
@@ -327,13 +342,12 @@ export const updateSupplier = async (
             }
         }
 
-        logMessage(`debug`, `waste password: `, password);
-
+        // Prepare data for updating the supplier
         const updateData = {
             name,
             username,
             email,
-            password: currentSupplier?.password,
+            password,
             role: 'supplier',
             dateOfBirth: new Date(dateOfBirth),
             currentAddress,

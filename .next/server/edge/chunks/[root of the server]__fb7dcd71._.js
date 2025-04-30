@@ -42,8 +42,10 @@ async function adminAuthMiddleware(req, adminRole, applicableRoles) {
                 status: 401
             });
         }
+        console.log(`Role: ${adminRole}`);
         // Verify token and extract admin details
         const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
+        console.log(`payload:`, payload);
         if (!payload || typeof payload !== 'object' || typeof payload.adminId !== 'number' || typeof payload.adminRole !== 'string') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Access forbidden. Invalid token payload."
@@ -57,7 +59,7 @@ async function adminAuthMiddleware(req, adminRole, applicableRoles) {
                 status: 403
             });
         }
-        console.log(`Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
+        console.log(`payload - Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
         // Clone the request and set custom headers
         const response = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
         response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());
@@ -92,95 +94,104 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$api$2f$server$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/node_modules/next/dist/esm/api/server.js [middleware-edge] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/esm/server/web/spec-extension/response.js [middleware-edge] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/middlewares/adminAuth.ts [middleware-edge] (ecmascript)"); // Import admin middleware
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/middlewares/adminAuth.ts [middleware-edge] (ecmascript)");
 ;
 ;
+// Helper function to determine if a route matches
+function routeMatches(url, routes) {
+    return routes.some((route)=>url.includes(route));
+}
 function middleware(req) {
     const res = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
     // Apply CORS headers globally
-    res.headers.set("Access-Control-Allow-Origin", "*"); // Change '*' to your frontend URL in production
-    // res.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.headers.set("Access-Control-Allow-Origin", "*"); // Replace '*' with allowed domain in production
     res.headers.set("Access-Control-Allow-Methods", "*");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    // Log request method and URL (optional: remove in production)
     console.log(`req.method: ${req.method}`);
     console.log(`req.url: ${req.url}`);
-    // Handle preflight requests
+    // Handle preflight OPTIONS request
     if (req.method === "OPTIONS") {
         return new Response(null, {
             status: 200,
             headers: res.headers
         });
     }
-    // Apply adminAuthMiddleware to /api/admin/list route
-    const adminProtectedRoutes = [
-        "/api/admin/list",
-        "/api/admin/auth/verify"
+    const pathname = req.nextUrl.pathname;
+    const routeProtections = [
+        {
+            routes: [
+                "/api/admin/list",
+                "/api/admin/auth/verify"
+            ],
+            role: "admin",
+            applicableRoles: [
+                "admin",
+                "admin_staff"
+            ]
+        },
+        {
+            routes: [
+                "/api/dropshipper/list",
+                "/api/dropshipper/auth/verify"
+            ],
+            role: "dropshipper",
+            applicableRoles: [
+                "dropshipper",
+                "dropshipper_staff"
+            ]
+        },
+        {
+            routes: [
+                "/api/supplier/list",
+                "/api/supplier/auth/verify",
+                "/api/supplier/profile",
+                "/api/supplier/profile/update"
+            ],
+            role: "supplier",
+            applicableRoles: [
+                "supplier",
+                "supplier_staff"
+            ]
+        },
+        {
+            routes: [
+                "/api/category",
+                "/api/category/",
+                "/api/brand",
+                "/api/brand/",
+                "/api/warehouse",
+                "/api/warehouse/",
+                "/api/location/country",
+                "/api/location/country/",
+                "/api/location/state",
+                "/api/location/state/",
+                "/api/location/city",
+                "/api/location/city/",
+                "/api/product",
+                "/api/product/",
+                "/api/supplier",
+                "/api/dropshipper",
+                "/api/dropshipper/"
+            ],
+            role: "admin",
+            applicableRoles: [
+                "admin",
+                "admin_staff",
+                "dropshipper",
+                "dropshipper_staff",
+                "supplier",
+                "supplier_staff"
+            ]
+        }
     ];
-    const dropshipperProtectedRoutes = [
-        "/api/dropshipper/list",
-        "/api/dropshipper/auth/verify"
-    ];
-    const supplierProtectedRoutes = [
-        "/api/supplier/list",
-        "/api/supplier/auth/verify"
-    ];
-    const restProtectedRoutes = [
-        "/api/category",
-        "/api/category/:path*",
-        "/api/brand",
-        "/api/brand/:path*",
-        "/api/warehouse",
-        "/api/warehouse/:path*",
-        "/api/location/country",
-        "/api/location/country/:path*",
-        "/api/location/state",
-        "/api/location/state/:path*",
-        "/api/location/city",
-        "/api/location/city/:path*",
-        "/api/product",
-        "/api/product/:path*",
-        "/api/supplier",
-        "/api/supplier/:path*",
-        "/api/dropshipper",
-        "/api/dropshipper/:path*"
-    ];
-    if (adminProtectedRoutes.some((route)=>req.url.includes(route))) {
-        const applicableRoles = [
-            "admin",
-            "admin_staff"
-        ];
-        const adminRole = "admin";
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
+    for (const protection of routeProtections){
+        if (routeMatches(pathname, protection.routes)) {
+            console.log(`req.url: matched protected route for role ${protection.role}`);
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, protection.role, protection.applicableRoles);
+        }
     }
-    if (dropshipperProtectedRoutes.some((route)=>req.url.includes(route))) {
-        const applicableRoles = [
-            "dropshipper",
-            "dropshipper_staff"
-        ];
-        const adminRole = "dropshipper";
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
-    }
-    if (supplierProtectedRoutes.some((route)=>req.url.includes(route))) {
-        const applicableRoles = [
-            "supplier",
-            "supplier_staff"
-        ];
-        const adminRole = "supplier";
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
-    }
-    if (restProtectedRoutes.some((route)=>req.url.includes(route))) {
-        const applicableRoles = [
-            "admin",
-            "admin_staff",
-            "dropshipper",
-            "dropshipper_staff",
-            "supplier",
-            "supplier_staff"
-        ];
-        const adminRole = "admin";
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, adminRole, applicableRoles);
-    }
-    return req; // Continue processing for other routes
+    return res; // Proceed to next handler for unprotected routes
 }
 const config = {
     matcher: [
@@ -190,6 +201,7 @@ const config = {
         "/api/dropshipper/auth/verify",
         "/api/supplier/list",
         "/api/supplier/auth/verify",
+        "/api/supplier/profile/:path*",
         "/api/category",
         "/api/category/:path*",
         "/api/brand",
@@ -205,7 +217,6 @@ const config = {
         "/api/product",
         "/api/product/:path*",
         "/api/supplier",
-        "/api/supplier/:path*",
         "/api/dropshipper",
         "/api/dropshipper/:path*"
     ]

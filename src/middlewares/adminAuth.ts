@@ -12,15 +12,18 @@ export async function adminAuthMiddleware(req: NextRequest, adminRole: string, a
             return NextResponse.json({ error: "Access denied. Please log in to continue." }, { status: 401 });
         }
 
+        console.log(`Role: ${adminRole}`);
+
         // Verify token and extract admin details
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
+        console.log(`payload:`, payload);
         if (!payload || typeof payload !== 'object' || typeof payload.adminId !== 'number' || typeof payload.adminRole !== 'string') {
             return NextResponse.json({ error: "Access forbidden. Invalid token payload." }, { status: 403 });
         } else if (!applicableRoles.includes(payload.adminRole)) {
             return NextResponse.json({ error: "Access denied. Admin privileges required." }, { status: 403 });
         }
 
-        console.log(`Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
+        console.log(`payload - Admin ID: ${payload.adminId}, Role: ${payload.adminRole}`);
         // Clone the request and set custom headers
         const response = NextResponse.next();
         response.headers.set(`x-${adminRole}-id`, payload.adminId.toString());
