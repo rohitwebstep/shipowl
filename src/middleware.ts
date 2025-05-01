@@ -3,29 +3,30 @@ import { NextRequest, NextResponse } from "next/server";
 import { adminAuthMiddleware } from "./middlewares/adminAuth";
 
 type RouteProtection = {
+    skip?: boolean;
     routes: string[];
-    role: string;
-    applicableRoles: string[];
+    role?: string;
+    applicableRoles?: string[];
 };
 
 // Helper function to determine if a route matches
-function routeMatches(url: string, routes: string[]): boolean {
-    return routes.some(route => url.includes(route));
+function routeMatches(pathname: string, routes: string[]): boolean {
+    return routes.some(route => pathname === route || pathname.startsWith(route));
 }
 
 export function middleware(req: NextRequest) {
     const res = NextResponse.next();
 
     // Apply CORS headers globally
-    res.headers.set("Access-Control-Allow-Origin", "*"); // Replace '*' with allowed domain in production
+    res.headers.set("Access-Control-Allow-Origin", "*"); // TODO: Replace '*' with actual domain in production
     res.headers.set("Access-Control-Allow-Methods", "*");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-    // Log request method and URL (optional: remove in production)
+    // Log request method and URL
     console.log(`req.method: ${req.method}`);
     console.log(`req.url: ${req.url}`);
 
-    // Handle preflight OPTIONS request
+    // Handle preflight OPTIONS requests
     if (req.method === "OPTIONS") {
         return new Response(null, { status: 200, headers: res.headers });
     }
@@ -34,10 +35,11 @@ export function middleware(req: NextRequest) {
 
     const routeProtections: RouteProtection[] = [
         {
-            routes: [
-                "/api/admin/list",
-                "/api/admin/auth/verify"
-            ],
+            skip: true,
+            routes: ["/api/dropshipper/auth/login"],
+        },
+        {
+            routes: ["/api/admin/list", "/api/admin/auth/verify"],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
         },
@@ -94,13 +96,24 @@ export function middleware(req: NextRequest) {
     ];
 
     for (const protection of routeProtections) {
+        // Only proceed if the current route group applies to the current URL and isn't skipped
         if (routeMatches(pathname, protection.routes)) {
-            console.log(`req.url: matched protected route for role ${protection.role}`);
-            return adminAuthMiddleware(req, protection.role, protection.applicableRoles);
+            if (protection.skip) {
+                break; // Skip checking other protections, since it's explicitly marked as skippable
+            }
+
+            if (protection.role && protection.applicableRoles) {
+                console.log(`req.url: matched protected route for role ${protection.role}`);
+                return adminAuthMiddleware(req, protection.role, protection.applicableRoles);
+            }
+
+            // If route matches but no auth needed, break to avoid checking others
+            break;
         }
     }
 
-    return res; // Proceed to next handler for unprotected routes
+
+    return res; // Proceed to next handler if no match
 }
 
 export const config = {

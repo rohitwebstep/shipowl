@@ -98,19 +98,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminA
 ;
 ;
 // Helper function to determine if a route matches
-function routeMatches(url, routes) {
-    return routes.some((route)=>url.includes(route));
+function routeMatches(pathname, routes) {
+    return routes.some((route)=>pathname === route || pathname.startsWith(route));
 }
 function middleware(req) {
     const res = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
     // Apply CORS headers globally
-    res.headers.set("Access-Control-Allow-Origin", "*"); // Replace '*' with allowed domain in production
+    res.headers.set("Access-Control-Allow-Origin", "*"); // TODO: Replace '*' with actual domain in production
     res.headers.set("Access-Control-Allow-Methods", "*");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    // Log request method and URL (optional: remove in production)
+    // Log request method and URL
     console.log(`req.method: ${req.method}`);
     console.log(`req.url: ${req.url}`);
-    // Handle preflight OPTIONS request
+    // Handle preflight OPTIONS requests
     if (req.method === "OPTIONS") {
         return new Response(null, {
             status: 200,
@@ -119,6 +119,12 @@ function middleware(req) {
     }
     const pathname = req.nextUrl.pathname;
     const routeProtections = [
+        {
+            skip: true,
+            routes: [
+                "/api/dropshipper/auth/login"
+            ]
+        },
         {
             routes: [
                 "/api/admin/list",
@@ -188,12 +194,19 @@ function middleware(req) {
         }
     ];
     for (const protection of routeProtections){
+        // Only proceed if the current route group applies to the current URL and isn't skipped
         if (routeMatches(pathname, protection.routes)) {
-            console.log(`req.url: matched protected route for role ${protection.role}`);
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, protection.role, protection.applicableRoles);
+            if (protection.skip) {
+                break; // Skip checking other protections, since it's explicitly marked as skippable
+            }
+            if (protection.role && protection.applicableRoles) {
+                console.log(`req.url: matched protected route for role ${protection.role}`);
+                return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, protection.role, protection.applicableRoles);
+            }
+            break;
         }
     }
-    return res; // Proceed to next handler for unprotected routes
+    return res; // Proceed to next handler if no match
 }
 const config = {
     matcher: [
