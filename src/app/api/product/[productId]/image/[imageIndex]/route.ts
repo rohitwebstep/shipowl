@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/authUtils';
-import { getProductById, removeProductImageByIndex } from '@/app/models/product';
+import { getProductById, removeProductImageByIndex } from '@/app/models/product/product';
 
 type ImageType =
   | 'package_weight_image'

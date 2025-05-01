@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { getProductsByStatus } from '@/app/models/product';
+import { getProductsByStatus } from '@/app/models/product/product';
 
 
 export async function GET(req: NextRequest) {

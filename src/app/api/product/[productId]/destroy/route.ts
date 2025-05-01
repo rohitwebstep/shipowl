@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { getProductById, deleteProduct } from '@/app/models/product';
+import { getProductById, deleteProduct } from '@/app/models/product/product';
 
 export async function DELETE(req: NextRequest) {
   try {

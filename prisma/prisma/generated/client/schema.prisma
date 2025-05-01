@@ -105,12 +105,12 @@ model companyDetail {
   gstDocument              String? // File path or URL
   panCardHolderName        String?
   aadharCardHolderName     String?
-  panCardImage             String? // File path or URL
-  aadharCardImage          String? // File path or URL
+  panCardImage             String? @db.LongText
+  aadharCardImage          String? @db.LongText
   additionalDocumentUpload String? // Optional file or zip path
   documentId               String?
   documentName             String?
-  documentImage            String? // File path or URL
+  documentImage            String? @db.LongText
 
   createdAt     DateTime  @default(now())
   createdBy     Int?
@@ -134,7 +134,7 @@ model bankAccount {
   bankBranch           String
   accountType          String
   ifscCode             String
-  cancelledChequeImage String? // File path or URL
+  cancelledChequeImage String? @db.LongText
   paymentMethod        String?
 
   createdAt     DateTime  @default(now())
@@ -411,6 +411,25 @@ model brand {
   @@index([deletedAt])
 }
 
+model productRequest {
+  id          Int     @id @default(autoincrement())
+  name        String
+  image       String? @db.LongText
+  description String?
+  quantity    Int?
+
+  status        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+}
+
 model product {
   id              Int     @id @default(autoincrement())
   categoryId      Int
@@ -429,7 +448,7 @@ model product {
   pickupAddress   String?
 
   shippingCountryId BigInt
-  video_url         String?
+  video_url         String? @db.LongText
   list_as           String? // e.g., featured, trending, etc.
 
   shipping_time String?
@@ -439,12 +458,12 @@ model product {
   package_width           Float? // Updated from pack_width
   package_height          Float? // Updated from package_heig
   chargeable_weight       Float? // Updated from chargab_weig
-  package_weight_image    String? // Updated from package_wei_image
-  package_length_image    String? // Updated from package_leng_image
-  package_width_image     String? // Updated from package_wid_image
-  package_height_image    String? // Updated from package_heig_image
-  product_detail_video    String?
-  training_guidance_video String?
+  package_weight_image    String? @db.LongText
+  package_length_image    String? @db.LongText
+  package_width_image     String? @db.LongText
+  package_height_image    String? @db.LongText
+  product_detail_video    String? @db.LongText
+  training_guidance_video String? @db.LongText
 
   status        Boolean   @default(true)
   createdAt     DateTime  @default(now())
@@ -476,7 +495,7 @@ model product {
 model productVariant {
   id                  Int     @id @default(autoincrement())
   productId           Int
-  image               String
+  image               String  @db.LongText
   color               String
   sku                 String  @unique
   qty                 Int

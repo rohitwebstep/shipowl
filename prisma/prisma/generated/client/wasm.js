@@ -420,6 +420,24 @@ exports.Prisma.BrandScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.ProductRequestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  image: 'image',
+  description: 'description',
+  quantity: 'quantity',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   categoryId: 'categoryId',
@@ -688,6 +706,15 @@ exports.Prisma.brandOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.productRequestOrderByRelevanceFieldEnum = {
+  name: 'name',
+  image: 'image',
+  description: 'description',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -750,6 +777,7 @@ exports.Prisma.ModelName = {
   warehouse: 'warehouse',
   category: 'category',
   brand: 'brand',
+  productRequest: 'productRequest',
   product: 'product',
   productVariant: 'productVariant'
 };

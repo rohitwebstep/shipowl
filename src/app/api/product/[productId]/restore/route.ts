@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { getProductById, restoreProduct } from '@/app/models/product';
+import { getProductById, restoreProduct } from '@/app/models/product/product';
 
 export async function PATCH(req: NextRequest) {
   try {

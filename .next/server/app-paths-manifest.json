@@ -1,8 +1,4 @@
 {
-  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
-  "/api/dropshipper/profile/route": "app/api/dropshipper/profile/route.js",
-  "/api/dropshipper/profile/update/route": "app/api/dropshipper/profile/update/route.js",
-  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/profile/route": "app/api/supplier/profile/route.js",
-  "/api/supplier/profile/update/route": "app/api/supplier/profile/update/route.js"
+  "/api/product/request/[productRequestId]/destroy/route": "app/api/product/request/[productRequestId]/destroy/route.js",
+  "/api/product/request/[productRequestId]/route": "app/api/product/request/[productRequestId]/route.js"
 }
