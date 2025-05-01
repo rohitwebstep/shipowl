@@ -6,6 +6,7 @@ import { isUserExist } from "@/utils/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createProductRequest, getProductRequestsByStatus } from '@/app/models/product/productRequest';
+import { getCategoryById } from '@/app/models/category';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -45,10 +46,10 @@ export async function POST(req: NextRequest) {
 
     // Validate input
     const validation = validateFormData(formData, {
-      requiredFields: ['name', 'quantity'],
+      requiredFields: ['name', 'category'],
       patternValidations: {
         status: 'boolean',
-        quantity: 'number'
+        category: 'number'
       },
     });
 
@@ -62,10 +63,25 @@ export async function POST(req: NextRequest) {
 
     // Extract fields
     const name = formData.get('name') as string;
-    const description = (formData.get('description') as string) || '';
-    const quantity = parseInt(formData.get('quantity') as string, 10) || 0;
+    const categoryId = Number(formData.get('category'));
+    const expectedPrice = Number(formData.get('expectedPrice'));
+    const expectedDailyOrders = formData.get('expectedDailyOrders') as string;
+    const url = formData.get('url') as string;
+
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+
+    if (isNaN(categoryId) || isNaN(expectedPrice)) {
+      logMessage('warn', 'Invalid categoryId or expectedPrice', { categoryId, expectedPrice });
+      return NextResponse.json({ error: 'Invalid category and expected price' }, { status: 400 });
+    }
+
+    const categoryResult = await getCategoryById(categoryId);
+    logMessage('debug', 'Category fetch result:', categoryResult);
+    if (!categoryResult?.status) {
+      logMessage('warn', 'Category not found', { categoryId });
+      return NextResponse.json({ status: false, message: 'category not found' }, { status: 404 });
+    }
 
     // File upload
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'productRequest');
@@ -86,8 +102,14 @@ export async function POST(req: NextRequest) {
 
     const productRequestPayload = {
       name,
-      quantity,
-      description,
+      category: {
+        connect: {
+          id: categoryId,
+        },
+      },
+      expectedPrice,
+      expectedDailyOrders,
+      url,
       status,
       image,
     };

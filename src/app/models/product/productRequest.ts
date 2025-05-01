@@ -3,10 +3,16 @@ import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
 
 interface ProductRequest {
+    id?: number,
     name: string;
+    categoryId?: number;
+    category: {
+        connect: { id: number }; // or whatever your relation is
+    };
+    expectedPrice: number;
+    expectedDailyOrders?: string;
+    url?: string;
     image?: string;
-    description: string;
-    quantity: number;
     status: boolean;
     updatedBy?: number;
     updatedAt?: Date;
@@ -16,16 +22,25 @@ interface ProductRequest {
     deletedByRole?: string | null;
 }
 
-
 export async function createProductRequest(adminId: number, adminRole: string, productRequest: ProductRequest) {
 
     try {
-        const { name, description, quantity, status, image } = productRequest;
+        const {
+            name,
+            category,
+            expectedPrice,
+            expectedDailyOrders,
+            url,
+            status,
+            image
+        } = productRequest;
         const newProductRequest = await prisma.productRequest.create({
             data: {
                 name,
-                description,
-                quantity,
+                category,
+                expectedPrice,
+                expectedDailyOrders,
+                url,
                 status,
                 image,
                 createdAt: new Date(),
@@ -49,9 +64,15 @@ export const updateProductRequest = async (
     data: ProductRequest
 ) => {
     try {
-        data.updatedBy = adminId;
-        data.updatedAt = new Date();
-        data.updatedByRole = adminRole;
+        const {
+            name,
+            category,
+            expectedPrice,
+            expectedDailyOrders,
+            url,
+            status,
+            image
+        } = data;
 
         if (data.image) {
             const newImagesArr = data.image.split(",").map((img) => img.trim());
@@ -73,7 +94,18 @@ export const updateProductRequest = async (
 
         const productRequest = await prisma.productRequest.update({
             where: { id: productRequestId }, // Assuming 'id' is the correct primary key field
-            data: data,
+            data: {
+                name,
+                category,
+                expectedPrice,
+                expectedDailyOrders,
+                url,
+                status,
+                image,
+                updatedAt: new Date(),
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+            },
         });
 
         return { status: true, productRequest };
@@ -185,6 +217,7 @@ export const getProductRequestsByStatus = async (status: "active" | "inactive" |
         const productRequests = await prisma.productRequest.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
+            include: { category: true }
         });
 
         return { status: true, productRequests };

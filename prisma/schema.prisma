@@ -364,23 +364,24 @@ model warehouse {
 }
 
 model category {
-  id             Int       @id @default(autoincrement())
-  name           String
-  slug           String    @unique
-  description    String?   @db.LongText
-  image          String?   @db.LongText
-  status         Boolean   @default(false)
-  createdAt      DateTime  @default(now())
-  createdBy      Int?
-  createdByRole  String?
-  updatedAt      DateTime  @updatedAt
-  updatedBy      Int?
-  updatedByRole  String?
-  deletedAt      DateTime?
-  deletedBy      Int?
-  deletedByRole  String?
+  id                   Int              @id @default(autoincrement())
+  name                 String
+  slug                 String           @unique
+  description          String?          @db.LongText
+  image                String?          @db.LongText
+  status               Boolean          @default(false)
+  createdAt            DateTime         @default(now())
+  createdBy            Int?
+  createdByRole        String?
+  updatedAt            DateTime         @updatedAt
+  updatedBy            Int?
+  updatedByRole        String?
+  deletedAt            DateTime?
+  deletedBy            Int?
+  deletedByRole        String?
 
-  products      product[]
+  products             product[]
+  productRequests      productRequest[]
 
   @@index([createdBy])
   @@index([updatedBy])
@@ -411,22 +412,26 @@ model brand {
 }
 
 model productRequest {
-  id                Int             @id @default(autoincrement())
-  name              String
-  image             String?         @db.LongText
-  description       String?
-  quantity          Int?
+  id                        Int             @id @default(autoincrement())
+  name                      String
+  categoryId                Int
+  expectedPrice             Int?
+  expectedDailyOrders       String?
+  url                       String?         @db.LongText
+  image                     String?         @db.LongText
 
-  status            Boolean         @default(true)
-  createdAt         DateTime        @default(now())
-  createdBy         Int?
-  createdByRole     String?
-  updatedAt         DateTime        @updatedAt
-  updatedBy         Int?
-  updatedByRole     String?
-  deletedAt         DateTime?
-  deletedBy         Int?
-  deletedByRole     String?
+  status                    Boolean         @default(true)
+  createdAt                 DateTime        @default(now())
+  createdBy                 Int?
+  createdByRole             String?
+  updatedAt                 DateTime        @updatedAt
+  updatedBy                 Int?
+  updatedByRole             String?
+  deletedAt                 DateTime?
+  deletedBy                 Int?
+  deletedByRole             String?
+
+  category                  category        @relation(fields: [categoryId], references: [id])
 }
 
 model product {

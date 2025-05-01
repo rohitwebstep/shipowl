@@ -379,9 +379,11 @@ CREATE TABLE `brand` (
 CREATE TABLE `productRequest` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `categoryId` INTEGER NOT NULL,
+    `expectedPrice` INTEGER NULL,
+    `expectedDailyOrders` VARCHAR(191) NULL,
+    `url` LONGTEXT NULL,
     `image` LONGTEXT NULL,
-    `description` VARCHAR(191) NULL,
-    `quantity` INTEGER NULL,
     `status` BOOLEAN NOT NULL DEFAULT true,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
@@ -516,6 +518,9 @@ ALTER TABLE `warehouse` ADD CONSTRAINT `warehouse_stateId_fkey` FOREIGN KEY (`st
 
 -- AddForeignKey
 ALTER TABLE `warehouse` ADD CONSTRAINT `warehouse_cityId_fkey` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `productRequest` ADD CONSTRAINT `productRequest_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `product` ADD CONSTRAINT `product_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

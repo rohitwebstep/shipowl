@@ -3,10 +3,16 @@ import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
 
 interface ProductRequest {
+    id?: number,
     name: string;
+    categoryId?: number;
+    category: {
+        connect: { id: number }; // or whatever your relation is
+    };
+    expectedPrice: number;
+    expectedDailyOrders?: string;
+    url?: string;
     image?: string;
-    description: string;
-    quantity: number;
     status: boolean;
     updatedBy?: number;
     updatedAt?: Date;
@@ -24,9 +30,15 @@ export const updateProductRequest = async (
     data: ProductRequest
 ) => {
     try {
-        data.updatedBy = adminId;
-        data.updatedAt = new Date();
-        data.updatedByRole = adminRole;
+        const {
+            name,
+            category,
+            expectedPrice,
+            expectedDailyOrders,
+            url,
+            status,
+            image
+        } = data;
 
         if (data.image) {
             const newImagesArr = data.image.split(",").map((img) => img.trim());
@@ -48,7 +60,18 @@ export const updateProductRequest = async (
 
         const productRequest = await prisma.productRequest.update({
             where: { id: productRequestId }, // Assuming 'id' is the correct primary key field
-            data: data,
+            data: {
+                name,
+                category,
+                expectedPrice,
+                expectedDailyOrders,
+                url,
+                status,
+                image,
+                updatedAt: new Date(),
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+            },
         });
 
         return { status: true, productRequest };
@@ -110,7 +133,11 @@ export const removeProductRequestImageByIndex = async (
 
         // Update productRequest in DB
         const updatedProductRequest = await prisma.productRequest.update({
-            where: { id: productRequestId },
+            where: {
+                id: productRequestId,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
             data: { image: updatedImages },
         });
 
@@ -180,6 +207,7 @@ export const getProductRequestsByStatus = async (
         const productRequests = await prisma.productRequest.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
+            include: { category: true }
         });
 
         return { status: true, productRequests };
@@ -194,7 +222,11 @@ export const getProductRequestsByStatus = async (
 export const softDeleteProductRequest = async (adminId: number, adminRole: string, id: number) => {
     try {
         const updatedProductRequest = await prisma.productRequest.update({
-            where: { id },
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
             data: {
                 deletedBy: adminId,
                 deletedAt: new Date(),
@@ -212,7 +244,11 @@ export const softDeleteProductRequest = async (adminId: number, adminRole: strin
 export const restoreProductRequest = async (adminId: number, adminRole: string, id: number) => {
     try {
         const restoredProductRequest = await prisma.productRequest.update({
-            where: { id },
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null
@@ -231,9 +267,15 @@ export const restoreProductRequest = async (adminId: number, adminRole: string, 
 };
 
 // 🔴 DELETE
-export const deleteProductRequest = async (id: number) => {
+export const deleteProductRequest = async (adminId: number, adminRole: string, id: number) => {
     try {
-        await prisma.productRequest.delete({ where: { id } });
+        await prisma.productRequest.delete({
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
         return { status: true, message: "ProductRequest deleted successfully" };
     } catch (error) {
         console.error("❌ deleteProductRequest Error:", error);

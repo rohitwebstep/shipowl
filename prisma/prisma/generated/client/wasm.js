@@ -423,9 +423,11 @@ exports.Prisma.BrandScalarFieldEnum = {
 exports.Prisma.ProductRequestScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  categoryId: 'categoryId',
+  expectedPrice: 'expectedPrice',
+  expectedDailyOrders: 'expectedDailyOrders',
+  url: 'url',
   image: 'image',
-  description: 'description',
-  quantity: 'quantity',
   status: 'status',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
@@ -708,8 +710,9 @@ exports.Prisma.brandOrderByRelevanceFieldEnum = {
 
 exports.Prisma.productRequestOrderByRelevanceFieldEnum = {
   name: 'name',
+  expectedDailyOrders: 'expectedDailyOrders',
+  url: 'url',
   image: 'image',
-  description: 'description',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'

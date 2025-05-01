@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/admin/auth/login/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/product/request/my/[productRequestId]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,6 +50,14 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
+
+module.exports = mod;
+}}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
@@ -8059,14 +8067,6 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
-
-module.exports = mod;
-}}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -8869,373 +8869,6 @@ connectToDatabase().catch((error)=>{
 });
 const __TURBOPACK__default__export__ = prisma;
 }}),
-"[externals]/events [external] (events, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("events", () => require("events"));
-
-module.exports = mod;
-}}),
-"[externals]/url [external] (url, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("url", () => require("url"));
-
-module.exports = mod;
-}}),
-"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("util", () => require("util"));
-
-module.exports = mod;
-}}),
-"[externals]/http [external] (http, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("http", () => require("http"));
-
-module.exports = mod;
-}}),
-"[externals]/https [external] (https, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("https", () => require("https"));
-
-module.exports = mod;
-}}),
-"[externals]/zlib [external] (zlib, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("zlib", () => require("zlib"));
-
-module.exports = mod;
-}}),
-"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}}),
-"[externals]/net [external] (net, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("net", () => require("net"));
-
-module.exports = mod;
-}}),
-"[externals]/dns [external] (dns, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("dns", () => require("dns"));
-
-module.exports = mod;
-}}),
-"[externals]/os [external] (os, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("os", () => require("os"));
-
-module.exports = mod;
-}}),
-"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("crypto", () => require("crypto"));
-
-module.exports = mod;
-}}),
-"[externals]/tls [external] (tls, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tls", () => require("tls"));
-
-module.exports = mod;
-}}),
-"[externals]/child_process [external] (child_process, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("child_process", () => require("child_process"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "sendEmail": (()=>sendEmail)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/nodemailer/lib/nodemailer.js [app-route] (ecmascript)");
-;
-async function sendEmail(config, mailData) {
-    const { host, port, secure, username, password, from_email, from_name } = config;
-    const { recipient = [], cc = [], bcc = [], subject, htmlBody, attachments = [] } = mailData;
-    const formatAddressList = (list)=>Array.isArray(list) ? list.map(({ name, email })=>`${name} <${email}>`) : [];
-    const formatAttachments = (list)=>list.map(({ name, path })=>({
-                filename: name,
-                path: path
-            }));
-    try {
-        const transporter = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].createTransport({
-            host,
-            port: Number(port),
-            secure,
-            auth: {
-                user: username,
-                pass: password
-            }
-        });
-        const mailOptions = {
-            from: `${from_name} <${from_email}>`,
-            to: formatAddressList(recipient),
-            cc: formatAddressList(cc),
-            bcc: formatAddressList(bcc),
-            subject,
-            html: htmlBody,
-            attachments: formatAttachments(attachments)
-        };
-        const info = await transporter.sendMail(mailOptions);
-        console.log(`📤 Email sent to ${mailOptions.to.join(", ")} | ID: ${info.messageId}`);
-        return {
-            success: true,
-            messageId: info.messageId
-        };
-    } catch (error) {
-        // Specify a type other than 'any' for the error
-        if (error instanceof Error) {
-            console.error("❌ Email Error:", error.message);
-            return {
-                success: false,
-                error: error.message
-            };
-        } else {
-            console.error("❌ Unknown Error:", error);
-            return {
-                success: false,
-                error: "Unknown error occurred"
-            };
-        }
-    }
-}
-}}),
-"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("buffer", () => require("buffer"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "generatePasswordResetToken": (()=>generatePasswordResetToken),
-    "generateToken": (()=>generateToken),
-    "isUserExist": (()=>isUserExist),
-    "verifyToken": (()=>verifyToken)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-;
-;
-const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
-function generateToken(adminId, adminRole) {
-    console.log(`adminId: ${adminId}, adminRole: ${adminRole}`);
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId,
-        adminRole
-    }, SECRET_KEY, {
-        expiresIn: '3h'
-    });
-}
-function generatePasswordResetToken(adminId, adminRole) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId,
-        adminRole
-    }, SECRET_KEY, {
-        expiresIn: '1h'
-    });
-}
-async function verifyToken(token) {
-    try {
-        const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
-        return {
-            payload,
-            status: true,
-            message: "Token is valid"
-        };
-    } catch (error) {
-        let message = "Authentication failed. Please try again.";
-        if (typeof error === "object" && error !== null && "code" in error) {
-            const err = error;
-            if (err.code === 'ERR_JWT_EXPIRED') {
-                message = "Session expired. Please log in again.";
-            }
-        }
-        return {
-            payload: null,
-            status: false,
-            message
-        };
-    }
-}
-async function isUserExist(adminId, adminRole) {
-    try {
-        const adminRoleStr = String(adminRole); // Ensure it's a string
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(adminRoleStr) ? "admin" : "adminStaff";
-        // Fetch admin details from database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
-                where: {
-                    id: adminId,
-                    role: adminRoleStr
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
-                where: {
-                    id: adminId,
-                    role: adminRoleStr
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true
-                }
-            });
-        }
-        // If admin doesn't exist, return false with a message
-        if (!admin) {
-            return {
-                status: false,
-                message: "User with the provided ID does not exist"
-            };
-        }
-        // Return admin details if found
-        return {
-            status: true,
-            admin
-        };
-    } catch (error) {
-        console.error("Error fetching admin by ID:", error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-}}),
-"[project]/src/utils/hashUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "comparePassword": (()=>comparePassword),
-    "hashPassword": (()=>hashPassword)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
-;
-async function hashPassword(password) {
-    const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10);
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-}
-async function comparePassword(password, hashedPassword) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, hashedPassword);
-}
-}}),
-"[project]/src/app/models/emailConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "getEmailConfig": (()=>getEmailConfig)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-const getEmailConfig = async (panel, module, action, status = true // Default value is true
-)=>{
-    try {
-        console.log(`Fetching email configuration for panel: ${panel}, module: ${module}, action: ${action}, status: ${status}`);
-        // Fetching the email configuration from the database based on conditions
-        const emailConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].emailConfig.findFirst({
-            where: {
-                panel,
-                module,
-                action,
-                status
-            },
-            orderBy: {
-                id: "desc"
-            }
-        });
-        if (!emailConfig) {
-            return {
-                status: false,
-                message: "Email configuration not found"
-            };
-        }
-        // Mapping the database result to the desired output format
-        const config = {
-            host: emailConfig.smtp_host,
-            port: emailConfig.smtp_port,
-            secure: emailConfig.smtp_secure,
-            username: emailConfig.smtp_username,
-            password: emailConfig.smtp_password,
-            from_email: emailConfig.from_email,
-            from_name: emailConfig.from_name
-        };
-        return {
-            status: true,
-            emailConfig: config,
-            htmlTemplate: emailConfig.html_template,
-            subject: emailConfig.subject
-        };
-    } catch (error) {
-        console.error(`Error fetching email configuration for panel "${panel}", module "${module}", action "${action}":`, error);
-        return {
-            status: false,
-            message: "Error fetching email configuration"
-        };
-    }
-};
-}}),
 "[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9388,361 +9021,99 @@ async function fetchLogInfo(module, action, req) {
     }
 }
 }}),
-"[project]/src/app/api/controllers/admin/authController.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("buffer", () => require("buffer"));
+
+module.exports = mod;
+}}),
+"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}}),
+"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}}),
+"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}}),
+"[project]/src/utils/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "adminByToken": (()=>adminByToken),
-    "adminByUsernameRole": (()=>adminByUsernameRole),
-    "handleForgetPassword": (()=>handleForgetPassword),
-    "handleLogin": (()=>handleLogin),
-    "handleResetPassword": (()=>handleResetPassword),
-    "handleVerifyLogin": (()=>handleVerifyLogin)
+    "generatePasswordResetToken": (()=>generatePasswordResetToken),
+    "generateToken": (()=>generateToken),
+    "isUserExist": (()=>isUserExist),
+    "verifyToken": (()=>verifyToken)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/hashUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/emailConfig.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
 ;
 ;
-;
-;
-;
-;
-;
-;
-async function handleLogin(req, adminRole, adminStaffRole) {
+const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
+function generateToken(adminId, adminRole) {
+    console.log(`adminId: ${adminId}, adminRole: ${adminRole}`);
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '3h'
+    });
+}
+function generatePasswordResetToken(adminId, adminRole) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '1h'
+    });
+}
+async function verifyToken(token) {
     try {
-        const { email, password } = await req.json();
-        // Hash the password using bcrypt
-        const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10); // Generates a salt with 10 rounds
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
-        // Fetch admin by email and role
-        let adminResponse = await adminByUsernameRole(email, adminRole);
-        if (!adminResponse.status || !adminResponse.admin) {
-            adminResponse = await adminByUsernameRole(email, adminStaffRole);
-            if (!adminResponse.status || !adminResponse.admin) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: adminResponse.message || "Invalid email or password",
-                    status: false
-                }, {
-                    status: 401
-                });
+        const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
+        return {
+            payload,
+            status: true,
+            message: "Token is valid"
+        };
+    } catch (error) {
+        let message = "Authentication failed. Please try again.";
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error;
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
             }
         }
-        const admin = adminResponse.admin;
-        // Compare the provided password with the stored hash
-        const isPasswordValid = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["comparePassword"])(password, admin.password);
-        if (!isPasswordValid) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'Invalid email or password',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Generate authentication token
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generateToken"])(admin.id, admin.role);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Login successful",
-            token,
-            admin: {
-                id: admin.id,
-                name: admin.name,
-                email: admin.email,
-                role: admin.role
-            }
-        });
-    } catch (error) {
-        console.error(`Error during login:`, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
+        return {
+            payload: null,
+            status: false,
+            message
+        };
     }
 }
-async function handleVerifyLogin(req, adminRole, adminStaffRole) {
+async function isUserExist(adminId, adminRole) {
     try {
-        // Extract token from Authorization header
-        const token = req.headers.get('authorization')?.split(' ')[1];
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'No token provided',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Use adminByToken to verify token and fetch admin details
-        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: message || "Invalid email or password",
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Token is valid",
-            admin,
-            status: true
-        });
-    } catch (error) {
-        console.error(`error - `, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleForgetPassword(req, panel, adminRole, adminStaffRole) {
-    try {
-        const { email } = await req.json();
-        if (!email) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Email is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Attempt to fetch admin or adminStaff by email
-        let userResponse = await adminByUsernameRole(email, adminRole);
-        if (!userResponse.status || !userResponse.admin) {
-            userResponse = await adminByUsernameRole(email, adminStaffRole);
-            if (!userResponse.status || !userResponse.admin) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: "No account found with this email.",
-                    status: false
-                }, {
-                    status: 404
-                });
-            }
-        }
-        const admin = userResponse.admin;
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generatePasswordResetToken"])(admin.id, admin.role);
-        const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-        // Update token and expiry in database
-        const updateData = {
-            pr_token: token,
-            pr_expires_at: expiry
-        };
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        // Optional: Send email
-        // await sendPasswordResetEmail(admin.email, token);
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])(panel, "auth", "forget-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        let urlPanel;
-        if (panel == 'dropshipper') {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
-        } else {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{resetUrl}}": urlPanel,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email
-                }
-            ],
-            cc: [],
-            bcc: [],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.success) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Reset token created but failed to send email. Please try again.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset link has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Forgot password error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Something went wrong. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleResetPassword(req, adminRole, adminStaffRole) {
-    try {
-        const { token, password } = await req.json();
-        // Check if token is provided
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Token is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Verify token and fetch admin details using adminByToken function
-        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!tokenStatus || !admin) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: tokenMessage || "Invalid token or role."
-            }, {
-                status: 401
-            });
-        }
-        // Hash the password using bcrypt
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10));
-        // Prepare the update data
-        const updateData = {
-            pr_token: null,
-            pr_expires_at: null,
-            pr_last_reset: new Date(),
-            password: hashedPassword
-        };
-        // Update the admin or admin staff record based on the role
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("admin", "auth", "reset-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
-        // Replace placeholders in the HTML template
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email: admin.email
-                }
-            ],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        // Send email notification
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.success) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Password reset successful, but failed to send email notification.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        // Return success response
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset successful. A notification has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Password reset error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "An error occurred while resetting the password. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function adminByUsernameRole(username, role) {
-    try {
-        const adminRoleStr = String(role); // Ensure it's a string
+        const adminRoleStr = String(adminRole); // Ensure it's a string
         const adminModel = [
             "admin",
             "dropshipper",
@@ -9751,10 +9122,10 @@ async function adminByUsernameRole(username, role) {
         // Fetch admin details from database
         let admin;
         if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findFirst({
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
                 where: {
-                    email: username,
-                    role
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
@@ -9765,10 +9136,10 @@ async function adminByUsernameRole(username, role) {
                 }
             });
         } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findFirst({
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
                 where: {
-                    email: username,
-                    role
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
@@ -9786,89 +9157,13 @@ async function adminByUsernameRole(username, role) {
                 message: "User with the provided ID does not exist"
             };
         }
+        // Return admin details if found
         return {
             status: true,
             admin
         };
     } catch (error) {
-        console.error(`Error fetching admin:`, error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function adminByToken(token, adminRole, adminStaffRole) {
-    try {
-        // Verify token and extract admin details
-        const { payload, status, message } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        if (!status || !payload || typeof payload.adminId !== 'number') {
-            return {
-                status: false,
-                message: message || "Unauthorized access. Invalid token."
-            };
-        }
-        // Determine the admin model based on role
-        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-        if (![
-            adminRole,
-            adminStaffRole
-        ].includes(payloadAdminRole)) {
-            return {
-                status: false,
-                message: "Access denied. Invalid role."
-            };
-        }
-        // Set the correct admin model
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(payloadAdminRole) ? "admin" : "adminStaff";
-        // Fetch the admin from the database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        }
-        // If admin not found, return error
-        if (!admin) {
-            return {
-                status: false,
-                message: "Invalid admin credentials or account not found."
-            };
-        }
-        // Return success with admin details
-        return {
-            status: true,
-            message: "Token is valid",
-            admin
-        };
-    } catch (error) {
-        console.error("Error fetching admin:", error);
+        console.error("Error fetching admin by ID:", error);
         return {
             status: false,
             message: "Internal Server Error"
@@ -9876,23 +9171,1245 @@ async function adminByToken(token, adminRole, adminStaffRole) {
     }
 }
 }}),
-"[project]/src/app/api/admin/auth/login/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
+
+module.exports = mod;
+}}),
+"[project]/src/utils/saveFiles.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "POST": (()=>POST)
+    "deleteFile": (()=>deleteFile),
+    "saveFilesFromFormData": (()=>saveFilesFromFormData)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/controllers/admin/authController.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
 ;
-async function POST(req) {
-    const adminRole = "admin";
-    const adminStaffRole = "admin_staff";
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["handleLogin"])(req, adminRole, adminStaffRole);
+;
+;
+// Helper: ensure directory exists
+async function ensureDir(dirPath) {
+    if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(dirPath)) {
+        console.log(`📁 Directory not found. Creating: ${dirPath}`);
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(dirPath, {
+            recursive: true
+        });
+    } else {
+        console.log(`✅ Directory already exists: ${dirPath}`);
+    }
+}
+// Helper: generate file name
+function generateFileName(originalName, pattern, customName) {
+    const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(originalName);
+    const base = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(originalName, ext);
+    switch(pattern){
+        case 'original':
+            console.log(`📝 Using original filename: ${originalName}`);
+            return originalName;
+        case 'custom':
+            const name = `${customName}${ext}`;
+            console.log(`📝 Using custom filename: ${name}`);
+            return name;
+        case 'slug':
+            const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const slugName = `${slug}${ext}`;
+            console.log(`📝 Using slug filename: ${slugName}`);
+            return slugName;
+        case 'slug-unique':
+            const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
+            const slugUniqueName = `${unique}${ext}`;
+            console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
+            return slugUniqueName;
+        default:
+            return originalName;
+    }
+}
+async function saveFilesFromFormData(formData, fieldName, options) {
+    const { dir, pattern, customName, multiple = false } = options;
+    console.log(`🚀 Starting file save from field: "${fieldName}"`);
+    await ensureDir(dir);
+    let result = multiple ? [] : null;
+    const files = formData.getAll(fieldName).filter((item)=>item instanceof File && item.name.length > 0);
+    console.log(`📦 Total files to process: ${files.length}`);
+    for(let index = 0; index < files.length; index++){
+        const file = files[index];
+        const nameToUse = pattern === 'custom' && multiple ? `${customName}-${index + 1}` : pattern === 'custom' ? customName : file.name;
+        const finalFileName = generateFileName(nameToUse, pattern, nameToUse);
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const fullPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(dir, finalFileName);
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(fullPath, buffer);
+        const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
+        const info = {
+            originalName: file.name,
+            savedAs: finalFileName,
+            size: file.size,
+            type: file.type,
+            url: `${fileUrl}`
+        };
+        if (multiple && Array.isArray(result)) {
+            result.push(info);
+        } else {
+            result = info;
+        }
+    }
+    return result;
+}
+async function deleteFile(filePath) {
+    try {
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["stat"])(filePath); // Throws if file doesn't exist
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
+        return true;
+    } catch (error) {
+        console.log(`error - File not found or couldn't be deleted: ${filePath}`, error);
+        return false;
+    }
+}
+}}),
+"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "validateFormData": (()=>validateFormData)
+});
+function toReadableFieldName(field) {
+    // Converts camelCase or snake_case to Title Case
+    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
+}
+function validateFormData(formData, { requiredFields = [], patternValidations = {} }) {
+    const error = {};
+    // Required fields
+    for (const field of requiredFields){
+        const value = formData.get(field);
+        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
+            error[field] = `${toReadableFieldName(field)} is required`;
+        }
+    }
+    // Pattern validations
+    for (const [field, expectedType] of Object.entries(patternValidations)){
+        const value = formData.get(field);
+        if (value !== null) {
+            const val = typeof value === 'string' ? value.trim() : value;
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean = expectedType === 'boolean' && ![
+                'true',
+                'false',
+                '1',
+                '0',
+                true,
+                false,
+                1,
+                0,
+                'active',
+                'inactive'
+            ].includes(val.toString().toLowerCase());
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
+            }
+        }
+    }
+    const errorCount = Object.keys(error).length;
+    return {
+        isValid: errorCount === 0,
+        ...errorCount > 0 && {
+            error
+        },
+        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
+    };
+}
+}}),
+"[project]/src/app/models/product/myProductRequest.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "deleteProductRequest": (()=>deleteProductRequest),
+    "getAllProductRequests": (()=>getAllProductRequests),
+    "getProductRequestById": (()=>getProductRequestById),
+    "getProductRequestsByStatus": (()=>getProductRequestsByStatus),
+    "removeProductRequestImageByIndex": (()=>removeProductRequestImageByIndex),
+    "restoreProductRequest": (()=>restoreProductRequest),
+    "softDeleteProductRequest": (()=>softDeleteProductRequest),
+    "updateProductRequest": (()=>updateProductRequest)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+;
+;
+;
+const updateProductRequest = async (adminId, adminRole, productRequestId, data)=>{
+    try {
+        const { name, category, expectedPrice, expectedDailyOrders, url, status, image } = data;
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img)=>img.trim());
+            const { status, productRequest, message } = await getProductRequestById(adminId, adminRole, productRequestId);
+            if (!status || !productRequest) {
+                return {
+                    status: false,
+                    message: message || "ProductRequest not found."
+                };
+            }
+            const existingImages = productRequest.image ? productRequest.image.split(",").map((img)=>img.trim()) : [];
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([
+                ...existingImages,
+                ...newImagesArr
+            ]));
+            data.image = mergedImages.join(",");
+        }
+        const productRequest = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.update({
+            where: {
+                id: productRequestId
+            },
+            data: {
+                name,
+                category,
+                expectedPrice,
+                expectedDailyOrders,
+                url,
+                status,
+                image,
+                updatedAt: new Date(),
+                updatedBy: adminId,
+                updatedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            productRequest
+        };
+    } catch (error) {
+        console.error("❌ updateProductRequest Error:", error);
+        return {
+            status: false,
+            message: "Error updating productRequest"
+        };
+    }
+};
+const getProductRequestById = async (adminId, adminRole, id)=>{
+    try {
+        const productRequest = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.findUnique({
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        if (!productRequest) return {
+            status: false,
+            message: "ProductRequest not found"
+        };
+        return {
+            status: true,
+            productRequest
+        };
+    } catch (error) {
+        console.error("❌ getProductRequestById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching productRequest"
+        };
+    }
+};
+const removeProductRequestImageByIndex = async (adminId, adminRole, productRequestId, imageIndex)=>{
+    try {
+        const { status, productRequest, message } = await getProductRequestById(adminId, adminRole, productRequestId);
+        if (!status || !productRequest) {
+            return {
+                status: false,
+                message: message || "ProductRequest not found."
+            };
+        }
+        if (!productRequest.image) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = productRequest.image.split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update productRequest in DB
+        const updatedProductRequest = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.update({
+            where: {
+                id: productRequestId,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
+            data: {
+                image: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "productRequest", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            productRequest: updatedProductRequest
+        };
+    } catch (error) {
+        console.error("❌ Error removing productRequest image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getAllProductRequests = async ()=>{
+    try {
+        const productRequests = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            productRequests
+        };
+    } catch (error) {
+        console.error("❌ getAllProductRequests Error:", error);
+        return {
+            status: false,
+            message: "Error fetching productRequests"
+        };
+    }
+};
+const getProductRequestsByStatus = async (adminId, adminRole, status)=>{
+    try {
+        let whereCondition = {
+            createdBy: adminId,
+            createdByRole: adminRole
+        };
+        switch(status){
+            case "active":
+                whereCondition = {
+                    ...whereCondition,
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    ...whereCondition,
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    ...whereCondition,
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    ...whereCondition,
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const productRequests = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            productRequests
+        };
+    } catch (error) {
+        console.error(`Error fetching productRequests by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching productRequests"
+        };
+    }
+};
+const softDeleteProductRequest = async (adminId, adminRole, id)=>{
+    try {
+        const updatedProductRequest = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.update({
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "ProductRequest soft deleted successfully",
+            updatedProductRequest
+        };
+    } catch (error) {
+        console.error("❌ softDeleteProductRequest Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting productRequest"
+        };
+    }
+};
+const restoreProductRequest = async (adminId, adminRole, id)=>{
+    try {
+        const restoredProductRequest = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.update({
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "ProductRequest restored successfully",
+            restoredProductRequest
+        };
+    } catch (error) {
+        console.error("❌ restoreProductRequest Error:", error);
+        return {
+            status: false,
+            message: "Error restoring productRequest"
+        };
+    }
+};
+const deleteProductRequest = async (adminId, adminRole, id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productRequest.delete({
+            where: {
+                id,
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "ProductRequest deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteProductRequest Error:", error);
+        return {
+            status: false,
+            message: "Error deleting productRequest"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/category.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createCategory": (()=>createCategory),
+    "deleteCategory": (()=>deleteCategory),
+    "generateCategorySlug": (()=>generateCategorySlug),
+    "getAllCategories": (()=>getAllCategories),
+    "getCategoriesByStatus": (()=>getCategoriesByStatus),
+    "getCategoryById": (()=>getCategoryById),
+    "removeCategoryImageByIndex": (()=>removeCategoryImageByIndex),
+    "restoreCategory": (()=>restoreCategory),
+    "softDeleteCategory": (()=>softDeleteCategory),
+    "updateCategory": (()=>updateCategory)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+;
+;
+;
+async function generateCategorySlug(name) {
+    let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    let isSlugTaken = true;
+    let suffix = 0;
+    // Keep checking until an unused slug is found
+    while(isSlugTaken){
+        const existingCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
+            where: {
+                slug
+            }
+        });
+        if (existingCategory) {
+            // If the slug already exists, add a suffix (-1, -2, etc.)
+            suffix++;
+            slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
+        } else {
+            // If the slug is not taken, set isSlugTaken to false to exit the loop
+            isSlugTaken = false;
+        }
+    }
+    return slug;
+}
+async function createCategory(adminId, adminRole, category) {
+    try {
+        const { name, description, status, image } = category;
+        // Generate a unique slug for the category
+        const slug = await generateCategorySlug(name);
+        const newCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.create({
+            data: {
+                name,
+                description,
+                status,
+                slug,
+                image,
+                createdAt: new Date(),
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            category: newCategory
+        };
+    } catch (error) {
+        console.error(`Error creating category:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateCategory = async (adminId, adminRole, categoryId, data)=>{
+    try {
+        data.updatedBy = adminId;
+        data.updatedAt = new Date();
+        data.updatedByRole = adminRole;
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img)=>img.trim());
+            const { status, category, message } = await getCategoryById(categoryId);
+            if (!status || !category) {
+                return {
+                    status: false,
+                    message: message || "Category not found."
+                };
+            }
+            const existingImages = category.image ? category.image.split(",").map((img)=>img.trim()) : [];
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([
+                ...existingImages,
+                ...newImagesArr
+            ]));
+            data.image = mergedImages.join(",");
+        }
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: data
+        });
+        return {
+            status: true,
+            category
+        };
+    } catch (error) {
+        console.error("❌ updateCategory Error:", error);
+        return {
+            status: false,
+            message: "Error updating category"
+        };
+    }
+};
+const getCategoryById = async (id)=>{
+    try {
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!category) return {
+            status: false,
+            message: "Category not found"
+        };
+        return {
+            status: true,
+            category
+        };
+    } catch (error) {
+        console.error("❌ getCategoryById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching category"
+        };
+    }
+};
+const removeCategoryImageByIndex = async (categoryId, imageIndex)=>{
+    try {
+        const { status, category, message } = await getCategoryById(categoryId);
+        if (!status || !category) {
+            return {
+                status: false,
+                message: message || "Category not found."
+            };
+        }
+        if (!category.image) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = category.image.split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update category in DB
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: {
+                image: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "category", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            category: updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ Error removing category image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getAllCategories = async ()=>{
+    try {
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            categories
+        };
+    } catch (error) {
+        console.error("❌ getAllCategories Error:", error);
+        return {
+            status: false,
+            message: "Error fetching categories"
+        };
+    }
+};
+const getCategoriesByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            categories
+        };
+    } catch (error) {
+        console.error(`Error fetching categories by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching categories"
+        };
+    }
+};
+const softDeleteCategory = async (adminId, adminRole, id)=>{
+    try {
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Category soft deleted successfully",
+            updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ softDeleteCategory Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting category"
+        };
+    }
+};
+const restoreCategory = async (adminId, adminRole, id)=>{
+    try {
+        const restoredCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "Category restored successfully",
+            restoredCategory
+        };
+    } catch (error) {
+        console.error("❌ restoreCategory Error:", error);
+        return {
+            status: false,
+            message: "Error restoring category"
+        };
+    }
+};
+const deleteCategory = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Category deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteCategory Error:", error);
+        return {
+            status: false,
+            message: "Error deleting category"
+        };
+    }
+};
+}}),
+"[project]/src/app/api/product/request/my/[productRequestId]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "DELETE": (()=>DELETE),
+    "GET": (()=>GET),
+    "PATCH": (()=>PATCH),
+    "PUT": (()=>PUT)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/product/myProductRequest.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/category.ts [app-route] (ecmascript)");
+;
+;
+;
+;
+;
+;
+;
+;
+async function GET(req) {
+    try {
+        // Extract productRequestId directly from the URL path
+        const productRequestId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested ProductRequest ID:', productRequestId);
+        // Retrieve x-admin-id and x-admin-role from request headers
+        const adminIdHeader = req.headers.get("x-admin-id");
+        const adminRole = req.headers.get("x-admin-role");
+        const adminId = Number(adminIdHeader);
+        if (!adminIdHeader || isNaN(adminId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: "User ID is missing or invalid in request"
+            }, {
+                status: 400
+            });
+        }
+        // Check if admin exists
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!result.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${result.message}`
+            }, {
+                status: 404
+            });
+        }
+        const productRequestIdNum = Number(productRequestId);
+        if (isNaN(productRequestIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid productRequestID', {
+                productRequestId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid productRequestID'
+            }, {
+                status: 400
+            });
+        }
+        const productRequestResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductRequestById"])(Number(adminId), String(adminRole), productRequestIdNum);
+        if (productRequestResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'ProductRequest found:', productRequestResult.productRequest);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                productRequest: productRequestResult.productRequest
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'ProductRequest found:', productRequestResult.productRequest);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'ProductRequest not found'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching productRequests:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: "Failed to fetch productRequests"
+        }, {
+            status: 500
+        });
+    }
+}
+async function PUT(req) {
+    try {
+        // Extract productRequestId directly from the URL path
+        const productRequestId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested ProductRequest ID:', productRequestId);
+        // Get headers
+        const adminIdHeader = req.headers.get("x-admin-id");
+        const adminRole = req.headers.get("x-admin-role");
+        const adminId = Number(adminIdHeader);
+        if (!adminIdHeader || isNaN(adminId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID header', {
+                adminIdHeader,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "User ID is missing or invalid in request"
+            }, {
+                status: 400
+            });
+        }
+        // Check if admin exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const productRequestIdNum = Number(productRequestId);
+        if (isNaN(productRequestIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid productRequestID', {
+                productRequestId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid productRequestID'
+            }, {
+                status: 400
+            });
+        }
+        const productRequestResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductRequestById"])(Number(adminId), String(adminRole), productRequestIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'ProductRequest fetch result:', productRequestResult);
+        if (!productRequestResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'ProductRequest not found', {
+                productRequestIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'ProductRequest not found'
+            }, {
+                status: 404
+            });
+        }
+        const isMultipleImages = true; // Set true to allow multiple image uploads
+        const formData = await req.formData();
+        // Validate input
+        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
+            requiredFields: [
+                'name',
+                'category'
+            ],
+            patternValidations: {
+                status: 'boolean',
+                category: 'number'
+            }
+        });
+        if (!validation.isValid) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.error);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: validation.error,
+                message: validation.message
+            }, {
+                status: 400
+            });
+        }
+        // Extract fields
+        const name = formData.get('name');
+        const categoryId = Number(formData.get('category'));
+        const expectedPrice = Number(formData.get('expectedPrice'));
+        const expectedDailyOrders = formData.get('expectedDailyOrders');
+        const url = formData.get('url');
+        const statusRaw = formData.get('status')?.toString().toLowerCase();
+        const status = [
+            'true',
+            '1',
+            true,
+            1,
+            'active'
+        ].includes(statusRaw);
+        if (isNaN(categoryId) || isNaN(expectedPrice)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid categoryId or expectedPrice', {
+                categoryId,
+                expectedPrice
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid category and expected price'
+            }, {
+                status: 400
+            });
+        }
+        const categoryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoryById"])(categoryId);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Category fetch result:', categoryResult);
+        if (!categoryResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Category not found', {
+                categoryId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'category not found'
+            }, {
+                status: 404
+            });
+        }
+        // File upload
+        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'productRequest');
+        const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
+            dir: uploadDir,
+            pattern: 'slug-unique',
+            multiple: isMultipleImages
+        });
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'File upload result:', fileData);
+        let image = '';
+        if (fileData) {
+            image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
+        }
+        const productRequestPayload = {
+            name,
+            category: {
+                connect: {
+                    id: categoryId
+                }
+            },
+            expectedPrice,
+            expectedDailyOrders,
+            url,
+            status,
+            image
+        };
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'ProductRequest payload:', productRequestPayload);
+        const productRequestCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateProductRequest"])(adminId, String(adminRole), productRequestIdNum, productRequestPayload);
+        if (productRequestCreateResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'ProductRequest updated successfully:', productRequestCreateResult.productRequest);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                productRequest: productRequestCreateResult.productRequest
+            }, {
+                status: 200
+            });
+        }
+        // ❌ ProductRequest creation failed — delete uploaded file(s)
+        const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
+        if (isMultipleImages && Array.isArray(fileData)) {
+            await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
+        } else {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'ProductRequest update failed', productRequestCreateResult?.message);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: productRequestCreateResult?.message || 'ProductRequest creation failed'
+        }, {
+            status: 500
+        });
+    } catch (err) {
+        const error = err instanceof Error ? err.message : 'Internal Server Error';
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ ProductRequest Updation Error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error
+        }, {
+            status: 500
+        });
+    }
+}
+async function PATCH(req) {
+    try {
+        // Extract productRequestId directly from the URL path
+        const productRequestId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Requested ProductRequest ID:', productRequestId);
+        // Get headers
+        const adminIdHeader = req.headers.get("x-admin-id");
+        const adminRole = req.headers.get("x-admin-role");
+        const adminId = Number(adminIdHeader);
+        if (!adminIdHeader || isNaN(adminId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID header', {
+                adminIdHeader,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "User ID is missing or invalid in request"
+            }, {
+                status: 400
+            });
+        }
+        // Check if admin exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const productRequestIdNum = Number(productRequestId);
+        if (isNaN(productRequestIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid productRequestID', {
+                productRequestId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Invalid productRequestID'
+            }, {
+                status: 400
+            });
+        }
+        const productRequestResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductRequestById"])(Number(adminId), String(adminRole), productRequestIdNum);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'ProductRequest fetch result:', productRequestResult);
+        if (!productRequestResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'ProductRequest not found', {
+                productRequestIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'ProductRequest not found'
+            }, {
+                status: 404
+            });
+        }
+        // Restore the productRequest(i.e., reset deletedAt, deletedBy, deletedByRole)
+        const restoreResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["restoreProductRequest"])(adminId, String(adminRole), productRequestIdNum);
+        if (restoreResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'ProductRequest restored successfully:', restoreResult.restoredProductRequest);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                productRequest: restoreResult.restoredProductRequest
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'ProductRequest restore failed');
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'ProductRequest restore failed'
+        }, {
+            status: 500
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ ProductRequest restore error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function DELETE(req) {
+    try {
+        // Extract productRequestId directly from the URL path
+        const productRequestId = req.nextUrl.pathname.split('/').pop();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Delete ProductRequest Request:', {
+            productRequestId
+        });
+        // Extract admin ID and role from headers
+        const adminId = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Validate admin ID
+        if (!adminId || isNaN(Number(adminId))) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid or missing admin ID', {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Admin ID is missing or invalid'
+            }, {
+                status: 400
+            });
+        }
+        // Check if the admin user exists
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(Number(adminId), String(adminRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Admin not found: ${userCheck.message}`, {
+                adminId,
+                adminRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `Admin not found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        // Validate productRequestID
+        const productRequestIdNum = Number(productRequestId);
+        if (isNaN(productRequestIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid productRequestID format', {
+                productRequestId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'ProductRequest ID is invalid'
+            }, {
+                status: 400
+            });
+        }
+        const productRequestResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductRequestById"])(Number(adminId), String(adminRole), productRequestIdNum);
+        if (!productRequestResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'ProductRequest not found', {
+                productRequestIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'ProductRequest not found'
+            }, {
+                status: 404
+            });
+        }
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$myProductRequest$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["softDeleteProductRequest"])(Number(adminId), String(adminRole), productRequestIdNum); // Assuming softDeleteProductRequest marks the productRequestas deleted
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Soft delete request for productRequest: ${productRequestIdNum}`, {
+            adminId
+        });
+        if (result?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `ProductRequest soft deleted successfully: ${productRequestIdNum}`, {
+                adminId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: `ProductRequest soft deleted successfully`
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `ProductRequest not found or could not be deleted: ${productRequestIdNum}`, {
+            adminId
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'ProductRequest not found or deletion failed'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error during productRequestdeletion', {
+            error
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Internal server error'
+        }, {
+            status: 500
+        });
+    }
 }
 }}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a25c379f._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__8bae21a5._.js.map
