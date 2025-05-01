@@ -42,7 +42,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Permanent delete operation
-    const result = await deleteProductRequest(productRequestIdNum);  // Assuming deleteProductRequest is for permanent deletion
+    const result = await deleteProductRequest(Number(adminId), String(adminRole), productRequestIdNum);  // Assuming deleteProductRequest is for permanent deletion
     logMessage('info', `Permanent delete request for productRequest: ${productRequestIdNum}`, { adminId });
 
 
