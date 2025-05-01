@@ -66,7 +66,7 @@ export const getProductRequestById = async (
 ) => {
     try {
         const productRequest = await prisma.productRequest.findUnique({
-            where: { 
+            where: {
                 id,
                 createdBy: adminId,
                 createdByRole: adminRole
@@ -155,7 +155,7 @@ export const getProductRequestsByStatus = async (
     status: "active" | "inactive" | "deleted" | "notDeleted"
 ) => {
     try {
-        let whereCondition: { [key: string]: any } = {
+        let whereCondition: Record<string, unknown> = {
             createdBy: adminId,
             createdByRole: adminRole,
         };
