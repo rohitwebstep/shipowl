@@ -70,6 +70,11 @@ type ImageType =
     | 'package_width_image'
     | 'package_height_image';
 
+type ProductFilters = {
+    categoryId?: number;
+    brandId?: number;
+};
+
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
     if (Array.isArray(obj)) {
@@ -353,7 +358,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 article_id: variant.article_id,
                 suggested_price: variant.suggested_price,
                 shipowl_price: variant.shipowl_price,
-                rto_suggested_price: variant.rto_suggested_price,
+                rto_suggested_price: isNaN(Number(variant.rto_suggested_price)) ? null : Number(variant.rto_suggested_price),
                 rto_price: variant.rto_price,
                 image: variant.images,
                 product_link: variant.product_link,
@@ -361,9 +366,21 @@ export async function createProduct(adminId: number, adminRole: string, product:
             }));
 
             // Create variants in the database
-            await prisma.productVariant.createMany({
-                data: productVariants,
-            });
+            try {
+                await prisma.productVariant.createMany({
+                    data: productVariants,
+                });
+            } catch (variantError) {
+                console.error('Error creating product variants:', variantError);
+
+                // If variants creation fails, delete the main product
+                await prisma.product.delete({
+                    where: { id: productWithStringBigInts.id },
+                });
+
+                // Throw the error to exit the transaction
+                throw new Error('Failed to create product variants');
+            }
         }
 
         return { status: true, product: productWithStringBigInts };
@@ -372,6 +389,57 @@ export async function createProduct(adminId: number, adminRole: string, product:
         return { status: false, message: "Internal Server Error" };
     }
 }
+
+export const getProductsByFiltersAndStatus = async (productFilters: ProductFilters, status: "active" | "inactive" | "deleted" | "notDeleted") => {
+    try {
+        // Define status condition
+        const statusCondition:
+            | { status: true; deletedAt: null }
+            | { status: false; deletedAt: null }
+            | { deletedAt: { not: null } }
+            | { deletedAt: null } = (() => {
+                switch (status) {
+                    case "active":
+                        return { status: true, deletedAt: null };
+                    case "inactive":
+                        return { status: false, deletedAt: null };
+                    case "deleted":
+                        return { deletedAt: { not: null } };
+                    case "notDeleted":
+                        return { deletedAt: null };
+                    default:
+                        throw new Error("Invalid status");
+                }
+            })();
+
+        console.log(`productFilters - `, productFilters);
+        
+        // Combine with filters (fully typed)
+        const whereCondition = {
+            ...statusCondition,
+            ...(productFilters.categoryId !== undefined && {
+                categoryId: productFilters.categoryId,
+            }),
+            ...(productFilters.brandId !== undefined && {
+                brandId: productFilters.brandId,
+            }),
+        };
+
+        const products = await prisma.product.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+            include: { variants: true },
+        });
+
+        const sanitizedProducts = serializeBigInt(products);
+        logMessage("debug", "Fetched products:", sanitizedProducts);
+
+        return { status: true, products: sanitizedProducts };
+    } catch (error) {
+        console.error(`Error fetching products by filters and status:`, error);
+        return { status: false, message: "Error fetching products" };
+    }
+};
 
 export const getProductsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
     try {

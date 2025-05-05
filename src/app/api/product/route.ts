@@ -8,7 +8,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { getBrandById } from '@/app/models/brand';
 import { getCategoryById } from '@/app/models/category';
 import { getCountryById } from '@/app/models/location/country'
-import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByStatus } from '@/app/models/product/product';
+import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/product/product';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -298,35 +298,50 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching products');
+    // Extract categoryId from the query parameters
+    const categoryId = req.nextUrl.searchParams.get('category');
+    const brandId = req.nextUrl.searchParams.get('brand');
+    logMessage('debug', 'Received GET request to fetch products', { categoryId, brandId });
 
-    // Retrieve x-admin-id and x-admin-role from request headers
-    const adminIdHeader = req.headers.get("x-admin-id");
-    const adminRole = req.headers.get("x-admin-role");
+    // Retrieve admin details from request headers
+    const adminIdHeader = req.headers.get('x-admin-id');
+    const adminRole = req.headers.get('x-admin-role');
 
-    logMessage('info', 'Admin ID and Role:', { adminIdHeader, adminRole });
+    // Log admin info
+    logMessage('info', 'Admin details received', { adminIdHeader, adminRole });
+
+    // Validate adminId
     const adminId = Number(adminIdHeader);
     if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+      logMessage('warn', 'Invalid admin ID received', { adminIdHeader });
       return NextResponse.json(
-        { status: false, error: "User ID is missing or invalid in request" },
+        { status: false, error: 'Invalid or missing admin ID' },
         { status: 400 }
       );
     }
 
-    // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    // Check if the admin exists
+    const userExistence = await isUserExist(adminId, String(adminRole));
+    if (!userExistence.status) {
+      logMessage('warn', 'Admin user not found', { adminId, adminRole });
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userExistence.message}` },
         { status: 404 }
       );
     }
 
-    // Fetch all products
-    const productsResult = await getProductsByStatus("notDeleted");
+    // Check if categoryId and brandId exist, and construct productFilters accordingly
+    const productFilters = {
+      ...(categoryId && { categoryId: Number(categoryId) }),  // Only include if categoryId exists
+      ...(brandId && { brandId: Number(brandId) })  // Only include if brandId exists
+    };
 
+    // Fetch products based on filters
+    const productsResult = categoryId
+      ? await getProductsByFiltersAndStatus(productFilters, 'notDeleted')
+      : await getProductsByStatus('notDeleted');
+
+    // Handle response based on products result
     if (productsResult?.status) {
       return NextResponse.json(
         { status: true, products: productsResult.products },
@@ -334,15 +349,16 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    logMessage('warn', 'No products found');
+    logMessage('warn', 'No products found matching the criteria', { categoryId });
     return NextResponse.json(
-      { status: false, error: "No products found" },
+      { status: false, error: 'No products found' },
       { status: 404 }
     );
   } catch (error) {
-    logMessage('error', 'Error fetching products:', error);
+    // Log and handle any unexpected errors
+    logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(
-      { status: false, error: "Failed to fetch products" },
+      { status: false, error: 'Failed to fetch products due to an internal error' },
       { status: 500 }
     );
   }

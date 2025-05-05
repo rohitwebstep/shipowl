@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/brand/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/category/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -9328,22 +9328,22 @@ function validateFormData(formData, { requiredFields = [], patternValidations = 
     };
 }
 }}),
-"[project]/src/app/models/brand.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/category.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "createBrand": (()=>createBrand),
-    "deleteBrand": (()=>deleteBrand),
-    "generateBrandSlug": (()=>generateBrandSlug),
-    "getAllBrands": (()=>getAllBrands),
-    "getBrandById": (()=>getBrandById),
-    "getBrandsByStatus": (()=>getBrandsByStatus),
-    "removeBrandImageByIndex": (()=>removeBrandImageByIndex),
-    "restoreBrand": (()=>restoreBrand),
-    "softDeleteBrand": (()=>softDeleteBrand),
-    "updateBrand": (()=>updateBrand)
+    "createCategory": (()=>createCategory),
+    "deleteCategory": (()=>deleteCategory),
+    "generateCategorySlug": (()=>generateCategorySlug),
+    "getAllCategories": (()=>getAllCategories),
+    "getCategoriesByStatus": (()=>getCategoriesByStatus),
+    "getCategoryById": (()=>getCategoryById),
+    "removeCategoryImageByIndex": (()=>removeCategoryImageByIndex),
+    "restoreCategory": (()=>restoreCategory),
+    "softDeleteCategory": (()=>softDeleteCategory),
+    "updateCategory": (()=>updateCategory)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
@@ -9351,18 +9351,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e
 ;
 ;
 ;
-async function generateBrandSlug(name) {
+async function generateCategorySlug(name) {
     let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
     let isSlugTaken = true;
     let suffix = 0;
     // Keep checking until an unused slug is found
     while(isSlugTaken){
-        const existingBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
+        const existingCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
             where: {
                 slug
             }
         });
-        if (existingBrand) {
+        if (existingCategory) {
             // If the slug already exists, add a suffix (-1, -2, etc.)
             suffix++;
             slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
@@ -9373,12 +9373,12 @@ async function generateBrandSlug(name) {
     }
     return slug;
 }
-async function createBrand(adminId, adminRole, brand) {
+async function createCategory(adminId, adminRole, category) {
     try {
-        const { name, description, status, image } = brand;
-        // Generate a unique slug for the brand
-        const slug = await generateBrandSlug(name);
-        const newBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.create({
+        const { name, description, status, image } = category;
+        // Generate a unique slug for the category
+        const slug = await generateCategorySlug(name);
+        const newCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.create({
             data: {
                 name,
                 description,
@@ -9392,31 +9392,31 @@ async function createBrand(adminId, adminRole, brand) {
         });
         return {
             status: true,
-            brand: newBrand
+            category: newCategory
         };
     } catch (error) {
-        console.error(`Error creating brand:`, error);
+        console.error(`Error creating category:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateBrand = async (adminId, adminRole, brandId, data)=>{
+const updateCategory = async (adminId, adminRole, categoryId, data)=>{
     try {
         data.updatedBy = adminId;
         data.updatedAt = new Date();
         data.updatedByRole = adminRole;
         if (data.image) {
             const newImagesArr = data.image.split(",").map((img)=>img.trim());
-            const { status, brand, message } = await getBrandById(brandId);
-            if (!status || !brand) {
+            const { status, category, message } = await getCategoryById(categoryId);
+            if (!status || !category) {
                 return {
                     status: false,
-                    message: message || "Brand not found."
+                    message: message || "Category not found."
                 };
             }
-            const existingImages = brand.image ? brand.image.split(",").map((img)=>img.trim()) : [];
+            const existingImages = category.image ? category.image.split(",").map((img)=>img.trim()) : [];
             // Merge and remove duplicates
             const mergedImages = Array.from(new Set([
                 ...existingImages,
@@ -9424,63 +9424,63 @@ const updateBrand = async (adminId, adminRole, brandId, data)=>{
             ]));
             data.image = mergedImages.join(",");
         }
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
-                id: brandId
+                id: categoryId
             },
             data: data
         });
         return {
             status: true,
-            brand
+            category
         };
     } catch (error) {
-        console.error("❌ updateBrand Error:", error);
+        console.error("❌ updateCategory Error:", error);
         return {
             status: false,
-            message: "Error updating brand"
+            message: "Error updating category"
         };
     }
 };
-const getBrandById = async (id)=>{
+const getCategoryById = async (id)=>{
     try {
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
             where: {
                 id
             }
         });
-        if (!brand) return {
+        if (!category) return {
             status: false,
-            message: "Brand not found"
+            message: "Category not found"
         };
         return {
             status: true,
-            brand
+            category
         };
     } catch (error) {
-        console.error("❌ getBrandById Error:", error);
+        console.error("❌ getCategoryById Error:", error);
         return {
             status: false,
-            message: "Error fetching brand"
+            message: "Error fetching category"
         };
     }
 };
-const removeBrandImageByIndex = async (brandId, imageIndex)=>{
+const removeCategoryImageByIndex = async (categoryId, imageIndex)=>{
     try {
-        const { status, brand, message } = await getBrandById(brandId);
-        if (!status || !brand) {
+        const { status, category, message } = await getCategoryById(categoryId);
+        if (!status || !category) {
             return {
                 status: false,
-                message: message || "Brand not found."
+                message: message || "Category not found."
             };
         }
-        if (!brand.image) {
+        if (!category.image) {
             return {
                 status: false,
                 message: "No images available to delete."
             };
         }
-        const images = brand.image.split(",");
+        const images = category.image.split(",");
         if (imageIndex < 0 || imageIndex >= images.length) {
             return {
                 status: false,
@@ -9489,10 +9489,10 @@ const removeBrandImageByIndex = async (brandId, imageIndex)=>{
         }
         const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
         const updatedImages = images.join(",");
-        // Update brand in DB
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        // Update category in DB
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
-                id: brandId
+                id: categoryId
             },
             data: {
                 image: updatedImages
@@ -9500,41 +9500,41 @@ const removeBrandImageByIndex = async (brandId, imageIndex)=>{
         });
         // 🔥 Attempt to delete the image file from storage
         const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
-        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "brand", imageFileName);
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "category", imageFileName);
         const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
         return {
             status: true,
             message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
-            brand: updatedBrand
+            category: updatedCategory
         };
     } catch (error) {
-        console.error("❌ Error removing brand image:", error);
+        console.error("❌ Error removing category image:", error);
         return {
             status: false,
             message: "An unexpected error occurred while removing the image."
         };
     }
 };
-const getAllBrands = async ()=>{
+const getAllCategories = async ()=>{
     try {
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
             orderBy: {
                 id: 'desc'
             }
         });
         return {
             status: true,
-            brands
+            categories
         };
     } catch (error) {
-        console.error("❌ getAllBrands Error:", error);
+        console.error("❌ getAllCategories Error:", error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching categories"
         };
     }
 };
-const getBrandsByStatus = async (status)=>{
+const getCategoriesByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -9565,7 +9565,7 @@ const getBrandsByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
             where: whereCondition,
             orderBy: {
                 id: "desc"
@@ -9573,19 +9573,19 @@ const getBrandsByStatus = async (status)=>{
         });
         return {
             status: true,
-            brands
+            categories
         };
     } catch (error) {
-        console.error(`Error fetching brands by status (${status}):`, error);
+        console.error(`Error fetching categories by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching categories"
         };
     }
 };
-const softDeleteBrand = async (adminId, adminRole, id)=>{
+const softDeleteCategory = async (adminId, adminRole, id)=>{
     try {
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
                 id
             },
@@ -9597,20 +9597,20 @@ const softDeleteBrand = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Brand soft deleted successfully",
-            updatedBrand
+            message: "Category soft deleted successfully",
+            updatedCategory
         };
     } catch (error) {
-        console.error("❌ softDeleteBrand Error:", error);
+        console.error("❌ softDeleteCategory Error:", error);
         return {
             status: false,
-            message: "Error soft deleting brand"
+            message: "Error soft deleting category"
         };
     }
 };
-const restoreBrand = async (adminId, adminRole, id)=>{
+const restoreCategory = async (adminId, adminRole, id)=>{
     try {
-        const restoredBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const restoredCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
             where: {
                 id
             },
@@ -9625,38 +9625,38 @@ const restoreBrand = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Brand restored successfully",
-            restoredBrand
+            message: "Category restored successfully",
+            restoredCategory
         };
     } catch (error) {
-        console.error("❌ restoreBrand Error:", error);
+        console.error("❌ restoreCategory Error:", error);
         return {
             status: false,
-            message: "Error restoring brand"
+            message: "Error restoring category"
         };
     }
 };
-const deleteBrand = async (id)=>{
+const deleteCategory = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.delete({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "Brand deleted successfully"
+            message: "Category deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteBrand Error:", error);
+        console.error("❌ deleteCategory Error:", error);
         return {
             status: false,
-            message: "Error deleting brand"
+            message: "Error deleting category"
         };
     }
 };
 }}),
-"[project]/src/app/api/brand/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/category/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -9671,8 +9671,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/brand.ts [app-route] (ecmascript)");
-;
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/category.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -9682,7 +9681,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$bran
 ;
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for brand creation');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for category creation');
         // Get headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
@@ -9738,7 +9737,7 @@ async function POST(req) {
             'active'
         ].includes(statusRaw);
         // File upload
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'brand');
+        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'category');
         const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
             dir: uploadDir,
             pattern: 'slug-unique',
@@ -9749,39 +9748,39 @@ async function POST(req) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
             image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
         }
-        const brandPayload = {
+        const categoryPayload = {
             name,
             description,
             status,
             image
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Brand payload created:', brandPayload);
-        const brandCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createBrand"])(adminId, String(adminRole), brandPayload);
-        if (brandCreateResult?.status) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Category payload created:', categoryPayload);
+        const categoryCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCategory"])(adminId, String(adminRole), categoryPayload);
+        if (categoryCreateResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brand: brandCreateResult.brand
+                category: categoryCreateResult.category
             }, {
                 status: 200
             });
         }
-        // ❌ Brand creation failed — delete uploaded file(s)
+        // ❌ Category creation failed — delete uploaded file(s)
         const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
         if (isMultipleImages && Array.isArray(fileData)) {
             await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
         } else {
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand creation failed:', brandCreateResult?.message || 'Unknown error');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category creation failed:', categoryCreateResult?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: brandCreateResult?.message || 'Brand creation failed'
+            error: categoryCreateResult?.message || 'Category creation failed'
         }, {
             status: 500
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Category Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9792,9 +9791,7 @@ async function POST(req) {
 }
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching brands');
-        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('brand', 'view', req);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching categories');
         // Retrieve x-admin-id and x-admin-role from request headers
         const adminIdHeader = req.headers.get("x-admin-id");
         const adminRole = req.headers.get("x-admin-role");
@@ -9819,28 +9816,28 @@ async function GET(req) {
                 status: 404
             });
         }
-        // Fetch all brands
-        const brandsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getBrandsByStatus"])("notDeleted");
-        if (brandsResult?.status) {
+        // Fetch all categories
+        const categoriesResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoriesByStatus"])("notDeleted");
+        if (categoriesResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brands: brandsResult.brands
+                categories: categoriesResult.categories
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No brands found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No categories found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No brands found"
+            error: "No categories found"
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching brands:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching categories:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch brands"
+            error: "Failed to fetch categories"
         }, {
             status: 500
         });
@@ -9850,4 +9847,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__5f5e077b._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__e016221d._.js.map

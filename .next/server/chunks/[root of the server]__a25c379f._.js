@@ -8766,7 +8766,7 @@ exports.Prisma.ModelName = {
             "value": "prisma-client-js"
         },
         "output": {
-            "value": "D:\\Webstep2\\ShippingOWL\\2025\\May\\01\\Working\\shipping-owl\\prisma\\prisma\\generated\\client",
+            "value": "D:\\Webstep2\\ShippingOWL\\2025\\May\\05\\shipping-owl\\prisma\\prisma\\generated\\client",
             "fromEnvVar": null
         },
         "config": {
@@ -8780,7 +8780,7 @@ exports.Prisma.ModelName = {
             }
         ],
         "previewFeatures": [],
-        "sourceFilePath": "D:\\Webstep2\\ShippingOWL\\2025\\May\\01\\Working\\shipping-owl\\prisma\\schema.prisma",
+        "sourceFilePath": "D:\\Webstep2\\ShippingOWL\\2025\\May\\05\\shipping-owl\\prisma\\schema.prisma",
         "isCustomOutput": true
     },
     "relativeEnvPaths": {
@@ -8794,11 +8794,12 @@ exports.Prisma.ModelName = {
         "db"
     ],
     "activeProvider": "mysql",
+    "postinstall": false,
     "inlineDatasources": {
         "db": {
             "url": {
                 "fromEnvVar": "DATABASE_URL",
-                "value": "mysql://root:@localhost:3306/shippingowl"
+                "value": null
             }
         }
     },

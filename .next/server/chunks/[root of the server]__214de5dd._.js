@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/brand/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/product/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -9656,7 +9656,1378 @@ const deleteBrand = async (id)=>{
     }
 };
 }}),
-"[project]/src/app/api/brand/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/category.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createCategory": (()=>createCategory),
+    "deleteCategory": (()=>deleteCategory),
+    "generateCategorySlug": (()=>generateCategorySlug),
+    "getAllCategories": (()=>getAllCategories),
+    "getCategoriesByStatus": (()=>getCategoriesByStatus),
+    "getCategoryById": (()=>getCategoryById),
+    "removeCategoryImageByIndex": (()=>removeCategoryImageByIndex),
+    "restoreCategory": (()=>restoreCategory),
+    "softDeleteCategory": (()=>softDeleteCategory),
+    "updateCategory": (()=>updateCategory)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+;
+;
+;
+async function generateCategorySlug(name) {
+    let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    let isSlugTaken = true;
+    let suffix = 0;
+    // Keep checking until an unused slug is found
+    while(isSlugTaken){
+        const existingCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
+            where: {
+                slug
+            }
+        });
+        if (existingCategory) {
+            // If the slug already exists, add a suffix (-1, -2, etc.)
+            suffix++;
+            slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
+        } else {
+            // If the slug is not taken, set isSlugTaken to false to exit the loop
+            isSlugTaken = false;
+        }
+    }
+    return slug;
+}
+async function createCategory(adminId, adminRole, category) {
+    try {
+        const { name, description, status, image } = category;
+        // Generate a unique slug for the category
+        const slug = await generateCategorySlug(name);
+        const newCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.create({
+            data: {
+                name,
+                description,
+                status,
+                slug,
+                image,
+                createdAt: new Date(),
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            category: newCategory
+        };
+    } catch (error) {
+        console.error(`Error creating category:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateCategory = async (adminId, adminRole, categoryId, data)=>{
+    try {
+        data.updatedBy = adminId;
+        data.updatedAt = new Date();
+        data.updatedByRole = adminRole;
+        if (data.image) {
+            const newImagesArr = data.image.split(",").map((img)=>img.trim());
+            const { status, category, message } = await getCategoryById(categoryId);
+            if (!status || !category) {
+                return {
+                    status: false,
+                    message: message || "Category not found."
+                };
+            }
+            const existingImages = category.image ? category.image.split(",").map((img)=>img.trim()) : [];
+            // Merge and remove duplicates
+            const mergedImages = Array.from(new Set([
+                ...existingImages,
+                ...newImagesArr
+            ]));
+            data.image = mergedImages.join(",");
+        }
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: data
+        });
+        return {
+            status: true,
+            category
+        };
+    } catch (error) {
+        console.error("❌ updateCategory Error:", error);
+        return {
+            status: false,
+            message: "Error updating category"
+        };
+    }
+};
+const getCategoryById = async (id)=>{
+    try {
+        const category = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!category) return {
+            status: false,
+            message: "Category not found"
+        };
+        return {
+            status: true,
+            category
+        };
+    } catch (error) {
+        console.error("❌ getCategoryById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching category"
+        };
+    }
+};
+const removeCategoryImageByIndex = async (categoryId, imageIndex)=>{
+    try {
+        const { status, category, message } = await getCategoryById(categoryId);
+        if (!status || !category) {
+            return {
+                status: false,
+                message: message || "Category not found."
+            };
+        }
+        if (!category.image) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const images = category.image.split(",");
+        if (imageIndex < 0 || imageIndex >= images.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = images.join(",");
+        // Update category in DB
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id: categoryId
+            },
+            data: {
+                image: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "category", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            category: updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ Error removing category image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getAllCategories = async ()=>{
+    try {
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            categories
+        };
+    } catch (error) {
+        console.error("❌ getAllCategories Error:", error);
+        return {
+            status: false,
+            message: "Error fetching categories"
+        };
+    }
+};
+const getCategoriesByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const categories = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            categories
+        };
+    } catch (error) {
+        console.error(`Error fetching categories by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching categories"
+        };
+    }
+};
+const softDeleteCategory = async (adminId, adminRole, id)=>{
+    try {
+        const updatedCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Category soft deleted successfully",
+            updatedCategory
+        };
+    } catch (error) {
+        console.error("❌ softDeleteCategory Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting category"
+        };
+    }
+};
+const restoreCategory = async (adminId, adminRole, id)=>{
+    try {
+        const restoredCategory = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "Category restored successfully",
+            restoredCategory
+        };
+    } catch (error) {
+        console.error("❌ restoreCategory Error:", error);
+        return {
+            status: false,
+            message: "Error restoring category"
+        };
+    }
+};
+const deleteCategory = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].category.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Category deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteCategory Error:", error);
+        return {
+            status: false,
+            message: "Error deleting category"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/location/country.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createCountry": (()=>createCountry),
+    "deleteCountry": (()=>deleteCountry),
+    "getAllCountries": (()=>getAllCountries),
+    "getCountriesByStatus": (()=>getCountriesByStatus),
+    "getCountryById": (()=>getCountryById),
+    "restoreCountry": (()=>restoreCountry),
+    "softDeleteCountry": (()=>softDeleteCountry),
+    "updateCountry": (()=>updateCountry)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+async function createCountry(adminId, adminRole, country) {
+    try {
+        const { name, iso3, iso2, phonecode, currency, currencyName, currencySymbol, nationality } = country;
+        const newCountry = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.create({
+            data: {
+                name,
+                iso3,
+                iso2,
+                phonecode,
+                currency,
+                currencyName,
+                currencySymbol,
+                nationality,
+                createdAt: new Date(),
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        // Convert BigInt to string for serialization
+        const countryWithStringBigInts = {
+            ...newCountry,
+            id: newCountry.id.toString()
+        };
+        return {
+            status: true,
+            country: countryWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error creating country:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateCountry = async (adminId, adminRole, countryId, data)=>{
+    try {
+        const { name, iso3, iso2, phonecode, currency, currencyName, currencySymbol, nationality } = data;
+        // Construct the payload safely
+        const updateData = {
+            name,
+            iso3,
+            iso2,
+            phonecode,
+            currency,
+            currencyName,
+            currencySymbol,
+            nationality,
+            updatedBy: adminId,
+            updatedAt: new Date(),
+            updatedByRole: adminRole
+        };
+        const country = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.update({
+            where: {
+                id: countryId
+            },
+            data: updateData
+        });
+        // Convert BigInt to string for serialization
+        const countryWithStringBigInts = {
+            ...country,
+            id: country.id.toString()
+        };
+        return {
+            status: true,
+            country: countryWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ updateCountry Error:", error);
+        return {
+            status: false,
+            message: "Error updating country"
+        };
+    }
+};
+const getCountryById = async (id)=>{
+    try {
+        const country = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!country) return {
+            status: false,
+            message: "Country not found"
+        };
+        // Convert BigInt to string for serialization
+        const countryWithStringBigInts = {
+            ...country,
+            id: country.id.toString()
+        };
+        return {
+            status: true,
+            country: countryWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ getCountryById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching country"
+        };
+    }
+};
+const getAllCountries = async ()=>{
+    try {
+        const countries = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.findMany({
+            orderBy: {
+                name: 'asc'
+            }
+        });
+        // Convert BigInt to string for serialization
+        const countriesWithStringBigInts = countries.map((country)=>({
+                ...country,
+                id: country.id.toString()
+            }));
+        return {
+            status: true,
+            countries: countriesWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ getAllCountries Error:", error);
+        return {
+            status: false,
+            message: "Error fetching countries"
+        };
+    }
+};
+const getCountriesByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const countries = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.findMany({
+            where: whereCondition,
+            orderBy: {
+                name: "asc"
+            }
+        });
+        // Convert BigInt to string for serialization
+        const countriesWithStringBigInts = countries.map((country)=>({
+                ...country,
+                id: country.id.toString()
+            }));
+        return {
+            status: true,
+            countries: countriesWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error fetching countries by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching countries"
+        };
+    }
+};
+const softDeleteCountry = async (adminId, adminRole, id)=>{
+    try {
+        const updatedCountry = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Country soft deleted successfully",
+            updatedCountry
+        };
+    } catch (error) {
+        console.error("❌ softDeleteCountry Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting country"
+        };
+    }
+};
+const restoreCountry = async (adminId, adminRole, id)=>{
+    try {
+        const restoredCountry = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Convert BigInt to string for serialization
+        const countryWithStringBigInts = {
+            ...restoredCountry,
+            id: restoredCountry.id.toString()
+        };
+        return {
+            status: true,
+            message: "Country restored successfully",
+            country: countryWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ restoreCountry Error:", error);
+        return {
+            status: false,
+            message: "Error restoring country"
+        };
+    }
+};
+const deleteCountry = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Country deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteCountry Error:", error);
+        return {
+            status: false,
+            message: "Error deleting country"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/product/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkMainSKUAvailability": (()=>checkMainSKUAvailability),
+    "checkMainSKUAvailabilityForUpdate": (()=>checkMainSKUAvailabilityForUpdate),
+    "checkVariantSKUsAvailability": (()=>checkVariantSKUsAvailability),
+    "checkVariantSKUsAvailabilityForUpdate": (()=>checkVariantSKUsAvailabilityForUpdate),
+    "createProduct": (()=>createProduct),
+    "deleteProduct": (()=>deleteProduct),
+    "generateProductSlug": (()=>generateProductSlug),
+    "getProductById": (()=>getProductById),
+    "getProductVariantById": (()=>getProductVariantById),
+    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
+    "getProductsByStatus": (()=>getProductsByStatus),
+    "removeProductImageByIndex": (()=>removeProductImageByIndex),
+    "restoreProduct": (()=>restoreProduct),
+    "softDeleteProduct": (()=>softDeleteProduct),
+    "updateProduct": (()=>updateProduct)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
+;
+;
+;
+const serializeBigInt = (obj)=>{
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    } else if (typeof obj === 'bigint') {
+        return obj.toString();
+    }
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
+async function checkMainSKUAvailability(main_sku) {
+    try {
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                main_sku
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: `SKU "${main_sku}" is already in use.`
+            };
+        }
+        return {
+            status: true,
+            message: `SKU "${main_sku}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking SKU:", error);
+        return {
+            status: false,
+            message: "Error while checking SKU availability."
+        };
+    }
+}
+async function checkMainSKUAvailabilityForUpdate(main_sku, productId) {
+    try {
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                main_sku,
+                NOT: {
+                    id: productId
+                }
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: `SKU "${main_sku}" is already in use.`
+            };
+        }
+        return {
+            status: true,
+            message: `SKU "${main_sku}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking SKU:", error);
+        return {
+            status: false,
+            message: "Error while checking SKU availability."
+        };
+    }
+}
+async function checkVariantSKUsAvailability(skus) {
+    try {
+        // Get existing SKUs from the database
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
+            where: {
+                sku: {
+                    in: skus
+                }
+            },
+            select: {
+                sku: true
+            }
+        });
+        if (existingVariants.length > 0) {
+            const usedSkus = existingVariants.map((v)=>v.sku);
+            return {
+                status: false,
+                message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
+                usedSkus
+            };
+        }
+        return {
+            status: true,
+            message: `All SKUs are available.`
+        };
+    } catch (error) {
+        console.error("Error checking variant SKUs:", error);
+        return {
+            status: false,
+            message: "Error while checking variant SKU availability."
+        };
+    }
+}
+async function checkVariantSKUsAvailabilityForUpdate(variants, productId) {
+    try {
+        const skus = variants.map((v)=>v.sku);
+        // Fetch existing variants with matching SKUs, excluding current productId
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
+            where: {
+                sku: {
+                    in: skus
+                },
+                NOT: {
+                    productId
+                }
+            },
+            select: {
+                sku: true,
+                id: true
+            }
+        });
+        // Filter out variants that match the same id (i.e., currently being updated)
+        const conflictingSkus = existingVariants.filter((ev)=>{
+            const incomingVariant = variants.find((v)=>v.sku === ev.sku);
+            return !incomingVariant?.id || incomingVariant.id !== ev.id;
+        });
+        if (conflictingSkus.length > 0) {
+            const usedSkus = conflictingSkus.map((v)=>v.sku);
+            return {
+                status: false,
+                message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
+                usedSkus
+            };
+        }
+        return {
+            status: true,
+            message: 'All SKUs are available.'
+        };
+    } catch (error) {
+        console.error('Error checking variant SKUs:', error);
+        return {
+            status: false,
+            message: 'Error while checking variant SKU availability.'
+        };
+    }
+}
+async function generateProductSlug(name) {
+    let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    let isSlugTaken = true;
+    let suffix = 0;
+    // Keep checking until an unused slug is found
+    while(isSlugTaken){
+        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                slug
+            }
+        });
+        if (existingProduct) {
+            // If the slug already exists, add a suffix (-1, -2, etc.)
+            suffix++;
+            slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
+        } else {
+            // If the slug is not taken, set isSlugTaken to false to exit the loop
+            isSlugTaken = false;
+        }
+    }
+    return slug;
+}
+async function createProduct(adminId, adminRole, product) {
+    try {
+        const { name, categoryId, main_sku, ean, hsnCode, taxRate, upc, rtoAddress, pickupAddress, description, tags, brandId, originCountryId, shippingCountryId, list_as, shipping_time, weight, package_length, package_width, package_height, chargeable_weight, variants, product_detail_video, training_guidance_video, status, package_weight_image, package_length_image, package_width_image, package_height_image, video_url, createdBy, createdByRole } = product;
+        // Generate a unique slug for the product
+        const slug = await generateProductSlug(name);
+        // Create the product in the database
+        const newProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.create({
+            data: {
+                name,
+                categoryId,
+                main_sku,
+                ean,
+                hsnCode,
+                taxRate,
+                upc,
+                rtoAddress,
+                pickupAddress,
+                description,
+                tags,
+                brandId,
+                originCountryId,
+                shippingCountryId,
+                list_as,
+                shipping_time,
+                weight,
+                package_length,
+                package_width,
+                package_height,
+                chargeable_weight,
+                product_detail_video,
+                training_guidance_video,
+                status,
+                package_weight_image,
+                package_length_image,
+                package_width_image,
+                package_height_image,
+                video_url,
+                createdBy,
+                createdByRole,
+                slug,
+                createdAt: new Date()
+            }
+        });
+        // Convert BigInt to string for serialization
+        const productWithStringBigInts = {
+            ...newProduct,
+            originCountryId: newProduct.originCountryId.toString(),
+            shippingCountryId: newProduct.shippingCountryId.toString()
+        };
+        // If there are variants, create them separately in the related productVariant model
+        if (variants && variants.length > 0) {
+            const productVariants = variants.map((variant)=>({
+                    color: variant.color,
+                    sku: variant.sku,
+                    qty: variant.qty,
+                    currency: variant.currency,
+                    article_id: variant.article_id,
+                    suggested_price: variant.suggested_price,
+                    shipowl_price: variant.shipowl_price,
+                    rto_suggested_price: isNaN(Number(variant.rto_suggested_price)) ? null : Number(variant.rto_suggested_price),
+                    rto_price: variant.rto_price,
+                    image: variant.images,
+                    product_link: variant.product_link,
+                    productId: productWithStringBigInts.id // This associates the variant with the product
+                }));
+            // Create variants in the database
+            try {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.createMany({
+                    data: productVariants
+                });
+            } catch (variantError) {
+                console.error('Error creating product variants:', variantError);
+                // If variants creation fails, delete the main product
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.delete({
+                    where: {
+                        id: productWithStringBigInts.id
+                    }
+                });
+                // Throw the error to exit the transaction
+                throw new Error('Failed to create product variants');
+            }
+        }
+        return {
+            status: true,
+            product: productWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error creating product:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const getProductsByFiltersAndStatus = async (productFilters, status)=>{
+    try {
+        // Define status condition
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
+            }
+        })();
+        console.log(`productFilters - `, productFilters);
+        // Combine with filters (fully typed)
+        const whereCondition = {
+            ...statusCondition,
+            ...productFilters.categoryId !== undefined && {
+                categoryId: productFilters.categoryId
+            },
+            ...productFilters.brandId !== undefined && {
+                brandId: productFilters.brandId
+            }
+        };
+        const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                variants: true
+            }
+        });
+        const sanitizedProducts = serializeBigInt(products);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Fetched products:", sanitizedProducts);
+        return {
+            status: true,
+            products: sanitizedProducts
+        };
+    } catch (error) {
+        console.error(`Error fetching products by filters and status:`, error);
+        return {
+            status: false,
+            message: "Error fetching products"
+        };
+    }
+};
+const getProductsByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                variants: true
+            }
+        });
+        const sanitizedProducts = serializeBigInt(products);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProducts);
+        return {
+            status: true,
+            products: sanitizedProducts
+        };
+    } catch (error) {
+        console.error(`Error fetching products by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching products"
+        };
+    }
+};
+const removeProductImageByIndex = async (productId, type, imageIndex)=>{
+    try {
+        const { status, product, message } = await getProductById(productId);
+        if (!status || !product) {
+            return {
+                status: false,
+                message: message || "Product not found."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])(`debug`, `product (${type}):`, product);
+        const allowedImages = {
+            package_weight_image: product.package_weight_image,
+            package_length_image: product.package_length_image,
+            package_width_image: product.package_width_image,
+            package_height_image: product.package_height_image
+        };
+        const images = allowedImages[type]; // ✅ No TS error now
+        console.log(`Images of type '${type}':`, images);
+        if (!images) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const imagesArr = images.split(",");
+        if (imageIndex < 0 || imageIndex >= imagesArr.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = imagesArr.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = imagesArr.join(",");
+        // Update product in DB
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                [type]: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "product", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            product: updatedProduct
+        };
+    } catch (error) {
+        console.error("❌ Error removing product image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getProductById = async (id)=>{
+    try {
+        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                id
+            },
+            include: {
+                variants: true
+            }
+        });
+        if (!product) return {
+            status: false,
+            message: "Product not found"
+        };
+        const sanitizedProduct = serializeBigInt(product);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProduct);
+        return {
+            status: true,
+            product: sanitizedProduct
+        };
+    } catch (error) {
+        console.error("❌ getProductById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product"
+        };
+    }
+};
+const getProductVariantById = async (id)=>{
+    try {
+        const productVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!productVariant) return {
+            status: false,
+            message: "productVariant Variant not found"
+        };
+        const sanitizedProductVariant = serializeBigInt(productVariant);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedProductVariant);
+        return {
+            status: true,
+            variant: sanitizedProductVariant
+        };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product variant"
+        };
+    }
+};
+const updateProduct = async (adminId, adminRole, productId, product)=>{
+    try {
+        const { name, categoryId, main_sku, ean, hsnCode, taxRate, upc, rtoAddress, pickupAddress, description, tags, brandId, originCountryId, shippingCountryId, list_as, shipping_time, weight, package_length, package_width, package_height, chargeable_weight, variants, product_detail_video, training_guidance_video, status, package_weight_image, package_length_image, package_width_image, package_height_image, video_url } = product;
+        // Image fields to process
+        const imageFields = [
+            'package_weight_image',
+            'package_length_image',
+            'package_width_image',
+            'package_height_image'
+        ];
+        // Fetch existing product once
+        const productResponse = await getProductById(productId);
+        if (!productResponse.status || !productResponse.product) {
+            return {
+                status: false,
+                message: productResponse.message || "Product not found."
+            };
+        }
+        const existingProduct = productResponse.product;
+        for (const field of imageFields){
+            const newValue = product[field];
+            if (typeof newValue === 'string' && newValue.trim()) {
+                const newImages = newValue.split(',').map((img)=>img.trim()).filter(Boolean);
+                const existingValue = existingProduct[field];
+                const existingImages = typeof existingValue === 'string' ? existingValue.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedImages = Array.from(new Set([
+                    ...existingImages,
+                    ...newImages
+                ]));
+                // ✅ Type-safe update
+                product[field] = mergedImages.join(',');
+            }
+        }
+        // Update the product details
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                name,
+                categoryId,
+                main_sku,
+                ean,
+                hsnCode,
+                taxRate,
+                upc,
+                rtoAddress,
+                pickupAddress,
+                description,
+                tags,
+                brandId,
+                originCountryId,
+                shippingCountryId,
+                list_as,
+                shipping_time,
+                weight,
+                package_length,
+                package_width,
+                package_height,
+                chargeable_weight,
+                product_detail_video,
+                training_guidance_video,
+                status,
+                package_weight_image,
+                package_length_image,
+                package_width_image,
+                package_height_image,
+                video_url,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Handle variants: update if id exists, else create new
+        if (variants && variants.length > 0) {
+            for (const variant of variants){
+                // Get existing variant if ID exists
+                let existingVariantImages = [];
+                if (variant.id) {
+                    // Fetch existing product once
+                    const productVariantResponse = await getProductVariantById(variant.id);
+                    if (!productVariantResponse.status || !productVariantResponse.variant) {
+                        return {
+                            status: false,
+                            message: productVariantResponse.message || "Product Variant not found."
+                        };
+                    }
+                    const existingProductVariant = productVariantResponse.variant;
+                    if (existingProductVariant?.image && typeof existingProductVariant.image === 'string') {
+                        existingVariantImages = existingProductVariant.image.split(',').map((img)=>img.trim()).filter(Boolean);
+                    }
+                }
+                const newVariantImages = typeof variant.images === 'string' ? variant.images.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedVariantImages = Array.from(new Set([
+                    ...existingVariantImages,
+                    ...newVariantImages
+                ])).join(',');
+                const variantData = {
+                    color: variant.color,
+                    sku: variant.sku,
+                    qty: variant.qty,
+                    currency: variant.currency,
+                    article_id: variant.article_id,
+                    suggested_price: variant.suggested_price,
+                    shipowl_price: variant.shipowl_price,
+                    rto_suggested_price: variant.rto_suggested_price,
+                    rto_price: variant.rto_price,
+                    product_link: variant.product_link,
+                    image: mergedVariantImages
+                };
+                if (variant.id) {
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.update({
+                        where: {
+                            id: Number(variant.id)
+                        },
+                        data: variantData
+                    });
+                } else {
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.create({
+                        data: {
+                            ...variantData,
+                            productId: productId
+                        }
+                    });
+                }
+            }
+        }
+        const sanitizedProducts = serializeBigInt(updatedProduct);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProducts);
+        return {
+            status: true,
+            product: sanitizedProducts
+        };
+    } catch (error) {
+        console.error("❌ updateProduct Error:", error);
+        return {
+            status: false,
+            message: "Error updating product"
+        };
+    }
+};
+const softDeleteProduct = async (adminId, adminRole, id)=>{
+    try {
+        // Soft delete the product
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        // Soft delete the variants of this product
+        const updatedVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
+            where: {
+                productId: id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Product and variants soft deleted successfully",
+            updatedProduct,
+            updatedVariants
+        };
+    } catch (error) {
+        console.error("❌ softDeleteProduct Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting product and variants"
+        };
+    }
+};
+const restoreProduct = async (adminId, adminRole, id)=>{
+    try {
+        // Restore the product
+        const restoredProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id
+            },
+            include: {
+                variants: true
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Restore the variants of this product
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
+            where: {
+                productId: id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        const sanitizedProduct = serializeBigInt(restoredProduct);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProduct);
+        return {
+            status: true,
+            message: "Product and variants restored successfully",
+            restoredProduct: sanitizedProduct
+        };
+    } catch (error) {
+        console.error("❌ restoreProduct Error:", error);
+        return {
+            status: false,
+            message: "Error restoring product and variants"
+        };
+    }
+};
+const deleteProduct = async (id)=>{
+    try {
+        console.log(`id - `, id);
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Product deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteProduct Error:", error);
+        return {
+            status: false,
+            message: "Error deleting product"
+        };
+    }
+};
+}}),
+"[project]/src/app/api/product/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -9672,6 +11043,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/brand.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/category.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$country$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/country.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/product/product.ts [app-route] (ecmascript)");
+;
+;
 ;
 ;
 ;
@@ -9682,20 +11058,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$bran
 ;
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for brand creation');
-        // Get headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for product creation');
+        const adminIdHeader = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "User ID is missing or invalid in request"
+                error: 'User ID is missing or invalid in request'
             }, {
                 status: 400
             });
         }
-        // Check if admin exists
         const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
         if (!userCheck.status) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
@@ -9705,13 +11079,17 @@ async function POST(req) {
                 status: 404
             });
         }
-        const isMultipleImages = true; // Set true to allow multiple image uploads
+        const requiredFields = [
+            'name',
+            'category',
+            'main_sku',
+            'brand',
+            'origin_country',
+            'shipping_country'
+        ];
         const formData = await req.formData();
-        // Validate input
         const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: [
-                'name'
-            ],
+            requiredFields: requiredFields,
             patternValidations: {
                 status: 'boolean'
             }
@@ -9726,9 +11104,35 @@ async function POST(req) {
                 status: 400
             });
         }
-        // Extract fields
-        const name = formData.get('name');
-        const description = formData.get('description') || '';
+        const extractNumber = (key)=>Number(formData.get(key)) || null;
+        const extractString = (key)=>formData.get(key) || null;
+        const extractJSON = (key)=>{
+            const value = extractString(key);
+            const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
+            let parsedData;
+            if (typeof cleanedValue === 'string') {
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 1", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                }
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 2", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                    return null;
+                }
+            }
+            if (typeof cleanedValue === 'object' && cleanedValue !== null) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 3", cleanedValue);
+                return cleanedValue;
+            }
+            return null;
+        };
         const statusRaw = formData.get('status')?.toString().toLowerCase();
         const status = [
             'true',
@@ -9737,51 +11141,216 @@ async function POST(req) {
             1,
             'active'
         ].includes(statusRaw);
-        // File upload
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'brand');
-        const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
-            dir: uploadDir,
-            pattern: 'slug-unique',
-            multiple: isMultipleImages
-        });
-        let image = '';
-        if (fileData) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
-            image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
+        const main_sku = extractString('main_sku') || '';
+        const { status: checkMainSKUAvailabilityResult, message: checkMainSKUAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkMainSKUAvailability"])(main_sku);
+        if (!checkMainSKUAvailabilityResult) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `SKU availability check failed: ${checkMainSKUAvailabilityMessage}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: checkMainSKUAvailabilityMessage
+            }, {
+                status: 400
+            });
         }
-        const brandPayload = {
-            name,
-            description,
+        const rawVariants = extractJSON('variants');
+        console.log(`rawVariants`, rawVariants);
+        if (!Array.isArray(rawVariants) || rawVariants.length === 0) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Variants are not valid or empty');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Variants are not valid or empty'
+            }, {
+                status: 400
+            });
+        }
+        const variants = Array.isArray(rawVariants) ? rawVariants : [];
+        if (variants.length > 0) {
+            const allUniqeSkus = new Set(variants.map((variant)=>variant.sku)); // Typed the variant as an object with a sku
+            if (allUniqeSkus.size !== variants.length) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Duplicate SKUs found in variants');
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    error: 'Duplicate SKUs found in variants'
+                }, {
+                    status: 400
+                });
+            }
+            const { status: checkVariantSKUsAvailabilityResult, message: checkVariantSKUsAvailabilityMessage } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkVariantSKUsAvailability"])(Array.from(allUniqeSkus));
+            if (!checkVariantSKUsAvailabilityResult) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Variant SKU availability check failed: ${checkVariantSKUsAvailabilityMessage}`);
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    error: checkVariantSKUsAvailabilityMessage
+                }, {
+                    status: 400
+                });
+            }
+        }
+        const brandId = extractNumber('brand') || 0;
+        const brandResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getBrandById"])(brandId);
+        if (!brandResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Brand found:', brandResult.brand);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: brandResult.message || 'Brand not found'
+            }, {
+                status: 404
+            });
+        }
+        const categoryId = extractNumber('category') || 0;
+        const categoryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$category$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCategoryById"])(categoryId);
+        if (!categoryResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Category found:', categoryResult.category);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: categoryResult.message || 'Category not found'
+            }, {
+                status: 404
+            });
+        }
+        const originCountryId = extractNumber('origin_country') || 0;
+        const originCountryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$country$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCountryById"])(originCountryId);
+        if (!originCountryResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Country found:', originCountryResult.country);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Origin Country not found'
+            }, {
+                status: 404
+            });
+        }
+        const shippingCountryId = extractNumber('shipping_country') || 0;
+        const shippingCountryResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$country$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getCountryById"])(shippingCountryId);
+        if (!shippingCountryResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Country found:', shippingCountryResult.country);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Shipping Country not found'
+            }, {
+                status: 404
+            });
+        }
+        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'product');
+        const fileFields = [
+            'package_weight_image',
+            'package_length_image',
+            'package_width_image',
+            'package_height_image',
+            'product_detail_video',
+            'training_guidance_video'
+        ];
+        const uploadedFiles = {};
+        for (const field of fileFields){
+            const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, field, {
+                dir: uploadDir,
+                pattern: 'slug-unique',
+                multiple: true
+            });
+            if (fileData) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
+                if (Array.isArray(fileData)) {
+                    uploadedFiles[field] = fileData.map((file)=>file.url).join(', ');
+                } else {
+                    uploadedFiles[field] = fileData.url;
+                }
+            }
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Uploaded files:', uploadedFiles);
+        const productPayload = {
+            name: extractString('name') || '',
+            categoryId,
+            main_sku,
+            ean: extractString('ean') || '',
+            hsnCode: extractString('hsn_code') || '',
+            taxRate: extractNumber('tax_rate') || 0,
+            upc: extractString('upc') || '',
+            rtoAddress: extractString('rto_address') || '',
+            pickupAddress: extractString('pickup_address') || '',
+            description: extractString('description'),
+            tags: extractString('tags') || '',
+            brandId: extractNumber('brand') || 0,
+            originCountryId,
+            shippingCountryId,
+            list_as: extractString('list_as'),
+            shipping_time: extractString('shipping_time'),
+            weight: extractNumber('weight'),
+            package_length: extractNumber('package_length'),
+            package_width: extractNumber('package_width'),
+            package_height: extractNumber('package_height'),
+            chargeable_weight: extractNumber('chargable_weight'),
+            variants,
+            product_detail_video: uploadedFiles['product_detail_video'],
             status,
-            image
+            package_weight_image: uploadedFiles['package_weight_image'],
+            package_length_image: uploadedFiles['package_length_image'],
+            package_width_image: uploadedFiles['package_width_image'],
+            package_height_image: uploadedFiles['package_height_image'],
+            training_guidance_video: uploadedFiles['training_guidance_video'],
+            video_url: extractString('video_url'),
+            createdBy: adminId,
+            createdByRole: adminRole
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Brand payload created:', brandPayload);
-        const brandCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createBrand"])(adminId, String(adminRole), brandPayload);
-        if (brandCreateResult?.status) {
+        if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
+            for(let index = 0; index < productPayload.variants.length; index++){
+                console.log(`🔁 Index: ${index}`);
+                const variantImagesIndex = `variant_images_${index}`;
+                // File upload
+                const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, variantImagesIndex, {
+                    dir: uploadDir,
+                    pattern: 'slug-unique',
+                    multiple: true
+                });
+                let image = '';
+                if (fileData) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
+                    if (Array.isArray(fileData)) {
+                        image = fileData.map((file)=>file.url).join(', ');
+                    } else {
+                        image = fileData.url;
+                    }
+                }
+                productPayload.variants[index].images = image;
+            }
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product payload created:', productPayload);
+        const productCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createProduct"])(adminId, String(adminRole), productPayload);
+        if (productCreateResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brand: brandCreateResult.brand
+                product: productCreateResult.product
             }, {
                 status: 200
             });
         }
-        // ❌ Brand creation failed — delete uploaded file(s)
-        const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
-        if (isMultipleImages && Array.isArray(fileData)) {
-            await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
+        // Check if there are any uploaded files before attempting to delete
+        if (Object.keys(uploadedFiles).length > 0) {
+            // Iterate over each field in uploadedFiles
+            for(const field in uploadedFiles){
+                // Split the comma-separated URLs into an array of individual file URLs
+                const fileUrls = uploadedFiles[field].split(',').map((url)=>url.trim());
+                // Iterate over each file URL in the array
+                for (const fileUrl of fileUrls){
+                    if (fileUrl) {
+                        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(fileUrl));
+                        // Attempt to delete the file
+                        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Deleted file: ${filePath}`);
+                    }
+                }
+            }
         } else {
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'No uploaded files to delete.');
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand creation failed:', brandCreateResult?.message || 'Unknown error');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: brandCreateResult?.message || 'Brand creation failed'
+            error: productCreateResult?.message || 'Product creation failed'
         }, {
             status: 500
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9792,55 +11361,85 @@ async function POST(req) {
 }
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching brands');
-        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('brand', 'view', req);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
-        // Retrieve x-admin-id and x-admin-role from request headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
+        // Extract categoryId from the query parameters
+        const categoryId = req.nextUrl.searchParams.get('category');
+        const brandId = req.nextUrl.searchParams.get('brand');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Received GET request to fetch products', {
+            categoryId,
+            brandId
+        });
+        // Retrieve admin details from request headers
+        const adminIdHeader = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Log admin info
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Admin details received', {
+            adminIdHeader,
+            adminRole
+        });
+        // Validate adminId
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid admin ID received', {
+                adminIdHeader
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: "User ID is missing or invalid in request"
+                error: 'Invalid or missing admin ID'
             }, {
                 status: 400
             });
         }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
+        // Check if the admin exists
+        const userExistence = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userExistence.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Admin user not found', {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: `User Not Found: ${result.message}`
+                error: `User Not Found: ${userExistence.message}`
             }, {
                 status: 404
             });
         }
-        // Fetch all brands
-        const brandsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getBrandsByStatus"])("notDeleted");
-        if (brandsResult?.status) {
+        // Check if categoryId and brandId exist, and construct productFilters accordingly
+        const productFilters = {
+            ...categoryId && {
+                categoryId: Number(categoryId)
+            },
+            ...brandId && {
+                brandId: Number(brandId)
+            }
+        };
+        // Fetch products based on filters
+        const productsResult = categoryId ? await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByFiltersAndStatus"])(productFilters, 'notDeleted') : await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByStatus"])('notDeleted');
+        // Handle response based on products result
+        if (productsResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brands: brandsResult.brands
+                products: productsResult.products
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No brands found');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No products found matching the criteria', {
+            categoryId
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No brands found"
+            error: 'No products found'
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching brands:', error);
+        // Log and handle any unexpected errors
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching products', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch brands"
+            error: 'Failed to fetch products due to an internal error'
         }, {
             status: 500
         });
@@ -9850,4 +11449,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__5f5e077b._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__214de5dd._.js.map

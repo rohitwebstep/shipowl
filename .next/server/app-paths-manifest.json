@@ -1,7 +1,3 @@
 {
-  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/product/request/[productRequestId]/route": "app/api/product/request/[productRequestId]/route.js",
-  "/api/product/request/my/[productRequestId]/route": "app/api/product/request/my/[productRequestId]/route.js",
-  "/api/product/request/my/route": "app/api/product/request/my/route.js",
-  "/api/product/request/route": "app/api/product/request/route.js"
+  "/api/product/route": "app/api/product/route.js"
 }
