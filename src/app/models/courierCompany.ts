@@ -1,6 +1,4 @@
 import prisma from "@/lib/prisma";
-import path from "path";
-import { deleteFile } from '@/utils/saveFiles';
 
 interface CourierCompany {
     id?: string;
@@ -130,8 +128,8 @@ export async function createCourierCompany(adminId: number, adminRole: string, c
                 phoneNumber,
                 status,
                 createdAt: new Date(),
-                createdBy: adminId,
-                createdByRole: adminRole,
+                createdBy: createdBy,
+                createdByRole: createdByRole,
             },
         });
 
@@ -171,8 +169,8 @@ export const updateCourierCompany = async (
                 phoneNumber,
                 status,
                 updatedAt: new Date(),
-                updatedBy: adminId,
-                updatedByRole: adminRole,
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole,
             },
         });
 

@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getCourierCompanyById, checkCodeAvailabilityForUpdate, updateCourierCompany, softDeleteCourierCompany, restoreCourierCompany } from '@/app/models/courierCompany';
 
