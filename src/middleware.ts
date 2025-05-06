@@ -82,6 +82,8 @@ export function middleware(req: NextRequest) {
                 "/api/supplier",
                 "/api/dropshipper",
                 "/api/dropshipper/",
+                "/api/courier-company",
+                "/api/courier-company/:path*",
             ],
             role: "admin",
             applicableRoles: [
@@ -143,5 +145,7 @@ export const config = {
         "/api/supplier",
         "/api/dropshipper",
         "/api/dropshipper/:path*",
+        "/api/courier-company",
+        "/api/courier-company/:path*",
     ],
 };

@@ -98,5 +98,13 @@
   {
     "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
     "originalSource": "/api/dropshipper/:path*"
+  },
+  {
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/courier-company(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/courier-company"
+  },
+  {
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/courier-company(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/courier-company/:path*"
   }
 ]

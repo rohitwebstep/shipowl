@@ -180,7 +180,9 @@ function middleware(req) {
                 "/api/product/",
                 "/api/supplier",
                 "/api/dropshipper",
-                "/api/dropshipper/"
+                "/api/dropshipper/",
+                "/api/courier-company",
+                "/api/courier-company/:path*"
             ],
             role: "admin",
             applicableRoles: [
@@ -234,7 +236,9 @@ const config = {
         "/api/product/:path*",
         "/api/supplier",
         "/api/dropshipper",
-        "/api/dropshipper/:path*"
+        "/api/dropshipper/:path*",
+        "/api/courier-company",
+        "/api/courier-company/:path*"
     ]
 };
 }}),

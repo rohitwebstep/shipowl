@@ -483,6 +483,31 @@ CREATE TABLE `productVariant` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `courierCompany` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `slug` VARCHAR(191) NOT NULL,
+    `code` VARCHAR(191) NULL,
+    `website` LONGTEXT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `phoneNumber` VARCHAR(191) NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `courierCompany_slug_key`(`slug`),
+    UNIQUE INDEX `courierCompany_code_key`(`code`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 

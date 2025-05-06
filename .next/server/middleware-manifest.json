@@ -109,6 +109,14 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/dropshipper/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/courier-company(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/courier-company"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/courier-company(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/courier-company/:path*"
         }
       ],
       "wasm": [],
@@ -116,9 +124,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "cbbb6a58f6ba9cb9a0448628a765b731",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "2c78e999778a3e7f2f864a16b70f62acd37a885f647e4a2d13ea15afe1a0bc96",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "84850e7e76973650d3a70be1eaa583051352995c82266d7271fb0ecda817ffae"
+        "__NEXT_PREVIEW_MODE_ID": "a74ac0e0d486c926739ba2a879a0a6f5",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "91db4bee748110aa39a1b223b8e2007c5b771261b8aff34fef348ce22ea4a6f5",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "0eb67219e53e034a80a06bc80889c5445fb9798c80221dea21f3a6a85e8ac949"
       }
     }
   },
