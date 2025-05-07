@@ -1,7 +1,4 @@
 {
   "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/courier-company/[courierCompanyId]/restore/route": "app/api/courier-company/[courierCompanyId]/restore/route.js",
-  "/api/courier-company/[courierCompanyId]/route": "app/api/courier-company/[courierCompanyId]/route.js",
-  "/api/courier-company/route": "app/api/courier-company/route.js",
-  "/api/courier-company/trashed/route": "app/api/courier-company/trashed/route.js"
+  "/api/high-rto/route": "app/api/high-rto/route.js"
 }

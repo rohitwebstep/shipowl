@@ -98,6 +98,11 @@ export type productVariant = $Result.DefaultSelection<Prisma.$productVariantPayl
  * 
  */
 export type courierCompany = $Result.DefaultSelection<Prisma.$courierCompanyPayload>
+/**
+ * Model highRto
+ * 
+ */
+export type highRto = $Result.DefaultSelection<Prisma.$highRtoPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -393,6 +398,16 @@ export class PrismaClient<
     * ```
     */
   get courierCompany(): Prisma.courierCompanyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.highRto`: Exposes CRUD operations for the **highRto** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HighRtos
+    * const highRtos = await prisma.highRto.findMany()
+    * ```
+    */
+  get highRto(): Prisma.highRtoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -849,7 +864,8 @@ export namespace Prisma {
     productRequest: 'productRequest',
     product: 'product',
     productVariant: 'productVariant',
-    courierCompany: 'courierCompany'
+    courierCompany: 'courierCompany',
+    highRto: 'highRto'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -868,7 +884,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany"
+      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany" | "highRto"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1994,6 +2010,72 @@ export namespace Prisma {
           }
         }
       }
+      highRto: {
+        payload: Prisma.$highRtoPayload<ExtArgs>
+        fields: Prisma.highRtoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.highRtoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.highRtoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          findFirst: {
+            args: Prisma.highRtoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.highRtoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          findMany: {
+            args: Prisma.highRtoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>[]
+          }
+          create: {
+            args: Prisma.highRtoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          createMany: {
+            args: Prisma.highRtoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.highRtoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          update: {
+            args: Prisma.highRtoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          deleteMany: {
+            args: Prisma.highRtoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.highRtoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.highRtoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$highRtoPayload>
+          }
+          aggregate: {
+            args: Prisma.HighRtoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHighRto>
+          }
+          groupBy: {
+            args: Prisma.highRtoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HighRtoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.highRtoCountArgs<ExtArgs>
+            result: $Utils.Optional<HighRtoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2095,6 +2177,7 @@ export namespace Prisma {
     product?: productOmit
     productVariant?: productVariantOmit
     courierCompany?: courierCompanyOmit
+    highRto?: highRtoOmit
   }
 
   /* Types for Logging */
@@ -2232,6 +2315,7 @@ export namespace Prisma {
     states: number
     cities: number
     warehouses: number
+    highRtos: number
     admins: number
     originProducts: number
     shippingProducts: number
@@ -2241,6 +2325,7 @@ export namespace Prisma {
     states?: boolean | CountryCountOutputTypeCountStatesArgs
     cities?: boolean | CountryCountOutputTypeCountCitiesArgs
     warehouses?: boolean | CountryCountOutputTypeCountWarehousesArgs
+    highRtos?: boolean | CountryCountOutputTypeCountHighRtosArgs
     admins?: boolean | CountryCountOutputTypeCountAdminsArgs
     originProducts?: boolean | CountryCountOutputTypeCountOriginProductsArgs
     shippingProducts?: boolean | CountryCountOutputTypeCountShippingProductsArgs
@@ -2281,6 +2366,13 @@ export namespace Prisma {
   /**
    * CountryCountOutputType without action
    */
+  export type CountryCountOutputTypeCountHighRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: highRtoWhereInput
+  }
+
+  /**
+   * CountryCountOutputType without action
+   */
   export type CountryCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: adminWhereInput
   }
@@ -2307,12 +2399,14 @@ export namespace Prisma {
   export type StateCountOutputType = {
     cities: number
     warehouses: number
+    highRtos: number
     admins: number
   }
 
   export type StateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cities?: boolean | StateCountOutputTypeCountCitiesArgs
     warehouses?: boolean | StateCountOutputTypeCountWarehousesArgs
+    highRtos?: boolean | StateCountOutputTypeCountHighRtosArgs
     admins?: boolean | StateCountOutputTypeCountAdminsArgs
   }
 
@@ -2344,6 +2438,13 @@ export namespace Prisma {
   /**
    * StateCountOutputType without action
    */
+  export type StateCountOutputTypeCountHighRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: highRtoWhereInput
+  }
+
+  /**
+   * StateCountOutputType without action
+   */
   export type StateCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: adminWhereInput
   }
@@ -2355,11 +2456,13 @@ export namespace Prisma {
 
   export type CityCountOutputType = {
     warehouses: number
+    highRtos: number
     admins: number
   }
 
   export type CityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     warehouses?: boolean | CityCountOutputTypeCountWarehousesArgs
+    highRtos?: boolean | CityCountOutputTypeCountHighRtosArgs
     admins?: boolean | CityCountOutputTypeCountAdminsArgs
   }
 
@@ -2379,6 +2482,13 @@ export namespace Prisma {
    */
   export type CityCountOutputTypeCountWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: warehouseWhereInput
+  }
+
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeCountHighRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: highRtoWhereInput
   }
 
   /**
@@ -11093,6 +11203,7 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    highRtos?: boolean | country$highRtosArgs<ExtArgs>
     admins?: boolean | country$adminsArgs<ExtArgs>
     originProducts?: boolean | country$originProductsArgs<ExtArgs>
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
@@ -11127,6 +11238,7 @@ export namespace Prisma {
     states?: boolean | country$statesArgs<ExtArgs>
     cities?: boolean | country$citiesArgs<ExtArgs>
     warehouses?: boolean | country$warehousesArgs<ExtArgs>
+    highRtos?: boolean | country$highRtosArgs<ExtArgs>
     admins?: boolean | country$adminsArgs<ExtArgs>
     originProducts?: boolean | country$originProductsArgs<ExtArgs>
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
@@ -11139,6 +11251,7 @@ export namespace Prisma {
       states: Prisma.$statePayload<ExtArgs>[]
       cities: Prisma.$cityPayload<ExtArgs>[]
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      highRtos: Prisma.$highRtoPayload<ExtArgs>[]
       admins: Prisma.$adminPayload<ExtArgs>[]
       originProducts: Prisma.$productPayload<ExtArgs>[]
       shippingProducts: Prisma.$productPayload<ExtArgs>[]
@@ -11505,6 +11618,7 @@ export namespace Prisma {
     states<T extends country$statesArgs<ExtArgs> = {}>(args?: Subset<T, country$statesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cities<T extends country$citiesArgs<ExtArgs> = {}>(args?: Subset<T, country$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     warehouses<T extends country$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, country$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    highRtos<T extends country$highRtosArgs<ExtArgs> = {}>(args?: Subset<T, country$highRtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends country$adminsArgs<ExtArgs> = {}>(args?: Subset<T, country$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     originProducts<T extends country$originProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$originProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shippingProducts<T extends country$shippingProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$shippingProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -11970,6 +12084,30 @@ export namespace Prisma {
   }
 
   /**
+   * country.highRtos
+   */
+  export type country$highRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    where?: highRtoWhereInput
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    cursor?: highRtoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
+  }
+
+  /**
    * country.admins
    */
   export type country$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12349,6 +12487,7 @@ export namespace Prisma {
     country?: boolean | countryDefaultArgs<ExtArgs>
     cities?: boolean | state$citiesArgs<ExtArgs>
     warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    highRtos?: boolean | state$highRtosArgs<ExtArgs>
     admins?: boolean | state$adminsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["state"]>
@@ -12377,6 +12516,7 @@ export namespace Prisma {
     country?: boolean | countryDefaultArgs<ExtArgs>
     cities?: boolean | state$citiesArgs<ExtArgs>
     warehouses?: boolean | state$warehousesArgs<ExtArgs>
+    highRtos?: boolean | state$highRtosArgs<ExtArgs>
     admins?: boolean | state$adminsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -12387,6 +12527,7 @@ export namespace Prisma {
       country: Prisma.$countryPayload<ExtArgs>
       cities: Prisma.$cityPayload<ExtArgs>[]
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      highRtos: Prisma.$highRtoPayload<ExtArgs>[]
       admins: Prisma.$adminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -12747,6 +12888,7 @@ export namespace Prisma {
     country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     cities<T extends state$citiesArgs<ExtArgs> = {}>(args?: Subset<T, state$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     warehouses<T extends state$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, state$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    highRtos<T extends state$highRtosArgs<ExtArgs> = {}>(args?: Subset<T, state$highRtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends state$adminsArgs<ExtArgs> = {}>(args?: Subset<T, state$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13182,6 +13324,30 @@ export namespace Prisma {
   }
 
   /**
+   * state.highRtos
+   */
+  export type state$highRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    where?: highRtoWhereInput
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    cursor?: highRtoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
+  }
+
+  /**
    * state.admins
    */
   export type state$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13509,6 +13675,7 @@ export namespace Prisma {
     state?: boolean | stateDefaultArgs<ExtArgs>
     country?: boolean | countryDefaultArgs<ExtArgs>
     warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    highRtos?: boolean | city$highRtosArgs<ExtArgs>
     admins?: boolean | city$adminsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["city"]>
@@ -13536,6 +13703,7 @@ export namespace Prisma {
     state?: boolean | stateDefaultArgs<ExtArgs>
     country?: boolean | countryDefaultArgs<ExtArgs>
     warehouses?: boolean | city$warehousesArgs<ExtArgs>
+    highRtos?: boolean | city$highRtosArgs<ExtArgs>
     admins?: boolean | city$adminsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13546,6 +13714,7 @@ export namespace Prisma {
       state: Prisma.$statePayload<ExtArgs>
       country: Prisma.$countryPayload<ExtArgs>
       warehouses: Prisma.$warehousePayload<ExtArgs>[]
+      highRtos: Prisma.$highRtoPayload<ExtArgs>[]
       admins: Prisma.$adminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13905,6 +14074,7 @@ export namespace Prisma {
     state<T extends stateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stateDefaultArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     country<T extends countryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, countryDefaultArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     warehouses<T extends city$warehousesArgs<ExtArgs> = {}>(args?: Subset<T, city$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$warehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    highRtos<T extends city$highRtosArgs<ExtArgs> = {}>(args?: Subset<T, city$highRtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends city$adminsArgs<ExtArgs> = {}>(args?: Subset<T, city$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14312,6 +14482,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WarehouseScalarFieldEnum | WarehouseScalarFieldEnum[]
+  }
+
+  /**
+   * city.highRtos
+   */
+  export type city$highRtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    where?: highRtoWhereInput
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    cursor?: highRtoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
   }
 
   /**
@@ -22646,6 +22840,1168 @@ export namespace Prisma {
 
 
   /**
+   * Model highRto
+   */
+
+  export type AggregateHighRto = {
+    _count: HighRtoCountAggregateOutputType | null
+    _avg: HighRtoAvgAggregateOutputType | null
+    _sum: HighRtoSumAggregateOutputType | null
+    _min: HighRtoMinAggregateOutputType | null
+    _max: HighRtoMaxAggregateOutputType | null
+  }
+
+  export type HighRtoAvgAggregateOutputType = {
+    id: number | null
+    countryId: number | null
+    stateId: number | null
+    cityId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type HighRtoSumAggregateOutputType = {
+    id: number | null
+    countryId: bigint | null
+    stateId: bigint | null
+    cityId: bigint | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type HighRtoMinAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    countryId: bigint | null
+    stateId: bigint | null
+    cityId: bigint | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type HighRtoMaxAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    countryId: bigint | null
+    stateId: bigint | null
+    cityId: bigint | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type HighRtoCountAggregateOutputType = {
+    id: number
+    pincode: number
+    countryId: number
+    stateId: number
+    cityId: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type HighRtoAvgAggregateInputType = {
+    id?: true
+    countryId?: true
+    stateId?: true
+    cityId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type HighRtoSumAggregateInputType = {
+    id?: true
+    countryId?: true
+    stateId?: true
+    cityId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type HighRtoMinAggregateInputType = {
+    id?: true
+    pincode?: true
+    countryId?: true
+    stateId?: true
+    cityId?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type HighRtoMaxAggregateInputType = {
+    id?: true
+    pincode?: true
+    countryId?: true
+    stateId?: true
+    cityId?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type HighRtoCountAggregateInputType = {
+    id?: true
+    pincode?: true
+    countryId?: true
+    stateId?: true
+    cityId?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type HighRtoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which highRto to aggregate.
+     */
+    where?: highRtoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of highRtos to fetch.
+     */
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: highRtoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` highRtos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` highRtos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned highRtos
+    **/
+    _count?: true | HighRtoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HighRtoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HighRtoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HighRtoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HighRtoMaxAggregateInputType
+  }
+
+  export type GetHighRtoAggregateType<T extends HighRtoAggregateArgs> = {
+        [P in keyof T & keyof AggregateHighRto]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHighRto[P]>
+      : GetScalarType<T[P], AggregateHighRto[P]>
+  }
+
+
+
+
+  export type highRtoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: highRtoWhereInput
+    orderBy?: highRtoOrderByWithAggregationInput | highRtoOrderByWithAggregationInput[]
+    by: HighRtoScalarFieldEnum[] | HighRtoScalarFieldEnum
+    having?: highRtoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HighRtoCountAggregateInputType | true
+    _avg?: HighRtoAvgAggregateInputType
+    _sum?: HighRtoSumAggregateInputType
+    _min?: HighRtoMinAggregateInputType
+    _max?: HighRtoMaxAggregateInputType
+  }
+
+  export type HighRtoGroupByOutputType = {
+    id: number
+    pincode: string
+    countryId: bigint | null
+    stateId: bigint | null
+    cityId: bigint | null
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: HighRtoCountAggregateOutputType | null
+    _avg: HighRtoAvgAggregateOutputType | null
+    _sum: HighRtoSumAggregateOutputType | null
+    _min: HighRtoMinAggregateOutputType | null
+    _max: HighRtoMaxAggregateOutputType | null
+  }
+
+  type GetHighRtoGroupByPayload<T extends highRtoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HighRtoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HighRtoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HighRtoGroupByOutputType[P]>
+            : GetScalarType<T[P], HighRtoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type highRtoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pincode?: boolean
+    countryId?: boolean
+    stateId?: boolean
+    cityId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    country?: boolean | highRto$countryArgs<ExtArgs>
+    state?: boolean | highRto$stateArgs<ExtArgs>
+    city?: boolean | highRto$cityArgs<ExtArgs>
+  }, ExtArgs["result"]["highRto"]>
+
+
+
+  export type highRtoSelectScalar = {
+    id?: boolean
+    pincode?: boolean
+    countryId?: boolean
+    stateId?: boolean
+    cityId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type highRtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pincode" | "countryId" | "stateId" | "cityId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["highRto"]>
+  export type highRtoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    country?: boolean | highRto$countryArgs<ExtArgs>
+    state?: boolean | highRto$stateArgs<ExtArgs>
+    city?: boolean | highRto$cityArgs<ExtArgs>
+  }
+
+  export type $highRtoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "highRto"
+    objects: {
+      country: Prisma.$countryPayload<ExtArgs> | null
+      state: Prisma.$statePayload<ExtArgs> | null
+      city: Prisma.$cityPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      pincode: string
+      countryId: bigint | null
+      stateId: bigint | null
+      cityId: bigint | null
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["highRto"]>
+    composites: {}
+  }
+
+  type highRtoGetPayload<S extends boolean | null | undefined | highRtoDefaultArgs> = $Result.GetResult<Prisma.$highRtoPayload, S>
+
+  type highRtoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<highRtoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HighRtoCountAggregateInputType | true
+    }
+
+  export interface highRtoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['highRto'], meta: { name: 'highRto' } }
+    /**
+     * Find zero or one HighRto that matches the filter.
+     * @param {highRtoFindUniqueArgs} args - Arguments to find a HighRto
+     * @example
+     * // Get one HighRto
+     * const highRto = await prisma.highRto.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends highRtoFindUniqueArgs>(args: SelectSubset<T, highRtoFindUniqueArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HighRto that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {highRtoFindUniqueOrThrowArgs} args - Arguments to find a HighRto
+     * @example
+     * // Get one HighRto
+     * const highRto = await prisma.highRto.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends highRtoFindUniqueOrThrowArgs>(args: SelectSubset<T, highRtoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HighRto that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoFindFirstArgs} args - Arguments to find a HighRto
+     * @example
+     * // Get one HighRto
+     * const highRto = await prisma.highRto.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends highRtoFindFirstArgs>(args?: SelectSubset<T, highRtoFindFirstArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HighRto that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoFindFirstOrThrowArgs} args - Arguments to find a HighRto
+     * @example
+     * // Get one HighRto
+     * const highRto = await prisma.highRto.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends highRtoFindFirstOrThrowArgs>(args?: SelectSubset<T, highRtoFindFirstOrThrowArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HighRtos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HighRtos
+     * const highRtos = await prisma.highRto.findMany()
+     * 
+     * // Get first 10 HighRtos
+     * const highRtos = await prisma.highRto.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const highRtoWithIdOnly = await prisma.highRto.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends highRtoFindManyArgs>(args?: SelectSubset<T, highRtoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HighRto.
+     * @param {highRtoCreateArgs} args - Arguments to create a HighRto.
+     * @example
+     * // Create one HighRto
+     * const HighRto = await prisma.highRto.create({
+     *   data: {
+     *     // ... data to create a HighRto
+     *   }
+     * })
+     * 
+     */
+    create<T extends highRtoCreateArgs>(args: SelectSubset<T, highRtoCreateArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HighRtos.
+     * @param {highRtoCreateManyArgs} args - Arguments to create many HighRtos.
+     * @example
+     * // Create many HighRtos
+     * const highRto = await prisma.highRto.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends highRtoCreateManyArgs>(args?: SelectSubset<T, highRtoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a HighRto.
+     * @param {highRtoDeleteArgs} args - Arguments to delete one HighRto.
+     * @example
+     * // Delete one HighRto
+     * const HighRto = await prisma.highRto.delete({
+     *   where: {
+     *     // ... filter to delete one HighRto
+     *   }
+     * })
+     * 
+     */
+    delete<T extends highRtoDeleteArgs>(args: SelectSubset<T, highRtoDeleteArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HighRto.
+     * @param {highRtoUpdateArgs} args - Arguments to update one HighRto.
+     * @example
+     * // Update one HighRto
+     * const highRto = await prisma.highRto.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends highRtoUpdateArgs>(args: SelectSubset<T, highRtoUpdateArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HighRtos.
+     * @param {highRtoDeleteManyArgs} args - Arguments to filter HighRtos to delete.
+     * @example
+     * // Delete a few HighRtos
+     * const { count } = await prisma.highRto.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends highRtoDeleteManyArgs>(args?: SelectSubset<T, highRtoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HighRtos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HighRtos
+     * const highRto = await prisma.highRto.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends highRtoUpdateManyArgs>(args: SelectSubset<T, highRtoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one HighRto.
+     * @param {highRtoUpsertArgs} args - Arguments to update or create a HighRto.
+     * @example
+     * // Update or create a HighRto
+     * const highRto = await prisma.highRto.upsert({
+     *   create: {
+     *     // ... data to create a HighRto
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HighRto we want to update
+     *   }
+     * })
+     */
+    upsert<T extends highRtoUpsertArgs>(args: SelectSubset<T, highRtoUpsertArgs<ExtArgs>>): Prisma__highRtoClient<$Result.GetResult<Prisma.$highRtoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HighRtos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoCountArgs} args - Arguments to filter HighRtos to count.
+     * @example
+     * // Count the number of HighRtos
+     * const count = await prisma.highRto.count({
+     *   where: {
+     *     // ... the filter for the HighRtos we want to count
+     *   }
+     * })
+    **/
+    count<T extends highRtoCountArgs>(
+      args?: Subset<T, highRtoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HighRtoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HighRto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HighRtoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HighRtoAggregateArgs>(args: Subset<T, HighRtoAggregateArgs>): Prisma.PrismaPromise<GetHighRtoAggregateType<T>>
+
+    /**
+     * Group by HighRto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {highRtoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends highRtoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: highRtoGroupByArgs['orderBy'] }
+        : { orderBy?: highRtoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, highRtoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHighRtoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the highRto model
+   */
+  readonly fields: highRtoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for highRto.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__highRtoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    country<T extends highRto$countryArgs<ExtArgs> = {}>(args?: Subset<T, highRto$countryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    state<T extends highRto$stateArgs<ExtArgs> = {}>(args?: Subset<T, highRto$stateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    city<T extends highRto$cityArgs<ExtArgs> = {}>(args?: Subset<T, highRto$cityArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the highRto model
+   */
+  interface highRtoFieldRefs {
+    readonly id: FieldRef<"highRto", 'Int'>
+    readonly pincode: FieldRef<"highRto", 'String'>
+    readonly countryId: FieldRef<"highRto", 'BigInt'>
+    readonly stateId: FieldRef<"highRto", 'BigInt'>
+    readonly cityId: FieldRef<"highRto", 'BigInt'>
+    readonly status: FieldRef<"highRto", 'Boolean'>
+    readonly createdAt: FieldRef<"highRto", 'DateTime'>
+    readonly createdBy: FieldRef<"highRto", 'Int'>
+    readonly createdByRole: FieldRef<"highRto", 'String'>
+    readonly updatedAt: FieldRef<"highRto", 'DateTime'>
+    readonly updatedBy: FieldRef<"highRto", 'Int'>
+    readonly updatedByRole: FieldRef<"highRto", 'String'>
+    readonly deletedAt: FieldRef<"highRto", 'DateTime'>
+    readonly deletedBy: FieldRef<"highRto", 'Int'>
+    readonly deletedByRole: FieldRef<"highRto", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * highRto findUnique
+   */
+  export type highRtoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter, which highRto to fetch.
+     */
+    where: highRtoWhereUniqueInput
+  }
+
+  /**
+   * highRto findUniqueOrThrow
+   */
+  export type highRtoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter, which highRto to fetch.
+     */
+    where: highRtoWhereUniqueInput
+  }
+
+  /**
+   * highRto findFirst
+   */
+  export type highRtoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter, which highRto to fetch.
+     */
+    where?: highRtoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of highRtos to fetch.
+     */
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for highRtos.
+     */
+    cursor?: highRtoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` highRtos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` highRtos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of highRtos.
+     */
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
+  }
+
+  /**
+   * highRto findFirstOrThrow
+   */
+  export type highRtoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter, which highRto to fetch.
+     */
+    where?: highRtoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of highRtos to fetch.
+     */
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for highRtos.
+     */
+    cursor?: highRtoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` highRtos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` highRtos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of highRtos.
+     */
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
+  }
+
+  /**
+   * highRto findMany
+   */
+  export type highRtoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter, which highRtos to fetch.
+     */
+    where?: highRtoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of highRtos to fetch.
+     */
+    orderBy?: highRtoOrderByWithRelationInput | highRtoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing highRtos.
+     */
+    cursor?: highRtoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` highRtos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` highRtos.
+     */
+    skip?: number
+    distinct?: HighRtoScalarFieldEnum | HighRtoScalarFieldEnum[]
+  }
+
+  /**
+   * highRto create
+   */
+  export type highRtoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a highRto.
+     */
+    data: XOR<highRtoCreateInput, highRtoUncheckedCreateInput>
+  }
+
+  /**
+   * highRto createMany
+   */
+  export type highRtoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many highRtos.
+     */
+    data: highRtoCreateManyInput | highRtoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * highRto update
+   */
+  export type highRtoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a highRto.
+     */
+    data: XOR<highRtoUpdateInput, highRtoUncheckedUpdateInput>
+    /**
+     * Choose, which highRto to update.
+     */
+    where: highRtoWhereUniqueInput
+  }
+
+  /**
+   * highRto updateMany
+   */
+  export type highRtoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update highRtos.
+     */
+    data: XOR<highRtoUpdateManyMutationInput, highRtoUncheckedUpdateManyInput>
+    /**
+     * Filter which highRtos to update
+     */
+    where?: highRtoWhereInput
+    /**
+     * Limit how many highRtos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * highRto upsert
+   */
+  export type highRtoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the highRto to update in case it exists.
+     */
+    where: highRtoWhereUniqueInput
+    /**
+     * In case the highRto found by the `where` argument doesn't exist, create a new highRto with this data.
+     */
+    create: XOR<highRtoCreateInput, highRtoUncheckedCreateInput>
+    /**
+     * In case the highRto was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<highRtoUpdateInput, highRtoUncheckedUpdateInput>
+  }
+
+  /**
+   * highRto delete
+   */
+  export type highRtoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+    /**
+     * Filter which highRto to delete.
+     */
+    where: highRtoWhereUniqueInput
+  }
+
+  /**
+   * highRto deleteMany
+   */
+  export type highRtoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which highRtos to delete
+     */
+    where?: highRtoWhereInput
+    /**
+     * Limit how many highRtos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * highRto.country
+   */
+  export type highRto$countryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    where?: countryWhereInput
+  }
+
+  /**
+   * highRto.state
+   */
+  export type highRto$stateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    where?: stateWhereInput
+  }
+
+  /**
+   * highRto.city
+   */
+  export type highRto$cityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
+  }
+
+  /**
+   * highRto without action
+   */
+  export type highRtoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the highRto
+     */
+    select?: highRtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the highRto
+     */
+    omit?: highRtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: highRtoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -23118,6 +24474,27 @@ export namespace Prisma {
   export type CourierCompanyScalarFieldEnum = (typeof CourierCompanyScalarFieldEnum)[keyof typeof CourierCompanyScalarFieldEnum]
 
 
+  export const HighRtoScalarFieldEnum: {
+    id: 'id',
+    pincode: 'pincode',
+    countryId: 'countryId',
+    stateId: 'stateId',
+    cityId: 'cityId',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type HighRtoScalarFieldEnum = (typeof HighRtoScalarFieldEnum)[keyof typeof HighRtoScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -23451,6 +24828,16 @@ export namespace Prisma {
   };
 
   export type courierCompanyOrderByRelevanceFieldEnum = (typeof courierCompanyOrderByRelevanceFieldEnum)[keyof typeof courierCompanyOrderByRelevanceFieldEnum]
+
+
+  export const highRtoOrderByRelevanceFieldEnum: {
+    pincode: 'pincode',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type highRtoOrderByRelevanceFieldEnum = (typeof highRtoOrderByRelevanceFieldEnum)[keyof typeof highRtoOrderByRelevanceFieldEnum]
 
 
   /**
@@ -24599,6 +25986,7 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
     originProducts?: ProductListRelationFilter
     shippingProducts?: ProductListRelationFilter
@@ -24626,6 +26014,7 @@ export namespace Prisma {
     states?: stateOrderByRelationAggregateInput
     cities?: cityOrderByRelationAggregateInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    highRtos?: highRtoOrderByRelationAggregateInput
     admins?: adminOrderByRelationAggregateInput
     originProducts?: productOrderByRelationAggregateInput
     shippingProducts?: productOrderByRelationAggregateInput
@@ -24657,6 +26046,7 @@ export namespace Prisma {
     states?: StateListRelationFilter
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
     originProducts?: ProductListRelationFilter
     shippingProducts?: ProductListRelationFilter
@@ -24733,6 +26123,7 @@ export namespace Prisma {
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
   }
 
@@ -24754,6 +26145,7 @@ export namespace Prisma {
     country?: countryOrderByWithRelationInput
     cities?: cityOrderByRelationAggregateInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    highRtos?: highRtoOrderByRelationAggregateInput
     admins?: adminOrderByRelationAggregateInput
     _relevance?: stateOrderByRelevanceInput
   }
@@ -24779,6 +26171,7 @@ export namespace Prisma {
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     cities?: CityListRelationFilter
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
   }, "id">
 
@@ -24844,6 +26237,7 @@ export namespace Prisma {
     state?: XOR<StateScalarRelationFilter, stateWhereInput>
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
   }
 
@@ -24864,6 +26258,7 @@ export namespace Prisma {
     state?: stateOrderByWithRelationInput
     country?: countryOrderByWithRelationInput
     warehouses?: warehouseOrderByRelationAggregateInput
+    highRtos?: highRtoOrderByRelationAggregateInput
     admins?: adminOrderByRelationAggregateInput
     _relevance?: cityOrderByRelevanceInput
   }
@@ -24888,6 +26283,7 @@ export namespace Prisma {
     state?: XOR<StateScalarRelationFilter, stateWhereInput>
     country?: XOR<CountryScalarRelationFilter, countryWhereInput>
     warehouses?: WarehouseListRelationFilter
+    highRtos?: HighRtoListRelationFilter
     admins?: AdminListRelationFilter
   }, "id">
 
@@ -25918,6 +27314,120 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"courierCompany"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"courierCompany"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"courierCompany"> | string | null
+  }
+
+  export type highRtoWhereInput = {
+    AND?: highRtoWhereInput | highRtoWhereInput[]
+    OR?: highRtoWhereInput[]
+    NOT?: highRtoWhereInput | highRtoWhereInput[]
+    id?: IntFilter<"highRto"> | number
+    pincode?: StringFilter<"highRto"> | string
+    countryId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    status?: BoolFilter<"highRto"> | boolean
+    createdAt?: DateTimeFilter<"highRto"> | Date | string
+    createdBy?: IntNullableFilter<"highRto"> | number | null
+    createdByRole?: StringNullableFilter<"highRto"> | string | null
+    updatedAt?: DateTimeFilter<"highRto"> | Date | string
+    updatedBy?: IntNullableFilter<"highRto"> | number | null
+    updatedByRole?: StringNullableFilter<"highRto"> | string | null
+    deletedAt?: DateTimeNullableFilter<"highRto"> | Date | string | null
+    deletedBy?: IntNullableFilter<"highRto"> | number | null
+    deletedByRole?: StringNullableFilter<"highRto"> | string | null
+    country?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    state?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    city?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
+  }
+
+  export type highRtoOrderByWithRelationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    countryId?: SortOrderInput | SortOrder
+    stateId?: SortOrderInput | SortOrder
+    cityId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    country?: countryOrderByWithRelationInput
+    state?: stateOrderByWithRelationInput
+    city?: cityOrderByWithRelationInput
+    _relevance?: highRtoOrderByRelevanceInput
+  }
+
+  export type highRtoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: highRtoWhereInput | highRtoWhereInput[]
+    OR?: highRtoWhereInput[]
+    NOT?: highRtoWhereInput | highRtoWhereInput[]
+    pincode?: StringFilter<"highRto"> | string
+    countryId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    status?: BoolFilter<"highRto"> | boolean
+    createdAt?: DateTimeFilter<"highRto"> | Date | string
+    createdBy?: IntNullableFilter<"highRto"> | number | null
+    createdByRole?: StringNullableFilter<"highRto"> | string | null
+    updatedAt?: DateTimeFilter<"highRto"> | Date | string
+    updatedBy?: IntNullableFilter<"highRto"> | number | null
+    updatedByRole?: StringNullableFilter<"highRto"> | string | null
+    deletedAt?: DateTimeNullableFilter<"highRto"> | Date | string | null
+    deletedBy?: IntNullableFilter<"highRto"> | number | null
+    deletedByRole?: StringNullableFilter<"highRto"> | string | null
+    country?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    state?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    city?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
+  }, "id">
+
+  export type highRtoOrderByWithAggregationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    countryId?: SortOrderInput | SortOrder
+    stateId?: SortOrderInput | SortOrder
+    cityId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: highRtoCountOrderByAggregateInput
+    _avg?: highRtoAvgOrderByAggregateInput
+    _max?: highRtoMaxOrderByAggregateInput
+    _min?: highRtoMinOrderByAggregateInput
+    _sum?: highRtoSumOrderByAggregateInput
+  }
+
+  export type highRtoScalarWhereWithAggregatesInput = {
+    AND?: highRtoScalarWhereWithAggregatesInput | highRtoScalarWhereWithAggregatesInput[]
+    OR?: highRtoScalarWhereWithAggregatesInput[]
+    NOT?: highRtoScalarWhereWithAggregatesInput | highRtoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"highRto"> | number
+    pincode?: StringWithAggregatesFilter<"highRto"> | string
+    countryId?: BigIntNullableWithAggregatesFilter<"highRto"> | bigint | number | null
+    stateId?: BigIntNullableWithAggregatesFilter<"highRto"> | bigint | number | null
+    cityId?: BigIntNullableWithAggregatesFilter<"highRto"> | bigint | number | null
+    status?: BoolWithAggregatesFilter<"highRto"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"highRto"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"highRto"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"highRto"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"highRto"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"highRto"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"highRto"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"highRto"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"highRto"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"highRto"> | string | null
   }
 
   export type emailConfigCreateInput = {
@@ -27225,6 +28735,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
@@ -27252,6 +28763,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
@@ -27279,6 +28791,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
@@ -27306,6 +28819,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
@@ -27391,6 +28905,7 @@ export namespace Prisma {
     country: countryCreateNestedOneWithoutStatesInput
     cities?: cityCreateNestedManyWithoutStateInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
     admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -27411,6 +28926,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -27431,6 +28947,7 @@ export namespace Prisma {
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     cities?: cityUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -27451,6 +28968,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -27519,6 +29037,7 @@ export namespace Prisma {
     state: stateCreateNestedOneWithoutCitiesInput
     country: countryCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
     admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -27537,6 +29056,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -27555,6 +29075,7 @@ export namespace Prisma {
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -27573,6 +29094,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -28791,6 +30313,126 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type highRtoCreateInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutHighRtosInput
+    state?: stateCreateNestedOneWithoutHighRtosInput
+    city?: cityCreateNestedOneWithoutHighRtosInput
+  }
+
+  export type highRtoUncheckedCreateInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type highRtoUpdateInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutHighRtosNestedInput
+    state?: stateUpdateOneWithoutHighRtosNestedInput
+    city?: cityUpdateOneWithoutHighRtosNestedInput
+  }
+
+  export type highRtoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoCreateManyInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type highRtoUpdateManyMutationInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -29807,6 +31449,12 @@ export namespace Prisma {
     none?: warehouseWhereInput
   }
 
+  export type HighRtoListRelationFilter = {
+    every?: highRtoWhereInput
+    some?: highRtoWhereInput
+    none?: highRtoWhereInput
+  }
+
   export type AdminListRelationFilter = {
     every?: adminWhereInput
     some?: adminWhereInput
@@ -29828,6 +31476,10 @@ export namespace Prisma {
   }
 
   export type warehouseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type highRtoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30875,6 +32527,86 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
+  export type highRtoOrderByRelevanceInput = {
+    fields: highRtoOrderByRelevanceFieldEnum | highRtoOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type highRtoCountOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    countryId?: SortOrder
+    stateId?: SortOrder
+    cityId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type highRtoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    countryId?: SortOrder
+    stateId?: SortOrder
+    cityId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type highRtoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    countryId?: SortOrder
+    stateId?: SortOrder
+    cityId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type highRtoMinOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    countryId?: SortOrder
+    stateId?: SortOrder
+    cityId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type highRtoSumOrderByAggregateInput = {
+    id?: SortOrder
+    countryId?: SortOrder
+    stateId?: SortOrder
+    cityId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
   export type BigIntFieldUpdateOperationsInput = {
     set?: bigint | number
     increment?: bigint | number
@@ -31154,6 +32886,13 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type highRtoCreateNestedManyWithoutCountryInput = {
+    create?: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput> | highRtoCreateWithoutCountryInput[] | highRtoUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCountryInput | highRtoCreateOrConnectWithoutCountryInput[]
+    createMany?: highRtoCreateManyCountryInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+  }
+
   export type adminCreateNestedManyWithoutPermanentCountryInput = {
     create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
@@ -31194,6 +32933,13 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutCountryInput | warehouseCreateOrConnectWithoutCountryInput[]
     createMany?: warehouseCreateManyCountryInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type highRtoUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput> | highRtoCreateWithoutCountryInput[] | highRtoUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCountryInput | highRtoCreateOrConnectWithoutCountryInput[]
+    createMany?: highRtoCreateManyCountryInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
   }
 
   export type adminUncheckedCreateNestedManyWithoutPermanentCountryInput = {
@@ -31257,6 +33003,20 @@ export namespace Prisma {
     update?: warehouseUpdateWithWhereUniqueWithoutCountryInput | warehouseUpdateWithWhereUniqueWithoutCountryInput[]
     updateMany?: warehouseUpdateManyWithWhereWithoutCountryInput | warehouseUpdateManyWithWhereWithoutCountryInput[]
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type highRtoUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput> | highRtoCreateWithoutCountryInput[] | highRtoUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCountryInput | highRtoCreateOrConnectWithoutCountryInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutCountryInput | highRtoUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: highRtoCreateManyCountryInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutCountryInput | highRtoUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutCountryInput | highRtoUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
   }
 
   export type adminUpdateManyWithoutPermanentCountryNestedInput = {
@@ -31343,6 +33103,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type highRtoUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput> | highRtoCreateWithoutCountryInput[] | highRtoUncheckedCreateWithoutCountryInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCountryInput | highRtoCreateOrConnectWithoutCountryInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutCountryInput | highRtoUpsertWithWhereUniqueWithoutCountryInput[]
+    createMany?: highRtoCreateManyCountryInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutCountryInput | highRtoUpdateWithWhereUniqueWithoutCountryInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutCountryInput | highRtoUpdateManyWithWhereWithoutCountryInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+  }
+
   export type adminUncheckedUpdateManyWithoutPermanentCountryNestedInput = {
     create?: XOR<adminCreateWithoutPermanentCountryInput, adminUncheckedCreateWithoutPermanentCountryInput> | adminCreateWithoutPermanentCountryInput[] | adminUncheckedCreateWithoutPermanentCountryInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentCountryInput | adminCreateOrConnectWithoutPermanentCountryInput[]
@@ -31405,6 +33179,13 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type highRtoCreateNestedManyWithoutStateInput = {
+    create?: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput> | highRtoCreateWithoutStateInput[] | highRtoUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutStateInput | highRtoCreateOrConnectWithoutStateInput[]
+    createMany?: highRtoCreateManyStateInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+  }
+
   export type adminCreateNestedManyWithoutPermanentStateInput = {
     create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
@@ -31424,6 +33205,13 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutStateInput | warehouseCreateOrConnectWithoutStateInput[]
     createMany?: warehouseCreateManyStateInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type highRtoUncheckedCreateNestedManyWithoutStateInput = {
+    create?: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput> | highRtoCreateWithoutStateInput[] | highRtoUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutStateInput | highRtoCreateOrConnectWithoutStateInput[]
+    createMany?: highRtoCreateManyStateInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
   }
 
   export type adminUncheckedCreateNestedManyWithoutPermanentStateInput = {
@@ -31469,6 +33257,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type highRtoUpdateManyWithoutStateNestedInput = {
+    create?: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput> | highRtoCreateWithoutStateInput[] | highRtoUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutStateInput | highRtoCreateOrConnectWithoutStateInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutStateInput | highRtoUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: highRtoCreateManyStateInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutStateInput | highRtoUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutStateInput | highRtoUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+  }
+
   export type adminUpdateManyWithoutPermanentStateNestedInput = {
     create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
@@ -31511,6 +33313,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type highRtoUncheckedUpdateManyWithoutStateNestedInput = {
+    create?: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput> | highRtoCreateWithoutStateInput[] | highRtoUncheckedCreateWithoutStateInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutStateInput | highRtoCreateOrConnectWithoutStateInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutStateInput | highRtoUpsertWithWhereUniqueWithoutStateInput[]
+    createMany?: highRtoCreateManyStateInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutStateInput | highRtoUpdateWithWhereUniqueWithoutStateInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutStateInput | highRtoUpdateManyWithWhereWithoutStateInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+  }
+
   export type adminUncheckedUpdateManyWithoutPermanentStateNestedInput = {
     create?: XOR<adminCreateWithoutPermanentStateInput, adminUncheckedCreateWithoutPermanentStateInput> | adminCreateWithoutPermanentStateInput[] | adminUncheckedCreateWithoutPermanentStateInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentStateInput | adminCreateOrConnectWithoutPermanentStateInput[]
@@ -31544,6 +33360,13 @@ export namespace Prisma {
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
   }
 
+  export type highRtoCreateNestedManyWithoutCityInput = {
+    create?: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput> | highRtoCreateWithoutCityInput[] | highRtoUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCityInput | highRtoCreateOrConnectWithoutCityInput[]
+    createMany?: highRtoCreateManyCityInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+  }
+
   export type adminCreateNestedManyWithoutPermanentCityInput = {
     create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
@@ -31556,6 +33379,13 @@ export namespace Prisma {
     connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
     createMany?: warehouseCreateManyCityInputEnvelope
     connect?: warehouseWhereUniqueInput | warehouseWhereUniqueInput[]
+  }
+
+  export type highRtoUncheckedCreateNestedManyWithoutCityInput = {
+    create?: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput> | highRtoCreateWithoutCityInput[] | highRtoUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCityInput | highRtoCreateOrConnectWithoutCityInput[]
+    createMany?: highRtoCreateManyCityInputEnvelope
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
   }
 
   export type adminUncheckedCreateNestedManyWithoutPermanentCityInput = {
@@ -31595,6 +33425,20 @@ export namespace Prisma {
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
   }
 
+  export type highRtoUpdateManyWithoutCityNestedInput = {
+    create?: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput> | highRtoCreateWithoutCityInput[] | highRtoUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCityInput | highRtoCreateOrConnectWithoutCityInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutCityInput | highRtoUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: highRtoCreateManyCityInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutCityInput | highRtoUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutCityInput | highRtoUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+  }
+
   export type adminUpdateManyWithoutPermanentCityNestedInput = {
     create?: XOR<adminCreateWithoutPermanentCityInput, adminUncheckedCreateWithoutPermanentCityInput> | adminCreateWithoutPermanentCityInput[] | adminUncheckedCreateWithoutPermanentCityInput[]
     connectOrCreate?: adminCreateOrConnectWithoutPermanentCityInput | adminCreateOrConnectWithoutPermanentCityInput[]
@@ -31621,6 +33465,20 @@ export namespace Prisma {
     update?: warehouseUpdateWithWhereUniqueWithoutCityInput | warehouseUpdateWithWhereUniqueWithoutCityInput[]
     updateMany?: warehouseUpdateManyWithWhereWithoutCityInput | warehouseUpdateManyWithWhereWithoutCityInput[]
     deleteMany?: warehouseScalarWhereInput | warehouseScalarWhereInput[]
+  }
+
+  export type highRtoUncheckedUpdateManyWithoutCityNestedInput = {
+    create?: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput> | highRtoCreateWithoutCityInput[] | highRtoUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: highRtoCreateOrConnectWithoutCityInput | highRtoCreateOrConnectWithoutCityInput[]
+    upsert?: highRtoUpsertWithWhereUniqueWithoutCityInput | highRtoUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: highRtoCreateManyCityInputEnvelope
+    set?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    disconnect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    delete?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    connect?: highRtoWhereUniqueInput | highRtoWhereUniqueInput[]
+    update?: highRtoUpdateWithWhereUniqueWithoutCityInput | highRtoUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: highRtoUpdateManyWithWhereWithoutCityInput | highRtoUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
   }
 
   export type adminUncheckedUpdateManyWithoutPermanentCityNestedInput = {
@@ -31945,6 +33803,54 @@ export namespace Prisma {
     update?: XOR<XOR<productUpdateToOneWithWhereWithoutVariantsInput, productUpdateWithoutVariantsInput>, productUncheckedUpdateWithoutVariantsInput>
   }
 
+  export type countryCreateNestedOneWithoutHighRtosInput = {
+    create?: XOR<countryCreateWithoutHighRtosInput, countryUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: countryCreateOrConnectWithoutHighRtosInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type stateCreateNestedOneWithoutHighRtosInput = {
+    create?: XOR<stateCreateWithoutHighRtosInput, stateUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: stateCreateOrConnectWithoutHighRtosInput
+    connect?: stateWhereUniqueInput
+  }
+
+  export type cityCreateNestedOneWithoutHighRtosInput = {
+    create?: XOR<cityCreateWithoutHighRtosInput, cityUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: cityCreateOrConnectWithoutHighRtosInput
+    connect?: cityWhereUniqueInput
+  }
+
+  export type countryUpdateOneWithoutHighRtosNestedInput = {
+    create?: XOR<countryCreateWithoutHighRtosInput, countryUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: countryCreateOrConnectWithoutHighRtosInput
+    upsert?: countryUpsertWithoutHighRtosInput
+    disconnect?: countryWhereInput | boolean
+    delete?: countryWhereInput | boolean
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutHighRtosInput, countryUpdateWithoutHighRtosInput>, countryUncheckedUpdateWithoutHighRtosInput>
+  }
+
+  export type stateUpdateOneWithoutHighRtosNestedInput = {
+    create?: XOR<stateCreateWithoutHighRtosInput, stateUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: stateCreateOrConnectWithoutHighRtosInput
+    upsert?: stateUpsertWithoutHighRtosInput
+    disconnect?: stateWhereInput | boolean
+    delete?: stateWhereInput | boolean
+    connect?: stateWhereUniqueInput
+    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutHighRtosInput, stateUpdateWithoutHighRtosInput>, stateUncheckedUpdateWithoutHighRtosInput>
+  }
+
+  export type cityUpdateOneWithoutHighRtosNestedInput = {
+    create?: XOR<cityCreateWithoutHighRtosInput, cityUncheckedCreateWithoutHighRtosInput>
+    connectOrCreate?: cityCreateOrConnectWithoutHighRtosInput
+    upsert?: cityUpsertWithoutHighRtosInput
+    disconnect?: cityWhereInput | boolean
+    delete?: cityWhereInput | boolean
+    connect?: cityWhereUniqueInput
+    update?: XOR<XOR<cityUpdateToOneWithWhereWithoutHighRtosInput, cityUpdateWithoutHighRtosInput>, cityUncheckedUpdateWithoutHighRtosInput>
+  }
+
   export type NestedBigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -32258,6 +34164,7 @@ export namespace Prisma {
     state: stateCreateNestedOneWithoutCitiesInput
     country: countryCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
   }
 
   export type cityUncheckedCreateWithoutAdminsInput = {
@@ -32275,6 +34182,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
   }
 
   export type cityCreateOrConnectWithoutAdminsInput = {
@@ -32299,6 +34207,7 @@ export namespace Prisma {
     country: countryCreateNestedOneWithoutStatesInput
     cities?: cityCreateNestedManyWithoutStateInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
   }
 
   export type stateUncheckedCreateWithoutAdminsInput = {
@@ -32318,6 +34227,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
   }
 
   export type stateCreateOrConnectWithoutAdminsInput = {
@@ -32347,6 +34257,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -32373,6 +34284,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -32582,6 +34494,7 @@ export namespace Prisma {
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutAdminsInput = {
@@ -32599,6 +34512,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
   }
 
   export type stateUpsertWithoutAdminsInput = {
@@ -32629,6 +34543,7 @@ export namespace Prisma {
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     cities?: cityUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutAdminsInput = {
@@ -32648,6 +34563,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
   }
 
   export type countryUpsertWithoutAdminsInput = {
@@ -32683,6 +34599,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -32709,6 +34626,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -33351,6 +35269,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityCreateNestedManyWithoutStateInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
     admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -33370,6 +35289,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -33397,6 +35317,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     state: stateCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
     admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -33414,6 +35335,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -33481,6 +35403,49 @@ export namespace Prisma {
 
   export type warehouseCreateManyCountryInputEnvelope = {
     data: warehouseCreateManyCountryInput | warehouseCreateManyCountryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type highRtoCreateWithoutCountryInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state?: stateCreateNestedOneWithoutHighRtosInput
+    city?: cityCreateNestedOneWithoutHighRtosInput
+  }
+
+  export type highRtoUncheckedCreateWithoutCountryInput = {
+    id?: number
+    pincode: string
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type highRtoCreateOrConnectWithoutCountryInput = {
+    where: highRtoWhereUniqueInput
+    create: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput>
+  }
+
+  export type highRtoCreateManyCountryInputEnvelope = {
+    data: highRtoCreateManyCountryInput | highRtoCreateManyCountryInput[]
     skipDuplicates?: boolean
   }
 
@@ -33868,6 +35833,43 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"warehouse"> | string | null
   }
 
+  export type highRtoUpsertWithWhereUniqueWithoutCountryInput = {
+    where: highRtoWhereUniqueInput
+    update: XOR<highRtoUpdateWithoutCountryInput, highRtoUncheckedUpdateWithoutCountryInput>
+    create: XOR<highRtoCreateWithoutCountryInput, highRtoUncheckedCreateWithoutCountryInput>
+  }
+
+  export type highRtoUpdateWithWhereUniqueWithoutCountryInput = {
+    where: highRtoWhereUniqueInput
+    data: XOR<highRtoUpdateWithoutCountryInput, highRtoUncheckedUpdateWithoutCountryInput>
+  }
+
+  export type highRtoUpdateManyWithWhereWithoutCountryInput = {
+    where: highRtoScalarWhereInput
+    data: XOR<highRtoUpdateManyMutationInput, highRtoUncheckedUpdateManyWithoutCountryInput>
+  }
+
+  export type highRtoScalarWhereInput = {
+    AND?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+    OR?: highRtoScalarWhereInput[]
+    NOT?: highRtoScalarWhereInput | highRtoScalarWhereInput[]
+    id?: IntFilter<"highRto"> | number
+    pincode?: StringFilter<"highRto"> | string
+    countryId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    stateId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    cityId?: BigIntNullableFilter<"highRto"> | bigint | number | null
+    status?: BoolFilter<"highRto"> | boolean
+    createdAt?: DateTimeFilter<"highRto"> | Date | string
+    createdBy?: IntNullableFilter<"highRto"> | number | null
+    createdByRole?: StringNullableFilter<"highRto"> | string | null
+    updatedAt?: DateTimeFilter<"highRto"> | Date | string
+    updatedBy?: IntNullableFilter<"highRto"> | number | null
+    updatedByRole?: StringNullableFilter<"highRto"> | string | null
+    deletedAt?: DateTimeNullableFilter<"highRto"> | Date | string | null
+    deletedBy?: IntNullableFilter<"highRto"> | number | null
+    deletedByRole?: StringNullableFilter<"highRto"> | string | null
+  }
+
   export type adminUpsertWithWhereUniqueWithoutPermanentCountryInput = {
     where: adminWhereUniqueInput
     update: XOR<adminUpdateWithoutPermanentCountryInput, adminUncheckedUpdateWithoutPermanentCountryInput>
@@ -34019,6 +36021,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
@@ -34045,6 +36048,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
@@ -34069,6 +36073,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutCitiesInput
     warehouses?: warehouseCreateNestedManyWithoutCityInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
     admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -34086,6 +36091,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -34153,6 +36159,49 @@ export namespace Prisma {
 
   export type warehouseCreateManyStateInputEnvelope = {
     data: warehouseCreateManyStateInput | warehouseCreateManyStateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type highRtoCreateWithoutStateInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutHighRtosInput
+    city?: cityCreateNestedOneWithoutHighRtosInput
+  }
+
+  export type highRtoUncheckedCreateWithoutStateInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type highRtoCreateOrConnectWithoutStateInput = {
+    where: highRtoWhereUniqueInput
+    create: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput>
+  }
+
+  export type highRtoCreateManyStateInputEnvelope = {
+    data: highRtoCreateManyStateInput | highRtoCreateManyStateInput[]
     skipDuplicates?: boolean
   }
 
@@ -34267,6 +36316,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
@@ -34293,6 +36343,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
@@ -34330,6 +36381,22 @@ export namespace Prisma {
     data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutStateInput>
   }
 
+  export type highRtoUpsertWithWhereUniqueWithoutStateInput = {
+    where: highRtoWhereUniqueInput
+    update: XOR<highRtoUpdateWithoutStateInput, highRtoUncheckedUpdateWithoutStateInput>
+    create: XOR<highRtoCreateWithoutStateInput, highRtoUncheckedCreateWithoutStateInput>
+  }
+
+  export type highRtoUpdateWithWhereUniqueWithoutStateInput = {
+    where: highRtoWhereUniqueInput
+    data: XOR<highRtoUpdateWithoutStateInput, highRtoUncheckedUpdateWithoutStateInput>
+  }
+
+  export type highRtoUpdateManyWithWhereWithoutStateInput = {
+    where: highRtoScalarWhereInput
+    data: XOR<highRtoUpdateManyMutationInput, highRtoUncheckedUpdateManyWithoutStateInput>
+  }
+
   export type adminUpsertWithWhereUniqueWithoutPermanentStateInput = {
     where: adminWhereUniqueInput
     update: XOR<adminUpdateWithoutPermanentStateInput, adminUncheckedUpdateWithoutPermanentStateInput>
@@ -34362,6 +36429,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutStatesInput
     warehouses?: warehouseCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
     admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -34381,6 +36449,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -34410,6 +36479,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
@@ -34436,6 +36506,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
@@ -34500,6 +36571,49 @@ export namespace Prisma {
 
   export type warehouseCreateManyCityInputEnvelope = {
     data: warehouseCreateManyCityInput | warehouseCreateManyCityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type highRtoCreateWithoutCityInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country?: countryCreateNestedOneWithoutHighRtosInput
+    state?: stateCreateNestedOneWithoutHighRtosInput
+  }
+
+  export type highRtoUncheckedCreateWithoutCityInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type highRtoCreateOrConnectWithoutCityInput = {
+    where: highRtoWhereUniqueInput
+    create: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput>
+  }
+
+  export type highRtoCreateManyCityInputEnvelope = {
+    data: highRtoCreateManyCityInput | highRtoCreateManyCityInput[]
     skipDuplicates?: boolean
   }
 
@@ -34609,6 +36723,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -34628,6 +36743,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -34663,6 +36779,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
@@ -34689,6 +36806,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
@@ -34708,6 +36826,22 @@ export namespace Prisma {
   export type warehouseUpdateManyWithWhereWithoutCityInput = {
     where: warehouseScalarWhereInput
     data: XOR<warehouseUpdateManyMutationInput, warehouseUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type highRtoUpsertWithWhereUniqueWithoutCityInput = {
+    where: highRtoWhereUniqueInput
+    update: XOR<highRtoUpdateWithoutCityInput, highRtoUncheckedUpdateWithoutCityInput>
+    create: XOR<highRtoCreateWithoutCityInput, highRtoUncheckedCreateWithoutCityInput>
+  }
+
+  export type highRtoUpdateWithWhereUniqueWithoutCityInput = {
+    where: highRtoWhereUniqueInput
+    data: XOR<highRtoUpdateWithoutCityInput, highRtoUncheckedUpdateWithoutCityInput>
+  }
+
+  export type highRtoUpdateManyWithWhereWithoutCityInput = {
+    where: highRtoScalarWhereInput
+    data: XOR<highRtoUpdateManyMutationInput, highRtoUncheckedUpdateManyWithoutCityInput>
   }
 
   export type adminUpsertWithWhereUniqueWithoutPermanentCityInput = {
@@ -34747,6 +36881,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
@@ -34773,6 +36908,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
@@ -34799,6 +36935,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     country: countryCreateNestedOneWithoutStatesInput
     cities?: cityCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
     admins?: adminCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -34818,6 +36955,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
   }
 
@@ -34840,6 +36978,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     state: stateCreateNestedOneWithoutCitiesInput
     country: countryCreateNestedOneWithoutCitiesInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
     admins?: adminCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -34857,6 +36996,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
   }
 
@@ -34897,6 +37037,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
@@ -34923,6 +37064,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
@@ -34955,6 +37097,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutStatesNestedInput
     cities?: cityUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -34974,6 +37117,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -35002,6 +37146,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -35019,6 +37164,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -35524,6 +37670,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
   }
@@ -35550,6 +37697,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
   }
@@ -35581,6 +37729,7 @@ export namespace Prisma {
     states?: stateCreateNestedManyWithoutCountryInput
     cities?: cityCreateNestedManyWithoutCountryInput
     warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
     admins?: adminCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
   }
@@ -35607,6 +37756,7 @@ export namespace Prisma {
     states?: stateUncheckedCreateNestedManyWithoutCountryInput
     cities?: cityUncheckedCreateNestedManyWithoutCountryInput
     warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
   }
@@ -35800,6 +37950,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
   }
@@ -35826,6 +37977,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
   }
@@ -35863,6 +38015,7 @@ export namespace Prisma {
     states?: stateUpdateManyWithoutCountryNestedInput
     cities?: cityUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
     admins?: adminUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
   }
@@ -35889,6 +38042,7 @@ export namespace Prisma {
     states?: stateUncheckedUpdateManyWithoutCountryNestedInput
     cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
   }
@@ -36123,6 +38277,314 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type countryCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutHighRtosInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutHighRtosInput, countryUncheckedCreateWithoutHighRtosInput>
+  }
+
+  export type stateCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    cities?: cityCreateNestedManyWithoutStateInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
+  }
+
+  export type stateUncheckedCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
+  }
+
+  export type stateCreateOrConnectWithoutHighRtosInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutHighRtosInput, stateUncheckedCreateWithoutHighRtosInput>
+  }
+
+  export type cityCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    country: countryCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
+  }
+
+  export type cityUncheckedCreateWithoutHighRtosInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
+  }
+
+  export type cityCreateOrConnectWithoutHighRtosInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutHighRtosInput, cityUncheckedCreateWithoutHighRtosInput>
+  }
+
+  export type countryUpsertWithoutHighRtosInput = {
+    update: XOR<countryUpdateWithoutHighRtosInput, countryUncheckedUpdateWithoutHighRtosInput>
+    create: XOR<countryCreateWithoutHighRtosInput, countryUncheckedCreateWithoutHighRtosInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutHighRtosInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutHighRtosInput, countryUncheckedUpdateWithoutHighRtosInput>
+  }
+
+  export type countryUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
+  }
+
+  export type stateUpsertWithoutHighRtosInput = {
+    update: XOR<stateUpdateWithoutHighRtosInput, stateUncheckedUpdateWithoutHighRtosInput>
+    create: XOR<stateCreateWithoutHighRtosInput, stateUncheckedCreateWithoutHighRtosInput>
+    where?: stateWhereInput
+  }
+
+  export type stateUpdateToOneWithWhereWithoutHighRtosInput = {
+    where?: stateWhereInput
+    data: XOR<stateUpdateWithoutHighRtosInput, stateUncheckedUpdateWithoutHighRtosInput>
+  }
+
+  export type stateUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    cities?: cityUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
+  }
+
+  export type cityUpsertWithoutHighRtosInput = {
+    update: XOR<cityUpdateWithoutHighRtosInput, cityUncheckedUpdateWithoutHighRtosInput>
+    create: XOR<cityCreateWithoutHighRtosInput, cityUncheckedCreateWithoutHighRtosInput>
+    where?: cityWhereInput
+  }
+
+  export type cityUpdateToOneWithWhereWithoutHighRtosInput = {
+    where?: cityWhereInput
+    data: XOR<cityUpdateWithoutHighRtosInput, cityUncheckedUpdateWithoutHighRtosInput>
+  }
+
+  export type cityUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutHighRtosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
+  }
+
   export type adminStaffCreateManyAdminInput = {
     id?: number
     name: string
@@ -36344,6 +38806,23 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type highRtoCreateManyCountryInput = {
+    id?: number
+    pincode: string
+    stateId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type adminCreateManyPermanentCountryInput = {
     id?: number
     profilePicture?: string | null
@@ -36476,6 +38955,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -36495,6 +38975,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     cities?: cityUncheckedUpdateManyWithoutStateNestedInput
     warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
   }
 
@@ -36528,6 +39009,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     state?: stateUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -36545,6 +39027,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -36620,6 +39103,56 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUpdateWithoutCountryInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneWithoutHighRtosNestedInput
+    city?: cityUpdateOneWithoutHighRtosNestedInput
+  }
+
+  export type highRtoUncheckedUpdateWithoutCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUncheckedUpdateManyWithoutCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
     stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -37028,6 +39561,23 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type highRtoCreateManyStateInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    cityId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type adminCreateManyPermanentStateInput = {
     id?: number
     profilePicture?: string | null
@@ -37074,6 +39624,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     country?: countryUpdateOneRequiredWithoutCitiesNestedInput
     warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -37091,6 +39642,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
   }
 
@@ -37166,6 +39718,56 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUpdateWithoutStateInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutHighRtosNestedInput
+    city?: cityUpdateOneWithoutHighRtosNestedInput
+  }
+
+  export type highRtoUncheckedUpdateWithoutStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUncheckedUpdateManyWithoutStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
     countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     cityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -37305,6 +39907,23 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type highRtoCreateManyCityInput = {
+    id?: number
+    pincode: string
+    countryId?: bigint | number | null
+    stateId?: bigint | number | null
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type adminCreateManyPermanentCityInput = {
     id?: number
     profilePicture?: string | null
@@ -37394,6 +40013,56 @@ export namespace Prisma {
     address_line_1?: StringFieldUpdateOperationsInput | string
     address_line_2?: NullableStringFieldUpdateOperationsInput | string | null
     postal_code?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUpdateWithoutCityInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneWithoutHighRtosNestedInput
+    state?: stateUpdateOneWithoutHighRtosNestedInput
+  }
+
+  export type highRtoUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type highRtoUncheckedUpdateManyWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
     countryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     stateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     status?: BoolFieldUpdateOperationsInput | boolean

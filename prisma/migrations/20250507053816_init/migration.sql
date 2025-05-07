@@ -508,6 +508,33 @@ CREATE TABLE `courierCompany` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `highRto` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `pincode` VARCHAR(191) NOT NULL,
+    `countryId` BIGINT NULL,
+    `stateId` BIGINT NULL,
+    `cityId` BIGINT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT false,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `highRto_countryId_idx`(`countryId`),
+    INDEX `highRto_stateId_idx`(`stateId`),
+    INDEX `highRto_cityId_idx`(`cityId`),
+    INDEX `highRto_createdBy_idx`(`createdBy`),
+    INDEX `highRto_updatedBy_idx`(`updatedBy`),
+    INDEX `highRto_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -561,3 +588,12 @@ ALTER TABLE `product` ADD CONSTRAINT `product_shippingCountryId_fkey` FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE `productVariant` ADD CONSTRAINT `productVariant_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `highRto` ADD CONSTRAINT `highRto_countryId_fkey` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `highRto` ADD CONSTRAINT `highRto_stateId_fkey` FOREIGN KEY (`stateId`) REFERENCES `state`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `highRto` ADD CONSTRAINT `highRto_cityId_fkey` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

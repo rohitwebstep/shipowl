@@ -528,6 +528,24 @@ exports.Prisma.CourierCompanyScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.HighRtoScalarFieldEnum = {
+  id: 'id',
+  pincode: 'pincode',
+  countryId: 'countryId',
+  stateId: 'stateId',
+  cityId: 'cityId',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -797,6 +815,13 @@ exports.Prisma.courierCompanyOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.highRtoOrderByRelevanceFieldEnum = {
+  pincode: 'pincode',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -815,7 +840,8 @@ exports.Prisma.ModelName = {
   productRequest: 'productRequest',
   product: 'product',
   productVariant: 'productVariant',
-  courierCompany: 'courierCompany'
+  courierCompany: 'courierCompany',
+  highRto: 'highRto'
 };
 
 /**

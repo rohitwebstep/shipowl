@@ -182,7 +182,9 @@ function middleware(req) {
                 "/api/dropshipper",
                 "/api/dropshipper/",
                 "/api/courier-company",
-                "/api/courier-company/:path*"
+                "/api/courier-company/:path*",
+                "/api/high-rto",
+                "/api/high-rto/:path*"
             ],
             role: "admin",
             applicableRoles: [
@@ -238,7 +240,9 @@ const config = {
         "/api/dropshipper",
         "/api/dropshipper/:path*",
         "/api/courier-company",
-        "/api/courier-company/:path*"
+        "/api/courier-company/:path*",
+        "/api/high-rto",
+        "/api/high-rto/:path*"
     ]
 };
 }}),
