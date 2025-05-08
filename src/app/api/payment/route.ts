@@ -49,9 +49,6 @@ export async function POST(req: NextRequest) {
       return null;
     };
 
-    const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
-
     const transactionId = extractString('transactionId') || '';
     const { status: checkTransactionIdAvailabilityResult, message: checkTransactionIdAvailabilityMessage } = await checkTransactionIdAvailability(transactionId);
 
