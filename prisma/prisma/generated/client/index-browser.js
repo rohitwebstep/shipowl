@@ -607,7 +607,6 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   orderId: 'orderId',
   productId: 'productId',
   variantId: 'variantId',
-  productName: 'productName',
   quantity: 'quantity',
   price: 'price',
   total: 'total'
@@ -916,10 +915,6 @@ exports.Prisma.OrderOrderByRelevanceFieldEnum = {
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.OrderItemOrderByRelevanceFieldEnum = {
-  productName: 'productName'
 };
 
 

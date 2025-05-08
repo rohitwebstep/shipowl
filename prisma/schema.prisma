@@ -612,6 +612,8 @@ model Payment {
   deletedBy       Int?
   deletedByRole   String?
 
+  orders          Order[]   @relation("OrderPayment")
+
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -650,7 +652,6 @@ model Order {
   billingEmail    String
   billingAddress  String
   billingZip      String
-
   billingCountryId       BigInt?
   billingStateId         BigInt?
   billingCityId          BigInt?
@@ -660,7 +661,8 @@ model Order {
   billingCity  city? @relation("CityBillingRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
 
   // Optional: Payment Reference
-  paymentId       Int?      // FK to payment table if exists
+  paymentId       Int?     
+  payment         Payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
 
   // Meta / Audit Info
   createdAt       DateTime  @default(now())
@@ -685,8 +687,7 @@ model OrderItem {
   id            Int                  @id @default(autoincrement())
   orderId       Int
   productId     Int?
-  variantId     Int?                 // Optional if not all orders are variant-specific
-  productName   String
+  variantId     Int?
   quantity      Int
   price         Float
   total         Float

@@ -611,7 +611,6 @@ CREATE TABLE `OrderItem` (
     `orderId` INTEGER NOT NULL,
     `productId` INTEGER NULL,
     `variantId` INTEGER NULL,
-    `productName` VARCHAR(191) NOT NULL,
     `quantity` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
     `total` DOUBLE NOT NULL,
@@ -702,6 +701,9 @@ ALTER TABLE `Order` ADD CONSTRAINT `Order_billingStateId_fkey` FOREIGN KEY (`bil
 
 -- AddForeignKey
 ALTER TABLE `Order` ADD CONSTRAINT `Order_billingCityId_fkey` FOREIGN KEY (`billingCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_paymentId_fkey` FOREIGN KEY (`paymentId`) REFERENCES `Payment`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_orderId_fkey` FOREIGN KEY (`orderId`) REFERENCES `Order`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

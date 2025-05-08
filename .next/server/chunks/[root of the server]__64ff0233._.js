@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/brand/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/order/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,14 +50,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
@@ -8067,6 +8059,14 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9319,6 +9319,800 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
+"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "validateFormData": (()=>validateFormData)
+});
+function toReadableFieldName(field) {
+    // Converts camelCase or snake_case to Title Case
+    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
+}
+function validateFormData(formData, { requiredFields = [], patternValidations = {} }) {
+    const error = {};
+    // Required fields
+    for (const field of requiredFields){
+        const value = formData.get(field);
+        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
+            error[field] = `${toReadableFieldName(field)} is required`;
+        }
+    }
+    // Pattern validations
+    for (const [field, expectedType] of Object.entries(patternValidations)){
+        const value = formData.get(field);
+        if (value !== null) {
+            const val = typeof value === 'string' ? value.trim() : value;
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean = expectedType === 'boolean' && ![
+                'true',
+                'false',
+                '1',
+                '0',
+                true,
+                false,
+                1,
+                0,
+                'active',
+                'inactive'
+            ].includes(val.toString().toLowerCase());
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
+            }
+        }
+    }
+    const errorCount = Object.keys(error).length;
+    return {
+        isValid: errorCount === 0,
+        ...errorCount > 0 && {
+            error
+        },
+        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
+    };
+}
+}}),
+"[project]/src/app/models/location/city.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createCity": (()=>createCity),
+    "deleteCity": (()=>deleteCity),
+    "getAllCities": (()=>getAllCities),
+    "getCitiesByState": (()=>getCitiesByState),
+    "getCitiesByStatus": (()=>getCitiesByStatus),
+    "getCityById": (()=>getCityById),
+    "isLocationHierarchyCorrect": (()=>isLocationHierarchyCorrect),
+    "restoreCity": (()=>restoreCity),
+    "softDeleteCity": (()=>softDeleteCity),
+    "updateCity": (()=>updateCity)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
+;
+async function createCity(adminId, adminRole, city) {
+    try {
+        const { name, state, country } = city;
+        const newCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.create({
+            data: {
+                name,
+                state,
+                country,
+                createdAt: new Date(),
+                createdBy: adminId,
+                createdByRole: adminRole
+            }
+        });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...newCity,
+            id: newCity.id.toString(),
+            stateId: newCity.stateId.toString(),
+            countryId: newCity.countryId.toString()
+        };
+        return {
+            status: true,
+            city: cityWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateCity = async (adminId, adminRole, cityId, data)=>{
+    try {
+        const { name, state, country } = data;
+        // Construct the payload safely
+        const updateData = {
+            name,
+            state,
+            country,
+            updatedBy: adminId,
+            updatedAt: new Date(),
+            updatedByRole: adminRole
+        };
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
+            where: {
+                id: cityId
+            },
+            data: updateData
+        });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
+        };
+        return {
+            status: true,
+            city: cityWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ updateCity Error:", error);
+        return {
+            status: false,
+            message: "Error updating city"
+        };
+    }
+};
+const getCityById = async (id)=>{
+    try {
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!city) return {
+            status: false,
+            message: "City not found"
+        };
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
+        };
+        return {
+            status: true,
+            city: cityWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ getCityById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching city"
+        };
+    }
+};
+const getAllCities = async ()=>{
+    try {
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            orderBy: {
+                name: 'asc'
+            }
+        });
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
+            }));
+        return {
+            status: true,
+            cities: citiesWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ getAllCities Error:", error);
+        return {
+            status: false,
+            message: "Error fetching cities"
+        };
+    }
+};
+const getCitiesByStatus = async (status = "notDeleted")=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            where: whereCondition,
+            orderBy: {
+                name: "asc"
+            }
+        });
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
+            }));
+        return {
+            status: true,
+            cities: citiesWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error fetching cities by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching cities"
+        };
+    }
+};
+const getCitiesByState = async (state, status = "notDeleted")=>{
+    try {
+        const whereCondition = {
+            stateId: state,
+            deletedAt: status === "notDeleted" ? null : {
+                not: null
+            }
+        };
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            where: whereCondition,
+            orderBy: {
+                name: "asc"
+            }
+        });
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map(({ id, stateId, countryId, ...city })=>({
+                ...city,
+                id: id.toString(),
+                stateId: stateId.toString(),
+                countryId: countryId.toString()
+            }));
+        return {
+            status: true,
+            cities: citiesWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error fetching cities by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching cities"
+        };
+    }
+};
+const isLocationHierarchyCorrect = async (cityId, stateId, countryId)=>{
+    try {
+        // First, check if the country exists
+        const country = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.findUnique({
+            where: {
+                id: countryId
+            }
+        });
+        if (!country) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `Country not found for ID: ${countryId}`);
+            return {
+                status: false,
+                message: "We couldn't find a country with the given ID. Please check and try again."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `Country found:`, country);
+        // Next, check if the state exists in the given country
+        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findUnique({
+            where: {
+                id: stateId
+            },
+            include: {
+                country: true
+            }
+        });
+        if (!state) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State not found for ID: ${stateId}`);
+            return {
+                status: false,
+                message: "We couldn't find a state with the given ID. Please check the state ID and try again."
+            };
+        }
+        if (state.countryId.toString() !== countryId.toString()) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State ID ${stateId} does not belong to country ID ${countryId}`);
+            return {
+                status: false,
+                message: "This state does not belong to the specified country. Please verify the state and country relationship."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State found and belongs to the country:`, state);
+        // Finally, check if the city exists in the given state
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
+            where: {
+                id: cityId
+            },
+            include: {
+                state: true
+            }
+        });
+        if (!city) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City not found for ID: ${cityId}`);
+            return {
+                status: false,
+                message: "We couldn't find a city with the given ID. Please check the city ID and try again."
+            };
+        }
+        if (city.stateId.toString() !== stateId.toString()) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City ID ${cityId} does not belong to state ID ${stateId}`);
+            return {
+                status: false,
+                message: "This city does not belong to the specified state. Please verify the city and state relationship."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City found and belongs to the state:`, city);
+        // If all checks pass, return the linked data
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Successfully validated the hierarchy: city, state, and country.");
+        return {
+            status: true,
+            message: "Successfully found the linked city, state, and country.",
+            data: {
+                country: {
+                    id: country.id.toString(),
+                    name: country.name
+                },
+                state: {
+                    id: state.id.toString(),
+                    name: state.name
+                },
+                city: {
+                    id: city.id.toString(),
+                    name: city.name
+                }
+            }
+        };
+    } catch (error) {
+        console.error("Error fetching city, state, and country details:", error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Error fetching city, state, and country details:", error);
+        return {
+            status: false,
+            message: "There was an error while retrieving the location hierarchy. Please try again later."
+        };
+    }
+};
+const softDeleteCity = async (adminId, adminRole, id)=>{
+    try {
+        const updatedCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "City soft deleted successfully",
+            updatedCity
+        };
+    } catch (error) {
+        console.error("❌ softDeleteCity Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting city"
+        };
+    }
+};
+const restoreCity = async (adminId, adminRole, id)=>{
+    try {
+        const restoredCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...restoredCity,
+            id: restoredCity.id.toString(),
+            stateId: restoredCity.stateId.toString(),
+            countryId: restoredCity.countryId.toString()
+        };
+        return {
+            status: true,
+            message: "City restored successfully",
+            city: cityWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ restoreCity Error:", error);
+        return {
+            status: false,
+            message: "Error restoring city"
+        };
+    }
+};
+const deleteCity = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "City deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteCity Error:", error);
+        return {
+            status: false,
+            message: "Error deleting city"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkPaymentIdAvailability": (()=>checkPaymentIdAvailability),
+    "createOrder": (()=>createOrder),
+    "deleteOrder": (()=>deleteOrder),
+    "getAllOrders": (()=>getAllOrders),
+    "getOrderById": (()=>getOrderById),
+    "getOrdersByStatus": (()=>getOrdersByStatus),
+    "restoreOrder": (()=>restoreOrder),
+    "softDeleteOrder": (()=>softDeleteOrder),
+    "updateOrder": (()=>updateOrder)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+async function checkPaymentIdAvailability(paymentId) {
+    try {
+        // Check if the payment exists
+        const existingPayment = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].payment.findUnique({
+            where: {
+                id: paymentId
+            }
+        });
+        if (!existingPayment) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" does not exist.`
+            };
+        }
+        // Check if the payment ID is already linked to an order
+        const usedInOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findFirst({
+            where: {
+                paymentId: paymentId
+            }
+        });
+        if (usedInOrder) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" is already assigned to an order.`
+            };
+        }
+        return {
+            status: true,
+            message: `Payment ID "${paymentId}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking Payment ID:", error);
+        return {
+            status: false,
+            message: "Error while checking Payment ID availability."
+        };
+    }
+}
+async function createOrder(order) {
+    try {
+        const { orderNumber, status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment } = order;
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.create({
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: newOrder
+        };
+    } catch (error) {
+        console.error(`Error creating order:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { orderNumber, status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment, updatedBy, updatedByRole } = data;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const getOrderById = async (id)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order
+        };
+    } catch (error) {
+        console.error("❌ getOrderById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const getAllOrders = async ()=>{
+    try {
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            orders
+        };
+    } catch (error) {
+        console.error("❌ getAllOrders Error:", error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            orders
+        };
+    } catch (error) {
+        console.error(`Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const softDeleteOrder = async (adminId, adminRole, id)=>{
+    try {
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Order soft deleted successfully",
+            updatedOrder
+        };
+    } catch (error) {
+        console.error("❌ softDeleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting order"
+        };
+    }
+};
+const restoreOrder = async (adminId, adminRole, id)=>{
+    try {
+        const restoredOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "Order restored successfully",
+            restoredOrder
+        };
+    } catch (error) {
+        console.error("❌ restoreOrder Error:", error);
+        return {
+            status: false,
+            message: "Error restoring order"
+        };
+    }
+};
+const deleteOrder = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Order deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error deleting order"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/order/item.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createOrderItem": (()=>createOrderItem)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+async function createOrderItem(items) {
+    try {
+        const newOrderItems = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].orderItem.createMany({
+            data: items,
+            skipDuplicates: true
+        });
+        return {
+            status: true,
+            orderItems: newOrderItems
+        };
+    } catch (error) {
+        console.error(`Error creating order items:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+}}),
 "[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9421,95 +10215,192 @@ async function deleteFile(filePath) {
     }
 }
 }}),
-"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/product/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "validateFormData": (()=>validateFormData)
-});
-function toReadableFieldName(field) {
-    // Converts camelCase or snake_case to Title Case
-    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
-}
-function validateFormData(formData, { requiredFields = [], patternValidations = {} }) {
-    const error = {};
-    // Required fields
-    for (const field of requiredFields){
-        const value = formData.get(field);
-        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
-            error[field] = `${toReadableFieldName(field)} is required`;
-        }
-    }
-    // Pattern validations
-    for (const [field, expectedType] of Object.entries(patternValidations)){
-        const value = formData.get(field);
-        if (value !== null) {
-            const val = typeof value === 'string' ? value.trim() : value;
-            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
-            const isInvalidBoolean = expectedType === 'boolean' && ![
-                'true',
-                'false',
-                '1',
-                '0',
-                true,
-                false,
-                1,
-                0,
-                'active',
-                'inactive'
-            ].includes(val.toString().toLowerCase());
-            if (isInvalidNumber || isInvalidBoolean) {
-                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
-            }
-        }
-    }
-    const errorCount = Object.keys(error).length;
-    return {
-        isValid: errorCount === 0,
-        ...errorCount > 0 && {
-            error
-        },
-        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
-    };
-}
-}}),
-"[project]/src/app/models/brand.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "createBrand": (()=>createBrand),
-    "deleteBrand": (()=>deleteBrand),
-    "generateBrandSlug": (()=>generateBrandSlug),
-    "getAllBrands": (()=>getAllBrands),
-    "getBrandById": (()=>getBrandById),
-    "getBrandsByStatus": (()=>getBrandsByStatus),
-    "removeBrandImageByIndex": (()=>removeBrandImageByIndex),
-    "restoreBrand": (()=>restoreBrand),
-    "softDeleteBrand": (()=>softDeleteBrand),
-    "updateBrand": (()=>updateBrand)
+    "checkMainSKUAvailability": (()=>checkMainSKUAvailability),
+    "checkMainSKUAvailabilityForUpdate": (()=>checkMainSKUAvailabilityForUpdate),
+    "checkVariantSKUsAvailability": (()=>checkVariantSKUsAvailability),
+    "checkVariantSKUsAvailabilityForUpdate": (()=>checkVariantSKUsAvailabilityForUpdate),
+    "createProduct": (()=>createProduct),
+    "deleteProduct": (()=>deleteProduct),
+    "generateProductSlug": (()=>generateProductSlug),
+    "getProductById": (()=>getProductById),
+    "getProductVariantById": (()=>getProductVariantById),
+    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
+    "getProductsByStatus": (()=>getProductsByStatus),
+    "removeProductImageByIndex": (()=>removeProductImageByIndex),
+    "restoreProduct": (()=>restoreProduct),
+    "softDeleteProduct": (()=>softDeleteProduct),
+    "updateProduct": (()=>updateProduct)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
 ;
 ;
-async function generateBrandSlug(name) {
+;
+const serializeBigInt = (obj)=>{
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    } else if (typeof obj === 'bigint') {
+        return obj.toString();
+    }
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
+async function checkMainSKUAvailability(main_sku) {
+    try {
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                main_sku
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: `SKU "${main_sku}" is already in use.`
+            };
+        }
+        return {
+            status: true,
+            message: `SKU "${main_sku}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking SKU:", error);
+        return {
+            status: false,
+            message: "Error while checking SKU availability."
+        };
+    }
+}
+async function checkMainSKUAvailabilityForUpdate(main_sku, productId) {
+    try {
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                main_sku,
+                NOT: {
+                    id: productId
+                }
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: `SKU "${main_sku}" is already in use.`
+            };
+        }
+        return {
+            status: true,
+            message: `SKU "${main_sku}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking SKU:", error);
+        return {
+            status: false,
+            message: "Error while checking SKU availability."
+        };
+    }
+}
+async function checkVariantSKUsAvailability(skus) {
+    try {
+        // Get existing SKUs from the database
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
+            where: {
+                sku: {
+                    in: skus
+                }
+            },
+            select: {
+                sku: true
+            }
+        });
+        if (existingVariants.length > 0) {
+            const usedSkus = existingVariants.map((v)=>v.sku);
+            return {
+                status: false,
+                message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
+                usedSkus
+            };
+        }
+        return {
+            status: true,
+            message: `All SKUs are available.`
+        };
+    } catch (error) {
+        console.error("Error checking variant SKUs:", error);
+        return {
+            status: false,
+            message: "Error while checking variant SKU availability."
+        };
+    }
+}
+async function checkVariantSKUsAvailabilityForUpdate(variants, productId) {
+    try {
+        const skus = variants.map((v)=>v.sku);
+        // Fetch existing variants with matching SKUs, excluding current productId
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
+            where: {
+                sku: {
+                    in: skus
+                },
+                NOT: {
+                    productId
+                }
+            },
+            select: {
+                sku: true,
+                id: true
+            }
+        });
+        // Filter out variants that match the same id (i.e., currently being updated)
+        const conflictingSkus = existingVariants.filter((ev)=>{
+            const incomingVariant = variants.find((v)=>v.sku === ev.sku);
+            return !incomingVariant?.id || incomingVariant.id !== ev.id;
+        });
+        if (conflictingSkus.length > 0) {
+            const usedSkus = conflictingSkus.map((v)=>v.sku);
+            return {
+                status: false,
+                message: `The following SKUs are already in use: ${usedSkus.join(', ')}`,
+                usedSkus
+            };
+        }
+        return {
+            status: true,
+            message: 'All SKUs are available.'
+        };
+    } catch (error) {
+        console.error('Error checking variant SKUs:', error);
+        return {
+            status: false,
+            message: 'Error while checking variant SKU availability.'
+        };
+    }
+}
+async function generateProductSlug(name) {
     let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
     let isSlugTaken = true;
     let suffix = 0;
     // Keep checking until an unused slug is found
     while(isSlugTaken){
-        const existingBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
+        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
             where: {
                 slug
             }
         });
-        if (existingBrand) {
+        if (existingProduct) {
             // If the slug already exists, add a suffix (-1, -2, etc.)
             suffix++;
             slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
@@ -9520,168 +10411,164 @@ async function generateBrandSlug(name) {
     }
     return slug;
 }
-async function createBrand(adminId, adminRole, brand) {
+async function createProduct(adminId, adminRole, product) {
     try {
-        const { name, description, status, image } = brand;
-        // Generate a unique slug for the brand
-        const slug = await generateBrandSlug(name);
-        const newBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.create({
+        const { name, categoryId, main_sku, ean, hsnCode, taxRate, upc, rtoAddress, pickupAddress, description, tags, brandId, originCountryId, shippingCountryId, list_as, shipping_time, weight, package_length, package_width, package_height, chargeable_weight, variants, product_detail_video, training_guidance_video, status, package_weight_image, package_length_image, package_width_image, package_height_image, video_url, createdBy, createdByRole } = product;
+        // Generate a unique slug for the product
+        const slug = await generateProductSlug(name);
+        // Create the product in the database
+        const newProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.create({
             data: {
                 name,
+                categoryId,
+                main_sku,
+                ean,
+                hsnCode,
+                taxRate,
+                upc,
+                rtoAddress,
+                pickupAddress,
                 description,
+                tags,
+                brandId,
+                originCountryId,
+                shippingCountryId,
+                list_as,
+                shipping_time,
+                weight,
+                package_length,
+                package_width,
+                package_height,
+                chargeable_weight,
+                product_detail_video,
+                training_guidance_video,
                 status,
+                package_weight_image,
+                package_length_image,
+                package_width_image,
+                package_height_image,
+                video_url,
+                createdBy,
+                createdByRole,
                 slug,
-                image,
-                createdAt: new Date(),
-                createdBy: adminId,
-                createdByRole: adminRole
+                createdAt: new Date()
             }
         });
+        // Convert BigInt to string for serialization
+        const productWithStringBigInts = {
+            ...newProduct,
+            originCountryId: newProduct.originCountryId.toString(),
+            shippingCountryId: newProduct.shippingCountryId.toString()
+        };
+        // If there are variants, create them separately in the related productVariant model
+        if (variants && variants.length > 0) {
+            const productVariants = variants.map((variant)=>({
+                    color: variant.color,
+                    sku: variant.sku,
+                    qty: variant.qty,
+                    currency: variant.currency,
+                    article_id: variant.article_id,
+                    suggested_price: variant.suggested_price,
+                    shipowl_price: variant.shipowl_price,
+                    rto_suggested_price: isNaN(Number(variant.rto_suggested_price)) ? null : Number(variant.rto_suggested_price),
+                    rto_price: variant.rto_price,
+                    image: variant.images,
+                    product_link: variant.product_link,
+                    productId: productWithStringBigInts.id // This associates the variant with the product
+                }));
+            // Create variants in the database
+            try {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.createMany({
+                    data: productVariants
+                });
+            } catch (variantError) {
+                console.error('Error creating product variants:', variantError);
+                // If variants creation fails, delete the main product
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.delete({
+                    where: {
+                        id: productWithStringBigInts.id
+                    }
+                });
+                // Throw the error to exit the transaction
+                throw new Error('Failed to create product variants');
+            }
+        }
         return {
             status: true,
-            brand: newBrand
+            product: productWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error creating brand:`, error);
+        console.error(`Error creating product:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateBrand = async (adminId, adminRole, brandId, data)=>{
+const getProductsByFiltersAndStatus = async (productFilters, status)=>{
     try {
-        data.updatedBy = adminId;
-        data.updatedAt = new Date();
-        data.updatedByRole = adminRole;
-        if (data.image) {
-            const newImagesArr = data.image.split(",").map((img)=>img.trim());
-            const { status, brand, message } = await getBrandById(brandId);
-            if (!status || !brand) {
-                return {
-                    status: false,
-                    message: message || "Brand not found."
-                };
+        // Define status condition
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
             }
-            const existingImages = brand.image ? brand.image.split(",").map((img)=>img.trim()) : [];
-            // Merge and remove duplicates
-            const mergedImages = Array.from(new Set([
-                ...existingImages,
-                ...newImagesArr
-            ]));
-            data.image = mergedImages.join(",");
-        }
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
-            where: {
-                id: brandId
+        })();
+        console.log(`productFilters - `, productFilters);
+        // Combine with filters (fully typed)
+        const whereCondition = {
+            ...statusCondition,
+            ...productFilters.categoryId !== undefined && {
+                categoryId: productFilters.categoryId
             },
-            data: data
-        });
-        return {
-            status: true,
-            brand
-        };
-    } catch (error) {
-        console.error("❌ updateBrand Error:", error);
-        return {
-            status: false,
-            message: "Error updating brand"
-        };
-    }
-};
-const getBrandById = async (id)=>{
-    try {
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
-            where: {
-                id
+            ...productFilters.brandId !== undefined && {
+                brandId: productFilters.brandId
             }
-        });
-        if (!brand) return {
-            status: false,
-            message: "Brand not found"
         };
-        return {
-            status: true,
-            brand
-        };
-    } catch (error) {
-        console.error("❌ getBrandById Error:", error);
-        return {
-            status: false,
-            message: "Error fetching brand"
-        };
-    }
-};
-const removeBrandImageByIndex = async (brandId, imageIndex)=>{
-    try {
-        const { status, brand, message } = await getBrandById(brandId);
-        if (!status || !brand) {
-            return {
-                status: false,
-                message: message || "Brand not found."
-            };
-        }
-        if (!brand.image) {
-            return {
-                status: false,
-                message: "No images available to delete."
-            };
-        }
-        const images = brand.image.split(",");
-        if (imageIndex < 0 || imageIndex >= images.length) {
-            return {
-                status: false,
-                message: "Invalid image index provided."
-            };
-        }
-        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
-        const updatedImages = images.join(",");
-        // Update brand in DB
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
-            where: {
-                id: brandId
-            },
-            data: {
-                image: updatedImages
-            }
-        });
-        // 🔥 Attempt to delete the image file from storage
-        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
-        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "brand", imageFileName);
-        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
-        return {
-            status: true,
-            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
-            brand: updatedBrand
-        };
-    } catch (error) {
-        console.error("❌ Error removing brand image:", error);
-        return {
-            status: false,
-            message: "An unexpected error occurred while removing the image."
-        };
-    }
-};
-const getAllBrands = async ()=>{
-    try {
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
+            where: whereCondition,
             orderBy: {
-                id: 'desc'
+                id: "desc"
+            },
+            include: {
+                variants: true
             }
         });
+        const sanitizedProducts = serializeBigInt(products);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Fetched products:", sanitizedProducts);
         return {
             status: true,
-            brands
+            products: sanitizedProducts
         };
     } catch (error) {
-        console.error("❌ getAllBrands Error:", error);
+        console.error(`Error fetching products by filters and status:`, error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching products"
         };
     }
 };
-const getBrandsByStatus = async (status)=>{
+const getProductsByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -9712,27 +10599,286 @@ const getBrandsByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
             where: whereCondition,
             orderBy: {
                 id: "desc"
+            },
+            include: {
+                variants: true
             }
         });
+        const sanitizedProducts = serializeBigInt(products);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProducts);
         return {
             status: true,
-            brands
+            products: sanitizedProducts
         };
     } catch (error) {
-        console.error(`Error fetching brands by status (${status}):`, error);
+        console.error(`Error fetching products by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching products"
         };
     }
 };
-const softDeleteBrand = async (adminId, adminRole, id)=>{
+const removeProductImageByIndex = async (productId, type, imageIndex)=>{
     try {
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const { status, product, message } = await getProductById(productId);
+        if (!status || !product) {
+            return {
+                status: false,
+                message: message || "Product not found."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])(`debug`, `product (${type}):`, product);
+        const allowedImages = {
+            package_weight_image: product.package_weight_image,
+            package_length_image: product.package_length_image,
+            package_width_image: product.package_width_image,
+            package_height_image: product.package_height_image
+        };
+        const images = allowedImages[type]; // ✅ No TS error now
+        console.log(`Images of type '${type}':`, images);
+        if (!images) {
+            return {
+                status: false,
+                message: "No images available to delete."
+            };
+        }
+        const imagesArr = images.split(",");
+        if (imageIndex < 0 || imageIndex >= imagesArr.length) {
+            return {
+                status: false,
+                message: "Invalid image index provided."
+            };
+        }
+        const removedImage = imagesArr.splice(imageIndex, 1)[0]; // Remove image at given index
+        const updatedImages = imagesArr.join(",");
+        // Update product in DB
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                [type]: updatedImages
+            }
+        });
+        // 🔥 Attempt to delete the image file from storage
+        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "product", imageFileName);
+        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        return {
+            status: true,
+            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
+            product: updatedProduct
+        };
+    } catch (error) {
+        console.error("❌ Error removing product image:", error);
+        return {
+            status: false,
+            message: "An unexpected error occurred while removing the image."
+        };
+    }
+};
+const getProductById = async (id)=>{
+    try {
+        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+            where: {
+                id
+            },
+            include: {
+                variants: true
+            }
+        });
+        if (!product) return {
+            status: false,
+            message: "Product not found"
+        };
+        const sanitizedProduct = serializeBigInt(product);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProduct);
+        return {
+            status: true,
+            product: sanitizedProduct
+        };
+    } catch (error) {
+        console.error("❌ getProductById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product"
+        };
+    }
+};
+const getProductVariantById = async (id)=>{
+    try {
+        const productVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!productVariant) return {
+            status: false,
+            message: "productVariant Variant not found"
+        };
+        const sanitizedProductVariant = serializeBigInt(productVariant);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedProductVariant);
+        return {
+            status: true,
+            variant: sanitizedProductVariant
+        };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product variant"
+        };
+    }
+};
+const updateProduct = async (adminId, adminRole, productId, product)=>{
+    try {
+        const { name, categoryId, main_sku, ean, hsnCode, taxRate, upc, rtoAddress, pickupAddress, description, tags, brandId, originCountryId, shippingCountryId, list_as, shipping_time, weight, package_length, package_width, package_height, chargeable_weight, variants, product_detail_video, training_guidance_video, status, package_weight_image, package_length_image, package_width_image, package_height_image, video_url } = product;
+        // Image fields to process
+        const imageFields = [
+            'package_weight_image',
+            'package_length_image',
+            'package_width_image',
+            'package_height_image'
+        ];
+        // Fetch existing product once
+        const productResponse = await getProductById(productId);
+        if (!productResponse.status || !productResponse.product) {
+            return {
+                status: false,
+                message: productResponse.message || "Product not found."
+            };
+        }
+        const existingProduct = productResponse.product;
+        for (const field of imageFields){
+            const newValue = product[field];
+            if (typeof newValue === 'string' && newValue.trim()) {
+                const newImages = newValue.split(',').map((img)=>img.trim()).filter(Boolean);
+                const existingValue = existingProduct[field];
+                const existingImages = typeof existingValue === 'string' ? existingValue.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedImages = Array.from(new Set([
+                    ...existingImages,
+                    ...newImages
+                ]));
+                // ✅ Type-safe update
+                product[field] = mergedImages.join(',');
+            }
+        }
+        // Update the product details
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                name,
+                categoryId,
+                main_sku,
+                ean,
+                hsnCode,
+                taxRate,
+                upc,
+                rtoAddress,
+                pickupAddress,
+                description,
+                tags,
+                brandId,
+                originCountryId,
+                shippingCountryId,
+                list_as,
+                shipping_time,
+                weight,
+                package_length,
+                package_width,
+                package_height,
+                chargeable_weight,
+                product_detail_video,
+                training_guidance_video,
+                status,
+                package_weight_image,
+                package_length_image,
+                package_width_image,
+                package_height_image,
+                video_url,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Handle variants: update if id exists, else create new
+        if (variants && variants.length > 0) {
+            for (const variant of variants){
+                // Get existing variant if ID exists
+                let existingVariantImages = [];
+                if (variant.id) {
+                    // Fetch existing product once
+                    const productVariantResponse = await getProductVariantById(variant.id);
+                    if (!productVariantResponse.status || !productVariantResponse.variant) {
+                        return {
+                            status: false,
+                            message: productVariantResponse.message || "Product Variant not found."
+                        };
+                    }
+                    const existingProductVariant = productVariantResponse.variant;
+                    if (existingProductVariant?.image && typeof existingProductVariant.image === 'string') {
+                        existingVariantImages = existingProductVariant.image.split(',').map((img)=>img.trim()).filter(Boolean);
+                    }
+                }
+                const newVariantImages = typeof variant.images === 'string' ? variant.images.split(',').map((img)=>img.trim()).filter(Boolean) : [];
+                const mergedVariantImages = Array.from(new Set([
+                    ...existingVariantImages,
+                    ...newVariantImages
+                ])).join(',');
+                const variantData = {
+                    color: variant.color,
+                    sku: variant.sku,
+                    qty: variant.qty,
+                    currency: variant.currency,
+                    article_id: variant.article_id,
+                    suggested_price: variant.suggested_price,
+                    shipowl_price: variant.shipowl_price,
+                    rto_suggested_price: variant.rto_suggested_price,
+                    rto_price: variant.rto_price,
+                    product_link: variant.product_link,
+                    image: mergedVariantImages
+                };
+                if (variant.id) {
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.update({
+                        where: {
+                            id: Number(variant.id)
+                        },
+                        data: variantData
+                    });
+                } else {
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.create({
+                        data: {
+                            ...variantData,
+                            productId: productId
+                        }
+                    });
+                }
+            }
+        }
+        const sanitizedProducts = serializeBigInt(updatedProduct);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProducts);
+        return {
+            status: true,
+            product: sanitizedProducts
+        };
+    } catch (error) {
+        console.error("❌ updateProduct Error:", error);
+        return {
+            status: false,
+            message: "Error updating product"
+        };
+    }
+};
+const softDeleteProduct = async (adminId, adminRole, id)=>{
+    try {
+        // Soft delete the product
+        const updatedProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
             where: {
                 id
             },
@@ -9742,24 +10888,40 @@ const softDeleteBrand = async (adminId, adminRole, id)=>{
                 deletedByRole: adminRole
             }
         });
+        // Soft delete the variants of this product
+        const updatedVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
+            where: {
+                productId: id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
         return {
             status: true,
-            message: "Brand soft deleted successfully",
-            updatedBrand
+            message: "Product and variants soft deleted successfully",
+            updatedProduct,
+            updatedVariants
         };
     } catch (error) {
-        console.error("❌ softDeleteBrand Error:", error);
+        console.error("❌ softDeleteProduct Error:", error);
         return {
             status: false,
-            message: "Error soft deleting brand"
+            message: "Error soft deleting product and variants"
         };
     }
 };
-const restoreBrand = async (adminId, adminRole, id)=>{
+const restoreProduct = async (adminId, adminRole, id)=>{
     try {
-        const restoredBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        // Restore the product
+        const restoredProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.update({
             where: {
                 id
+            },
+            include: {
+                variants: true
             },
             data: {
                 deletedBy: null,
@@ -9770,40 +10932,57 @@ const restoreBrand = async (adminId, adminRole, id)=>{
                 updatedAt: new Date()
             }
         });
+        // Restore the variants of this product
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.updateMany({
+            where: {
+                productId: id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        const sanitizedProduct = serializeBigInt(restoredProduct);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched products :', sanitizedProduct);
         return {
             status: true,
-            message: "Brand restored successfully",
-            restoredBrand
+            message: "Product and variants restored successfully",
+            restoredProduct: sanitizedProduct
         };
     } catch (error) {
-        console.error("❌ restoreBrand Error:", error);
+        console.error("❌ restoreProduct Error:", error);
         return {
             status: false,
-            message: "Error restoring brand"
+            message: "Error restoring product and variants"
         };
     }
 };
-const deleteBrand = async (id)=>{
+const deleteProduct = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.delete({
+        console.log(`id - `, id);
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "Brand deleted successfully"
+            message: "Product deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteBrand Error:", error);
+        console.error("❌ deleteProduct Error:", error);
         return {
             status: false,
-            message: "Error deleting brand"
+            message: "Error deleting product"
         };
     }
 };
 }}),
-"[project]/src/app/api/brand/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/order/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -9813,12 +10992,13 @@ __turbopack_context__.s({
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/brand.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/city.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/order.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/item.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/product/product.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -9829,38 +11009,61 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$bran
 ;
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for brand creation');
-        // Get headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "User ID is missing or invalid in request"
-            }, {
-                status: 400
-            });
-        }
-        // Check if admin exists
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found: ${userCheck.message}`
-            }, {
-                status: 404
-            });
-        }
-        const isMultipleImages = true; // Set true to allow multiple image uploads
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for order creation');
+        const requiredFields = [
+            'orderNumber',
+            'status',
+            'subtotal',
+            'tax',
+            'discount',
+            'totalAmount',
+            'currency',
+            'shippingName',
+            'shippingPhone',
+            'shippingEmail',
+            'shippingAddress',
+            'shippingZip',
+            'shippingCountry',
+            'shippingState',
+            'shippingCity',
+            'billingName',
+            'billingPhone',
+            'billingEmail',
+            'billingAddress',
+            'billingZip',
+            'billingCountry',
+            'billingState',
+            'billingCity',
+            'payment'
+        ];
         const formData = await req.formData();
-        // Validate input
         const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: [
-                'name'
-            ],
+            requiredFields: requiredFields,
             patternValidations: {
-                status: 'boolean'
+                orderNumber: 'string',
+                status: 'string',
+                subtotal: 'number',
+                tax: 'number',
+                discount: 'number',
+                totalAmount: 'number',
+                currency: 'string',
+                shippingName: 'string',
+                shippingPhone: 'string',
+                shippingEmail: 'string',
+                shippingAddress: 'string',
+                shippingZip: 'string',
+                shippingCountry: 'number',
+                shippingState: 'number',
+                shippingCity: 'number',
+                billingName: 'string',
+                billingPhone: 'string',
+                billingEmail: 'string',
+                billingAddress: 'string',
+                billingZip: 'string',
+                billingCountry: 'number',
+                billingState: 'number',
+                billingCity: 'number',
+                payment: 'number'
             }
         });
         if (!validation.isValid) {
@@ -9873,62 +11076,206 @@ async function POST(req) {
                 status: 400
             });
         }
-        // Extract fields
-        const name = formData.get('name');
-        const description = formData.get('description') || '';
-        const statusRaw = formData.get('status')?.toString().toLowerCase();
-        const status = [
-            'true',
-            '1',
-            true,
-            1,
-            'active'
-        ].includes(statusRaw);
-        // File upload
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'brand');
-        const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
-            dir: uploadDir,
-            pattern: 'slug-unique',
-            multiple: isMultipleImages
-        });
-        let image = '';
-        if (fileData) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
-            image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
-        }
-        const brandPayload = {
-            name,
-            description,
-            status,
-            image
+        const extractNumber = (key)=>Number(formData.get(key)) || null;
+        const extractString = (key)=>formData.get(key) || null;
+        const extractJSON = (key)=>{
+            const value = extractString(key);
+            const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
+            let parsedData;
+            if (typeof cleanedValue === 'string') {
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 1", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                }
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 2", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                    return null;
+                }
+            }
+            if (typeof cleanedValue === 'object' && cleanedValue !== null) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 3", cleanedValue);
+                return cleanedValue;
+            }
+            return null;
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Brand payload created:', brandPayload);
-        const brandCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createBrand"])(adminId, String(adminRole), brandPayload);
-        if (brandCreateResult?.status) {
+        const paymentIdNum = Number(extractNumber('payment'));
+        if (isNaN(paymentIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid Payment ID', {
+                paymentIdNum
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                brand: brandCreateResult.brand
+                error: 'Invalid Payment ID'
             }, {
-                status: 200
+                status: 400
             });
         }
-        // ❌ Brand creation failed — delete uploaded file(s)
-        const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
-        if (isMultipleImages && Array.isArray(fileData)) {
-            await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
-        } else {
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
+        const PaymentResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkPaymentIdAvailability"])(paymentIdNum);
+        if (!PaymentResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Payment not found', {
+                paymentIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: PaymentResult.message || 'Payment not found'
+            }, {
+                status: 404
+            });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand creation failed:', brandCreateResult?.message || 'Unknown error');
+        const shippingCountryId = extractNumber('shippingCountry') || 0;
+        const shippingStateId = extractNumber('shippingState') || 0;
+        const shippingCityId = extractNumber('shippingCity') || 0;
+        const isShippingLocationHierarchyCorrectResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isLocationHierarchyCorrect"])(shippingCityId, shippingStateId, shippingCountryId);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Location hierarchy check result:', isShippingLocationHierarchyCorrectResult);
+        if (!isShippingLocationHierarchyCorrectResult.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Location hierarchy is incorrect: ${isShippingLocationHierarchyCorrectResult.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: isShippingLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect'
+            }, {
+                status: 400
+            });
+        }
+        const billingCountryId = extractNumber('billingCountry') || 0;
+        const billingStateId = extractNumber('billingState') || 0;
+        const billingCityId = extractNumber('billingCity') || 0;
+        const isbillingLocationHierarchyCorrectResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isLocationHierarchyCorrect"])(billingCityId, billingStateId, billingCountryId);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Location hierarchy check result:', isbillingLocationHierarchyCorrectResult);
+        if (!isbillingLocationHierarchyCorrectResult.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Location hierarchy is incorrect: ${isbillingLocationHierarchyCorrectResult.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: isbillingLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect'
+            }, {
+                status: 400
+            });
+        }
+        const rawItems = extractJSON('items');
+        console.log(`rawItems`, rawItems);
+        if (!Array.isArray(rawItems) || rawItems.length === 0) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Variants are not valid or empty');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Variants are not valid or empty'
+            }, {
+                status: 400
+            });
+        }
+        const items = Array.isArray(rawItems) ? rawItems : [];
+        console.log(`items - `, items);
+        const orderPayload = {
+            orderNumber: extractString('orderNumber') || '',
+            status: extractString('status') || '',
+            orderNote: extractString('orderNote') || '',
+            subtotal: extractNumber('subtotal') || 0,
+            tax: extractNumber('tax') || 0,
+            discount: extractNumber('discount') || 0,
+            totalAmount: extractNumber('totalAmount') || 0,
+            currency: extractString('currency') || 'INR',
+            shippingName: extractString('shippingName') || '',
+            shippingPhone: extractString('shippingPhone') || '',
+            shippingEmail: extractString('shippingEmail') || '',
+            shippingAddress: extractString('shippingAddress') || '',
+            shippingZip: extractString('shippingZip') || '',
+            shippingCountry: {
+                connect: {
+                    id: shippingCountryId
+                }
+            },
+            shippingState: {
+                connect: {
+                    id: shippingStateId
+                }
+            },
+            shippingCity: {
+                connect: {
+                    id: shippingCityId
+                }
+            },
+            billingName: extractString('billingName') || '',
+            billingPhone: extractString('billingPhone') || '',
+            billingEmail: extractString('billingEmail') || '',
+            billingAddress: extractString('billingAddress') || '',
+            billingZip: extractString('billingZip') || '',
+            billingCountry: {
+                connect: {
+                    id: billingCountryId
+                }
+            },
+            billingState: {
+                connect: {
+                    id: billingStateId
+                }
+            },
+            billingCity: {
+                connect: {
+                    id: billingCityId
+                }
+            },
+            payment: {
+                connect: {
+                    id: paymentIdNum
+                }
+            }
+        };
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Order payload created:', orderPayload);
+        const orderCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createOrder"])(orderPayload);
+        if (!orderCreateResult || !orderCreateResult.status || !orderCreateResult.order) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order creation failed:', orderCreateResult?.message || 'Unknown error');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: orderCreateResult?.message || 'Order creation failed'
+            }, {
+                status: 500
+            });
+        }
+        const orderItemPayload = [];
+        for (const item of items){
+            const productId = Number(item.productId);
+            const variantId = Number(item.variantId);
+            const [productExists, variantExists] = await Promise.all([
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductById"])(productId),
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$product$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductVariantById"])(variantId)
+            ]);
+            if (!productExists.status || !variantExists.status) {
+                console.warn(`Skipping item with invalid product or variant:`, item);
+                continue;
+            }
+            orderItemPayload.push({
+                productId,
+                variantId,
+                quantity: Number(item.quantity),
+                price: Number(item.price),
+                total: Number(item.total),
+                orderId: orderCreateResult.order.id
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Order payload created:', orderItemPayload);
+        const orderItemCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createOrderItem"])(orderItemPayload);
+        if (!orderItemCreateResult || !orderItemCreateResult.status || !orderItemCreateResult.orderItems) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order creation failed:', orderItemCreateResult?.message || 'Unknown error');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: orderItemCreateResult?.message || 'Order creation failed'
+            }, {
+                status: 500
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: brandCreateResult?.message || 'Brand creation failed'
+            status: true,
+            error: orderCreateResult?.message || 'Order created Successfuly'
         }, {
-            status: 500
+            status: 200
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9939,55 +11286,66 @@ async function POST(req) {
 }
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching brands');
-        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('brand', 'view', req);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
-        // Retrieve x-admin-id and x-admin-role from request headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
+        // Retrieve admin details from request headers
+        const adminIdHeader = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Log admin info
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Admin details received', {
+            adminIdHeader,
+            adminRole
+        });
+        // Validate adminId
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid admin ID received', {
+                adminIdHeader
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: "User ID is missing or invalid in request"
+                error: 'Invalid or missing admin ID'
             }, {
                 status: 400
             });
         }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
+        // Check if the admin exists
+        const userExistence = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userExistence.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Admin user not found', {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: `User Not Found: ${result.message}`
+                error: `User Not Found: ${userExistence.message}`
             }, {
                 status: 404
             });
         }
-        // Fetch all brands
-        const brandsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getBrandsByStatus"])("notDeleted");
-        if (brandsResult?.status) {
+        // Fetch orders based on filters
+        const ordersResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrdersByStatus"])('notDeleted');
+        // Handle response based on orders result
+        if (ordersResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brands: brandsResult.brands
+                orders: ordersResult.orders
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No brands found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No brands found"
+            error: 'No orders found'
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching brands:', error);
+        // Log and handle any unexpected errors
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching orders', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch brands"
+            error: 'Failed to fetch orders due to an internal error'
         }, {
             status: 500
         });
@@ -9997,4 +11355,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__5f5e077b._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__64ff0233._.js.map

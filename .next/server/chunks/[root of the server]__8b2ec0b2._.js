@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/brand/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/order/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,14 +50,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
@@ -8067,6 +8059,14 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9319,108 +9319,6 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/saveFiles.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "deleteFile": (()=>deleteFile),
-    "saveFilesFromFormData": (()=>saveFilesFromFormData)
-});
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
-;
-;
-;
-// Helper: ensure directory exists
-async function ensureDir(dirPath) {
-    if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(dirPath)) {
-        console.log(`📁 Directory not found. Creating: ${dirPath}`);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(dirPath, {
-            recursive: true
-        });
-    } else {
-        console.log(`✅ Directory already exists: ${dirPath}`);
-    }
-}
-// Helper: generate file name
-function generateFileName(originalName, pattern, customName) {
-    const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(originalName);
-    const base = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(originalName, ext);
-    switch(pattern){
-        case 'original':
-            console.log(`📝 Using original filename: ${originalName}`);
-            return originalName;
-        case 'custom':
-            const name = `${customName}${ext}`;
-            console.log(`📝 Using custom filename: ${name}`);
-            return name;
-        case 'slug':
-            const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const slugName = `${slug}${ext}`;
-            console.log(`📝 Using slug filename: ${slugName}`);
-            return slugName;
-        case 'slug-unique':
-            const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
-            const slugUniqueName = `${unique}${ext}`;
-            console.log(`📝 Using slug-unique filename: ${slugUniqueName}`);
-            return slugUniqueName;
-        default:
-            return originalName;
-    }
-}
-async function saveFilesFromFormData(formData, fieldName, options) {
-    const { dir, pattern, customName, multiple = false } = options;
-    console.log(`🚀 Starting file save from field: "${fieldName}"`);
-    await ensureDir(dir);
-    let result = multiple ? [] : null;
-    const files = formData.getAll(fieldName).filter((item)=>item instanceof File && item.name.length > 0);
-    console.log(`📦 Total files to process: ${files.length}`);
-    for(let index = 0; index < files.length; index++){
-        const file = files[index];
-        const nameToUse = pattern === 'custom' && multiple ? `${customName}-${index + 1}` : pattern === 'custom' ? customName : file.name;
-        const finalFileName = generateFileName(nameToUse, pattern, nameToUse);
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const fullPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(dir, finalFileName);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(fullPath, buffer);
-        const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
-        const info = {
-            originalName: file.name,
-            savedAs: finalFileName,
-            size: file.size,
-            type: file.type,
-            url: `${fileUrl}`
-        };
-        if (multiple && Array.isArray(result)) {
-            result.push(info);
-        } else {
-            result = info;
-        }
-    }
-    return result;
-}
-async function deleteFile(filePath) {
-    try {
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["stat"])(filePath); // Throws if file doesn't exist
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
-        return true;
-    } catch (error) {
-        console.log(`error - File not found or couldn't be deleted: ${filePath}`, error);
-        return false;
-    }
-}
-}}),
 "[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9475,213 +9373,596 @@ function validateFormData(formData, { requiredFields = [], patternValidations = 
     };
 }
 }}),
-"[project]/src/app/models/brand.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/location/city.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "createBrand": (()=>createBrand),
-    "deleteBrand": (()=>deleteBrand),
-    "generateBrandSlug": (()=>generateBrandSlug),
-    "getAllBrands": (()=>getAllBrands),
-    "getBrandById": (()=>getBrandById),
-    "getBrandsByStatus": (()=>getBrandsByStatus),
-    "removeBrandImageByIndex": (()=>removeBrandImageByIndex),
-    "restoreBrand": (()=>restoreBrand),
-    "softDeleteBrand": (()=>softDeleteBrand),
-    "updateBrand": (()=>updateBrand)
+    "createCity": (()=>createCity),
+    "deleteCity": (()=>deleteCity),
+    "getAllCities": (()=>getAllCities),
+    "getCitiesByState": (()=>getCitiesByState),
+    "getCitiesByStatus": (()=>getCitiesByStatus),
+    "getCityById": (()=>getCityById),
+    "isLocationHierarchyCorrect": (()=>isLocationHierarchyCorrect),
+    "restoreCity": (()=>restoreCity),
+    "softDeleteCity": (()=>softDeleteCity),
+    "updateCity": (()=>updateCity)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
 ;
-;
-async function generateBrandSlug(name) {
-    let slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    let isSlugTaken = true;
-    let suffix = 0;
-    // Keep checking until an unused slug is found
-    while(isSlugTaken){
-        const existingBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
-            where: {
-                slug
-            }
-        });
-        if (existingBrand) {
-            // If the slug already exists, add a suffix (-1, -2, etc.)
-            suffix++;
-            slug = `${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${suffix}`;
-        } else {
-            // If the slug is not taken, set isSlugTaken to false to exit the loop
-            isSlugTaken = false;
-        }
-    }
-    return slug;
-}
-async function createBrand(adminId, adminRole, brand) {
+async function createCity(adminId, adminRole, city) {
     try {
-        const { name, description, status, image } = brand;
-        // Generate a unique slug for the brand
-        const slug = await generateBrandSlug(name);
-        const newBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.create({
+        const { name, state, country } = city;
+        const newCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.create({
             data: {
                 name,
-                description,
-                status,
-                slug,
-                image,
+                state,
+                country,
                 createdAt: new Date(),
                 createdBy: adminId,
                 createdByRole: adminRole
             }
         });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...newCity,
+            id: newCity.id.toString(),
+            stateId: newCity.stateId.toString(),
+            countryId: newCity.countryId.toString()
+        };
         return {
             status: true,
-            brand: newBrand
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error(`Error creating brand:`, error);
+        console.error(`Error creating city:`, error);
         return {
             status: false,
             message: "Internal Server Error"
         };
     }
 }
-const updateBrand = async (adminId, adminRole, brandId, data)=>{
+const updateCity = async (adminId, adminRole, cityId, data)=>{
     try {
-        data.updatedBy = adminId;
-        data.updatedAt = new Date();
-        data.updatedByRole = adminRole;
-        if (data.image) {
-            const newImagesArr = data.image.split(",").map((img)=>img.trim());
-            const { status, brand, message } = await getBrandById(brandId);
-            if (!status || !brand) {
-                return {
-                    status: false,
-                    message: message || "Brand not found."
-                };
-            }
-            const existingImages = brand.image ? brand.image.split(",").map((img)=>img.trim()) : [];
-            // Merge and remove duplicates
-            const mergedImages = Array.from(new Set([
-                ...existingImages,
-                ...newImagesArr
-            ]));
-            data.image = mergedImages.join(",");
-        }
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const { name, state, country } = data;
+        // Construct the payload safely
+        const updateData = {
+            name,
+            state,
+            country,
+            updatedBy: adminId,
+            updatedAt: new Date(),
+            updatedByRole: adminRole
+        };
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
             where: {
-                id: brandId
+                id: cityId
             },
-            data: data
+            data: updateData
         });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
+        };
         return {
             status: true,
-            brand
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ updateBrand Error:", error);
+        console.error("❌ updateCity Error:", error);
         return {
             status: false,
-            message: "Error updating brand"
+            message: "Error updating city"
         };
     }
 };
-const getBrandById = async (id)=>{
+const getCityById = async (id)=>{
     try {
-        const brand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findUnique({
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
             where: {
                 id
             }
         });
-        if (!brand) return {
+        if (!city) return {
             status: false,
-            message: "Brand not found"
+            message: "City not found"
+        };
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...city,
+            id: city.id.toString(),
+            stateId: city.stateId.toString(),
+            countryId: city.countryId.toString()
         };
         return {
             status: true,
-            brand
+            city: cityWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ getBrandById Error:", error);
+        console.error("❌ getCityById Error:", error);
         return {
             status: false,
-            message: "Error fetching brand"
+            message: "Error fetching city"
         };
     }
 };
-const removeBrandImageByIndex = async (brandId, imageIndex)=>{
+const getAllCities = async ()=>{
     try {
-        const { status, brand, message } = await getBrandById(brandId);
-        if (!status || !brand) {
-            return {
-                status: false,
-                message: message || "Brand not found."
-            };
-        }
-        if (!brand.image) {
-            return {
-                status: false,
-                message: "No images available to delete."
-            };
-        }
-        const images = brand.image.split(",");
-        if (imageIndex < 0 || imageIndex >= images.length) {
-            return {
-                status: false,
-                message: "Invalid image index provided."
-            };
-        }
-        const removedImage = images.splice(imageIndex, 1)[0]; // Remove image at given index
-        const updatedImages = images.join(",");
-        // Update brand in DB
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
-            where: {
-                id: brandId
-            },
-            data: {
-                image: updatedImages
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            orderBy: {
+                name: 'asc'
             }
         });
-        // 🔥 Attempt to delete the image file from storage
-        const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
-        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "public", "uploads", "brand", imageFileName);
-        const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
+            }));
         return {
             status: true,
-            message: fileDeleted ? "Image removed and file deleted successfully." : "Image removed, but file deletion failed.",
-            brand: updatedBrand
+            cities: citiesWithStringBigInts
         };
     } catch (error) {
-        console.error("❌ Error removing brand image:", error);
+        console.error("❌ getAllCities Error:", error);
         return {
             status: false,
-            message: "An unexpected error occurred while removing the image."
+            message: "Error fetching cities"
         };
     }
 };
-const getAllBrands = async ()=>{
+const getCitiesByStatus = async (status = "notDeleted")=>{
     try {
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        let whereCondition = {};
+        switch(status){
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            where: whereCondition,
+            orderBy: {
+                name: "asc"
+            }
+        });
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map((city)=>({
+                ...city,
+                id: city.id.toString(),
+                stateId: city.stateId.toString(),
+                countryId: city.countryId.toString()
+            }));
+        return {
+            status: true,
+            cities: citiesWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error fetching cities by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching cities"
+        };
+    }
+};
+const getCitiesByState = async (state, status = "notDeleted")=>{
+    try {
+        const whereCondition = {
+            stateId: state,
+            deletedAt: status === "notDeleted" ? null : {
+                not: null
+            }
+        };
+        const cities = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findMany({
+            where: whereCondition,
+            orderBy: {
+                name: "asc"
+            }
+        });
+        // Convert BigInt to string for serialization
+        const citiesWithStringBigInts = cities.map(({ id, stateId, countryId, ...city })=>({
+                ...city,
+                id: id.toString(),
+                stateId: stateId.toString(),
+                countryId: countryId.toString()
+            }));
+        return {
+            status: true,
+            cities: citiesWithStringBigInts
+        };
+    } catch (error) {
+        console.error(`Error fetching cities by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching cities"
+        };
+    }
+};
+const isLocationHierarchyCorrect = async (cityId, stateId, countryId)=>{
+    try {
+        // First, check if the country exists
+        const country = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].country.findUnique({
+            where: {
+                id: countryId
+            }
+        });
+        if (!country) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `Country not found for ID: ${countryId}`);
+            return {
+                status: false,
+                message: "We couldn't find a country with the given ID. Please check and try again."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `Country found:`, country);
+        // Next, check if the state exists in the given country
+        const state = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].state.findUnique({
+            where: {
+                id: stateId
+            },
+            include: {
+                country: true
+            }
+        });
+        if (!state) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State not found for ID: ${stateId}`);
+            return {
+                status: false,
+                message: "We couldn't find a state with the given ID. Please check the state ID and try again."
+            };
+        }
+        if (state.countryId.toString() !== countryId.toString()) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State ID ${stateId} does not belong to country ID ${countryId}`);
+            return {
+                status: false,
+                message: "This state does not belong to the specified country. Please verify the state and country relationship."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `State found and belongs to the country:`, state);
+        // Finally, check if the city exists in the given state
+        const city = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.findUnique({
+            where: {
+                id: cityId
+            },
+            include: {
+                state: true
+            }
+        });
+        if (!city) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City not found for ID: ${cityId}`);
+            return {
+                status: false,
+                message: "We couldn't find a city with the given ID. Please check the city ID and try again."
+            };
+        }
+        if (city.stateId.toString() !== stateId.toString()) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City ID ${cityId} does not belong to state ID ${stateId}`);
+            return {
+                status: false,
+                message: "This city does not belong to the specified state. Please verify the city and state relationship."
+            };
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", `City found and belongs to the state:`, city);
+        // If all checks pass, return the linked data
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Successfully validated the hierarchy: city, state, and country.");
+        return {
+            status: true,
+            message: "Successfully found the linked city, state, and country.",
+            data: {
+                country: {
+                    id: country.id.toString(),
+                    name: country.name
+                },
+                state: {
+                    id: state.id.toString(),
+                    name: state.name
+                },
+                city: {
+                    id: city.id.toString(),
+                    name: city.name
+                }
+            }
+        };
+    } catch (error) {
+        console.error("Error fetching city, state, and country details:", error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("debug", "Error fetching city, state, and country details:", error);
+        return {
+            status: false,
+            message: "There was an error while retrieving the location hierarchy. Please try again later."
+        };
+    }
+};
+const softDeleteCity = async (adminId, adminRole, id)=>{
+    try {
+        const updatedCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "City soft deleted successfully",
+            updatedCity
+        };
+    } catch (error) {
+        console.error("❌ softDeleteCity Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting city"
+        };
+    }
+};
+const restoreCity = async (adminId, adminRole, id)=>{
+    try {
+        const restoredCity = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        // Convert BigInt to string for serialization
+        const cityWithStringBigInts = {
+            ...restoredCity,
+            id: restoredCity.id.toString(),
+            stateId: restoredCity.stateId.toString(),
+            countryId: restoredCity.countryId.toString()
+        };
+        return {
+            status: true,
+            message: "City restored successfully",
+            city: cityWithStringBigInts
+        };
+    } catch (error) {
+        console.error("❌ restoreCity Error:", error);
+        return {
+            status: false,
+            message: "Error restoring city"
+        };
+    }
+};
+const deleteCity = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].city.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "City deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteCity Error:", error);
+        return {
+            status: false,
+            message: "Error deleting city"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkPaymentIdAvailability": (()=>checkPaymentIdAvailability),
+    "createOrder": (()=>createOrder),
+    "deleteOrder": (()=>deleteOrder),
+    "getAllOrders": (()=>getAllOrders),
+    "getOrderById": (()=>getOrderById),
+    "getOrdersByStatus": (()=>getOrdersByStatus),
+    "restoreOrder": (()=>restoreOrder),
+    "softDeleteOrder": (()=>softDeleteOrder),
+    "updateOrder": (()=>updateOrder)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+async function checkPaymentIdAvailability(paymentId) {
+    try {
+        // Check if the payment exists
+        const existingPayment = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].payment.findUnique({
+            where: {
+                id: paymentId
+            }
+        });
+        if (!existingPayment) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" does not exist.`
+            };
+        }
+        // Check if the payment ID is already linked to an order
+        const usedInOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findFirst({
+            where: {
+                paymentId: paymentId
+            }
+        });
+        if (usedInOrder) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" is already assigned to an order.`
+            };
+        }
+        return {
+            status: true,
+            message: `Payment ID "${paymentId}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking Payment ID:", error);
+        return {
+            status: false,
+            message: "Error while checking Payment ID availability."
+        };
+    }
+}
+async function createOrder(order) {
+    try {
+        const { orderNumber, status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment } = order;
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.create({
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: newOrder
+        };
+    } catch (error) {
+        console.error(`Error creating order:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { orderNumber, status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment, updatedBy, updatedByRole } = data;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const getOrderById = async (id)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order
+        };
+    } catch (error) {
+        console.error("❌ getOrderById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const getAllOrders = async ()=>{
+    try {
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
             orderBy: {
                 id: 'desc'
             }
         });
         return {
             status: true,
-            brands
+            orders
         };
     } catch (error) {
-        console.error("❌ getAllBrands Error:", error);
+        console.error("❌ getAllOrders Error:", error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching orders"
         };
     }
 };
-const getBrandsByStatus = async (status)=>{
+const getOrdersByStatus = async (status)=>{
     try {
         let whereCondition = {};
         switch(status){
@@ -9712,7 +9993,7 @@ const getBrandsByStatus = async (status)=>{
             default:
                 throw new Error("Invalid status");
         }
-        const brands = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.findMany({
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
             where: whereCondition,
             orderBy: {
                 id: "desc"
@@ -9720,19 +10001,19 @@ const getBrandsByStatus = async (status)=>{
         });
         return {
             status: true,
-            brands
+            orders
         };
     } catch (error) {
-        console.error(`Error fetching brands by status (${status}):`, error);
+        console.error(`Error fetching orders by status (${status}):`, error);
         return {
             status: false,
-            message: "Error fetching brands"
+            message: "Error fetching orders"
         };
     }
 };
-const softDeleteBrand = async (adminId, adminRole, id)=>{
+const softDeleteOrder = async (adminId, adminRole, id)=>{
     try {
-        const updatedBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
             where: {
                 id
             },
@@ -9744,20 +10025,20 @@ const softDeleteBrand = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Brand soft deleted successfully",
-            updatedBrand
+            message: "Order soft deleted successfully",
+            updatedOrder
         };
     } catch (error) {
-        console.error("❌ softDeleteBrand Error:", error);
+        console.error("❌ softDeleteOrder Error:", error);
         return {
             status: false,
-            message: "Error soft deleting brand"
+            message: "Error soft deleting order"
         };
     }
 };
-const restoreBrand = async (adminId, adminRole, id)=>{
+const restoreOrder = async (adminId, adminRole, id)=>{
     try {
-        const restoredBrand = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.update({
+        const restoredOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
             where: {
                 id
             },
@@ -9772,38 +10053,67 @@ const restoreBrand = async (adminId, adminRole, id)=>{
         });
         return {
             status: true,
-            message: "Brand restored successfully",
-            restoredBrand
+            message: "Order restored successfully",
+            restoredOrder
         };
     } catch (error) {
-        console.error("❌ restoreBrand Error:", error);
+        console.error("❌ restoreOrder Error:", error);
         return {
             status: false,
-            message: "Error restoring brand"
+            message: "Error restoring order"
         };
     }
 };
-const deleteBrand = async (id)=>{
+const deleteOrder = async (id)=>{
     try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].brand.delete({
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.delete({
             where: {
                 id
             }
         });
         return {
             status: true,
-            message: "Brand deleted successfully"
+            message: "Order deleted successfully"
         };
     } catch (error) {
-        console.error("❌ deleteBrand Error:", error);
+        console.error("❌ deleteOrder Error:", error);
         return {
             status: false,
-            message: "Error deleting brand"
+            message: "Error deleting order"
         };
     }
 };
 }}),
-"[project]/src/app/api/brand/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/order/item.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createOrderItem": (()=>createOrderItem)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+async function createOrderItem(items) {
+    try {
+        const newOrderItems = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].orderItem.createMany({
+            data: items,
+            skipDuplicates: true
+        });
+        return {
+            status: true,
+            orderItems: newOrderItems
+        };
+    } catch (error) {
+        console.error(`Error creating order items:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+}}),
+"[project]/src/app/api/order/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -9813,13 +10123,12 @@ __turbopack_context__.s({
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/brand.ts [app-route] (ecmascript)");
-;
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/location/city.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/order.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/item.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -9829,38 +10138,61 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$bran
 ;
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for brand creation');
-        // Get headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
-        const adminId = Number(adminIdHeader);
-        if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "User ID is missing or invalid in request"
-            }, {
-                status: 400
-            });
-        }
-        // Check if admin exists
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found: ${userCheck.message}`
-            }, {
-                status: 404
-            });
-        }
-        const isMultipleImages = true; // Set true to allow multiple image uploads
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for order creation');
+        const requiredFields = [
+            'orderNumber',
+            'status',
+            'subtotal',
+            'tax',
+            'discount',
+            'totalAmount',
+            'currency',
+            'shippingName',
+            'shippingPhone',
+            'shippingEmail',
+            'shippingAddress',
+            'shippingZip',
+            'shippingCountry',
+            'shippingState',
+            'shippingCity',
+            'billingName',
+            'billingPhone',
+            'billingEmail',
+            'billingAddress',
+            'billingZip',
+            'billingCountry',
+            'billingState',
+            'billingCity',
+            'payment'
+        ];
         const formData = await req.formData();
-        // Validate input
         const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: [
-                'name'
-            ],
+            requiredFields: requiredFields,
             patternValidations: {
-                status: 'boolean'
+                orderNumber: 'string',
+                status: 'string',
+                subtotal: 'number',
+                tax: 'number',
+                discount: 'number',
+                totalAmount: 'number',
+                currency: 'string',
+                shippingName: 'string',
+                shippingPhone: 'string',
+                shippingEmail: 'string',
+                shippingAddress: 'string',
+                shippingZip: 'string',
+                shippingCountry: 'number',
+                shippingState: 'number',
+                shippingCity: 'number',
+                billingName: 'string',
+                billingPhone: 'string',
+                billingEmail: 'string',
+                billingAddress: 'string',
+                billingZip: 'string',
+                billingCountry: 'number',
+                billingState: 'number',
+                billingCity: 'number',
+                payment: 'number'
             }
         });
         if (!validation.isValid) {
@@ -9873,62 +10205,204 @@ async function POST(req) {
                 status: 400
             });
         }
-        // Extract fields
-        const name = formData.get('name');
-        const description = formData.get('description') || '';
-        const statusRaw = formData.get('status')?.toString().toLowerCase();
-        const status = [
-            'true',
-            '1',
-            true,
-            1,
-            'active'
-        ].includes(statusRaw);
-        // File upload
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'brand');
-        const fileData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'image', {
-            dir: uploadDir,
-            pattern: 'slug-unique',
-            multiple: isMultipleImages
-        });
-        let image = '';
-        if (fileData) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'uploaded fileData:', fileData);
-            image = ("TURBOPACK compile-time truthy", 1) ? fileData.map((file)=>file.url).join(', ') : ("TURBOPACK unreachable", undefined);
-        }
-        const brandPayload = {
-            name,
-            description,
-            status,
-            image
+        const extractNumber = (key)=>Number(formData.get(key)) || null;
+        const extractString = (key)=>formData.get(key) || null;
+        const extractJSON = (key)=>{
+            const value = extractString(key);
+            const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
+            let parsedData;
+            if (typeof cleanedValue === 'string') {
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 1", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                }
+                try {
+                    parsedData = JSON.parse(cleanedValue);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 2", parsedData);
+                    return parsedData;
+                } catch (error) {
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse JSON value:', error);
+                    return null;
+                }
+            }
+            if (typeof cleanedValue === 'object' && cleanedValue !== null) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', "✅ Parsed value: 3", cleanedValue);
+                return cleanedValue;
+            }
+            return null;
         };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Brand payload created:', brandPayload);
-        const brandCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createBrand"])(adminId, String(adminRole), brandPayload);
-        if (brandCreateResult?.status) {
+        const paymentIdNum = Number(extractNumber('payment'));
+        if (isNaN(paymentIdNum)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid Payment ID', {
+                paymentIdNum
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                brand: brandCreateResult.brand
+                error: 'Invalid Payment ID'
             }, {
-                status: 200
+                status: 400
             });
         }
-        // ❌ Brand creation failed — delete uploaded file(s)
-        const deletePath = (file)=>__TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(file.url));
-        if (isMultipleImages && Array.isArray(fileData)) {
-            await Promise.all(fileData.map((file)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(file))));
-        } else {
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(deletePath(fileData));
+        const PaymentResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkPaymentIdAvailability"])(paymentIdNum);
+        if (!PaymentResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Payment not found', {
+                paymentIdNum
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: PaymentResult.message || 'Payment not found'
+            }, {
+                status: 404
+            });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand creation failed:', brandCreateResult?.message || 'Unknown error');
+        const shippingCountryId = extractNumber('shippingCountry') || 0;
+        const shippingStateId = extractNumber('shippingState') || 0;
+        const shippingCityId = extractNumber('shippingCity') || 0;
+        const isShippingLocationHierarchyCorrectResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isLocationHierarchyCorrect"])(shippingCityId, shippingStateId, shippingCountryId);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Location hierarchy check result:', isShippingLocationHierarchyCorrectResult);
+        if (!isShippingLocationHierarchyCorrectResult.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Location hierarchy is incorrect: ${isShippingLocationHierarchyCorrectResult.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: isShippingLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect'
+            }, {
+                status: 400
+            });
+        }
+        const billingCountryId = extractNumber('billingCountry') || 0;
+        const billingStateId = extractNumber('billingState') || 0;
+        const billingCityId = extractNumber('billingCity') || 0;
+        const isbillingLocationHierarchyCorrectResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$location$2f$city$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isLocationHierarchyCorrect"])(billingCityId, billingStateId, billingCountryId);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Location hierarchy check result:', isbillingLocationHierarchyCorrectResult);
+        if (!isbillingLocationHierarchyCorrectResult.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Location hierarchy is incorrect: ${isbillingLocationHierarchyCorrectResult.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: isbillingLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect'
+            }, {
+                status: 400
+            });
+        }
+        const rawItems = extractJSON('items');
+        console.log(`rawItems`, rawItems);
+        if (!Array.isArray(rawItems) || rawItems.length === 0) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Variants are not valid or empty');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Variants are not valid or empty'
+            }, {
+                status: 400
+            });
+        }
+        const items = Array.isArray(rawItems) ? rawItems : [];
+        console.log(`items - `, items);
+        const orderPayload = {
+            orderNumber: extractString('orderNumber') || '',
+            status: extractString('status') || '',
+            orderNote: extractString('orderNote') || '',
+            subtotal: extractNumber('subtotal') || 0,
+            tax: extractNumber('tax') || 0,
+            discount: extractNumber('discount') || 0,
+            totalAmount: extractNumber('totalAmount') || 0,
+            currency: extractString('currency') || 'INR',
+            shippingName: extractString('shippingName') || '',
+            shippingPhone: extractString('shippingPhone') || '',
+            shippingEmail: extractString('shippingEmail') || '',
+            shippingAddress: extractString('shippingAddress') || '',
+            shippingZip: extractString('shippingZip') || '',
+            shippingCountry: {
+                connect: {
+                    id: shippingCountryId
+                }
+            },
+            shippingState: {
+                connect: {
+                    id: shippingStateId
+                }
+            },
+            shippingCity: {
+                connect: {
+                    id: shippingCityId
+                }
+            },
+            billingName: extractString('billingName') || '',
+            billingPhone: extractString('billingPhone') || '',
+            billingEmail: extractString('billingEmail') || '',
+            billingAddress: extractString('billingAddress') || '',
+            billingZip: extractString('billingZip') || '',
+            billingCountry: {
+                connect: {
+                    id: billingCountryId
+                }
+            },
+            billingState: {
+                connect: {
+                    id: billingStateId
+                }
+            },
+            billingCity: {
+                connect: {
+                    id: billingCityId
+                }
+            },
+            payment: {
+                connect: {
+                    id: paymentIdNum
+                }
+            }
+        };
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Order payload created:', orderPayload);
+        const orderCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createOrder"])(orderPayload);
+        if (!orderCreateResult || !orderCreateResult.status || !orderCreateResult.order) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order creation failed:', orderCreateResult?.message || 'Unknown error');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: orderCreateResult?.message || 'Order creation failed'
+            }, {
+                status: 500
+            });
+        }
+        const orderItemPayload = [];
+        for (const item of items){
+            orderItemPayload.push({
+                product: {
+                    connect: {
+                        id: Number(item.product)
+                    }
+                },
+                variant: {
+                    connect: {
+                        id: Number(item.variant)
+                    }
+                },
+                quantity: Number(item.quantity),
+                price: Number(item.price),
+                total: Number(item.total),
+                orderId: orderCreateResult.order.id
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Order payload created:', orderItemPayload);
+        const orderItemCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createOrderItem"])(orderItemPayload);
+        if (!orderItemCreateResult || !orderItemCreateResult.status || !orderItemCreateResult.orderItems) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order creation failed:', orderItemCreateResult?.message || 'Unknown error');
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: orderItemCreateResult?.message || 'Order creation failed'
+            }, {
+                status: 500
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: brandCreateResult?.message || 'Brand creation failed'
+            status: true,
+            error: orderCreateResult?.message || 'Order created Successfuly'
         }, {
-            status: 500
+            status: 200
         });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Brand Creation Error:', error);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Order Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -9939,55 +10413,66 @@ async function POST(req) {
 }
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'GET request received for fetching brands');
-        const fetchLogInfoResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["fetchLogInfo"])('brand', 'view', req);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
-        // Retrieve x-admin-id and x-admin-role from request headers
-        const adminIdHeader = req.headers.get("x-admin-id");
-        const adminRole = req.headers.get("x-admin-role");
+        // Retrieve admin details from request headers
+        const adminIdHeader = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
+        // Log admin info
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Admin details received', {
+            adminIdHeader,
+            adminRole
+        });
+        // Validate adminId
         const adminId = Number(adminIdHeader);
         if (!adminIdHeader || isNaN(adminId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid admin ID received', {
+                adminIdHeader
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: "User ID is missing or invalid in request"
+                error: 'Invalid or missing admin ID'
             }, {
                 status: 400
             });
         }
-        // Check if admin exists
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${result.message}`);
+        // Check if the admin exists
+        const userExistence = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(adminId, String(adminRole));
+        if (!userExistence.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Admin user not found', {
+                adminId,
+                adminRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: `User Not Found: ${result.message}`
+                error: `User Not Found: ${userExistence.message}`
             }, {
                 status: 404
             });
         }
-        // Fetch all brands
-        const brandsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getBrandsByStatus"])("notDeleted");
-        if (brandsResult?.status) {
+        // Fetch orders based on filters
+        const ordersResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrdersByStatus"])('notDeleted');
+        // Handle response based on orders result
+        if (ordersResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                brands: brandsResult.brands
+                orders: ordersResult.orders
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'No brands found');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "No brands found"
+            error: 'No orders found'
         }, {
             status: 404
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching brands:', error);
+        // Log and handle any unexpected errors
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching orders', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: "Failed to fetch brands"
+            error: 'Failed to fetch orders due to an internal error'
         }, {
             status: 500
         });
@@ -9997,4 +10482,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__5f5e077b._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__8b2ec0b2._.js.map
