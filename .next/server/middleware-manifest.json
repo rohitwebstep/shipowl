@@ -133,6 +133,10 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/payment(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/payment/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/order(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/order"
         }
       ],
       "wasm": [],

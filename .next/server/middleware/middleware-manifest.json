@@ -133,6 +133,10 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/payment/:path*{(\\\\.json)}?",
           "originalSource": "/api/payment/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/order{(\\\\.json)}?",
+          "originalSource": "/api/order"
         }
       ],
       "wasm": [],

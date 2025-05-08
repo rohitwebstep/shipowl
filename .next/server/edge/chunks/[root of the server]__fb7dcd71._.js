@@ -186,7 +186,8 @@ function middleware(req) {
                 "/api/high-rto",
                 "/api/high-rto/:path*",
                 "/api/payment",
-                "/api/payment/:path*"
+                "/api/payment/:path*",
+                "/api/order"
             ],
             role: "admin",
             applicableRoles: [
@@ -246,7 +247,8 @@ const config = {
         "/api/high-rto",
         "/api/high-rto/:path*",
         "/api/payment",
-        "/api/payment/:path*"
+        "/api/payment/:path*",
+        "/api/order"
     ]
 };
 }}),

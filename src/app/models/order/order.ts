@@ -52,6 +52,26 @@ interface Order {
     deletedByRole?: string | null;
 }
 
+const serializeBigInt = <T>(obj: T): T => {
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as T;
+    }
+    // If it's an object, recursively apply serializeBigInt to each key-value pair
+    else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+    // If it's a BigInt, convert it to a string
+    else if (typeof obj === 'bigint') {
+        return obj.toString() as T;
+    }
+
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
+
 export async function checkPaymentIdAvailability(paymentId: number) {
     try {
         // Check if the payment exists
@@ -154,7 +174,7 @@ export async function createOrder(order: Order) {
             },
         });
 
-        return { status: true, order: newOrder };
+        return { status: true, order: serializeBigInt(newOrder) };
     } catch (error) {
         console.error(`Error creating order:`, error);
         return { status: false, message: "Internal Server Error" };
@@ -233,7 +253,7 @@ export const updateOrder = async (
             },
         });
 
-        return { status: true, order };
+        return { status: true, order: serializeBigInt(order) };
     } catch (error) {
         console.error("❌ updateOrder Error:", error);
         return { status: false, message: "Error updating order" };
@@ -248,7 +268,7 @@ export const getOrderById = async (id: number) => {
         });
 
         if (!order) return { status: false, message: "Order not found" };
-        return { status: true, order };
+        return { status: true, order: serializeBigInt(order) };
     } catch (error) {
         console.error("❌ getOrderById Error:", error);
         return { status: false, message: "Error fetching order" };
@@ -261,7 +281,7 @@ export const getAllOrders = async () => {
         const orders = await prisma.order.findMany({
             orderBy: { id: 'desc' },
         });
-        return { status: true, orders };
+        return { status: true, orders: serializeBigInt(orders) };
     } catch (error) {
         console.error("❌ getAllOrders Error:", error);
         return { status: false, message: "Error fetching orders" };
@@ -292,9 +312,10 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
         const orders = await prisma.order.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
+            include: { items: true }
         });
 
-        return { status: true, orders };
+        return { status: true, orders: serializeBigInt(orders) };
     } catch (error) {
         console.error(`Error fetching orders by status (${status}):`, error);
         return { status: false, message: "Error fetching orders" };
@@ -312,7 +333,7 @@ export const softDeleteOrder = async (adminId: number, adminRole: string, id: nu
                 deletedByRole: adminRole,
             },
         });
-        return { status: true, message: "Order soft deleted successfully", updatedOrder };
+        return { status: true, message: "Order soft deleted successfully", updatedOrder: serializeBigInt(updatedOrder) };
     } catch (error) {
         console.error("❌ softDeleteOrder Error:", error);
         return { status: false, message: "Error soft deleting order" };
@@ -334,7 +355,7 @@ export const restoreOrder = async (adminId: number, adminRole: string, id: numbe
             },
         });
 
-        return { status: true, message: "Order restored successfully", restoredOrder };
+        return { status: true, message: "Order restored successfully", restoredOrder: serializeBigInt(restoredOrder) };
     } catch (error) {
         console.error("❌ restoreOrder Error:", error);
         return { status: false, message: "Error restoring order" };

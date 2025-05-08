@@ -9787,6 +9787,21 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
 ;
+const serializeBigInt = (obj)=>{
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    } else if (typeof obj === 'bigint') {
+        return obj.toString();
+    }
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
 async function checkPaymentIdAvailability(paymentId) {
     try {
         // Check if the payment exists
@@ -9860,7 +9875,7 @@ async function createOrder(order) {
         });
         return {
             status: true,
-            order: newOrder
+            order: serializeBigInt(newOrder)
         };
     } catch (error) {
         console.error(`Error creating order:`, error);
@@ -9910,7 +9925,7 @@ const updateOrder = async (adminId, adminRole, orderId, data)=>{
         });
         return {
             status: true,
-            order
+            order: serializeBigInt(order)
         };
     } catch (error) {
         console.error("❌ updateOrder Error:", error);
@@ -9933,7 +9948,7 @@ const getOrderById = async (id)=>{
         };
         return {
             status: true,
-            order
+            order: serializeBigInt(order)
         };
     } catch (error) {
         console.error("❌ getOrderById Error:", error);
@@ -9952,7 +9967,7 @@ const getAllOrders = async ()=>{
         });
         return {
             status: true,
-            orders
+            orders: serializeBigInt(orders)
         };
     } catch (error) {
         console.error("❌ getAllOrders Error:", error);
@@ -9997,11 +10012,14 @@ const getOrdersByStatus = async (status)=>{
             where: whereCondition,
             orderBy: {
                 id: "desc"
+            },
+            include: {
+                items: true
             }
         });
         return {
             status: true,
-            orders
+            orders: serializeBigInt(orders)
         };
     } catch (error) {
         console.error(`Error fetching orders by status (${status}):`, error);
@@ -10026,7 +10044,7 @@ const softDeleteOrder = async (adminId, adminRole, id)=>{
         return {
             status: true,
             message: "Order soft deleted successfully",
-            updatedOrder
+            updatedOrder: serializeBigInt(updatedOrder)
         };
     } catch (error) {
         console.error("❌ softDeleteOrder Error:", error);
@@ -10054,7 +10072,7 @@ const restoreOrder = async (adminId, adminRole, id)=>{
         return {
             status: true,
             message: "Order restored successfully",
-            restoredOrder
+            restoredOrder: serializeBigInt(restoredOrder)
         };
     } catch (error) {
         console.error("❌ restoreOrder Error:", error);
