@@ -542,6 +542,7 @@ CREATE TABLE `Payment` (
     `cycle` VARCHAR(191) NULL,
     `amount` DOUBLE NULL,
     `status` VARCHAR(191) NULL,
+    `date` DATETIME(3) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
     `createdByRole` VARCHAR(191) NULL,
@@ -556,6 +557,68 @@ CREATE TABLE `Payment` (
     INDEX `Payment_createdBy_idx`(`createdBy`),
     INDEX `Payment_updatedBy_idx`(`updatedBy`),
     INDEX `Payment_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Order` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `orderNumber` VARCHAR(191) NOT NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `orderNote` VARCHAR(191) NULL,
+    `subtotal` DOUBLE NOT NULL DEFAULT 0.0,
+    `tax` DOUBLE NOT NULL DEFAULT 0.0,
+    `discount` DOUBLE NOT NULL DEFAULT 0.0,
+    `totalAmount` DOUBLE NOT NULL DEFAULT 0.0,
+    `currency` VARCHAR(191) NOT NULL DEFAULT 'USD',
+    `shippingName` VARCHAR(191) NOT NULL,
+    `shippingPhone` VARCHAR(191) NOT NULL,
+    `shippingEmail` VARCHAR(191) NOT NULL,
+    `shippingAddress` VARCHAR(191) NOT NULL,
+    `shippingZip` VARCHAR(191) NOT NULL,
+    `shippingCountryId` BIGINT NULL,
+    `shippingStateId` BIGINT NULL,
+    `shippingCityId` BIGINT NULL,
+    `billingName` VARCHAR(191) NOT NULL,
+    `billingPhone` VARCHAR(191) NOT NULL,
+    `billingEmail` VARCHAR(191) NOT NULL,
+    `billingAddress` VARCHAR(191) NOT NULL,
+    `billingZip` VARCHAR(191) NOT NULL,
+    `billingCountryId` BIGINT NULL,
+    `billingStateId` BIGINT NULL,
+    `billingCityId` BIGINT NULL,
+    `paymentId` INTEGER NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `Order_orderNumber_key`(`orderNumber`),
+    INDEX `Order_createdBy_idx`(`createdBy`),
+    INDEX `Order_updatedBy_idx`(`updatedBy`),
+    INDEX `Order_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `OrderItem` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `orderId` INTEGER NOT NULL,
+    `productId` INTEGER NULL,
+    `variantId` INTEGER NULL,
+    `productName` VARCHAR(191) NOT NULL,
+    `quantity` INTEGER NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `total` DOUBLE NOT NULL,
+
+    INDEX `OrderItem_orderId_idx`(`orderId`),
+    INDEX `OrderItem_productId_idx`(`productId`),
+    INDEX `OrderItem_variantId_idx`(`variantId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -621,3 +684,30 @@ ALTER TABLE `highRto` ADD CONSTRAINT `highRto_stateId_fkey` FOREIGN KEY (`stateI
 
 -- AddForeignKey
 ALTER TABLE `highRto` ADD CONSTRAINT `highRto_cityId_fkey` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_shippingCountryId_fkey` FOREIGN KEY (`shippingCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_shippingStateId_fkey` FOREIGN KEY (`shippingStateId`) REFERENCES `state`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_shippingCityId_fkey` FOREIGN KEY (`shippingCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_billingCountryId_fkey` FOREIGN KEY (`billingCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_billingStateId_fkey` FOREIGN KEY (`billingStateId`) REFERENCES `state`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Order` ADD CONSTRAINT `Order_billingCityId_fkey` FOREIGN KEY (`billingCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_orderId_fkey` FOREIGN KEY (`orderId`) REFERENCES `Order`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_variantId_fkey` FOREIGN KEY (`variantId`) REFERENCES `productVariant`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

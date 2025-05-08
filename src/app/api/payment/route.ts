@@ -40,6 +40,14 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
+    const extractDateTime = (key: string): Date | null => {
+      const value = formData.get(key);
+      if (typeof value === 'string' && value.trim()) {
+        const parsedDate = new Date(value);
+        return isNaN(parsedDate.getTime()) ? null : parsedDate;
+      }
+      return null;
+    };
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -57,6 +65,7 @@ export async function POST(req: NextRequest) {
       cycle: extractString('cycle') || '',
       amount: extractNumber('amount') || 0,
       status: extractString('status') || '',
+      date: extractDateTime('date') || undefined,
       createdBy: adminId,
       createdByRole: adminRole || '',
     };

@@ -6,6 +6,7 @@ interface Payment {
     cycle: string;
     amount: number;
     status: string;
+    date?: Date;
     createdBy?: number;
     createdAt?: Date;
     createdByRole?: string;
@@ -82,6 +83,7 @@ export async function createPayment(adminId: number, adminRole: string, payment:
             transactionId,
             cycle,
             amount,
+            date,
             status,
             createdBy,
             createdByRole,
@@ -92,6 +94,7 @@ export async function createPayment(adminId: number, adminRole: string, payment:
                 transactionId,
                 cycle,
                 amount,
+                date,
                 status,
                 createdAt: new Date(),
                 createdBy: createdBy,
@@ -118,6 +121,7 @@ export const updatePayment = async (
             transactionId,
             cycle,
             amount,
+            date,
             status,
             updatedBy,
             updatedByRole,
@@ -129,6 +133,7 @@ export const updatePayment = async (
                 transactionId,
                 cycle,
                 amount,
+                date,
                 status,
                 updatedAt: new Date(),
                 updatedBy: updatedBy,

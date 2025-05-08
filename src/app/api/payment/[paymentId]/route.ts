@@ -87,6 +87,14 @@ export async function PUT(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
+    const extractDateTime = (key: string): Date | null => {
+      const value = formData.get(key);
+      if (typeof value === 'string' && value.trim()) {
+        const parsedDate = new Date(value);
+        return isNaN(parsedDate.getTime()) ? null : parsedDate;
+      }
+      return null;
+    };    
 
     // Validate input
     const requiredFields = ['transactionId'];
@@ -125,6 +133,7 @@ export async function PUT(req: NextRequest) {
       cycle: extractString('cycle') || '',
       amount: extractNumber('amount') || 0,
       status: extractString('status') || '',
+      date: extractDateTime('date') || undefined,
       updatedBy: adminId,
       updatedByRole: adminRole || '',
     };

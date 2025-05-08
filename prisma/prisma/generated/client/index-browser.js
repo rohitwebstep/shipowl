@@ -552,6 +552,7 @@ exports.Prisma.PaymentScalarFieldEnum = {
   cycle: 'cycle',
   amount: 'amount',
   status: 'status',
+  date: 'date',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -561,6 +562,55 @@ exports.Prisma.PaymentScalarFieldEnum = {
   deletedAt: 'deletedAt',
   deletedBy: 'deletedBy',
   deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  status: 'status',
+  orderNote: 'orderNote',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  discount: 'discount',
+  totalAmount: 'totalAmount',
+  currency: 'currency',
+  shippingName: 'shippingName',
+  shippingPhone: 'shippingPhone',
+  shippingEmail: 'shippingEmail',
+  shippingAddress: 'shippingAddress',
+  shippingZip: 'shippingZip',
+  shippingCountryId: 'shippingCountryId',
+  shippingStateId: 'shippingStateId',
+  shippingCityId: 'shippingCityId',
+  billingName: 'billingName',
+  billingPhone: 'billingPhone',
+  billingEmail: 'billingEmail',
+  billingAddress: 'billingAddress',
+  billingZip: 'billingZip',
+  billingCountryId: 'billingCountryId',
+  billingStateId: 'billingStateId',
+  billingCityId: 'billingCityId',
+  paymentId: 'paymentId',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  variantId: 'variantId',
+  productName: 'productName',
+  quantity: 'quantity',
+  price: 'price',
+  total: 'total'
 };
 
 exports.Prisma.SortOrder = {
@@ -848,6 +898,30 @@ exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.OrderOrderByRelevanceFieldEnum = {
+  orderNumber: 'orderNumber',
+  status: 'status',
+  orderNote: 'orderNote',
+  currency: 'currency',
+  shippingName: 'shippingName',
+  shippingPhone: 'shippingPhone',
+  shippingEmail: 'shippingEmail',
+  shippingAddress: 'shippingAddress',
+  shippingZip: 'shippingZip',
+  billingName: 'billingName',
+  billingPhone: 'billingPhone',
+  billingEmail: 'billingEmail',
+  billingAddress: 'billingAddress',
+  billingZip: 'billingZip',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.OrderItemOrderByRelevanceFieldEnum = {
+  productName: 'productName'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -868,7 +942,9 @@ exports.Prisma.ModelName = {
   productVariant: 'productVariant',
   courierCompany: 'courierCompany',
   highRto: 'highRto',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**
