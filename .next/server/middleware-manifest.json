@@ -125,6 +125,14 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/high-rto(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/high-rto/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/payment(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/payment"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/payment(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/payment/:path*"
         }
       ],
       "wasm": [],
@@ -132,9 +140,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "5be3659002e6bf0436be12676433d717",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "f54ec7f237fb05474a91f8b48b153ab2804c92309d392ae27c5c78ae1eb9f9d3",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "58f02c7aa976e8feeadb38fc60845db2cc33d47c9989080c85ba60f6f8154163"
+        "__NEXT_PREVIEW_MODE_ID": "72e624ecedd28d6c13f5a909f892a5c9",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "0df411b5aea3cd312f655ddad53875178a52578e8c01864b181834aefd7dea38",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "fefcce37812526e0d6abf442b8aeb772b67713d475c5769bba9b34025415a448"
       }
     }
   },

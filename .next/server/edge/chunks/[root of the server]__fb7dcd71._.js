@@ -184,7 +184,9 @@ function middleware(req) {
                 "/api/courier-company",
                 "/api/courier-company/:path*",
                 "/api/high-rto",
-                "/api/high-rto/:path*"
+                "/api/high-rto/:path*",
+                "/api/payment",
+                "/api/payment/:path*"
             ],
             role: "admin",
             applicableRoles: [
@@ -242,7 +244,9 @@ const config = {
         "/api/courier-company",
         "/api/courier-company/:path*",
         "/api/high-rto",
-        "/api/high-rto/:path*"
+        "/api/high-rto/:path*",
+        "/api/payment",
+        "/api/payment/:path*"
     ]
 };
 }}),

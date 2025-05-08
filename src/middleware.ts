@@ -86,6 +86,8 @@ export function middleware(req: NextRequest) {
                 "/api/courier-company/:path*",
                 "/api/high-rto",
                 "/api/high-rto/:path*",
+                "/api/payment",
+                "/api/payment/:path*",
             ],
             role: "admin",
             applicableRoles: [
@@ -151,5 +153,7 @@ export const config = {
         "/api/courier-company/:path*",
         "/api/high-rto",
         "/api/high-rto/:path*",
+        "/api/payment",
+        "/api/payment/:path*",
     ],
 };

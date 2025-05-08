@@ -1,4 +1,5 @@
 {
   "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/high-rto/route": "app/api/high-rto/route.js"
+  "/api/payment/[paymentId]/route": "app/api/payment/[paymentId]/route.js",
+  "/api/payment/route": "app/api/payment/route.js"
 }

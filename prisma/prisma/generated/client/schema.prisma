@@ -582,3 +582,25 @@ model highRto {
   @@index([updatedBy])
   @@index([deletedAt])
 }
+
+model Payment {
+  id            Int     @id @default(autoincrement())
+  transactionId String  @unique
+  cycle         String?
+  amount        Float?
+  status        String?
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}

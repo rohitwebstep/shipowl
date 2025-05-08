@@ -535,6 +535,30 @@ CREATE TABLE `highRto` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `Payment` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `transactionId` VARCHAR(191) NOT NULL,
+    `cycle` VARCHAR(191) NULL,
+    `amount` DOUBLE NULL,
+    `status` VARCHAR(191) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `Payment_transactionId_key`(`transactionId`),
+    INDEX `Payment_createdBy_idx`(`createdBy`),
+    INDEX `Payment_updatedBy_idx`(`updatedBy`),
+    INDEX `Payment_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 

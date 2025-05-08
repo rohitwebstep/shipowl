@@ -546,6 +546,23 @@ exports.Prisma.HighRtoScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  cycle: 'cycle',
+  amount: 'amount',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -822,6 +839,15 @@ exports.Prisma.highRtoOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
+  transactionId: 'transactionId',
+  cycle: 'cycle',
+  status: 'status',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -841,7 +867,8 @@ exports.Prisma.ModelName = {
   product: 'product',
   productVariant: 'productVariant',
   courierCompany: 'courierCompany',
-  highRto: 'highRto'
+  highRto: 'highRto',
+  Payment: 'Payment'
 };
 
 /**
