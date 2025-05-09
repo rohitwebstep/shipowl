@@ -65,7 +65,6 @@ export async function GET(req: NextRequest) {
   }
 }
 
-
 export async function PUT(req: NextRequest) {
 
   try {
