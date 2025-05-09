@@ -232,7 +232,7 @@ export async function POST(req: NextRequest) {
     logMessage('debug', 'Admin\'s bank accounts:', permissions);
 
     const adminPermissionPayload = {
-      admin: { connect: { id: adminId } },
+      adminId,
       permissions,
       updatedAt: new Date(),
       updatedBy: adminId,

@@ -14,7 +14,8 @@ interface AdminHasPermission {
 }
 
 interface AdminPermissionsPayload {
-    admin: { connect: { id: number } };
+    admin?: { connect: { id: number } };
+    adminId?: number;
     permissions: AdminHasPermission[];
     createdAt?: Date; // Timestamp of when the dropshipper was created
     updatedAt?: Date; // Timestamp of when the dropshipper was last updated
@@ -70,7 +71,7 @@ export async function assignAdminPermission(
 ) {
     try {
         const permissionOperations = payload.permissions.map(async (permission) => {
-            const targetAdminId = Number(permission.adminId);
+            const targetAdminId = Number(payload.adminId);
             const targetPermissionId = Number(permission.permissionId);
 
             const { status: found, permission: currentPermission, message } = await getAdminPermissionById(targetPermissionId);

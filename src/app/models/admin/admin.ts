@@ -207,6 +207,7 @@ export const getAdminById = async (id: number, withPassword: boolean | string | 
             include: {
                 companyDetail: true,
                 bankAccounts: true,
+                permissions: true,
             }
 
         });
