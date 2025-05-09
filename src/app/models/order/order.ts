@@ -265,6 +265,7 @@ export const getOrderById = async (id: number) => {
     try {
         const order = await prisma.order.findUnique({
             where: { id },
+            include: { items: true }
         });
 
         if (!order) return { status: false, message: "Order not found" };

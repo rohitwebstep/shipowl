@@ -7,6 +7,7 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkPaymentIdAvailability, createOrder, getOrdersByStatus } from '@/app/models/order/order';
 import { createOrderItem } from '@/app/models/order/item';
 import { getProductById, getProductVariantById } from '@/app/models/product/product';
+import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 
 interface Item {
   productId: number;
@@ -268,6 +269,9 @@ export async function POST(req: NextRequest) {
       logMessage('error', 'Order creation failed:', orderItemCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: orderItemCreateResult?.message || 'Order creation failed' }, { status: 500 });
     }
+
+    const placeOrderShippingResult = await placeOrderShipping(orderCreateResult.order.id);
+    logMessage('info', 'Order shipping created:', placeOrderShippingResult);
 
     return NextResponse.json(
       { status: true, error: orderCreateResult?.message || 'Order created Successfuly' },
