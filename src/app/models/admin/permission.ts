@@ -131,20 +131,22 @@ export const getAllAdminPermissions = async () => {
 
 export const getAdminPermissionsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
     try {
-        let whereCondition = {};
+        let whereCondition: Record<string, unknown> = {
+            panel: "admin",
+        };
 
         switch (status) {
             case "active":
-                whereCondition = { status: true, deletedAt: null };
+                whereCondition = { ...whereCondition, status: true, deletedAt: null };
                 break;
             case "inactive":
-                whereCondition = { status: false, deletedAt: null };
+                whereCondition = { ...whereCondition, status: false, deletedAt: null };
                 break;
             case "deleted":
-                whereCondition = { deletedAt: { not: null } };
+                whereCondition = { ...whereCondition, deletedAt: { not: null } };
                 break;
             case "notDeleted":
-                whereCondition = { deletedAt: null };
+                whereCondition = { ...whereCondition, deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");
