@@ -273,8 +273,14 @@ export async function POST(req: NextRequest) {
     const placeOrderShippingResult = await placeOrderShipping(orderCreateResult.order.id);
     logMessage('info', 'Order shipping created:', placeOrderShippingResult);
 
+    if (!placeOrderShippingResult || !placeOrderShippingResult.status) {
+      logMessage('error', 'Order shipping creation failed:', placeOrderShippingResult?.message || 'Unknown error');
+      return NextResponse.json({ status: false, error: placeOrderShippingResult?.message || 'Order shipping creation failed' }, { status: 500 });
+    }
+    logMessage('info', 'Order created successfully:', orderCreateResult.order);
+
     return NextResponse.json(
-      { status: true, error: orderCreateResult?.message || 'Order created Successfuly' },
+      { status: true, error: placeOrderShippingResult?.message || 'Order created Successfuly' },
       { status: 200 }
     );
   } catch (err: unknown) {

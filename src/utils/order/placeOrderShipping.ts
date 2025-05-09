@@ -147,11 +147,11 @@ export async function placeOrderShipping(orderId: number): Promise<Result> {
         const result = await response.json();
 
         logMessage("debug", "shipping result:", result);
-        if (result?.status === "success") {
+        if (result?.status) {
             console.log("Order created successfully:", result);
             return {
                 status: true,
-                message: `Shipping payload generated successfully for order ID ${orderId}.`,
+                message: result?.message,
                 data: JSON.stringify(shippingPayload),
             };
         } else {
