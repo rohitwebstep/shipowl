@@ -37,6 +37,7 @@ CREATE TABLE `admin` (
     `referralCode` VARCHAR(191) NULL,
     `password` VARCHAR(191) NOT NULL,
     `role` VARCHAR(191) NOT NULL DEFAULT 'admin',
+    `type` VARCHAR(191) NOT NULL DEFAULT 'main',
     `status` VARCHAR(191) NOT NULL DEFAULT 'active',
     `dateOfBirth` DATETIME(3) NULL,
     `phoneNumber` VARCHAR(191) NULL,
@@ -60,6 +61,44 @@ CREATE TABLE `admin` (
     `deletedByRole` VARCHAR(191) NULL,
 
     UNIQUE INDEX `admin_username_key`(`username`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `permission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `panel` VARCHAR(191) NOT NULL,
+    `module` VARCHAR(191) NOT NULL,
+    `action` VARCHAR(191) NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `adminHasPermission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminId` INTEGER NOT NULL,
+    `permissionId` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -629,6 +668,12 @@ ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentStateId_fkey` FOREIGN KEY (`p
 
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCountryId_fkey` FOREIGN KEY (`permanentCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `adminHasPermission` ADD CONSTRAINT `adminHasPermission_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `adminHasPermission` ADD CONSTRAINT `adminHasPermission_permissionId_fkey` FOREIGN KEY (`permissionId`) REFERENCES `permission`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

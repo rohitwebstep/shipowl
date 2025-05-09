@@ -11,12 +11,12 @@
       "page": "/",
       "matchers": [
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/admin/list{(\\\\.json)}?",
-          "originalSource": "/api/admin/list"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/admin{(\\\\.json)}?",
+          "originalSource": "/api/admin"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/admin/auth/verify{(\\\\.json)}?",
-          "originalSource": "/api/admin/auth/verify"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/admin/:path*{(\\\\.json)}?",
+          "originalSource": "/api/admin/:path*"
         },
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/list{(\\\\.json)}?",
@@ -144,9 +144,9 @@
       "env": {
         "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "HsF2tAf05pWk1bxl5T9IgRqhsPBy74XiKGYydWQADBU=",
-        "__NEXT_PREVIEW_MODE_ID": "45e93196aa9c14662bd04f9e8e1242fd",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "ef0a9387aeec7805635f587e498abb59dd534ffd6134d04ba32490979f023c7f",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "fc8eab9e854b17aecd3ae2b4c298527a0e50698011ea607aea5f16d451a26428"
+        "__NEXT_PREVIEW_MODE_ID": "50cc9beac18f7a67c1a21b97cfc37ea9",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "bd11811d5123c6c08caab31dc2ab015bbd8de9933415c7b827deb8a1d73d0fa7",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "e1f7da0110cda70a7f7a658263a487610f6386ac185d9849f8e2d8e5a066ba9a"
       }
     }
   },

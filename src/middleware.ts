@@ -36,10 +36,17 @@ export function middleware(req: NextRequest) {
     const routeProtections: RouteProtection[] = [
         {
             skip: true,
-            routes: ["/api/dropshipper/auth/login"],
+            routes: [
+                "/api/admin/auth/login",
+                "/api/dropshipper/auth/login",
+                "/api/supplier/auth/login",
+            ],
         },
         {
-            routes: ["/api/admin/list", "/api/admin/auth/verify"],
+            routes: [
+                "/api/admin",
+                "/api/admin/:path*",
+            ],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
         },
@@ -125,8 +132,8 @@ export function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        "/api/admin/list",
-        "/api/admin/auth/verify",
+        "/api/admin",
+        "/api/admin/:path*",
         "/api/dropshipper/list",
         "/api/dropshipper/auth/verify",
         "/api/supplier/list",

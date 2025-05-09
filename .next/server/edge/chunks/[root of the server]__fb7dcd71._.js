@@ -122,13 +122,15 @@ function middleware(req) {
         {
             skip: true,
             routes: [
-                "/api/dropshipper/auth/login"
+                "/api/admin/auth/login",
+                "/api/dropshipper/auth/login",
+                "/api/supplier/auth/login"
             ]
         },
         {
             routes: [
-                "/api/admin/list",
-                "/api/admin/auth/verify"
+                "/api/admin",
+                "/api/admin/:path*"
             ],
             role: "admin",
             applicableRoles: [
@@ -217,8 +219,8 @@ function middleware(req) {
 }
 const config = {
     matcher: [
-        "/api/admin/list",
-        "/api/admin/auth/verify",
+        "/api/admin",
+        "/api/admin/:path*",
         "/api/dropshipper/list",
         "/api/dropshipper/auth/verify",
         "/api/supplier/list",

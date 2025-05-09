@@ -55,6 +55,7 @@ model admin {
   referralCode        String?
   password            String
   role                String    @default("admin")
+  type                String    @default("main")
   status              String    @default("active")
   dateOfBirth         DateTime?
   phoneNumber         String?
@@ -83,8 +84,48 @@ model admin {
   permanentCountry country? @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
   staff         adminStaff[]
-  companyDetail companyDetail? @relation
+  companyDetail companyDetail?       @relation
   bankAccounts  bankAccount[]
+  permissions   adminHasPermission[]
+}
+
+model permission {
+  id     Int     @id @default(autoincrement())
+  panel  String
+  module String
+  action String
+  status Boolean @default(true)
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  adminPermissions adminHasPermission[]
+}
+
+model adminHasPermission {
+  id           Int @id @default(autoincrement())
+  adminId      Int
+  permissionId Int
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  admin      admin      @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  permission permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 }
 
 model companyDetail {

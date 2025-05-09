@@ -1,11 +1,11 @@
 [
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/admin\\/list(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/admin/list"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/admin(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/admin"
   },
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/admin\\/auth\\/verify(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/admin/auth/verify"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/admin(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/admin/:path*"
   },
   {
     "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper\\/list(\\\\.json)?[\\/#\\?]?$",
