@@ -7,7 +7,7 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkPaymentIdAvailability, createOrder, getOrdersByStatus } from '@/app/models/order/order';
 import { createOrderItem } from '@/app/models/order/item';
 import { getProductById, getProductVariantById } from '@/app/models/product/product';
-import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
+// import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 
 interface Item {
   productId: number;
