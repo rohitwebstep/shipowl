@@ -85,6 +85,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ status: false, message: 'CourierCompany not found' }, { status: 404 });
     }
 
+    const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
 
     const formData = await req.formData();
@@ -125,6 +126,8 @@ export async function PUT(req: NextRequest) {
       website: extractString('website') || '',
       email: extractString('email') || '',
       phoneNumber: extractString('phoneNumber') || '',
+      flatShippingRate: extractNumber('flatShippingRate') || null,
+      rtoCharges: extractNumber('rtoCharges') || null,
       status,
       updatedBy: adminId,
       updatedByRole: adminRole || '',

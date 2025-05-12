@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: validation.error, message: validation.message }, { status: 400 });
     }
 
+    const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
@@ -55,6 +56,8 @@ export async function POST(req: NextRequest) {
       website: extractString('website') || '',
       email: extractString('email') || '',
       phoneNumber: extractString('phoneNumber') || '',
+      flatShippingRate: extractNumber('flatShippingRate') || null,
+      rtoCharges: extractNumber('rtoCharges') || null,
       status,
       createdBy: adminId,
       createdByRole: adminRole || '',

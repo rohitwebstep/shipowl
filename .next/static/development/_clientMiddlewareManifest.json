@@ -116,12 +116,12 @@
     "originalSource": "/api/high-rto/:path*"
   },
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/Good-pincode(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/Good-pincode"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/good-pincode(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/good-pincode"
   },
   {
-    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/Good-pincode(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
-    "originalSource": "/api/Good-pincode/:path*"
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/good-pincode(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+    "originalSource": "/api/good-pincode/:path*"
   },
   {
     "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/bad-pincode(\\\\.json)?[\\/#\\?]?$",

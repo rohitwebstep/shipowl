@@ -7,6 +7,8 @@ interface CourierCompany {
     website: string;
     email: string;
     phoneNumber: string;
+    flatShippingRate: number | null,
+    rtoCharges: number | null,
     status: boolean;
     createdBy?: number;
     createdAt?: Date;
