@@ -3,7 +3,7 @@ import * as XLSX from 'xlsx';
 
 export interface ParsedFileData {
     headers: string[];
-    rows: Record<string, any>[];
+    rows: Record<string, string | number | boolean | null>[];  // Instead of 'any', use specific types
     originalName: string;
     extension: string;
     size: number;
@@ -20,7 +20,7 @@ interface ParseOptions {
  */
 async function parseCSVFile(file: File): Promise<ParsedFileData> {
     const text = await file.text();
-    const result = parse<Record<string, any>>(text, {
+    const result = parse<{ [key: string]: string | number | boolean | null }>(text, {
         header: true,
         skipEmptyLines: true,
     });
@@ -43,7 +43,7 @@ async function parseExcelFile(file: File): Promise<ParsedFileData> {
     const workbook = XLSX.read(arrayBuffer, { type: 'array' });
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
-    const rows = XLSX.utils.sheet_to_json<Record<string, any>>(sheet, { defval: '' });
+    const rows = XLSX.utils.sheet_to_json<Record<string, string | number | boolean | null>>(sheet, { defval: '' });
     const headers = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0] as string[];
 
     return {
