@@ -6,6 +6,10 @@ import { validateFormData } from '@/utils/validateFormData';
 import { parseFilesFromFormData } from '@/utils/parseCsvExcel';
 import { importBadPincodes } from '@/app/models/badPincode';
 
+type PincodeRow = {
+  pincode: string;
+};
+
 export async function POST(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for brand creation');
@@ -57,7 +61,7 @@ export async function POST(req: NextRequest) {
       const needHeader = ['pincode'];
       const headersToKeep = new Set(needHeader.map(h => h.toLowerCase()));
 
-      const filtered = (parsed.rows as Record<string, any>[]).map(row => {
+      const filtered = (parsed.rows as PincodeRow[]).map(row => {
         const newRow: Record<string, any> = {};
         for (const [key, value] of Object.entries(row)) {
           if (headersToKeep.has(key.toLowerCase())) {
