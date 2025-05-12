@@ -10106,7 +10106,18 @@ const getOrdersByStatus = async (status)=>{
                 id: "desc"
             },
             include: {
-                items: true
+                items: {
+                    include: {
+                        product: true
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
             }
         });
         return {

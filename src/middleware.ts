@@ -39,8 +39,7 @@ export function middleware(req: NextRequest) {
             routes: [
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
-                "/api/supplier/auth/login",
-                "/api/order"
+                "/api/supplier/auth/login"
             ],
         },
         {

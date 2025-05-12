@@ -124,8 +124,7 @@ function middleware(req) {
             routes: [
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
-                "/api/supplier/auth/login",
-                "/api/order"
+                "/api/supplier/auth/login"
             ]
         },
         {

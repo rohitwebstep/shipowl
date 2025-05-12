@@ -1,5 +1,7 @@
 {
-  "/api/good-pincode/route": "app/api/good-pincode/route.js",
+  "/api/brand/route": "app/api/brand/route.js",
+  "/api/category/route": "app/api/category/route.js",
   "/api/order/route": "app/api/order/route.js",
-  "/api/payment/route": "app/api/payment/route.js"
+  "/api/payment/route": "app/api/payment/route.js",
+  "/api/product/route": "app/api/product/route.js"
 }

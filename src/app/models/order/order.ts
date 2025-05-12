@@ -313,7 +313,20 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
         const orders = await prisma.order.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
-            include: { items: true }
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true,
+            },
         });
 
         return { status: true, orders: serializeBigInt(orders) };
