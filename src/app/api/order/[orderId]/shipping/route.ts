@@ -6,7 +6,6 @@ import { getOrderById } from '@/app/models/order/order';
 import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';
 import { getBadPincodeByPincode } from '@/app/models/badPincode';
-import { getGoodPincodeByPincode } from '@/app/models/goodPincode';
 
 export async function POST(req: NextRequest) {
   try {
