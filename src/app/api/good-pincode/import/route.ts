@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
       const headersToKeep = new Set(needHeader.map(h => h.toLowerCase()));
 
       const filtered = (parsed.rows as PincodeRow[]).map(row => {
-        const newRow: Record<string, any> = {};
+        const newRow: Record<string, string | undefined> = {};
         for (const [key, value] of Object.entries(row)) {
           if (headersToKeep.has(key.toLowerCase())) {
             newRow[key] = value;
