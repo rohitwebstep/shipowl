@@ -131,6 +131,57 @@ export const getHighRtoById = async (id: number) => {
     }
 };
 
+export const getHighRtoByPincode = async (pincode: string) => {
+    try {
+        const highRto = await prisma.highRto.findFirst({
+            where: { pincode },
+        });
+
+        if (highRto) {
+            return {
+                status: false,
+                message: `Pincode "${pincode}" is already in use.`,
+            };
+        }
+
+        return {
+            status: true,
+            message: `Pincode "${pincode}" is available.`,
+        };
+    } catch (error) {
+        console.error("❌ getHighRtoByPincode Error:", error);
+        return { status: false, message: "Error fetching highRto" };
+    }
+};
+
+export const getHighRtoByPincodeForUpdate = async (pincode: string, highRtoId: number) => {
+    try {
+        const highRto = await prisma.highRto.findFirst({
+            where: {
+                pincode,
+                NOT: {
+                    id: highRtoId,  // Exclude the current product being updated
+                }
+            },
+        });
+
+        if (highRto) {
+            return {
+                status: false,
+                message: `Pincode "${pincode}" is already linked to highRtoId ${highRtoId}.`,
+            };
+        }
+
+        return {
+            status: true,
+            message: `Pincode "${pincode}" is available for updating to highRtoId ${highRtoId}.`,
+        };
+    } catch (error) {
+        console.error("❌ getHighRtoByPincode Error:", error);
+        return { status: false, message: "Error fetching highRto" };
+    }
+};
+
 // 🟣 GET ALL
 export const getAllHighRtos = async () => {
     try {

@@ -270,6 +270,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: orderItemCreateResult?.message || 'Order creation failed' }, { status: 500 });
     }
 
+    /*
     const placeOrderShippingResult = await placeOrderShipping(orderCreateResult.order.id);
     logMessage('info', 'Order shipping created:', placeOrderShippingResult);
 
@@ -281,6 +282,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { status: true, error: placeOrderShippingResult?.message || 'Order created Successfuly' },
+      { status: 200 }
+    );
+    */
+
+    return NextResponse.json(
+      { status: true, error: orderItemCreateResult?.message || 'Order created Successfuly' },
       { status: 200 }
     );
   } catch (err: unknown) {

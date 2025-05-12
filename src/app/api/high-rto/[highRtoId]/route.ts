@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
-import { getHighRtoById, updateHighRto, softDeleteHighRto, restoreHighRto } from '@/app/models/highRto';
+import { getHighRtoById, updateHighRto, softDeleteHighRto, restoreHighRto, getHighRtoByPincodeForUpdate } from '@/app/models/highRto';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 
 export async function GET(req: NextRequest) {
@@ -134,8 +134,20 @@ export async function PUT(req: NextRequest) {
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
+    const pincode = extractString('pincode');
+
+    const getHighRtoByPincodeForUpdateResult = await getHighRtoByPincodeForUpdate(pincode || '', highRtoIdNum);
+
+    if (!getHighRtoByPincodeForUpdateResult?.status) {
+      logMessage('warn', 'GoodPincode already exists:', getHighRtoByPincodeForUpdateResult?.message || 'Unknown error');
+      return NextResponse.json(
+        { status: false, error: getHighRtoByPincodeForUpdateResult?.message || 'GoodPincode already exists' },
+        { status: 400 }
+      );
+    }
+
     const highRtoPayload = {
-      pincode: extractString('pincode') || '',
+      pincode: pincode || '',
       city: {
         connect: {
           id: cityIdNum,

@@ -579,6 +579,36 @@ exports.Prisma.HighRtoScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.BadPincodeScalarFieldEnum = {
+  id: 'id',
+  pincode: 'pincode',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.GoodPincodeScalarFieldEnum = {
+  id: 'id',
+  pincode: 'pincode',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   transactionId: 'transactionId',
@@ -937,6 +967,20 @@ exports.Prisma.highRtoOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.badPincodeOrderByRelevanceFieldEnum = {
+  pincode: 'pincode',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.goodPincodeOrderByRelevanceFieldEnum = {
+  pincode: 'pincode',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
   transactionId: 'transactionId',
   cycle: 'cycle',
@@ -988,6 +1032,8 @@ exports.Prisma.ModelName = {
   productVariant: 'productVariant',
   courierCompany: 'courierCompany',
   highRto: 'highRto',
+  badPincode: 'badPincode',
+  goodPincode: 'goodPincode',
   Payment: 'Payment',
   Order: 'Order',
   OrderItem: 'OrderItem'

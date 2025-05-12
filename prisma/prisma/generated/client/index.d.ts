@@ -114,6 +114,16 @@ export type courierCompany = $Result.DefaultSelection<Prisma.$courierCompanyPayl
  */
 export type highRto = $Result.DefaultSelection<Prisma.$highRtoPayload>
 /**
+ * Model badPincode
+ * 
+ */
+export type badPincode = $Result.DefaultSelection<Prisma.$badPincodePayload>
+/**
+ * Model goodPincode
+ * 
+ */
+export type goodPincode = $Result.DefaultSelection<Prisma.$goodPincodePayload>
+/**
  * Model Payment
  * 
  */
@@ -453,6 +463,26 @@ export class PrismaClient<
     * ```
     */
   get highRto(): Prisma.highRtoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.badPincode`: Exposes CRUD operations for the **badPincode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BadPincodes
+    * const badPincodes = await prisma.badPincode.findMany()
+    * ```
+    */
+  get badPincode(): Prisma.badPincodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.goodPincode`: Exposes CRUD operations for the **goodPincode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GoodPincodes
+    * const goodPincodes = await prisma.goodPincode.findMany()
+    * ```
+    */
+  get goodPincode(): Prisma.goodPincodeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.payment`: Exposes CRUD operations for the **Payment** model.
@@ -943,6 +973,8 @@ export namespace Prisma {
     productVariant: 'productVariant',
     courierCompany: 'courierCompany',
     highRto: 'highRto',
+    badPincode: 'badPincode',
+    goodPincode: 'goodPincode',
     Payment: 'Payment',
     Order: 'Order',
     OrderItem: 'OrderItem'
@@ -964,7 +996,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "permission" | "adminHasPermission" | "companyDetail" | "bankAccount" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany" | "highRto" | "payment" | "order" | "orderItem"
+      modelProps: "emailConfig" | "admin" | "permission" | "adminHasPermission" | "companyDetail" | "bankAccount" | "adminStaff" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "payment" | "order" | "orderItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2288,6 +2320,138 @@ export namespace Prisma {
           }
         }
       }
+      badPincode: {
+        payload: Prisma.$badPincodePayload<ExtArgs>
+        fields: Prisma.badPincodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.badPincodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.badPincodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          findFirst: {
+            args: Prisma.badPincodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.badPincodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          findMany: {
+            args: Prisma.badPincodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>[]
+          }
+          create: {
+            args: Prisma.badPincodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          createMany: {
+            args: Prisma.badPincodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.badPincodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          update: {
+            args: Prisma.badPincodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          deleteMany: {
+            args: Prisma.badPincodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.badPincodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.badPincodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badPincodePayload>
+          }
+          aggregate: {
+            args: Prisma.BadPincodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBadPincode>
+          }
+          groupBy: {
+            args: Prisma.badPincodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BadPincodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.badPincodeCountArgs<ExtArgs>
+            result: $Utils.Optional<BadPincodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      goodPincode: {
+        payload: Prisma.$goodPincodePayload<ExtArgs>
+        fields: Prisma.goodPincodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.goodPincodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.goodPincodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          findFirst: {
+            args: Prisma.goodPincodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.goodPincodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          findMany: {
+            args: Prisma.goodPincodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>[]
+          }
+          create: {
+            args: Prisma.goodPincodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          createMany: {
+            args: Prisma.goodPincodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.goodPincodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          update: {
+            args: Prisma.goodPincodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          deleteMany: {
+            args: Prisma.goodPincodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.goodPincodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.goodPincodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$goodPincodePayload>
+          }
+          aggregate: {
+            args: Prisma.GoodPincodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGoodPincode>
+          }
+          groupBy: {
+            args: Prisma.goodPincodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GoodPincodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.goodPincodeCountArgs<ExtArgs>
+            result: $Utils.Optional<GoodPincodeCountAggregateOutputType> | number
+          }
+        }
+      }
       Payment: {
         payload: Prisma.$PaymentPayload<ExtArgs>
         fields: Prisma.PaymentFieldRefs
@@ -2590,6 +2754,8 @@ export namespace Prisma {
     productVariant?: productVariantOmit
     courierCompany?: courierCompanyOmit
     highRto?: highRtoOmit
+    badPincode?: badPincodeOmit
+    goodPincode?: goodPincodeOmit
     payment?: PaymentOmit
     order?: OrderOmit
     orderItem?: OrderItemOmit
@@ -27042,6 +27208,2016 @@ export namespace Prisma {
 
 
   /**
+   * Model badPincode
+   */
+
+  export type AggregateBadPincode = {
+    _count: BadPincodeCountAggregateOutputType | null
+    _avg: BadPincodeAvgAggregateOutputType | null
+    _sum: BadPincodeSumAggregateOutputType | null
+    _min: BadPincodeMinAggregateOutputType | null
+    _max: BadPincodeMaxAggregateOutputType | null
+  }
+
+  export type BadPincodeAvgAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BadPincodeSumAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BadPincodeMinAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BadPincodeMaxAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BadPincodeCountAggregateOutputType = {
+    id: number
+    pincode: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type BadPincodeAvgAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BadPincodeSumAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BadPincodeMinAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BadPincodeMaxAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BadPincodeCountAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type BadPincodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which badPincode to aggregate.
+     */
+    where?: badPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badPincodes to fetch.
+     */
+    orderBy?: badPincodeOrderByWithRelationInput | badPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: badPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned badPincodes
+    **/
+    _count?: true | BadPincodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BadPincodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BadPincodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BadPincodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BadPincodeMaxAggregateInputType
+  }
+
+  export type GetBadPincodeAggregateType<T extends BadPincodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateBadPincode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBadPincode[P]>
+      : GetScalarType<T[P], AggregateBadPincode[P]>
+  }
+
+
+
+
+  export type badPincodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: badPincodeWhereInput
+    orderBy?: badPincodeOrderByWithAggregationInput | badPincodeOrderByWithAggregationInput[]
+    by: BadPincodeScalarFieldEnum[] | BadPincodeScalarFieldEnum
+    having?: badPincodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BadPincodeCountAggregateInputType | true
+    _avg?: BadPincodeAvgAggregateInputType
+    _sum?: BadPincodeSumAggregateInputType
+    _min?: BadPincodeMinAggregateInputType
+    _max?: BadPincodeMaxAggregateInputType
+  }
+
+  export type BadPincodeGroupByOutputType = {
+    id: number
+    pincode: string
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: BadPincodeCountAggregateOutputType | null
+    _avg: BadPincodeAvgAggregateOutputType | null
+    _sum: BadPincodeSumAggregateOutputType | null
+    _min: BadPincodeMinAggregateOutputType | null
+    _max: BadPincodeMaxAggregateOutputType | null
+  }
+
+  type GetBadPincodeGroupByPayload<T extends badPincodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BadPincodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BadPincodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BadPincodeGroupByOutputType[P]>
+            : GetScalarType<T[P], BadPincodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type badPincodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pincode?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }, ExtArgs["result"]["badPincode"]>
+
+
+
+  export type badPincodeSelectScalar = {
+    id?: boolean
+    pincode?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type badPincodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pincode" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["badPincode"]>
+
+  export type $badPincodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "badPincode"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      pincode: string
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["badPincode"]>
+    composites: {}
+  }
+
+  type badPincodeGetPayload<S extends boolean | null | undefined | badPincodeDefaultArgs> = $Result.GetResult<Prisma.$badPincodePayload, S>
+
+  type badPincodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<badPincodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BadPincodeCountAggregateInputType | true
+    }
+
+  export interface badPincodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['badPincode'], meta: { name: 'badPincode' } }
+    /**
+     * Find zero or one BadPincode that matches the filter.
+     * @param {badPincodeFindUniqueArgs} args - Arguments to find a BadPincode
+     * @example
+     * // Get one BadPincode
+     * const badPincode = await prisma.badPincode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends badPincodeFindUniqueArgs>(args: SelectSubset<T, badPincodeFindUniqueArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BadPincode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {badPincodeFindUniqueOrThrowArgs} args - Arguments to find a BadPincode
+     * @example
+     * // Get one BadPincode
+     * const badPincode = await prisma.badPincode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends badPincodeFindUniqueOrThrowArgs>(args: SelectSubset<T, badPincodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BadPincode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeFindFirstArgs} args - Arguments to find a BadPincode
+     * @example
+     * // Get one BadPincode
+     * const badPincode = await prisma.badPincode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends badPincodeFindFirstArgs>(args?: SelectSubset<T, badPincodeFindFirstArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BadPincode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeFindFirstOrThrowArgs} args - Arguments to find a BadPincode
+     * @example
+     * // Get one BadPincode
+     * const badPincode = await prisma.badPincode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends badPincodeFindFirstOrThrowArgs>(args?: SelectSubset<T, badPincodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BadPincodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BadPincodes
+     * const badPincodes = await prisma.badPincode.findMany()
+     * 
+     * // Get first 10 BadPincodes
+     * const badPincodes = await prisma.badPincode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const badPincodeWithIdOnly = await prisma.badPincode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends badPincodeFindManyArgs>(args?: SelectSubset<T, badPincodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BadPincode.
+     * @param {badPincodeCreateArgs} args - Arguments to create a BadPincode.
+     * @example
+     * // Create one BadPincode
+     * const BadPincode = await prisma.badPincode.create({
+     *   data: {
+     *     // ... data to create a BadPincode
+     *   }
+     * })
+     * 
+     */
+    create<T extends badPincodeCreateArgs>(args: SelectSubset<T, badPincodeCreateArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BadPincodes.
+     * @param {badPincodeCreateManyArgs} args - Arguments to create many BadPincodes.
+     * @example
+     * // Create many BadPincodes
+     * const badPincode = await prisma.badPincode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends badPincodeCreateManyArgs>(args?: SelectSubset<T, badPincodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BadPincode.
+     * @param {badPincodeDeleteArgs} args - Arguments to delete one BadPincode.
+     * @example
+     * // Delete one BadPincode
+     * const BadPincode = await prisma.badPincode.delete({
+     *   where: {
+     *     // ... filter to delete one BadPincode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends badPincodeDeleteArgs>(args: SelectSubset<T, badPincodeDeleteArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BadPincode.
+     * @param {badPincodeUpdateArgs} args - Arguments to update one BadPincode.
+     * @example
+     * // Update one BadPincode
+     * const badPincode = await prisma.badPincode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends badPincodeUpdateArgs>(args: SelectSubset<T, badPincodeUpdateArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BadPincodes.
+     * @param {badPincodeDeleteManyArgs} args - Arguments to filter BadPincodes to delete.
+     * @example
+     * // Delete a few BadPincodes
+     * const { count } = await prisma.badPincode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends badPincodeDeleteManyArgs>(args?: SelectSubset<T, badPincodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BadPincodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BadPincodes
+     * const badPincode = await prisma.badPincode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends badPincodeUpdateManyArgs>(args: SelectSubset<T, badPincodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BadPincode.
+     * @param {badPincodeUpsertArgs} args - Arguments to update or create a BadPincode.
+     * @example
+     * // Update or create a BadPincode
+     * const badPincode = await prisma.badPincode.upsert({
+     *   create: {
+     *     // ... data to create a BadPincode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BadPincode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends badPincodeUpsertArgs>(args: SelectSubset<T, badPincodeUpsertArgs<ExtArgs>>): Prisma__badPincodeClient<$Result.GetResult<Prisma.$badPincodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BadPincodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeCountArgs} args - Arguments to filter BadPincodes to count.
+     * @example
+     * // Count the number of BadPincodes
+     * const count = await prisma.badPincode.count({
+     *   where: {
+     *     // ... the filter for the BadPincodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends badPincodeCountArgs>(
+      args?: Subset<T, badPincodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BadPincodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BadPincode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadPincodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BadPincodeAggregateArgs>(args: Subset<T, BadPincodeAggregateArgs>): Prisma.PrismaPromise<GetBadPincodeAggregateType<T>>
+
+    /**
+     * Group by BadPincode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badPincodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends badPincodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: badPincodeGroupByArgs['orderBy'] }
+        : { orderBy?: badPincodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, badPincodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBadPincodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the badPincode model
+   */
+  readonly fields: badPincodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for badPincode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__badPincodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the badPincode model
+   */
+  interface badPincodeFieldRefs {
+    readonly id: FieldRef<"badPincode", 'Int'>
+    readonly pincode: FieldRef<"badPincode", 'String'>
+    readonly status: FieldRef<"badPincode", 'Boolean'>
+    readonly createdAt: FieldRef<"badPincode", 'DateTime'>
+    readonly createdBy: FieldRef<"badPincode", 'Int'>
+    readonly createdByRole: FieldRef<"badPincode", 'String'>
+    readonly updatedAt: FieldRef<"badPincode", 'DateTime'>
+    readonly updatedBy: FieldRef<"badPincode", 'Int'>
+    readonly updatedByRole: FieldRef<"badPincode", 'String'>
+    readonly deletedAt: FieldRef<"badPincode", 'DateTime'>
+    readonly deletedBy: FieldRef<"badPincode", 'Int'>
+    readonly deletedByRole: FieldRef<"badPincode", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * badPincode findUnique
+   */
+  export type badPincodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which badPincode to fetch.
+     */
+    where: badPincodeWhereUniqueInput
+  }
+
+  /**
+   * badPincode findUniqueOrThrow
+   */
+  export type badPincodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which badPincode to fetch.
+     */
+    where: badPincodeWhereUniqueInput
+  }
+
+  /**
+   * badPincode findFirst
+   */
+  export type badPincodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which badPincode to fetch.
+     */
+    where?: badPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badPincodes to fetch.
+     */
+    orderBy?: badPincodeOrderByWithRelationInput | badPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for badPincodes.
+     */
+    cursor?: badPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of badPincodes.
+     */
+    distinct?: BadPincodeScalarFieldEnum | BadPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * badPincode findFirstOrThrow
+   */
+  export type badPincodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which badPincode to fetch.
+     */
+    where?: badPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badPincodes to fetch.
+     */
+    orderBy?: badPincodeOrderByWithRelationInput | badPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for badPincodes.
+     */
+    cursor?: badPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of badPincodes.
+     */
+    distinct?: BadPincodeScalarFieldEnum | BadPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * badPincode findMany
+   */
+  export type badPincodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which badPincodes to fetch.
+     */
+    where?: badPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badPincodes to fetch.
+     */
+    orderBy?: badPincodeOrderByWithRelationInput | badPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing badPincodes.
+     */
+    cursor?: badPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badPincodes.
+     */
+    skip?: number
+    distinct?: BadPincodeScalarFieldEnum | BadPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * badPincode create
+   */
+  export type badPincodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * The data needed to create a badPincode.
+     */
+    data: XOR<badPincodeCreateInput, badPincodeUncheckedCreateInput>
+  }
+
+  /**
+   * badPincode createMany
+   */
+  export type badPincodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many badPincodes.
+     */
+    data: badPincodeCreateManyInput | badPincodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * badPincode update
+   */
+  export type badPincodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * The data needed to update a badPincode.
+     */
+    data: XOR<badPincodeUpdateInput, badPincodeUncheckedUpdateInput>
+    /**
+     * Choose, which badPincode to update.
+     */
+    where: badPincodeWhereUniqueInput
+  }
+
+  /**
+   * badPincode updateMany
+   */
+  export type badPincodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update badPincodes.
+     */
+    data: XOR<badPincodeUpdateManyMutationInput, badPincodeUncheckedUpdateManyInput>
+    /**
+     * Filter which badPincodes to update
+     */
+    where?: badPincodeWhereInput
+    /**
+     * Limit how many badPincodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * badPincode upsert
+   */
+  export type badPincodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * The filter to search for the badPincode to update in case it exists.
+     */
+    where: badPincodeWhereUniqueInput
+    /**
+     * In case the badPincode found by the `where` argument doesn't exist, create a new badPincode with this data.
+     */
+    create: XOR<badPincodeCreateInput, badPincodeUncheckedCreateInput>
+    /**
+     * In case the badPincode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<badPincodeUpdateInput, badPincodeUncheckedUpdateInput>
+  }
+
+  /**
+   * badPincode delete
+   */
+  export type badPincodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+    /**
+     * Filter which badPincode to delete.
+     */
+    where: badPincodeWhereUniqueInput
+  }
+
+  /**
+   * badPincode deleteMany
+   */
+  export type badPincodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which badPincodes to delete
+     */
+    where?: badPincodeWhereInput
+    /**
+     * Limit how many badPincodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * badPincode without action
+   */
+  export type badPincodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badPincode
+     */
+    select?: badPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badPincode
+     */
+    omit?: badPincodeOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model goodPincode
+   */
+
+  export type AggregateGoodPincode = {
+    _count: GoodPincodeCountAggregateOutputType | null
+    _avg: GoodPincodeAvgAggregateOutputType | null
+    _sum: GoodPincodeSumAggregateOutputType | null
+    _min: GoodPincodeMinAggregateOutputType | null
+    _max: GoodPincodeMaxAggregateOutputType | null
+  }
+
+  export type GoodPincodeAvgAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type GoodPincodeSumAggregateOutputType = {
+    id: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type GoodPincodeMinAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type GoodPincodeMaxAggregateOutputType = {
+    id: number | null
+    pincode: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type GoodPincodeCountAggregateOutputType = {
+    id: number
+    pincode: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type GoodPincodeAvgAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type GoodPincodeSumAggregateInputType = {
+    id?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type GoodPincodeMinAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type GoodPincodeMaxAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type GoodPincodeCountAggregateInputType = {
+    id?: true
+    pincode?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type GoodPincodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which goodPincode to aggregate.
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of goodPincodes to fetch.
+     */
+    orderBy?: goodPincodeOrderByWithRelationInput | goodPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: goodPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` goodPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` goodPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned goodPincodes
+    **/
+    _count?: true | GoodPincodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GoodPincodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GoodPincodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GoodPincodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GoodPincodeMaxAggregateInputType
+  }
+
+  export type GetGoodPincodeAggregateType<T extends GoodPincodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateGoodPincode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGoodPincode[P]>
+      : GetScalarType<T[P], AggregateGoodPincode[P]>
+  }
+
+
+
+
+  export type goodPincodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: goodPincodeWhereInput
+    orderBy?: goodPincodeOrderByWithAggregationInput | goodPincodeOrderByWithAggregationInput[]
+    by: GoodPincodeScalarFieldEnum[] | GoodPincodeScalarFieldEnum
+    having?: goodPincodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GoodPincodeCountAggregateInputType | true
+    _avg?: GoodPincodeAvgAggregateInputType
+    _sum?: GoodPincodeSumAggregateInputType
+    _min?: GoodPincodeMinAggregateInputType
+    _max?: GoodPincodeMaxAggregateInputType
+  }
+
+  export type GoodPincodeGroupByOutputType = {
+    id: number
+    pincode: string
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: GoodPincodeCountAggregateOutputType | null
+    _avg: GoodPincodeAvgAggregateOutputType | null
+    _sum: GoodPincodeSumAggregateOutputType | null
+    _min: GoodPincodeMinAggregateOutputType | null
+    _max: GoodPincodeMaxAggregateOutputType | null
+  }
+
+  type GetGoodPincodeGroupByPayload<T extends goodPincodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GoodPincodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GoodPincodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GoodPincodeGroupByOutputType[P]>
+            : GetScalarType<T[P], GoodPincodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type goodPincodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pincode?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }, ExtArgs["result"]["goodPincode"]>
+
+
+
+  export type goodPincodeSelectScalar = {
+    id?: boolean
+    pincode?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type goodPincodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pincode" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["goodPincode"]>
+
+  export type $goodPincodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "goodPincode"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      pincode: string
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["goodPincode"]>
+    composites: {}
+  }
+
+  type goodPincodeGetPayload<S extends boolean | null | undefined | goodPincodeDefaultArgs> = $Result.GetResult<Prisma.$goodPincodePayload, S>
+
+  type goodPincodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<goodPincodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GoodPincodeCountAggregateInputType | true
+    }
+
+  export interface goodPincodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['goodPincode'], meta: { name: 'goodPincode' } }
+    /**
+     * Find zero or one GoodPincode that matches the filter.
+     * @param {goodPincodeFindUniqueArgs} args - Arguments to find a GoodPincode
+     * @example
+     * // Get one GoodPincode
+     * const goodPincode = await prisma.goodPincode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends goodPincodeFindUniqueArgs>(args: SelectSubset<T, goodPincodeFindUniqueArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GoodPincode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {goodPincodeFindUniqueOrThrowArgs} args - Arguments to find a GoodPincode
+     * @example
+     * // Get one GoodPincode
+     * const goodPincode = await prisma.goodPincode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends goodPincodeFindUniqueOrThrowArgs>(args: SelectSubset<T, goodPincodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoodPincode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeFindFirstArgs} args - Arguments to find a GoodPincode
+     * @example
+     * // Get one GoodPincode
+     * const goodPincode = await prisma.goodPincode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends goodPincodeFindFirstArgs>(args?: SelectSubset<T, goodPincodeFindFirstArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoodPincode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeFindFirstOrThrowArgs} args - Arguments to find a GoodPincode
+     * @example
+     * // Get one GoodPincode
+     * const goodPincode = await prisma.goodPincode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends goodPincodeFindFirstOrThrowArgs>(args?: SelectSubset<T, goodPincodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GoodPincodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GoodPincodes
+     * const goodPincodes = await prisma.goodPincode.findMany()
+     * 
+     * // Get first 10 GoodPincodes
+     * const goodPincodes = await prisma.goodPincode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const goodPincodeWithIdOnly = await prisma.goodPincode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends goodPincodeFindManyArgs>(args?: SelectSubset<T, goodPincodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GoodPincode.
+     * @param {goodPincodeCreateArgs} args - Arguments to create a GoodPincode.
+     * @example
+     * // Create one GoodPincode
+     * const GoodPincode = await prisma.goodPincode.create({
+     *   data: {
+     *     // ... data to create a GoodPincode
+     *   }
+     * })
+     * 
+     */
+    create<T extends goodPincodeCreateArgs>(args: SelectSubset<T, goodPincodeCreateArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GoodPincodes.
+     * @param {goodPincodeCreateManyArgs} args - Arguments to create many GoodPincodes.
+     * @example
+     * // Create many GoodPincodes
+     * const goodPincode = await prisma.goodPincode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends goodPincodeCreateManyArgs>(args?: SelectSubset<T, goodPincodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a GoodPincode.
+     * @param {goodPincodeDeleteArgs} args - Arguments to delete one GoodPincode.
+     * @example
+     * // Delete one GoodPincode
+     * const GoodPincode = await prisma.goodPincode.delete({
+     *   where: {
+     *     // ... filter to delete one GoodPincode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends goodPincodeDeleteArgs>(args: SelectSubset<T, goodPincodeDeleteArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GoodPincode.
+     * @param {goodPincodeUpdateArgs} args - Arguments to update one GoodPincode.
+     * @example
+     * // Update one GoodPincode
+     * const goodPincode = await prisma.goodPincode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends goodPincodeUpdateArgs>(args: SelectSubset<T, goodPincodeUpdateArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GoodPincodes.
+     * @param {goodPincodeDeleteManyArgs} args - Arguments to filter GoodPincodes to delete.
+     * @example
+     * // Delete a few GoodPincodes
+     * const { count } = await prisma.goodPincode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends goodPincodeDeleteManyArgs>(args?: SelectSubset<T, goodPincodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoodPincodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GoodPincodes
+     * const goodPincode = await prisma.goodPincode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends goodPincodeUpdateManyArgs>(args: SelectSubset<T, goodPincodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one GoodPincode.
+     * @param {goodPincodeUpsertArgs} args - Arguments to update or create a GoodPincode.
+     * @example
+     * // Update or create a GoodPincode
+     * const goodPincode = await prisma.goodPincode.upsert({
+     *   create: {
+     *     // ... data to create a GoodPincode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GoodPincode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends goodPincodeUpsertArgs>(args: SelectSubset<T, goodPincodeUpsertArgs<ExtArgs>>): Prisma__goodPincodeClient<$Result.GetResult<Prisma.$goodPincodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GoodPincodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeCountArgs} args - Arguments to filter GoodPincodes to count.
+     * @example
+     * // Count the number of GoodPincodes
+     * const count = await prisma.goodPincode.count({
+     *   where: {
+     *     // ... the filter for the GoodPincodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends goodPincodeCountArgs>(
+      args?: Subset<T, goodPincodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GoodPincodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GoodPincode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodPincodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GoodPincodeAggregateArgs>(args: Subset<T, GoodPincodeAggregateArgs>): Prisma.PrismaPromise<GetGoodPincodeAggregateType<T>>
+
+    /**
+     * Group by GoodPincode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {goodPincodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends goodPincodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: goodPincodeGroupByArgs['orderBy'] }
+        : { orderBy?: goodPincodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, goodPincodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoodPincodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the goodPincode model
+   */
+  readonly fields: goodPincodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for goodPincode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__goodPincodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the goodPincode model
+   */
+  interface goodPincodeFieldRefs {
+    readonly id: FieldRef<"goodPincode", 'Int'>
+    readonly pincode: FieldRef<"goodPincode", 'String'>
+    readonly status: FieldRef<"goodPincode", 'Boolean'>
+    readonly createdAt: FieldRef<"goodPincode", 'DateTime'>
+    readonly createdBy: FieldRef<"goodPincode", 'Int'>
+    readonly createdByRole: FieldRef<"goodPincode", 'String'>
+    readonly updatedAt: FieldRef<"goodPincode", 'DateTime'>
+    readonly updatedBy: FieldRef<"goodPincode", 'Int'>
+    readonly updatedByRole: FieldRef<"goodPincode", 'String'>
+    readonly deletedAt: FieldRef<"goodPincode", 'DateTime'>
+    readonly deletedBy: FieldRef<"goodPincode", 'Int'>
+    readonly deletedByRole: FieldRef<"goodPincode", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * goodPincode findUnique
+   */
+  export type goodPincodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which goodPincode to fetch.
+     */
+    where: goodPincodeWhereUniqueInput
+  }
+
+  /**
+   * goodPincode findUniqueOrThrow
+   */
+  export type goodPincodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which goodPincode to fetch.
+     */
+    where: goodPincodeWhereUniqueInput
+  }
+
+  /**
+   * goodPincode findFirst
+   */
+  export type goodPincodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which goodPincode to fetch.
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of goodPincodes to fetch.
+     */
+    orderBy?: goodPincodeOrderByWithRelationInput | goodPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for goodPincodes.
+     */
+    cursor?: goodPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` goodPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` goodPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of goodPincodes.
+     */
+    distinct?: GoodPincodeScalarFieldEnum | GoodPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * goodPincode findFirstOrThrow
+   */
+  export type goodPincodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which goodPincode to fetch.
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of goodPincodes to fetch.
+     */
+    orderBy?: goodPincodeOrderByWithRelationInput | goodPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for goodPincodes.
+     */
+    cursor?: goodPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` goodPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` goodPincodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of goodPincodes.
+     */
+    distinct?: GoodPincodeScalarFieldEnum | GoodPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * goodPincode findMany
+   */
+  export type goodPincodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter, which goodPincodes to fetch.
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of goodPincodes to fetch.
+     */
+    orderBy?: goodPincodeOrderByWithRelationInput | goodPincodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing goodPincodes.
+     */
+    cursor?: goodPincodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` goodPincodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` goodPincodes.
+     */
+    skip?: number
+    distinct?: GoodPincodeScalarFieldEnum | GoodPincodeScalarFieldEnum[]
+  }
+
+  /**
+   * goodPincode create
+   */
+  export type goodPincodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * The data needed to create a goodPincode.
+     */
+    data: XOR<goodPincodeCreateInput, goodPincodeUncheckedCreateInput>
+  }
+
+  /**
+   * goodPincode createMany
+   */
+  export type goodPincodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many goodPincodes.
+     */
+    data: goodPincodeCreateManyInput | goodPincodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * goodPincode update
+   */
+  export type goodPincodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * The data needed to update a goodPincode.
+     */
+    data: XOR<goodPincodeUpdateInput, goodPincodeUncheckedUpdateInput>
+    /**
+     * Choose, which goodPincode to update.
+     */
+    where: goodPincodeWhereUniqueInput
+  }
+
+  /**
+   * goodPincode updateMany
+   */
+  export type goodPincodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update goodPincodes.
+     */
+    data: XOR<goodPincodeUpdateManyMutationInput, goodPincodeUncheckedUpdateManyInput>
+    /**
+     * Filter which goodPincodes to update
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * Limit how many goodPincodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * goodPincode upsert
+   */
+  export type goodPincodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * The filter to search for the goodPincode to update in case it exists.
+     */
+    where: goodPincodeWhereUniqueInput
+    /**
+     * In case the goodPincode found by the `where` argument doesn't exist, create a new goodPincode with this data.
+     */
+    create: XOR<goodPincodeCreateInput, goodPincodeUncheckedCreateInput>
+    /**
+     * In case the goodPincode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<goodPincodeUpdateInput, goodPincodeUncheckedUpdateInput>
+  }
+
+  /**
+   * goodPincode delete
+   */
+  export type goodPincodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+    /**
+     * Filter which goodPincode to delete.
+     */
+    where: goodPincodeWhereUniqueInput
+  }
+
+  /**
+   * goodPincode deleteMany
+   */
+  export type goodPincodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which goodPincodes to delete
+     */
+    where?: goodPincodeWhereInput
+    /**
+     * Limit how many goodPincodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * goodPincode without action
+   */
+  export type goodPincodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the goodPincode
+     */
+    select?: goodPincodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the goodPincode
+     */
+    omit?: goodPincodeOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Payment
    */
 
@@ -31280,6 +33456,42 @@ export namespace Prisma {
   export type HighRtoScalarFieldEnum = (typeof HighRtoScalarFieldEnum)[keyof typeof HighRtoScalarFieldEnum]
 
 
+  export const BadPincodeScalarFieldEnum: {
+    id: 'id',
+    pincode: 'pincode',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type BadPincodeScalarFieldEnum = (typeof BadPincodeScalarFieldEnum)[keyof typeof BadPincodeScalarFieldEnum]
+
+
+  export const GoodPincodeScalarFieldEnum: {
+    id: 'id',
+    pincode: 'pincode',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type GoodPincodeScalarFieldEnum = (typeof GoodPincodeScalarFieldEnum)[keyof typeof GoodPincodeScalarFieldEnum]
+
+
   export const PaymentScalarFieldEnum: {
     id: 'id',
     transactionId: 'transactionId',
@@ -31720,6 +33932,26 @@ export namespace Prisma {
   };
 
   export type highRtoOrderByRelevanceFieldEnum = (typeof highRtoOrderByRelevanceFieldEnum)[keyof typeof highRtoOrderByRelevanceFieldEnum]
+
+
+  export const badPincodeOrderByRelevanceFieldEnum: {
+    pincode: 'pincode',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type badPincodeOrderByRelevanceFieldEnum = (typeof badPincodeOrderByRelevanceFieldEnum)[keyof typeof badPincodeOrderByRelevanceFieldEnum]
+
+
+  export const goodPincodeOrderByRelevanceFieldEnum: {
+    pincode: 'pincode',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type goodPincodeOrderByRelevanceFieldEnum = (typeof goodPincodeOrderByRelevanceFieldEnum)[keyof typeof goodPincodeOrderByRelevanceFieldEnum]
 
 
   export const PaymentOrderByRelevanceFieldEnum: {
@@ -34576,6 +36808,186 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"highRto"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"highRto"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"highRto"> | string | null
+  }
+
+  export type badPincodeWhereInput = {
+    AND?: badPincodeWhereInput | badPincodeWhereInput[]
+    OR?: badPincodeWhereInput[]
+    NOT?: badPincodeWhereInput | badPincodeWhereInput[]
+    id?: IntFilter<"badPincode"> | number
+    pincode?: StringFilter<"badPincode"> | string
+    status?: BoolFilter<"badPincode"> | boolean
+    createdAt?: DateTimeFilter<"badPincode"> | Date | string
+    createdBy?: IntNullableFilter<"badPincode"> | number | null
+    createdByRole?: StringNullableFilter<"badPincode"> | string | null
+    updatedAt?: DateTimeFilter<"badPincode"> | Date | string
+    updatedBy?: IntNullableFilter<"badPincode"> | number | null
+    updatedByRole?: StringNullableFilter<"badPincode"> | string | null
+    deletedAt?: DateTimeNullableFilter<"badPincode"> | Date | string | null
+    deletedBy?: IntNullableFilter<"badPincode"> | number | null
+    deletedByRole?: StringNullableFilter<"badPincode"> | string | null
+  }
+
+  export type badPincodeOrderByWithRelationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _relevance?: badPincodeOrderByRelevanceInput
+  }
+
+  export type badPincodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: badPincodeWhereInput | badPincodeWhereInput[]
+    OR?: badPincodeWhereInput[]
+    NOT?: badPincodeWhereInput | badPincodeWhereInput[]
+    pincode?: StringFilter<"badPincode"> | string
+    status?: BoolFilter<"badPincode"> | boolean
+    createdAt?: DateTimeFilter<"badPincode"> | Date | string
+    createdBy?: IntNullableFilter<"badPincode"> | number | null
+    createdByRole?: StringNullableFilter<"badPincode"> | string | null
+    updatedAt?: DateTimeFilter<"badPincode"> | Date | string
+    updatedBy?: IntNullableFilter<"badPincode"> | number | null
+    updatedByRole?: StringNullableFilter<"badPincode"> | string | null
+    deletedAt?: DateTimeNullableFilter<"badPincode"> | Date | string | null
+    deletedBy?: IntNullableFilter<"badPincode"> | number | null
+    deletedByRole?: StringNullableFilter<"badPincode"> | string | null
+  }, "id">
+
+  export type badPincodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: badPincodeCountOrderByAggregateInput
+    _avg?: badPincodeAvgOrderByAggregateInput
+    _max?: badPincodeMaxOrderByAggregateInput
+    _min?: badPincodeMinOrderByAggregateInput
+    _sum?: badPincodeSumOrderByAggregateInput
+  }
+
+  export type badPincodeScalarWhereWithAggregatesInput = {
+    AND?: badPincodeScalarWhereWithAggregatesInput | badPincodeScalarWhereWithAggregatesInput[]
+    OR?: badPincodeScalarWhereWithAggregatesInput[]
+    NOT?: badPincodeScalarWhereWithAggregatesInput | badPincodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"badPincode"> | number
+    pincode?: StringWithAggregatesFilter<"badPincode"> | string
+    status?: BoolWithAggregatesFilter<"badPincode"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"badPincode"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"badPincode"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"badPincode"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"badPincode"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"badPincode"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"badPincode"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"badPincode"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"badPincode"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"badPincode"> | string | null
+  }
+
+  export type goodPincodeWhereInput = {
+    AND?: goodPincodeWhereInput | goodPincodeWhereInput[]
+    OR?: goodPincodeWhereInput[]
+    NOT?: goodPincodeWhereInput | goodPincodeWhereInput[]
+    id?: IntFilter<"goodPincode"> | number
+    pincode?: StringFilter<"goodPincode"> | string
+    status?: BoolFilter<"goodPincode"> | boolean
+    createdAt?: DateTimeFilter<"goodPincode"> | Date | string
+    createdBy?: IntNullableFilter<"goodPincode"> | number | null
+    createdByRole?: StringNullableFilter<"goodPincode"> | string | null
+    updatedAt?: DateTimeFilter<"goodPincode"> | Date | string
+    updatedBy?: IntNullableFilter<"goodPincode"> | number | null
+    updatedByRole?: StringNullableFilter<"goodPincode"> | string | null
+    deletedAt?: DateTimeNullableFilter<"goodPincode"> | Date | string | null
+    deletedBy?: IntNullableFilter<"goodPincode"> | number | null
+    deletedByRole?: StringNullableFilter<"goodPincode"> | string | null
+  }
+
+  export type goodPincodeOrderByWithRelationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _relevance?: goodPincodeOrderByRelevanceInput
+  }
+
+  export type goodPincodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: goodPincodeWhereInput | goodPincodeWhereInput[]
+    OR?: goodPincodeWhereInput[]
+    NOT?: goodPincodeWhereInput | goodPincodeWhereInput[]
+    pincode?: StringFilter<"goodPincode"> | string
+    status?: BoolFilter<"goodPincode"> | boolean
+    createdAt?: DateTimeFilter<"goodPincode"> | Date | string
+    createdBy?: IntNullableFilter<"goodPincode"> | number | null
+    createdByRole?: StringNullableFilter<"goodPincode"> | string | null
+    updatedAt?: DateTimeFilter<"goodPincode"> | Date | string
+    updatedBy?: IntNullableFilter<"goodPincode"> | number | null
+    updatedByRole?: StringNullableFilter<"goodPincode"> | string | null
+    deletedAt?: DateTimeNullableFilter<"goodPincode"> | Date | string | null
+    deletedBy?: IntNullableFilter<"goodPincode"> | number | null
+    deletedByRole?: StringNullableFilter<"goodPincode"> | string | null
+  }, "id">
+
+  export type goodPincodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: goodPincodeCountOrderByAggregateInput
+    _avg?: goodPincodeAvgOrderByAggregateInput
+    _max?: goodPincodeMaxOrderByAggregateInput
+    _min?: goodPincodeMinOrderByAggregateInput
+    _sum?: goodPincodeSumOrderByAggregateInput
+  }
+
+  export type goodPincodeScalarWhereWithAggregatesInput = {
+    AND?: goodPincodeScalarWhereWithAggregatesInput | goodPincodeScalarWhereWithAggregatesInput[]
+    OR?: goodPincodeScalarWhereWithAggregatesInput[]
+    NOT?: goodPincodeScalarWhereWithAggregatesInput | goodPincodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"goodPincode"> | number
+    pincode?: StringWithAggregatesFilter<"goodPincode"> | string
+    status?: BoolWithAggregatesFilter<"goodPincode"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"goodPincode"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"goodPincode"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"goodPincode"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"goodPincode"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"goodPincode"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"goodPincode"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"goodPincode"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"goodPincode"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"goodPincode"> | string | null
   }
 
   export type PaymentWhereInput = {
@@ -38254,6 +40666,210 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type badPincodeCreateInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type badPincodeUncheckedCreateInput = {
+    id?: number
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type badPincodeUpdateInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type badPincodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type badPincodeCreateManyInput = {
+    id?: number
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type badPincodeUpdateManyMutationInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type badPincodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type goodPincodeCreateInput = {
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type goodPincodeUncheckedCreateInput = {
+    id?: number
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type goodPincodeUpdateInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type goodPincodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type goodPincodeCreateManyInput = {
+    id?: number
+    pincode: string
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type goodPincodeUpdateManyMutationInput = {
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type goodPincodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    pincode?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type PaymentCreateInput = {
     transactionId: string
     cycle?: string | null
@@ -41052,6 +43668,136 @@ export namespace Prisma {
     countryId?: SortOrder
     stateId?: SortOrder
     cityId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type badPincodeOrderByRelevanceInput = {
+    fields: badPincodeOrderByRelevanceFieldEnum | badPincodeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type badPincodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type badPincodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type badPincodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type badPincodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type badPincodeSumOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type goodPincodeOrderByRelevanceInput = {
+    fields: goodPincodeOrderByRelevanceFieldEnum | goodPincodeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type goodPincodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type goodPincodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type goodPincodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type goodPincodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    pincode?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type goodPincodeSumOrderByAggregateInput = {
+    id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder

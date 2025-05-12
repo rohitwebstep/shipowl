@@ -575,6 +575,48 @@ CREATE TABLE `highRto` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `badPincode` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `pincode` VARCHAR(191) NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT false,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `badPincode_createdBy_idx`(`createdBy`),
+    INDEX `badPincode_updatedBy_idx`(`updatedBy`),
+    INDEX `badPincode_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `goodPincode` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `pincode` VARCHAR(191) NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT false,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `goodPincode_createdBy_idx`(`createdBy`),
+    INDEX `goodPincode_updatedBy_idx`(`updatedBy`),
+    INDEX `goodPincode_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Payment` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `transactionId` VARCHAR(191) NOT NULL,

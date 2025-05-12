@@ -3,12 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
-import { createHighRto, getHighRtosByStatus, getHighRtoByPincode } from '@/app/models/highRto';
-import { isLocationHierarchyCorrect } from '@/app/models/location/city';
+import { createGoodPincode, getGoodPincodesByStatus, getGoodPincodeByPincode } from '@/app/models/goodPincode';
 
 export async function POST(req: NextRequest) {
   try {
-    logMessage('debug', 'POST request received for highRto creation');
+    logMessage('debug', 'POST request received for goodPincode creation');
 
     const adminIdHeader = req.headers.get('x-admin-id');
     const adminRole = req.headers.get('x-admin-role');
@@ -39,83 +38,44 @@ export async function POST(req: NextRequest) {
 
     const extractString = (key: string) => (formData.get(key) as string) || null;
 
-    const countryId = Number(formData.get('country'));
-    const stateId = Number(formData.get('state'));
-    const cityId = Number(formData.get('city'));
-
-    const countryIdNum = Number(countryId);
-    const stateIdNum = Number(stateId);
-    const cityIdNum = Number(cityId);
-
-    logMessage('debug', 'Extracted fields:', {
-      cityIdNum,
-      stateIdNum,
-      countryIdNum
-    });
-
-    const isLocationHierarchyCorrectResult = await isLocationHierarchyCorrect(cityIdNum, stateIdNum, countryIdNum);
-    logMessage('debug', 'Location hierarchy check result:', isLocationHierarchyCorrectResult);
-    if (!isLocationHierarchyCorrectResult.status) {
-      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectResult.message}`);
-      return NextResponse.json(
-        { status: false, message: isLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect' },
-        { status: 400 }
-      );
-    }
-
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
     const pincode = extractString('pincode');
 
-    const getHighRtoByPincodeResult = await getHighRtoByPincode(pincode || '');
+    const getGoodPincodeByPincodeResult = await getGoodPincodeByPincode(pincode || '');
 
-    if (!getHighRtoByPincodeResult?.status) {
-      logMessage('warn', 'HighRto already exists:', getHighRtoByPincodeResult?.message || 'Unknown error');
+    if (!getGoodPincodeByPincodeResult?.status) {
+      logMessage('warn', 'GoodPincode already exists:', getGoodPincodeByPincodeResult?.message || 'Unknown error');
       return NextResponse.json(
-        { status: false, error: getHighRtoByPincodeResult?.message || 'HighRto already exists' },
+        { status: false, error: getGoodPincodeByPincodeResult?.message || 'GoodPincode already exists' },
         { status: 400 }
       );
     }
 
-    const highRtoPayload = {
+    const goodPincodePayload = {
       pincode: pincode || '',
-      city: {
-        connect: {
-          id: cityIdNum,
-        },
-      },
-      state: {
-        connect: {
-          id: stateIdNum,
-        },
-      },
-      country: {
-        connect: {
-          id: countryIdNum,
-        },
-      },
       status,
       createdBy: adminId,
       createdByRole: adminRole || '',
     };
 
-    logMessage('info', 'HighRto payload created:', highRtoPayload);
+    logMessage('info', 'GoodPincode payload created:', goodPincodePayload);
 
-    const highRtoCreateResult = await createHighRto(adminId, String(adminRole), highRtoPayload);
+    const goodPincodeCreateResult = await createGoodPincode(adminId, String(adminRole), goodPincodePayload);
 
-    if (highRtoCreateResult?.status) {
-      return NextResponse.json({ status: true, highRto: highRtoCreateResult.highRto }, { status: 200 });
+    if (goodPincodeCreateResult?.status) {
+      return NextResponse.json({ status: true, goodPincode: goodPincodeCreateResult.goodPincode }, { status: 200 });
     }
 
-    logMessage('error', 'HighRto creation failed:', highRtoCreateResult?.message || 'Unknown error');
+    logMessage('error', 'GoodPincode creation failed:', goodPincodeCreateResult?.message || 'Unknown error');
     return NextResponse.json(
-      { status: false, error: highRtoCreateResult?.message || 'HighRto creation failed' },
+      { status: false, error: goodPincodeCreateResult?.message || 'GoodPincode creation failed' },
       { status: 500 }
     );
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'HighRto Creation Error:', error);
+    logMessage('error', 'GoodPincode Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
@@ -150,26 +110,26 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch highRtos based on filters
-    const highRtosResult = await getHighRtosByStatus('notDeleted');
+    // Fetch goodPincodes based on filters
+    const goodPincodesResult = await getGoodPincodesByStatus('notDeleted');
 
-    // Handle response based on highRtos result
-    if (highRtosResult?.status) {
+    // Handle response based on goodPincodes result
+    if (goodPincodesResult?.status) {
       return NextResponse.json(
-        { status: true, highRtos: highRtosResult.highRtos },
+        { status: true, goodPincodes: goodPincodesResult.goodPincodes },
         { status: 200 }
       );
     }
 
     return NextResponse.json(
-      { status: false, error: 'No highRtos found' },
+      { status: false, error: 'No goodPincodes found' },
       { status: 404 }
     );
   } catch (error) {
     // Log and handle any unexpected errors
-    logMessage('error', 'Error while fetching highRtos', { error });
+    logMessage('error', 'Error while fetching goodPincodes', { error });
     return NextResponse.json(
-      { status: false, error: 'Failed to fetch highRtos due to an internal error' },
+      { status: false, error: 'Failed to fetch goodPincodes due to an internal error' },
       { status: 500 }
     );
   }
