@@ -40,6 +40,7 @@ export function middleware(req: NextRequest) {
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
                 "/api/supplier/auth/login",
+                "/api/order"
             ],
         },
         {
@@ -93,6 +94,10 @@ export function middleware(req: NextRequest) {
                 "/api/courier-company/:path*",
                 "/api/high-rto",
                 "/api/high-rto/:path*",
+                "/api/Good-pincode",
+                "/api/Good-pincode/:path*",
+                "/api/bad-pincode",
+                "/api/bad-pincode/:path*",
                 "/api/payment",
                 "/api/payment/:path*",
                 "/api/order",
@@ -161,8 +166,13 @@ export const config = {
         "/api/courier-company/:path*",
         "/api/high-rto",
         "/api/high-rto/:path*",
+        "/api/Good-pincode",
+        "/api/Good-pincode/:path*",
+        "/api/bad-pincode",
+        "/api/bad-pincode/:path*",
         "/api/payment",
         "/api/payment/:path*",
         "/api/order",
+        "/api/order/:path*",
     ],
 };

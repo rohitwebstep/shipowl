@@ -127,6 +127,22 @@
           "originalSource": "/api/high-rto/:path*"
         },
         {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/Good-pincode(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/Good-pincode"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/Good-pincode(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/Good-pincode/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/bad-pincode(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/bad-pincode"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/bad-pincode(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/bad-pincode/:path*"
+        },
+        {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/payment(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/payment"
         },
@@ -137,6 +153,10 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/order(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/order"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/order(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/order/:path*"
         }
       ],
       "wasm": [],

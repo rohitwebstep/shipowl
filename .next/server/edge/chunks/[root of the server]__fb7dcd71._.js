@@ -124,7 +124,8 @@ function middleware(req) {
             routes: [
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
-                "/api/supplier/auth/login"
+                "/api/supplier/auth/login",
+                "/api/order"
             ]
         },
         {
@@ -187,6 +188,10 @@ function middleware(req) {
                 "/api/courier-company/:path*",
                 "/api/high-rto",
                 "/api/high-rto/:path*",
+                "/api/Good-pincode",
+                "/api/Good-pincode/:path*",
+                "/api/bad-pincode",
+                "/api/bad-pincode/:path*",
                 "/api/payment",
                 "/api/payment/:path*",
                 "/api/order"
@@ -248,9 +253,14 @@ const config = {
         "/api/courier-company/:path*",
         "/api/high-rto",
         "/api/high-rto/:path*",
+        "/api/Good-pincode",
+        "/api/Good-pincode/:path*",
+        "/api/bad-pincode",
+        "/api/bad-pincode/:path*",
         "/api/payment",
         "/api/payment/:path*",
-        "/api/order"
+        "/api/order",
+        "/api/order/:path*"
     ]
 };
 }}),

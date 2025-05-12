@@ -127,6 +127,22 @@
           "originalSource": "/api/high-rto/:path*"
         },
         {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/Good-pincode{(\\\\.json)}?",
+          "originalSource": "/api/Good-pincode"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/Good-pincode/:path*{(\\\\.json)}?",
+          "originalSource": "/api/Good-pincode/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/bad-pincode{(\\\\.json)}?",
+          "originalSource": "/api/bad-pincode"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/bad-pincode/:path*{(\\\\.json)}?",
+          "originalSource": "/api/bad-pincode/:path*"
+        },
+        {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/payment{(\\\\.json)}?",
           "originalSource": "/api/payment"
         },
@@ -137,6 +153,10 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/order{(\\\\.json)}?",
           "originalSource": "/api/order"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/order/:path*{(\\\\.json)}?",
+          "originalSource": "/api/order/:path*"
         }
       ],
       "wasm": [],
