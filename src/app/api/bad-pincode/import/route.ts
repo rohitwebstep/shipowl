@@ -1,19 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { parseFilesFromFormData } from '@/utils/parseCsvExcel';
 import { importBadPincodes } from '@/app/models/badPincode';
-
-type UploadedFileInfo = {
-  originalName: string;
-  savedAs: string;
-  size: number;
-  type: string;
-  url: string;
-};
 
 export async function POST(req: NextRequest) {
   try {
