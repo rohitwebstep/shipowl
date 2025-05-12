@@ -61,6 +61,59 @@ export async function createGoodPincode(adminId: number, adminRole: string, good
         return { status: false, message: "Internal Server Error" };
     }
 }
+// Bulk import for good pincodes
+export async function importGoodPincodes(adminId: number, adminRole: string, goodPincodes: { pincode: string }[]) {
+    try {
+        // Filter out any goodPincode entries where pincode is empty or null
+        const validGoodPincodes = goodPincodes.filter(goodPincode => goodPincode.pincode && goodPincode.pincode.trim() !== '');
+
+        if (validGoodPincodes.length === 0) {
+            return { status: false, message: 'No valid pincodes to import.' };
+        }
+
+        // Check which pincodes already exist in the database
+        const existingPincodes = await prisma.goodPincode.findMany({
+            where: {
+                pincode: {
+                    in: validGoodPincodes.map(goodPincode => goodPincode.pincode),
+                },
+            },
+            select: {
+                pincode: true,
+            },
+        });
+
+        // Extract existing pincodes from the result
+        const existingPincodeSet = new Set(existingPincodes.map(p => p.pincode));
+
+        // Filter out the pincodes that already exist
+        const newGoodPincodes = validGoodPincodes.filter(goodPincode => !existingPincodeSet.has(goodPincode.pincode));
+
+        if (newGoodPincodes.length === 0) {
+            return { status: false, message: 'All pincodes already exist in the database.' };
+        }
+
+        // Prepare data for bulk creation
+        const goodPincodeData = newGoodPincodes.map(goodPincode => ({
+            pincode: goodPincode.pincode,
+            status: true, // Default status, you can modify this as needed
+            createdAt: new Date(),
+            createdBy: adminId,
+            createdByRole: adminRole,
+        }));
+
+        // Bulk insert into the database
+        const result = await prisma.goodPincode.createMany({
+            data: goodPincodeData,
+        });
+
+        // Return the result
+        return { status: true, message: `${result.count} pincodes imported successfully.` };
+    } catch (error) {
+        console.error('Error importing goodPincodes:', error);
+        return { status: false, message: 'Internal Server Error' };
+    }
+}
 
 // 🟡 UPDATE
 export const updateGoodPincode = async (

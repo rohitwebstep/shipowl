@@ -1,6 +1,7 @@
 interface ValidationOptions {
     requiredFields?: string[];
     patternValidations?: Record<string, 'string' | 'number' | 'boolean'>;
+    fileExtensionValidations?: Record<string, string[]>;
 }
 
 interface ValidationResult {
@@ -19,7 +20,11 @@ function toReadableFieldName(field: string): string {
 
 export function validateFormData(
     formData: FormData,
-    { requiredFields = [], patternValidations = {} }: ValidationOptions
+    {
+        requiredFields = [],
+        patternValidations = {},
+        fileExtensionValidations = {}
+    }: ValidationOptions
 ): ValidationResult {
     const error: Record<string, string> = {};
 
@@ -45,6 +50,20 @@ export function validateFormData(
             if (isInvalidNumber || isInvalidBoolean) {
                 error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
             }
+        }
+    }
+
+    // File extension validations
+    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations) as [string, string[]][]) {
+        const file = formData.get(field);
+        if (file instanceof File) {
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop() || '';
+            if (!allowedExtensions.map(ext => ext.toLowerCase()).includes(fileExtension)) {
+                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
+            }
+        } else if (file !== null) {
+            error[field] = `${toReadableFieldName(field)} must be a valid file`;
         }
     }
 
