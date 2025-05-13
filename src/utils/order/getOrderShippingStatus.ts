@@ -11,14 +11,17 @@ interface ShippingApiResult {
 }
 
 function isShippingApiResult(obj: unknown): obj is ShippingApiResult {
-    return (
+    if (
         typeof obj === 'object' &&
         obj !== null &&
-        'data' in obj &&
-        typeof (obj as any).data === 'object' &&
-        (obj as any).data !== null &&
-        'awb_number' in (obj as any).data
-    );
+        'data' in obj
+    ) {
+        const data = (obj as { data?: unknown }).data;
+        if (typeof data === 'object' && data !== null && 'awb_number' in data) {
+            return typeof (data as { awb_number?: unknown }).awb_number === 'string';
+        }
+    }
+    return false;
 }
 
 export async function getOrderShippingStatus(orderId: number) {
