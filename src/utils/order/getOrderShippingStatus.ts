@@ -2,6 +2,25 @@ import { getOrderById } from "@/app/models/order/order";
 import { logMessage } from "../commonUtils";
 import { NextResponse } from "next/server";
 
+interface ShippingApiResult {
+    data: {
+        awb_number?: string;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+}
+
+function isShippingApiResult(obj: unknown): obj is ShippingApiResult {
+    return (
+        typeof obj === 'object' &&
+        obj !== null &&
+        'data' in obj &&
+        typeof (obj as any).data === 'object' &&
+        (obj as any).data !== null &&
+        'awb_number' in (obj as any).data
+    );
+}
+
 export async function getOrderShippingStatus(orderId: number) {
     if (isNaN(orderId)) {
         logMessage('warn', 'Invalid order ID', { orderId });
@@ -24,15 +43,8 @@ export async function getOrderShippingStatus(orderId: number) {
     let orderAWBNumber = '';
 
     try {
-        if (
-            typeof order.shippingApiResult === 'object' &&
-            order.shippingApiResult !== null &&
-            'data' in order.shippingApiResult &&
-            typeof order.shippingApiResult.data === 'object' &&
-            order.shippingApiResult.data !== null &&
-            'awb_number' in order.shippingApiResult.data
-        ) {
-            orderAWBNumber = (order.shippingApiResult.data as any).awb_number || '';
+        if (isShippingApiResult(order.shippingApiResult)) {
+            orderAWBNumber = order.shippingApiResult.data.awb_number || '';
         }
     } catch (e) {
         logMessage('error', 'Error while extracting awb_number', { error: e });

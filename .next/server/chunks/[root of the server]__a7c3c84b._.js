@@ -9821,6 +9821,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$serv
 ;
 ;
 ;
+function isShippingApiResult(obj) {
+    return typeof obj === 'object' && obj !== null && 'data' in obj && typeof obj.data === 'object' && obj.data !== null && 'awb_number' in obj.data;
+}
 async function getOrderShippingStatus(orderId) {
     if (isNaN(orderId)) {
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid order ID', {
@@ -9858,7 +9861,7 @@ async function getOrderShippingStatus(orderId) {
     }
     let orderAWBNumber = '';
     try {
-        if (typeof order.shippingApiResult === 'object' && order.shippingApiResult !== null && 'data' in order.shippingApiResult && typeof order.shippingApiResult.data === 'object' && order.shippingApiResult.data !== null && 'awb_number' in order.shippingApiResult.data) {
+        if (isShippingApiResult(order.shippingApiResult)) {
             orderAWBNumber = order.shippingApiResult.data.awb_number || '';
         }
     } catch (e) {
@@ -9891,6 +9894,7 @@ async function getOrderShippingStatus(orderId) {
             headers: myHeaders,
             redirect: "follow"
         };
+        // 13630911339376
         const response = await fetch(`https://app.parcelx.in/api/v1/track_order?awb=13630911339376`, requestOptions);
         const trackingData = await response.json();
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Fetched tracking status from ParcelX', {
