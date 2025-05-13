@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/authUtils";
-import { getOrderById } from '@/app/models/order/order';
+import { getOrderById, updateShippingApiResultOfOrder } from '@/app/models/order/order';
 import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';
 import { getBadPincodeByPincode } from '@/app/models/badPincode';
@@ -71,6 +71,26 @@ export async function POST(req: NextRequest) {
 
     // Process shipping if no bad pincode or high RTO
     const placeOrderShippingResult = await placeOrderShipping(orderIdIdNum);
+
+    const orderPayload = {
+      updatedBy: adminId,
+      updatedByRole: adminRole || '',
+      shippingApiJson: placeOrderShippingResult.result,
+    };
+
+    logMessage('info', 'Order payload created:', orderPayload);
+
+    const updateShippingApiResultOfOrderResult = await updateShippingApiResultOfOrder(adminId, String(adminRole), orderIdIdNum, orderPayload);
+
+    if (!updateShippingApiResultOfOrderResult || !updateShippingApiResultOfOrderResult.status || !updateShippingApiResultOfOrderResult.order) {
+      logMessage('warn', 'Failed to update order shipping API result:', updateShippingApiResultOfOrderResult);
+      return NextResponse.json({
+        status: false,
+        message: 'Failed to update order shipping API result',
+        result: updateShippingApiResultOfOrderResult,
+      }, { status: 500 });
+    }
+
     return NextResponse.json({
       status: true,
       message: 'Shipping started.',

@@ -2,7 +2,6 @@ import prisma from "@/lib/prisma";
 
 interface Order {
     id?: string;
-    orderNumber: string;
     status: string;
     orderNote?: string;
     subtotal: number;
@@ -41,6 +40,7 @@ interface Order {
     payment: {
         connect: { id: number }; // or whatever your relation is
     };
+    shippingApiJson?: string;
     createdBy?: number;
     createdAt?: Date;
     createdByRole?: string;
@@ -51,6 +51,12 @@ interface Order {
     deletedAt?: Date;
     deletedByRole?: string | null;
 }
+
+type ShippingUpdatePayload = {
+    updatedBy: number;
+    updatedByRole: string;
+    shippingApiJson: string | undefined;
+};
 
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
@@ -71,6 +77,31 @@ const serializeBigInt = <T>(obj: T): T => {
     // Return the value unchanged if it's not an array, object, or BigInt
     return obj;
 };
+
+export async function generateOrderNumber(base: string = '') {
+    const cleanBase = base
+        ? base.toUpperCase().replace(/[^A-Z0-9]/g, '')
+        : Array.from({ length: 8 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 36)]).join('');
+
+    let orderNumber = cleanBase;
+    let isTaken = true;
+    let suffix = 0;
+
+    while (isTaken) {
+        const existingOrder = await prisma.order.findUnique({
+            where: { orderNumber },
+        });
+
+        if (existingOrder) {
+            suffix++;
+            orderNumber = `${cleanBase}-${suffix}`;
+        } else {
+            isTaken = false;
+        }
+    }
+
+    return orderNumber;
+}
 
 export async function checkPaymentIdAvailability(paymentId: number) {
     try {
@@ -115,8 +146,10 @@ export async function checkPaymentIdAvailability(paymentId: number) {
 export async function createOrder(order: Order) {
 
     try {
+        // Generate a unique orderNumber for the order
+        const orderNumber = await generateOrderNumber();
+
         const {
-            orderNumber,
             status,
             orderNote,
             subtotal,
@@ -190,7 +223,6 @@ export const updateOrder = async (
 ) => {
     try {
         const {
-            orderNumber,
             status,
             orderNote,
             subtotal,
@@ -222,7 +254,6 @@ export const updateOrder = async (
         const order = await prisma.order.update({
             where: { id: orderId }, // Assuming 'id' is the correct primary key field
             data: {
-                orderNumber,
                 status,
                 orderNote,
                 subtotal,
@@ -247,6 +278,36 @@ export const updateOrder = async (
                 billingState,
                 billingCity,
                 payment,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole,
+            },
+        });
+
+        return { status: true, order: serializeBigInt(order) };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return { status: false, message: "Error updating order" };
+    }
+};
+
+export const updateShippingApiResultOfOrder = async (
+    adminId: number,
+    adminRole: string,
+    orderId: number,
+    data: ShippingUpdatePayload
+) => {
+    try {
+        const {
+            updatedBy,
+            updatedByRole,
+            shippingApiJson,
+        } = data;
+
+        const order = await prisma.order.update({
+            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+            data: {
+                shippingApiResult: shippingApiJson,
                 updatedAt: new Date(),
                 updatedBy: updatedBy,
                 updatedByRole: updatedByRole,

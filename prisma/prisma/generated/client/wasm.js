@@ -654,6 +654,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   billingStateId: 'billingStateId',
   billingCityId: 'billingCityId',
   paymentId: 'paymentId',
+  shippingApiResult: 'shippingApiResult',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',

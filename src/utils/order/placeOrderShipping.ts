@@ -5,6 +5,7 @@ import { logMessage } from "../commonUtils";
 interface Result {
     status: boolean;
     message?: string;
+    result?: string;
     data?: string;
 }
 
@@ -152,11 +153,13 @@ export async function placeOrderShipping(orderId: number): Promise<Result> {
             return {
                 status: true,
                 message: result?.message,
+                result,
                 data: JSON.stringify(shippingPayload),
             };
         } else {
             return {
                 status: false,
+                result,
                 message: result.errors || result.responsemsg,
             };
         }

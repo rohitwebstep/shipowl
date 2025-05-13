@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
     logMessage('debug', 'POST request received for order creation');
 
     const requiredFields = [
-      'orderNumber',
       'status',
       'subtotal',
       'tax',
@@ -52,7 +51,6 @@ export async function POST(req: NextRequest) {
     const validation = validateFormData(formData, {
       requiredFields: requiredFields,
       patternValidations: {
-        orderNumber: 'string',
         status: 'string',
         subtotal: 'number',
         tax: 'number',
@@ -171,7 +169,6 @@ export async function POST(req: NextRequest) {
     console.log(`items - `, items);
 
     const orderPayload = {
-      orderNumber: extractString('orderNumber') || '',
       status: extractString('status') || '',
       orderNote: extractString('orderNote') || '',
       subtotal: extractNumber('subtotal') || 0,

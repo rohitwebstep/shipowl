@@ -139,13 +139,13 @@ export const getHighRtoByPincode = async (pincode: string) => {
 
         if (highRto) {
             return {
-                status: false,
+                status: true,
                 message: `Pincode "${pincode}" is already in use.`,
             };
         }
 
         return {
-            status: true,
+            status: false,
             message: `Pincode "${pincode}" is available.`,
         };
     } catch (error) {

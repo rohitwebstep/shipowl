@@ -30483,6 +30483,7 @@ export namespace Prisma {
     billingStateId: number
     billingCityId: number
     paymentId: number
+    shippingApiResult: number
     createdAt: number
     createdBy: number
     createdByRole: number
@@ -30635,6 +30636,7 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
+    shippingApiResult?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -30760,6 +30762,7 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
+    shippingApiResult: JsonValue | null
     createdAt: Date
     createdBy: number | null
     createdByRole: string | null
@@ -30817,6 +30820,7 @@ export namespace Prisma {
     billingStateId?: boolean
     billingCityId?: boolean
     paymentId?: boolean
+    shippingApiResult?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -30866,6 +30870,7 @@ export namespace Prisma {
     billingStateId?: boolean
     billingCityId?: boolean
     paymentId?: boolean
+    shippingApiResult?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -30877,7 +30882,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shippingCountry?: boolean | Order$shippingCountryArgs<ExtArgs>
     shippingState?: boolean | Order$shippingStateArgs<ExtArgs>
@@ -30929,6 +30934,7 @@ export namespace Prisma {
       billingStateId: bigint | null
       billingCityId: bigint | null
       paymentId: number | null
+      shippingApiResult: Prisma.JsonValue | null
       createdAt: Date
       createdBy: number | null
       createdByRole: string | null
@@ -31341,6 +31347,7 @@ export namespace Prisma {
     readonly billingStateId: FieldRef<"Order", 'BigInt'>
     readonly billingCityId: FieldRef<"Order", 'BigInt'>
     readonly paymentId: FieldRef<"Order", 'Int'>
+    readonly shippingApiResult: FieldRef<"Order", 'Json'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly createdBy: FieldRef<"Order", 'Int'>
     readonly createdByRole: FieldRef<"Order", 'String'>
@@ -33540,6 +33547,7 @@ export namespace Prisma {
     billingStateId: 'billingStateId',
     billingCityId: 'billingCityId',
     paymentId: 'paymentId',
+    shippingApiResult: 'shippingApiResult',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
@@ -37128,6 +37136,7 @@ export namespace Prisma {
     billingStateId?: BigIntNullableFilter<"Order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"Order"> | bigint | number | null
     paymentId?: IntNullableFilter<"Order"> | number | null
+    shippingApiResult?: JsonNullableFilter<"Order">
     createdAt?: DateTimeFilter<"Order"> | Date | string
     createdBy?: IntNullableFilter<"Order"> | number | null
     createdByRole?: StringNullableFilter<"Order"> | string | null
@@ -37174,6 +37183,7 @@ export namespace Prisma {
     billingStateId?: SortOrderInput | SortOrder
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
+    shippingApiResult?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -37224,6 +37234,7 @@ export namespace Prisma {
     billingStateId?: BigIntNullableFilter<"Order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"Order"> | bigint | number | null
     paymentId?: IntNullableFilter<"Order"> | number | null
+    shippingApiResult?: JsonNullableFilter<"Order">
     createdAt?: DateTimeFilter<"Order"> | Date | string
     createdBy?: IntNullableFilter<"Order"> | number | null
     createdByRole?: StringNullableFilter<"Order"> | string | null
@@ -37270,6 +37281,7 @@ export namespace Prisma {
     billingStateId?: SortOrderInput | SortOrder
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
+    shippingApiResult?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -37316,6 +37328,7 @@ export namespace Prisma {
     billingStateId?: BigIntNullableWithAggregatesFilter<"Order"> | bigint | number | null
     billingCityId?: BigIntNullableWithAggregatesFilter<"Order"> | bigint | number | null
     paymentId?: IntNullableWithAggregatesFilter<"Order"> | number | null
+    shippingApiResult?: JsonNullableWithAggregatesFilter<"Order">
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"Order"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"Order"> | string | null
@@ -41016,6 +41029,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -41062,6 +41076,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -41093,6 +41108,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41139,6 +41155,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41178,6 +41195,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -41208,6 +41226,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41246,6 +41265,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43928,6 +43948,7 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
+    shippingApiResult?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -48408,6 +48429,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -48452,6 +48474,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -48493,6 +48516,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -48537,6 +48561,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -48888,6 +48913,7 @@ export namespace Prisma {
     billingStateId?: BigIntNullableFilter<"Order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"Order"> | bigint | number | null
     paymentId?: IntNullableFilter<"Order"> | number | null
+    shippingApiResult?: JsonNullableFilter<"Order">
     createdAt?: DateTimeFilter<"Order"> | Date | string
     createdBy?: IntNullableFilter<"Order"> | number | null
     createdByRole?: StringNullableFilter<"Order"> | string | null
@@ -49230,6 +49256,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49274,6 +49301,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49315,6 +49343,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49359,6 +49388,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49860,6 +49890,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49904,6 +49935,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49945,6 +49977,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -49989,6 +50022,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -52132,6 +52166,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -52176,6 +52211,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53026,6 +53062,7 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53071,6 +53108,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53263,6 +53301,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53308,6 +53347,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53968,6 +54008,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -54005,6 +54046,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -54635,6 +54677,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54679,6 +54722,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54717,6 +54761,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54747,6 +54792,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54791,6 +54837,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54829,6 +54876,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54955,6 +55003,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -54992,6 +55041,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -55304,6 +55354,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55348,6 +55399,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55386,6 +55438,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55416,6 +55469,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55460,6 +55514,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55498,6 +55553,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55609,6 +55665,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -55646,6 +55703,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     paymentId?: number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -55903,6 +55961,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55947,6 +56006,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55985,6 +56045,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56015,6 +56076,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56059,6 +56121,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56097,6 +56160,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56718,6 +56782,7 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -56748,6 +56813,7 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56792,6 +56858,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56830,6 +56897,7 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null

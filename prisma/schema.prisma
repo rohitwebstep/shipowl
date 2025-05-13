@@ -716,11 +716,11 @@ model Order {
   currency        String    @default("USD")
 
   // Shipping Address
-  shippingName     String
-  shippingPhone    String
-  shippingEmail    String
-  shippingAddress  String
-  shippingZip      String
+  shippingName            String
+  shippingPhone           String
+  shippingEmail           String
+  shippingAddress         String
+  shippingZip             String
   shippingCountryId       BigInt?
   shippingStateId         BigInt?
   shippingCityId          BigInt?
@@ -730,33 +730,35 @@ model Order {
   shippingCity city? @relation("CityShippingRelation", fields: [shippingCityId], references: [id], onDelete: SetNull)
 
   // Billing Address
-  billingName     String
-  billingPhone    String
-  billingEmail    String
-  billingAddress  String
-  billingZip      String
-  billingCountryId       BigInt?
-  billingStateId         BigInt?
-  billingCityId          BigInt?
+  billingName             String
+  billingPhone            String
+  billingEmail            String
+  billingAddress          String
+  billingZip              String
+  billingCountryId        BigInt?
+  billingStateId          BigInt?
+  billingCityId           BigInt?
 
   billingCountry  country? @relation("CountryBillingRelation", fields: [billingCountryId], references: [id], onDelete: SetNull)
   billingState  state? @relation("StateBillingRelation", fields: [billingStateId], references: [id], onDelete: SetNull)
   billingCity  city? @relation("CityBillingRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
 
   // Optional: Payment Reference
-  paymentId       Int?     
-  payment         Payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
+  paymentId               Int?     
+  payment                 Payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
+
+  shippingApiResult       Json?
 
   // Meta / Audit Info
-  createdAt       DateTime  @default(now())
-  createdBy       Int?
-  createdByRole   String?
-  updatedAt       DateTime  @updatedAt
-  updatedBy       Int?
-  updatedByRole   String?
-  deletedAt       DateTime?
-  deletedBy       Int?
-  deletedByRole   String?
+  createdAt               DateTime  @default(now())
+  createdBy               Int?
+  createdByRole           String?
+  updatedAt               DateTime  @updatedAt
+  updatedBy               Int?
+  updatedByRole           String?
+  deletedAt               DateTime?
+  deletedBy               Int?
+  deletedByRole           String?
 
   // Order Items Relation
   items           OrderItem[] // One-to-many with OrderItem model

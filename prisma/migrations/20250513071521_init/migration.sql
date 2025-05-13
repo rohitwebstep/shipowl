@@ -669,6 +669,7 @@ CREATE TABLE `Order` (
     `billingStateId` BIGINT NULL,
     `billingCityId` BIGINT NULL,
     `paymentId` INTEGER NULL,
+    `shippingApiResult` JSON NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
     `createdByRole` VARCHAR(191) NULL,

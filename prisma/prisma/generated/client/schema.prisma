@@ -748,6 +748,8 @@ model Order {
   paymentId Int?
   payment   Payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
 
+  shippingApiResult Json?
+
   // Meta / Audit Info
   createdAt     DateTime  @default(now())
   createdBy     Int?

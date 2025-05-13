@@ -1,3 +1,5 @@
 {
-  "/api/bad-pincode/import/route": "app/api/bad-pincode/import/route.js"
+  "/api/order/[orderId]/shipping/route": "app/api/order/[orderId]/shipping/route.js",
+  "/api/order/[orderId]/shipping/status/route": "app/api/order/[orderId]/shipping/status/route.js",
+  "/api/order/route": "app/api/order/route.js"
 }
