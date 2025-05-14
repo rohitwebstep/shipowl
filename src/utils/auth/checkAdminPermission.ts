@@ -1,11 +1,9 @@
-import { getAdminById } from "@/app/models/admin/admin";
 import { getPermissionsOfAdminStaff } from "@/app/models/admin/permission";
 import { isUserExist } from "@/utils/authUtils";
 import { logMessage } from "@/utils/commonUtils";
 
 interface PermissionCheckParams {
     admin_id: number;
-    admin_type: string;
     panel: string;
     role: string;
     module: string;
@@ -19,7 +17,6 @@ interface PermissionCheckResult {
 
 export async function checkAdminPermission({
     admin_id,
-    admin_type,
     panel,
     role,
     module,
