@@ -7,7 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getDropshipperStaffById, checkEmailAvailabilityForUpdate, updateDropshipperStaff, restoreDropshipperStaff, softDeleteDropshipperStaff } from '@/app/models/dropshipper/staff';
-import { assignDropshipperStaffPermission } from '@/app/models/dropshipper/staff';
+import { assignDropshipperStaffPermission } from '@/app/models/dropshipper/permission';
 
 type UploadedFileInfo = {
   originalName: string;

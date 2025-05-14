@@ -259,7 +259,7 @@ export const updateDropshipperStaff = async (
             return { status: false, message: message || "DropshipperStaff not found." };
         }
 
-        // Check if currentSupplier has a password (it should if the supplier is valid)
+        // Check if currentDropshipper has a password (it should if the dropshipper is valid)
         const password = (withPassword && currentDropshipperStaff.password) ? currentDropshipperStaff.password : '123456'; // Default password
 
         if (profilePicture && profilePicture.trim() !== '' && currentDropshipperStaff?.profilePicture?.trim()) {

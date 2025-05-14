@@ -7,7 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getAdminById, checkEmailAvailabilityForUpdate, updateAdmin, restoreAdmin, softDeleteAdmin } from '@/app/models/admin/admin';
-import { assignAdminPermission } from '@/app/models/admin/permission';
+import { assignAdminStaffPermission } from '@/app/models/admin/permission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -259,7 +259,7 @@ export async function PUT(req: NextRequest) {
       updatedByRole: adminRole,
     }
 
-    const adminPermissionCreateResult = await assignAdminPermission(adminId, String(adminRole), adminPermissionPayload);
+    const adminPermissionCreateResult = await assignAdminStaffPermission(adminId, String(adminRole), adminPermissionPayload);
     if (
       !adminPermissionCreateResult ||
       !adminPermissionCreateResult.status ||
