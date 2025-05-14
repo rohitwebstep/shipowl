@@ -86,46 +86,6 @@ model admin {
   staff                adminStaff[]
   companyDetail        companyDetail?    @relation
   bankAccounts         bankAccount[]
-  permissions          adminHasPermission[]
-}
-
-model permission {
-  id                              Int       @id @default(autoincrement())
-  panel                           String
-  module                          String
-  action                          String
-  status                          Boolean   @default(true)
-
-  createdAt                       DateTime  @default(now())
-  createdBy                       Int?
-  createdByRole                   String?
-  updatedAt                       DateTime  @updatedAt
-  updatedBy                       Int?
-  updatedByRole                   String?
-  deletedAt                       DateTime?
-  deletedBy                       Int?
-  deletedByRole                   String?
-
-  adminPermissions                adminHasPermission[]
-}
-
-model adminHasPermission {
-  id                              Int            @id @default(autoincrement())
-  adminId                         Int
-  permissionId                    Int
-
-  createdAt                       DateTime       @default(now())
-  createdBy                       Int?
-  createdByRole                   String?
-  updatedAt                       DateTime       @updatedAt
-  updatedBy                       Int?
-  updatedByRole                   String?
-  deletedAt                       DateTime?
-  deletedBy                       Int?
-  deletedByRole                   String?
-
-  admin                           admin           @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  permission                      permission      @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 }
 
 model companyDetail {
@@ -193,9 +153,17 @@ model bankAccount {
 
 model adminStaff {
   id                   Int       @id @default(autoincrement())
-  admin_id             Int       @unique
+  admin_id             Int
+  profilePicture       String?   @db.LongText
   name                 String    
   email                String    @unique
+  phoneNumber          String?
+  currentAddress       String?
+  permanentAddress     String?
+  permanentPostalCode  String?
+  permanentCityId      BigInt?
+  permanentStateId     BigInt?
+  permanentCountryId   BigInt?
   password             String
   role                 String    @default("admin")
   status               String    @default("active")
@@ -213,7 +181,51 @@ model adminStaff {
   deletedBy            Int?
   deletedByRole        String?
 
+  permanentCity       city?       @relation(fields: [permanentCityId], references: [id], onDelete: SetNull)
+  permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
+  permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
+
   admin                admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+  permissions          adminStaffHasPermission[]
+}
+
+model permission {
+  id                              Int       @id @default(autoincrement())
+  panel                           String
+  module                          String
+  action                          String
+  status                          Boolean   @default(true)
+
+  createdAt                       DateTime  @default(now())
+  createdBy                       Int?
+  createdByRole                   String?
+  updatedAt                       DateTime  @updatedAt
+  updatedBy                       Int?
+  updatedByRole                   String?
+  deletedAt                       DateTime?
+  deletedBy                       Int?
+  deletedByRole                   String?
+
+  adminStaffPermissions                adminStaffHasPermission[]
+}
+
+model adminStaffHasPermission {
+  id                              Int            @id @default(autoincrement())
+  adminStaffId                    Int
+  permissionId                    Int
+
+  createdAt                       DateTime       @default(now())
+  createdBy                       Int?
+  createdByRole                   String?
+  updatedAt                       DateTime       @updatedAt
+  updatedBy                       Int?
+  updatedByRole                   String?
+  deletedAt                       DateTime?
+  deletedBy                       Int?
+  deletedByRole                   String?
+
+  adminStaff                      adminStaff      @relation(fields: [adminStaffId], references: [id], onDelete: Cascade)
+  permission                      permission      @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 }
 
 model loginLog {
@@ -308,6 +320,7 @@ model country {
   warehouses            warehouse[]
   highRtos              highRto[]
   admins                admin[]
+  adminStaffs           adminStaff[]
 
   // Add the relation fields for `originCountry` and `shippingCountry`
   originProducts        product[]       @relation("OriginCountryRelation")
@@ -342,6 +355,7 @@ model state {
   warehouses      warehouse[]
   highRtos        highRto[]
   admins          admin[]
+  adminStaffs     adminStaff[]
 
   shippingOrders  Order[] @relation("StateShippingRelation")
   billingOrders   Order[] @relation("StateBillingRelation")
@@ -369,6 +383,7 @@ model city {
   warehouses      warehouse[]
   highRtos        highRto[]
   admins          admin[]
+  adminStaffs     adminStaff[]
 
   shippingOrders  Order[]     @relation("CityShippingRelation")
   billingOrders   Order[]     @relation("CityBillingRelation")

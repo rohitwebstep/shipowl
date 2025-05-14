@@ -8,7 +8,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createAdmin, getAdminsByStatus } from '@/app/models/admin/admin';
-import { assignAdminPermission } from '@/app/models/admin/permission';
+import { assignAdminStaffPermission } from '@/app/models/admin/permission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -17,18 +17,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
-interface AdminHasPermission {
-  id?: number;
-  admin?: {
-    connect: { id: number }; // or whatever your relation is
-  };
-  permission?: {
-    connect: { id: number }; // or whatever your relation is
-  };
-  adminId?: number;
-  permissionId?: number;
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,11 +37,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const requiredFields = ['name', 'email', 'password', 'type'];
+    const requiredFields = ['name', 'email', 'password'];
     const formData = await req.formData();
     const validation = validateFormData(formData, {
       requiredFields: requiredFields,
-      patternValidations: { status: 'boolean', type: 'string' },
+      patternValidations: { status: 'boolean' },
     });
 
     if (!validation.isValid) {
@@ -96,16 +84,6 @@ export async function POST(req: NextRequest) {
       return null;
     };
 
-    const type = extractString('type')?.toLowerCase();
-
-    if (!type || !['main', 'sub'].includes(type)) {
-      logMessage('warn', `Invalid type: ${type}`);
-      return NextResponse.json(
-        { status: false, error: `Invalid type: ${type}` },
-        { status: 400 }
-      );
-    }
-
     const statusRaw = extractString('status')?.toLowerCase();
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
@@ -130,14 +108,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawPermissions = extractJSON('permissions');
-
-    if (!Array.isArray(rawPermissions) || rawPermissions.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const permissions: AdminHasPermission[] = Array.isArray(rawPermissions) ? rawPermissions as AdminHasPermission[] : [];
 
     const password = extractString('password') || '';
     // Hash the password using bcrypt
@@ -169,7 +139,6 @@ export async function POST(req: NextRequest) {
 
     const adminPayload = {
       name: extractString('name') || '',
-      type,
       profilePicture: adminUploadedFiles['profilePicture'],
       email,
       website: extractString('website') || '',
@@ -227,29 +196,6 @@ export async function POST(req: NextRequest) {
       }
       logMessage('error', 'Admin creation failed:', adminCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: adminCreateResult?.message || 'Admin creation failed' }, { status: 500 });
-    }
-
-    logMessage('debug', 'Admin\'s bank accounts:', permissions);
-
-    const adminPermissionPayload = {
-      adminId,
-      permissions,
-      updatedAt: new Date(),
-      updatedBy: adminId,
-      updatedByRole: adminRole,
-    }
-
-    const adminPermissionCreateResult = await assignAdminPermission(adminId, String(adminRole), adminPermissionPayload);
-    if (
-      !adminPermissionCreateResult ||
-      !adminPermissionCreateResult.status ||
-      !adminPermissionCreateResult.permissions
-    ) {
-      logMessage('error', 'Admin company creation failed', adminPermissionCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: adminPermissionCreateResult?.message || 'Admin company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(

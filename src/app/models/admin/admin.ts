@@ -5,7 +5,6 @@ import { logMessage } from "@/utils/commonUtils";
 
 interface Admin {
     id?: bigint; // Optional: ID of the admin (if exists)
-    type?: string;
     name: string; // Name of the admin
     profilePicture: string,
     email: string; // Email address of the admin
@@ -125,7 +124,7 @@ export async function checkEmailAvailabilityForUpdate(email: string, adminId: nu
 
 export async function createAdmin(adminId: number, adminRole: string, admin: Admin) {
     try {
-        const { name, type, profilePicture, email, website, referralCode, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = admin;
+        const { name, profilePicture, email, website, referralCode, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = admin;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
@@ -136,7 +135,6 @@ export async function createAdmin(adminId: number, adminRole: string, admin: Adm
         const newAdmin = await prisma.admin.create({
             data: {
                 name,
-                type,
                 profilePicture,
                 email,
                 website,
@@ -207,11 +205,6 @@ export const getAdminById = async (id: number, withPassword: boolean | string | 
             include: {
                 companyDetail: true,
                 bankAccounts: true,
-                permissions: {
-                    include: {
-                        permission: true,
-                    },
-                },
             }
 
         });
@@ -236,7 +229,6 @@ export const updateAdmin = async (
     try {
         const {
             name,
-            type,
             profilePicture,
             email,
             website,
@@ -286,7 +278,6 @@ export const updateAdmin = async (
 
         const updateData = {
             name,
-            type,
             email,
             website,
             phoneNumber,

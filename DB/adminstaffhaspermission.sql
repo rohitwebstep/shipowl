@@ -1,4 +1,4 @@
-INSERT INTO `adminhaspermission` (`adminId`, `permissionId`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
+INSERT INTO `adminstaffhaspermission` (`adminStaffId`, `permissionId`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
 (1, 1, '2025-05-12 10:12:20.000', NULL, NULL, '2025-05-12 10:13:48.000', NULL, NULL, NULL, NULL, NULL),
 (1, 2, '2025-05-12 10:12:20.000', NULL, NULL, '2025-05-12 10:13:48.000', NULL, NULL, NULL, NULL, NULL),
 (1, 3, '2025-05-12 10:12:20.000', NULL, NULL, '2025-05-12 10:13:48.000', NULL, NULL, NULL, NULL, NULL),

@@ -177,38 +177,6 @@ exports.Prisma.AdminScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.PermissionScalarFieldEnum = {
-  id: 'id',
-  panel: 'panel',
-  module: 'module',
-  action: 'action',
-  status: 'status',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.AdminHasPermissionScalarFieldEnum = {
-  id: 'id',
-  adminId: 'adminId',
-  permissionId: 'permissionId',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.CompanyDetailScalarFieldEnum = {
   id: 'id',
   adminId: 'adminId',
@@ -269,14 +237,54 @@ exports.Prisma.BankAccountScalarFieldEnum = {
 exports.Prisma.AdminStaffScalarFieldEnum = {
   id: 'id',
   admin_id: 'admin_id',
+  profilePicture: 'profilePicture',
   name: 'name',
   email: 'email',
+  phoneNumber: 'phoneNumber',
+  currentAddress: 'currentAddress',
+  permanentAddress: 'permanentAddress',
+  permanentPostalCode: 'permanentPostalCode',
+  permanentCityId: 'permanentCityId',
+  permanentStateId: 'permanentStateId',
+  permanentCountryId: 'permanentCountryId',
   password: 'password',
   role: 'role',
   status: 'status',
   pr_token: 'pr_token',
   pr_expires_at: 'pr_expires_at',
   pr_last_reset: 'pr_last_reset',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  panel: 'panel',
+  module: 'module',
+  action: 'action',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.AdminStaffHasPermissionScalarFieldEnum = {
+  id: 'id',
+  adminStaffId: 'adminStaffId',
+  permissionId: 'permissionId',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -727,21 +735,6 @@ exports.Prisma.adminOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.permissionOrderByRelevanceFieldEnum = {
-  panel: 'panel',
-  module: 'module',
-  action: 'action',
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.adminHasPermissionOrderByRelevanceFieldEnum = {
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.companyDetailOrderByRelevanceFieldEnum = {
   companyName: 'companyName',
   brandName: 'brandName',
@@ -784,12 +777,32 @@ exports.Prisma.bankAccountOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
+  profilePicture: 'profilePicture',
   name: 'name',
   email: 'email',
+  phoneNumber: 'phoneNumber',
+  currentAddress: 'currentAddress',
+  permanentAddress: 'permanentAddress',
+  permanentPostalCode: 'permanentPostalCode',
   password: 'password',
   role: 'role',
   status: 'status',
   pr_token: 'pr_token',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.permissionOrderByRelevanceFieldEnum = {
+  panel: 'panel',
+  module: 'module',
+  action: 'action',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.adminStaffHasPermissionOrderByRelevanceFieldEnum = {
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1015,11 +1028,11 @@ exports.Prisma.OrderOrderByRelevanceFieldEnum = {
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
   admin: 'admin',
-  permission: 'permission',
-  adminHasPermission: 'adminHasPermission',
   companyDetail: 'companyDetail',
   bankAccount: 'bankAccount',
   adminStaff: 'adminStaff',
+  permission: 'permission',
+  adminStaffHasPermission: 'adminStaffHasPermission',
   loginLog: 'loginLog',
   activityLog: 'activityLog',
   country: 'country',

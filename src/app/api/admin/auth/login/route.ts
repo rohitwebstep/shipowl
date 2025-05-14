@@ -1,3 +1,4 @@
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 import { handleLogin } from '../../../controllers/admin/authController';
 import { NextRequest } from 'next/server';
 

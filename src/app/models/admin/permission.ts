@@ -9,13 +9,13 @@ interface AdminHasPermission {
     permission?: {
         connect: { id: number }; // or whatever your relation is
     };
-    adminId?: number;
+    adminStaffId?: number;
     permissionId?: number;
 }
 
 interface AdminPermissionsPayload {
     admin?: { connect: { id: number } };
-    adminId?: number;
+    adminStaffId?: number;
     permissions: AdminHasPermission[];
     createdAt?: Date; // Timestamp of when the dropshipper was created
     updatedAt?: Date; // Timestamp of when the dropshipper was last updated
@@ -64,14 +64,14 @@ export const getAdminPermissionById = async (id: number) => {
 };
 
 
-export async function assignAdminPermission(
-    adminId: number,
+export async function assignAdminStaffPermission(
+    adminStaffId: number,
     adminRole: string,
     payload: AdminPermissionsPayload
 ) {
     try {
         const permissionOperations = payload.permissions.map(async (permission) => {
-            const targetAdminId = Number(payload.adminId);
+            const targetAdminId = Number(payload.adminStaffId);
             const targetPermissionId = Number(permission.permissionId);
 
             const { status: found, permission: currentPermission, message } = await getAdminPermissionById(targetPermissionId);
@@ -80,9 +80,9 @@ export async function assignAdminPermission(
             }
 
             // Check if the permission is already assigned to this admin
-            const existingPermission = await prisma.adminHasPermission.findFirst({
+            const existingPermission = await prisma.adminStaffHasPermission.findFirst({
                 where: {
-                    adminId: targetAdminId,
+                    adminStaffId: targetAdminId,
                     permissionId: targetPermissionId,
                 }
             });
@@ -95,9 +95,9 @@ export async function assignAdminPermission(
             }
 
             // Create new permission entry
-            const newPermission = await prisma.adminHasPermission.create({
+            const newPermission = await prisma.adminStaffHasPermission.create({
                 data: {
-                    adminId: targetAdminId,
+                    adminStaffId: targetAdminId,
                     permissionId: targetPermissionId,
                     updatedAt: payload.updatedAt,
                     updatedBy: payload.updatedBy,
@@ -118,7 +118,7 @@ export async function assignAdminPermission(
 }
 
 // 🟣 GET ALL
-export const getAllAdminPermissions = async () => {
+export const getAllAdminStaffPermissions = async () => {
     try {
         const permissions = await prisma.permission.findMany({
             orderBy: { id: 'desc' },
@@ -130,7 +130,7 @@ export const getAllAdminPermissions = async () => {
     }
 };
 
-export const getAdminPermissionsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+export const getAdminStaffPermissionsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
     try {
         let whereCondition: Record<string, unknown> = {
             panel: "admin",
@@ -162,5 +162,28 @@ export const getAdminPermissionsByStatus = async (status: "active" | "inactive" 
     } catch (error) {
         console.error(`Error fetching permissions by status (${status}):`, error);
         return { status: false, message: "Error fetching permissions" };
+    }
+};
+
+export const getPermissionsOfAdminStaff = async (adminStaffId: number) => {
+    try {
+        if (!adminStaffId || isNaN(adminStaffId)) {
+            return { status: false, message: "Invalid Admin ID" };
+        }
+
+        const permissions = await prisma.adminStaffHasPermission.findMany({
+            where: { adminStaffId },
+            include: {
+                permission: true // Include full permission details
+            },
+            orderBy: {
+                permissionId: "asc"
+            }
+        });
+
+        return { status: true, permissions: serializeBigInt(permissions) };
+    } catch (error) {
+        logMessage("error", `Failed to get permissions for adminStaffId ${adminStaffId}`, error);
+        return { status: false, message: "Failed to fetch admin permissions" };
     }
 };
