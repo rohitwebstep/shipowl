@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 import { cancelOrderShipping } from '@/utils/order/cancelOrderShipping';
 
 export async function GET(req: NextRequest) {

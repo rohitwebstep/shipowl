@@ -1,5 +1,5 @@
 import { getPermissionsOfAdminStaff } from "@/app/models/admin/permission";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 import { logMessage } from "@/utils/commonUtils";
 
 interface PermissionCheckParams {

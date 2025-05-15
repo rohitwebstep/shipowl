@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 import { getBadPincodeById, deleteBadPincode } from '@/app/models/badPincode';
 
 export async function DELETE(req: NextRequest) {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 
 export async function GET(req: NextRequest) {
   try {

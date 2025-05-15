@@ -30,7 +30,7 @@ interface MailData {
 }
 
 interface EmailResult {
-    success: boolean;
+    status: boolean;
     messageId?: string;
     error?: string;
 }
@@ -82,15 +82,15 @@ export async function sendEmail(
         const info = await transporter.sendMail(mailOptions);
 
         console.log(`📤 Email sent to ${mailOptions.to.join(", ")} | ID: ${info.messageId}`);
-        return { success: true, messageId: info.messageId };
+        return { status: true, messageId: info.messageId };
     } catch (error) {
         // Specify a type other than 'any' for the error
         if (error instanceof Error) {
             console.error("❌ Email Error:", error.message);
-            return { success: false, error: error.message };
+            return { status: false, error: error.message };
         } else {
             console.error("❌ Unknown Error:", error);
-            return { success: false, error: "Unknown error occurred" };
+            return { status: false, error: "Unknown error occurred" };
         }
     }
 }

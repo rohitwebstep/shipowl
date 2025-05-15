@@ -13,6 +13,10 @@ export function generatePasswordResetToken(adminId: number, adminRole: string) {
     return jwt.sign({ adminId, adminRole }, SECRET_KEY, { expiresIn: '1h' });
 }
 
+export function generateRegistrationToken(adminId: number, adminRole: string) {
+    return jwt.sign({ adminId, adminRole }, SECRET_KEY, { expiresIn: '1h' });
+}
+
 export async function verifyToken(token: string) {
     try {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));

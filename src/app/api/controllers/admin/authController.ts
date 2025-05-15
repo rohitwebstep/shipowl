@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from "@/lib/prisma";
-import { sendEmail } from "@/utils/email/sendEmail";
-import { generateToken, generatePasswordResetToken } from '@/utils/authUtils';
+import { generateToken, generatePasswordResetToken } from '@/utils/auth/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
-import { verifyToken } from '@/utils/authUtils';
+import { verifyToken } from '@/utils/auth/authUtils';
 import { getEmailConfig } from '@/app/models/emailConfig';
+import { sendEmail } from "@/utils/email/sendEmail";
 import bcrypt from 'bcryptjs';
 import { logMessage } from '@/utils/commonUtils';
 
@@ -186,7 +186,7 @@ export async function handleForgetPassword(
 
         const emailResult = await sendEmail(emailConfig, mailData);
 
-        if (!emailResult.success) {
+        if (!emailResult.status) {
             return NextResponse.json(
                 {
                     message: "Reset token created but failed to send email. Please try again.",
@@ -309,7 +309,7 @@ export async function handleResetPassword(
         // Send email notification
         const emailResult = await sendEmail(emailConfig, mailData);
 
-        if (!emailResult.success) {
+        if (!emailResult.status) {
             return NextResponse.json(
                 {
                     message: "Password reset successful, but failed to send email notification.",
@@ -333,6 +333,124 @@ export async function handleResetPassword(
         console.error("❌ Password reset error:", error);
         return NextResponse.json(
             { message: "An error occurred while resetting the password. Please try again later.", status: false },
+            { status: 500 }
+        );
+    }
+}
+
+export async function handleVerifyStatus(
+    req: NextRequest,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { token } = await req.json();
+
+        // Check if token is provided
+        if (!token) {
+            return NextResponse.json(
+                { message: "Token is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Verify token and fetch admin details using adminByToken function
+        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
+
+        if (!tokenStatus || !admin) {
+            return NextResponse.json(
+                { status: false, message: tokenMessage || "Invalid token or role." },
+                { status: 401 }
+            );
+        }
+
+        // Prepare the update data
+        const updateData = {
+            status: 'active'
+        };
+
+        // Update the admin or admin staff record based on the role
+        if (admin.role === adminRole) {
+            await prisma.admin.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        } else {
+            await prisma.adminStaff.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        }
+
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('admin', 'registration', 'verify', true);
+        logMessage('debug', 'Email Config:', emailConfig);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Your account has been verified successfully.</p>";
+
+        // Replace placeholders in the HTML template
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email: admin.email },
+            ],
+            subject,
+            htmlBody,
+            attachments: [],
+        };
+
+        // Send email notification
+        const emailResult = await sendEmail(emailConfig, mailData);
+
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Account Verified successful, but failed to send email notification.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        // Return success response
+        return NextResponse.json(
+            {
+                message: "Account Verified successful. A notification has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Account Verified error:", error);
+        return NextResponse.json(
+            { message: "An error occurred while verifing the account. Please try again later.", status: false },
             { status: 500 }
         );
     }

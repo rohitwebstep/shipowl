@@ -1,5 +1,4 @@
 {
-  "/api/admin/staff/[adminStaffId]/restore/route": "app/api/admin/staff/[adminStaffId]/restore/route.js",
-  "/api/admin/staff/[adminStaffId]/route": "app/api/admin/staff/[adminStaffId]/route.js",
-  "/api/admin/staff/route": "app/api/admin/staff/route.js"
+  "/api/dropshipper/auth/registration/route": "app/api/dropshipper/auth/registration/route.js",
+  "/api/dropshipper/auth/registration/verify/route": "app/api/dropshipper/auth/registration/verify/route.js"
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 import { getOrderById, updateShippingApiResultOfOrder } from '@/app/models/order/order';
 import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
-import { isUserExist } from "@/utils/authUtils";
+import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createWarehouse, getWarehousesByStatus } from '@/app/models/warehouse';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
