@@ -37,6 +37,16 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
 
         const admin = adminResponse.admin;
 
+        console.log(`admin - `, admin);
+
+        // Correct usage of .toLowerCase() as a function
+        if (admin.status.toLowerCase() !== 'active') {
+            return NextResponse.json(
+                { message: "Admin account is not active", status: false },
+                { status: 403 }
+            );
+        }
+
         // Compare the provided password with the stored hash
         const isPasswordValid = await comparePassword(password, admin.password);
         if (!isPasswordValid) {
@@ -473,6 +483,7 @@ export async function adminByUsernameRole(username: string, role: string) {
                     email: true,
                     password: true, // Hashed password stored in DB
                     role: true,
+                    status: true,
                 },
             });
         } else {
@@ -484,6 +495,7 @@ export async function adminByUsernameRole(username: string, role: string) {
                     email: true,
                     password: true,
                     role: true,
+                    status: true,
                 },
             });
         }

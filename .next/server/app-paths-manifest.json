@@ -1,4 +1,3 @@
 {
-  "/api/dropshipper/auth/registration/route": "app/api/dropshipper/auth/registration/route.js",
-  "/api/dropshipper/auth/registration/verify/route": "app/api/dropshipper/auth/registration/verify/route.js"
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js"
 }
