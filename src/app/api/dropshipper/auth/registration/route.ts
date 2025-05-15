@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
-import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
@@ -55,6 +54,7 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
+    /*
     const extractJSON = (key: string): Record<string, unknown> | null => {
 
       const value = extractString(key);
@@ -87,6 +87,7 @@ export async function POST(req: NextRequest) {
 
       return null;
     };
+    */
 
     const email = extractString('email') || '';
     const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await checkEmailAvailability(email);
@@ -314,12 +315,10 @@ export async function POST(req: NextRequest) {
 
     const token = generateRegistrationToken(dropshipperCreateResult.dropshipper.id, 'dropshipper');
 
-    let verificationLink = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/regist/reset?token=${token}`;
-
     // Use index signature to avoid TS error
     const replacements: Record<string, string> = {
       "{{name}}": dropshipperCreateResult.dropshipper.name,
-      "{{verificationLink}}": verificationLink,
+      "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/regist/reset?token=${token}`,
       "{{year}}": new Date().getFullYear().toString(),
       "{{appName}}": "Shipping OWL",
     };

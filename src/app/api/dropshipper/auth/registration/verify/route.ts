@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { handleVerifyStatus } from '@/app/api/controllers/admin/authController';
 
 export async function POST(req: NextRequest) {
