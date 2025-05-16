@@ -19,28 +19,20 @@
           "originalSource": "/api/admin/:path*"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/list{(\\\\.json)}?",
-          "originalSource": "/api/dropshipper/list"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper{(\\\\.json)}?",
+          "originalSource": "/api/dropshipper"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/auth/verify{(\\\\.json)}?",
-          "originalSource": "/api/dropshipper/auth/verify"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/:path*{(\\\\.json)}?",
+          "originalSource": "/api/dropshipper/:path*"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/list{(\\\\.json)}?",
-          "originalSource": "/api/supplier/list"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier{(\\\\.json)}?",
+          "originalSource": "/api/supplier"
         },
         {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/auth/verify{(\\\\.json)}?",
-          "originalSource": "/api/supplier/auth/verify"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/profile/:path*{(\\\\.json)}?",
-          "originalSource": "/api/supplier/profile/:path*"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/profile/:path*{(\\\\.json)}?",
-          "originalSource": "/api/dropshipper/profile/:path*"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier/:path*{(\\\\.json)}?",
+          "originalSource": "/api/supplier/:path*"
         },
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/category{(\\\\.json)}?",
@@ -97,18 +89,6 @@
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/product/:path*{(\\\\.json)}?",
           "originalSource": "/api/product/:path*"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/supplier{(\\\\.json)}?",
-          "originalSource": "/api/supplier"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper{(\\\\.json)}?",
-          "originalSource": "/api/dropshipper"
-        },
-        {
-          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/dropshipper/:path*{(\\\\.json)}?",
-          "originalSource": "/api/dropshipper/:path*"
         },
         {
           "regexp": "/:nextData(_next/data/[^/]{1,})?/api/courier-company{(\\\\.json)}?",

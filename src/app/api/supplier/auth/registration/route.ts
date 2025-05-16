@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
       return null;
     };
     */
-   
+
     const extractDate = (key: string, outputFormat: string): string | null => {
       const value = extractString(key);
       if (!value) return null;

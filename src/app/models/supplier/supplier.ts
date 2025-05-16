@@ -387,6 +387,43 @@ export const updateSupplier = async (
     }
 };
 
+export const updateSupplierStatus = async (
+    adminId: number,
+    adminRole: string,
+    supplierId: number,
+    statusRaw: string | boolean | number,
+) => {
+    try {
+
+        // Convert status to a boolean using the includes check
+        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+
+        // Convert boolean status to string ('active' or 'inactive')
+        const statusString = status ? 'active' : 'inactive';
+
+        // Fetch current supplier details, including password based on withPassword flag
+        const { status: supplierStatus, supplier: currentDropshipper, message } = await getSupplierById(supplierId);
+
+        if (!supplierStatus || !currentDropshipper) {
+            return { status: false, message: message || "Dropshipper not found." };
+        }
+
+        const updateData = {
+            status: statusString,
+        };
+
+        const newDropshipper = await prisma.admin.update({
+            where: { id: supplierId },
+            data: updateData,
+        });
+
+        return { status: true, supplier: serializeBigInt(newDropshipper) };
+    } catch (error) {
+        console.error(`Error updating supplier:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+};
+
 // 🔴 Soft DELETE (marks as deleted by setting deletedAt field for supplier and variants)
 export const softDeleteSupplier = async (adminId: number, adminRole: string, id: number) => {
     try {

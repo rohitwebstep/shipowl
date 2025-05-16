@@ -19,28 +19,20 @@
           "originalSource": "/api/admin/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper\\/list(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/dropshipper/list"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/dropshipper"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper\\/auth\\/verify(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/dropshipper/auth/verify"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/dropshipper/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier\\/list(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/supplier/list"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/supplier"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier\\/auth\\/verify(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/supplier/auth/verify"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier\\/profile(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/supplier/profile/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper\\/profile(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/dropshipper/profile/:path*"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/api/supplier/:path*"
         },
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/category(\\\\.json)?[\\/#\\?]?$",
@@ -97,18 +89,6 @@
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/product(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/product/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/supplier(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/supplier"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/dropshipper"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/dropshipper(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
-          "originalSource": "/api/dropshipper/:path*"
         },
         {
           "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/courier-company(\\\\.json)?[\\/#\\?]?$",

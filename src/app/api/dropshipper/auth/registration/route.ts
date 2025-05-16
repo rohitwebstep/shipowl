@@ -318,7 +318,7 @@ export async function POST(req: NextRequest) {
     // Use index signature to avoid TS error
     const replacements: Record<string, string> = {
       "{{name}}": dropshipperCreateResult.dropshipper.name,
-      "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/regist/reset?token=${token}`,
+      "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/register/verify?token=${token}`,
       "{{year}}": new Date().getFullYear().toString(),
       "{{appName}}": "Shipping OWL",
     };

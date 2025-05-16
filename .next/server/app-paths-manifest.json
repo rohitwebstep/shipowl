@@ -1,4 +1,5 @@
 {
+  "/api/supplier/[supplierId]/status/route": "app/api/supplier/[supplierId]/status/route.js",
   "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
   "/api/supplier/auth/registration/route": "app/api/supplier/auth/registration/route.js",
   "/api/supplier/route": "app/api/supplier/route.js"
