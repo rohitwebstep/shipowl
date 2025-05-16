@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
+    /*
     const extractJSON = (key: string): Record<string, unknown> | null => {
 
       const value = extractString(key);
@@ -86,6 +87,8 @@ export async function POST(req: NextRequest) {
 
       return null;
     };
+    */
+   
     const extractDate = (key: string, outputFormat: string): string | null => {
       const value = extractString(key);
       if (!value) return null;
