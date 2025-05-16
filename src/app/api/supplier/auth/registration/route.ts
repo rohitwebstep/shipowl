@@ -10,6 +10,8 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier } from '@/app/models/supplier/supplier';
+import { getEmailConfig } from '@/app/models/emailConfig';
+import { sendEmail } from "@/utils/email/sendEmail";
 /*
 import { createSupplierCompany } from '@/app/models/supplier/company';
 import { createSupplierBankAccount } from '@/app/models/supplier/bankAccount';
@@ -439,8 +441,64 @@ export async function POST(req: NextRequest) {
     }
     */
 
+    const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('supplier', 'auth', 'registration', true);
+    logMessage('debug', 'Email Config:', emailConfig);
+
+    if (!emailStatus || !emailConfig) {
+      return NextResponse.json(
+        { message: emailMessage || "Failed to fetch email configuration.", status: false },
+        { status: 500 }
+      );
+    }
+
+    // Use index signature to avoid TS error
+    const replacements: Record<string, string> = {
+      "{{name}}": supplierCreateResult.supplier.name,
+      "{{email}}": supplierCreateResult.supplier.email,
+      "{{year}}": new Date().getFullYear().toString(),
+      "{{appName}}": "Shipping OWL",
+    };
+
+    let htmlBody = htmlTemplate?.trim()
+      ? htmlTemplate
+      : "<p>Dear {{name}},</p><p>Click <a href='{{verificationLink}}'>here</a> to verify your email.</p>";
+
+    Object.keys(replacements).forEach((key) => {
+      htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+    });
+
+    logMessage('debug', 'HTML Body:', htmlBody);
+
+    let subject = emailSubject;
+    Object.keys(replacements).forEach((key) => {
+      subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+    });
+
+    const mailData = {
+      recipient: [
+        { name: supplierCreateResult.supplier.name, email }
+      ],
+      cc: [],
+      bcc: [],
+      subject,
+      htmlBody,
+      attachments: [],
+    };
+
+    const emailResult = await sendEmail(emailConfig, mailData);
+
+    if (!emailResult.status) {
+      return NextResponse.json(
+        {
+          message: "Reset token created but failed to send email. Please try again.",
+          status: false,
+          emailError: emailResult.error,
+        },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(
-      { status: true, error: supplierCreateResult?.message || 'Supplier created Successfuly' },
+      { status: true, error: supplierCreateResult?.message || 'Supplier updated Successfuly' },
       { status: 200 }
     );
   } catch (err: unknown) {

@@ -392,7 +392,7 @@ export async function handleVerifyStatus(
             });
         }
 
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('admin', 'registration', 'verify', true);
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('dropshipper', 'auth', 'verify', true);
         logMessage('debug', 'Email Config:', emailConfig);
 
         if (!emailStatus || !emailConfig) {
@@ -406,6 +406,7 @@ export async function handleVerifyStatus(
         const replacements: Record<string, string> = {
             "{{name}}": admin.name,
             "{{year}}": new Date().getFullYear().toString(),
+            "{{loginLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`,
             "{{appName}}": "Shipping OWL",
         };
 

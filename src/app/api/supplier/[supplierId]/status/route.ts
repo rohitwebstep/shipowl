@@ -5,80 +5,108 @@ import {
   getSupplierById,
   updateSupplierStatus,
 } from '@/app/models/supplier/supplier';
+import { getEmailConfig } from '@/app/models/emailConfig';
+import { sendEmail } from "@/utils/email/sendEmail";
 
 export async function PATCH(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
-    const supplierId = parts[parts.length - 2]; // Get the second-to-last segment
-    logMessage('debug', 'Requested Supplier ID:', { supplierId });
-
-    // Optional query param: e.g. ?status=active or inactive
+    const supplierId = parts[parts.length - 2]; // Get the supplier ID from the path
     const statusRaw = req.nextUrl.searchParams.get('status');
-    logMessage('debug', 'Requested status status:', { statusRaw });
 
-    // Extract headers
+    logMessage('debug', 'PATCH Request - Supplier ID & Status:', { supplierId, statusRaw });
+
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
     const adminId = Number(adminIdHeader);
 
     if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', 'Invalid or missing admin ID header', { adminIdHeader, adminRole });
-      return NextResponse.json(
-        { error: "Admin ID is missing or invalid" },
-        { status: 400 }
-      );
+      logMessage('warn', 'Invalid or missing admin ID', { adminIdHeader, adminRole });
+      return NextResponse.json({ error: "Admin ID is missing or invalid" }, { status: 400 });
     }
 
-    // Validate admin user
     const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', 'User not found', { adminId, adminRole });
-      return NextResponse.json(
-        { error: `Admin user not found: ${userCheck.message}` },
-        { status: 404 }
-      );
+      logMessage('warn', 'Admin user not found', { adminId, adminRole });
+      return NextResponse.json({ error: `Admin user not found: ${userCheck.message}` }, { status: 404 });
     }
 
-    // Validate supplier ID
     const supplierIdNum = Number(supplierId);
     if (isNaN(supplierIdNum)) {
       logMessage('warn', 'Invalid supplier ID', { supplierId });
       return NextResponse.json({ error: 'Invalid supplier ID' }, { status: 400 });
     }
 
-    // Fetch supplier data
     const supplierResult = await getSupplierById(supplierIdNum);
-    logMessage('debug', 'Supplier fetch result:', { supplierResult });
-
-    if (!supplierResult?.status) {
+    if (!supplierResult?.supplier) {
       logMessage('warn', 'Supplier not found', { supplierId: supplierIdNum });
-      return NextResponse.json(
-        { status: false, message: 'Supplier not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ status: false, message: 'Supplier not found' }, { status: 404 });
     }
 
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
-
-    // Update supplier status
     const updateResult = await updateSupplierStatus(adminId, String(adminRole), supplierIdNum, status);
-    logMessage('debug', 'Supplier status update result:', { updateResult });
 
     if (!updateResult?.status) {
       logMessage('warn', 'Failed to update supplier status', { supplierId: supplierIdNum });
-      return NextResponse.json(
-        { status: false, message: 'Failed to update supplier status' },
-        { status: 500 }
-      );
+      return NextResponse.json({ status: false, message: 'Failed to update supplier status' }, { status: 500 });
+    }
+
+    const emailConfigResult = await getEmailConfig('supplier', 'auth', 'status-update', true);
+    const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = emailConfigResult;
+
+    if (!emailStatus || !emailConfig) {
+      logMessage('error', 'Email config fetch failed', { emailMessage });
+      return NextResponse.json({ status: false, message: emailMessage || "Failed to fetch email configuration." }, { status: 500 });
+    }
+
+    const replacements: Record<string, string> = {
+      "{{name}}": supplierResult.supplier.name || '',
+      "{{email}}": supplierResult.supplier.email || '',
+      "{{status}}": status ? 'Active' : 'Inactive',
+      "{{statusColor}}": status ? 'green' : 'red',
+      "{{year}}": new Date().getFullYear().toString(),
+      "{{appName}}": "Shipping OWL",
+    };
+
+    let htmlBody = htmlTemplate?.trim() || "<p>Dear {{name}},</p><p>Your account status is now {{status}}.</p>";
+    let subject = emailSubject;
+
+    Object.keys(replacements).forEach(key => {
+      htmlBody = htmlBody.replace(new RegExp(key, 'g'), replacements[key]);
+      subject = subject.replace(new RegExp(key, 'g'), replacements[key]);
+    });
+
+    const mailData = {
+      recipient: [
+        {
+          name: supplierResult.supplier.name,
+          email: supplierResult.supplier.email,
+        }
+      ],
+      cc: [],
+      bcc: [],
+      subject,
+      htmlBody,
+      attachments: [],
+    };
+
+    const emailResult = await sendEmail(emailConfig, mailData);
+
+    if (!emailResult.status) {
+      logMessage('error', 'Email sending failed', emailResult.error);
+      return NextResponse.json({
+        status: false,
+        message: "Supplier status updated, but failed to send email notification.",
+        emailError: emailResult.error,
+      }, { status: 500 });
     }
 
     return NextResponse.json({
       status: true,
-      message: `Supplier marked as ${statusRaw}`,
+      message: `Supplier status updated to ${status ? 'Active' : 'Inactive'}`,
     });
-
   } catch (error) {
-    logMessage('error', '❌ Supplier status update error:', error);
+    logMessage('error', 'Unexpected error in supplier PATCH route:', error);
     return NextResponse.json(
       { status: false, error: 'Internal server error' },
       { status: 500 }
