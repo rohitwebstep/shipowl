@@ -229,18 +229,24 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
 }
 
 export const getSuppliersByStatus = async (
-    status: "deleted" | "notDeleted" = "notDeleted",
+    status: "deleted" | "notDeleted" | "inactive" | "active" = "notDeleted",
     withPassword: boolean | string | number = false
 ) => {
     try {
         let whereCondition = {};
 
-        switch (status) {
-            case "notDeleted":
+        switch (status.trim().toLowerCase()) {
+            case "notdeleted":
                 whereCondition = { role: 'supplier', deletedAt: null };
                 break;
             case "deleted":
                 whereCondition = { role: 'supplier', deletedAt: { not: null } };
+                break;
+            case "inactive":
+                whereCondition = { status: 'inactive', deletedAt: null };
+                break;
+            case "active":
+                whereCondition = { status: 'active', deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");

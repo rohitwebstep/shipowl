@@ -40,7 +40,8 @@ export function middleware(req: NextRequest) {
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
                 "/api/dropshipper/auth/registration",
-                "/api/supplier/auth/login"
+                "/api/supplier/auth/login",
+                "/api/supplier/auth/registration",
             ],
         },
         {

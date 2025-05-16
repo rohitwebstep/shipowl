@@ -125,7 +125,8 @@ function middleware(req) {
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
                 "/api/dropshipper/auth/registration",
-                "/api/supplier/auth/login"
+                "/api/supplier/auth/login",
+                "/api/supplier/auth/registration"
             ]
         },
         {

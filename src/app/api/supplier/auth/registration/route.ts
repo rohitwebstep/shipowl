@@ -3,13 +3,17 @@ import path from 'path';
 import bcrypt from 'bcryptjs';
 
 import { logMessage } from "@/utils/commonUtils";
+/*
 import { isUserExist } from "@/utils/auth/authUtils";
+*/
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
-import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getSuppliersByStatus } from '@/app/models/supplier/supplier';
+import { checkEmailAvailability, checkUsernameAvailability, createSupplier } from '@/app/models/supplier/supplier';
+/*
 import { createSupplierCompany } from '@/app/models/supplier/company';
 import { createSupplierBankAccount } from '@/app/models/supplier/bankAccount';
+*/
 
 type UploadedFileInfo = {
   originalName: string;
@@ -19,6 +23,7 @@ type UploadedFileInfo = {
   url: string;
 };
 
+/*
 interface BankAccount {
   id?: number;
   accountHolderName: string;
@@ -29,25 +34,11 @@ interface BankAccount {
   ifscCode: string;
   cancelledChequeImage: string;
 }
+*/
 
 export async function POST(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for supplier creation');
-
-    const adminIdHeader = req.headers.get('x-admin-id');
-    const adminRole = req.headers.get('x-admin-role');
-    const adminId = Number(adminIdHeader);
-
-    if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-      return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
-    }
-
-    const userCheck = await isUserExist(adminId, String(adminRole));
-    if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
-    }
 
     const requiredFields = ['name', 'username', 'email', 'password'];
     const formData = await req.formData();
@@ -151,9 +142,6 @@ export async function POST(req: NextRequest) {
       return formatDate(parsedDate, outputFormat);
     };
 
-    const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
-
     const email = extractString('email') || '';
     const { status: checkEmailAvailabilityResult, message: checkEmailAvailabilityMessage } = await checkEmailAvailability(email);
 
@@ -184,6 +172,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    /*
     const rawBankAccounts = extractJSON('bankAccounts');
 
     console.log(`rawBankAccounts`, rawBankAccounts);
@@ -192,6 +181,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
     }
     const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
+    */
 
     const password = extractString('password') || '';
     // Hash the password using bcrypt
@@ -246,15 +236,15 @@ export async function POST(req: NextRequest) {
           id: permanentCountryId,
         },
       },
-      status,
+      status: false,
       createdAt: new Date(),
-      createdBy: adminId,
-      createdByRole: adminRole,
+      createdBy: 0,
+      createdByRole: '',
     };
 
     logMessage('info', 'Supplier payload created:', supplierPayload);
 
-    const supplierCreateResult = await createSupplier(adminId, String(adminRole), supplierPayload);
+    const supplierCreateResult = await createSupplier(0, String(''), supplierPayload);
 
     if (!supplierCreateResult || !supplierCreateResult.status || !supplierCreateResult.supplier) {
       // Check if there are any uploaded files before attempting to delete
@@ -282,6 +272,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: supplierCreateResult?.message || 'Supplier creation failed' }, { status: 500 });
     }
 
+    /*
     const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
     const supplierCompanyFileFields = [
       'gstDocument',
@@ -339,7 +330,7 @@ export async function POST(req: NextRequest) {
 
     logMessage('info', 'Supplier payload created:', supplierCompanyPayload);
 
-    const supplierCompanyCreateResult = await createSupplierCompany(adminId, String(adminRole), supplierCompanyPayload);
+    const supplierCompanyCreateResult = await createSupplierCompany(0, String(''), supplierCompanyPayload);
     if (!supplierCompanyCreateResult || !supplierCompanyCreateResult.status || !supplierCompanyCreateResult.supplier) {
 
       // Check if there are any uploaded files before attempting to delete
@@ -367,15 +358,15 @@ export async function POST(req: NextRequest) {
       logMessage('error', 'Supplier company creation failed', supplierCompanyCreateResult?.message);
       return NextResponse.json({ status: false, error: supplierCompanyCreateResult?.message || 'Supplier company creation failed' }, { status: 500 });
     }
-
+    
     logMessage('debug', 'Supplier\'s bank accounts:', bankAccounts);
 
     const supplierBankAccountPayload = {
       admin: { connect: { id: supplierCreateResult.supplier.id } },
       bankAccounts,
       createdAt: new Date(),
-      createdBy: adminId,
-      createdByRole: adminRole,
+      createdBy: 0,
+      createdByRole: '',
     }
 
     const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
@@ -410,7 +401,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const supplierBankAccountCreateResult = await createSupplierBankAccount(adminId, String(adminRole), supplierBankAccountPayload);
+    const supplierBankAccountCreateResult = await createSupplierBankAccount(0, String(''), supplierBankAccountPayload);
     if (
       !supplierBankAccountCreateResult ||
       !supplierBankAccountCreateResult.status ||
@@ -443,6 +434,7 @@ export async function POST(req: NextRequest) {
         error: supplierBankAccountCreateResult?.message || 'Supplier company creation failed'
       }, { status: 500 });
     }
+    */
 
     return NextResponse.json(
       { status: true, error: supplierCreateResult?.message || 'Supplier created Successfuly' },
@@ -452,75 +444,5 @@ export async function POST(req: NextRequest) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
     logMessage('error', 'Supplier Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
-  }
-}
-
-export async function GET(req: NextRequest) {
-  try {
-    logMessage('debug', 'GET request received for fetching suppliers');
-
-    const type = req.nextUrl.searchParams.get('type');
-
-    // Retrieve x-admin-id and x-admin-role from request headers
-    const adminIdHeader = req.headers.get("x-admin-id");
-    const adminRole = req.headers.get("x-admin-role");
-
-    logMessage('info', 'Admin ID and Role:', { adminIdHeader, adminRole });
-    const adminId = Number(adminIdHeader);
-    if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-      return NextResponse.json(
-        { status: false, error: "User ID is missing or invalid in request" },
-        { status: 400 }
-      );
-    }
-
-    // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
-      return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
-        { status: 404 }
-      );
-    }
-
-    let suppliersResult;
-    // Fetch all suppliers
-    switch (type?.trim()?.toLowerCase()) {
-      case "notdeleted":
-        suppliersResult = await getSuppliersByStatus("notDeleted");
-        break;
-      case "deleted":
-        suppliersResult = await getSuppliersByStatus("deleted");
-        break;
-      case "inactive":
-        suppliersResult = await getSuppliersByStatus("inactive");
-        break;
-      case "active":
-        suppliersResult = await getSuppliersByStatus("active");
-        break;
-      default:
-        suppliersResult = await getSuppliersByStatus("notDeleted");
-    }
-
-    if (suppliersResult?.status) {
-      return NextResponse.json(
-        { status: true, suppliers: suppliersResult.suppliers },
-        { status: 200 }
-      );
-    }
-
-    logMessage('warn', 'No suppliers found');
-    return NextResponse.json(
-      { status: false, error: "No suppliers found" },
-      { status: 404 }
-    );
-  } catch (error) {
-    logMessage('error', 'Error fetching suppliers:', error);
-    return NextResponse.json(
-      { status: false, error: "Failed to fetch suppliers" },
-      { status: 500 }
-    );
   }
 }
