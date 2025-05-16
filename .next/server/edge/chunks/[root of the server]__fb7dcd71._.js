@@ -97,9 +97,24 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/middlewares/adminAuth.ts [middleware-edge] (ecmascript)");
 ;
 ;
-// Helper function to determine if a route matches
+// Helper function to check if a pathname matches a route string or pattern
 function routeMatches(pathname, routes) {
     return routes.some((route)=>pathname === route || pathname.startsWith(route));
+}
+// Helper function to check if pathname + method match any skippable route entry
+function routeMatchesWithMethod(pathname, method, routes) {
+    return routes.some((routeObj)=>{
+        if (typeof routeObj === "string") {
+            // String route means skip for all methods
+            return pathname === routeObj || pathname.startsWith(routeObj);
+        } else {
+            // Object with route + optional methods array
+            const matchesRoute = pathname === routeObj.route || pathname.startsWith(routeObj.route);
+            if (!matchesRoute) return false;
+            if (!routeObj.methods) return true; // no method specified means skip all methods
+            return routeObj.methods.includes(method);
+        }
+    });
 }
 function middleware(req) {
     const res = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
@@ -107,10 +122,10 @@ function middleware(req) {
     res.headers.set("Access-Control-Allow-Origin", "*"); // TODO: Replace '*' with actual domain in production
     res.headers.set("Access-Control-Allow-Methods", "*");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    // Log request method and URL
+    // Log request method and URL (for debugging)
     console.log(`req.method: ${req.method}`);
     console.log(`req.url: ${req.url}`);
-    // Handle preflight OPTIONS requests
+    // Handle preflight OPTIONS requests quickly
     if (req.method === "OPTIONS") {
         return new Response(null, {
             status: 200,
@@ -118,6 +133,7 @@ function middleware(req) {
         });
     }
     const pathname = req.nextUrl.pathname;
+    const method = req.method;
     const routeProtections = [
         {
             skip: true,
@@ -127,9 +143,36 @@ function middleware(req) {
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
                 "/api/supplier/auth/registration",
-                "/api/location/country",
-                "/api/location/state",
-                "/api/location/city"
+                {
+                    route: "/api/location/country",
+                    methods: [
+                        "GET"
+                    ]
+                },
+                {
+                    route: "/api/location/country/[countryId]/states",
+                    methods: [
+                        "GET"
+                    ]
+                },
+                {
+                    route: "/api/location/state",
+                    methods: [
+                        "GET"
+                    ]
+                },
+                {
+                    route: "/api/location/state/[stateId]/cities",
+                    methods: [
+                        "GET"
+                    ]
+                },
+                {
+                    route: "/api/location/city",
+                    methods: [
+                        "GET"
+                    ]
+                }
             ]
         },
         {
@@ -212,11 +255,16 @@ function middleware(req) {
         }
     ];
     for (const protection of routeProtections){
-        // Only proceed if the current route group applies to the current URL and isn't skipped
-        if (routeMatches(pathname, protection.routes)) {
-            if (protection.skip) {
-                break; // Skip checking other protections, since it's explicitly marked as skippable
+        if (protection.skip) {
+            // If skip is true, check with method-aware matcher
+            if (routeMatchesWithMethod(pathname, method, protection.routes)) {
+                // Skip auth for this route and method
+                return res;
             }
+            continue; // check next protection if no match
+        }
+        // For non-skipped routes, just check route matches ignoring method here
+        if (routeMatches(pathname, protection.routes)) {
             if (protection.role && protection.applicableRoles) {
                 console.log(`req.url: matched protected route for role ${protection.role}`);
                 return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminAuth$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["adminAuthMiddleware"])(req, protection.role, protection.applicableRoles);
@@ -224,7 +272,7 @@ function middleware(req) {
             break;
         }
     }
-    return res; // Proceed to next handler if no match
+    return res; // Proceed normally if no protection or skipped
 }
 const config = {
     matcher: [

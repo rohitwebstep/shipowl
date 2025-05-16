@@ -2,16 +2,39 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuthMiddleware } from "./middlewares/adminAuth";
 
+type SkippableRoute = string | { route: string; methods?: string[] };
+
 type RouteProtection = {
     skip?: boolean;
-    routes: string[];
+    routes: SkippableRoute[];
     role?: string;
     applicableRoles?: string[];
 };
 
-// Helper function to determine if a route matches
+// Helper function to check if a pathname matches a route string or pattern
 function routeMatches(pathname: string, routes: string[]): boolean {
-    return routes.some(route => pathname === route || pathname.startsWith(route));
+    return routes.some((route) => pathname === route || pathname.startsWith(route));
+}
+
+// Helper function to check if pathname + method match any skippable route entry
+function routeMatchesWithMethod(
+    pathname: string,
+    method: string,
+    routes: SkippableRoute[]
+): boolean {
+    return routes.some((routeObj) => {
+        if (typeof routeObj === "string") {
+            // String route means skip for all methods
+            return pathname === routeObj || pathname.startsWith(routeObj);
+        } else {
+            // Object with route + optional methods array
+            const matchesRoute =
+                pathname === routeObj.route || pathname.startsWith(routeObj.route);
+            if (!matchesRoute) return false;
+            if (!routeObj.methods) return true; // no method specified means skip all methods
+            return routeObj.methods.includes(method);
+        }
+    });
 }
 
 export function middleware(req: NextRequest) {
@@ -22,16 +45,17 @@ export function middleware(req: NextRequest) {
     res.headers.set("Access-Control-Allow-Methods", "*");
     res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-    // Log request method and URL
+    // Log request method and URL (for debugging)
     console.log(`req.method: ${req.method}`);
     console.log(`req.url: ${req.url}`);
 
-    // Handle preflight OPTIONS requests
+    // Handle preflight OPTIONS requests quickly
     if (req.method === "OPTIONS") {
         return new Response(null, { status: 200, headers: res.headers });
     }
 
     const pathname = req.nextUrl.pathname;
+    const method = req.method;
 
     const routeProtections: RouteProtection[] = [
         {
@@ -42,16 +66,15 @@ export function middleware(req: NextRequest) {
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
                 "/api/supplier/auth/registration",
-                "/api/location/country",
-                "/api/location/state",
-                "/api/location/city",
+                { route: "/api/location/country", methods: ["GET"] },
+                { route: "/api/location/country/[countryId]/states", methods: ["GET"] },
+                { route: "/api/location/state", methods: ["GET"] },
+                { route: "/api/location/state/[stateId]/cities", methods: ["GET"] },
+                { route: "/api/location/city", methods: ["GET"] },
             ],
         },
         {
-            routes: [
-                "/api/admin",
-                "/api/admin/:path*",
-            ],
+            routes: ["/api/admin", "/api/admin/:path*"],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
         },
@@ -119,24 +142,26 @@ export function middleware(req: NextRequest) {
     ];
 
     for (const protection of routeProtections) {
-        // Only proceed if the current route group applies to the current URL and isn't skipped
-        if (routeMatches(pathname, protection.routes)) {
-            if (protection.skip) {
-                break; // Skip checking other protections, since it's explicitly marked as skippable
+        if (protection.skip) {
+            // If skip is true, check with method-aware matcher
+            if (routeMatchesWithMethod(pathname, method, protection.routes)) {
+                // Skip auth for this route and method
+                return res;
             }
+            continue; // check next protection if no match
+        }
 
+        // For non-skipped routes, just check route matches ignoring method here
+        if (routeMatches(pathname, protection.routes as string[])) {
             if (protection.role && protection.applicableRoles) {
                 console.log(`req.url: matched protected route for role ${protection.role}`);
                 return adminAuthMiddleware(req, protection.role, protection.applicableRoles);
             }
-
-            // If route matches but no auth needed, break to avoid checking others
             break;
         }
     }
 
-
-    return res; // Proceed to next handler if no match
+    return res; // Proceed normally if no protection or skipped
 }
 
 export const config = {

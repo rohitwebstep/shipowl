@@ -12,23 +12,6 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Delete State Request:', { stateId });
 
-    // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
-    const adminRole = req.headers.get('x-admin-role');
-
-    // Validate admin ID
-    if (!adminId || isNaN(Number(adminId))) {
-      logMessage('warn', 'Invalid or missing admin ID', { adminId });
-      return NextResponse.json({ error: 'Admin ID is missing or invalid' }, { status: 400 });
-    }
-
-    // Check if the admin user exists
-    const userCheck = await isUserExist(Number(adminId), String(adminRole));
-    if (!userCheck.status) {
-      logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
-      return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
-    }
-
     // Validate state ID
     const stateIdNum = Number(stateId);
     if (isNaN(stateIdNum)) {
