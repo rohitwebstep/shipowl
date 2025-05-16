@@ -483,6 +483,7 @@ exports.Prisma.ProductRequestScalarFieldEnum = {
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
+  shippingOwlProductId: 'shippingOwlProductId',
   categoryId: 'categoryId',
   name: 'name',
   slug: 'slug',
@@ -682,6 +683,43 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   quantity: 'quantity',
   price: 'price',
   total: 'total'
+};
+
+exports.Prisma.SupplierProductScalarFieldEnum = {
+  id: 'id',
+  supplierId: 'supplierId',
+  productId: 'productId',
+  price: 'price',
+  stock: 'stock',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.DropshipperProductScalarFieldEnum = {
+  id: 'id',
+  dropshipperId: 'dropshipperId',
+  supplierId: 'supplierId',
+  productId: 'productId',
+  price: 'price',
+  stock: 'stock',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
 };
 
 exports.Prisma.SortOrder = {
@@ -927,6 +965,7 @@ exports.Prisma.QueryMode = {
 };
 
 exports.Prisma.productOrderByRelevanceFieldEnum = {
+  shippingOwlProductId: 'shippingOwlProductId',
   name: 'name',
   slug: 'slug',
   main_sku: 'main_sku',
@@ -1024,6 +1063,18 @@ exports.Prisma.OrderOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.supplierProductOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.dropshipperProductOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -1050,7 +1101,9 @@ exports.Prisma.ModelName = {
   goodPincode: 'goodPincode',
   Payment: 'Payment',
   Order: 'Order',
-  OrderItem: 'OrderItem'
+  OrderItem: 'OrderItem',
+  supplierProduct: 'supplierProduct',
+  dropshipperProduct: 'dropshipperProduct'
 };
 
 /**

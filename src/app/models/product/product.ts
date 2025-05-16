@@ -261,6 +261,24 @@ export async function generateProductSlug(name: string) {
     return slug;
 }
 
+export async function generateUniqueShippingOwlProductId() {
+    let isIdTaken = true;
+    let shippingOwlProductId = '';
+
+    while (isIdTaken) {
+        const randomNumber = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+        shippingOwlProductId = `PRD-${randomNumber}`;
+
+        const existingProduct = await prisma.product.findUnique({
+            where: { shippingOwlProductId },
+        });
+
+        isIdTaken = !!existingProduct;
+    }
+
+    return shippingOwlProductId;
+}
+
 export async function createProduct(adminId: number, adminRole: string, product: Product) {
     try {
         const {
@@ -301,9 +319,12 @@ export async function createProduct(adminId: number, adminRole: string, product:
         // Generate a unique slug for the product
         const slug = await generateProductSlug(name);
 
+        const shippingOwlProductId = await generateUniqueShippingOwlProductId();
+
         // Create the product in the database
         const newProduct = await prisma.product.create({
             data: {
+                shippingOwlProductId,
                 name,
                 categoryId,  // Use categoryId here
                 main_sku,
@@ -413,7 +434,7 @@ export const getProductsByFiltersAndStatus = async (productFilters: ProductFilte
             })();
 
         console.log(`productFilters - `, productFilters);
-        
+
         // Combine with filters (fully typed)
         const whereCondition = {
             ...statusCondition,
@@ -808,7 +829,6 @@ export const softDeleteProduct = async (adminId: number, adminRole: string, id: 
         return { status: false, message: "Error soft deleting product and variants" };
     }
 };
-
 
 // 🟢 RESTORE (Restores a soft-deleted product and its variants by setting deletedAt to null)
 export const restoreProduct = async (adminId: number, adminRole: string, id: number) => {

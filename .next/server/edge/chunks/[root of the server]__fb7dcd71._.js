@@ -178,7 +178,10 @@ function middleware(req) {
         {
             routes: [
                 "/api/admin",
-                "/api/admin/:path*"
+                "/api/admin/:path*",
+                "/api/product",
+                "/api/category",
+                "/api/brand"
             ],
             role: "admin",
             applicableRoles: [
@@ -204,7 +207,8 @@ function middleware(req) {
                 "/api/supplier/list",
                 "/api/supplier/auth/verify",
                 "/api/supplier/profile",
-                "/api/supplier/profile/update"
+                "/api/supplier/profile/update",
+                "/api/supplier/product"
             ],
             role: "supplier",
             applicableRoles: [
@@ -214,10 +218,6 @@ function middleware(req) {
         },
         {
             routes: [
-                "/api/category",
-                "/api/category/",
-                "/api/brand",
-                "/api/brand/",
                 "/api/warehouse",
                 "/api/warehouse/",
                 "/api/location/country",
@@ -226,8 +226,6 @@ function middleware(req) {
                 "/api/location/state/",
                 "/api/location/city",
                 "/api/location/city/",
-                "/api/product",
-                "/api/product/",
                 "/api/supplier",
                 "/api/dropshipper",
                 "/api/dropshipper/",

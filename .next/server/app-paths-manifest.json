@@ -1,4 +1,5 @@
 {
-  "/api/location/country/[countryId]/states/route": "app/api/location/country/[countryId]/states/route.js",
-  "/api/location/country/route": "app/api/location/country/route.js"
+  "/api/supplier/product/[supplierProductId]/route": "app/api/supplier/product/[supplierProductId]/route.js",
+  "/api/supplier/product/route": "app/api/supplier/product/route.js",
+  "/api/supplier/product/trashed/route": "app/api/supplier/product/trashed/route.js"
 }

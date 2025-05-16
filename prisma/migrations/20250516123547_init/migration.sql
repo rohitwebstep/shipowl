@@ -447,6 +447,7 @@ CREATE TABLE `productRequest` (
 -- CreateTable
 CREATE TABLE `product` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `shippingOwlProductId` VARCHAR(191) NOT NULL,
     `categoryId` INTEGER NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL,
@@ -487,6 +488,7 @@ CREATE TABLE `product` (
     `deletedBy` INTEGER NULL,
     `deletedByRole` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `product_shippingOwlProductId_key`(`shippingOwlProductId`),
     UNIQUE INDEX `product_slug_key`(`slug`),
     UNIQUE INDEX `product_main_sku_key`(`main_sku`),
     INDEX `product_categoryId_idx`(`categoryId`),
@@ -710,6 +712,60 @@ CREATE TABLE `OrderItem` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `supplierProduct` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `supplierId` INTEGER NOT NULL,
+    `productId` INTEGER NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `stock` INTEGER NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `supplierProduct_supplierId_idx`(`supplierId`),
+    INDEX `supplierProduct_productId_idx`(`productId`),
+    INDEX `supplierProduct_createdBy_idx`(`createdBy`),
+    INDEX `supplierProduct_updatedBy_idx`(`updatedBy`),
+    INDEX `supplierProduct_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `dropshipperProduct` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `dropshipperId` INTEGER NOT NULL,
+    `supplierId` INTEGER NOT NULL,
+    `productId` INTEGER NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `stock` INTEGER NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `dropshipperProduct_dropshipperId_idx`(`dropshipperId`),
+    INDEX `dropshipperProduct_supplierId_idx`(`supplierId`),
+    INDEX `dropshipperProduct_productId_idx`(`productId`),
+    INDEX `dropshipperProduct_createdBy_idx`(`createdBy`),
+    INDEX `dropshipperProduct_updatedBy_idx`(`updatedBy`),
+    INDEX `dropshipperProduct_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -817,3 +873,18 @@ ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_productId_fkey` FOREIGN KEY (`
 
 -- AddForeignKey
 ALTER TABLE `OrderItem` ADD CONSTRAINT `OrderItem_variantId_fkey` FOREIGN KEY (`variantId`) REFERENCES `productVariant`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `supplierProduct` ADD CONSTRAINT `supplierProduct_supplierId_fkey` FOREIGN KEY (`supplierId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `supplierProduct` ADD CONSTRAINT `supplierProduct_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_dropshipperId_fkey` FOREIGN KEY (`dropshipperId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_supplierId_fkey` FOREIGN KEY (`supplierId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

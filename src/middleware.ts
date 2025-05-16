@@ -74,7 +74,13 @@ export function middleware(req: NextRequest) {
             ],
         },
         {
-            routes: ["/api/admin", "/api/admin/:path*"],
+            routes: [
+                "/api/admin",
+                "/api/admin/:path*",
+                "/api/product",
+                "/api/category",
+                "/api/brand"
+            ],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
         },
@@ -94,16 +100,14 @@ export function middleware(req: NextRequest) {
                 "/api/supplier/auth/verify",
                 "/api/supplier/profile",
                 "/api/supplier/profile/update",
+                "/api/supplier/product",
             ],
             role: "supplier",
             applicableRoles: ["supplier", "supplier_staff"],
         },
         {
             routes: [
-                "/api/category",
-                "/api/category/",
-                "/api/brand",
-                "/api/brand/",
+
                 "/api/warehouse",
                 "/api/warehouse/",
                 "/api/location/country",
@@ -112,8 +116,6 @@ export function middleware(req: NextRequest) {
                 "/api/location/state/",
                 "/api/location/city",
                 "/api/location/city/",
-                "/api/product",
-                "/api/product/",
                 "/api/supplier",
                 "/api/dropshipper",
                 "/api/dropshipper/",

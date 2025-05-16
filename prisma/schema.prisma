@@ -86,6 +86,9 @@ model admin {
   staff                adminStaff[]
   companyDetail        companyDetail?    @relation
   bankAccounts         bankAccount[]
+  supplierProducts     supplierProduct[]  @relation("SupplierProducts")
+  dropshipperProducts  dropshipperProduct[] @relation("DropshipperProducts")
+  suppliedProducts     dropshipperProduct[] @relation("SuppliedProducts")
 }
 
 model companyDetail {
@@ -322,7 +325,7 @@ model country {
   admins                admin[]
   adminStaffs           adminStaff[]
 
-  // Add the relation fields for `originCountry` and `shippingCountry`
+  // Add the relation fields for originCountry and shippingCountry
   originProducts        product[]       @relation("OriginCountryRelation")
   shippingProducts      product[]       @relation("ShippingCountryRelation")
 
@@ -504,6 +507,7 @@ model productRequest {
 
 model product {
   id                              Int              @id @default(autoincrement())
+  shippingOwlProductId            String           @unique
   categoryId                      Int
   name                            String
   slug                            String           @unique
@@ -555,6 +559,8 @@ model product {
 
   variants                        productVariant[]
   orderItems                      OrderItem[]
+  supplierProducts                supplierProduct[]
+  dropshipperProducts             dropshipperProduct[]
 
   @@index([categoryId])
   @@index([brandId])
@@ -799,4 +805,63 @@ model OrderItem {
   @@index([orderId])
   @@index([productId])
   @@index([variantId])
+}
+
+model supplierProduct {
+  id              Int       @id @default(autoincrement())
+  supplierId      Int
+  productId       Int
+  price           Float
+  stock           Int
+  status          Boolean   @default(true)
+
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  supplier        admin     @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product         product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([supplierId])
+  @@index([productId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
+model dropshipperProduct {
+  id              Int       @id @default(autoincrement())
+  dropshipperId   Int
+  supplierId      Int
+  productId       Int
+  price           Float
+  stock           Int
+  status          Boolean   @default(true)
+
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  dropshipper     admin     @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
+  supplier        admin     @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product         product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([dropshipperId])
+  @@index([supplierId])
+  @@index([productId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
