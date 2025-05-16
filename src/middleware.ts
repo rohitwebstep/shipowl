@@ -42,6 +42,9 @@ export function middleware(req: NextRequest) {
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
                 "/api/supplier/auth/registration",
+                "/api/location/country",
+                "/api/location/state",
+                "/api/location/city",
             ],
         },
         {

@@ -126,7 +126,10 @@ function middleware(req) {
                 "/api/dropshipper/auth/login",
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
-                "/api/supplier/auth/registration"
+                "/api/supplier/auth/registration",
+                "/api/location/country",
+                "/api/location/state",
+                "/api/location/city"
             ]
         },
         {
