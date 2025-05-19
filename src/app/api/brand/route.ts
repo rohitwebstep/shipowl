@@ -126,29 +126,6 @@ export async function GET(req: NextRequest) {
     const fetchLogInfoResult = await fetchLogInfo('brand', 'view', req);
     logMessage('debug', 'fetchLogInfoResult:', fetchLogInfoResult);
 
-    // Retrieve x-admin-id and x-admin-role from request headers
-    const adminIdHeader = req.headers.get("x-admin-id");
-    const adminRole = req.headers.get("x-admin-role");
-
-    const adminId = Number(adminIdHeader);
-    if (!adminIdHeader || isNaN(adminId)) {
-      logMessage('warn', `Invalid adminIdHeader: ${adminIdHeader}`);
-      return NextResponse.json(
-        { status: false, error: "User ID is missing or invalid in request" },
-        { status: 400 }
-      );
-    }
-
-    // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
-      return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
-        { status: 404 }
-      );
-    }
-
     // Fetch all brands
     const brandsResult = await getBrandsByStatus("notDeleted");
 

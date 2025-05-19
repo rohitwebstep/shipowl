@@ -172,6 +172,18 @@ function middleware(req) {
                     methods: [
                         "GET"
                     ]
+                },
+                {
+                    route: "/api/brand",
+                    methods: [
+                        "GET"
+                    ]
+                },
+                {
+                    route: "/api/category",
+                    methods: [
+                        "GET"
+                    ]
                 }
             ]
         },
