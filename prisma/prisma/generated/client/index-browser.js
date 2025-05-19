@@ -234,6 +234,31 @@ exports.Prisma.BankAccountScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.BankAccountChangeRequestScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  bankAccountId: 'bankAccountId',
+  accountHolderName: 'accountHolderName',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountType: 'accountType',
+  ifscCode: 'ifscCode',
+  cancelledChequeImage: 'cancelledChequeImage',
+  paymentMethod: 'paymentMethod',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.AdminStaffScalarFieldEnum = {
   id: 'id',
   admin_id: 'admin_id',
@@ -492,10 +517,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   tags: 'tags',
   brandId: 'brandId',
   originCountryId: 'originCountryId',
-  ean: 'ean',
   hsnCode: 'hsnCode',
   taxRate: 'taxRate',
-  upc: 'upc',
   rtoAddress: 'rtoAddress',
   pickupAddress: 'pickupAddress',
   shippingCountryId: 'shippingCountryId',
@@ -533,7 +556,6 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   sku: 'sku',
   qty: 'qty',
   currency: 'currency',
-  article_id: 'article_id',
   product_link: 'product_link',
   suggested_price: 'suggested_price',
   shipowl_price: 'shipowl_price',
@@ -815,6 +837,22 @@ exports.Prisma.bankAccountOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.bankAccountChangeRequestOrderByRelevanceFieldEnum = {
+  accountHolderName: 'accountHolderName',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountType: 'accountType',
+  ifscCode: 'ifscCode',
+  cancelledChequeImage: 'cancelledChequeImage',
+  paymentMethod: 'paymentMethod',
+  status: 'status',
+  remarks: 'remarks',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   profilePicture: 'profilePicture',
   name: 'name',
@@ -971,9 +1009,7 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
   slug: 'slug',
   main_sku: 'main_sku',
   description: 'description',
-  ean: 'ean',
   hsnCode: 'hsnCode',
-  upc: 'upc',
   rtoAddress: 'rtoAddress',
   pickupAddress: 'pickupAddress',
   video_url: 'video_url',
@@ -995,7 +1031,6 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   color: 'color',
   sku: 'sku',
   currency: 'currency',
-  article_id: 'article_id',
   product_link: 'product_link',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
@@ -1082,6 +1117,7 @@ exports.Prisma.ModelName = {
   admin: 'admin',
   companyDetail: 'companyDetail',
   bankAccount: 'bankAccount',
+  bankAccountChangeRequest: 'bankAccountChangeRequest',
   adminStaff: 'adminStaff',
   permission: 'permission',
   adminStaffHasPermission: 'adminStaffHasPermission',

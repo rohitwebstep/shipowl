@@ -129,6 +129,39 @@ CREATE TABLE `bankAccount` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `bankAccountChangeRequest` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminId` INTEGER NOT NULL,
+    `bankAccountId` INTEGER NULL,
+    `accountHolderName` VARCHAR(191) NOT NULL,
+    `accountNumber` VARCHAR(191) NOT NULL,
+    `bankName` VARCHAR(191) NOT NULL,
+    `bankBranch` VARCHAR(191) NOT NULL,
+    `accountType` VARCHAR(191) NOT NULL,
+    `ifscCode` VARCHAR(191) NOT NULL,
+    `cancelledChequeImage` LONGTEXT NULL,
+    `paymentMethod` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NOT NULL DEFAULT 'pending',
+    `remarks` LONGTEXT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `bankAccountChangeRequest_adminId_idx`(`adminId`),
+    INDEX `bankAccountChangeRequest_bankAccountId_idx`(`bankAccountId`),
+    INDEX `bankAccountChangeRequest_createdBy_idx`(`createdBy`),
+    INDEX `bankAccountChangeRequest_updatedBy_idx`(`updatedBy`),
+    INDEX `bankAccountChangeRequest_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `adminStaff` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `admin_id` INTEGER NOT NULL,
@@ -456,10 +489,8 @@ CREATE TABLE `product` (
     `tags` JSON NULL,
     `brandId` INTEGER NOT NULL,
     `originCountryId` BIGINT NOT NULL,
-    `ean` VARCHAR(191) NULL,
     `hsnCode` VARCHAR(191) NULL,
     `taxRate` DOUBLE NULL,
-    `upc` VARCHAR(191) NULL,
     `rtoAddress` VARCHAR(191) NULL,
     `pickupAddress` VARCHAR(191) NULL,
     `shippingCountryId` BIGINT NOT NULL,
@@ -510,7 +541,6 @@ CREATE TABLE `productVariant` (
     `sku` VARCHAR(191) NOT NULL,
     `qty` INTEGER NOT NULL,
     `currency` VARCHAR(191) NOT NULL,
-    `article_id` VARCHAR(191) NULL,
     `product_link` VARCHAR(191) NULL,
     `suggested_price` DOUBLE NULL,
     `shipowl_price` DOUBLE NULL,
@@ -781,6 +811,12 @@ ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_adminId_fkey` FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE `bankAccount` ADD CONSTRAINT `bankAccount_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `bankAccountChangeRequest` ADD CONSTRAINT `bankAccountChangeRequest_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `bankAccountChangeRequest` ADD CONSTRAINT `bankAccountChangeRequest_bankAccountId_fkey` FOREIGN KEY (`bankAccountId`) REFERENCES `bankAccount`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

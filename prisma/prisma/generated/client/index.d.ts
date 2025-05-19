@@ -34,6 +34,11 @@ export type companyDetail = $Result.DefaultSelection<Prisma.$companyDetailPayloa
  */
 export type bankAccount = $Result.DefaultSelection<Prisma.$bankAccountPayload>
 /**
+ * Model bankAccountChangeRequest
+ * 
+ */
+export type bankAccountChangeRequest = $Result.DefaultSelection<Prisma.$bankAccountChangeRequestPayload>
+/**
  * Model adminStaff
  * 
  */
@@ -313,6 +318,16 @@ export class PrismaClient<
     * ```
     */
   get bankAccount(): Prisma.bankAccountDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bankAccountChangeRequest`: Exposes CRUD operations for the **bankAccountChangeRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BankAccountChangeRequests
+    * const bankAccountChangeRequests = await prisma.bankAccountChangeRequest.findMany()
+    * ```
+    */
+  get bankAccountChangeRequest(): Prisma.bankAccountChangeRequestDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.adminStaff`: Exposes CRUD operations for the **adminStaff** model.
@@ -987,6 +1002,7 @@ export namespace Prisma {
     admin: 'admin',
     companyDetail: 'companyDetail',
     bankAccount: 'bankAccount',
+    bankAccountChangeRequest: 'bankAccountChangeRequest',
     adminStaff: 'adminStaff',
     permission: 'permission',
     adminStaffHasPermission: 'adminStaffHasPermission',
@@ -1028,7 +1044,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "adminStaff" | "permission" | "adminStaffHasPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "payment" | "order" | "orderItem" | "supplierProduct" | "dropshipperProduct"
+      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "adminStaffHasPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "payment" | "order" | "orderItem" | "supplierProduct" | "dropshipperProduct"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1293,6 +1309,72 @@ export namespace Prisma {
           count: {
             args: Prisma.bankAccountCountArgs<ExtArgs>
             result: $Utils.Optional<BankAccountCountAggregateOutputType> | number
+          }
+        }
+      }
+      bankAccountChangeRequest: {
+        payload: Prisma.$bankAccountChangeRequestPayload<ExtArgs>
+        fields: Prisma.bankAccountChangeRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.bankAccountChangeRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.bankAccountChangeRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.bankAccountChangeRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.bankAccountChangeRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          findMany: {
+            args: Prisma.bankAccountChangeRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>[]
+          }
+          create: {
+            args: Prisma.bankAccountChangeRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          createMany: {
+            args: Prisma.bankAccountChangeRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.bankAccountChangeRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          update: {
+            args: Prisma.bankAccountChangeRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.bankAccountChangeRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.bankAccountChangeRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.bankAccountChangeRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bankAccountChangeRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.BankAccountChangeRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBankAccountChangeRequest>
+          }
+          groupBy: {
+            args: Prisma.bankAccountChangeRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BankAccountChangeRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.bankAccountChangeRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<BankAccountChangeRequestCountAggregateOutputType> | number
           }
         }
       }
@@ -2902,6 +2984,7 @@ export namespace Prisma {
     admin?: adminOmit
     companyDetail?: companyDetailOmit
     bankAccount?: bankAccountOmit
+    bankAccountChangeRequest?: bankAccountChangeRequestOmit
     adminStaff?: adminStaffOmit
     permission?: permissionOmit
     adminStaffHasPermission?: adminStaffHasPermissionOmit
@@ -3024,6 +3107,7 @@ export namespace Prisma {
     supplierProducts: number
     dropshipperProducts: number
     suppliedProducts: number
+    bankAccountChangeRequests: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3032,6 +3116,7 @@ export namespace Prisma {
     supplierProducts?: boolean | AdminCountOutputTypeCountSupplierProductsArgs
     dropshipperProducts?: boolean | AdminCountOutputTypeCountDropshipperProductsArgs
     suppliedProducts?: boolean | AdminCountOutputTypeCountSuppliedProductsArgs
+    bankAccountChangeRequests?: boolean | AdminCountOutputTypeCountBankAccountChangeRequestsArgs
   }
 
   // Custom InputTypes
@@ -3078,6 +3163,44 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountSuppliedProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: dropshipperProductWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountBankAccountChangeRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bankAccountChangeRequestWhereInput
+  }
+
+
+  /**
+   * Count Type BankAccountCountOutputType
+   */
+
+  export type BankAccountCountOutputType = {
+    bankAccountChangeRequests: number
+  }
+
+  export type BankAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bankAccountChangeRequests?: boolean | BankAccountCountOutputTypeCountBankAccountChangeRequestsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BankAccountCountOutputType without action
+   */
+  export type BankAccountCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BankAccountCountOutputType
+     */
+    select?: BankAccountCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BankAccountCountOutputType without action
+   */
+  export type BankAccountCountOutputTypeCountBankAccountChangeRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bankAccountChangeRequestWhereInput
   }
 
 
@@ -5205,6 +5328,7 @@ export namespace Prisma {
     supplierProducts?: boolean | admin$supplierProductsArgs<ExtArgs>
     dropshipperProducts?: boolean | admin$dropshipperProductsArgs<ExtArgs>
     suppliedProducts?: boolean | admin$suppliedProductsArgs<ExtArgs>
+    bankAccountChangeRequests?: boolean | admin$bankAccountChangeRequestsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -5255,6 +5379,7 @@ export namespace Prisma {
     supplierProducts?: boolean | admin$supplierProductsArgs<ExtArgs>
     dropshipperProducts?: boolean | admin$dropshipperProductsArgs<ExtArgs>
     suppliedProducts?: boolean | admin$suppliedProductsArgs<ExtArgs>
+    bankAccountChangeRequests?: boolean | admin$bankAccountChangeRequestsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5270,6 +5395,7 @@ export namespace Prisma {
       supplierProducts: Prisma.$supplierProductPayload<ExtArgs>[]
       dropshipperProducts: Prisma.$dropshipperProductPayload<ExtArgs>[]
       suppliedProducts: Prisma.$dropshipperProductPayload<ExtArgs>[]
+      bankAccountChangeRequests: Prisma.$bankAccountChangeRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5652,6 +5778,7 @@ export namespace Prisma {
     supplierProducts<T extends admin$supplierProductsArgs<ExtArgs> = {}>(args?: Subset<T, admin$supplierProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$supplierProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dropshipperProducts<T extends admin$dropshipperProductsArgs<ExtArgs> = {}>(args?: Subset<T, admin$dropshipperProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$dropshipperProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     suppliedProducts<T extends admin$suppliedProductsArgs<ExtArgs> = {}>(args?: Subset<T, admin$suppliedProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$dropshipperProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bankAccountChangeRequests<T extends admin$bankAccountChangeRequestsArgs<ExtArgs> = {}>(args?: Subset<T, admin$bankAccountChangeRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6248,6 +6375,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DropshipperProductScalarFieldEnum | DropshipperProductScalarFieldEnum[]
+  }
+
+  /**
+   * admin.bankAccountChangeRequests
+   */
+  export type admin$bankAccountChangeRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    where?: bankAccountChangeRequestWhereInput
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BankAccountChangeRequestScalarFieldEnum | BankAccountChangeRequestScalarFieldEnum[]
   }
 
   /**
@@ -7872,6 +8023,8 @@ export namespace Prisma {
     deletedBy?: boolean
     deletedByRole?: boolean
     admin?: boolean | adminDefaultArgs<ExtArgs>
+    bankAccountChangeRequests?: boolean | bankAccount$bankAccountChangeRequestsArgs<ExtArgs>
+    _count?: boolean | BankAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankAccount"]>
 
 
@@ -7901,12 +8054,15 @@ export namespace Prisma {
   export type bankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "paymentMethod" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccount"]>
   export type bankAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | adminDefaultArgs<ExtArgs>
+    bankAccountChangeRequests?: boolean | bankAccount$bankAccountChangeRequestsArgs<ExtArgs>
+    _count?: boolean | BankAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $bankAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "bankAccount"
     objects: {
       admin: Prisma.$adminPayload<ExtArgs>
+      bankAccountChangeRequests: Prisma.$bankAccountChangeRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8269,6 +8425,7 @@ export namespace Prisma {
   export interface Prisma__bankAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bankAccountChangeRequests<T extends bankAccount$bankAccountChangeRequestsArgs<ExtArgs> = {}>(args?: Subset<T, bankAccount$bankAccountChangeRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8660,6 +8817,30 @@ export namespace Prisma {
   }
 
   /**
+   * bankAccount.bankAccountChangeRequests
+   */
+  export type bankAccount$bankAccountChangeRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    where?: bankAccountChangeRequestWhereInput
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BankAccountChangeRequestScalarFieldEnum | BankAccountChangeRequestScalarFieldEnum[]
+  }
+
+  /**
    * bankAccount without action
    */
   export type bankAccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8675,6 +8856,1199 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: bankAccountInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model bankAccountChangeRequest
+   */
+
+  export type AggregateBankAccountChangeRequest = {
+    _count: BankAccountChangeRequestCountAggregateOutputType | null
+    _avg: BankAccountChangeRequestAvgAggregateOutputType | null
+    _sum: BankAccountChangeRequestSumAggregateOutputType | null
+    _min: BankAccountChangeRequestMinAggregateOutputType | null
+    _max: BankAccountChangeRequestMaxAggregateOutputType | null
+  }
+
+  export type BankAccountChangeRequestAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    bankAccountId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BankAccountChangeRequestSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    bankAccountId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type BankAccountChangeRequestMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    bankAccountId: number | null
+    accountHolderName: string | null
+    accountNumber: string | null
+    bankName: string | null
+    bankBranch: string | null
+    accountType: string | null
+    ifscCode: string | null
+    cancelledChequeImage: string | null
+    paymentMethod: string | null
+    status: string | null
+    remarks: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BankAccountChangeRequestMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    bankAccountId: number | null
+    accountHolderName: string | null
+    accountNumber: string | null
+    bankName: string | null
+    bankBranch: string | null
+    accountType: string | null
+    ifscCode: string | null
+    cancelledChequeImage: string | null
+    paymentMethod: string | null
+    status: string | null
+    remarks: string | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type BankAccountChangeRequestCountAggregateOutputType = {
+    id: number
+    adminId: number
+    bankAccountId: number
+    accountHolderName: number
+    accountNumber: number
+    bankName: number
+    bankBranch: number
+    accountType: number
+    ifscCode: number
+    cancelledChequeImage: number
+    paymentMethod: number
+    status: number
+    remarks: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type BankAccountChangeRequestAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    bankAccountId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BankAccountChangeRequestSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    bankAccountId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type BankAccountChangeRequestMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    bankAccountId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    paymentMethod?: true
+    status?: true
+    remarks?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BankAccountChangeRequestMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    bankAccountId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    paymentMethod?: true
+    status?: true
+    remarks?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type BankAccountChangeRequestCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    bankAccountId?: true
+    accountHolderName?: true
+    accountNumber?: true
+    bankName?: true
+    bankBranch?: true
+    accountType?: true
+    ifscCode?: true
+    cancelledChequeImage?: true
+    paymentMethod?: true
+    status?: true
+    remarks?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type BankAccountChangeRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bankAccountChangeRequest to aggregate.
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccountChangeRequests to fetch.
+     */
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccountChangeRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccountChangeRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned bankAccountChangeRequests
+    **/
+    _count?: true | BankAccountChangeRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BankAccountChangeRequestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BankAccountChangeRequestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BankAccountChangeRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BankAccountChangeRequestMaxAggregateInputType
+  }
+
+  export type GetBankAccountChangeRequestAggregateType<T extends BankAccountChangeRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateBankAccountChangeRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBankAccountChangeRequest[P]>
+      : GetScalarType<T[P], AggregateBankAccountChangeRequest[P]>
+  }
+
+
+
+
+  export type bankAccountChangeRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bankAccountChangeRequestWhereInput
+    orderBy?: bankAccountChangeRequestOrderByWithAggregationInput | bankAccountChangeRequestOrderByWithAggregationInput[]
+    by: BankAccountChangeRequestScalarFieldEnum[] | BankAccountChangeRequestScalarFieldEnum
+    having?: bankAccountChangeRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BankAccountChangeRequestCountAggregateInputType | true
+    _avg?: BankAccountChangeRequestAvgAggregateInputType
+    _sum?: BankAccountChangeRequestSumAggregateInputType
+    _min?: BankAccountChangeRequestMinAggregateInputType
+    _max?: BankAccountChangeRequestMaxAggregateInputType
+  }
+
+  export type BankAccountChangeRequestGroupByOutputType = {
+    id: number
+    adminId: number
+    bankAccountId: number | null
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage: string | null
+    paymentMethod: string | null
+    status: string
+    remarks: string | null
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: BankAccountChangeRequestCountAggregateOutputType | null
+    _avg: BankAccountChangeRequestAvgAggregateOutputType | null
+    _sum: BankAccountChangeRequestSumAggregateOutputType | null
+    _min: BankAccountChangeRequestMinAggregateOutputType | null
+    _max: BankAccountChangeRequestMaxAggregateOutputType | null
+  }
+
+  type GetBankAccountChangeRequestGroupByPayload<T extends bankAccountChangeRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BankAccountChangeRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BankAccountChangeRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BankAccountChangeRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], BankAccountChangeRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type bankAccountChangeRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    bankAccountId?: boolean
+    accountHolderName?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    bankBranch?: boolean
+    accountType?: boolean
+    ifscCode?: boolean
+    cancelledChequeImage?: boolean
+    paymentMethod?: boolean
+    status?: boolean
+    remarks?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    supplier?: boolean | adminDefaultArgs<ExtArgs>
+    bankAccount?: boolean | bankAccountChangeRequest$bankAccountArgs<ExtArgs>
+  }, ExtArgs["result"]["bankAccountChangeRequest"]>
+
+
+
+  export type bankAccountChangeRequestSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    bankAccountId?: boolean
+    accountHolderName?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    bankBranch?: boolean
+    accountType?: boolean
+    ifscCode?: boolean
+    cancelledChequeImage?: boolean
+    paymentMethod?: boolean
+    status?: boolean
+    remarks?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type bankAccountChangeRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "bankAccountId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "paymentMethod" | "status" | "remarks" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccountChangeRequest"]>
+  export type bankAccountChangeRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    supplier?: boolean | adminDefaultArgs<ExtArgs>
+    bankAccount?: boolean | bankAccountChangeRequest$bankAccountArgs<ExtArgs>
+  }
+
+  export type $bankAccountChangeRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "bankAccountChangeRequest"
+    objects: {
+      supplier: Prisma.$adminPayload<ExtArgs>
+      bankAccount: Prisma.$bankAccountPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      bankAccountId: number | null
+      accountHolderName: string
+      accountNumber: string
+      bankName: string
+      bankBranch: string
+      accountType: string
+      ifscCode: string
+      cancelledChequeImage: string | null
+      paymentMethod: string | null
+      status: string
+      remarks: string | null
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["bankAccountChangeRequest"]>
+    composites: {}
+  }
+
+  type bankAccountChangeRequestGetPayload<S extends boolean | null | undefined | bankAccountChangeRequestDefaultArgs> = $Result.GetResult<Prisma.$bankAccountChangeRequestPayload, S>
+
+  type bankAccountChangeRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<bankAccountChangeRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BankAccountChangeRequestCountAggregateInputType | true
+    }
+
+  export interface bankAccountChangeRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['bankAccountChangeRequest'], meta: { name: 'bankAccountChangeRequest' } }
+    /**
+     * Find zero or one BankAccountChangeRequest that matches the filter.
+     * @param {bankAccountChangeRequestFindUniqueArgs} args - Arguments to find a BankAccountChangeRequest
+     * @example
+     * // Get one BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends bankAccountChangeRequestFindUniqueArgs>(args: SelectSubset<T, bankAccountChangeRequestFindUniqueArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BankAccountChangeRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {bankAccountChangeRequestFindUniqueOrThrowArgs} args - Arguments to find a BankAccountChangeRequest
+     * @example
+     * // Get one BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends bankAccountChangeRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, bankAccountChangeRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BankAccountChangeRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestFindFirstArgs} args - Arguments to find a BankAccountChangeRequest
+     * @example
+     * // Get one BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends bankAccountChangeRequestFindFirstArgs>(args?: SelectSubset<T, bankAccountChangeRequestFindFirstArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BankAccountChangeRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestFindFirstOrThrowArgs} args - Arguments to find a BankAccountChangeRequest
+     * @example
+     * // Get one BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends bankAccountChangeRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, bankAccountChangeRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BankAccountChangeRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BankAccountChangeRequests
+     * const bankAccountChangeRequests = await prisma.bankAccountChangeRequest.findMany()
+     * 
+     * // Get first 10 BankAccountChangeRequests
+     * const bankAccountChangeRequests = await prisma.bankAccountChangeRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bankAccountChangeRequestWithIdOnly = await prisma.bankAccountChangeRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends bankAccountChangeRequestFindManyArgs>(args?: SelectSubset<T, bankAccountChangeRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BankAccountChangeRequest.
+     * @param {bankAccountChangeRequestCreateArgs} args - Arguments to create a BankAccountChangeRequest.
+     * @example
+     * // Create one BankAccountChangeRequest
+     * const BankAccountChangeRequest = await prisma.bankAccountChangeRequest.create({
+     *   data: {
+     *     // ... data to create a BankAccountChangeRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends bankAccountChangeRequestCreateArgs>(args: SelectSubset<T, bankAccountChangeRequestCreateArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BankAccountChangeRequests.
+     * @param {bankAccountChangeRequestCreateManyArgs} args - Arguments to create many BankAccountChangeRequests.
+     * @example
+     * // Create many BankAccountChangeRequests
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends bankAccountChangeRequestCreateManyArgs>(args?: SelectSubset<T, bankAccountChangeRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BankAccountChangeRequest.
+     * @param {bankAccountChangeRequestDeleteArgs} args - Arguments to delete one BankAccountChangeRequest.
+     * @example
+     * // Delete one BankAccountChangeRequest
+     * const BankAccountChangeRequest = await prisma.bankAccountChangeRequest.delete({
+     *   where: {
+     *     // ... filter to delete one BankAccountChangeRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends bankAccountChangeRequestDeleteArgs>(args: SelectSubset<T, bankAccountChangeRequestDeleteArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BankAccountChangeRequest.
+     * @param {bankAccountChangeRequestUpdateArgs} args - Arguments to update one BankAccountChangeRequest.
+     * @example
+     * // Update one BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends bankAccountChangeRequestUpdateArgs>(args: SelectSubset<T, bankAccountChangeRequestUpdateArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BankAccountChangeRequests.
+     * @param {bankAccountChangeRequestDeleteManyArgs} args - Arguments to filter BankAccountChangeRequests to delete.
+     * @example
+     * // Delete a few BankAccountChangeRequests
+     * const { count } = await prisma.bankAccountChangeRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends bankAccountChangeRequestDeleteManyArgs>(args?: SelectSubset<T, bankAccountChangeRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BankAccountChangeRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BankAccountChangeRequests
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends bankAccountChangeRequestUpdateManyArgs>(args: SelectSubset<T, bankAccountChangeRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BankAccountChangeRequest.
+     * @param {bankAccountChangeRequestUpsertArgs} args - Arguments to update or create a BankAccountChangeRequest.
+     * @example
+     * // Update or create a BankAccountChangeRequest
+     * const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.upsert({
+     *   create: {
+     *     // ... data to create a BankAccountChangeRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BankAccountChangeRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends bankAccountChangeRequestUpsertArgs>(args: SelectSubset<T, bankAccountChangeRequestUpsertArgs<ExtArgs>>): Prisma__bankAccountChangeRequestClient<$Result.GetResult<Prisma.$bankAccountChangeRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BankAccountChangeRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestCountArgs} args - Arguments to filter BankAccountChangeRequests to count.
+     * @example
+     * // Count the number of BankAccountChangeRequests
+     * const count = await prisma.bankAccountChangeRequest.count({
+     *   where: {
+     *     // ... the filter for the BankAccountChangeRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends bankAccountChangeRequestCountArgs>(
+      args?: Subset<T, bankAccountChangeRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BankAccountChangeRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BankAccountChangeRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BankAccountChangeRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BankAccountChangeRequestAggregateArgs>(args: Subset<T, BankAccountChangeRequestAggregateArgs>): Prisma.PrismaPromise<GetBankAccountChangeRequestAggregateType<T>>
+
+    /**
+     * Group by BankAccountChangeRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bankAccountChangeRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends bankAccountChangeRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: bankAccountChangeRequestGroupByArgs['orderBy'] }
+        : { orderBy?: bankAccountChangeRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, bankAccountChangeRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBankAccountChangeRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the bankAccountChangeRequest model
+   */
+  readonly fields: bankAccountChangeRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for bankAccountChangeRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__bankAccountChangeRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    supplier<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bankAccount<T extends bankAccountChangeRequest$bankAccountArgs<ExtArgs> = {}>(args?: Subset<T, bankAccountChangeRequest$bankAccountArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the bankAccountChangeRequest model
+   */
+  interface bankAccountChangeRequestFieldRefs {
+    readonly id: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly adminId: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly bankAccountId: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly accountHolderName: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly accountNumber: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly bankName: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly bankBranch: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly accountType: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly ifscCode: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly cancelledChequeImage: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly paymentMethod: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly status: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly remarks: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly createdAt: FieldRef<"bankAccountChangeRequest", 'DateTime'>
+    readonly createdBy: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly createdByRole: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly updatedAt: FieldRef<"bankAccountChangeRequest", 'DateTime'>
+    readonly updatedBy: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly updatedByRole: FieldRef<"bankAccountChangeRequest", 'String'>
+    readonly deletedAt: FieldRef<"bankAccountChangeRequest", 'DateTime'>
+    readonly deletedBy: FieldRef<"bankAccountChangeRequest", 'Int'>
+    readonly deletedByRole: FieldRef<"bankAccountChangeRequest", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * bankAccountChangeRequest findUnique
+   */
+  export type bankAccountChangeRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccountChangeRequest to fetch.
+     */
+    where: bankAccountChangeRequestWhereUniqueInput
+  }
+
+  /**
+   * bankAccountChangeRequest findUniqueOrThrow
+   */
+  export type bankAccountChangeRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccountChangeRequest to fetch.
+     */
+    where: bankAccountChangeRequestWhereUniqueInput
+  }
+
+  /**
+   * bankAccountChangeRequest findFirst
+   */
+  export type bankAccountChangeRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccountChangeRequest to fetch.
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccountChangeRequests to fetch.
+     */
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bankAccountChangeRequests.
+     */
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccountChangeRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccountChangeRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bankAccountChangeRequests.
+     */
+    distinct?: BankAccountChangeRequestScalarFieldEnum | BankAccountChangeRequestScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccountChangeRequest findFirstOrThrow
+   */
+  export type bankAccountChangeRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccountChangeRequest to fetch.
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccountChangeRequests to fetch.
+     */
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bankAccountChangeRequests.
+     */
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccountChangeRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccountChangeRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bankAccountChangeRequests.
+     */
+    distinct?: BankAccountChangeRequestScalarFieldEnum | BankAccountChangeRequestScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccountChangeRequest findMany
+   */
+  export type bankAccountChangeRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which bankAccountChangeRequests to fetch.
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bankAccountChangeRequests to fetch.
+     */
+    orderBy?: bankAccountChangeRequestOrderByWithRelationInput | bankAccountChangeRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing bankAccountChangeRequests.
+     */
+    cursor?: bankAccountChangeRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bankAccountChangeRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bankAccountChangeRequests.
+     */
+    skip?: number
+    distinct?: BankAccountChangeRequestScalarFieldEnum | BankAccountChangeRequestScalarFieldEnum[]
+  }
+
+  /**
+   * bankAccountChangeRequest create
+   */
+  export type bankAccountChangeRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a bankAccountChangeRequest.
+     */
+    data: XOR<bankAccountChangeRequestCreateInput, bankAccountChangeRequestUncheckedCreateInput>
+  }
+
+  /**
+   * bankAccountChangeRequest createMany
+   */
+  export type bankAccountChangeRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many bankAccountChangeRequests.
+     */
+    data: bankAccountChangeRequestCreateManyInput | bankAccountChangeRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * bankAccountChangeRequest update
+   */
+  export type bankAccountChangeRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a bankAccountChangeRequest.
+     */
+    data: XOR<bankAccountChangeRequestUpdateInput, bankAccountChangeRequestUncheckedUpdateInput>
+    /**
+     * Choose, which bankAccountChangeRequest to update.
+     */
+    where: bankAccountChangeRequestWhereUniqueInput
+  }
+
+  /**
+   * bankAccountChangeRequest updateMany
+   */
+  export type bankAccountChangeRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update bankAccountChangeRequests.
+     */
+    data: XOR<bankAccountChangeRequestUpdateManyMutationInput, bankAccountChangeRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which bankAccountChangeRequests to update
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * Limit how many bankAccountChangeRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * bankAccountChangeRequest upsert
+   */
+  export type bankAccountChangeRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the bankAccountChangeRequest to update in case it exists.
+     */
+    where: bankAccountChangeRequestWhereUniqueInput
+    /**
+     * In case the bankAccountChangeRequest found by the `where` argument doesn't exist, create a new bankAccountChangeRequest with this data.
+     */
+    create: XOR<bankAccountChangeRequestCreateInput, bankAccountChangeRequestUncheckedCreateInput>
+    /**
+     * In case the bankAccountChangeRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bankAccountChangeRequestUpdateInput, bankAccountChangeRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * bankAccountChangeRequest delete
+   */
+  export type bankAccountChangeRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
+    /**
+     * Filter which bankAccountChangeRequest to delete.
+     */
+    where: bankAccountChangeRequestWhereUniqueInput
+  }
+
+  /**
+   * bankAccountChangeRequest deleteMany
+   */
+  export type bankAccountChangeRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bankAccountChangeRequests to delete
+     */
+    where?: bankAccountChangeRequestWhereInput
+    /**
+     * Limit how many bankAccountChangeRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * bankAccountChangeRequest.bankAccount
+   */
+  export type bankAccountChangeRequest$bankAccountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccount
+     */
+    select?: bankAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccount
+     */
+    omit?: bankAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountInclude<ExtArgs> | null
+    where?: bankAccountWhereInput
+  }
+
+  /**
+   * bankAccountChangeRequest without action
+   */
+  export type bankAccountChangeRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bankAccountChangeRequest
+     */
+    select?: bankAccountChangeRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bankAccountChangeRequest
+     */
+    omit?: bankAccountChangeRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bankAccountChangeRequestInclude<ExtArgs> | null
   }
 
 
@@ -22989,10 +24363,8 @@ export namespace Prisma {
     description: string | null
     brandId: number | null
     originCountryId: bigint | null
-    ean: string | null
     hsnCode: string | null
     taxRate: number | null
-    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint | null
@@ -23032,10 +24404,8 @@ export namespace Prisma {
     description: string | null
     brandId: number | null
     originCountryId: bigint | null
-    ean: string | null
     hsnCode: string | null
     taxRate: number | null
-    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint | null
@@ -23076,10 +24446,8 @@ export namespace Prisma {
     tags: number
     brandId: number
     originCountryId: number
-    ean: number
     hsnCode: number
     taxRate: number
-    upc: number
     rtoAddress: number
     pickupAddress: number
     shippingCountryId: number
@@ -23155,10 +24523,8 @@ export namespace Prisma {
     description?: true
     brandId?: true
     originCountryId?: true
-    ean?: true
     hsnCode?: true
     taxRate?: true
-    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -23198,10 +24564,8 @@ export namespace Prisma {
     description?: true
     brandId?: true
     originCountryId?: true
-    ean?: true
     hsnCode?: true
     taxRate?: true
-    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -23242,10 +24606,8 @@ export namespace Prisma {
     tags?: true
     brandId?: true
     originCountryId?: true
-    ean?: true
     hsnCode?: true
     taxRate?: true
-    upc?: true
     rtoAddress?: true
     pickupAddress?: true
     shippingCountryId?: true
@@ -23373,10 +24735,8 @@ export namespace Prisma {
     tags: JsonValue | null
     brandId: number
     originCountryId: bigint
-    ean: string | null
     hsnCode: string | null
     taxRate: number | null
-    upc: string | null
     rtoAddress: string | null
     pickupAddress: string | null
     shippingCountryId: bigint
@@ -23436,10 +24796,8 @@ export namespace Prisma {
     tags?: boolean
     brandId?: boolean
     originCountryId?: boolean
-    ean?: boolean
     hsnCode?: boolean
     taxRate?: boolean
-    upc?: boolean
     rtoAddress?: boolean
     pickupAddress?: boolean
     shippingCountryId?: boolean
@@ -23491,10 +24849,8 @@ export namespace Prisma {
     tags?: boolean
     brandId?: boolean
     originCountryId?: boolean
-    ean?: boolean
     hsnCode?: boolean
     taxRate?: boolean
-    upc?: boolean
     rtoAddress?: boolean
     pickupAddress?: boolean
     shippingCountryId?: boolean
@@ -23524,7 +24880,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shippingOwlProductId" | "categoryId" | "name" | "slug" | "main_sku" | "description" | "tags" | "brandId" | "originCountryId" | "ean" | "hsnCode" | "taxRate" | "upc" | "rtoAddress" | "pickupAddress" | "shippingCountryId" | "video_url" | "list_as" | "shipping_time" | "weight" | "package_length" | "package_width" | "package_height" | "chargeable_weight" | "package_weight_image" | "package_length_image" | "package_width_image" | "package_height_image" | "product_detail_video" | "training_guidance_video" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
+  export type productOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shippingOwlProductId" | "categoryId" | "name" | "slug" | "main_sku" | "description" | "tags" | "brandId" | "originCountryId" | "hsnCode" | "taxRate" | "rtoAddress" | "pickupAddress" | "shippingCountryId" | "video_url" | "list_as" | "shipping_time" | "weight" | "package_length" | "package_width" | "package_height" | "chargeable_weight" | "package_weight_image" | "package_length_image" | "package_width_image" | "package_height_image" | "product_detail_video" | "training_guidance_video" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["product"]>
   export type productInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | categoryDefaultArgs<ExtArgs>
     brand?: boolean | brandDefaultArgs<ExtArgs>
@@ -23560,10 +24916,8 @@ export namespace Prisma {
       tags: Prisma.JsonValue | null
       brandId: number
       originCountryId: bigint
-      ean: string | null
       hsnCode: string | null
       taxRate: number | null
-      upc: string | null
       rtoAddress: string | null
       pickupAddress: string | null
       shippingCountryId: bigint
@@ -23978,10 +25332,8 @@ export namespace Prisma {
     readonly tags: FieldRef<"product", 'Json'>
     readonly brandId: FieldRef<"product", 'Int'>
     readonly originCountryId: FieldRef<"product", 'BigInt'>
-    readonly ean: FieldRef<"product", 'String'>
     readonly hsnCode: FieldRef<"product", 'String'>
     readonly taxRate: FieldRef<"product", 'Float'>
-    readonly upc: FieldRef<"product", 'String'>
     readonly rtoAddress: FieldRef<"product", 'String'>
     readonly pickupAddress: FieldRef<"product", 'String'>
     readonly shippingCountryId: FieldRef<"product", 'BigInt'>
@@ -24512,7 +25864,6 @@ export namespace Prisma {
     sku: string | null
     qty: number | null
     currency: string | null
-    article_id: string | null
     product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
@@ -24537,7 +25888,6 @@ export namespace Prisma {
     sku: string | null
     qty: number | null
     currency: string | null
-    article_id: string | null
     product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
@@ -24562,7 +25912,6 @@ export namespace Prisma {
     sku: number
     qty: number
     currency: number
-    article_id: number
     product_link: number
     suggested_price: number
     shipowl_price: number
@@ -24615,7 +25964,6 @@ export namespace Prisma {
     sku?: true
     qty?: true
     currency?: true
-    article_id?: true
     product_link?: true
     suggested_price?: true
     shipowl_price?: true
@@ -24640,7 +25988,6 @@ export namespace Prisma {
     sku?: true
     qty?: true
     currency?: true
-    article_id?: true
     product_link?: true
     suggested_price?: true
     shipowl_price?: true
@@ -24665,7 +26012,6 @@ export namespace Prisma {
     sku?: true
     qty?: true
     currency?: true
-    article_id?: true
     product_link?: true
     suggested_price?: true
     shipowl_price?: true
@@ -24777,7 +26123,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id: string | null
     product_link: string | null
     suggested_price: number | null
     shipowl_price: number | null
@@ -24821,7 +26166,6 @@ export namespace Prisma {
     sku?: boolean
     qty?: boolean
     currency?: boolean
-    article_id?: boolean
     product_link?: boolean
     suggested_price?: boolean
     shipowl_price?: boolean
@@ -24851,7 +26195,6 @@ export namespace Prisma {
     sku?: boolean
     qty?: boolean
     currency?: boolean
-    article_id?: boolean
     product_link?: boolean
     suggested_price?: boolean
     shipowl_price?: boolean
@@ -24868,7 +26211,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "article_id" | "product_link" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "qty" | "currency" | "product_link" | "suggested_price" | "shipowl_price" | "rto_suggested_price" | "rto_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
     orderItems?: boolean | productVariant$orderItemsArgs<ExtArgs>
@@ -24889,7 +26232,6 @@ export namespace Prisma {
       sku: string
       qty: number
       currency: string
-      article_id: string | null
       product_link: string | null
       suggested_price: number | null
       shipowl_price: number | null
@@ -25282,7 +26624,6 @@ export namespace Prisma {
     readonly sku: FieldRef<"productVariant", 'String'>
     readonly qty: FieldRef<"productVariant", 'Int'>
     readonly currency: FieldRef<"productVariant", 'String'>
-    readonly article_id: FieldRef<"productVariant", 'String'>
     readonly product_link: FieldRef<"productVariant", 'String'>
     readonly suggested_price: FieldRef<"productVariant", 'Float'>
     readonly shipowl_price: FieldRef<"productVariant", 'Float'>
@@ -36045,6 +37386,34 @@ export namespace Prisma {
   export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
 
 
+  export const BankAccountChangeRequestScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    bankAccountId: 'bankAccountId',
+    accountHolderName: 'accountHolderName',
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    bankBranch: 'bankBranch',
+    accountType: 'accountType',
+    ifscCode: 'ifscCode',
+    cancelledChequeImage: 'cancelledChequeImage',
+    paymentMethod: 'paymentMethod',
+    status: 'status',
+    remarks: 'remarks',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type BankAccountChangeRequestScalarFieldEnum = (typeof BankAccountChangeRequestScalarFieldEnum)[keyof typeof BankAccountChangeRequestScalarFieldEnum]
+
+
   export const AdminStaffScalarFieldEnum: {
     id: 'id',
     admin_id: 'admin_id',
@@ -36339,10 +37708,8 @@ export namespace Prisma {
     tags: 'tags',
     brandId: 'brandId',
     originCountryId: 'originCountryId',
-    ean: 'ean',
     hsnCode: 'hsnCode',
     taxRate: 'taxRate',
-    upc: 'upc',
     rtoAddress: 'rtoAddress',
     pickupAddress: 'pickupAddress',
     shippingCountryId: 'shippingCountryId',
@@ -36383,7 +37750,6 @@ export namespace Prisma {
     sku: 'sku',
     qty: 'qty',
     currency: 'currency',
-    article_id: 'article_id',
     product_link: 'product_link',
     suggested_price: 'suggested_price',
     shipowl_price: 'shipowl_price',
@@ -36716,6 +38082,25 @@ export namespace Prisma {
   export type bankAccountOrderByRelevanceFieldEnum = (typeof bankAccountOrderByRelevanceFieldEnum)[keyof typeof bankAccountOrderByRelevanceFieldEnum]
 
 
+  export const bankAccountChangeRequestOrderByRelevanceFieldEnum: {
+    accountHolderName: 'accountHolderName',
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    bankBranch: 'bankBranch',
+    accountType: 'accountType',
+    ifscCode: 'ifscCode',
+    cancelledChequeImage: 'cancelledChequeImage',
+    paymentMethod: 'paymentMethod',
+    status: 'status',
+    remarks: 'remarks',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type bankAccountChangeRequestOrderByRelevanceFieldEnum = (typeof bankAccountChangeRequestOrderByRelevanceFieldEnum)[keyof typeof bankAccountChangeRequestOrderByRelevanceFieldEnum]
+
+
   export const adminStaffOrderByRelevanceFieldEnum: {
     profilePicture: 'profilePicture',
     name: 'name',
@@ -36914,9 +38299,7 @@ export namespace Prisma {
     slug: 'slug',
     main_sku: 'main_sku',
     description: 'description',
-    ean: 'ean',
     hsnCode: 'hsnCode',
-    upc: 'upc',
     rtoAddress: 'rtoAddress',
     pickupAddress: 'pickupAddress',
     video_url: 'video_url',
@@ -36941,7 +38324,6 @@ export namespace Prisma {
     color: 'color',
     sku: 'sku',
     currency: 'currency',
-    article_id: 'article_id',
     product_link: 'product_link',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
@@ -37287,6 +38669,7 @@ export namespace Prisma {
     supplierProducts?: SupplierProductListRelationFilter
     dropshipperProducts?: DropshipperProductListRelationFilter
     suppliedProducts?: DropshipperProductListRelationFilter
+    bankAccountChangeRequests?: BankAccountChangeRequestListRelationFilter
   }
 
   export type adminOrderByWithRelationInput = {
@@ -37330,6 +38713,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductOrderByRelationAggregateInput
     dropshipperProducts?: dropshipperProductOrderByRelationAggregateInput
     suppliedProducts?: dropshipperProductOrderByRelationAggregateInput
+    bankAccountChangeRequests?: bankAccountChangeRequestOrderByRelationAggregateInput
     _relevance?: adminOrderByRelevanceInput
   }
 
@@ -37377,6 +38761,7 @@ export namespace Prisma {
     supplierProducts?: SupplierProductListRelationFilter
     dropshipperProducts?: DropshipperProductListRelationFilter
     suppliedProducts?: DropshipperProductListRelationFilter
+    bankAccountChangeRequests?: BankAccountChangeRequestListRelationFilter
   }, "id" | "username">
 
   export type adminOrderByWithAggregationInput = {
@@ -37672,6 +39057,7 @@ export namespace Prisma {
     deletedBy?: IntNullableFilter<"bankAccount"> | number | null
     deletedByRole?: StringNullableFilter<"bankAccount"> | string | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    bankAccountChangeRequests?: BankAccountChangeRequestListRelationFilter
   }
 
   export type bankAccountOrderByWithRelationInput = {
@@ -37695,6 +39081,7 @@ export namespace Prisma {
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
     admin?: adminOrderByWithRelationInput
+    bankAccountChangeRequests?: bankAccountChangeRequestOrderByRelationAggregateInput
     _relevance?: bankAccountOrderByRelevanceInput
   }
 
@@ -37722,6 +39109,7 @@ export namespace Prisma {
     deletedBy?: IntNullableFilter<"bankAccount"> | number | null
     deletedByRole?: StringNullableFilter<"bankAccount"> | string | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    bankAccountChangeRequests?: BankAccountChangeRequestListRelationFilter
   }, "id">
 
   export type bankAccountOrderByWithAggregationInput = {
@@ -37774,6 +39162,152 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"bankAccount"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"bankAccount"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"bankAccount"> | string | null
+  }
+
+  export type bankAccountChangeRequestWhereInput = {
+    AND?: bankAccountChangeRequestWhereInput | bankAccountChangeRequestWhereInput[]
+    OR?: bankAccountChangeRequestWhereInput[]
+    NOT?: bankAccountChangeRequestWhereInput | bankAccountChangeRequestWhereInput[]
+    id?: IntFilter<"bankAccountChangeRequest"> | number
+    adminId?: IntFilter<"bankAccountChangeRequest"> | number
+    bankAccountId?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    accountHolderName?: StringFilter<"bankAccountChangeRequest"> | string
+    accountNumber?: StringFilter<"bankAccountChangeRequest"> | string
+    bankName?: StringFilter<"bankAccountChangeRequest"> | string
+    bankBranch?: StringFilter<"bankAccountChangeRequest"> | string
+    accountType?: StringFilter<"bankAccountChangeRequest"> | string
+    ifscCode?: StringFilter<"bankAccountChangeRequest"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    status?: StringFilter<"bankAccountChangeRequest"> | string
+    remarks?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    createdAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccountChangeRequest"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
+  }
+
+  export type bankAccountChangeRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrderInput | SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrderInput | SortOrder
+    status?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    supplier?: adminOrderByWithRelationInput
+    bankAccount?: bankAccountOrderByWithRelationInput
+    _relevance?: bankAccountChangeRequestOrderByRelevanceInput
+  }
+
+  export type bankAccountChangeRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: bankAccountChangeRequestWhereInput | bankAccountChangeRequestWhereInput[]
+    OR?: bankAccountChangeRequestWhereInput[]
+    NOT?: bankAccountChangeRequestWhereInput | bankAccountChangeRequestWhereInput[]
+    adminId?: IntFilter<"bankAccountChangeRequest"> | number
+    bankAccountId?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    accountHolderName?: StringFilter<"bankAccountChangeRequest"> | string
+    accountNumber?: StringFilter<"bankAccountChangeRequest"> | string
+    bankName?: StringFilter<"bankAccountChangeRequest"> | string
+    bankBranch?: StringFilter<"bankAccountChangeRequest"> | string
+    accountType?: StringFilter<"bankAccountChangeRequest"> | string
+    ifscCode?: StringFilter<"bankAccountChangeRequest"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    status?: StringFilter<"bankAccountChangeRequest"> | string
+    remarks?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    createdAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccountChangeRequest"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
+  }, "id">
+
+  export type bankAccountChangeRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrderInput | SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrderInput | SortOrder
+    status?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: bankAccountChangeRequestCountOrderByAggregateInput
+    _avg?: bankAccountChangeRequestAvgOrderByAggregateInput
+    _max?: bankAccountChangeRequestMaxOrderByAggregateInput
+    _min?: bankAccountChangeRequestMinOrderByAggregateInput
+    _sum?: bankAccountChangeRequestSumOrderByAggregateInput
+  }
+
+  export type bankAccountChangeRequestScalarWhereWithAggregatesInput = {
+    AND?: bankAccountChangeRequestScalarWhereWithAggregatesInput | bankAccountChangeRequestScalarWhereWithAggregatesInput[]
+    OR?: bankAccountChangeRequestScalarWhereWithAggregatesInput[]
+    NOT?: bankAccountChangeRequestScalarWhereWithAggregatesInput | bankAccountChangeRequestScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"bankAccountChangeRequest"> | number
+    adminId?: IntWithAggregatesFilter<"bankAccountChangeRequest"> | number
+    bankAccountId?: IntNullableWithAggregatesFilter<"bankAccountChangeRequest"> | number | null
+    accountHolderName?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    accountNumber?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    bankName?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    bankBranch?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    accountType?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    ifscCode?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    cancelledChequeImage?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
+    paymentMethod?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
+    status?: StringWithAggregatesFilter<"bankAccountChangeRequest"> | string
+    remarks?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"bankAccountChangeRequest"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"bankAccountChangeRequest"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"bankAccountChangeRequest"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"bankAccountChangeRequest"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"bankAccountChangeRequest"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"bankAccountChangeRequest"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"bankAccountChangeRequest"> | string | null
   }
 
   export type adminStaffWhereInput = {
@@ -39328,10 +40862,8 @@ export namespace Prisma {
     tags?: JsonNullableFilter<"product">
     brandId?: IntFilter<"product"> | number
     originCountryId?: BigIntFilter<"product"> | bigint | number
-    ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
-    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -39380,10 +40912,8 @@ export namespace Prisma {
     tags?: SortOrderInput | SortOrder
     brandId?: SortOrder
     originCountryId?: SortOrder
-    ean?: SortOrderInput | SortOrder
     hsnCode?: SortOrderInput | SortOrder
     taxRate?: SortOrderInput | SortOrder
-    upc?: SortOrderInput | SortOrder
     rtoAddress?: SortOrderInput | SortOrder
     pickupAddress?: SortOrderInput | SortOrder
     shippingCountryId?: SortOrder
@@ -39436,10 +40966,8 @@ export namespace Prisma {
     tags?: JsonNullableFilter<"product">
     brandId?: IntFilter<"product"> | number
     originCountryId?: BigIntFilter<"product"> | bigint | number
-    ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
-    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -39488,10 +41016,8 @@ export namespace Prisma {
     tags?: SortOrderInput | SortOrder
     brandId?: SortOrder
     originCountryId?: SortOrder
-    ean?: SortOrderInput | SortOrder
     hsnCode?: SortOrderInput | SortOrder
     taxRate?: SortOrderInput | SortOrder
-    upc?: SortOrderInput | SortOrder
     rtoAddress?: SortOrderInput | SortOrder
     pickupAddress?: SortOrderInput | SortOrder
     shippingCountryId?: SortOrder
@@ -39540,10 +41066,8 @@ export namespace Prisma {
     tags?: JsonNullableWithAggregatesFilter<"product">
     brandId?: IntWithAggregatesFilter<"product"> | number
     originCountryId?: BigIntWithAggregatesFilter<"product"> | bigint | number
-    ean?: StringNullableWithAggregatesFilter<"product"> | string | null
     hsnCode?: StringNullableWithAggregatesFilter<"product"> | string | null
     taxRate?: FloatNullableWithAggregatesFilter<"product"> | number | null
-    upc?: StringNullableWithAggregatesFilter<"product"> | string | null
     rtoAddress?: StringNullableWithAggregatesFilter<"product"> | string | null
     pickupAddress?: StringNullableWithAggregatesFilter<"product"> | string | null
     shippingCountryId?: BigIntWithAggregatesFilter<"product"> | bigint | number
@@ -39584,7 +41108,6 @@ export namespace Prisma {
     sku?: StringFilter<"productVariant"> | string
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
-    article_id?: StringNullableFilter<"productVariant"> | string | null
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -39611,7 +41134,6 @@ export namespace Prisma {
     sku?: SortOrder
     qty?: SortOrder
     currency?: SortOrder
-    article_id?: SortOrderInput | SortOrder
     product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
     shipowl_price?: SortOrderInput | SortOrder
@@ -39642,7 +41164,6 @@ export namespace Prisma {
     color?: StringFilter<"productVariant"> | string
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
-    article_id?: StringNullableFilter<"productVariant"> | string | null
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -39669,7 +41190,6 @@ export namespace Prisma {
     sku?: SortOrder
     qty?: SortOrder
     currency?: SortOrder
-    article_id?: SortOrderInput | SortOrder
     product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
     shipowl_price?: SortOrderInput | SortOrder
@@ -39702,7 +41222,6 @@ export namespace Prisma {
     sku?: StringWithAggregatesFilter<"productVariant"> | string
     qty?: IntWithAggregatesFilter<"productVariant"> | number
     currency?: StringWithAggregatesFilter<"productVariant"> | string
-    article_id?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
     product_link?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
@@ -40982,6 +42501,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateInput = {
@@ -41022,6 +42542,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUpdateInput = {
@@ -41061,6 +42582,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateInput = {
@@ -41101,6 +42623,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminCreateManyInput = {
@@ -41461,6 +42984,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     admin: adminCreateNestedOneWithoutBankAccountsInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutBankAccountInput
   }
 
   export type bankAccountUncheckedCreateInput = {
@@ -41483,6 +43007,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutBankAccountInput
   }
 
   export type bankAccountUpdateInput = {
@@ -41504,6 +43029,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: adminUpdateOneRequiredWithoutBankAccountsNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutBankAccountNestedInput
   }
 
   export type bankAccountUncheckedUpdateInput = {
@@ -41526,6 +43052,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutBankAccountNestedInput
   }
 
   export type bankAccountCreateManyInput = {
@@ -41581,6 +43108,176 @@ export namespace Prisma {
     ifscCode?: StringFieldUpdateOperationsInput | string
     cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
     paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestCreateInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    supplier: adminCreateNestedOneWithoutBankAccountChangeRequestsInput
+    bankAccount?: bankAccountCreateNestedOneWithoutBankAccountChangeRequestsInput
+  }
+
+  export type bankAccountChangeRequestUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    bankAccountId?: number | null
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountChangeRequestUpdateInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier?: adminUpdateOneRequiredWithoutBankAccountChangeRequestsNestedInput
+    bankAccount?: bankAccountUpdateOneWithoutBankAccountChangeRequestsNestedInput
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    bankAccountId?: NullableIntFieldUpdateOperationsInput | number | null
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestCreateManyInput = {
+    id?: number
+    adminId: number
+    bankAccountId?: number | null
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountChangeRequestUpdateManyMutationInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    bankAccountId?: NullableIntFieldUpdateOperationsInput | number | null
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43400,10 +45097,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -43451,10 +45146,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -43495,10 +45188,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43546,10 +45237,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -43594,10 +45283,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -43634,10 +45321,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43677,10 +45362,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -43716,7 +45399,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -43743,7 +45425,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -43767,7 +45448,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43794,7 +45474,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43820,7 +45499,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -43843,7 +45521,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43868,7 +45545,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45407,6 +47083,12 @@ export namespace Prisma {
     none?: dropshipperProductWhereInput
   }
 
+  export type BankAccountChangeRequestListRelationFilter = {
+    every?: bankAccountChangeRequestWhereInput
+    some?: bankAccountChangeRequestWhereInput
+    none?: bankAccountChangeRequestWhereInput
+  }
+
   export type adminStaffOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -45420,6 +47102,10 @@ export namespace Prisma {
   }
 
   export type dropshipperProductOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type bankAccountChangeRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -45796,6 +47482,110 @@ export namespace Prisma {
   export type bankAccountSumOrderByAggregateInput = {
     id?: SortOrder
     adminId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type BankAccountNullableScalarRelationFilter = {
+    is?: bankAccountWhereInput | null
+    isNot?: bankAccountWhereInput | null
+  }
+
+  export type bankAccountChangeRequestOrderByRelevanceInput = {
+    fields: bankAccountChangeRequestOrderByRelevanceFieldEnum | bankAccountChangeRequestOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type bankAccountChangeRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
+    status?: SortOrder
+    remarks?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountChangeRequestAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type bankAccountChangeRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
+    status?: SortOrder
+    remarks?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountChangeRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrder
+    accountHolderName?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    bankBranch?: SortOrder
+    accountType?: SortOrder
+    ifscCode?: SortOrder
+    cancelledChequeImage?: SortOrder
+    paymentMethod?: SortOrder
+    status?: SortOrder
+    remarks?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type bankAccountChangeRequestSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    bankAccountId?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -47005,10 +48795,8 @@ export namespace Prisma {
     tags?: SortOrder
     brandId?: SortOrder
     originCountryId?: SortOrder
-    ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
-    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -47065,10 +48853,8 @@ export namespace Prisma {
     description?: SortOrder
     brandId?: SortOrder
     originCountryId?: SortOrder
-    ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
-    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -47108,10 +48894,8 @@ export namespace Prisma {
     description?: SortOrder
     brandId?: SortOrder
     originCountryId?: SortOrder
-    ean?: SortOrder
     hsnCode?: SortOrder
     taxRate?: SortOrder
-    upc?: SortOrder
     rtoAddress?: SortOrder
     pickupAddress?: SortOrder
     shippingCountryId?: SortOrder
@@ -47219,7 +49003,6 @@ export namespace Prisma {
     sku?: SortOrder
     qty?: SortOrder
     currency?: SortOrder
-    article_id?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
@@ -47257,7 +49040,6 @@ export namespace Prisma {
     sku?: SortOrder
     qty?: SortOrder
     currency?: SortOrder
-    article_id?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
@@ -47282,7 +49064,6 @@ export namespace Prisma {
     sku?: SortOrder
     qty?: SortOrder
     currency?: SortOrder
-    article_id?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
     shipowl_price?: SortOrder
@@ -48210,6 +49991,13 @@ export namespace Prisma {
     connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
   }
 
+  export type bankAccountChangeRequestCreateNestedManyWithoutSupplierInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput> | bankAccountChangeRequestCreateWithoutSupplierInput[] | bankAccountChangeRequestUncheckedCreateWithoutSupplierInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput | bankAccountChangeRequestCreateOrConnectWithoutSupplierInput[]
+    createMany?: bankAccountChangeRequestCreateManySupplierInputEnvelope
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+  }
+
   export type adminStaffUncheckedCreateNestedManyWithoutAdminInput = {
     create?: XOR<adminStaffCreateWithoutAdminInput, adminStaffUncheckedCreateWithoutAdminInput> | adminStaffCreateWithoutAdminInput[] | adminStaffUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
@@ -48249,6 +50037,13 @@ export namespace Prisma {
     connectOrCreate?: dropshipperProductCreateOrConnectWithoutSupplierInput | dropshipperProductCreateOrConnectWithoutSupplierInput[]
     createMany?: dropshipperProductCreateManySupplierInputEnvelope
     connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+  }
+
+  export type bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput> | bankAccountChangeRequestCreateWithoutSupplierInput[] | bankAccountChangeRequestUncheckedCreateWithoutSupplierInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput | bankAccountChangeRequestCreateOrConnectWithoutSupplierInput[]
+    createMany?: bankAccountChangeRequestCreateManySupplierInputEnvelope
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -48365,6 +50160,20 @@ export namespace Prisma {
     deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
   }
 
+  export type bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput> | bankAccountChangeRequestCreateWithoutSupplierInput[] | bankAccountChangeRequestUncheckedCreateWithoutSupplierInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput | bankAccountChangeRequestCreateOrConnectWithoutSupplierInput[]
+    upsert?: bankAccountChangeRequestUpsertWithWhereUniqueWithoutSupplierInput | bankAccountChangeRequestUpsertWithWhereUniqueWithoutSupplierInput[]
+    createMany?: bankAccountChangeRequestCreateManySupplierInputEnvelope
+    set?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    disconnect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    delete?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    update?: bankAccountChangeRequestUpdateWithWhereUniqueWithoutSupplierInput | bankAccountChangeRequestUpdateWithWhereUniqueWithoutSupplierInput[]
+    updateMany?: bankAccountChangeRequestUpdateManyWithWhereWithoutSupplierInput | bankAccountChangeRequestUpdateManyWithWhereWithoutSupplierInput[]
+    deleteMany?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+  }
+
   export type NullableBigIntFieldUpdateOperationsInput = {
     set?: bigint | number | null
     increment?: bigint | number
@@ -48453,6 +50262,20 @@ export namespace Prisma {
     deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
   }
 
+  export type bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput> | bankAccountChangeRequestCreateWithoutSupplierInput[] | bankAccountChangeRequestUncheckedCreateWithoutSupplierInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput | bankAccountChangeRequestCreateOrConnectWithoutSupplierInput[]
+    upsert?: bankAccountChangeRequestUpsertWithWhereUniqueWithoutSupplierInput | bankAccountChangeRequestUpsertWithWhereUniqueWithoutSupplierInput[]
+    createMany?: bankAccountChangeRequestCreateManySupplierInputEnvelope
+    set?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    disconnect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    delete?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    update?: bankAccountChangeRequestUpdateWithWhereUniqueWithoutSupplierInput | bankAccountChangeRequestUpdateWithWhereUniqueWithoutSupplierInput[]
+    updateMany?: bankAccountChangeRequestUpdateManyWithWhereWithoutSupplierInput | bankAccountChangeRequestUpdateManyWithWhereWithoutSupplierInput[]
+    deleteMany?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+  }
+
   export type adminCreateNestedOneWithoutCompanyDetailInput = {
     create?: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
     connectOrCreate?: adminCreateOrConnectWithoutCompanyDetailInput
@@ -48473,12 +50296,84 @@ export namespace Prisma {
     connect?: adminWhereUniqueInput
   }
 
+  export type bankAccountChangeRequestCreateNestedManyWithoutBankAccountInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput> | bankAccountChangeRequestCreateWithoutBankAccountInput[] | bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput | bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput[]
+    createMany?: bankAccountChangeRequestCreateManyBankAccountInputEnvelope
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+  }
+
+  export type bankAccountChangeRequestUncheckedCreateNestedManyWithoutBankAccountInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput> | bankAccountChangeRequestCreateWithoutBankAccountInput[] | bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput | bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput[]
+    createMany?: bankAccountChangeRequestCreateManyBankAccountInputEnvelope
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+  }
+
   export type adminUpdateOneRequiredWithoutBankAccountsNestedInput = {
     create?: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
     connectOrCreate?: adminCreateOrConnectWithoutBankAccountsInput
     upsert?: adminUpsertWithoutBankAccountsInput
     connect?: adminWhereUniqueInput
     update?: XOR<XOR<adminUpdateToOneWithWhereWithoutBankAccountsInput, adminUpdateWithoutBankAccountsInput>, adminUncheckedUpdateWithoutBankAccountsInput>
+  }
+
+  export type bankAccountChangeRequestUpdateManyWithoutBankAccountNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput> | bankAccountChangeRequestCreateWithoutBankAccountInput[] | bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput | bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput[]
+    upsert?: bankAccountChangeRequestUpsertWithWhereUniqueWithoutBankAccountInput | bankAccountChangeRequestUpsertWithWhereUniqueWithoutBankAccountInput[]
+    createMany?: bankAccountChangeRequestCreateManyBankAccountInputEnvelope
+    set?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    disconnect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    delete?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    update?: bankAccountChangeRequestUpdateWithWhereUniqueWithoutBankAccountInput | bankAccountChangeRequestUpdateWithWhereUniqueWithoutBankAccountInput[]
+    updateMany?: bankAccountChangeRequestUpdateManyWithWhereWithoutBankAccountInput | bankAccountChangeRequestUpdateManyWithWhereWithoutBankAccountInput[]
+    deleteMany?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateManyWithoutBankAccountNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput> | bankAccountChangeRequestCreateWithoutBankAccountInput[] | bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput[]
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput | bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput[]
+    upsert?: bankAccountChangeRequestUpsertWithWhereUniqueWithoutBankAccountInput | bankAccountChangeRequestUpsertWithWhereUniqueWithoutBankAccountInput[]
+    createMany?: bankAccountChangeRequestCreateManyBankAccountInputEnvelope
+    set?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    disconnect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    delete?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    connect?: bankAccountChangeRequestWhereUniqueInput | bankAccountChangeRequestWhereUniqueInput[]
+    update?: bankAccountChangeRequestUpdateWithWhereUniqueWithoutBankAccountInput | bankAccountChangeRequestUpdateWithWhereUniqueWithoutBankAccountInput[]
+    updateMany?: bankAccountChangeRequestUpdateManyWithWhereWithoutBankAccountInput | bankAccountChangeRequestUpdateManyWithWhereWithoutBankAccountInput[]
+    deleteMany?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+  }
+
+  export type adminCreateNestedOneWithoutBankAccountChangeRequestsInput = {
+    create?: XOR<adminCreateWithoutBankAccountChangeRequestsInput, adminUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    connectOrCreate?: adminCreateOrConnectWithoutBankAccountChangeRequestsInput
+    connect?: adminWhereUniqueInput
+  }
+
+  export type bankAccountCreateNestedOneWithoutBankAccountChangeRequestsInput = {
+    create?: XOR<bankAccountCreateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    connectOrCreate?: bankAccountCreateOrConnectWithoutBankAccountChangeRequestsInput
+    connect?: bankAccountWhereUniqueInput
+  }
+
+  export type adminUpdateOneRequiredWithoutBankAccountChangeRequestsNestedInput = {
+    create?: XOR<adminCreateWithoutBankAccountChangeRequestsInput, adminUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    connectOrCreate?: adminCreateOrConnectWithoutBankAccountChangeRequestsInput
+    upsert?: adminUpsertWithoutBankAccountChangeRequestsInput
+    connect?: adminWhereUniqueInput
+    update?: XOR<XOR<adminUpdateToOneWithWhereWithoutBankAccountChangeRequestsInput, adminUpdateWithoutBankAccountChangeRequestsInput>, adminUncheckedUpdateWithoutBankAccountChangeRequestsInput>
+  }
+
+  export type bankAccountUpdateOneWithoutBankAccountChangeRequestsNestedInput = {
+    create?: XOR<bankAccountCreateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    connectOrCreate?: bankAccountCreateOrConnectWithoutBankAccountChangeRequestsInput
+    upsert?: bankAccountUpsertWithoutBankAccountChangeRequestsInput
+    disconnect?: bankAccountWhereInput | boolean
+    delete?: bankAccountWhereInput | boolean
+    connect?: bankAccountWhereUniqueInput
+    update?: XOR<XOR<bankAccountUpdateToOneWithWhereWithoutBankAccountChangeRequestsInput, bankAccountUpdateWithoutBankAccountChangeRequestsInput>, bankAccountUncheckedUpdateWithoutBankAccountChangeRequestsInput>
   }
 
   export type cityCreateNestedOneWithoutAdminStaffsInput = {
@@ -51199,6 +53094,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutBankAccountInput
   }
 
   export type bankAccountUncheckedCreateWithoutAdminInput = {
@@ -51220,6 +53116,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutBankAccountInput
   }
 
   export type bankAccountCreateOrConnectWithoutAdminInput = {
@@ -51368,6 +53265,63 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManySupplierInputEnvelope = {
     data: dropshipperProductCreateManySupplierInput | dropshipperProductCreateManySupplierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type bankAccountChangeRequestCreateWithoutSupplierInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    bankAccount?: bankAccountCreateNestedOneWithoutBankAccountChangeRequestsInput
+  }
+
+  export type bankAccountChangeRequestUncheckedCreateWithoutSupplierInput = {
+    id?: number
+    bankAccountId?: number | null
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountChangeRequestCreateOrConnectWithoutSupplierInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    create: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
+  }
+
+  export type bankAccountChangeRequestCreateManySupplierInputEnvelope = {
+    data: bankAccountChangeRequestCreateManySupplierInput | bankAccountChangeRequestCreateManySupplierInput[]
     skipDuplicates?: boolean
   }
 
@@ -51812,6 +53766,50 @@ export namespace Prisma {
     data: XOR<dropshipperProductUpdateManyMutationInput, dropshipperProductUncheckedUpdateManyWithoutSupplierInput>
   }
 
+  export type bankAccountChangeRequestUpsertWithWhereUniqueWithoutSupplierInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    update: XOR<bankAccountChangeRequestUpdateWithoutSupplierInput, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
+    create: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
+  }
+
+  export type bankAccountChangeRequestUpdateWithWhereUniqueWithoutSupplierInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    data: XOR<bankAccountChangeRequestUpdateWithoutSupplierInput, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
+  }
+
+  export type bankAccountChangeRequestUpdateManyWithWhereWithoutSupplierInput = {
+    where: bankAccountChangeRequestScalarWhereInput
+    data: XOR<bankAccountChangeRequestUpdateManyMutationInput, bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierInput>
+  }
+
+  export type bankAccountChangeRequestScalarWhereInput = {
+    AND?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+    OR?: bankAccountChangeRequestScalarWhereInput[]
+    NOT?: bankAccountChangeRequestScalarWhereInput | bankAccountChangeRequestScalarWhereInput[]
+    id?: IntFilter<"bankAccountChangeRequest"> | number
+    adminId?: IntFilter<"bankAccountChangeRequest"> | number
+    bankAccountId?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    accountHolderName?: StringFilter<"bankAccountChangeRequest"> | string
+    accountNumber?: StringFilter<"bankAccountChangeRequest"> | string
+    bankName?: StringFilter<"bankAccountChangeRequest"> | string
+    bankBranch?: StringFilter<"bankAccountChangeRequest"> | string
+    accountType?: StringFilter<"bankAccountChangeRequest"> | string
+    ifscCode?: StringFilter<"bankAccountChangeRequest"> | string
+    cancelledChequeImage?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    paymentMethod?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    status?: StringFilter<"bankAccountChangeRequest"> | string
+    remarks?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    createdAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    createdBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    createdByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    updatedAt?: DateTimeFilter<"bankAccountChangeRequest"> | Date | string
+    updatedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    updatedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+    deletedAt?: DateTimeNullableFilter<"bankAccountChangeRequest"> | Date | string | null
+    deletedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
+    deletedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
+  }
+
   export type adminCreateWithoutCompanyDetailInput = {
     profilePicture?: string | null
     name: string
@@ -51848,6 +53846,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutCompanyDetailInput = {
@@ -51887,6 +53886,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutCompanyDetailInput = {
@@ -51941,6 +53941,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutCompanyDetailInput = {
@@ -51980,6 +53981,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminCreateWithoutBankAccountsInput = {
@@ -52018,6 +54020,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutBankAccountsInput = {
@@ -52057,11 +54060,69 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutBankAccountsInput = {
     where: adminWhereUniqueInput
     create: XOR<adminCreateWithoutBankAccountsInput, adminUncheckedCreateWithoutBankAccountsInput>
+  }
+
+  export type bankAccountChangeRequestCreateWithoutBankAccountInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    supplier: adminCreateNestedOneWithoutBankAccountChangeRequestsInput
+  }
+
+  export type bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput = {
+    id?: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountChangeRequestCreateOrConnectWithoutBankAccountInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    create: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput>
+  }
+
+  export type bankAccountChangeRequestCreateManyBankAccountInputEnvelope = {
+    data: bankAccountChangeRequestCreateManyBankAccountInput | bankAccountChangeRequestCreateManyBankAccountInput[]
+    skipDuplicates?: boolean
   }
 
   export type adminUpsertWithoutBankAccountsInput = {
@@ -52111,6 +54172,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutBankAccountsInput = {
@@ -52150,6 +54212,299 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
+  }
+
+  export type bankAccountChangeRequestUpsertWithWhereUniqueWithoutBankAccountInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    update: XOR<bankAccountChangeRequestUpdateWithoutBankAccountInput, bankAccountChangeRequestUncheckedUpdateWithoutBankAccountInput>
+    create: XOR<bankAccountChangeRequestCreateWithoutBankAccountInput, bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput>
+  }
+
+  export type bankAccountChangeRequestUpdateWithWhereUniqueWithoutBankAccountInput = {
+    where: bankAccountChangeRequestWhereUniqueInput
+    data: XOR<bankAccountChangeRequestUpdateWithoutBankAccountInput, bankAccountChangeRequestUncheckedUpdateWithoutBankAccountInput>
+  }
+
+  export type bankAccountChangeRequestUpdateManyWithWhereWithoutBankAccountInput = {
+    where: bankAccountChangeRequestScalarWhereInput
+    data: XOR<bankAccountChangeRequestUpdateManyMutationInput, bankAccountChangeRequestUncheckedUpdateManyWithoutBankAccountInput>
+  }
+
+  export type adminCreateWithoutBankAccountChangeRequestsInput = {
+    profilePicture?: string | null
+    name: string
+    username?: string | null
+    website?: string | null
+    email: string
+    referralCode?: string | null
+    password: string
+    role?: string
+    type?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
+    supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
+    dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
+    suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+  }
+
+  export type adminUncheckedCreateWithoutBankAccountChangeRequestsInput = {
+    id?: number
+    profilePicture?: string | null
+    name: string
+    username?: string | null
+    website?: string | null
+    email: string
+    referralCode?: string | null
+    password: string
+    role?: string
+    type?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
+    supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
+    dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
+    suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+  }
+
+  export type adminCreateOrConnectWithoutBankAccountChangeRequestsInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutBankAccountChangeRequestsInput, adminUncheckedCreateWithoutBankAccountChangeRequestsInput>
+  }
+
+  export type bankAccountCreateWithoutBankAccountChangeRequestsInput = {
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    admin: adminCreateNestedOneWithoutBankAccountsInput
+  }
+
+  export type bankAccountUncheckedCreateWithoutBankAccountChangeRequestsInput = {
+    id?: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountCreateOrConnectWithoutBankAccountChangeRequestsInput = {
+    where: bankAccountWhereUniqueInput
+    create: XOR<bankAccountCreateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedCreateWithoutBankAccountChangeRequestsInput>
+  }
+
+  export type adminUpsertWithoutBankAccountChangeRequestsInput = {
+    update: XOR<adminUpdateWithoutBankAccountChangeRequestsInput, adminUncheckedUpdateWithoutBankAccountChangeRequestsInput>
+    create: XOR<adminCreateWithoutBankAccountChangeRequestsInput, adminUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    where?: adminWhereInput
+  }
+
+  export type adminUpdateToOneWithWhereWithoutBankAccountChangeRequestsInput = {
+    where?: adminWhereInput
+    data: XOR<adminUpdateWithoutBankAccountChangeRequestsInput, adminUncheckedUpdateWithoutBankAccountChangeRequestsInput>
+  }
+
+  export type adminUpdateWithoutBankAccountChangeRequestsInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
+    supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
+    dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
+    suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutBankAccountChangeRequestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
+    supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
+    dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
+    suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+  }
+
+  export type bankAccountUpsertWithoutBankAccountChangeRequestsInput = {
+    update: XOR<bankAccountUpdateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedUpdateWithoutBankAccountChangeRequestsInput>
+    create: XOR<bankAccountCreateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedCreateWithoutBankAccountChangeRequestsInput>
+    where?: bankAccountWhereInput
+  }
+
+  export type bankAccountUpdateToOneWithWhereWithoutBankAccountChangeRequestsInput = {
+    where?: bankAccountWhereInput
+    data: XOR<bankAccountUpdateWithoutBankAccountChangeRequestsInput, bankAccountUncheckedUpdateWithoutBankAccountChangeRequestsInput>
+  }
+
+  export type bankAccountUpdateWithoutBankAccountChangeRequestsInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    admin?: adminUpdateOneRequiredWithoutBankAccountsNestedInput
+  }
+
+  export type bankAccountUncheckedUpdateWithoutBankAccountChangeRequestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type cityCreateWithoutAdminStaffsInput = {
@@ -52351,6 +54706,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutStaffInput = {
@@ -52390,6 +54746,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutStaffInput = {
@@ -52662,6 +55019,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutStaffInput = {
@@ -52701,6 +55059,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput = {
@@ -53250,6 +55609,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutPermanentCountryInput = {
@@ -53289,6 +55649,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutPermanentCountryInput = {
@@ -53377,10 +55738,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -53426,10 +55785,8 @@ export namespace Prisma {
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -53480,10 +55837,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -53530,10 +55885,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -54001,10 +56354,8 @@ export namespace Prisma {
     tags?: JsonNullableFilter<"product">
     brandId?: IntFilter<"product"> | number
     originCountryId?: BigIntFilter<"product"> | bigint | number
-    ean?: StringNullableFilter<"product"> | string | null
     hsnCode?: StringNullableFilter<"product"> | string | null
     taxRate?: FloatNullableFilter<"product"> | number | null
-    upc?: StringNullableFilter<"product"> | string | null
     rtoAddress?: StringNullableFilter<"product"> | string | null
     pickupAddress?: StringNullableFilter<"product"> | string | null
     shippingCountryId?: BigIntFilter<"product"> | bigint | number
@@ -54377,6 +56728,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutPermanentStateInput = {
@@ -54416,6 +56768,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutPermanentStateInput = {
@@ -55106,6 +57459,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutPermanentCityInput = {
@@ -55145,6 +57499,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutPermanentCityInput = {
@@ -55975,10 +58330,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -56024,10 +58377,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -56180,10 +58531,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -56229,10 +58578,8 @@ export namespace Prisma {
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -56600,7 +58947,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -56625,7 +58971,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -57035,7 +59380,6 @@ export namespace Prisma {
     sku?: StringFilter<"productVariant"> | string
     qty?: IntFilter<"productVariant"> | number
     currency?: StringFilter<"productVariant"> | string
-    article_id?: StringNullableFilter<"productVariant"> | string | null
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     shipowl_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -57120,10 +59464,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -57170,10 +59512,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -57256,10 +59596,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57306,10 +59644,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -58711,10 +61047,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -58761,10 +61095,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -58808,7 +61140,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -58834,7 +61165,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -58962,10 +61292,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59012,10 +61340,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -59065,7 +61391,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -59091,7 +61416,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -59144,6 +61468,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutSupplierProductsInput = {
@@ -59183,6 +61508,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutSupplierProductsInput = {
@@ -59197,10 +61523,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -59247,10 +61571,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -59382,6 +61704,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutSupplierProductsInput = {
@@ -59421,6 +61744,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type productUpsertWithoutSupplierProductsInput = {
@@ -59441,10 +61765,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59491,10 +61813,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -59579,6 +61899,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutDropshipperProductsInput = {
@@ -59618,6 +61939,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutDropshipperProductsInput = {
@@ -59661,6 +61983,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountCreateNestedManyWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
+    bankAccountChangeRequests?: bankAccountChangeRequestCreateNestedManyWithoutSupplierInput
   }
 
   export type adminUncheckedCreateWithoutSuppliedProductsInput = {
@@ -59700,6 +62023,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedCreateNestedManyWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedCreateNestedManyWithoutSupplierInput
   }
 
   export type adminCreateOrConnectWithoutSuppliedProductsInput = {
@@ -59714,10 +62038,8 @@ export namespace Prisma {
     main_sku: string
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -59764,10 +62086,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -59892,6 +62212,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutDropshipperProductsInput = {
@@ -59931,6 +62252,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUpsertWithoutSuppliedProductsInput = {
@@ -59980,6 +62302,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUpdateManyWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutSuppliedProductsInput = {
@@ -60019,6 +62342,7 @@ export namespace Prisma {
     bankAccounts?: bankAccountUncheckedUpdateManyWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type productUpsertWithoutDropshipperProductsInput = {
@@ -60039,10 +62363,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60089,10 +62411,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -60276,6 +62596,30 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type bankAccountChangeRequestCreateManySupplierInput = {
+    id?: number
+    bankAccountId?: number | null
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type adminStaffUpdateWithoutAdminInput = {
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
@@ -60382,6 +62726,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutBankAccountNestedInput
   }
 
   export type bankAccountUncheckedUpdateWithoutAdminInput = {
@@ -60403,6 +62748,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutBankAccountNestedInput
   }
 
   export type bankAccountUncheckedUpdateManyWithoutAdminInput = {
@@ -60579,6 +62925,172 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestUpdateWithoutSupplierInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    bankAccount?: bankAccountUpdateOneWithoutBankAccountChangeRequestsNestedInput
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bankAccountId?: NullableIntFieldUpdateOperationsInput | number | null
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bankAccountId?: NullableIntFieldUpdateOperationsInput | number | null
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestCreateManyBankAccountInput = {
+    id?: number
+    adminId: number
+    accountHolderName: string
+    accountNumber: string
+    bankName: string
+    bankBranch: string
+    accountType: string
+    ifscCode: string
+    cancelledChequeImage?: string | null
+    paymentMethod?: string | null
+    status?: string
+    remarks?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type bankAccountChangeRequestUpdateWithoutBankAccountInput = {
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier?: adminUpdateOneRequiredWithoutBankAccountChangeRequestsNestedInput
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateWithoutBankAccountInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type bankAccountChangeRequestUncheckedUpdateManyWithoutBankAccountInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    accountHolderName?: StringFieldUpdateOperationsInput | string
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    bankBranch?: StringFieldUpdateOperationsInput | string
+    accountType?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    cancelledChequeImage?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60844,10 +63356,8 @@ export namespace Prisma {
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -60888,10 +63398,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     video_url?: string | null
@@ -61272,6 +63780,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutPermanentCountryInput = {
@@ -61311,6 +63820,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateManyWithoutPermanentCountryInput = {
@@ -61441,10 +63951,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61490,10 +63998,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -61537,10 +64043,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -61577,10 +64081,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61627,10 +64129,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61674,10 +64174,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62344,6 +64842,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutPermanentStateInput = {
@@ -62383,6 +64882,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateManyWithoutPermanentStateInput = {
@@ -63072,6 +65572,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateWithoutPermanentCityInput = {
@@ -63111,6 +65612,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequests?: bankAccountChangeRequestUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type adminUncheckedUpdateManyWithoutPermanentCityInput = {
@@ -63474,10 +65976,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId: number
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -63533,10 +66033,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63582,10 +66080,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -63629,10 +66125,8 @@ export namespace Prisma {
     tags?: NullableJsonNullValueInput | InputJsonValue
     brandId?: IntFieldUpdateOperationsInput | number
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -63728,10 +66222,8 @@ export namespace Prisma {
     description?: string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     originCountryId: bigint | number
-    ean?: string | null
     hsnCode?: string | null
     taxRate?: number | null
-    upc?: string | null
     rtoAddress?: string | null
     pickupAddress?: string | null
     shippingCountryId: bigint | number
@@ -63768,10 +66260,8 @@ export namespace Prisma {
     main_sku?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63817,10 +66307,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -63864,10 +66352,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: NullableJsonNullValueInput | InputJsonValue
     originCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
-    ean?: NullableStringFieldUpdateOperationsInput | string | null
     hsnCode?: NullableStringFieldUpdateOperationsInput | string | null
     taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    upc?: NullableStringFieldUpdateOperationsInput | string | null
     rtoAddress?: NullableStringFieldUpdateOperationsInput | string | null
     pickupAddress?: NullableStringFieldUpdateOperationsInput | string | null
     shippingCountryId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -63904,7 +66390,6 @@ export namespace Prisma {
     sku: string
     qty: number
     currency: string
-    article_id?: string | null
     product_link?: string | null
     suggested_price?: number | null
     shipowl_price?: number | null
@@ -63972,7 +66457,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -63997,7 +66481,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -64022,7 +66505,6 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     qty?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    article_id?: NullableStringFieldUpdateOperationsInput | string | null
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
     shipowl_price?: NullableFloatFieldUpdateOperationsInput | number | null

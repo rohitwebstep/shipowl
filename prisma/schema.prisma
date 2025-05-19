@@ -83,12 +83,13 @@ model admin {
   permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
-  staff                adminStaff[]
-  companyDetail        companyDetail?    @relation
-  bankAccounts         bankAccount[]
-  supplierProducts     supplierProduct[]  @relation("SupplierProducts")
-  dropshipperProducts  dropshipperProduct[] @relation("DropshipperProducts")
-  suppliedProducts     dropshipperProduct[] @relation("SuppliedProducts")
+  staff                           adminStaff[]
+  companyDetail                   companyDetail?              @relation
+  bankAccounts                    bankAccount[]
+  supplierProducts                supplierProduct[]           @relation("SupplierProducts")
+  dropshipperProducts             dropshipperProduct[]        @relation("DropshipperProducts")
+  suppliedProducts                dropshipperProduct[]        @relation("SuppliedProducts")
+  bankAccountChangeRequests       bankAccountChangeRequest[]
 }
 
 model companyDetail {
@@ -130,16 +131,46 @@ model companyDetail {
 }
 
 model bankAccount {
+  id                              Int                               @id @default(autoincrement())
+  adminId                         Int
+  accountHolderName               String
+  accountNumber                   String
+  bankName                        String
+  bankBranch                      String
+  accountType                     String
+  ifscCode                        String
+  cancelledChequeImage            String?                           @db.LongText
+  paymentMethod                   String?
+
+  createdAt                       DateTime                          @default(now())
+  createdBy                       Int?
+  createdByRole                   String?
+  updatedAt                       DateTime                          @updatedAt
+  updatedBy                       Int?
+  updatedByRole                   String?
+  deletedAt                       DateTime?
+  deletedBy                       Int?
+  deletedByRole                   String?
+
+  admin                           admin                             @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  bankAccountChangeRequests       bankAccountChangeRequest[]
+}
+
+model bankAccountChangeRequest {
   id                     Int       @id @default(autoincrement())
   adminId                Int
+  bankAccountId          Int?      // Optional reference to the existing bank account being updated
   accountHolderName      String
   accountNumber          String
   bankName               String
   bankBranch             String
   accountType            String
   ifscCode               String
-  cancelledChequeImage   String?     @db.LongText
+  cancelledChequeImage   String?   @db.LongText
   paymentMethod          String?
+  status                 String    @default("pending") // e.g., 'pending', 'approved', 'rejected'
+  remarks                String?   @db.LongText // Optional admin remarks for approval/rejection
 
   createdAt              DateTime  @default(now())
   createdBy              Int?
@@ -151,7 +182,14 @@ model bankAccount {
   deletedBy              Int?
   deletedByRole          String?
 
-  admin                  admin      @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  supplier               admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  bankAccount            bankAccount? @relation(fields: [bankAccountId], references: [id], onDelete: SetNull)
+
+  @@index([adminId])
+  @@index([bankAccountId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model adminStaff {
