@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 
     const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
     if (!productResult?.status || productResult.existsInDropshipperProduct) {
-      return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
+      return NextResponse.json({ status: true, message: productResult.message, dropshipperProduct: productResult.dropshipperProduct }, { status: 200 });
     }
 
     logMessage('info', 'Product found:', productResult.dropshipperProduct);

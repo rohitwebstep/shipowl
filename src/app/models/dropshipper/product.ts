@@ -47,38 +47,60 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
-export const getSupplierProductById = async (id: number) => {
+export const getSupplierProductById = async (id: number, includeOtherSuppliers: boolean = false) => {
     try {
         const supplierProduct = await prisma.supplierProduct.findFirst({
             where: {
                 id,
             },
-            select: {
-                id: true,
-                productId: true,
-                supplierId: true
-            },
+            include: {
+                product: {
+                    include: {
+                        brand: true,
+                        category: true,
+                        variants: true,
+                    }                        
+                },
+                supplier: true
+            }
         });
 
         if (!supplierProduct) {
             return {
                 status: false,
                 message: "Supplier product not found.",
-                product: null,
+                supplierProduct: null,
+                otherSuppliers: [],
             };
+        }
+
+        let otherSuppliers: { id: number; productId: number; supplierId: number }[] = [];
+
+        if (includeOtherSuppliers) {
+            otherSuppliers = await prisma.supplierProduct.findMany({
+                where: {
+                    productId: supplierProduct.productId,
+                    supplierId: { not: supplierProduct.supplierId },
+                },
+                include: {
+                    supplier: true,
+                }
+            });
         }
 
         return {
             status: true,
-            message: "Supplier product ID fetched successfully.",
+            message: "Supplier product fetched successfully.",
             supplierProduct: serializeBigInt(supplierProduct),
+            otherSuppliers: serializeBigInt(otherSuppliers),
         };
     } catch (error) {
         console.error("❌ Error in getSupplierProductById:", error);
         return {
             status: false,
             message: "Internal server error.",
-            product: null,
+            supplierProduct: null,
+            otherSuppliers: [],
         };
     }
 };
