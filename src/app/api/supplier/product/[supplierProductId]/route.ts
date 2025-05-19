@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { validateFormData } from '@/utils/validateFormData';
-import { getSupplierProductById } from '@/app/models/supplier/product';
 import { getProductById } from '@/app/models/product/product';
 
 export async function GET(req: NextRequest) {
