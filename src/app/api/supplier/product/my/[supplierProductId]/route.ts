@@ -32,12 +32,13 @@ export async function GET(req: NextRequest) {
     }
 
     const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
+    console.log(`productResult - `, productResult);
     if (!productResult?.status || !productResult.existsInSupplierProduct) {
-      return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
+      return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
     }
 
     logMessage('info', 'Product found:', productResult.supplierProduct);
-    return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
+    return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(
