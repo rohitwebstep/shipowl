@@ -59,7 +59,7 @@ export const getSupplierProductById = async (id: number, includeOtherSuppliers: 
                         brand: true,
                         category: true,
                         variants: true,
-                    }                        
+                    }
                 },
                 supplier: true
             }
@@ -269,7 +269,7 @@ export const getProductsByFiltersAndStatus = async (
                 select: { productId: true },
             }).then(data => data.map(d => d.productId));
 
-            products = await prisma.supplierProduct.findMany({
+            const supplierProducts = await prisma.supplierProduct.findMany({
                 where: {
                     ...baseFilters,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
@@ -285,6 +285,26 @@ export const getProductsByFiltersAndStatus = async (
                     }
                 },
             });
+
+            // For each supplierProduct, find the lowest price from other suppliers for the same product
+            const productsWithLowestPrice = await Promise.all(
+                supplierProducts.map(async (sp) => {
+                    const lowestPriceDropshipper = await prisma.dropshipperProduct.findFirst({
+                        where: {
+                            productId: sp.productId,
+                        },
+                        orderBy: { price: "asc" },
+                        select: { price: true },
+                    });
+
+                    return {
+                        ...sp,
+                        lowestOtherDropshipperPrice: lowestPriceDropshipper ? lowestPriceDropshipper.price : null,
+                    };
+                })
+            );
+
+            products = productsWithLowestPrice;
         }
 
         return { status: true, products };
@@ -346,7 +366,7 @@ export const getProductsByStatus = async (
                 })
                 .then((data) => data.map((d) => d.productId));
 
-            products = await prisma.supplierProduct.findMany({
+            const supplierProducts = await prisma.supplierProduct.findMany({
                 where: {
                     ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
@@ -362,6 +382,26 @@ export const getProductsByStatus = async (
                     }
                 },
             });
+
+            // For each supplierProduct, find the lowest price from other suppliers for the same product
+            const productsWithLowestPrice = await Promise.all(
+                supplierProducts.map(async (sp) => {
+                    const lowestPriceDropshipper = await prisma.dropshipperProduct.findFirst({
+                        where: {
+                            productId: sp.productId,
+                        },
+                        orderBy: { price: "asc" },
+                        select: { price: true },
+                    });
+
+                    return {
+                        ...sp,
+                        lowestOtherDropshipperPrice: lowestPriceDropshipper ? lowestPriceDropshipper.price : null,
+                    };
+                })
+            );
+
+            products = productsWithLowestPrice;
         } else {
             return { status: false, message: "Invalid type parameter", products: [] };
         }

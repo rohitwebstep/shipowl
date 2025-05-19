@@ -176,7 +176,7 @@ export const getProductsByFiltersAndStatus = async (
                 select: { productId: true },
             }).then(data => data.map(d => d.productId));
 
-            products = await prisma.product.findMany({
+            const notMyProducts = await prisma.product.findMany({
                 where: {
                     ...baseFilters,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
@@ -184,6 +184,26 @@ export const getProductsByFiltersAndStatus = async (
                 orderBy: { id: "desc" },
                 include: { variants: true },
             });
+
+            // Attach lowest price from other suppliers for each product
+            const enrichedProducts = await Promise.all(
+                notMyProducts.map(async (product) => {
+                    const lowestPriceData = await prisma.supplierProduct.findFirst({
+                        where: {
+                            productId: product.id,
+                        },
+                        orderBy: { price: "asc" },
+                        select: { price: true },
+                    });
+
+                    return {
+                        ...product,
+                        lowestOtherSupplierPrice: lowestPriceData?.price ?? null,
+                    };
+                })
+            );
+
+            products = enrichedProducts;
         }
 
         return { status: true, products };
@@ -237,7 +257,7 @@ export const getProductsByStatus = async (
                 })
                 .then((data) => data.map((d) => d.productId));
 
-            products = await prisma.product.findMany({
+            const notMyProducts = await prisma.product.findMany({
                 where: {
                     ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
@@ -245,6 +265,26 @@ export const getProductsByStatus = async (
                 orderBy: { id: "desc" },
                 include: { variants: true },
             });
+
+            // Attach lowest price from other suppliers for each product
+            const enrichedProducts = await Promise.all(
+                notMyProducts.map(async (product) => {
+                    const lowestPriceData = await prisma.supplierProduct.findFirst({
+                        where: {
+                            productId: product.id,
+                        },
+                        orderBy: { price: "asc" },
+                        select: { price: true },
+                    });
+
+                    return {
+                        ...product,
+                        lowestOtherSupplierPrice: lowestPriceData?.price ?? null,
+                    };
+                })
+            );
+
+            products = enrichedProducts;
         } else {
             return { status: false, message: "Invalid type parameter", products: [] };
         }

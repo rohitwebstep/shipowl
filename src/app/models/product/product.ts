@@ -555,7 +555,7 @@ export const removeProductImageByIndex = async (
             message: fileDeleted
                 ? "Image removed and file deleted successfully."
                 : "Image removed, but file deletion failed.",
-            product: updatedProduct,
+            product: serializeBigInt(updatedProduct),
         };
     } catch (error) {
         console.error("❌ Error removing product image:", error);
@@ -567,7 +567,7 @@ export const removeProductImageByIndex = async (
 };
 
 // 🔵 GET BY ID
-export const getProductById = async (id: number) => {
+export const getProductById = async (id: number, includeOtherSuppliers: boolean = false) => {
     try {
         const product = await prisma.product.findUnique({
             where: { id },
@@ -576,10 +576,20 @@ export const getProductById = async (id: number) => {
 
         if (!product) return { status: false, message: "Product not found" };
 
-        const sanitizedProduct = serializeBigInt(product);
-        logMessage('debug', 'fetched products :', sanitizedProduct);
+        let otherSuppliers: { id: number; productId: number; supplierId: number }[] = [];
 
-        return { status: true, product: sanitizedProduct };
+        if (includeOtherSuppliers) {
+            otherSuppliers = await prisma.supplierProduct.findMany({
+                where: {
+                    productId: id,
+                },
+                include: {
+                    supplier: true,
+                }
+            });
+        }
+
+        return { status: true, product: serializeBigInt(product), otherSuppliers: serializeBigInt(otherSuppliers), };
     } catch (error) {
         console.error("❌ getProductById Error:", error);
         return { status: false, message: "Error fetching product" };

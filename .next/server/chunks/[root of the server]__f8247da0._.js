@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/dropshipper/product/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/dropshipper/product/my/[dropshipperProductId]/destroy/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -9484,73 +9484,6 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "validateFormData": (()=>validateFormData)
-});
-function toReadableFieldName(field) {
-    // Converts camelCase or snake_case to Title Case
-    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
-}
-function validateFormData(formData, { requiredFields = [], patternValidations = {}, fileExtensionValidations = {} }) {
-    const error = {};
-    // Required fields
-    for (const field of requiredFields){
-        const value = formData.get(field);
-        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
-            error[field] = `${toReadableFieldName(field)} is required`;
-        }
-    }
-    // Pattern validations
-    for (const [field, expectedType] of Object.entries(patternValidations)){
-        const value = formData.get(field);
-        if (value !== null) {
-            const val = typeof value === 'string' ? value.trim() : value;
-            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
-            const isInvalidBoolean = expectedType === 'boolean' && ![
-                'true',
-                'false',
-                '1',
-                '0',
-                true,
-                false,
-                1,
-                0,
-                'active',
-                'inactive'
-            ].includes(val.toString().toLowerCase());
-            if (isInvalidNumber || isInvalidBoolean) {
-                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
-            }
-        }
-    }
-    // File extension validations
-    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations)){
-        const file = formData.get(field);
-        if (file instanceof File) {
-            const fileName = file.name.toLowerCase();
-            const fileExtension = fileName.split('.').pop() || '';
-            if (!allowedExtensions.map((ext)=>ext.toLowerCase()).includes(fileExtension)) {
-                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
-            }
-        } else if (file !== null) {
-            error[field] = `${toReadableFieldName(field)} must be a valid file`;
-        }
-    }
-    const errorCount = Object.keys(error).length;
-    return {
-        isValid: errorCount === 0,
-        ...errorCount > 0 && {
-            error
-        },
-        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
-    };
-}
-}}),
 "[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -10160,45 +10093,26 @@ const deleteDropshipperProduct = async (id)=>{
     }
 };
 }}),
-"[project]/src/app/api/dropshipper/product/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/dropshipper/product/my/[dropshipperProductId]/destroy/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "GET": (()=>GET),
-    "POST": (()=>POST)
+    "DELETE": (()=>DELETE)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)");
 ;
 ;
 ;
 ;
-;
-async function GET(req) {
+async function DELETE(req) {
     try {
-        const urlParams = req.nextUrl.searchParams;
-        const categoryId = urlParams.get('category');
-        const brandId = urlParams.get('brand');
-        const rawStatus = (urlParams.get('status') ?? '').trim().toLowerCase();
-        const rawType = (urlParams.get('type') ?? '').trim().toLowerCase();
-        const statusMap = {
-            active: 'active',
-            inactive: 'inactive',
-            deleted: 'deleted',
-            notdeleted: 'notDeleted'
-        };
-        const validTypes = [
-            'all',
-            'my',
-            'notmy'
-        ];
-        const status = statusMap[rawStatus] ?? 'notDeleted';
-        const type = validTypes.includes(rawType) ? rawType : 'all';
+        const parts = req.nextUrl.pathname.split('/');
+        const dropshipperProductId = Number(parts[parts.length - 2]);
         const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
         const dropshipperRole = req.headers.get('x-dropshipper-role');
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
@@ -10222,88 +10136,7 @@ async function GET(req) {
                 status: 404
             });
         }
-        const filters = {};
-        if (categoryId) filters.categoryId = Number(categoryId);
-        if (brandId) filters.brandId = Number(brandId);
-        const productsResult = categoryId || brandId ? await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByFiltersAndStatus"])(type, filters, dropshipperId, status) : await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByStatus"])(type, dropshipperId, status);
-        if (productsResult?.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
-                products: productsResult.products
-            }, {
-                status: 200
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: 'No products found'
-        }, {
-            status: 404
-        });
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching products', {
-            error
-        });
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: 'Failed to fetch products due to an internal error'
-        }, {
-            status: 500
-        });
-    }
-}
-async function POST(req) {
-    try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for product creation');
-        const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
-        const dropshipperRole = req.headers.get('x-dropshipper-role');
-        const dropshipperId = Number(dropshipperIdHeader);
-        if (!dropshipperIdHeader || isNaN(dropshipperId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid dropshipperIdHeader: ${dropshipperIdHeader}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'User ID is missing or invalid in request'
-            }, {
-                status: 400
-            });
-        }
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
-        if (!userCheck.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `User Not Found: ${userCheck.message}`
-            }, {
-                status: 404
-            });
-        }
-        const requiredFields = [
-            'supplierProductId',
-            'price',
-            'stock',
-            'status'
-        ];
-        const formData = await req.formData();
-        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields: requiredFields,
-            patternValidations: {
-                supplierProductId: 'number',
-                price: 'number',
-                stock: 'number',
-                status: 'boolean'
-            }
-        });
-        if (!validation.isValid) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.error);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                error: validation.error,
-                message: validation.message
-            }, {
-                status: 400
-            });
-        }
-        const extractNumber = (key)=>Number(formData.get(key)) || null;
-        const supplierProductId = extractNumber('supplierProductId') || 0;
-        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkProductForDropshipper"])(dropshipperId, supplierProductId);
+        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkDropshipperProductForDropshipper"])(dropshipperId, dropshipperProductId);
         if (!productResult?.status || !productResult.existsInDropshipperProduct) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
@@ -10312,46 +10145,36 @@ async function POST(req) {
                 status: 200
             });
         }
-        const statusRaw = formData.get('status')?.toString().toLowerCase();
-        const status = [
-            'true',
-            '1',
-            true,
-            1,
-            'active'
-        ].includes(statusRaw);
-        const productPayload = {
-            supplierProductId: extractNumber('supplierProductId') || 0,
-            dropshipperId: dropshipperId,
-            stock: extractNumber('stock') || 0,
-            price: extractNumber('price') || 0,
-            status,
-            createdBy: dropshipperId,
-            createdByRole: dropshipperRole
-        };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product payload created:', productPayload);
-        const productCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createDropshipperProduct"])(dropshipperId, String(dropshipperRole), productPayload);
-        if (productCreateResult?.status) {
+        // Permanent delete operation
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteDropshipperProduct"])(dropshipperProductId); // Assuming deleteProduct is for permanent deletion
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Permanent delete request for product: ${dropshipperProductId}`, {
+            dropshipperId
+        });
+        if (result?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Product permanently deleted successfully: ${dropshipperProductId}`, {
+                dropshipperId
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: true,
-                product: productCreateResult.product
+                message: `Product permanently deleted successfully`
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: productCreateResult?.message || 'Product creation failed'
-        }, {
-            status: 500
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Product not found or could not be deleted: ${dropshipperProductId}`, {
+            dropshipperId
         });
-    } catch (err) {
-        const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Error:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error
+            message: 'Product not found or deletion failed'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ Product restore error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
         }, {
             status: 500
         });
@@ -10361,4 +10184,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__78c1a8ee._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__f8247da0._.js.map

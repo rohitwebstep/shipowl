@@ -4,7 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { checkDropshipperProductForDropshipper, deleteDropshipperProduct } from '@/app/models/dropshipper/product';
 
-export async function PATCH(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
     const dropshipperProductId = Number(parts[parts.length - 2]);
@@ -29,7 +29,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-    if (!productResult?.status || productResult.existsInDropshipperProduct) {
+    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 

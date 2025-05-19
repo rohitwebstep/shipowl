@@ -9733,7 +9733,7 @@ const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=
                     productId: true
                 }
             }).then((data)=>data.map((d)=>d.productId));
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
                 where: {
                     ...baseFilters,
                     id: {
@@ -9749,6 +9749,25 @@ const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=
                     variants: true
                 }
             });
+            // Attach lowest price from other suppliers for each product
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const lowestPriceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
+                    where: {
+                        productId: product.id
+                    },
+                    orderBy: {
+                        price: "asc"
+                    },
+                    select: {
+                        price: true
+                    }
+                });
+                return {
+                    ...product,
+                    lowestOtherSupplierPrice: lowestPriceData?.price ?? null
+                };
+            }));
+            products = enrichedProducts;
         }
         return {
             status: true,
@@ -9829,7 +9848,7 @@ const getProductsByStatus = async (type, supplierId, status)=>{
                     productId: true
                 }
             }).then((data)=>data.map((d)=>d.productId));
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
                 where: {
                     ...statusCondition,
                     id: {
@@ -9845,6 +9864,25 @@ const getProductsByStatus = async (type, supplierId, status)=>{
                     variants: true
                 }
             });
+            // Attach lowest price from other suppliers for each product
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const lowestPriceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
+                    where: {
+                        productId: product.id
+                    },
+                    orderBy: {
+                        price: "asc"
+                    },
+                    select: {
+                        price: true
+                    }
+                });
+                return {
+                    ...product,
+                    lowestOtherSupplierPrice: lowestPriceData?.price ?? null
+                };
+            }));
+            products = enrichedProducts;
         } else {
             return {
                 status: false,

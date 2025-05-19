@@ -3,27 +3,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
-import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct } from '@/app/models/dropshipper/product';
+import { checkSupplierProductForSupplier, updateSupplierProduct, softDeleteSupplierProduct, restoreSupplierProduct } from '@/app/models/supplier/product';
 
 
 export async function GET(req: NextRequest) {
   try {
     // Extract productId directly from the URL path
-    const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+    const supplierProductId = Number(req.nextUrl.pathname.split('/').pop());
 
-    const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
-    const dropshipperRole = req.headers.get('x-dropshipper-role');
+    const supplierId = Number(req.headers.get('x-supplier-id'));
+    const supplierRole = req.headers.get('x-supplier-role');
 
-    logMessage('info', 'Dropshipper details received', { dropshipperId, dropshipperRole });
+    logMessage('info', 'Supplier details received', { supplierId, supplierRole });
 
-    if (!dropshipperId || isNaN(dropshipperId)) {
+    if (!supplierId || isNaN(supplierId)) {
       return NextResponse.json(
-        { status: false, error: 'Invalid or missing dropshipper ID' },
+        { status: false, error: 'Invalid or missing supplier ID' },
         { status: 400 }
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
+    const userExistence = await isUserExist(supplierId, String(supplierRole));
     if (!userExistence.status) {
       return NextResponse.json(
         { status: false, error: `User Not Found: ${userExistence.message}` },
@@ -31,12 +31,12 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-    if (!productResult?.status || productResult.existsInDropshipperProduct) {
-      return NextResponse.json({ status: true, message: productResult.message, dropshipperProduct: productResult.dropshipperProduct }, { status: 200 });
+    const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
+    if (!productResult?.status || productResult.existsInSupplierProduct) {
+      return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
-    logMessage('info', 'Product found:', productResult.dropshipperProduct);
+    logMessage('info', 'Product found:', productResult.supplierProduct);
     return NextResponse.json({ status: false, message: 'Product not found' }, { status: 404 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
@@ -51,39 +51,38 @@ export async function PUT(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for product updation');
 
-    // Extract dropshipperProductId directly from the URL path
-    const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+    // Extract productId directly from the URL path
+    const supplierProductId = Number(req.nextUrl.pathname.split('/').pop());
 
-    const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
-    const dropshipperRole = req.headers.get('x-dropshipper-role');
-    const dropshipperId = Number(dropshipperIdHeader);
+    const supplierIdHeader = req.headers.get('x-supplier-id');
+    const supplierRole = req.headers.get('x-supplier-role');
+    const supplierId = Number(supplierIdHeader);
 
-    if (!dropshipperIdHeader || isNaN(dropshipperId)) {
-      logMessage('warn', `Invalid dropshipperIdHeader: ${dropshipperIdHeader}`);
+    if (!supplierIdHeader || isNaN(supplierId)) {
+      logMessage('warn', `Invalid supplierIdHeader: ${supplierIdHeader}`);
       return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
+    const userCheck = await isUserExist(supplierId, String(supplierRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
 
-    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+    if (!productResult?.status || !productResult.existsInSupplierProduct) {
       logMessage('debug', 'productResult - ', productResult);
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
-    const dropshipperProduct = productResult.dropshipperProduct;
+    const supplierProduct = productResult.supplierProduct;
 
     // ✅ Validate required fields before continuing
     if (
-      typeof dropshipperProduct?.productId !== 'number' ||
-      typeof dropshipperProduct?.supplierProductId !== 'number'
+      typeof supplierProduct?.productId !== 'number'
     ) {
-      logMessage('error', 'Invalid dropshipperProduct: Missing productId or supplierProductId', dropshipperProduct);
+      logMessage('error', 'Invalid supplierProduct: Missing productId or supplierProductId', supplierProduct);
       return NextResponse.json({ status: false, message: 'Invalid product or supplier mapping.' }, { status: 400 });
     }
 
@@ -109,19 +108,18 @@ export async function PUT(req: NextRequest) {
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
     const productPayload = {
-      productId: dropshipperProduct?.productId,
-      supplierProductId: dropshipperProduct?.supplierProductId,
-      dropshipperId: dropshipperId,
+      productId: supplierProduct.productId,
+      supplierId: supplierId,
       stock: extractNumber('stock') || 0,
       price: extractNumber('price') || 0,
       status,
-      updatedBy: dropshipperId,
-      updatedByRole: dropshipperRole,
+      updatedBy: supplierId,
+      updatedByRole: supplierRole,
     };
 
     logMessage('info', 'Product payload updated:', productPayload);
 
-    const productCreateResult = await updateDropshipperProduct(dropshipperId, String(dropshipperRole), dropshipperProductId, productPayload);
+    const productCreateResult = await updateSupplierProduct(supplierId, String(supplierRole), supplierProductId, productPayload);
 
     if (productCreateResult?.status) {
       return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
@@ -142,20 +140,20 @@ export async function PUT(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     // Extract productId directly from the URL path
-    const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
-    const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
-    const dropshipperRole = req.headers.get('x-dropshipper-role');
+    const supplierProductId = Number(req.nextUrl.pathname.split('/').pop());
+    const supplierId = Number(req.headers.get('x-supplier-id'));
+    const supplierRole = req.headers.get('x-supplier-role');
 
-    logMessage('info', 'Dropshipper details received', { dropshipperId, dropshipperRole });
+    logMessage('info', 'Supplier details received', { supplierId, supplierRole });
 
-    if (!dropshipperId || isNaN(dropshipperId)) {
+    if (!supplierId || isNaN(supplierId)) {
       return NextResponse.json(
-        { status: false, error: 'Invalid or missing dropshipper ID' },
+        { status: false, error: 'Invalid or missing supplier ID' },
         { status: 400 }
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
+    const userExistence = await isUserExist(supplierId, String(supplierRole));
     if (!userExistence.status) {
       return NextResponse.json(
         { status: false, error: `User Not Found: ${userExistence.message}` },
@@ -163,17 +161,17 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+    const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
+    if (!productResult?.status || productResult.existsInSupplierProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
     // Restore the product (i.e., reset deletedAt, deletedBy, deletedByRole)
-    const restoreResult = await restoreDropshipperProduct(dropshipperId, String(dropshipperRole), dropshipperProductId);
+    const restoreResult = await restoreSupplierProduct(supplierId, String(supplierRole), supplierProductId);
 
     if (restoreResult?.status) {
-      logMessage('info', 'Product restored successfully:', restoreResult.restoredDropshipperProduct);
-      return NextResponse.json({ status: true, product: restoreResult.restoredDropshipperProduct }, { status: 200 });
+      logMessage('info', 'Product restored successfully:', restoreResult.restoredSupplierProduct);
+      return NextResponse.json({ status: true, product: restoreResult.restoredSupplierProduct }, { status: 200 });
     }
 
     logMessage('error', 'Product restore failed');
@@ -188,20 +186,20 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     // Extract productId directly from the URL path
-    const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
-    const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
-    const dropshipperRole = req.headers.get('x-dropshipper-role');
+    const supplierProductId = Number(req.nextUrl.pathname.split('/').pop());
+    const supplierId = Number(req.headers.get('x-supplier-id'));
+    const supplierRole = req.headers.get('x-supplier-role');
 
-    logMessage('info', 'Dropshipper details received', { dropshipperId, dropshipperRole });
+    logMessage('info', 'Supplier details received', { supplierId, supplierRole });
 
-    if (!dropshipperId || isNaN(dropshipperId)) {
+    if (!supplierId || isNaN(supplierId)) {
       return NextResponse.json(
-        { status: false, error: 'Invalid or missing dropshipper ID' },
+        { status: false, error: 'Invalid or missing supplier ID' },
         { status: 400 }
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
+    const userExistence = await isUserExist(supplierId, String(supplierRole));
     if (!userExistence.status) {
       return NextResponse.json(
         { status: false, error: `User Not Found: ${userExistence.message}` },
@@ -209,20 +207,20 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+    const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
+    if (!productResult?.status || !productResult.existsInSupplierProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
-    const result = await softDeleteDropshipperProduct(Number(dropshipperId), String(dropshipperRole), dropshipperProductId);  // Assuming softDeleteProduct marks the product as deleted
-    logMessage('info', `Soft delete request for product: ${dropshipperProductId}`, { dropshipperId });
+    const result = await softDeleteSupplierProduct(Number(supplierId), String(supplierRole), supplierProductId);  // Assuming softDeleteProduct marks the product as deleted
+    logMessage('info', `Soft delete request for product: ${supplierProductId}`, { supplierId });
 
     if (result?.status) {
-      logMessage('info', `Product soft deleted successfully: ${dropshipperProductId}`, { dropshipperId });
+      logMessage('info', `Product soft deleted successfully: ${supplierProductId}`, { supplierId });
       return NextResponse.json({ status: true, message: `Product soft deleted successfully` }, { status: 200 });
     }
 
-    logMessage('info', `Product not found or could not be deleted: ${dropshipperProductId}`, { dropshipperId });
+    logMessage('info', `Product not found or could not be deleted: ${supplierProductId}`, { supplierId });
     return NextResponse.json({ status: false, message: 'Product not found or deletion failed' }, { status: 404 });
   } catch (error) {
     logMessage('error', 'Error during product deletion', { error });
