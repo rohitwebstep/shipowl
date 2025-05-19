@@ -743,6 +743,7 @@ CREATE TABLE `dropshipperProduct` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `dropshipperId` INTEGER NOT NULL,
     `supplierId` INTEGER NOT NULL,
+    `supplierProductId` INTEGER NOT NULL,
     `productId` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
     `stock` INTEGER NOT NULL,
@@ -888,3 +889,6 @@ ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_supplierId_f
 
 -- AddForeignKey
 ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dropshipperProduct` ADD CONSTRAINT `dropshipperProduct_supplierProductId_fkey` FOREIGN KEY (`supplierProductId`) REFERENCES `supplierProduct`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

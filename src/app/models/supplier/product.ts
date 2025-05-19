@@ -413,3 +413,37 @@ export const deleteSupplierProduct = async (id: number) => {
         return { status: false, message: "Error deleting supplier product" };
     }
 };
+
+export const getSupplierProductById = async (id: number) => {
+    try {
+        const supplierProduct = await prisma.supplierProduct.findFirst({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (!supplierProduct) {
+            return {
+                status: false,
+                message: "Supplier product not found.",
+                product: null,
+            };
+        }
+
+        return {
+            status: true,
+            message: "Supplier product ID fetched successfully.",
+            supplierProduct: serializeBigInt(supplierProduct),
+        };
+    } catch (error) {
+        console.error("❌ Error in getSupplierProductById:", error);
+        return {
+            status: false,
+            message: "Internal server error.",
+            product: null,
+        };
+    }
+};

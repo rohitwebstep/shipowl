@@ -70,9 +70,20 @@ export async function PUT(req: NextRequest) {
     }
 
     const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
+
     if (!productResult?.status || !productResult.existsInSupplierProduct) {
-      logMessage(`debug`, `productResult - `, productResult);
+      logMessage('debug', 'productResult - ', productResult);
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
+    }
+
+    const supplierProduct = productResult.supplierProduct;
+
+    // ✅ Validate required fields before continuing
+    if (
+      typeof supplierProduct?.productId !== 'number'
+    ) {
+      logMessage('error', 'Invalid supplierProduct: Missing productId or supplierProductId', supplierProduct);
+      return NextResponse.json({ status: false, message: 'Invalid product or supplier mapping.' }, { status: 400 });
     }
 
     const requiredFields = ['price', 'stock', 'status'];
@@ -97,7 +108,7 @@ export async function PUT(req: NextRequest) {
     const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
 
     const productPayload = {
-      productId: extractNumber('productId') || 0,
+      productId: supplierProduct.productId,
       supplierId: supplierId,
       stock: extractNumber('stock') || 0,
       price: extractNumber('price') || 0,

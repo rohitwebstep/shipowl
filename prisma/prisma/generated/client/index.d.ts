@@ -601,8 +601,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -3635,6 +3635,37 @@ export namespace Prisma {
    */
   export type OrderCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput
+  }
+
+
+  /**
+   * Count Type SupplierProductCountOutputType
+   */
+
+  export type SupplierProductCountOutputType = {
+    dropshipperProducts: number
+  }
+
+  export type SupplierProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dropshipperProducts?: boolean | SupplierProductCountOutputTypeCountDropshipperProductsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SupplierProductCountOutputType without action
+   */
+  export type SupplierProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupplierProductCountOutputType
+     */
+    select?: SupplierProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SupplierProductCountOutputType without action
+   */
+  export type SupplierProductCountOutputTypeCountDropshipperProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: dropshipperProductWhereInput
   }
 
 
@@ -33904,6 +33935,8 @@ export namespace Prisma {
     deletedByRole?: boolean
     supplier?: boolean | adminDefaultArgs<ExtArgs>
     product?: boolean | productDefaultArgs<ExtArgs>
+    dropshipperProducts?: boolean | supplierProduct$dropshipperProductsArgs<ExtArgs>
+    _count?: boolean | SupplierProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["supplierProduct"]>
 
 
@@ -33930,6 +33963,8 @@ export namespace Prisma {
   export type supplierProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     supplier?: boolean | adminDefaultArgs<ExtArgs>
     product?: boolean | productDefaultArgs<ExtArgs>
+    dropshipperProducts?: boolean | supplierProduct$dropshipperProductsArgs<ExtArgs>
+    _count?: boolean | SupplierProductCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $supplierProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -33937,6 +33972,7 @@ export namespace Prisma {
     objects: {
       supplier: Prisma.$adminPayload<ExtArgs>
       product: Prisma.$productPayload<ExtArgs>
+      dropshipperProducts: Prisma.$dropshipperProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -34296,6 +34332,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     supplier<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     product<T extends productDefaultArgs<ExtArgs> = {}>(args?: Subset<T, productDefaultArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    dropshipperProducts<T extends supplierProduct$dropshipperProductsArgs<ExtArgs> = {}>(args?: Subset<T, supplierProduct$dropshipperProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$dropshipperProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -34683,6 +34720,30 @@ export namespace Prisma {
   }
 
   /**
+   * supplierProduct.dropshipperProducts
+   */
+  export type supplierProduct$dropshipperProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the dropshipperProduct
+     */
+    select?: dropshipperProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the dropshipperProduct
+     */
+    omit?: dropshipperProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dropshipperProductInclude<ExtArgs> | null
+    where?: dropshipperProductWhereInput
+    orderBy?: dropshipperProductOrderByWithRelationInput | dropshipperProductOrderByWithRelationInput[]
+    cursor?: dropshipperProductWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DropshipperProductScalarFieldEnum | DropshipperProductScalarFieldEnum[]
+  }
+
+  /**
    * supplierProduct without action
    */
   export type supplierProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -34717,6 +34778,7 @@ export namespace Prisma {
     id: number | null
     dropshipperId: number | null
     supplierId: number | null
+    supplierProductId: number | null
     productId: number | null
     price: number | null
     stock: number | null
@@ -34729,6 +34791,7 @@ export namespace Prisma {
     id: number | null
     dropshipperId: number | null
     supplierId: number | null
+    supplierProductId: number | null
     productId: number | null
     price: number | null
     stock: number | null
@@ -34741,6 +34804,7 @@ export namespace Prisma {
     id: number | null
     dropshipperId: number | null
     supplierId: number | null
+    supplierProductId: number | null
     productId: number | null
     price: number | null
     stock: number | null
@@ -34760,6 +34824,7 @@ export namespace Prisma {
     id: number | null
     dropshipperId: number | null
     supplierId: number | null
+    supplierProductId: number | null
     productId: number | null
     price: number | null
     stock: number | null
@@ -34779,6 +34844,7 @@ export namespace Prisma {
     id: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -34800,6 +34866,7 @@ export namespace Prisma {
     id?: true
     dropshipperId?: true
     supplierId?: true
+    supplierProductId?: true
     productId?: true
     price?: true
     stock?: true
@@ -34812,6 +34879,7 @@ export namespace Prisma {
     id?: true
     dropshipperId?: true
     supplierId?: true
+    supplierProductId?: true
     productId?: true
     price?: true
     stock?: true
@@ -34824,6 +34892,7 @@ export namespace Prisma {
     id?: true
     dropshipperId?: true
     supplierId?: true
+    supplierProductId?: true
     productId?: true
     price?: true
     stock?: true
@@ -34843,6 +34912,7 @@ export namespace Prisma {
     id?: true
     dropshipperId?: true
     supplierId?: true
+    supplierProductId?: true
     productId?: true
     price?: true
     stock?: true
@@ -34862,6 +34932,7 @@ export namespace Prisma {
     id?: true
     dropshipperId?: true
     supplierId?: true
+    supplierProductId?: true
     productId?: true
     price?: true
     stock?: true
@@ -34968,6 +35039,7 @@ export namespace Prisma {
     id: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -35006,6 +35078,7 @@ export namespace Prisma {
     id?: boolean
     dropshipperId?: boolean
     supplierId?: boolean
+    supplierProductId?: boolean
     productId?: boolean
     price?: boolean
     stock?: boolean
@@ -35022,6 +35095,7 @@ export namespace Prisma {
     dropshipper?: boolean | adminDefaultArgs<ExtArgs>
     supplier?: boolean | adminDefaultArgs<ExtArgs>
     product?: boolean | productDefaultArgs<ExtArgs>
+    supplierProduct?: boolean | supplierProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dropshipperProduct"]>
 
 
@@ -35030,6 +35104,7 @@ export namespace Prisma {
     id?: boolean
     dropshipperId?: boolean
     supplierId?: boolean
+    supplierProductId?: boolean
     productId?: boolean
     price?: boolean
     stock?: boolean
@@ -35045,11 +35120,12 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type dropshipperProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dropshipperId" | "supplierId" | "productId" | "price" | "stock" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProduct"]>
+  export type dropshipperProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dropshipperId" | "supplierId" | "supplierProductId" | "productId" | "price" | "stock" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProduct"]>
   export type dropshipperProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dropshipper?: boolean | adminDefaultArgs<ExtArgs>
     supplier?: boolean | adminDefaultArgs<ExtArgs>
     product?: boolean | productDefaultArgs<ExtArgs>
+    supplierProduct?: boolean | supplierProductDefaultArgs<ExtArgs>
   }
 
   export type $dropshipperProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35058,11 +35134,13 @@ export namespace Prisma {
       dropshipper: Prisma.$adminPayload<ExtArgs>
       supplier: Prisma.$adminPayload<ExtArgs>
       product: Prisma.$productPayload<ExtArgs>
+      supplierProduct: Prisma.$supplierProductPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       dropshipperId: number
       supplierId: number
+      supplierProductId: number
       productId: number
       price: number
       stock: number
@@ -35419,6 +35497,7 @@ export namespace Prisma {
     dropshipper<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     supplier<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     product<T extends productDefaultArgs<ExtArgs> = {}>(args?: Subset<T, productDefaultArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    supplierProduct<T extends supplierProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, supplierProductDefaultArgs<ExtArgs>>): Prisma__supplierProductClient<$Result.GetResult<Prisma.$supplierProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -35451,6 +35530,7 @@ export namespace Prisma {
     readonly id: FieldRef<"dropshipperProduct", 'Int'>
     readonly dropshipperId: FieldRef<"dropshipperProduct", 'Int'>
     readonly supplierId: FieldRef<"dropshipperProduct", 'Int'>
+    readonly supplierProductId: FieldRef<"dropshipperProduct", 'Int'>
     readonly productId: FieldRef<"dropshipperProduct", 'Int'>
     readonly price: FieldRef<"dropshipperProduct", 'Float'>
     readonly stock: FieldRef<"dropshipperProduct", 'Int'>
@@ -36504,6 +36584,7 @@ export namespace Prisma {
     id: 'id',
     dropshipperId: 'dropshipperId',
     supplierId: 'supplierId',
+    supplierProductId: 'supplierProductId',
     productId: 'productId',
     price: 'price',
     stock: 'stock',
@@ -40483,6 +40564,7 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"supplierProduct"> | string | null
     supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
+    dropshipperProducts?: DropshipperProductListRelationFilter
   }
 
   export type supplierProductOrderByWithRelationInput = {
@@ -40503,6 +40585,7 @@ export namespace Prisma {
     deletedByRole?: SortOrderInput | SortOrder
     supplier?: adminOrderByWithRelationInput
     product?: productOrderByWithRelationInput
+    dropshipperProducts?: dropshipperProductOrderByRelationAggregateInput
     _relevance?: supplierProductOrderByRelevanceInput
   }
 
@@ -40527,6 +40610,7 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"supplierProduct"> | string | null
     supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
+    dropshipperProducts?: DropshipperProductListRelationFilter
   }, "id">
 
   export type supplierProductOrderByWithAggregationInput = {
@@ -40580,6 +40664,7 @@ export namespace Prisma {
     id?: IntFilter<"dropshipperProduct"> | number
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
+    supplierProductId?: IntFilter<"dropshipperProduct"> | number
     productId?: IntFilter<"dropshipperProduct"> | number
     price?: FloatFilter<"dropshipperProduct"> | number
     stock?: IntFilter<"dropshipperProduct"> | number
@@ -40596,12 +40681,14 @@ export namespace Prisma {
     dropshipper?: XOR<AdminScalarRelationFilter, adminWhereInput>
     supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
+    supplierProduct?: XOR<SupplierProductScalarRelationFilter, supplierProductWhereInput>
   }
 
   export type dropshipperProductOrderByWithRelationInput = {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -40618,6 +40705,7 @@ export namespace Prisma {
     dropshipper?: adminOrderByWithRelationInput
     supplier?: adminOrderByWithRelationInput
     product?: productOrderByWithRelationInput
+    supplierProduct?: supplierProductOrderByWithRelationInput
     _relevance?: dropshipperProductOrderByRelevanceInput
   }
 
@@ -40628,6 +40716,7 @@ export namespace Prisma {
     NOT?: dropshipperProductWhereInput | dropshipperProductWhereInput[]
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
+    supplierProductId?: IntFilter<"dropshipperProduct"> | number
     productId?: IntFilter<"dropshipperProduct"> | number
     price?: FloatFilter<"dropshipperProduct"> | number
     stock?: IntFilter<"dropshipperProduct"> | number
@@ -40644,12 +40733,14 @@ export namespace Prisma {
     dropshipper?: XOR<AdminScalarRelationFilter, adminWhereInput>
     supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
     product?: XOR<ProductScalarRelationFilter, productWhereInput>
+    supplierProduct?: XOR<SupplierProductScalarRelationFilter, supplierProductWhereInput>
   }, "id">
 
   export type dropshipperProductOrderByWithAggregationInput = {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -40677,6 +40768,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     dropshipperId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     supplierId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
+    supplierProductId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     productId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     price?: FloatWithAggregatesFilter<"dropshipperProduct"> | number
     stock?: IntWithAggregatesFilter<"dropshipperProduct"> | number
@@ -44727,6 +44819,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     supplier: adminCreateNestedOneWithoutSupplierProductsInput
     product: productCreateNestedOneWithoutSupplierProductsInput
+    dropshipperProducts?: dropshipperProductCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductUncheckedCreateInput = {
@@ -44745,6 +44838,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductUpdateInput = {
@@ -44762,6 +44856,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: adminUpdateOneRequiredWithoutSupplierProductsNestedInput
     product?: productUpdateOneRequiredWithoutSupplierProductsNestedInput
+    dropshipperProducts?: dropshipperProductUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductUncheckedUpdateInput = {
@@ -44780,6 +44875,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductCreateManyInput = {
@@ -44849,12 +44945,14 @@ export namespace Prisma {
     dropshipper: adminCreateNestedOneWithoutDropshipperProductsInput
     supplier: adminCreateNestedOneWithoutSuppliedProductsInput
     product: productCreateNestedOneWithoutDropshipperProductsInput
+    supplierProduct: supplierProductCreateNestedOneWithoutDropshipperProductsInput
   }
 
   export type dropshipperProductUncheckedCreateInput = {
     id?: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -44886,12 +44984,14 @@ export namespace Prisma {
     dropshipper?: adminUpdateOneRequiredWithoutDropshipperProductsNestedInput
     supplier?: adminUpdateOneRequiredWithoutSuppliedProductsNestedInput
     product?: productUpdateOneRequiredWithoutDropshipperProductsNestedInput
+    supplierProduct?: supplierProductUpdateOneRequiredWithoutDropshipperProductsNestedInput
   }
 
   export type dropshipperProductUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -44911,6 +45011,7 @@ export namespace Prisma {
     id?: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -44945,6 +45046,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -47912,6 +48014,11 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
+  export type SupplierProductScalarRelationFilter = {
+    is?: supplierProductWhereInput
+    isNot?: supplierProductWhereInput
+  }
+
   export type dropshipperProductOrderByRelevanceInput = {
     fields: dropshipperProductOrderByRelevanceFieldEnum | dropshipperProductOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -47922,6 +48029,7 @@ export namespace Prisma {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -47941,6 +48049,7 @@ export namespace Prisma {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -47953,6 +48062,7 @@ export namespace Prisma {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -47972,6 +48082,7 @@ export namespace Prisma {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -47991,6 +48102,7 @@ export namespace Prisma {
     id?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
+    supplierProductId?: SortOrder
     productId?: SortOrder
     price?: SortOrder
     stock?: SortOrder
@@ -50337,6 +50449,20 @@ export namespace Prisma {
     connect?: productWhereUniqueInput
   }
 
+  export type dropshipperProductCreateNestedManyWithoutSupplierProductInput = {
+    create?: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput> | dropshipperProductCreateWithoutSupplierProductInput[] | dropshipperProductUncheckedCreateWithoutSupplierProductInput[]
+    connectOrCreate?: dropshipperProductCreateOrConnectWithoutSupplierProductInput | dropshipperProductCreateOrConnectWithoutSupplierProductInput[]
+    createMany?: dropshipperProductCreateManySupplierProductInputEnvelope
+    connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+  }
+
+  export type dropshipperProductUncheckedCreateNestedManyWithoutSupplierProductInput = {
+    create?: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput> | dropshipperProductCreateWithoutSupplierProductInput[] | dropshipperProductUncheckedCreateWithoutSupplierProductInput[]
+    connectOrCreate?: dropshipperProductCreateOrConnectWithoutSupplierProductInput | dropshipperProductCreateOrConnectWithoutSupplierProductInput[]
+    createMany?: dropshipperProductCreateManySupplierProductInputEnvelope
+    connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+  }
+
   export type adminUpdateOneRequiredWithoutSupplierProductsNestedInput = {
     create?: XOR<adminCreateWithoutSupplierProductsInput, adminUncheckedCreateWithoutSupplierProductsInput>
     connectOrCreate?: adminCreateOrConnectWithoutSupplierProductsInput
@@ -50351,6 +50477,34 @@ export namespace Prisma {
     upsert?: productUpsertWithoutSupplierProductsInput
     connect?: productWhereUniqueInput
     update?: XOR<XOR<productUpdateToOneWithWhereWithoutSupplierProductsInput, productUpdateWithoutSupplierProductsInput>, productUncheckedUpdateWithoutSupplierProductsInput>
+  }
+
+  export type dropshipperProductUpdateManyWithoutSupplierProductNestedInput = {
+    create?: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput> | dropshipperProductCreateWithoutSupplierProductInput[] | dropshipperProductUncheckedCreateWithoutSupplierProductInput[]
+    connectOrCreate?: dropshipperProductCreateOrConnectWithoutSupplierProductInput | dropshipperProductCreateOrConnectWithoutSupplierProductInput[]
+    upsert?: dropshipperProductUpsertWithWhereUniqueWithoutSupplierProductInput | dropshipperProductUpsertWithWhereUniqueWithoutSupplierProductInput[]
+    createMany?: dropshipperProductCreateManySupplierProductInputEnvelope
+    set?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    disconnect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    delete?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    update?: dropshipperProductUpdateWithWhereUniqueWithoutSupplierProductInput | dropshipperProductUpdateWithWhereUniqueWithoutSupplierProductInput[]
+    updateMany?: dropshipperProductUpdateManyWithWhereWithoutSupplierProductInput | dropshipperProductUpdateManyWithWhereWithoutSupplierProductInput[]
+    deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
+  }
+
+  export type dropshipperProductUncheckedUpdateManyWithoutSupplierProductNestedInput = {
+    create?: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput> | dropshipperProductCreateWithoutSupplierProductInput[] | dropshipperProductUncheckedCreateWithoutSupplierProductInput[]
+    connectOrCreate?: dropshipperProductCreateOrConnectWithoutSupplierProductInput | dropshipperProductCreateOrConnectWithoutSupplierProductInput[]
+    upsert?: dropshipperProductUpsertWithWhereUniqueWithoutSupplierProductInput | dropshipperProductUpsertWithWhereUniqueWithoutSupplierProductInput[]
+    createMany?: dropshipperProductCreateManySupplierProductInputEnvelope
+    set?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    disconnect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    delete?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
+    update?: dropshipperProductUpdateWithWhereUniqueWithoutSupplierProductInput | dropshipperProductUpdateWithWhereUniqueWithoutSupplierProductInput[]
+    updateMany?: dropshipperProductUpdateManyWithWhereWithoutSupplierProductInput | dropshipperProductUpdateManyWithWhereWithoutSupplierProductInput[]
+    deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
   }
 
   export type adminCreateNestedOneWithoutDropshipperProductsInput = {
@@ -50369,6 +50523,12 @@ export namespace Prisma {
     create?: XOR<productCreateWithoutDropshipperProductsInput, productUncheckedCreateWithoutDropshipperProductsInput>
     connectOrCreate?: productCreateOrConnectWithoutDropshipperProductsInput
     connect?: productWhereUniqueInput
+  }
+
+  export type supplierProductCreateNestedOneWithoutDropshipperProductsInput = {
+    create?: XOR<supplierProductCreateWithoutDropshipperProductsInput, supplierProductUncheckedCreateWithoutDropshipperProductsInput>
+    connectOrCreate?: supplierProductCreateOrConnectWithoutDropshipperProductsInput
+    connect?: supplierProductWhereUniqueInput
   }
 
   export type adminUpdateOneRequiredWithoutDropshipperProductsNestedInput = {
@@ -50393,6 +50553,14 @@ export namespace Prisma {
     upsert?: productUpsertWithoutDropshipperProductsInput
     connect?: productWhereUniqueInput
     update?: XOR<XOR<productUpdateToOneWithWhereWithoutDropshipperProductsInput, productUpdateWithoutDropshipperProductsInput>, productUncheckedUpdateWithoutDropshipperProductsInput>
+  }
+
+  export type supplierProductUpdateOneRequiredWithoutDropshipperProductsNestedInput = {
+    create?: XOR<supplierProductCreateWithoutDropshipperProductsInput, supplierProductUncheckedCreateWithoutDropshipperProductsInput>
+    connectOrCreate?: supplierProductCreateOrConnectWithoutDropshipperProductsInput
+    upsert?: supplierProductUpsertWithoutDropshipperProductsInput
+    connect?: supplierProductWhereUniqueInput
+    update?: XOR<XOR<supplierProductUpdateToOneWithWhereWithoutDropshipperProductsInput, supplierProductUpdateWithoutDropshipperProductsInput>, supplierProductUncheckedUpdateWithoutDropshipperProductsInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -51078,6 +51246,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     product: productCreateNestedOneWithoutSupplierProductsInput
+    dropshipperProducts?: dropshipperProductCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductUncheckedCreateWithoutSupplierInput = {
@@ -51095,6 +51264,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductCreateOrConnectWithoutSupplierInput = {
@@ -51122,11 +51292,13 @@ export namespace Prisma {
     deletedByRole?: string | null
     supplier: adminCreateNestedOneWithoutSuppliedProductsInput
     product: productCreateNestedOneWithoutDropshipperProductsInput
+    supplierProduct: supplierProductCreateNestedOneWithoutDropshipperProductsInput
   }
 
   export type dropshipperProductUncheckedCreateWithoutDropshipperInput = {
     id?: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -51167,11 +51339,13 @@ export namespace Prisma {
     deletedByRole?: string | null
     dropshipper: adminCreateNestedOneWithoutDropshipperProductsInput
     product: productCreateNestedOneWithoutDropshipperProductsInput
+    supplierProduct: supplierProductCreateNestedOneWithoutDropshipperProductsInput
   }
 
   export type dropshipperProductUncheckedCreateWithoutSupplierInput = {
     id?: number
     dropshipperId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -51606,6 +51780,7 @@ export namespace Prisma {
     id?: IntFilter<"dropshipperProduct"> | number
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
+    supplierProductId?: IntFilter<"dropshipperProduct"> | number
     productId?: IntFilter<"dropshipperProduct"> | number
     price?: FloatFilter<"dropshipperProduct"> | number
     stock?: IntFilter<"dropshipperProduct"> | number
@@ -56519,6 +56694,7 @@ export namespace Prisma {
     deletedBy?: number | null
     deletedByRole?: string | null
     supplier: adminCreateNestedOneWithoutSupplierProductsInput
+    dropshipperProducts?: dropshipperProductCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductUncheckedCreateWithoutProductInput = {
@@ -56536,6 +56712,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierProductInput
   }
 
   export type supplierProductCreateOrConnectWithoutProductInput = {
@@ -56563,12 +56740,14 @@ export namespace Prisma {
     deletedByRole?: string | null
     dropshipper: adminCreateNestedOneWithoutDropshipperProductsInput
     supplier: adminCreateNestedOneWithoutSuppliedProductsInput
+    supplierProduct: supplierProductCreateNestedOneWithoutDropshipperProductsInput
   }
 
   export type dropshipperProductUncheckedCreateWithoutProductInput = {
     id?: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     price: number
     stock: number
     status?: boolean
@@ -59109,6 +59288,53 @@ export namespace Prisma {
     create: XOR<productCreateWithoutSupplierProductsInput, productUncheckedCreateWithoutSupplierProductsInput>
   }
 
+  export type dropshipperProductCreateWithoutSupplierProductInput = {
+    price: number
+    stock: number
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    dropshipper: adminCreateNestedOneWithoutDropshipperProductsInput
+    supplier: adminCreateNestedOneWithoutSuppliedProductsInput
+    product: productCreateNestedOneWithoutDropshipperProductsInput
+  }
+
+  export type dropshipperProductUncheckedCreateWithoutSupplierProductInput = {
+    id?: number
+    dropshipperId: number
+    supplierId: number
+    productId: number
+    price: number
+    stock: number
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type dropshipperProductCreateOrConnectWithoutSupplierProductInput = {
+    where: dropshipperProductWhereUniqueInput
+    create: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput>
+  }
+
+  export type dropshipperProductCreateManySupplierProductInputEnvelope = {
+    data: dropshipperProductCreateManySupplierProductInput | dropshipperProductCreateManySupplierProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type adminUpsertWithoutSupplierProductsInput = {
     update: XOR<adminUpdateWithoutSupplierProductsInput, adminUncheckedUpdateWithoutSupplierProductsInput>
     create: XOR<adminCreateWithoutSupplierProductsInput, adminUncheckedCreateWithoutSupplierProductsInput>
@@ -59299,6 +59525,22 @@ export namespace Prisma {
     variants?: productVariantUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type dropshipperProductUpsertWithWhereUniqueWithoutSupplierProductInput = {
+    where: dropshipperProductWhereUniqueInput
+    update: XOR<dropshipperProductUpdateWithoutSupplierProductInput, dropshipperProductUncheckedUpdateWithoutSupplierProductInput>
+    create: XOR<dropshipperProductCreateWithoutSupplierProductInput, dropshipperProductUncheckedCreateWithoutSupplierProductInput>
+  }
+
+  export type dropshipperProductUpdateWithWhereUniqueWithoutSupplierProductInput = {
+    where: dropshipperProductWhereUniqueInput
+    data: XOR<dropshipperProductUpdateWithoutSupplierProductInput, dropshipperProductUncheckedUpdateWithoutSupplierProductInput>
+  }
+
+  export type dropshipperProductUpdateManyWithWhereWithoutSupplierProductInput = {
+    where: dropshipperProductScalarWhereInput
+    data: XOR<dropshipperProductUpdateManyMutationInput, dropshipperProductUncheckedUpdateManyWithoutSupplierProductInput>
   }
 
   export type adminCreateWithoutDropshipperProductsInput = {
@@ -59561,6 +59803,46 @@ export namespace Prisma {
   export type productCreateOrConnectWithoutDropshipperProductsInput = {
     where: productWhereUniqueInput
     create: XOR<productCreateWithoutDropshipperProductsInput, productUncheckedCreateWithoutDropshipperProductsInput>
+  }
+
+  export type supplierProductCreateWithoutDropshipperProductsInput = {
+    price: number
+    stock: number
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    supplier: adminCreateNestedOneWithoutSupplierProductsInput
+    product: productCreateNestedOneWithoutSupplierProductsInput
+  }
+
+  export type supplierProductUncheckedCreateWithoutDropshipperProductsInput = {
+    id?: number
+    supplierId: number
+    productId: number
+    price: number
+    stock: number
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type supplierProductCreateOrConnectWithoutDropshipperProductsInput = {
+    where: supplierProductWhereUniqueInput
+    create: XOR<supplierProductCreateWithoutDropshipperProductsInput, supplierProductUncheckedCreateWithoutDropshipperProductsInput>
   }
 
   export type adminUpsertWithoutDropshipperProductsInput = {
@@ -59843,6 +60125,52 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutProductNestedInput
   }
 
+  export type supplierProductUpsertWithoutDropshipperProductsInput = {
+    update: XOR<supplierProductUpdateWithoutDropshipperProductsInput, supplierProductUncheckedUpdateWithoutDropshipperProductsInput>
+    create: XOR<supplierProductCreateWithoutDropshipperProductsInput, supplierProductUncheckedCreateWithoutDropshipperProductsInput>
+    where?: supplierProductWhereInput
+  }
+
+  export type supplierProductUpdateToOneWithWhereWithoutDropshipperProductsInput = {
+    where?: supplierProductWhereInput
+    data: XOR<supplierProductUpdateWithoutDropshipperProductsInput, supplierProductUncheckedUpdateWithoutDropshipperProductsInput>
+  }
+
+  export type supplierProductUpdateWithoutDropshipperProductsInput = {
+    price?: FloatFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier?: adminUpdateOneRequiredWithoutSupplierProductsNestedInput
+    product?: productUpdateOneRequiredWithoutSupplierProductsNestedInput
+  }
+
+  export type supplierProductUncheckedUpdateWithoutDropshipperProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    supplierId?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type adminStaffCreateManyAdminInput = {
     id?: number
     profilePicture?: string | null
@@ -59913,6 +60241,7 @@ export namespace Prisma {
   export type dropshipperProductCreateManyDropshipperInput = {
     id?: number
     supplierId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -59931,6 +60260,7 @@ export namespace Prisma {
   export type dropshipperProductCreateManySupplierInput = {
     id?: number
     dropshipperId: number
+    supplierProductId: number
     productId: number
     price: number
     stock: number
@@ -60110,6 +60440,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     product?: productUpdateOneRequiredWithoutSupplierProductsNestedInput
+    dropshipperProducts?: dropshipperProductUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductUncheckedUpdateWithoutSupplierInput = {
@@ -60127,6 +60458,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductUncheckedUpdateManyWithoutSupplierInput = {
@@ -60161,11 +60493,13 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: adminUpdateOneRequiredWithoutSuppliedProductsNestedInput
     product?: productUpdateOneRequiredWithoutDropshipperProductsNestedInput
+    supplierProduct?: supplierProductUpdateOneRequiredWithoutDropshipperProductsNestedInput
   }
 
   export type dropshipperProductUncheckedUpdateWithoutDropshipperInput = {
     id?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -60184,6 +60518,7 @@ export namespace Prisma {
   export type dropshipperProductUncheckedUpdateManyWithoutDropshipperInput = {
     id?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -60214,11 +60549,13 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipper?: adminUpdateOneRequiredWithoutDropshipperProductsNestedInput
     product?: productUpdateOneRequiredWithoutDropshipperProductsNestedInput
+    supplierProduct?: supplierProductUpdateOneRequiredWithoutDropshipperProductsNestedInput
   }
 
   export type dropshipperProductUncheckedUpdateWithoutSupplierInput = {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -60237,6 +60574,7 @@ export namespace Prisma {
   export type dropshipperProductUncheckedUpdateManyWithoutSupplierInput = {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
@@ -63613,6 +63951,7 @@ export namespace Prisma {
     id?: number
     dropshipperId: number
     supplierId: number
+    supplierProductId: number
     price: number
     stock: number
     status?: boolean
@@ -63740,6 +64079,7 @@ export namespace Prisma {
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: adminUpdateOneRequiredWithoutSupplierProductsNestedInput
+    dropshipperProducts?: dropshipperProductUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductUncheckedUpdateWithoutProductInput = {
@@ -63757,6 +64097,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierProductNestedInput
   }
 
   export type supplierProductUncheckedUpdateManyWithoutProductInput = {
@@ -63791,12 +64132,14 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipper?: adminUpdateOneRequiredWithoutDropshipperProductsNestedInput
     supplier?: adminUpdateOneRequiredWithoutSuppliedProductsNestedInput
+    supplierProduct?: supplierProductUpdateOneRequiredWithoutDropshipperProductsNestedInput
   }
 
   export type dropshipperProductUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -63815,6 +64158,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
+    supplierProductId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -64050,6 +64394,81 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type dropshipperProductCreateManySupplierProductInput = {
+    id?: number
+    dropshipperId: number
+    supplierId: number
+    productId: number
+    price: number
+    stock: number
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type dropshipperProductUpdateWithoutSupplierProductInput = {
+    price?: FloatFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    dropshipper?: adminUpdateOneRequiredWithoutDropshipperProductsNestedInput
+    supplier?: adminUpdateOneRequiredWithoutSuppliedProductsNestedInput
+    product?: productUpdateOneRequiredWithoutDropshipperProductsNestedInput
+  }
+
+  export type dropshipperProductUncheckedUpdateWithoutSupplierProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dropshipperId?: IntFieldUpdateOperationsInput | number
+    supplierId?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type dropshipperProductUncheckedUpdateManyWithoutSupplierProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dropshipperId?: IntFieldUpdateOperationsInput | number
+    supplierId?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

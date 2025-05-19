@@ -1,5 +1,14 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
+  "/api/brand/route": "app/api/brand/route.js",
+  "/api/category/route": "app/api/category/route.js",
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
+  "/api/dropshipper/product/[dropshipperProductId]/route": "app/api/dropshipper/product/[dropshipperProductId]/route.js",
+  "/api/dropshipper/product/route": "app/api/dropshipper/product/route.js",
+  "/api/product/route": "app/api/product/route.js",
+  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
   "/api/supplier/product/[supplierProductId]/route": "app/api/supplier/product/[supplierProductId]/route.js",
   "/api/supplier/product/route": "app/api/supplier/product/route.js",
-  "/api/supplier/product/trashed/route": "app/api/supplier/product/trashed/route.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

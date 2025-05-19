@@ -808,25 +808,27 @@ model OrderItem {
 }
 
 model supplierProduct {
-  id              Int       @id @default(autoincrement())
-  supplierId      Int
-  productId       Int
-  price           Float
-  stock           Int
-  status          Boolean   @default(true)
+  id                        Int                         @id @default(autoincrement())
+  supplierId                Int
+  productId                 Int
+  price                     Float
+  stock                     Int
+  status                    Boolean                     @default(true)
 
-  createdAt       DateTime  @default(now())
-  createdBy       Int?
-  createdByRole   String?
-  updatedAt       DateTime  @updatedAt
-  updatedBy       Int?
-  updatedByRole   String?
-  deletedAt       DateTime?
-  deletedBy       Int?
-  deletedByRole   String?
+  createdAt                 DateTime                    @default(now())
+  createdBy                 Int?
+  createdByRole             String?
+  updatedAt                 DateTime                    @updatedAt
+  updatedBy                 Int?
+  updatedByRole             String?
+  deletedAt                 DateTime?
+  deletedBy                 Int?
+  deletedByRole             String?
 
-  supplier        admin     @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
-  product         product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  supplier                  admin                       @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product                   product                     @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  dropshipperProducts       dropshipperProduct[]        @relation("SupplierProductRelation")
 
   @@index([supplierId])
   @@index([productId])
@@ -836,27 +838,31 @@ model supplierProduct {
 }
 
 model dropshipperProduct {
-  id              Int       @id @default(autoincrement())
-  dropshipperId   Int
-  supplierId      Int
-  productId       Int
-  price           Float
-  stock           Int
-  status          Boolean   @default(true)
+  id                      Int       @id @default(autoincrement())
+  dropshipperId           Int
+  supplierId              Int
+  supplierProductId       Int
+  productId               Int
+  price                   Float
+  stock                   Int
+  status                  Boolean   @default(true)
 
-  createdAt       DateTime  @default(now())
-  createdBy       Int?
-  createdByRole   String?
-  updatedAt       DateTime  @updatedAt
-  updatedBy       Int?
-  updatedByRole   String?
-  deletedAt       DateTime?
-  deletedBy       Int?
-  deletedByRole   String?
+  createdAt               DateTime  @default(now())
+  createdBy               Int?
+  createdByRole           String?
+  updatedAt               DateTime  @updatedAt
+  updatedBy               Int?
+  updatedByRole           String?
+  deletedAt               DateTime?
+  deletedBy               Int?
+  deletedByRole           String?
 
-  dropshipper     admin     @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
-  supplier        admin     @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
-  product         product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  dropshipper             admin             @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
+  supplier                admin             @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product                 product           @relation(fields: [productId], references: [id], onDelete: Cascade)
+  supplierProduct         supplierProduct   @relation("SupplierProductRelation", fields: [supplierProductId], references: [id], onDelete: Cascade)
+
+
 
   @@index([dropshipperId])
   @@index([supplierId])

@@ -194,7 +194,8 @@ function middleware(req) {
                 "/api/dropshipper/list",
                 "/api/dropshipper/auth/verify",
                 "/api/dropshipper/profile",
-                "/api/dropshipper/profile/update"
+                "/api/dropshipper/profile/update",
+                "/api/dropshipper/product"
             ],
             role: "dropshipper",
             applicableRoles: [

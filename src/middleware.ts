@@ -90,6 +90,7 @@ export function middleware(req: NextRequest) {
                 "/api/dropshipper/auth/verify",
                 "/api/dropshipper/profile",
                 "/api/dropshipper/profile/update",
+                "/api/dropshipper/product",
             ],
             role: "dropshipper",
             applicableRoles: ["dropshipper", "dropshipper_staff"],
