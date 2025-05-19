@@ -29,7 +29,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
-    if (!productResult?.status || productResult.existsInSupplierProduct) {
+    if (!productResult?.status || !productResult.existsInSupplierProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 

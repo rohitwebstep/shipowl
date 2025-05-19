@@ -29,7 +29,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-    if (!productResult?.status || productResult.existsInDropshipperProduct) {
+    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
