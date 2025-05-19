@@ -516,10 +516,8 @@ model product {
   tags                            Json?            // store as array of strings
   brandId                         Int
   originCountryId                 BigInt
-  ean                             String?
   hsnCode                         String?
   taxRate                         Float?
-  upc                             String?
   rtoAddress                      String?
   pickupAddress                   String?
 
@@ -579,7 +577,6 @@ model productVariant {
   sku                       String           @unique
   qty                       Int
   currency                  String
-  article_id                String?
   product_link              String?
   suggested_price           Float?
   shipowl_price             Float?

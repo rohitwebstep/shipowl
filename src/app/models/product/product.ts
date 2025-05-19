@@ -9,7 +9,6 @@ interface Variant {
     sku: string;
     qty: number;
     currency: string;
-    article_id: string;
     suggested_price: number;
     shipowl_price: number;
     rto_suggested_price: number;
@@ -27,10 +26,8 @@ interface Product {
     name: string;
     categoryId: number;
     main_sku: string;
-    ean: string | null;
     hsnCode: string | null;
     taxRate: number | null;
-    upc: string | null;
     rtoAddress: string | null;
     pickupAddress: string | null;
     description: string | null;
@@ -285,10 +282,8 @@ export async function createProduct(adminId: number, adminRole: string, product:
             name,
             categoryId,
             main_sku,
-            ean,
             hsnCode,
             taxRate,
-            upc,
             rtoAddress,
             pickupAddress,
             description,
@@ -328,10 +323,8 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 name,
                 categoryId,  // Use categoryId here
                 main_sku,
-                ean,
                 hsnCode,
                 taxRate,
-                upc,
                 rtoAddress,
                 pickupAddress,
                 description,
@@ -376,7 +369,6 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 sku: variant.sku,
                 qty: variant.qty,
                 currency: variant.currency,
-                article_id: variant.article_id,
                 suggested_price: variant.suggested_price,
                 shipowl_price: variant.shipowl_price,
                 rto_suggested_price: isNaN(Number(variant.rto_suggested_price)) ? null : Number(variant.rto_suggested_price),
@@ -626,10 +618,8 @@ export const updateProduct = async (
             name,
             categoryId,
             main_sku,
-            ean,
             hsnCode,
             taxRate,
-            upc,
             rtoAddress,
             pickupAddress,
             description,
@@ -699,10 +689,8 @@ export const updateProduct = async (
                 name,
                 categoryId,
                 main_sku,
-                ean,
                 hsnCode,
                 taxRate,
-                upc,
                 rtoAddress,
                 pickupAddress,
                 description,
@@ -769,7 +757,6 @@ export const updateProduct = async (
                     sku: variant.sku,
                     qty: variant.qty,
                     currency: variant.currency,
-                    article_id: variant.article_id,
                     suggested_price: variant.suggested_price,
                     shipowl_price: variant.shipowl_price,
                     rto_suggested_price: variant.rto_suggested_price,

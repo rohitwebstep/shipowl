@@ -24,7 +24,6 @@ interface Variant {
   sku: string;
   qty: number;
   currency: string;
-  article_id: string;
   suggested_price: number;
   shipowl_price: number;
   rto_suggested_price: number;
@@ -261,10 +260,8 @@ export async function PUT(req: NextRequest) {
       name: extractString('name') || '',
       categoryId,
       main_sku,
-      ean: extractString('ean') || '',
       hsnCode: extractString('hsn_code') || '',
       taxRate: extractNumber('tax_rate') || 0,
-      upc: extractString('upc') || '',
       rtoAddress: extractString('rto_address') || '',
       pickupAddress: extractString('pickup_address') || '',
       description: extractString('description'),
