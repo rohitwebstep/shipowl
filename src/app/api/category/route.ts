@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    logMessage('debug', 'GET request received for fetching categories');
+    logMessage('debug', 'GET request received for fetching categories', req);
 
     // Fetch all categories
     const categoriesResult = await getCategoriesByStatus("notDeleted");
