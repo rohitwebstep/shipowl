@@ -5,6 +5,7 @@ import { adminAuthMiddleware } from "./middlewares/adminAuth";
 type SkippableRoute = string | { route: string; methods?: string[] };
 
 type RouteProtection = {
+    skipRoutes?: SkippableRoute[];
     skip?: boolean;
     routes: SkippableRoute[];
     role?: string;
@@ -76,6 +77,9 @@ export function middleware(req: NextRequest) {
             ],
         },
         {
+            skipRoutes: [
+                "/api/supplier/auth/verify",
+            ],
             routes: [
                 "/api/admin",
                 "/api/admin/:path*",
@@ -148,16 +152,17 @@ export function middleware(req: NextRequest) {
     ];
 
     for (const protection of routeProtections) {
-        if (protection.skip) {
-            // If skip is true, check with method-aware matcher
-            if (routeMatchesWithMethod(pathname, method, protection.routes)) {
-                // Skip auth for this route and method
-                return res;
-            }
-            continue; // check next protection if no match
+        // ✅ First skip if 'skip' flag is set and route matches
+        if (protection.skip && routeMatchesWithMethod(pathname, method, protection.routes)) {
+            return res;
         }
 
-        // For non-skipped routes, just check route matches ignoring method here
+        // ✅ Then skip if pathname+method match any in 'skipRoutes'
+        if (protection.skipRoutes && routeMatchesWithMethod(pathname, method, protection.skipRoutes)) {
+            return res;
+        }
+
+        // ✅ Finally, protect the route
         if (routeMatches(pathname, protection.routes as string[])) {
             if (protection.role && protection.applicableRoles) {
                 console.log(`req.url: matched protected route for role ${protection.role}`);
