@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 
     const getHighRtoByPincodeResult = await getHighRtoByPincode(pincode || '');
 
-    if (!getHighRtoByPincodeResult?.status) {
+    if (getHighRtoByPincodeResult?.status) {
       logMessage('warn', 'HighRto already exists:', getHighRtoByPincodeResult?.message || 'Unknown error');
       return NextResponse.json(
         { status: false, error: getHighRtoByPincodeResult?.message || 'HighRto already exists' },
