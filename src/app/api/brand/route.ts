@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
+import bwipjs from 'bwip-js';
+import fs from 'fs/promises';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
@@ -95,6 +97,29 @@ export async function POST(req: NextRequest) {
     const brandCreateResult = await createBrand(adminId, String(adminRole), brandPayload);
 
     if (brandCreateResult?.status) {
+
+      // Generate a barcode based on brand name
+      const barcodeFileName = `barcode-${Date.now()}.png`;
+      const barcodePath = path.join(uploadDir, barcodeFileName);
+      const barcodePublicPath = `/uploads/brand/${barcodeFileName}`;
+
+      try {
+        const pngBuffer = await bwipjs.toBuffer({
+          bcid: 'code128',        // Barcode type
+          text: name,             // Brand name as barcode text
+          scale: 3,
+          height: 10,
+          includetext: true,
+          textxalign: 'center',
+        });
+
+        // Save the buffer as a PNG file
+        await fs.writeFile(barcodePath, pngBuffer);
+        logMessage('info', `Barcode image saved: ${barcodePublicPath}`);
+      } catch (barcodeErr) {
+        logMessage('error', 'Barcode generation failed:', barcodeErr);
+      }
+
       return NextResponse.json({ status: true, brand: brandCreateResult.brand }, { status: 200 });
     }
 

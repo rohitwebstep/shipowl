@@ -1,8 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/admin/supplier/bank-account/change-request/[bankAccountChangeRequestId]/review/route": "app/api/admin/supplier/bank-account/change-request/[bankAccountChangeRequestId]/review/route.js",
-  "/api/admin/supplier/bank-account/change-request/route": "app/api/admin/supplier/bank-account/change-request/route.js",
-  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/profile/bank-account/change-request/route": "app/api/supplier/profile/bank-account/change-request/route.js"
+  "/api/brand/route": "app/api/brand/route.js"
 }

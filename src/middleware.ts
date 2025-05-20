@@ -81,7 +81,8 @@ export function middleware(req: NextRequest) {
                 "/api/admin/:path*",
                 "/api/product",
                 "/api/category",
-                "/api/brand"
+                "/api/brand",
+                "/api/supplier",
             ],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],

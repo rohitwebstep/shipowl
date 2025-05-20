@@ -193,7 +193,8 @@ function middleware(req) {
                 "/api/admin/:path*",
                 "/api/product",
                 "/api/category",
-                "/api/brand"
+                "/api/brand",
+                "/api/supplier"
             ],
             role: "admin",
             applicableRoles: [
