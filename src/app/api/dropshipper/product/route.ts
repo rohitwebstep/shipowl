@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
 
     const supplierProductId = extractNumber('supplierProductId') || 0;
     const productResult = await checkProductForDropshipper(dropshipperId, supplierProductId);
-    if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+    if (!productResult?.status || productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 

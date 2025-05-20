@@ -255,12 +255,11 @@ export const getProductsByFiltersAndStatus = async (
         }
 
         if (type === "my") {
-            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
+            products = await prisma.dropshipperProduct.findMany({
                 where: { ...baseFilters, dropshipperId },
                 include: { product: { include: { variants: true } } },
                 orderBy: { id: "desc" },
             });
-            products = dropshipperProducts.map((sp) => sp.product);
         }
 
         if (type === "notmy") {
@@ -352,12 +351,11 @@ export const getProductsByStatus = async (
                 },
             });
         } else if (type === "my") {
-            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
+            products = await prisma.dropshipperProduct.findMany({
                 where: { ...statusCondition, dropshipperId },
                 include: { product: { include: { variants: true } } },
                 orderBy: { id: "desc" },
             });
-            products = dropshipperProducts.map((sp) => sp.product);
         } else if (type === "notmy") {
             const myProductIds = await prisma.dropshipperProduct
                 .findMany({
@@ -494,7 +492,7 @@ export const checkDropshipperProductForDropshipper = async (
 
         if (!dropshipperProduct) {
             return {
-                status: true,
+                status: false,
                 message: "Dropshipper product not found or not assigned to the dropshipper.",
                 existsInDropshipperProduct: false,
                 dropshipperProduct: null,
