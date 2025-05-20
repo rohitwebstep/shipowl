@@ -16,7 +16,15 @@ interface BankAccount {
 
 interface SupplierBankAccountPayload {
     admin: { connect: { id: number } };
-    bankAccounts: BankAccount[];
+    bankAccount?: { connect: { id: number } } | null;
+    id?: number;
+    accountHolderName: string;
+    accountNumber: string;
+    bankName: string;
+    bankBranch: string;
+    accountType: string;
+    ifscCode: string;
+    cancelledChequeImage: string;
     createdAt?: Date; // Timestamp of when the supplier was created
     updatedAt?: Date; // Timestamp of when the supplier was last updated
     deletedAt?: Date | null; // Timestamp of when the supplier was deleted, or null if not deleted
@@ -29,6 +37,26 @@ interface SupplierBankAccountPayload {
 }
 
 type ImageType = "cancelledChequeImage";
+
+const serializeBigInt = <T>(obj: T): T => {
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as T;
+    }
+    // If it's an object, recursively apply serializeBigInt to each key-value pair
+    else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+    // If it's a BigInt, convert it to a string
+    else if (typeof obj === 'bigint') {
+        return obj.toString() as T;
+    }
+
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
 
 export const getBankAccountById = async (id: number) => {
     try {
@@ -44,30 +72,93 @@ export const getBankAccountById = async (id: number) => {
     }
 };
 
+export async function getSupplierBankAccountBySupplierId(supplierId: number) {
+    try {
+        const bankAccount = await prisma.bankAccount.findFirst({
+            where: {
+                adminId: supplierId,
+            },
+        });
+
+        if (!bankAccount) {
+            return { status: false, message: "No bank account found for this supplier." };
+        }
+
+        return { status: true, bankAccount: serializeBigInt(bankAccount) };
+    } catch (error) {
+        logMessage("error", "Error fetching bank account by supplierId", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function getBankAccountChangeRequestByAdminId(adminId: number) {
+    try {
+        // Check if there's already an existing bank account change request for the given adminId
+        const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findFirst({
+            where: {
+                adminId: adminId, // Check if a request exists for the same adminId
+            },
+        });
+
+        // If an existing request is found, return it
+        if (bankAccountChangeRequest) {
+            return { status: true, bankAccountChangeRequest: serializeBigInt(bankAccountChangeRequest) };
+        }
+
+        // If no existing request is found, return a message
+        return { status: false, message: "No bank account change request found for this admin." };
+    } catch (error) {
+        // Log the error and return a failure response
+        logMessage("error", "Error fetching bank account change request", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function getBankAccountChangeRequestById(id: number) {
+    try {
+        // Find the bank account change request by its unique ID
+        const bankAccountChangeRequest = await prisma.bankAccountChangeRequest.findUnique({
+            where: {
+                id: id, // Primary key lookup
+            },
+        });
+
+        // If found, return the serialized data
+        if (bankAccountChangeRequest) {
+            return { status: true, bankAccountChangeRequest: serializeBigInt(bankAccountChangeRequest) };
+        }
+
+        // If not found, return a not found message
+        return { status: false, message: "No bank account change request found with this ID." };
+    } catch (error) {
+        // Log error and return failure response
+        logMessage("error", "Error fetching bank account change request by ID", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
 export async function createSupplierBankAccount(
     adminId: number,
     adminRole: string,
     payload: SupplierBankAccountPayload
 ) {
     try {
-        const { admin, bankAccounts, createdAt, createdBy, createdByRole } = payload;
-
-        const bankAccountData = bankAccounts.map((account) => ({
-            adminId: admin.connect.id,
-            accountHolderName: account.accountHolderName,
-            accountNumber: account.accountNumber,
-            bankName: account.bankName,
-            bankBranch: account.bankBranch,
-            accountType: account.accountType,
-            ifscCode: account.ifscCode,
-            cancelledChequeImage: account.cancelledChequeImage,
-            createdAt,
-            createdBy,
-            createdByRole
-        }));
+        const { admin, accountHolderName, accountNumber, bankName, bankBranch, accountType, ifscCode, cancelledChequeImage, createdAt, createdBy, createdByRole } = payload;
 
         const newBankAccounts = await prisma.bankAccount.createMany({
-            data: bankAccountData,
+            data: {
+                adminId: admin.connect.id,
+                accountHolderName,
+                accountNumber,
+                bankName,
+                bankBranch,
+                accountType,
+                ifscCode,
+                cancelledChequeImage,
+                createdAt,
+                createdBy,
+                createdByRole
+            },
         });
 
         return { status: true, bankAccounts: newBankAccounts };
@@ -136,72 +227,226 @@ export async function updateSupplierBankAccount(
     payload: SupplierBankAccountPayload
 ) {
     try {
-        const updateOrCreatePromises = payload.bankAccounts.map(async (account) => {
-            if (account.id) {
+        const {
+            admin,
+            bankAccount,
+            accountHolderName,
+            accountNumber,
+            bankName,
+            bankBranch,
+            accountType,
+            ifscCode,
+            cancelledChequeImage,
+            updatedAt,
+            updatedBy,
+            updatedByRole
+        } = payload;
 
-                const { status: supplierStatus, bankAccount: currentBankAccount, message } = await getBankAccountById(account.id);
-                if (!supplierStatus || !currentBankAccount) {
-                    return { status: false, message: message || "Bank Account not found." };
-                }
+        if (bankAccount?.connect?.id) {
+            // Fetch the existing bank account to update
+            const { status: supplierStatus, bankAccount: currentBankAccount, message } = await getBankAccountById(bankAccount.connect.id);
 
-                const fields = ['cancelledChequeImage'] as const;
-                const mergedImages: Partial<Record<typeof fields[number], string>> = {};
-
-                for (const field of fields) {
-                    const newImages = account[field];
-                    const existingImages = currentBankAccount[field];
-                    if (newImages && newImages.trim()) {
-                        const merged = Array.from(new Set([
-                            ...(existingImages ? existingImages.split(',').map(x => x.trim()) : []),
-                            ...newImages.split(',').map(x => x.trim())
-                        ])).join(',');
-                        mergedImages[field] = merged;
-                    }
-                }
-
-                // If account has an ID, update it
-                return prisma.bankAccount.update({
-                    where: { id: account.id },
-                    data: {
-                        adminId: payload.admin.connect.id,
-                        accountHolderName: account.accountHolderName,
-                        accountNumber: account.accountNumber,
-                        bankName: account.bankName,
-                        bankBranch: account.bankBranch,
-                        accountType: account.accountType,
-                        ifscCode: account.ifscCode,
-                        cancelledChequeImage: mergedImages.cancelledChequeImage,
-                        updatedAt: payload.updatedAt,
-                        updatedBy: payload.updatedBy,
-                        updatedByRole: payload.updatedByRole,
-                    }
-                });
-            } else {
-                // Else create a new bank account
-                return prisma.bankAccount.create({
-                    data: {
-                        adminId: payload.admin.connect.id,
-                        accountHolderName: account.accountHolderName,
-                        accountNumber: account.accountNumber,
-                        bankName: account.bankName,
-                        bankBranch: account.bankBranch,
-                        accountType: account.accountType,
-                        ifscCode: account.ifscCode,
-                        cancelledChequeImage: account.cancelledChequeImage,
-                        createdAt: payload.createdAt,
-                        createdBy: payload.createdBy,
-                        createdByRole: payload.createdByRole,
-                    }
-                });
+            if (!supplierStatus || !currentBankAccount) {
+                return { status: false, message: message || "Bank Account not found." };
             }
-        });
 
-        const results = await Promise.all(updateOrCreatePromises);
+            // If the bank account exists, update it
+            await prisma.bankAccount.update({
+                where: { id: bankAccount.connect.id },
+                data: {
+                    adminId: admin.connect.id,
+                    accountHolderName,
+                    accountNumber,
+                    bankName,
+                    bankBranch,
+                    accountType,
+                    ifscCode,
+                    cancelledChequeImage,
+                    updatedAt,
+                    updatedBy,
+                    updatedByRole
+                }
+            });
 
-        return { status: true, bankAccounts: results };
+            // Return success response
+            return { status: true, message: "Bank account updated successfully." };
+
+        } else {
+            // If there's no bank account to update, create a new one
+            await prisma.bankAccount.create({
+                data: {
+                    adminId: admin.connect.id,
+                    accountHolderName,
+                    accountNumber,
+                    bankName,
+                    bankBranch,
+                    accountType,
+                    ifscCode,
+                    cancelledChequeImage,
+                    createdAt: updatedAt,
+                    createdBy: updatedBy,
+                    createdByRole: updatedByRole
+                }
+            });
+
+            // Return success response for creation
+            return { status: true, message: "Bank account created successfully." };
+        }
     } catch (error) {
         logMessage("error", "Error updating/creating supplier bank account", error);
         return { status: false, message: "Internal Server Error" };
     }
 }
 
+export async function requestSupplierBankAccountChange(
+    supplierId: number,
+    supplierRole: string,
+    payload: SupplierBankAccountPayload
+) {
+    try {
+        const { admin, accountHolderName, accountNumber, bankName, bankBranch, accountType, ifscCode, cancelledChequeImage, createdAt, createdBy, createdByRole } = payload;
+
+        const currentBankAccountChangeRequest = await getBankAccountChangeRequestByAdminId(admin.connect.id);
+        if (currentBankAccountChangeRequest.status) {
+            return { status: false, message: 'A bank account change request already exists for this supplier.' };
+        }
+
+        // Create a single bank account change request
+        const newBankAccount = await prisma.bankAccountChangeRequest.create({
+            data: {
+                adminId: admin.connect.id,
+                accountHolderName,
+                accountNumber,
+                bankName,
+                bankBranch,
+                accountType,
+                ifscCode,
+                cancelledChequeImage,
+                createdAt,
+                createdBy,
+                createdByRole
+            },
+        });
+
+        // Return success status and the created record
+        return { status: true, bankAccount: serializeBigInt(newBankAccount) };
+    } catch (error) {
+        // Log the error and return a failure response
+        logMessage("error", "Error creating supplier bank account change request", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export const getAllBankAccountChangeRequests = async () => {
+    try {
+        const requests = await prisma.bankAccountChangeRequest.findMany({
+            include: {
+                supplier: {
+                    include: {
+                        bankAccount: true
+                    }
+                },
+                bankAccount: true
+            },
+        });
+
+        return {
+            status: true,
+            requests: serializeBigInt(requests),
+        };
+    } catch (error) {
+        console.error("❌ Error fetching all bank account change requests:", error);
+        return {
+            status: false,
+            message: error || "Internal Server Error",
+        };
+    }
+};
+
+export async function reviewBankAccountChangeRequest(
+    adminId: number,
+    adminRole: string,
+    isApproved: boolean,
+    bankAccountChangeRequestId: number
+) {
+    try {
+        const {
+            status: changeRequestStatus,
+            bankAccountChangeRequest,
+        } = await getBankAccountChangeRequestById(bankAccountChangeRequestId);
+
+        if (!changeRequestStatus || !bankAccountChangeRequest) {
+            return { status: false, message: "Bank account change request not found." };
+        }
+
+        if (isApproved) {
+            const {
+                adminId: supplierId,
+                accountHolderName,
+                accountNumber,
+                bankName,
+                bankBranch,
+                accountType,
+                ifscCode,
+                cancelledChequeImage,
+            } = bankAccountChangeRequest;
+
+            const {
+                status: bankAccountStatus,
+                bankAccount,
+            } = await getSupplierBankAccountBySupplierId(supplierId);
+
+            if (bankAccountStatus && bankAccount) {
+                // Update existing bank account
+                await prisma.bankAccount.update({
+                    where: { id: bankAccount.id },
+                    data: {
+                        accountHolderName,
+                        accountNumber,
+                        bankName,
+                        bankBranch,
+                        accountType,
+                        ifscCode,
+                        cancelledChequeImage,
+                        updatedAt: new Date(),
+                        updatedBy: adminId,
+                        updatedByRole: adminRole,
+                    },
+                });
+            } else {
+                // Create a new bank account
+                await prisma.bankAccount.create({
+                    data: {
+                        adminId: supplierId,
+                        accountHolderName,
+                        accountNumber,
+                        bankName,
+                        bankBranch,
+                        accountType,
+                        ifscCode,
+                        cancelledChequeImage,
+                        createdAt: new Date(),
+                        createdBy: adminId,
+                        createdByRole: adminRole,
+                    },
+                });
+            }
+
+            await prisma.bankAccountChangeRequest.delete({
+                where: { id: bankAccountChangeRequestId },
+            });
+
+            return { status: true, message: "Bank account change request approved." };
+        } else {
+            // Rejected: simply delete the request
+            await prisma.bankAccountChangeRequest.delete({
+                where: { id: bankAccountChangeRequestId },
+            });
+
+            return { status: true, message: "Bank account change request rejected and deleted." };
+        }
+    } catch (error) {
+        logMessage("error", "Error in reviewing bank account change request", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}

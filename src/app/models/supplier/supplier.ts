@@ -258,7 +258,7 @@ export const getSuppliersByStatus = async (
             orderBy: { name: "asc" },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
+                bankAccount: true,
             }
         });
 
@@ -279,7 +279,7 @@ export const getSupplierById = async (id: number, withPassword: boolean | string
             where: { id, role: 'supplier' },
             include: {
                 companyDetail: true,
-                bankAccounts: true
+                bankAccount: true
             }
         });
 
@@ -477,7 +477,7 @@ export const restoreSupplier = async (adminId: number, adminRole: string, id: nu
         // Restore the supplier
         const restoredSupplier = await prisma.admin.update({
             where: { id },
-            include: { companyDetail: true, bankAccounts: true },
+            include: { companyDetail: true, bankAccount: true },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null

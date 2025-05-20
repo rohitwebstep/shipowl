@@ -184,7 +184,7 @@ export const getDropshippersByStatus = async (
             orderBy: { name: "asc" },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
+                bankAccount: true,
             }
         });
 
@@ -204,7 +204,7 @@ export const getDropshipperById = async (id: number, withPassword: boolean | str
             where: { id, role: 'dropshipper' },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
+                bankAccount: true,
             }
 
         });
@@ -399,7 +399,7 @@ export const restoreDropshipper = async (adminId: number, adminRole: string, id:
         // Restore the dropshipper
         const restoredDropshipper = await prisma.admin.update({
             where: { id },
-            include: { companyDetail: true, bankAccounts: true },
+            include: { companyDetail: true, bankAccount: true },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null

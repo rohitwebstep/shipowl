@@ -184,7 +184,7 @@ export const getAdminsByStatus = async (
             orderBy: { name: "asc" },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
+                bankAccount: true,
             }
         });
 
@@ -204,7 +204,7 @@ export const getAdminById = async (id: number, withPassword: boolean | string | 
             where: { id, role: 'admin' },
             include: {
                 companyDetail: true,
-                bankAccounts: true,
+                bankAccount: true,
             }
 
         });
@@ -361,7 +361,7 @@ export const restoreAdmin = async (adminId: number, adminRole: string, id: numbe
         // Restore the admin
         const restoredAdmin = await prisma.admin.update({
             where: { id },
-            include: { companyDetail: true, bankAccounts: true },
+            include: { companyDetail: true, bankAccount: true },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null

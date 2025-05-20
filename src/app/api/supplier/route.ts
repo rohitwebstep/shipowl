@@ -9,7 +9,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getSuppliersByStatus } from '@/app/models/supplier/supplier';
 import { createSupplierCompany } from '@/app/models/supplier/company';
-import { createSupplierBankAccount } from '@/app/models/supplier/bankAccount';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -18,17 +17,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
-interface BankAccount {
-  id?: number;
-  accountHolderName: string;
-  accountNumber: string;
-  bankName: string;
-  bankBranch: string;
-  accountType: string;
-  ifscCode: string;
-  cancelledChequeImage: string;
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -183,15 +171,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawBankAccounts = extractJSON('bankAccounts');
-
-    console.log(`rawBankAccounts`, rawBankAccounts);
-    if (!Array.isArray(rawBankAccounts) || rawBankAccounts.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
     const password = extractString('password') || '';
     // Hash the password using bcrypt
@@ -368,81 +347,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: supplierCompanyCreateResult?.message || 'Supplier company creation failed' }, { status: 500 });
     }
 
-    logMessage('debug', 'Supplier\'s bank accounts:', bankAccounts);
 
-    const supplierBankAccountPayload = {
-      admin: { connect: { id: supplierCreateResult.supplier.id } },
-      bankAccounts,
-      createdAt: new Date(),
-      createdBy: adminId,
-      createdByRole: adminRole,
-    }
-
-    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
-    const supplierBankAccountUploadedFiles: Record<string, string> = {};
-    if (Array.isArray(supplierBankAccountPayload.bankAccounts) && supplierBankAccountPayload.bankAccounts.length > 0) {
-      for (let index = 0; index < supplierBankAccountPayload.bankAccounts.length; index++) {
-        console.log(`🔁 Index: ${index}`);
-        const cancelledChequeImageIndex = `cancelledChequeImage${index}`;
-
-        // File upload
-        const fileData = await saveFilesFromFormData(formData, cancelledChequeImageIndex, {
-          dir: bankAccountUploadDir,
-          pattern: 'slug-unique',
-          multiple: true,
-        });
-
-        let image = '';
-
-        if (fileData) {
-          logMessage('info', 'uploaded fileData:', fileData);
-
-          if (Array.isArray(fileData)) {
-            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
-            image = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
-          } else {
-            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = (fileData as UploadedFileInfo).url;
-            image = (fileData as UploadedFileInfo).url;
-          }
-        }
-
-        supplierBankAccountPayload.bankAccounts[index].cancelledChequeImage = image;
-      }
-    }
-
-    const supplierBankAccountCreateResult = await createSupplierBankAccount(adminId, String(adminRole), supplierBankAccountPayload);
-    if (
-      !supplierBankAccountCreateResult ||
-      !supplierBankAccountCreateResult.status ||
-      !supplierBankAccountCreateResult.bankAccounts
-    ) {
-      // Check if there are any uploaded files before attempting to delete
-      if (Object.keys(supplierBankAccountUploadedFiles).length > 0) {
-        // Iterate over each field in supplierBankAccountUploadedFiles
-        for (const field in supplierBankAccountUploadedFiles) {
-          // Split the comma-separated URLs into an array of individual file URLs
-          const fileUrls = supplierBankAccountUploadedFiles[field].split(',').map((url) => url.trim());
-
-          // Iterate over each file URL in the array
-          for (const fileUrl of fileUrls) {
-            if (fileUrl) {  // Check if the file URL is valid
-              const filePath = path.join(companyUploadDir, path.basename(fileUrl));
-
-              // Attempt to delete the file
-              await deleteFile(filePath);
-              logMessage('info', `Deleted file: ${filePath}`);
-            }
-          }
-        }
-      } else {
-        logMessage('info', 'No uploaded files to delete.');
-      }
-      logMessage('error', 'Supplier company creation failed', supplierBankAccountCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: supplierBankAccountCreateResult?.message || 'Supplier company creation failed'
-      }, { status: 500 });
-    }
 
     return NextResponse.json(
       { status: true, error: supplierCreateResult?.message || 'Supplier created Successfuly' },

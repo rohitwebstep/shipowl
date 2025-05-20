@@ -85,11 +85,11 @@ model admin {
 
   staff                           adminStaff[]
   companyDetail                   companyDetail?              @relation
-  bankAccounts                    bankAccount[]
+  bankAccount                     bankAccount?                @relation
   supplierProducts                supplierProduct[]           @relation("SupplierProducts")
   dropshipperProducts             dropshipperProduct[]        @relation("DropshipperProducts")
   suppliedProducts                dropshipperProduct[]        @relation("SuppliedProducts")
-  bankAccountChangeRequests       bankAccountChangeRequest[]
+  bankAccountChangeRequest        bankAccountChangeRequest?   @relation
 }
 
 model companyDetail {
@@ -132,7 +132,7 @@ model companyDetail {
 
 model bankAccount {
   id                              Int                               @id @default(autoincrement())
-  adminId                         Int
+  adminId                         Int                               @unique
   accountHolderName               String
   accountNumber                   String
   bankName                        String
@@ -154,13 +154,13 @@ model bankAccount {
 
   admin                           admin                             @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
-  bankAccountChangeRequests       bankAccountChangeRequest[]
+  bankAccountChangeRequest       bankAccountChangeRequest?          @relation
 }
 
 model bankAccountChangeRequest {
   id                     Int       @id @default(autoincrement())
-  adminId                Int
-  bankAccountId          Int?      // Optional reference to the existing bank account being updated
+  adminId                Int       @unique
+  bankAccountId          Int?      @unique
   accountHolderName      String
   accountNumber          String
   bankName               String
