@@ -3,17 +3,6 @@ import { logMessage } from "@/utils/commonUtils";
 import path from "path";
 import { deleteFile } from '@/utils/saveFiles';
 
-interface BankAccount {
-    id?: number;
-    accountHolderName: string;
-    accountNumber: string;
-    bankName: string;
-    bankBranch: string;
-    accountType: string;
-    ifscCode: string;
-    cancelledChequeImage: string;
-}
-
 interface SupplierBankAccountPayload {
     admin: { connect: { id: number } };
     bankAccount?: { connect: { id: number } } | null;

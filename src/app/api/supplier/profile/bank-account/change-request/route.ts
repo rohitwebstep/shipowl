@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Fetch the existing bank account details for the supplier
-        const { status, bankAccount, message } = await getSupplierBankAccountBySupplierId(supplierId);
+        const { bankAccount } = await getSupplierBankAccountBySupplierId(supplierId);
 
         const supplierBankAccountPayload = {
             admin: { connect: { id: supplierId } },
