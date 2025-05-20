@@ -262,12 +262,12 @@ export async function PUT(req: NextRequest) {
 
           // Iterate over each file URL in the array
           for (const fileUrl of fileUrls) {
-            if (fileUrl) {  // Check if the file URL is valid
+            try {
               const filePath = path.join(supplierUploadDir, path.basename(fileUrl));
-
-              // Attempt to delete the file
               await deleteFile(filePath);
-              logMessage('info', `Deleted file: ${filePath}`);
+              logMessage('info', `Deleted uploaded file due to failure: ${fileUrl}`);
+            } catch (error) {
+              logMessage('error', `Failed to delete file: ${fileUrl}`, error);
             }
           }
         }
@@ -362,86 +362,6 @@ export async function PUT(req: NextRequest) {
 
       logMessage('error', 'Supplier company creation failed', supplierCompanyCreateResult?.message);
       return NextResponse.json({ status: false, error: supplierCompanyCreateResult?.message || 'Supplier company creation failed' }, { status: 500 });
-    }
-
-
-    logMessage('debug', 'Supplier\'s bank accounts:', bankAccounts);
-
-    const supplierBankAccountPayload = {
-      admin: { connect: { id: supplierId } },
-      bankAccounts,
-      updatedAt: new Date(),
-      updatedBy: supplierId,
-      updatedByRole: supplierRole,
-      createdAt: new Date(),
-      createdBy: supplierId,
-      createdByRole: supplierRole,
-    }
-
-    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'bank-aacount');
-    const supplierBankAccountUploadedFiles: Record<string, string> = {};
-    if (Array.isArray(supplierBankAccountPayload.bankAccounts) && supplierBankAccountPayload.bankAccounts.length > 0) {
-      for (let index = 0; index < supplierBankAccountPayload.bankAccounts.length; index++) {
-        console.log(`🔁 Index: ${index}`);
-        const cancelledChequeImageIndex = `cancelledChequeImage${index}`;
-
-        // File upload
-        const fileData = await saveFilesFromFormData(formData, cancelledChequeImageIndex, {
-          dir: bankAccountUploadDir,
-          pattern: 'slug-unique',
-          multiple: true,
-        });
-
-        let image = '';
-
-        if (fileData) {
-          logMessage('info', 'uploaded fileData:', fileData);
-
-          if (Array.isArray(fileData)) {
-            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
-            image = fileData.map((file: UploadedFileInfo) => file.url).join(', ');
-          } else {
-            supplierBankAccountUploadedFiles[cancelledChequeImageIndex] = (fileData as UploadedFileInfo).url;
-            image = (fileData as UploadedFileInfo).url;
-          }
-        }
-
-        supplierBankAccountPayload.bankAccounts[index].cancelledChequeImage = image;
-      }
-    }
-
-    const supplierBankAccountCreateResult = await updateSupplierBankAccount(supplierId, String(supplierRole), supplierId, supplierBankAccountPayload);
-    if (
-      !supplierBankAccountCreateResult ||
-      !supplierBankAccountCreateResult.status ||
-      !supplierBankAccountCreateResult.bankAccounts
-    ) {
-      // Check if there are any uploaded files before attempting to delete
-      if (Object.keys(supplierBankAccountUploadedFiles).length > 0) {
-        // Iterate over each field in supplierBankAccountUploadedFiles
-        for (const field in supplierBankAccountUploadedFiles) {
-          // Split the comma-separated URLs into an array of individual file URLs
-          const fileUrls = supplierBankAccountUploadedFiles[field].split(',').map((url) => url.trim());
-
-          // Iterate over each file URL in the array
-          for (const fileUrl of fileUrls) {
-            if (fileUrl) {  // Check if the file URL is valid
-              const filePath = path.join(companyUploadDir, path.basename(fileUrl));
-
-              // Attempt to delete the file
-              await deleteFile(filePath);
-              logMessage('info', `Deleted file: ${filePath}`);
-            }
-          }
-        }
-      } else {
-        logMessage('info', 'No uploaded files to delete.');
-      }
-      logMessage('error', 'Supplier company creation failed', supplierBankAccountCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: supplierBankAccountCreateResult?.message || 'Supplier company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(
