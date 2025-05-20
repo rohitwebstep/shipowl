@@ -8,7 +8,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailabilityForUpdate, checkUsernameAvailabilityForUpdate, updateSupplier } from '@/app/models/supplier/supplier';
 import { updateSupplierCompany } from '@/app/models/supplier/company';
-import { updateSupplierBankAccount } from '@/app/models/supplier/bankAccount';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -17,17 +16,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
-interface BankAccount {
-  id?: number;
-  accountHolderName: string;
-  accountNumber: string;
-  bankName: string;
-  bankBranch: string;
-  accountType: string;
-  ifscCode: string;
-  cancelledChequeImage: string;
-}
 
 export async function PUT(req: NextRequest) {
 
@@ -184,15 +172,6 @@ export async function PUT(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawBankAccounts = extractJSON('bankAccounts');
-
-    console.log(`rawBankAccounts`, rawBankAccounts);
-    if (!Array.isArray(rawBankAccounts) || rawBankAccounts.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
     const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
     const supplierFileFields = [
