@@ -12,8 +12,15 @@ interface DropshipperCompany {
     brandShortName?: string;
     billingAddress?: string;
     billingPincode?: string;
-    billingState?: string;
-    billingCity?: string;
+    billingCity?: {
+        connect: { id: number }; // City ID for billing city (connected to a city record)
+    };
+    billingState?: {
+        connect: { id: number }; // State ID for billing state (connected to a state record)
+    };
+    billingCountry?: {
+        connect: { id: number }; // Country ID for billing country (connected to a country record)
+    };
     businessType?: string;
     clientEntryType?: string;
     gstNumber?: string;
