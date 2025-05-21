@@ -10,7 +10,7 @@ export async function DELETE(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
     logMessage(`debug`, 'URL parts', parts);
-    const supplierIdHeader = Number(parts[parts.length - 5]);
+    const supplierId = Number(parts[parts.length - 5]);
     const companyId = Number(parts[parts.length - 3]);
     const imageIndex = Number(parts[parts.length - 1]);
 
@@ -25,20 +25,20 @@ export async function DELETE(req: NextRequest) {
 
     logMessage('debug', `Attempting to delete image (${imageIndex}) from company (${companyId})`);
 
-    // Validate supplier headers
-    const supplierId = Number(req.headers.get('x-supplier-id'));
-    const supplierRole = req.headers.get('x-supplier-role');
+    // Validate admin headers
+    const adminId = req.headers.get('x-admin-id');
+    const adminRole = req.headers.get('x-admin-role');
 
-    if (!supplierId || isNaN(Number(supplierId))) {
-      logMessage('warn', 'Missing or invalid supplier ID header', { supplierId });
-      return NextResponse.json({ error: 'Supplier ID is missing or invalid' }, { status: 400 });
+    if (!adminId || isNaN(Number(adminId))) {
+      logMessage('warn', 'Missing or invalid admin ID header', { adminId });
+      return NextResponse.json({ error: 'Admin ID is missing or invalid' }, { status: 400 });
     }
 
-    // Authenticate supplier user
-    const userCheck = await isUserExist(Number(supplierId), String(supplierRole));
+    // Authenticate admin user
+    const userCheck = await isUserExist(Number(adminId), String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', 'Supplier authentication failed', { supplierId, supplierRole });
-      return NextResponse.json({ error: `Supplier not found: ${userCheck.message}` }, { status: 404 });
+      logMessage('warn', 'Admin authentication failed', { adminId, adminRole });
+      return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
     }
 
     // Validate company existence
@@ -52,7 +52,7 @@ export async function DELETE(req: NextRequest) {
     const result = await removeCompanyDetailImageByIndex(companyId, supplierId, imageType, imageIndex);
 
     if (result.status) {
-      logMessage('info', `Image index ${imageIndex} removed from company ${companyId} by supplier ${supplierId}`);
+      logMessage('info', `Image index ${imageIndex} removed from company ${companyId} by admin ${adminId}`);
       return NextResponse.json({
         status: true,
         message: result.message || 'Image removed successfully',
