@@ -8,7 +8,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailabilityForUpdate, updateDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';
-import { updateDropshipperBankAccount } from '@/app/models/dropshipper/bankAccount';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -18,17 +17,6 @@ type UploadedFileInfo = {
   url: string;
 };
 
-interface BankAccount {
-  id?: number;
-  accountHolderName: string;
-  accountNumber: string;
-  bankName: string;
-  bankBranch: string;
-  accountType: string;
-  ifscCode: string;
-  paymentMethod: string;
-}
-
 export async function PUT(req: NextRequest) {
 
   try {
@@ -37,8 +25,8 @@ export async function PUT(req: NextRequest) {
     const parts = req.nextUrl.pathname.split('/');
     const dropshipperId = Number(parts[parts.length - 3]); // Get the second-to-last segment
 
-    const adminIdHeader = req.headers.get('x-dropshipper-id');
-    const adminRole = req.headers.get('x-dropshipper-role');
+    const adminIdHeader = req.headers.get('x-admin-id');
+    const adminRole = req.headers.get('x-admin-role');
     const adminId = Number(adminIdHeader);
 
     if (!adminId || isNaN(adminId)) {
@@ -123,15 +111,6 @@ export async function PUT(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawBankAccounts = extractJSON('bankAccounts');
-
-    console.log(`rawBankAccounts`, rawBankAccounts);
-    if (!Array.isArray(rawBankAccounts) || rawBankAccounts.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
     const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
@@ -286,29 +265,6 @@ export async function PUT(req: NextRequest) {
 
       logMessage('error', 'Dropshipper company creation failed', dropshipperCompanyCreateResult?.message);
       return NextResponse.json({ status: false, error: dropshipperCompanyCreateResult?.message || 'Dropshipper company creation failed' }, { status: 500 });
-    }
-
-    logMessage('debug', 'Dropshipper\'s bank accounts:', bankAccounts);
-
-    const dropshipperBankAccountPayload = {
-      admin: { connect: { id: dropshipperId } },
-      bankAccounts,
-      updatedAt: new Date(),
-      updatedBy: dropshipperId,
-      updatedByRole: adminRole,
-    }
-
-    const dropshipperBankAccountCreateResult = await updateDropshipperBankAccount(adminId, String(adminRole), dropshipperId, dropshipperBankAccountPayload);
-    if (
-      !dropshipperBankAccountCreateResult ||
-      !dropshipperBankAccountCreateResult.status ||
-      !dropshipperBankAccountCreateResult.bankAccounts
-    ) {
-      logMessage('error', 'Dropshipper company creation failed', dropshipperBankAccountCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: dropshipperBankAccountCreateResult?.message || 'Dropshipper company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(
