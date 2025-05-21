@@ -1,4 +1,5 @@
 {
-  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/profile/update/route": "app/api/supplier/profile/update/route.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/supplier/[supplierId]/company/[companyId]/image/[imageIndex]/route": "app/api/supplier/[supplierId]/company/[companyId]/image/[imageIndex]/route.js",
+  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js"
 }

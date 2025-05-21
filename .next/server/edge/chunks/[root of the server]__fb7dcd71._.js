@@ -189,16 +189,14 @@ function middleware(req) {
         },
         {
             skipRoutes: [
-                "/api/supplier/auth/verify",
-                "/api/supplier/profile"
+                "/api/supplier/auth/verify"
             ],
             routes: [
                 "/api/admin",
                 "/api/admin/:path*",
                 "/api/product",
                 "/api/category",
-                "/api/brand",
-                "/api/supplier"
+                "/api/brand"
             ],
             role: "admin",
             applicableRoles: [
@@ -277,7 +275,7 @@ function middleware(req) {
         }
         // ✅ Then skip if pathname+method match any in 'skipRoutes'
         if (protection.skipRoutes && routeMatchesWithMethod(pathname, method, protection.skipRoutes)) {
-            continue;
+            return res;
         }
         // ✅ Finally, protect the route
         if (routeMatches(pathname, protection.routes)) {

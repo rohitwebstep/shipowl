@@ -79,7 +79,6 @@ export function middleware(req: NextRequest) {
         {
             skipRoutes: [
                 "/api/supplier/auth/verify",
-                "/api/supplier/profile",
             ],
             routes: [
                 "/api/admin",
@@ -87,7 +86,6 @@ export function middleware(req: NextRequest) {
                 "/api/product",
                 "/api/category",
                 "/api/brand",
-                "/api/supplier",
             ],
             role: "admin",
             applicableRoles: ["admin", "admin_staff"],
@@ -160,7 +158,7 @@ export function middleware(req: NextRequest) {
 
         // ✅ Then skip if pathname+method match any in 'skipRoutes'
         if (protection.skipRoutes && routeMatchesWithMethod(pathname, method, protection.skipRoutes)) {
-            continue;
+            return res;
         }
 
         // ✅ Finally, protect the route
