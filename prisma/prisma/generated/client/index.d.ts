@@ -3232,6 +3232,7 @@ export namespace Prisma {
     shippingProducts: number
     shippingOrders: number
     billingOrders: number
+    billingCompanyDetails: number
   }
 
   export type CountryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3245,6 +3246,7 @@ export namespace Prisma {
     shippingProducts?: boolean | CountryCountOutputTypeCountShippingProductsArgs
     shippingOrders?: boolean | CountryCountOutputTypeCountShippingOrdersArgs
     billingOrders?: boolean | CountryCountOutputTypeCountBillingOrdersArgs
+    billingCompanyDetails?: boolean | CountryCountOutputTypeCountBillingCompanyDetailsArgs
   }
 
   // Custom InputTypes
@@ -3328,6 +3330,13 @@ export namespace Prisma {
     where?: OrderWhereInput
   }
 
+  /**
+   * CountryCountOutputType without action
+   */
+  export type CountryCountOutputTypeCountBillingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyDetailWhereInput
+  }
+
 
   /**
    * Count Type StateCountOutputType
@@ -3341,6 +3350,7 @@ export namespace Prisma {
     adminStaffs: number
     shippingOrders: number
     billingOrders: number
+    billingCompanyDetails: number
   }
 
   export type StateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3351,6 +3361,7 @@ export namespace Prisma {
     adminStaffs?: boolean | StateCountOutputTypeCountAdminStaffsArgs
     shippingOrders?: boolean | StateCountOutputTypeCountShippingOrdersArgs
     billingOrders?: boolean | StateCountOutputTypeCountBillingOrdersArgs
+    billingCompanyDetails?: boolean | StateCountOutputTypeCountBillingCompanyDetailsArgs
   }
 
   // Custom InputTypes
@@ -3413,6 +3424,13 @@ export namespace Prisma {
     where?: OrderWhereInput
   }
 
+  /**
+   * StateCountOutputType without action
+   */
+  export type StateCountOutputTypeCountBillingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyDetailWhereInput
+  }
+
 
   /**
    * Count Type CityCountOutputType
@@ -3425,6 +3443,7 @@ export namespace Prisma {
     adminStaffs: number
     shippingOrders: number
     billingOrders: number
+    billingCompanyDetails: number
   }
 
   export type CityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3434,6 +3453,7 @@ export namespace Prisma {
     adminStaffs?: boolean | CityCountOutputTypeCountAdminStaffsArgs
     shippingOrders?: boolean | CityCountOutputTypeCountShippingOrdersArgs
     billingOrders?: boolean | CityCountOutputTypeCountBillingOrdersArgs
+    billingCompanyDetails?: boolean | CityCountOutputTypeCountBillingCompanyDetailsArgs
   }
 
   // Custom InputTypes
@@ -3487,6 +3507,13 @@ export namespace Prisma {
    */
   export type CityCountOutputTypeCountBillingOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
+  }
+
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeCountBillingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyDetailWhereInput
   }
 
 
@@ -6376,6 +6403,9 @@ export namespace Prisma {
   export type CompanyDetailAvgAggregateOutputType = {
     id: number | null
     adminId: number | null
+    billingCountryId: number | null
+    billingStateId: number | null
+    billingCityId: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -6384,6 +6414,9 @@ export namespace Prisma {
   export type CompanyDetailSumAggregateOutputType = {
     id: number | null
     adminId: number | null
+    billingCountryId: bigint | null
+    billingStateId: bigint | null
+    billingCityId: bigint | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -6397,8 +6430,9 @@ export namespace Prisma {
     brandShortName: string | null
     billingAddress: string | null
     billingPincode: string | null
-    billingState: string | null
-    billingCity: string | null
+    billingCountryId: bigint | null
+    billingStateId: bigint | null
+    billingCityId: bigint | null
     businessType: string | null
     clientEntryType: string | null
     gstNumber: string | null
@@ -6432,8 +6466,9 @@ export namespace Prisma {
     brandShortName: string | null
     billingAddress: string | null
     billingPincode: string | null
-    billingState: string | null
-    billingCity: string | null
+    billingCountryId: bigint | null
+    billingStateId: bigint | null
+    billingCityId: bigint | null
     businessType: string | null
     clientEntryType: string | null
     gstNumber: string | null
@@ -6467,8 +6502,9 @@ export namespace Prisma {
     brandShortName: number
     billingAddress: number
     billingPincode: number
-    billingState: number
-    billingCity: number
+    billingCountryId: number
+    billingStateId: number
+    billingCityId: number
     businessType: number
     clientEntryType: number
     gstNumber: number
@@ -6499,6 +6535,9 @@ export namespace Prisma {
   export type CompanyDetailAvgAggregateInputType = {
     id?: true
     adminId?: true
+    billingCountryId?: true
+    billingStateId?: true
+    billingCityId?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -6507,6 +6546,9 @@ export namespace Prisma {
   export type CompanyDetailSumAggregateInputType = {
     id?: true
     adminId?: true
+    billingCountryId?: true
+    billingStateId?: true
+    billingCityId?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -6520,8 +6562,9 @@ export namespace Prisma {
     brandShortName?: true
     billingAddress?: true
     billingPincode?: true
-    billingState?: true
-    billingCity?: true
+    billingCountryId?: true
+    billingStateId?: true
+    billingCityId?: true
     businessType?: true
     clientEntryType?: true
     gstNumber?: true
@@ -6555,8 +6598,9 @@ export namespace Prisma {
     brandShortName?: true
     billingAddress?: true
     billingPincode?: true
-    billingState?: true
-    billingCity?: true
+    billingCountryId?: true
+    billingStateId?: true
+    billingCityId?: true
     businessType?: true
     clientEntryType?: true
     gstNumber?: true
@@ -6590,8 +6634,9 @@ export namespace Prisma {
     brandShortName?: true
     billingAddress?: true
     billingPincode?: true
-    billingState?: true
-    billingCity?: true
+    billingCountryId?: true
+    billingStateId?: true
+    billingCityId?: true
     businessType?: true
     clientEntryType?: true
     gstNumber?: true
@@ -6712,8 +6757,9 @@ export namespace Prisma {
     brandShortName: string | null
     billingAddress: string | null
     billingPincode: string | null
-    billingState: string | null
-    billingCity: string | null
+    billingCountryId: bigint | null
+    billingStateId: bigint | null
+    billingCityId: bigint | null
     businessType: string | null
     clientEntryType: string | null
     gstNumber: string | null
@@ -6766,8 +6812,9 @@ export namespace Prisma {
     brandShortName?: boolean
     billingAddress?: boolean
     billingPincode?: boolean
-    billingState?: boolean
-    billingCity?: boolean
+    billingCountryId?: boolean
+    billingStateId?: boolean
+    billingCityId?: boolean
     businessType?: boolean
     clientEntryType?: boolean
     gstNumber?: boolean
@@ -6791,6 +6838,9 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
+    billingCountry?: boolean | companyDetail$billingCountryArgs<ExtArgs>
+    billingState?: boolean | companyDetail$billingStateArgs<ExtArgs>
+    billingCity?: boolean | companyDetail$billingCityArgs<ExtArgs>
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["companyDetail"]>
 
@@ -6804,8 +6854,9 @@ export namespace Prisma {
     brandShortName?: boolean
     billingAddress?: boolean
     billingPincode?: boolean
-    billingState?: boolean
-    billingCity?: boolean
+    billingCountryId?: boolean
+    billingStateId?: boolean
+    billingCityId?: boolean
     businessType?: boolean
     clientEntryType?: boolean
     gstNumber?: boolean
@@ -6831,14 +6882,20 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type companyDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "companyName" | "brandName" | "brandShortName" | "billingAddress" | "billingPincode" | "billingState" | "billingCity" | "businessType" | "clientEntryType" | "gstNumber" | "companyPanNumber" | "aadharNumber" | "gstDocument" | "panCardHolderName" | "aadharCardHolderName" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentId" | "documentName" | "documentImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["companyDetail"]>
+  export type companyDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "companyName" | "brandName" | "brandShortName" | "billingAddress" | "billingPincode" | "billingCountryId" | "billingStateId" | "billingCityId" | "businessType" | "clientEntryType" | "gstNumber" | "companyPanNumber" | "aadharNumber" | "gstDocument" | "panCardHolderName" | "aadharCardHolderName" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentId" | "documentName" | "documentImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["companyDetail"]>
   export type companyDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    billingCountry?: boolean | companyDetail$billingCountryArgs<ExtArgs>
+    billingState?: boolean | companyDetail$billingStateArgs<ExtArgs>
+    billingCity?: boolean | companyDetail$billingCityArgs<ExtArgs>
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }
 
   export type $companyDetailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "companyDetail"
     objects: {
+      billingCountry: Prisma.$countryPayload<ExtArgs> | null
+      billingState: Prisma.$statePayload<ExtArgs> | null
+      billingCity: Prisma.$cityPayload<ExtArgs> | null
       admin: Prisma.$adminPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6849,8 +6906,9 @@ export namespace Prisma {
       brandShortName: string | null
       billingAddress: string | null
       billingPincode: string | null
-      billingState: string | null
-      billingCity: string | null
+      billingCountryId: bigint | null
+      billingStateId: bigint | null
+      billingCityId: bigint | null
       businessType: string | null
       clientEntryType: string | null
       gstNumber: string | null
@@ -7214,6 +7272,9 @@ export namespace Prisma {
    */
   export interface Prisma__companyDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    billingCountry<T extends companyDetail$billingCountryArgs<ExtArgs> = {}>(args?: Subset<T, companyDetail$billingCountryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    billingState<T extends companyDetail$billingStateArgs<ExtArgs> = {}>(args?: Subset<T, companyDetail$billingStateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    billingCity<T extends companyDetail$billingCityArgs<ExtArgs> = {}>(args?: Subset<T, companyDetail$billingCityArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7251,8 +7312,9 @@ export namespace Prisma {
     readonly brandShortName: FieldRef<"companyDetail", 'String'>
     readonly billingAddress: FieldRef<"companyDetail", 'String'>
     readonly billingPincode: FieldRef<"companyDetail", 'String'>
-    readonly billingState: FieldRef<"companyDetail", 'String'>
-    readonly billingCity: FieldRef<"companyDetail", 'String'>
+    readonly billingCountryId: FieldRef<"companyDetail", 'BigInt'>
+    readonly billingStateId: FieldRef<"companyDetail", 'BigInt'>
+    readonly billingCityId: FieldRef<"companyDetail", 'BigInt'>
     readonly businessType: FieldRef<"companyDetail", 'String'>
     readonly clientEntryType: FieldRef<"companyDetail", 'String'>
     readonly gstNumber: FieldRef<"companyDetail", 'String'>
@@ -7616,6 +7678,63 @@ export namespace Prisma {
      * Limit how many companyDetails to delete.
      */
     limit?: number
+  }
+
+  /**
+   * companyDetail.billingCountry
+   */
+  export type companyDetail$billingCountryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the country
+     */
+    select?: countrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the country
+     */
+    omit?: countryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: countryInclude<ExtArgs> | null
+    where?: countryWhereInput
+  }
+
+  /**
+   * companyDetail.billingState
+   */
+  export type companyDetail$billingStateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the state
+     */
+    select?: stateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the state
+     */
+    omit?: stateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: stateInclude<ExtArgs> | null
+    where?: stateWhereInput
+  }
+
+  /**
+   * companyDetail.billingCity
+   */
+  export type companyDetail$billingCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the city
+     */
+    select?: citySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the city
+     */
+    omit?: cityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cityInclude<ExtArgs> | null
+    where?: cityWhereInput
   }
 
   /**
@@ -16044,6 +16163,7 @@ export namespace Prisma {
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     shippingOrders?: boolean | country$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | country$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | country$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["country"]>
 
@@ -16082,6 +16202,7 @@ export namespace Prisma {
     shippingProducts?: boolean | country$shippingProductsArgs<ExtArgs>
     shippingOrders?: boolean | country$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | country$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | country$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | CountryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -16098,6 +16219,7 @@ export namespace Prisma {
       shippingProducts: Prisma.$productPayload<ExtArgs>[]
       shippingOrders: Prisma.$OrderPayload<ExtArgs>[]
       billingOrders: Prisma.$OrderPayload<ExtArgs>[]
+      billingCompanyDetails: Prisma.$companyDetailPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -16468,6 +16590,7 @@ export namespace Prisma {
     shippingProducts<T extends country$shippingProductsArgs<ExtArgs> = {}>(args?: Subset<T, country$shippingProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shippingOrders<T extends country$shippingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, country$shippingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     billingOrders<T extends country$billingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, country$billingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    billingCompanyDetails<T extends country$billingCompanyDetailsArgs<ExtArgs> = {}>(args?: Subset<T, country$billingCompanyDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17098,6 +17221,30 @@ export namespace Prisma {
   }
 
   /**
+   * country.billingCompanyDetails
+   */
+  export type country$billingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    where?: companyDetailWhereInput
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    cursor?: companyDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
+  }
+
+  /**
    * country without action
    */
   export type countryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17410,6 +17557,7 @@ export namespace Prisma {
     adminStaffs?: boolean | state$adminStaffsArgs<ExtArgs>
     shippingOrders?: boolean | state$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | state$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | state$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["state"]>
 
@@ -17442,6 +17590,7 @@ export namespace Prisma {
     adminStaffs?: boolean | state$adminStaffsArgs<ExtArgs>
     shippingOrders?: boolean | state$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | state$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | state$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | StateCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -17456,6 +17605,7 @@ export namespace Prisma {
       adminStaffs: Prisma.$adminStaffPayload<ExtArgs>[]
       shippingOrders: Prisma.$OrderPayload<ExtArgs>[]
       billingOrders: Prisma.$OrderPayload<ExtArgs>[]
+      billingCompanyDetails: Prisma.$companyDetailPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -17820,6 +17970,7 @@ export namespace Prisma {
     adminStaffs<T extends state$adminStaffsArgs<ExtArgs> = {}>(args?: Subset<T, state$adminStaffsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shippingOrders<T extends state$shippingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, state$shippingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     billingOrders<T extends state$billingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, state$billingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    billingCompanyDetails<T extends state$billingCompanyDetailsArgs<ExtArgs> = {}>(args?: Subset<T, state$billingCompanyDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18374,6 +18525,30 @@ export namespace Prisma {
   }
 
   /**
+   * state.billingCompanyDetails
+   */
+  export type state$billingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    where?: companyDetailWhereInput
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    cursor?: companyDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
+  }
+
+  /**
    * state without action
    */
   export type stateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18682,6 +18857,7 @@ export namespace Prisma {
     adminStaffs?: boolean | city$adminStaffsArgs<ExtArgs>
     shippingOrders?: boolean | city$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | city$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | city$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["city"]>
 
@@ -18713,6 +18889,7 @@ export namespace Prisma {
     adminStaffs?: boolean | city$adminStaffsArgs<ExtArgs>
     shippingOrders?: boolean | city$shippingOrdersArgs<ExtArgs>
     billingOrders?: boolean | city$billingOrdersArgs<ExtArgs>
+    billingCompanyDetails?: boolean | city$billingCompanyDetailsArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -18727,6 +18904,7 @@ export namespace Prisma {
       adminStaffs: Prisma.$adminStaffPayload<ExtArgs>[]
       shippingOrders: Prisma.$OrderPayload<ExtArgs>[]
       billingOrders: Prisma.$OrderPayload<ExtArgs>[]
+      billingCompanyDetails: Prisma.$companyDetailPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -19090,6 +19268,7 @@ export namespace Prisma {
     adminStaffs<T extends city$adminStaffsArgs<ExtArgs> = {}>(args?: Subset<T, city$adminStaffsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shippingOrders<T extends city$shippingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, city$shippingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     billingOrders<T extends city$billingOrdersArgs<ExtArgs> = {}>(args?: Subset<T, city$billingOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    billingCompanyDetails<T extends city$billingCompanyDetailsArgs<ExtArgs> = {}>(args?: Subset<T, city$billingCompanyDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19616,6 +19795,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
+  }
+
+  /**
+   * city.billingCompanyDetails
+   */
+  export type city$billingCompanyDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyDetail
+     */
+    select?: companyDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyDetail
+     */
+    omit?: companyDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyDetailInclude<ExtArgs> | null
+    where?: companyDetailWhereInput
+    orderBy?: companyDetailOrderByWithRelationInput | companyDetailOrderByWithRelationInput[]
+    cursor?: companyDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyDetailScalarFieldEnum | CompanyDetailScalarFieldEnum[]
   }
 
   /**
@@ -37265,8 +37468,9 @@ export namespace Prisma {
     brandShortName: 'brandShortName',
     billingAddress: 'billingAddress',
     billingPincode: 'billingPincode',
-    billingState: 'billingState',
-    billingCity: 'billingCity',
+    billingCountryId: 'billingCountryId',
+    billingStateId: 'billingStateId',
+    billingCityId: 'billingCityId',
     businessType: 'businessType',
     clientEntryType: 'clientEntryType',
     gstNumber: 'gstNumber',
@@ -37975,8 +38179,6 @@ export namespace Prisma {
     brandShortName: 'brandShortName',
     billingAddress: 'billingAddress',
     billingPincode: 'billingPincode',
-    billingState: 'billingState',
-    billingCity: 'billingCity',
     businessType: 'businessType',
     clientEntryType: 'clientEntryType',
     gstNumber: 'gstNumber',
@@ -38785,8 +38987,9 @@ export namespace Prisma {
     brandShortName?: StringNullableFilter<"companyDetail"> | string | null
     billingAddress?: StringNullableFilter<"companyDetail"> | string | null
     billingPincode?: StringNullableFilter<"companyDetail"> | string | null
-    billingState?: StringNullableFilter<"companyDetail"> | string | null
-    billingCity?: StringNullableFilter<"companyDetail"> | string | null
+    billingCountryId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingStateId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingCityId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
     businessType?: StringNullableFilter<"companyDetail"> | string | null
     clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableFilter<"companyDetail"> | string | null
@@ -38810,6 +39013,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"companyDetail"> | Date | string | null
     deletedBy?: IntNullableFilter<"companyDetail"> | number | null
     deletedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    billingCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    billingState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    billingCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
   }
 
@@ -38821,8 +39027,9 @@ export namespace Prisma {
     brandShortName?: SortOrderInput | SortOrder
     billingAddress?: SortOrderInput | SortOrder
     billingPincode?: SortOrderInput | SortOrder
-    billingState?: SortOrderInput | SortOrder
-    billingCity?: SortOrderInput | SortOrder
+    billingCountryId?: SortOrderInput | SortOrder
+    billingStateId?: SortOrderInput | SortOrder
+    billingCityId?: SortOrderInput | SortOrder
     businessType?: SortOrderInput | SortOrder
     clientEntryType?: SortOrderInput | SortOrder
     gstNumber?: SortOrderInput | SortOrder
@@ -38846,6 +39053,9 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
+    billingCountry?: countryOrderByWithRelationInput
+    billingState?: stateOrderByWithRelationInput
+    billingCity?: cityOrderByWithRelationInput
     admin?: adminOrderByWithRelationInput
     _relevance?: companyDetailOrderByRelevanceInput
   }
@@ -38861,8 +39071,9 @@ export namespace Prisma {
     brandShortName?: StringNullableFilter<"companyDetail"> | string | null
     billingAddress?: StringNullableFilter<"companyDetail"> | string | null
     billingPincode?: StringNullableFilter<"companyDetail"> | string | null
-    billingState?: StringNullableFilter<"companyDetail"> | string | null
-    billingCity?: StringNullableFilter<"companyDetail"> | string | null
+    billingCountryId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingStateId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingCityId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
     businessType?: StringNullableFilter<"companyDetail"> | string | null
     clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableFilter<"companyDetail"> | string | null
@@ -38886,6 +39097,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"companyDetail"> | Date | string | null
     deletedBy?: IntNullableFilter<"companyDetail"> | number | null
     deletedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    billingCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    billingState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
+    billingCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
   }, "id" | "adminId">
 
@@ -38897,8 +39111,9 @@ export namespace Prisma {
     brandShortName?: SortOrderInput | SortOrder
     billingAddress?: SortOrderInput | SortOrder
     billingPincode?: SortOrderInput | SortOrder
-    billingState?: SortOrderInput | SortOrder
-    billingCity?: SortOrderInput | SortOrder
+    billingCountryId?: SortOrderInput | SortOrder
+    billingStateId?: SortOrderInput | SortOrder
+    billingCityId?: SortOrderInput | SortOrder
     businessType?: SortOrderInput | SortOrder
     clientEntryType?: SortOrderInput | SortOrder
     gstNumber?: SortOrderInput | SortOrder
@@ -38940,8 +39155,9 @@ export namespace Prisma {
     brandShortName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     billingAddress?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     billingPincode?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
-    billingState?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
-    billingCity?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    billingCountryId?: BigIntNullableWithAggregatesFilter<"companyDetail"> | bigint | number | null
+    billingStateId?: BigIntNullableWithAggregatesFilter<"companyDetail"> | bigint | number | null
+    billingCityId?: BigIntNullableWithAggregatesFilter<"companyDetail"> | bigint | number | null
     businessType?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     clientEntryType?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
@@ -39935,6 +40151,7 @@ export namespace Prisma {
     shippingProducts?: ProductListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }
 
   export type countryOrderByWithRelationInput = {
@@ -39966,6 +40183,7 @@ export namespace Prisma {
     shippingProducts?: productOrderByRelationAggregateInput
     shippingOrders?: OrderOrderByRelationAggregateInput
     billingOrders?: OrderOrderByRelationAggregateInput
+    billingCompanyDetails?: companyDetailOrderByRelationAggregateInput
     _relevance?: countryOrderByRelevanceInput
   }
 
@@ -40001,6 +40219,7 @@ export namespace Prisma {
     shippingProducts?: ProductListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }, "id">
 
   export type countryOrderByWithAggregationInput = {
@@ -40079,6 +40298,7 @@ export namespace Prisma {
     adminStaffs?: AdminStaffListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }
 
   export type stateOrderByWithRelationInput = {
@@ -40104,6 +40324,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffOrderByRelationAggregateInput
     shippingOrders?: OrderOrderByRelationAggregateInput
     billingOrders?: OrderOrderByRelationAggregateInput
+    billingCompanyDetails?: companyDetailOrderByRelationAggregateInput
     _relevance?: stateOrderByRelevanceInput
   }
 
@@ -40133,6 +40354,7 @@ export namespace Prisma {
     adminStaffs?: AdminStaffListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }, "id">
 
   export type stateOrderByWithAggregationInput = {
@@ -40202,6 +40424,7 @@ export namespace Prisma {
     adminStaffs?: AdminStaffListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }
 
   export type cityOrderByWithRelationInput = {
@@ -40226,6 +40449,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffOrderByRelationAggregateInput
     shippingOrders?: OrderOrderByRelationAggregateInput
     billingOrders?: OrderOrderByRelationAggregateInput
+    billingCompanyDetails?: companyDetailOrderByRelationAggregateInput
     _relevance?: cityOrderByRelevanceInput
   }
 
@@ -40254,6 +40478,7 @@ export namespace Prisma {
     adminStaffs?: AdminStaffListRelationFilter
     shippingOrders?: OrderListRelationFilter
     billingOrders?: OrderListRelationFilter
+    billingCompanyDetails?: CompanyDetailListRelationFilter
   }, "id">
 
   export type cityOrderByWithAggregationInput = {
@@ -42664,8 +42889,6 @@ export namespace Prisma {
     brandShortName?: string | null
     billingAddress?: string | null
     billingPincode?: string | null
-    billingState?: string | null
-    billingCity?: string | null
     businessType?: string | null
     clientEntryType?: string | null
     gstNumber?: string | null
@@ -42689,6 +42912,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    billingCountry?: countryCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingState?: stateCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingCity?: cityCreateNestedOneWithoutBillingCompanyDetailsInput
     admin: adminCreateNestedOneWithoutCompanyDetailInput
   }
 
@@ -42700,8 +42926,9 @@ export namespace Prisma {
     brandShortName?: string | null
     billingAddress?: string | null
     billingPincode?: string | null
-    billingState?: string | null
-    billingCity?: string | null
+    billingCountryId?: bigint | number | null
+    billingStateId?: bigint | number | null
+    billingCityId?: bigint | number | null
     businessType?: string | null
     clientEntryType?: string | null
     gstNumber?: string | null
@@ -42733,8 +42960,6 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42758,6 +42983,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: countryUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingState?: stateUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingCity?: cityUpdateOneWithoutBillingCompanyDetailsNestedInput
     admin?: adminUpdateOneRequiredWithoutCompanyDetailNestedInput
   }
 
@@ -42769,8 +42997,9 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42804,8 +43033,9 @@ export namespace Prisma {
     brandShortName?: string | null
     billingAddress?: string | null
     billingPincode?: string | null
-    billingState?: string | null
-    billingCity?: string | null
+    billingCountryId?: bigint | number | null
+    billingStateId?: bigint | number | null
+    billingCityId?: bigint | number | null
     businessType?: string | null
     clientEntryType?: string | null
     gstNumber?: string | null
@@ -42837,8 +43067,6 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42872,8 +43100,9 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44023,6 +44252,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateInput = {
@@ -44054,6 +44284,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUpdateInput = {
@@ -44085,6 +44316,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateInput = {
@@ -44116,6 +44348,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryCreateManyInput = {
@@ -44203,6 +44436,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateInput = {
@@ -44227,6 +44461,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUpdateInput = {
@@ -44251,6 +44486,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateInput = {
@@ -44275,6 +44511,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateCreateManyInput = {
@@ -44347,6 +44584,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateInput = {
@@ -44369,6 +44607,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUpdateInput = {
@@ -44391,6 +44630,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateInput = {
@@ -44413,6 +44653,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityCreateManyInput = {
@@ -47210,8 +47451,9 @@ export namespace Prisma {
     brandShortName?: SortOrder
     billingAddress?: SortOrder
     billingPincode?: SortOrder
-    billingState?: SortOrder
-    billingCity?: SortOrder
+    billingCountryId?: SortOrder
+    billingStateId?: SortOrder
+    billingCityId?: SortOrder
     businessType?: SortOrder
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
@@ -47240,6 +47482,9 @@ export namespace Prisma {
   export type companyDetailAvgOrderByAggregateInput = {
     id?: SortOrder
     adminId?: SortOrder
+    billingCountryId?: SortOrder
+    billingStateId?: SortOrder
+    billingCityId?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -47253,8 +47498,9 @@ export namespace Prisma {
     brandShortName?: SortOrder
     billingAddress?: SortOrder
     billingPincode?: SortOrder
-    billingState?: SortOrder
-    billingCity?: SortOrder
+    billingCountryId?: SortOrder
+    billingStateId?: SortOrder
+    billingCityId?: SortOrder
     businessType?: SortOrder
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
@@ -47288,8 +47534,9 @@ export namespace Prisma {
     brandShortName?: SortOrder
     billingAddress?: SortOrder
     billingPincode?: SortOrder
-    billingState?: SortOrder
-    billingCity?: SortOrder
+    billingCountryId?: SortOrder
+    billingStateId?: SortOrder
+    billingCityId?: SortOrder
     businessType?: SortOrder
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
@@ -47318,6 +47565,9 @@ export namespace Prisma {
   export type companyDetailSumOrderByAggregateInput = {
     id?: SortOrder
     adminId?: SortOrder
+    billingCountryId?: SortOrder
+    billingStateId?: SortOrder
+    billingCityId?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -48024,6 +48274,12 @@ export namespace Prisma {
     none?: OrderWhereInput
   }
 
+  export type CompanyDetailListRelationFilter = {
+    every?: companyDetailWhereInput
+    some?: companyDetailWhereInput
+    none?: companyDetailWhereInput
+  }
+
   export type stateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -48049,6 +48305,10 @@ export namespace Prisma {
   }
 
   export type OrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type companyDetailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -50175,10 +50435,58 @@ export namespace Prisma {
     update?: XOR<XOR<bankAccountChangeRequestUpdateToOneWithWhereWithoutSupplierInput, bankAccountChangeRequestUpdateWithoutSupplierInput>, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
   }
 
+  export type countryCreateNestedOneWithoutBillingCompanyDetailsInput = {
+    create?: XOR<countryCreateWithoutBillingCompanyDetailsInput, countryUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutBillingCompanyDetailsInput
+    connect?: countryWhereUniqueInput
+  }
+
+  export type stateCreateNestedOneWithoutBillingCompanyDetailsInput = {
+    create?: XOR<stateCreateWithoutBillingCompanyDetailsInput, stateUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: stateCreateOrConnectWithoutBillingCompanyDetailsInput
+    connect?: stateWhereUniqueInput
+  }
+
+  export type cityCreateNestedOneWithoutBillingCompanyDetailsInput = {
+    create?: XOR<cityCreateWithoutBillingCompanyDetailsInput, cityUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: cityCreateOrConnectWithoutBillingCompanyDetailsInput
+    connect?: cityWhereUniqueInput
+  }
+
   export type adminCreateNestedOneWithoutCompanyDetailInput = {
     create?: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
     connectOrCreate?: adminCreateOrConnectWithoutCompanyDetailInput
     connect?: adminWhereUniqueInput
+  }
+
+  export type countryUpdateOneWithoutBillingCompanyDetailsNestedInput = {
+    create?: XOR<countryCreateWithoutBillingCompanyDetailsInput, countryUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: countryCreateOrConnectWithoutBillingCompanyDetailsInput
+    upsert?: countryUpsertWithoutBillingCompanyDetailsInput
+    disconnect?: countryWhereInput | boolean
+    delete?: countryWhereInput | boolean
+    connect?: countryWhereUniqueInput
+    update?: XOR<XOR<countryUpdateToOneWithWhereWithoutBillingCompanyDetailsInput, countryUpdateWithoutBillingCompanyDetailsInput>, countryUncheckedUpdateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type stateUpdateOneWithoutBillingCompanyDetailsNestedInput = {
+    create?: XOR<stateCreateWithoutBillingCompanyDetailsInput, stateUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: stateCreateOrConnectWithoutBillingCompanyDetailsInput
+    upsert?: stateUpsertWithoutBillingCompanyDetailsInput
+    disconnect?: stateWhereInput | boolean
+    delete?: stateWhereInput | boolean
+    connect?: stateWhereUniqueInput
+    update?: XOR<XOR<stateUpdateToOneWithWhereWithoutBillingCompanyDetailsInput, stateUpdateWithoutBillingCompanyDetailsInput>, stateUncheckedUpdateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type cityUpdateOneWithoutBillingCompanyDetailsNestedInput = {
+    create?: XOR<cityCreateWithoutBillingCompanyDetailsInput, cityUncheckedCreateWithoutBillingCompanyDetailsInput>
+    connectOrCreate?: cityCreateOrConnectWithoutBillingCompanyDetailsInput
+    upsert?: cityUpsertWithoutBillingCompanyDetailsInput
+    disconnect?: cityWhereInput | boolean
+    delete?: cityWhereInput | boolean
+    connect?: cityWhereUniqueInput
+    update?: XOR<XOR<cityUpdateToOneWithWhereWithoutBillingCompanyDetailsInput, cityUpdateWithoutBillingCompanyDetailsInput>, cityUncheckedUpdateWithoutBillingCompanyDetailsInput>
   }
 
   export type adminUpdateOneRequiredWithoutCompanyDetailNestedInput = {
@@ -50509,6 +50817,13 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
+  export type companyDetailCreateNestedManyWithoutBillingCountryInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput> | companyDetailCreateWithoutBillingCountryInput[] | companyDetailUncheckedCreateWithoutBillingCountryInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCountryInput | companyDetailCreateOrConnectWithoutBillingCountryInput[]
+    createMany?: companyDetailCreateManyBillingCountryInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+  }
+
   export type stateUncheckedCreateNestedManyWithoutCountryInput = {
     create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
@@ -50577,6 +50892,13 @@ export namespace Prisma {
     connectOrCreate?: OrderCreateOrConnectWithoutBillingCountryInput | OrderCreateOrConnectWithoutBillingCountryInput[]
     createMany?: OrderCreateManyBillingCountryInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput> | companyDetailCreateWithoutBillingCountryInput[] | companyDetailUncheckedCreateWithoutBillingCountryInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCountryInput | companyDetailCreateOrConnectWithoutBillingCountryInput[]
+    createMany?: companyDetailCreateManyBillingCountryInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
   }
 
   export type stateUpdateManyWithoutCountryNestedInput = {
@@ -50719,6 +51041,20 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type companyDetailUpdateManyWithoutBillingCountryNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput> | companyDetailCreateWithoutBillingCountryInput[] | companyDetailUncheckedCreateWithoutBillingCountryInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCountryInput | companyDetailCreateOrConnectWithoutBillingCountryInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingCountryInput | companyDetailUpsertWithWhereUniqueWithoutBillingCountryInput[]
+    createMany?: companyDetailCreateManyBillingCountryInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingCountryInput | companyDetailUpdateWithWhereUniqueWithoutBillingCountryInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingCountryInput | companyDetailUpdateManyWithWhereWithoutBillingCountryInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+  }
+
   export type stateUncheckedUpdateManyWithoutCountryNestedInput = {
     create?: XOR<stateCreateWithoutCountryInput, stateUncheckedCreateWithoutCountryInput> | stateCreateWithoutCountryInput[] | stateUncheckedCreateWithoutCountryInput[]
     connectOrCreate?: stateCreateOrConnectWithoutCountryInput | stateCreateOrConnectWithoutCountryInput[]
@@ -50859,6 +51195,20 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput> | companyDetailCreateWithoutBillingCountryInput[] | companyDetailUncheckedCreateWithoutBillingCountryInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCountryInput | companyDetailCreateOrConnectWithoutBillingCountryInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingCountryInput | companyDetailUpsertWithWhereUniqueWithoutBillingCountryInput[]
+    createMany?: companyDetailCreateManyBillingCountryInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingCountryInput | companyDetailUpdateWithWhereUniqueWithoutBillingCountryInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingCountryInput | companyDetailUpdateManyWithWhereWithoutBillingCountryInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+  }
+
   export type countryCreateNestedOneWithoutStatesInput = {
     create?: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
     connectOrCreate?: countryCreateOrConnectWithoutStatesInput
@@ -50914,6 +51264,13 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
+  export type companyDetailCreateNestedManyWithoutBillingStateInput = {
+    create?: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput> | companyDetailCreateWithoutBillingStateInput[] | companyDetailUncheckedCreateWithoutBillingStateInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingStateInput | companyDetailCreateOrConnectWithoutBillingStateInput[]
+    createMany?: companyDetailCreateManyBillingStateInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+  }
+
   export type cityUncheckedCreateNestedManyWithoutStateInput = {
     create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
     connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
@@ -50961,6 +51318,13 @@ export namespace Prisma {
     connectOrCreate?: OrderCreateOrConnectWithoutBillingStateInput | OrderCreateOrConnectWithoutBillingStateInput[]
     createMany?: OrderCreateManyBillingStateInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type companyDetailUncheckedCreateNestedManyWithoutBillingStateInput = {
+    create?: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput> | companyDetailCreateWithoutBillingStateInput[] | companyDetailUncheckedCreateWithoutBillingStateInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingStateInput | companyDetailCreateOrConnectWithoutBillingStateInput[]
+    createMany?: companyDetailCreateManyBillingStateInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
   }
 
   export type countryUpdateOneRequiredWithoutStatesNestedInput = {
@@ -51069,6 +51433,20 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type companyDetailUpdateManyWithoutBillingStateNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput> | companyDetailCreateWithoutBillingStateInput[] | companyDetailUncheckedCreateWithoutBillingStateInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingStateInput | companyDetailCreateOrConnectWithoutBillingStateInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingStateInput | companyDetailUpsertWithWhereUniqueWithoutBillingStateInput[]
+    createMany?: companyDetailCreateManyBillingStateInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingStateInput | companyDetailUpdateWithWhereUniqueWithoutBillingStateInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingStateInput | companyDetailUpdateManyWithWhereWithoutBillingStateInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+  }
+
   export type cityUncheckedUpdateManyWithoutStateNestedInput = {
     create?: XOR<cityCreateWithoutStateInput, cityUncheckedCreateWithoutStateInput> | cityCreateWithoutStateInput[] | cityUncheckedCreateWithoutStateInput[]
     connectOrCreate?: cityCreateOrConnectWithoutStateInput | cityCreateOrConnectWithoutStateInput[]
@@ -51167,6 +51545,20 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput> | companyDetailCreateWithoutBillingStateInput[] | companyDetailUncheckedCreateWithoutBillingStateInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingStateInput | companyDetailCreateOrConnectWithoutBillingStateInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingStateInput | companyDetailUpsertWithWhereUniqueWithoutBillingStateInput[]
+    createMany?: companyDetailCreateManyBillingStateInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingStateInput | companyDetailUpdateWithWhereUniqueWithoutBillingStateInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingStateInput | companyDetailUpdateManyWithWhereWithoutBillingStateInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+  }
+
   export type stateCreateNestedOneWithoutCitiesInput = {
     create?: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
     connectOrCreate?: stateCreateOrConnectWithoutCitiesInput
@@ -51221,6 +51613,13 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
+  export type companyDetailCreateNestedManyWithoutBillingCityInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput> | companyDetailCreateWithoutBillingCityInput[] | companyDetailUncheckedCreateWithoutBillingCityInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCityInput | companyDetailCreateOrConnectWithoutBillingCityInput[]
+    createMany?: companyDetailCreateManyBillingCityInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+  }
+
   export type warehouseUncheckedCreateNestedManyWithoutCityInput = {
     create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
     connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
@@ -51261,6 +51660,13 @@ export namespace Prisma {
     connectOrCreate?: OrderCreateOrConnectWithoutBillingCityInput | OrderCreateOrConnectWithoutBillingCityInput[]
     createMany?: OrderCreateManyBillingCityInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type companyDetailUncheckedCreateNestedManyWithoutBillingCityInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput> | companyDetailCreateWithoutBillingCityInput[] | companyDetailUncheckedCreateWithoutBillingCityInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCityInput | companyDetailCreateOrConnectWithoutBillingCityInput[]
+    createMany?: companyDetailCreateManyBillingCityInputEnvelope
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
   }
 
   export type stateUpdateOneRequiredWithoutCitiesNestedInput = {
@@ -51363,6 +51769,20 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type companyDetailUpdateManyWithoutBillingCityNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput> | companyDetailCreateWithoutBillingCityInput[] | companyDetailUncheckedCreateWithoutBillingCityInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCityInput | companyDetailCreateOrConnectWithoutBillingCityInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingCityInput | companyDetailUpsertWithWhereUniqueWithoutBillingCityInput[]
+    createMany?: companyDetailCreateManyBillingCityInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingCityInput | companyDetailUpdateWithWhereUniqueWithoutBillingCityInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingCityInput | companyDetailUpdateManyWithWhereWithoutBillingCityInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+  }
+
   export type warehouseUncheckedUpdateManyWithoutCityNestedInput = {
     create?: XOR<warehouseCreateWithoutCityInput, warehouseUncheckedCreateWithoutCityInput> | warehouseCreateWithoutCityInput[] | warehouseUncheckedCreateWithoutCityInput[]
     connectOrCreate?: warehouseCreateOrConnectWithoutCityInput | warehouseCreateOrConnectWithoutCityInput[]
@@ -51445,6 +51865,20 @@ export namespace Prisma {
     update?: OrderUpdateWithWhereUniqueWithoutBillingCityInput | OrderUpdateWithWhereUniqueWithoutBillingCityInput[]
     updateMany?: OrderUpdateManyWithWhereWithoutBillingCityInput | OrderUpdateManyWithWhereWithoutBillingCityInput[]
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  }
+
+  export type companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput = {
+    create?: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput> | companyDetailCreateWithoutBillingCityInput[] | companyDetailUncheckedCreateWithoutBillingCityInput[]
+    connectOrCreate?: companyDetailCreateOrConnectWithoutBillingCityInput | companyDetailCreateOrConnectWithoutBillingCityInput[]
+    upsert?: companyDetailUpsertWithWhereUniqueWithoutBillingCityInput | companyDetailUpsertWithWhereUniqueWithoutBillingCityInput[]
+    createMany?: companyDetailCreateManyBillingCityInputEnvelope
+    set?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    disconnect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    delete?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    connect?: companyDetailWhereUniqueInput | companyDetailWhereUniqueInput[]
+    update?: companyDetailUpdateWithWhereUniqueWithoutBillingCityInput | companyDetailUpdateWithWhereUniqueWithoutBillingCityInput[]
+    updateMany?: companyDetailUpdateManyWithWhereWithoutBillingCityInput | companyDetailUpdateManyWithWhereWithoutBillingCityInput[]
+    deleteMany?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
   }
 
   export type countryCreateNestedOneWithoutWarehousesInput = {
@@ -52680,6 +53114,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutAdminsInput = {
@@ -52701,6 +53136,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutAdminsInput = {
@@ -52729,6 +53165,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutAdminsInput = {
@@ -52752,6 +53189,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutAdminsInput = {
@@ -52787,6 +53225,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutAdminsInput = {
@@ -52817,6 +53256,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutAdminsInput = {
@@ -52899,8 +53339,6 @@ export namespace Prisma {
     brandShortName?: string | null
     billingAddress?: string | null
     billingPincode?: string | null
-    billingState?: string | null
-    billingCity?: string | null
     businessType?: string | null
     clientEntryType?: string | null
     gstNumber?: string | null
@@ -52924,6 +53362,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    billingCountry?: countryCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingState?: stateCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingCity?: cityCreateNestedOneWithoutBillingCompanyDetailsInput
   }
 
   export type companyDetailUncheckedCreateWithoutAdminInput = {
@@ -52933,8 +53374,9 @@ export namespace Prisma {
     brandShortName?: string | null
     billingAddress?: string | null
     billingPincode?: string | null
-    billingState?: string | null
-    billingCity?: string | null
+    billingCountryId?: bigint | number | null
+    billingStateId?: bigint | number | null
+    billingCityId?: bigint | number | null
     businessType?: string | null
     clientEntryType?: string | null
     gstNumber?: string | null
@@ -53234,6 +53676,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutAdminsInput = {
@@ -53255,6 +53698,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type stateUpsertWithoutAdminsInput = {
@@ -53289,6 +53733,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutAdminsInput = {
@@ -53312,6 +53757,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type countryUpsertWithoutAdminsInput = {
@@ -53353,6 +53799,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutAdminsInput = {
@@ -53383,6 +53830,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type adminStaffUpsertWithWhereUniqueWithoutAdminInput = {
@@ -53451,8 +53899,6 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53476,6 +53922,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: countryUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingState?: stateUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingCity?: cityUpdateOneWithoutBillingCompanyDetailsNestedInput
   }
 
   export type companyDetailUncheckedUpdateWithoutAdminInput = {
@@ -53485,8 +53934,9 @@ export namespace Prisma {
     brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     businessType?: NullableStringFieldUpdateOperationsInput | string | null
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53716,6 +54166,175 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type countryCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateCreateNestedManyWithoutCountryInput
+    cities?: cityCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoCreateNestedManyWithoutCountryInput
+    admins?: adminCreateNestedManyWithoutPermanentCountryInput
+    adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCountryInput
+    originProducts?: productCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
+    shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
+    billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+  }
+
+  export type countryUncheckedCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    iso3?: string | null
+    iso2?: string | null
+    phonecode?: string | null
+    currency?: string | null
+    currencyName?: string | null
+    currencySymbol?: string | null
+    nationality?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    states?: stateUncheckedCreateNestedManyWithoutCountryInput
+    cities?: cityUncheckedCreateNestedManyWithoutCountryInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCountryInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCountryInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCountryInput
+    adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCountryInput
+    originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
+    shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
+    shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
+    billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+  }
+
+  export type countryCreateOrConnectWithoutBillingCompanyDetailsInput = {
+    where: countryWhereUniqueInput
+    create: XOR<countryCreateWithoutBillingCompanyDetailsInput, countryUncheckedCreateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type stateCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    country: countryCreateNestedOneWithoutStatesInput
+    cities?: cityCreateNestedManyWithoutStateInput
+    warehouses?: warehouseCreateNestedManyWithoutStateInput
+    highRtos?: highRtoCreateNestedManyWithoutStateInput
+    admins?: adminCreateNestedManyWithoutPermanentStateInput
+    adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
+    shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
+    billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+  }
+
+  export type stateUncheckedCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    countryId: bigint | number
+    iso2?: string | null
+    type?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    cities?: cityUncheckedCreateNestedManyWithoutStateInput
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutStateInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutStateInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
+    adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
+    shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
+    billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+  }
+
+  export type stateCreateOrConnectWithoutBillingCompanyDetailsInput = {
+    where: stateWhereUniqueInput
+    create: XOR<stateCreateWithoutBillingCompanyDetailsInput, stateUncheckedCreateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type cityCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    state: stateCreateNestedOneWithoutCitiesInput
+    country: countryCreateNestedOneWithoutCitiesInput
+    warehouses?: warehouseCreateNestedManyWithoutCityInput
+    highRtos?: highRtoCreateNestedManyWithoutCityInput
+    admins?: adminCreateNestedManyWithoutPermanentCityInput
+    adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
+    shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
+    billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+  }
+
+  export type cityUncheckedCreateWithoutBillingCompanyDetailsInput = {
+    id?: bigint | number
+    name: string
+    stateId: bigint | number
+    countryId: bigint | number
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    warehouses?: warehouseUncheckedCreateNestedManyWithoutCityInput
+    highRtos?: highRtoUncheckedCreateNestedManyWithoutCityInput
+    admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
+    adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
+    shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
+    billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+  }
+
+  export type cityCreateOrConnectWithoutBillingCompanyDetailsInput = {
+    where: cityWhereUniqueInput
+    create: XOR<cityCreateWithoutBillingCompanyDetailsInput, cityUncheckedCreateWithoutBillingCompanyDetailsInput>
+  }
+
   export type adminCreateWithoutCompanyDetailInput = {
     profilePicture?: string | null
     name: string
@@ -53798,6 +54417,193 @@ export namespace Prisma {
   export type adminCreateOrConnectWithoutCompanyDetailInput = {
     where: adminWhereUniqueInput
     create: XOR<adminCreateWithoutCompanyDetailInput, adminUncheckedCreateWithoutCompanyDetailInput>
+  }
+
+  export type countryUpsertWithoutBillingCompanyDetailsInput = {
+    update: XOR<countryUpdateWithoutBillingCompanyDetailsInput, countryUncheckedUpdateWithoutBillingCompanyDetailsInput>
+    create: XOR<countryCreateWithoutBillingCompanyDetailsInput, countryUncheckedCreateWithoutBillingCompanyDetailsInput>
+    where?: countryWhereInput
+  }
+
+  export type countryUpdateToOneWithWhereWithoutBillingCompanyDetailsInput = {
+    where?: countryWhereInput
+    data: XOR<countryUpdateWithoutBillingCompanyDetailsInput, countryUncheckedUpdateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type countryUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUpdateManyWithoutCountryNestedInput
+    cities?: cityUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUpdateManyWithoutCountryNestedInput
+    admins?: adminUpdateManyWithoutPermanentCountryNestedInput
+    adminStaffs?: adminStaffUpdateManyWithoutPermanentCountryNestedInput
+    originProducts?: productUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
+    shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
+    billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+  }
+
+  export type countryUncheckedUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso3?: NullableStringFieldUpdateOperationsInput | string | null
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    phonecode?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    currencyName?: NullableStringFieldUpdateOperationsInput | string | null
+    currencySymbol?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    states?: stateUncheckedUpdateManyWithoutCountryNestedInput
+    cities?: cityUncheckedUpdateManyWithoutCountryNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutCountryNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCountryNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCountryNestedInput
+    adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCountryNestedInput
+    originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
+    shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
+    shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
+    billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+  }
+
+  export type stateUpsertWithoutBillingCompanyDetailsInput = {
+    update: XOR<stateUpdateWithoutBillingCompanyDetailsInput, stateUncheckedUpdateWithoutBillingCompanyDetailsInput>
+    create: XOR<stateCreateWithoutBillingCompanyDetailsInput, stateUncheckedCreateWithoutBillingCompanyDetailsInput>
+    where?: stateWhereInput
+  }
+
+  export type stateUpdateToOneWithWhereWithoutBillingCompanyDetailsInput = {
+    where?: stateWhereInput
+    data: XOR<stateUpdateWithoutBillingCompanyDetailsInput, stateUncheckedUpdateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type stateUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: countryUpdateOneRequiredWithoutStatesNestedInput
+    cities?: cityUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUpdateManyWithoutStateNestedInput
+    admins?: adminUpdateManyWithoutPermanentStateNestedInput
+    adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
+    shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
+    billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+  }
+
+  export type stateUncheckedUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    iso2?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    cities?: cityUncheckedUpdateManyWithoutStateNestedInput
+    warehouses?: warehouseUncheckedUpdateManyWithoutStateNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutStateNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
+    adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
+    shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
+    billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+  }
+
+  export type cityUpsertWithoutBillingCompanyDetailsInput = {
+    update: XOR<cityUpdateWithoutBillingCompanyDetailsInput, cityUncheckedUpdateWithoutBillingCompanyDetailsInput>
+    create: XOR<cityCreateWithoutBillingCompanyDetailsInput, cityUncheckedCreateWithoutBillingCompanyDetailsInput>
+    where?: cityWhereInput
+  }
+
+  export type cityUpdateToOneWithWhereWithoutBillingCompanyDetailsInput = {
+    where?: cityWhereInput
+    data: XOR<cityUpdateWithoutBillingCompanyDetailsInput, cityUncheckedUpdateWithoutBillingCompanyDetailsInput>
+  }
+
+  export type cityUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: stateUpdateOneRequiredWithoutCitiesNestedInput
+    country?: countryUpdateOneRequiredWithoutCitiesNestedInput
+    warehouses?: warehouseUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUpdateManyWithoutCityNestedInput
+    admins?: adminUpdateManyWithoutPermanentCityNestedInput
+    adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
+    shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
+    billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+  }
+
+  export type cityUncheckedUpdateWithoutBillingCompanyDetailsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    stateId?: BigIntFieldUpdateOperationsInput | bigint | number
+    countryId?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouses?: warehouseUncheckedUpdateManyWithoutCityNestedInput
+    highRtos?: highRtoUncheckedUpdateManyWithoutCityNestedInput
+    admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
+    adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
+    shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
+    billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type adminUpsertWithoutCompanyDetailInput = {
@@ -54469,6 +55275,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutAdminStaffsInput = {
@@ -54490,6 +55297,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutAdminStaffsInput = {
@@ -54518,6 +55326,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutAdminStaffsInput = {
@@ -54541,6 +55350,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutAdminStaffsInput = {
@@ -54576,6 +55386,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutAdminStaffsInput = {
@@ -54606,6 +55417,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutAdminStaffsInput = {
@@ -54764,6 +55576,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutAdminStaffsInput = {
@@ -54785,6 +55598,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type stateUpsertWithoutAdminStaffsInput = {
@@ -54819,6 +55633,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutAdminStaffsInput = {
@@ -54842,6 +55657,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type countryUpsertWithoutAdminStaffsInput = {
@@ -54883,6 +55699,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutAdminStaffsInput = {
@@ -54913,6 +55730,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type adminUpsertWithoutStaffInput = {
@@ -55329,6 +56147,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutCountryInput = {
@@ -55352,6 +56171,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutCountryInput = {
@@ -55383,6 +56203,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutCountryInput = {
@@ -55404,6 +56225,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutCountryInput = {
@@ -56046,6 +56868,85 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type companyDetailCreateWithoutBillingCountryInput = {
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    billingState?: stateCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingCity?: cityCreateNestedOneWithoutBillingCompanyDetailsInput
+    admin: adminCreateNestedOneWithoutCompanyDetailInput
+  }
+
+  export type companyDetailUncheckedCreateWithoutBillingCountryInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingStateId?: bigint | number | null
+    billingCityId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailCreateOrConnectWithoutBillingCountryInput = {
+    where: companyDetailWhereUniqueInput
+    create: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput>
+  }
+
+  export type companyDetailCreateManyBillingCountryInputEnvelope = {
+    data: companyDetailCreateManyBillingCountryInput | companyDetailCreateManyBillingCountryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type stateUpsertWithWhereUniqueWithoutCountryInput = {
     where: stateWhereUniqueInput
     update: XOR<stateUpdateWithoutCountryInput, stateUncheckedUpdateWithoutCountryInput>
@@ -56418,6 +57319,61 @@ export namespace Prisma {
     data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutBillingCountryInput>
   }
 
+  export type companyDetailUpsertWithWhereUniqueWithoutBillingCountryInput = {
+    where: companyDetailWhereUniqueInput
+    update: XOR<companyDetailUpdateWithoutBillingCountryInput, companyDetailUncheckedUpdateWithoutBillingCountryInput>
+    create: XOR<companyDetailCreateWithoutBillingCountryInput, companyDetailUncheckedCreateWithoutBillingCountryInput>
+  }
+
+  export type companyDetailUpdateWithWhereUniqueWithoutBillingCountryInput = {
+    where: companyDetailWhereUniqueInput
+    data: XOR<companyDetailUpdateWithoutBillingCountryInput, companyDetailUncheckedUpdateWithoutBillingCountryInput>
+  }
+
+  export type companyDetailUpdateManyWithWhereWithoutBillingCountryInput = {
+    where: companyDetailScalarWhereInput
+    data: XOR<companyDetailUpdateManyMutationInput, companyDetailUncheckedUpdateManyWithoutBillingCountryInput>
+  }
+
+  export type companyDetailScalarWhereInput = {
+    AND?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+    OR?: companyDetailScalarWhereInput[]
+    NOT?: companyDetailScalarWhereInput | companyDetailScalarWhereInput[]
+    id?: IntFilter<"companyDetail"> | number
+    adminId?: IntFilter<"companyDetail"> | number
+    companyName?: StringNullableFilter<"companyDetail"> | string | null
+    brandName?: StringNullableFilter<"companyDetail"> | string | null
+    brandShortName?: StringNullableFilter<"companyDetail"> | string | null
+    billingAddress?: StringNullableFilter<"companyDetail"> | string | null
+    billingPincode?: StringNullableFilter<"companyDetail"> | string | null
+    billingCountryId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingStateId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    billingCityId?: BigIntNullableFilter<"companyDetail"> | bigint | number | null
+    businessType?: StringNullableFilter<"companyDetail"> | string | null
+    clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
+    gstNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
+    gstDocument?: StringNullableFilter<"companyDetail"> | string | null
+    panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
+    panCardImage?: StringNullableFilter<"companyDetail"> | string | null
+    aadharCardImage?: StringNullableFilter<"companyDetail"> | string | null
+    additionalDocumentUpload?: StringNullableFilter<"companyDetail"> | string | null
+    documentId?: StringNullableFilter<"companyDetail"> | string | null
+    documentName?: StringNullableFilter<"companyDetail"> | string | null
+    documentImage?: StringNullableFilter<"companyDetail"> | string | null
+    createdAt?: DateTimeFilter<"companyDetail"> | Date | string
+    createdBy?: IntNullableFilter<"companyDetail"> | number | null
+    createdByRole?: StringNullableFilter<"companyDetail"> | string | null
+    updatedAt?: DateTimeFilter<"companyDetail"> | Date | string
+    updatedBy?: IntNullableFilter<"companyDetail"> | number | null
+    updatedByRole?: StringNullableFilter<"companyDetail"> | string | null
+    deletedAt?: DateTimeNullableFilter<"companyDetail"> | Date | string | null
+    deletedBy?: IntNullableFilter<"companyDetail"> | number | null
+    deletedByRole?: StringNullableFilter<"companyDetail"> | string | null
+  }
+
   export type countryCreateWithoutStatesInput = {
     id?: bigint | number
     name: string
@@ -56446,6 +57402,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutStatesInput = {
@@ -56476,6 +57433,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutStatesInput = {
@@ -56502,6 +57460,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutStateInput = {
@@ -56523,6 +57482,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutStateInput = {
@@ -56967,6 +57927,85 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type companyDetailCreateWithoutBillingStateInput = {
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    billingCountry?: countryCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingCity?: cityCreateNestedOneWithoutBillingCompanyDetailsInput
+    admin: adminCreateNestedOneWithoutCompanyDetailInput
+  }
+
+  export type companyDetailUncheckedCreateWithoutBillingStateInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingCountryId?: bigint | number | null
+    billingCityId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailCreateOrConnectWithoutBillingStateInput = {
+    where: companyDetailWhereUniqueInput
+    create: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput>
+  }
+
+  export type companyDetailCreateManyBillingStateInputEnvelope = {
+    data: companyDetailCreateManyBillingStateInput | companyDetailCreateManyBillingStateInput[]
+    skipDuplicates?: boolean
+  }
+
   export type countryUpsertWithoutStatesInput = {
     update: XOR<countryUpdateWithoutStatesInput, countryUncheckedUpdateWithoutStatesInput>
     create: XOR<countryCreateWithoutStatesInput, countryUncheckedCreateWithoutStatesInput>
@@ -57006,6 +58045,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutStatesInput = {
@@ -57036,6 +58076,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type cityUpsertWithWhereUniqueWithoutStateInput = {
@@ -57150,6 +58191,22 @@ export namespace Prisma {
     data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutBillingStateInput>
   }
 
+  export type companyDetailUpsertWithWhereUniqueWithoutBillingStateInput = {
+    where: companyDetailWhereUniqueInput
+    update: XOR<companyDetailUpdateWithoutBillingStateInput, companyDetailUncheckedUpdateWithoutBillingStateInput>
+    create: XOR<companyDetailCreateWithoutBillingStateInput, companyDetailUncheckedCreateWithoutBillingStateInput>
+  }
+
+  export type companyDetailUpdateWithWhereUniqueWithoutBillingStateInput = {
+    where: companyDetailWhereUniqueInput
+    data: XOR<companyDetailUpdateWithoutBillingStateInput, companyDetailUncheckedUpdateWithoutBillingStateInput>
+  }
+
+  export type companyDetailUpdateManyWithWhereWithoutBillingStateInput = {
+    where: companyDetailScalarWhereInput
+    data: XOR<companyDetailUpdateManyMutationInput, companyDetailUncheckedUpdateManyWithoutBillingStateInput>
+  }
+
   export type stateCreateWithoutCitiesInput = {
     id?: bigint | number
     name: string
@@ -57171,6 +58228,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutCitiesInput = {
@@ -57194,6 +58252,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutCitiesInput = {
@@ -57229,6 +58288,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutCitiesInput = {
@@ -57259,6 +58319,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutCitiesInput = {
@@ -57698,6 +58759,85 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type companyDetailCreateWithoutBillingCityInput = {
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    billingCountry?: countryCreateNestedOneWithoutBillingCompanyDetailsInput
+    billingState?: stateCreateNestedOneWithoutBillingCompanyDetailsInput
+    admin: adminCreateNestedOneWithoutCompanyDetailInput
+  }
+
+  export type companyDetailUncheckedCreateWithoutBillingCityInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingCountryId?: bigint | number | null
+    billingStateId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailCreateOrConnectWithoutBillingCityInput = {
+    where: companyDetailWhereUniqueInput
+    create: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput>
+  }
+
+  export type companyDetailCreateManyBillingCityInputEnvelope = {
+    data: companyDetailCreateManyBillingCityInput | companyDetailCreateManyBillingCityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type stateUpsertWithoutCitiesInput = {
     update: XOR<stateUpdateWithoutCitiesInput, stateUncheckedUpdateWithoutCitiesInput>
     create: XOR<stateCreateWithoutCitiesInput, stateUncheckedCreateWithoutCitiesInput>
@@ -57730,6 +58870,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutCitiesInput = {
@@ -57753,6 +58894,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type countryUpsertWithoutCitiesInput = {
@@ -57794,6 +58936,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutCitiesInput = {
@@ -57824,6 +58967,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type warehouseUpsertWithWhereUniqueWithoutCityInput = {
@@ -57922,6 +59066,22 @@ export namespace Prisma {
     data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutBillingCityInput>
   }
 
+  export type companyDetailUpsertWithWhereUniqueWithoutBillingCityInput = {
+    where: companyDetailWhereUniqueInput
+    update: XOR<companyDetailUpdateWithoutBillingCityInput, companyDetailUncheckedUpdateWithoutBillingCityInput>
+    create: XOR<companyDetailCreateWithoutBillingCityInput, companyDetailUncheckedCreateWithoutBillingCityInput>
+  }
+
+  export type companyDetailUpdateWithWhereUniqueWithoutBillingCityInput = {
+    where: companyDetailWhereUniqueInput
+    data: XOR<companyDetailUpdateWithoutBillingCityInput, companyDetailUncheckedUpdateWithoutBillingCityInput>
+  }
+
+  export type companyDetailUpdateManyWithWhereWithoutBillingCityInput = {
+    where: companyDetailScalarWhereInput
+    data: XOR<companyDetailUpdateManyMutationInput, companyDetailUncheckedUpdateManyWithoutBillingCityInput>
+  }
+
   export type countryCreateWithoutWarehousesInput = {
     id?: bigint | number
     name: string
@@ -57950,6 +59110,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutWarehousesInput = {
@@ -57980,6 +59141,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutWarehousesInput = {
@@ -58008,6 +59170,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutWarehousesInput = {
@@ -58031,6 +59194,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutWarehousesInput = {
@@ -58057,6 +59221,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutWarehousesInput = {
@@ -58078,6 +59243,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutWarehousesInput = {
@@ -58124,6 +59290,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutWarehousesInput = {
@@ -58154,6 +59321,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type stateUpsertWithoutWarehousesInput = {
@@ -58188,6 +59356,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutWarehousesInput = {
@@ -58211,6 +59380,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type cityUpsertWithoutWarehousesInput = {
@@ -58243,6 +59413,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutWarehousesInput = {
@@ -58264,6 +59435,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type productCreateWithoutCategoryInput = {
@@ -58782,6 +59954,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutOriginProductsInput = {
@@ -58812,6 +59985,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutOriginProductsInput = {
@@ -58847,6 +60021,7 @@ export namespace Prisma {
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutShippingProductsInput = {
@@ -58877,6 +60052,7 @@ export namespace Prisma {
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutShippingProductsInput = {
@@ -59193,6 +60369,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutOriginProductsInput = {
@@ -59223,6 +60400,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUpsertWithoutShippingProductsInput = {
@@ -59264,6 +60442,7 @@ export namespace Prisma {
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutShippingProductsInput = {
@@ -59294,6 +60473,7 @@ export namespace Prisma {
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type productVariantUpsertWithWhereUniqueWithoutProductInput = {
@@ -59665,6 +60845,7 @@ export namespace Prisma {
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutHighRtosInput = {
@@ -59695,6 +60876,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutHighRtosInput = {
@@ -59723,6 +60905,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutHighRtosInput = {
@@ -59746,6 +60929,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutHighRtosInput = {
@@ -59772,6 +60956,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutHighRtosInput = {
@@ -59793,6 +60978,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutHighRtosInput = {
@@ -59839,6 +61025,7 @@ export namespace Prisma {
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutHighRtosInput = {
@@ -59869,6 +61056,7 @@ export namespace Prisma {
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type stateUpsertWithoutHighRtosInput = {
@@ -59903,6 +61091,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutHighRtosInput = {
@@ -59926,6 +61115,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type cityUpsertWithoutHighRtosInput = {
@@ -59958,6 +61148,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutHighRtosInput = {
@@ -59979,6 +61170,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type OrderCreateWithoutPaymentInput = {
@@ -60112,6 +61304,7 @@ export namespace Prisma {
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutShippingOrdersInput = {
@@ -60142,6 +61335,7 @@ export namespace Prisma {
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutShippingOrdersInput = {
@@ -60170,6 +61364,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentStateInput
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     billingOrders?: OrderCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutShippingOrdersInput = {
@@ -60193,6 +61388,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutShippingOrdersInput = {
@@ -60219,6 +61415,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentCityInput
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     billingOrders?: OrderCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutShippingOrdersInput = {
@@ -60240,6 +61437,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     billingOrders?: OrderUncheckedCreateNestedManyWithoutBillingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutShippingOrdersInput = {
@@ -60275,6 +61473,7 @@ export namespace Prisma {
     originProducts?: productCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCountryInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryUncheckedCreateWithoutBillingOrdersInput = {
@@ -60305,6 +61504,7 @@ export namespace Prisma {
     originProducts?: productUncheckedCreateNestedManyWithoutOriginCountryInput
     shippingProducts?: productUncheckedCreateNestedManyWithoutShippingCountryInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCountryInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCountryInput
   }
 
   export type countryCreateOrConnectWithoutBillingOrdersInput = {
@@ -60333,6 +61533,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentStateInput
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingStateInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateUncheckedCreateWithoutBillingOrdersInput = {
@@ -60356,6 +61557,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentStateInput
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentStateInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingStateInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingStateInput
   }
 
   export type stateCreateOrConnectWithoutBillingOrdersInput = {
@@ -60382,6 +61584,7 @@ export namespace Prisma {
     admins?: adminCreateNestedManyWithoutPermanentCityInput
     adminStaffs?: adminStaffCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderCreateNestedManyWithoutShippingCityInput
+    billingCompanyDetails?: companyDetailCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityUncheckedCreateWithoutBillingOrdersInput = {
@@ -60403,6 +61606,7 @@ export namespace Prisma {
     admins?: adminUncheckedCreateNestedManyWithoutPermanentCityInput
     adminStaffs?: adminStaffUncheckedCreateNestedManyWithoutPermanentCityInput
     shippingOrders?: OrderUncheckedCreateNestedManyWithoutShippingCityInput
+    billingCompanyDetails?: companyDetailUncheckedCreateNestedManyWithoutBillingCityInput
   }
 
   export type cityCreateOrConnectWithoutBillingOrdersInput = {
@@ -60516,6 +61720,7 @@ export namespace Prisma {
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutShippingOrdersInput = {
@@ -60546,6 +61751,7 @@ export namespace Prisma {
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type stateUpsertWithoutShippingOrdersInput = {
@@ -60580,6 +61786,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutShippingOrdersInput = {
@@ -60603,6 +61810,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type cityUpsertWithoutShippingOrdersInput = {
@@ -60635,6 +61843,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutShippingOrdersInput = {
@@ -60656,6 +61865,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type countryUpsertWithoutBillingOrdersInput = {
@@ -60697,6 +61907,7 @@ export namespace Prisma {
     originProducts?: productUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCountryNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type countryUncheckedUpdateWithoutBillingOrdersInput = {
@@ -60727,6 +61938,7 @@ export namespace Prisma {
     originProducts?: productUncheckedUpdateManyWithoutOriginCountryNestedInput
     shippingProducts?: productUncheckedUpdateManyWithoutShippingCountryNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCountryNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
   export type stateUpsertWithoutBillingOrdersInput = {
@@ -60761,6 +61973,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentStateNestedInput
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutBillingOrdersInput = {
@@ -60784,6 +61997,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentStateNestedInput
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type cityUpsertWithoutBillingOrdersInput = {
@@ -60816,6 +62030,7 @@ export namespace Prisma {
     admins?: adminUpdateManyWithoutPermanentCityNestedInput
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutBillingOrdersInput = {
@@ -60837,6 +62052,7 @@ export namespace Prisma {
     admins?: adminUncheckedUpdateManyWithoutPermanentCityNestedInput
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type PaymentUpsertWithoutOrdersInput = {
@@ -63172,6 +64388,41 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type companyDetailCreateManyBillingCountryInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingStateId?: bigint | number | null
+    billingCityId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type stateUpdateWithoutCountryInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
@@ -63193,6 +64444,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateWithoutCountryInput = {
@@ -63216,6 +64468,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentStateNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingStateNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingStateNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingStateNestedInput
   }
 
   export type stateUncheckedUpdateManyWithoutCountryInput = {
@@ -63253,6 +64506,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutCountryInput = {
@@ -63274,6 +64528,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateManyWithoutCountryInput = {
@@ -64102,6 +65357,110 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type companyDetailUpdateWithoutBillingCountryInput = {
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: stateUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingCity?: cityUpdateOneWithoutBillingCompanyDetailsNestedInput
+    admin?: adminUpdateOneRequiredWithoutCompanyDetailNestedInput
+  }
+
+  export type companyDetailUncheckedUpdateWithoutBillingCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUncheckedUpdateManyWithoutBillingCountryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type cityCreateManyStateInput = {
     id?: bigint | number
     name: string
@@ -64296,6 +65655,41 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
+  export type companyDetailCreateManyBillingStateInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingCountryId?: bigint | number | null
+    billingCityId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type cityUpdateWithoutStateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
@@ -64315,6 +65709,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateWithoutStateInput = {
@@ -64336,6 +65731,7 @@ export namespace Prisma {
     adminStaffs?: adminStaffUncheckedUpdateManyWithoutPermanentCityNestedInput
     shippingOrders?: OrderUncheckedUpdateManyWithoutShippingCityNestedInput
     billingOrders?: OrderUncheckedUpdateManyWithoutBillingCityNestedInput
+    billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCityNestedInput
   }
 
   export type cityUncheckedUpdateManyWithoutStateInput = {
@@ -64904,6 +66300,110 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type companyDetailUpdateWithoutBillingStateInput = {
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: countryUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingCity?: cityUpdateOneWithoutBillingCompanyDetailsNestedInput
+    admin?: adminUpdateOneRequiredWithoutCompanyDetailNestedInput
+  }
+
+  export type companyDetailUncheckedUpdateWithoutBillingStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUncheckedUpdateManyWithoutBillingStateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type warehouseCreateManyCityInput = {
     id?: number
     name: string
@@ -65072,6 +66572,41 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type companyDetailCreateManyBillingCityInput = {
+    id?: number
+    adminId: number
+    companyName?: string | null
+    brandName?: string | null
+    brandShortName?: string | null
+    billingAddress?: string | null
+    billingPincode?: string | null
+    billingCountryId?: bigint | number | null
+    billingStateId?: bigint | number | null
+    businessType?: string | null
+    clientEntryType?: string | null
+    gstNumber?: string | null
+    companyPanNumber?: string | null
+    aadharNumber?: string | null
+    gstDocument?: string | null
+    panCardHolderName?: string | null
+    aadharCardHolderName?: string | null
+    panCardImage?: string | null
+    aadharCardImage?: string | null
+    additionalDocumentUpload?: string | null
+    documentId?: string | null
+    documentName?: string | null
+    documentImage?: string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -65623,6 +67158,110 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUpdateWithoutBillingCityInput = {
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: countryUpdateOneWithoutBillingCompanyDetailsNestedInput
+    billingState?: stateUpdateOneWithoutBillingCompanyDetailsNestedInput
+    admin?: adminUpdateOneRequiredWithoutCompanyDetailNestedInput
+  }
+
+  export type companyDetailUncheckedUpdateWithoutBillingCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type companyDetailUncheckedUpdateManyWithoutBillingCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandName?: NullableStringFieldUpdateOperationsInput | string | null
+    brandShortName?: NullableStringFieldUpdateOperationsInput | string | null
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingPincode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    businessType?: NullableStringFieldUpdateOperationsInput | string | null
+    clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
+    gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
+    panCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    aadharCardImage?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalDocumentUpload?: NullableStringFieldUpdateOperationsInput | string | null
+    documentId?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null

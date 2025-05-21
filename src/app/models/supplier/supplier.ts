@@ -279,7 +279,10 @@ export const getSupplierById = async (id: number, withPassword: boolean | string
             where: { id, role: 'supplier' },
             include: {
                 companyDetail: true,
-                bankAccount: true
+                bankAccount: true,
+                permanentCity: true,
+                permanentCountry: true,
+                permanentState: true,
             }
         });
 

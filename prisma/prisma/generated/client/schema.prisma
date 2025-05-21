@@ -93,15 +93,23 @@ model admin {
 }
 
 model companyDetail {
-  id                       Int     @id @default(autoincrement())
-  adminId                  Int     @unique
-  companyName              String?
-  brandName                String?
-  brandShortName           String?
-  billingAddress           String?
-  billingPincode           String?
-  billingState             String?
-  billingCity              String?
+  id             Int     @id @default(autoincrement())
+  adminId        Int     @unique
+  companyName    String?
+  brandName      String?
+  brandShortName String?
+  billingAddress String?
+  billingPincode String?
+
+  billingCountryId BigInt?
+  billingCountry   country? @relation("CompanyCountryRelation", fields: [billingCountryId], references: [id], onDelete: SetNull)
+
+  billingStateId BigInt?
+  billingState   state?  @relation("CompanyStateRelation", fields: [billingStateId], references: [id], onDelete: SetNull)
+
+  billingCityId BigInt?
+  billingCity   city?   @relation("CompanyCityRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
+
   businessType             String?
   clientEntryType          String?
   gstNumber                String?
@@ -370,6 +378,8 @@ model country {
   shippingOrders Order[] @relation("CountryShippingRelation")
   billingOrders  Order[] @relation("CountryBillingRelation")
 
+  billingCompanyDetails companyDetail[] @relation("CompanyCountryRelation")
+
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -401,6 +411,8 @@ model state {
   shippingOrders Order[] @relation("StateShippingRelation")
   billingOrders  Order[] @relation("StateBillingRelation")
 
+  billingCompanyDetails companyDetail[] @relation("CompanyStateRelation")
+
   @@index([countryId])
 }
 
@@ -428,6 +440,8 @@ model city {
 
   shippingOrders Order[] @relation("CityShippingRelation")
   billingOrders  Order[] @relation("CityBillingRelation")
+
+  billingCompanyDetails companyDetail[] @relation("CompanyCityRelation")
 
   @@index([stateId])
   @@index([countryId])

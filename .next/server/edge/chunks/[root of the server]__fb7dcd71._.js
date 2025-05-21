@@ -189,7 +189,8 @@ function middleware(req) {
         },
         {
             skipRoutes: [
-                "/api/supplier/auth/verify"
+                "/api/supplier/auth/verify",
+                "/api/supplier/profile"
             ],
             routes: [
                 "/api/admin",
@@ -276,7 +277,7 @@ function middleware(req) {
         }
         // ✅ Then skip if pathname+method match any in 'skipRoutes'
         if (protection.skipRoutes && routeMatchesWithMethod(pathname, method, protection.skipRoutes)) {
-            return res;
+            continue;
         }
         // ✅ Finally, protect the route
         if (routeMatches(pathname, protection.routes)) {

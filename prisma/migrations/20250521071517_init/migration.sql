@@ -73,8 +73,9 @@ CREATE TABLE `companyDetail` (
     `brandShortName` VARCHAR(191) NULL,
     `billingAddress` VARCHAR(191) NULL,
     `billingPincode` VARCHAR(191) NULL,
-    `billingState` VARCHAR(191) NULL,
-    `billingCity` VARCHAR(191) NULL,
+    `billingCountryId` BIGINT NULL,
+    `billingStateId` BIGINT NULL,
+    `billingCityId` BIGINT NULL,
     `businessType` VARCHAR(191) NULL,
     `clientEntryType` VARCHAR(191) NULL,
     `gstNumber` VARCHAR(191) NULL,
@@ -808,6 +809,15 @@ ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentStateId_fkey` FOREIGN KEY (`p
 
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCountryId_fkey` FOREIGN KEY (`permanentCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_billingCountryId_fkey` FOREIGN KEY (`billingCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_billingStateId_fkey` FOREIGN KEY (`billingStateId`) REFERENCES `state`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_billingCityId_fkey` FOREIGN KEY (`billingCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

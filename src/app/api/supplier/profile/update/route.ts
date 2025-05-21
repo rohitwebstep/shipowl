@@ -132,12 +132,26 @@ export async function PUT(req: NextRequest) {
     const permanentStateId = extractNumber('permanentState') || 0;
     const permanentCityId = extractNumber('permanentCity') || 0;
 
-    const isLocationHierarchyCorrectResult = await isLocationHierarchyCorrect(permanentCityId, permanentStateId, permanentCountryId);
-    logMessage('debug', 'Location hierarchy check result:', isLocationHierarchyCorrectResult);
-    if (!isLocationHierarchyCorrectResult.status) {
-      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectResult.message}`);
+    const billingCountryId = extractNumber('billingCountry') || 0;
+    const billingStateId = extractNumber('billingState') || 0;
+    const billingCityId = extractNumber('billingCity') || 0;
+
+    const isLocationHierarchyCorrectPermanentResult = await isLocationHierarchyCorrect(permanentCityId, permanentStateId, permanentCountryId);
+    logMessage('debug', 'Location hierarchy check result:', isLocationHierarchyCorrectPermanentResult);
+    if (!isLocationHierarchyCorrectPermanentResult.status) {
+      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectPermanentResult.message}`);
       return NextResponse.json(
-        { status: false, message: isLocationHierarchyCorrectResult.message || 'Location hierarchy is incorrect' },
+        { status: false, message: isLocationHierarchyCorrectPermanentResult.message || 'Location hierarchy is incorrect' },
+        { status: 400 }
+      );
+    }
+
+    const isLocationHierarchyCorrectBillingResult = await isLocationHierarchyCorrect(permanentCityId, permanentStateId, permanentCountryId);
+    logMessage('debug', 'Location hierarchy check result:', isLocationHierarchyCorrectBillingResult);
+    if (!isLocationHierarchyCorrectBillingResult.status) {
+      logMessage('warn', `Location hierarchy is incorrect: ${isLocationHierarchyCorrectBillingResult.message}`);
+      return NextResponse.json(
+        { status: false, message: isLocationHierarchyCorrectBillingResult.message || 'Location hierarchy is incorrect' },
         { status: 400 }
       );
     }
@@ -260,8 +274,21 @@ export async function PUT(req: NextRequest) {
       brandShortName: extractString('brandShortName') || '',
       billingAddress: extractString('billingAddress') || '',
       billingPincode: extractString('billingPincode') || '',
-      billingState: extractString('billingState') || '',
-      billingCity: extractString('billingCity') || '',
+      billingCountry: {
+        connect: {
+          id: billingCountryId,
+        },
+      },
+      billingState: {
+        connect: {
+          id: billingStateId,
+        },
+      },
+      billingCity: {
+        connect: {
+          id: billingCityId,
+        },
+      },
       businessType: extractString('businessType') || '',
       clientEntryType: extractString('clientEntryType') || '',
       gstNumber: extractString('gstNumber') || '',

@@ -1,4 +1,4 @@
 {
   "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/auth/verify/route": "app/api/supplier/auth/verify/route.js"
+  "/api/supplier/profile/update/route": "app/api/supplier/profile/update/route.js"
 }
