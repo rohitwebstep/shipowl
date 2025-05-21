@@ -64,8 +64,12 @@ export function middleware(req: NextRequest) {
             routes: [
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
+                "/api/dropshipper/auth/password/forget",
+                "/api/dropshipper/auth/password/reset",
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
+                "/api/supplier/auth/password/forget",
+                "/api/supplier/auth/password/reset",
                 "/api/supplier/auth/registration",
                 { route: "/api/location/country", methods: ["GET"] },
                 { route: "/api/location/country/[countryId]/states", methods: ["GET"] },
@@ -103,6 +107,7 @@ export function middleware(req: NextRequest) {
         },
         {
             routes: [
+                "/api/supplier",
                 "/api/supplier/list",
                 "/api/supplier/auth/verify",
                 "/api/supplier/profile",
@@ -123,7 +128,7 @@ export function middleware(req: NextRequest) {
                 "/api/location/state/",
                 "/api/location/city",
                 "/api/location/city/",
-                "/api/supplier",
+                "/api/admin/supplier",
                 "/api/dropshipper",
                 "/api/dropshipper/",
                 "/api/courier-company",

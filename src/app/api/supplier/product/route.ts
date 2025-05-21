@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
 
     const productId = extractNumber('productId') || 0;
     const productResult = await checkProductForSupplier(supplierId, productId);
-    if (!productResult?.status || !productResult.existsInSupplierProduct) {
+    if (!productResult?.status || productResult.existsInSupplierProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 

@@ -143,7 +143,7 @@ export async function handleForgetPassword(
 
         // Optional: Send email
         // await sendPasswordResetEmail(admin.email, token);
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig(panel, "auth", "forget-password", true);
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig("admin", "auth", "forget-password", true);
         logMessage('debug', 'Email Config:', emailConfig);
 
         if (!emailStatus || !emailConfig) {

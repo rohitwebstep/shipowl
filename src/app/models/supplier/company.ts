@@ -191,7 +191,7 @@ export const removeCompanyDetailImageByIndex = async (companyDetailId: number, s
             message: fileDeleted
                 ? "Image removed and file deleted successfully."
                 : "Image removed, but file deletion failed.",
-            companyDetail: updatedCompanyDeatil,
+            companyDetail: serializeBigInt(updatedCompanyDeatil),
         };
     } catch (error) {
         console.error("❌ Error removing Company Deatil image:", error);

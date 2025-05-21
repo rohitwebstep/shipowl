@@ -140,8 +140,12 @@ function middleware(req) {
             routes: [
                 "/api/admin/auth/login",
                 "/api/dropshipper/auth/login",
+                "/api/dropshipper/auth/password/forget",
+                "/api/dropshipper/auth/password/reset",
                 "/api/dropshipper/auth/registration",
                 "/api/supplier/auth/login",
+                "/api/supplier/auth/password/forget",
+                "/api/supplier/auth/password/reset",
                 "/api/supplier/auth/registration",
                 {
                     route: "/api/location/country",
@@ -220,6 +224,7 @@ function middleware(req) {
         },
         {
             routes: [
+                "/api/supplier",
                 "/api/supplier/list",
                 "/api/supplier/auth/verify",
                 "/api/supplier/profile",
@@ -242,7 +247,7 @@ function middleware(req) {
                 "/api/location/state/",
                 "/api/location/city",
                 "/api/location/city/",
-                "/api/supplier",
+                "/api/admin/supplier",
                 "/api/dropshipper",
                 "/api/dropshipper/",
                 "/api/courier-company",
