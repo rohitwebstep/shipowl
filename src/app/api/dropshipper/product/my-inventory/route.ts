@@ -6,6 +6,15 @@ import { validateFormData } from '@/utils/validateFormData';
 import { createDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
 
+type Variant = {
+  variantId: number;
+  stock: number;
+  price: number;
+  status?: boolean;
+  errors: string[];
+  index: number;
+};
+
 export async function GET(req: NextRequest) {
   try {
     const urlParams = req.nextUrl.searchParams;
@@ -122,7 +131,7 @@ export async function POST(req: NextRequest) {
     }
 
     const rawVariants = formData.get('variants') as string | null;
-    let parsedVariants: any[] = [];
+    let parsedVariants: Variant[] = [];
 
     if (rawVariants) {
       try {

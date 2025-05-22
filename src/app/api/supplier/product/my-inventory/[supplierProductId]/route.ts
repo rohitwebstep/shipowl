@@ -5,6 +5,15 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { checkSupplierProductForSupplier, updateSupplierProduct, softDeleteSupplierProduct, restoreSupplierProduct, checkProductForSupplier } from '@/app/models/supplier/product';
 
+type Variant = {
+  variantId: number;
+  stock: number;
+  price: number;
+  status?: boolean;
+  errors: string[];
+  index: number;
+};
+
 export async function GET(req: NextRequest) {
   try {
     // Extract productId directly from the URL path
@@ -107,7 +116,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const rawVariants = formData.get('variants') as string | null;
-    let parsedVariants: any[] = [];
+    let parsedVariants: Variant[] = [];
 
     if (rawVariants) {
       try {
