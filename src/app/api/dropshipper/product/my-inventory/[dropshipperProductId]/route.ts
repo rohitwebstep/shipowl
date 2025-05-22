@@ -176,8 +176,7 @@ export async function PUT(req: NextRequest) {
       { status: false, error: productCreateResult?.message || 'Product creation failed' },
       { status: 500 }
     );
-  } catch (err: unknown) {
-    const error = err instanceof Error ? err.message : 'Internal Server Error';
+  } catch (error) {
     logMessage('error', 'Product Creation Error:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }

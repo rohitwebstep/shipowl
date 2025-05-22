@@ -165,8 +165,8 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ status: false, message: 'Variant validation failed', error: errorDetails }, { status: 400 });
         }
 
-      } catch (err: any) {
-        return NextResponse.json({ status: false, message: 'Invalid variants JSON', error: err.message }, { status: 400 });
+      } catch (error) {
+        return NextResponse.json({ status: false, message: 'Invalid variants JSON', error }, { status: 400 });
       }
     }
 
