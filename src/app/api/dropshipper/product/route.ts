@@ -1,18 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
-import { validateFormData } from '@/utils/validateFormData';
-import { getBrandById } from '@/app/models/admin/brand';
-import { getCategoryById } from '@/app/models/admin/category';
-import { getCountryById } from '@/app/models/location/country'
-import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct } from '@/app/models/admin/product/product';
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
-import { getDropshipperById } from '@/app/models/dropshipper/dropshipper';
-import { createDropshipperProduct } from '@/app/models/dropshipper/product';
-
 
 export async function GET(req: NextRequest) {
   try {

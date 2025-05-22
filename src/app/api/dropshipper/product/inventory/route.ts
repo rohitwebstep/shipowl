@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { validateFormData } from '@/utils/validateFormData';
-import { createDropshipperProduct, getProductsByFiltersAndStatus, getProductsByStatus, checkProductForDropshipper } from '@/app/models/dropshipper/product';
+import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
 
 export async function GET(req: NextRequest) {
   try {
