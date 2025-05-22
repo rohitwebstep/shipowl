@@ -1,14 +1,17 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
 
-interface Product {
-    productId?: number;
-    supplierId?: number,
-    supplierProductId: number,
-    dropshipperId: number;
+interface Variant {
+    variantId: number;
     stock: number;
     price: number;
-    status: boolean;
+    status?: boolean;
+}
+
+interface Product {
+    supplierProductId: number;
+    dropshipperId: number;
+    variants: Variant[];
     createdBy?: number | null;
     createdByRole?: string | null;
     updatedBy?: number | null;
@@ -47,120 +50,72 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
-export const getSupplierProductById = async (id: number, includeOtherSuppliers: boolean = false) => {
-    try {
-        const supplierProduct = await prisma.supplierProduct.findFirst({
-            where: {
-                id,
-            },
-            include: {
-                product: {
-                    include: {
-                        brand: true,
-                        category: true,
-                        variants: true,
-                    }
-                },
-                supplier: true
-            }
-        });
-
-        if (!supplierProduct) {
-            return {
-                status: false,
-                message: "Supplier product not found.",
-                supplierProduct: null,
-                otherSuppliers: [],
-            };
-        }
-
-        let otherSuppliers: { id: number; productId: number; supplierId: number }[] = [];
-
-        if (includeOtherSuppliers) {
-            otherSuppliers = await prisma.supplierProduct.findMany({
-                where: {
-                    productId: supplierProduct.productId,
-                    supplierId: { not: supplierProduct.supplierId },
-                },
-                include: {
-                    supplier: true,
-                }
-            });
-        }
-
-        return {
-            status: true,
-            message: "Supplier product fetched successfully.",
-            supplierProduct: serializeBigInt(supplierProduct),
-            otherSuppliers: serializeBigInt(otherSuppliers),
-        };
-    } catch (error) {
-        console.error("❌ Error in getSupplierProductById:", error);
-        return {
-            status: false,
-            message: "Internal server error.",
-            supplierProduct: null,
-            otherSuppliers: [],
-        };
-    }
-};
-
 export async function createDropshipperProduct(
     dropshipperId: number,
     dropshipperRole: string,
     product: Product
 ) {
     try {
-        const {
-            supplierProductId,
-            stock,
-            price,
-            status,
-            createdBy,
-            createdByRole,
-        } = product;
+        const { supplierProductId, variants, createdBy, createdByRole } = product;
 
-        const supplierProductResult = await getSupplierProductById(
-            supplierProductId
-        );
+        // Step 1: Check if main product exists
+        const existingProduct = await prisma.supplierProduct.findUnique({
+            where: { id: supplierProductId },
+        });
 
-        if (
-            !supplierProductResult.status ||
-            !supplierProductResult.supplierProduct
-        ) {
-            return {
-                status: false,
-                message: "Invalid supplier product.",
-            };
+        if (!existingProduct) {
+            return { status: false, message: "Product does not exist." };
         }
 
-        const supplierProduct = supplierProductResult.supplierProduct;
+        // Step 2: Validate each variant under this product
+        const variantIds = variants.map(v => v.variantId);
+        const existingVariants = await prisma.supplierProductVariant.findMany({
+            where: {
+                id: { in: variantIds },
+                supplierProductId: supplierProductId,
+            },
+        });
 
-        const newProduct = await prisma.dropshipperProduct.create({
+        if (existingVariants.length !== variantIds.length) {
+            return { status: false, message: "One or more variants are invalid for this product." };
+        }
+
+        // Step 3: Create dropshipperProduct
+        const newDropshipperProduct = await prisma.dropshipperProduct.create({
             data: {
-                productId: supplierProduct.productId,
-                supplierId: supplierProduct.supplierId,
                 supplierProductId,
+                supplierId: existingProduct.supplierId,
+                productId: existingProduct.productId,
                 dropshipperId,
-                stock,
-                price,
-                status,
                 createdBy,
                 createdByRole,
                 createdAt: new Date(),
             },
         });
 
-        return {
-            status: true,
-            product: serializeBigInt(newProduct),
-        };
+        // Step 4: Create dropshipperProductVariants
+        for (const variant of variants) {
+            await prisma.dropshipperProductVariant.create({
+                data: {
+                    dropshipperId, // Add this
+                    supplierProductId: newDropshipperProduct.supplierProductId, // Add this
+                    dropshipperProductId: newDropshipperProduct.id,
+                    productId: newDropshipperProduct.productId,
+                    supplierProductVariantId: variant.variantId,
+                    stock: variant.stock,
+                    price: variant.price,
+                    status: variant.status ?? true,
+                    createdBy,
+                    createdByRole,
+                    createdAt: new Date(),
+                },
+            });
+        }
+
+        return { status: true, product: serializeBigInt(newDropshipperProduct) };
     } catch (error) {
-        console.error("❌ Error creating dropshipper product:", error);
-        return {
-            status: false,
-            message: "Internal Server Error",
-        };
+        logMessage("error", "Error creating dropshipper product:", error);
+        return { status: false, message: "Internal Server Error" };
     }
 }
 
@@ -171,45 +126,71 @@ export const updateDropshipperProduct = async (
     product: Product
 ) => {
     try {
-        const {
-            dropshipperId,
-            stock,
-            price,
-            status,
-            updatedBy,
-            updatedByRole
-        } = product;
+        const { variants, updatedBy, updatedByRole } = product;
 
-        // Fetch existing product once
-        const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
-        if (!productResult?.status || !productResult.existsInDropshipperProduct) {
-            return {
-                status: false,
-                message: productResult.message || "Product not found.",
-            };
+        // Step 1: Check if dropshipper product exists
+        const dropshipperProduct = await prisma.dropshipperProduct.findUnique({
+            where: { id: dropshipperProductId },
+        });
+
+        if (!dropshipperProduct) {
+            return { status: false, message: "Dropshipper product not found." };
         }
 
-        // Update the product details
-        const updatedProduct = await prisma.dropshipperProduct.update({
+        // Step 2: Update dropshipperProduct
+        await prisma.dropshipperProduct.update({
             where: { id: dropshipperProductId },
             data: {
-                productId: productResult?.dropshipperProduct?.productId,
-                stock,
-                price,
-                status,
                 updatedBy,
                 updatedByRole,
                 updatedAt: new Date(),
             },
         });
 
-        const sanitizedProducts = serializeBigInt(updatedProduct);
-        logMessage('debug', 'fetched products :', sanitizedProducts);
+        // Step 3: Update or Create each variant
+        for (const variant of variants) {
+            const existing = await prisma.dropshipperProductVariant.findFirst({
+                where: {
+                    dropshipperProductId,
+                    supplierProductVariantId: variant.variantId,
+                },
+            });
 
-        return { status: true, product: sanitizedProducts };
+            if (existing) {
+                await prisma.dropshipperProductVariant.update({
+                    where: { id: existing.id },
+                    data: {
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date(),
+                    },
+                });
+            } else {
+                await prisma.dropshipperProductVariant.create({
+                    data: {
+                        dropshipperId,
+                        supplierProductId: dropshipperProduct.supplierProductId,
+                        dropshipperProductId,
+                        productId: dropshipperProduct.productId,
+                        supplierProductVariantId: variant.variantId,
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date(),
+                    },
+                });
+            }
+        }
+
+        return { status: true, message: "Dropshipper product updated successfully." };
     } catch (error) {
-        console.error("❌ updateProduct Error:", error);
-        return { status: false, message: "Error updating product" };
+        console.error("Update error:", error);
+        return { status: false, message: "Something went wrong." };
     }
 };
 
@@ -242,68 +223,73 @@ export const getProductsByFiltersAndStatus = async (
             products = await prisma.supplierProduct.findMany({
                 where: baseFilters,
                 orderBy: { id: "desc" },
-                include: {
-                    product: {
-                        include: {
-                            variants: true,
-                            category: true,
-                            brand: true,
-                        }
-                    }
-                },
+                include: { variants: true },
             });
         }
 
         if (type === "my") {
-            products = await prisma.dropshipperProduct.findMany({
+            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
                 where: { ...baseFilters, dropshipperId },
-                include: { product: { include: { variants: true } } },
+                include: {
+                    product: true,
+                    dropshipper: true,
+                    variants: true
+                },
                 orderBy: { id: "desc" },
             });
+            products = dropshipperProducts.map((sp) => sp.product);
         }
 
         if (type === "notmy") {
             const myProductIds = await prisma.dropshipperProduct.findMany({
                 where: { dropshipperId },
-                select: { productId: true },
-            }).then(data => data.map(d => d.productId));
+                include: {
+                    variants: true,
+                }
+            }).then(data => data.map(d => d.supplierProductId));
 
-            const supplierProducts = await prisma.supplierProduct.findMany({
+            const notMyProducts = await prisma.supplierProduct.findMany({
                 where: {
                     ...baseFilters,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
                 },
                 orderBy: { id: "desc" },
-                include: {
-                    product: {
-                        include: {
-                            variants: true,
-                            category: true,
-                            brand: true,
-                        }
-                    }
-                },
+                include: { variants: true },
             });
 
-            // For each supplierProduct, find the lowest price from other suppliers for the same product
-            const productsWithLowestPrice = await Promise.all(
-                supplierProducts.map(async (sp) => {
-                    const lowestPriceDropshipper = await prisma.dropshipperProduct.findFirst({
-                        where: {
-                            productId: sp.productId,
-                        },
-                        orderBy: { price: "asc" },
-                        select: { price: true },
-                    });
+            console.dir(notMyProducts, { depth: null, colors: true });
+
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(
+                notMyProducts.map(async (product) => {
+                    const enrichedVariants = await Promise.all(
+                        product.variants.map(async (variant) => {
+                            const priceData = await prisma.dropshipperProductVariant.findFirst({
+                                where: {
+                                    supplierProductVariantId: variant.id,
+                                    dropshipperProduct: {
+                                        dropshipperId: { not: dropshipperId }, // Only other dropshippers
+                                    },
+                                },
+                                orderBy: { price: "asc" },
+                                select: { price: true },
+                            });
+
+                            return {
+                                ...variant,
+                                lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null,
+                            };
+                        })
+                    );
 
                     return {
-                        ...sp,
-                        lowestOtherDropshipperPrice: lowestPriceDropshipper ? lowestPriceDropshipper.price : null,
+                        ...product,
+                        variants: enrichedVariants, // Overwrite with enriched variants
                     };
                 })
             );
 
-            products = productsWithLowestPrice;
+            products = enrichedProducts;
         }
 
         return { status: true, products };
@@ -340,66 +326,70 @@ export const getProductsByStatus = async (
             products = await prisma.supplierProduct.findMany({
                 where: statusCondition,
                 orderBy: { id: "desc" },
-                include: {
-                    product: {
-                        include: {
-                            variants: true,
-                            category: true,
-                            brand: true,
-                        }
-                    }
-                },
+                include: { variants: true },
             });
         } else if (type === "my") {
-            products = await prisma.dropshipperProduct.findMany({
+            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
                 where: { ...statusCondition, dropshipperId },
-                include: { product: { include: { variants: true } } },
+                include: {
+                    product: true,
+                    dropshipper: true,
+                    variants: true
+                },
                 orderBy: { id: "desc" },
             });
-        } else if (type === "notmy") {
-            const myProductIds = await prisma.dropshipperProduct
-                .findMany({
-                    where: { dropshipperId },
-                    select: { productId: true },
-                })
-                .then((data) => data.map((d) => d.productId));
 
-            const supplierProducts = await prisma.supplierProduct.findMany({
+            products = dropshipperProducts.map((sp) => sp.product);
+        } else if (type === "notmy") {
+            const myProductIds = await prisma.dropshipperProduct.findMany({
+                where: { dropshipperId },
+                include: {
+                    variants: true,
+                }
+            }).then(data => data.map(d => d.supplierProductId));
+
+            const notMyProducts = await prisma.supplierProduct.findMany({
                 where: {
                     ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
                 },
                 orderBy: { id: "desc" },
-                include: {
-                    product: {
-                        include: {
-                            variants: true,
-                            category: true,
-                            brand: true,
-                        }
-                    }
-                },
+                include: { variants: true },
             });
 
-            // For each supplierProduct, find the lowest price from other suppliers for the same product
-            const productsWithLowestPrice = await Promise.all(
-                supplierProducts.map(async (sp) => {
-                    const lowestPriceDropshipper = await prisma.dropshipperProduct.findFirst({
-                        where: {
-                            productId: sp.productId,
-                        },
-                        orderBy: { price: "asc" },
-                        select: { price: true },
-                    });
+            console.dir(notMyProducts, { depth: null, colors: true });
+
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(
+                notMyProducts.map(async (product) => {
+                    const enrichedVariants = await Promise.all(
+                        product.variants.map(async (variant) => {
+                            const priceData = await prisma.dropshipperProductVariant.findFirst({
+                                where: {
+                                    supplierProductVariantId: variant.id,
+                                    dropshipperProduct: {
+                                        dropshipperId: { not: dropshipperId }, // Only other dropshippers
+                                    },
+                                },
+                                orderBy: { price: "asc" },
+                                select: { price: true },
+                            });
+
+                            return {
+                                ...variant,
+                                lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null,
+                            };
+                        })
+                    );
 
                     return {
-                        ...sp,
-                        lowestOtherDropshipperPrice: lowestPriceDropshipper ? lowestPriceDropshipper.price : null,
+                        ...product,
+                        variants: enrichedVariants, // Overwrite with enriched variants
                     };
                 })
             );
 
-            products = productsWithLowestPrice;
+            products = enrichedProducts;
         } else {
             return { status: false, message: "Invalid type parameter", products: [] };
         }
@@ -411,7 +401,6 @@ export const getProductsByStatus = async (
     }
 };
 
-
 export const checkProductForDropshipper = async (
     dropshipperId: number,
     supplierProductId: number
@@ -420,15 +409,7 @@ export const checkProductForDropshipper = async (
         // 1. Check if product exists
         const product = await prisma.supplierProduct.findUnique({
             where: { id: supplierProductId },
-            include: {
-                product: {
-                    include: {
-                        variants: true,
-                        category: true,
-                        brand: true,
-                    }
-                }
-            },
+            include: { variants: true }, // optional: remove if you don't need variants
         });
 
         if (!product) {
@@ -446,7 +427,6 @@ export const checkProductForDropshipper = async (
                 dropshipperId,
                 supplierProductId,
             },
-            select: { id: true },
         });
 
         if (!dropshipperProduct) {
@@ -465,6 +445,7 @@ export const checkProductForDropshipper = async (
             existsInProduct: true,
             existsInDropshipperProduct: true,
             product,
+            dropshipperProduct
         };
     } catch (error) {
         console.error("Error checking product for dropshipper:", error);
@@ -488,11 +469,16 @@ export const checkDropshipperProductForDropshipper = async (
                 id: dropshipperProductId,
                 dropshipperId,
             },
+            include: {
+                product: true,
+                dropshipper: true,
+                variants: true,
+            }
         });
 
         if (!dropshipperProduct) {
             return {
-                status: false,
+                status: true,
                 message: "Dropshipper product not found or not assigned to the dropshipper.",
                 existsInDropshipperProduct: false,
                 dropshipperProduct: null,
@@ -503,7 +489,7 @@ export const checkDropshipperProductForDropshipper = async (
             status: true,
             message: "Dropshipper product exists and is assigned to the dropshipper.",
             existsInDropshipperProduct: true,
-            dropshipperProduct,
+            dropshipperProduct: serializeBigInt(dropshipperProduct),
         };
     } catch (error) {
         console.error("❌ Error checking dropshipper product for dropshipper:", error);
@@ -517,52 +503,87 @@ export const checkDropshipperProductForDropshipper = async (
 };
 
 // 🟢 RESTORE (Restores a soft-deleted product and its variants by setting deletedAt to null)
-export const restoreDropshipperProduct = async (dropshipperId: number, dropshipperRole: string, id: number) => {
+export const restoreDropshipperProduct = async (
+    dropshipperId: number,
+    dropshipperRole: string,
+    id: number
+) => {
     try {
-        // Restore the product
+        const updatedAt = new Date();
+
+        // Step 1: Restore the dropshipper product
         const restoredDropshipperProduct = await prisma.dropshipperProduct.update({
             where: { id },
             data: {
-                deletedBy: null,      // Reset the deletedBy field
-                deletedAt: null,      // Set deletedAt to null
-                deletedByRole: null,  // Reset the deletedByRole field
-                updatedBy: dropshipperId,   // Record the user restoring the product
-                updatedByRole: dropshipperRole, // Record the role of the user
-                updatedAt: new Date(), // Update the updatedAt field
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt,
+            },
+        });
+
+        // Step 2: Restore all associated dropshipperProductVariants
+        await prisma.dropshipperProductVariant.updateMany({
+            where: { dropshipperProductId: id },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt,
             },
         });
 
         return {
             status: true,
-            message: "Dropshipper Product restored successfully",
-            restoredDropshipperProduct: serializeBigInt(restoredDropshipperProduct)
+            message: "Dropshipper product and variants restored successfully.",
+            restoredDropshipperProduct: serializeBigInt(restoredDropshipperProduct),
         };
     } catch (error) {
-        console.error("❌ restoreProduct Error:", error);
-        return { status: false, message: "Error restoring Dropshipper Product" };
+        console.error("❌ restoreDropshipperProduct Error:", error);
+        return { status: false, message: "Error restoring dropshipper product." };
     }
 };
 
-export const softDeleteDropshipperProduct = async (dropshipperId: number, dropshipperRole: string, id: number) => {
+export const softDeleteDropshipperProduct = async (
+    dropshipperId: number,
+    dropshipperRole: string,
+    id: number
+) => {
     try {
-        // Soft delete the dropshipperProduct
+        const deletedAt = new Date();
+
+        // Step 1: Soft delete dropshipperProduct
         const updatedDropshipperProduct = await prisma.dropshipperProduct.update({
             where: { id },
             data: {
                 deletedBy: dropshipperId,
-                deletedAt: new Date(),
                 deletedByRole: dropshipperRole,
+                deletedAt,
+            },
+        });
+
+        // Step 2: Soft delete all related dropshipperProductVariants
+        await prisma.dropshipperProductVariant.updateMany({
+            where: { dropshipperProductId: id },
+            data: {
+                deletedBy: dropshipperId,
+                deletedByRole: dropshipperRole,
+                deletedAt,
             },
         });
 
         return {
             status: true,
-            message: "Product and variants soft deleted successfully",
-            updatedDropshipperProduct
+            message: "Dropshipper product and its variants soft deleted successfully.",
+            updatedDropshipperProduct,
         };
     } catch (error) {
         console.error("❌ softDeleteDropshipperProduct Error:", error);
-        return { status: false, message: "Error soft deleting dropshipper product" };
+        return { status: false, message: "Error soft deleting dropshipper product." };
     }
 };
 
@@ -574,5 +595,39 @@ export const deleteDropshipperProduct = async (id: number) => {
     } catch (error) {
         console.error("❌ deleteProduct Error:", error);
         return { status: false, message: "Error deleting dropshipper product" };
+    }
+};
+
+export const getDropshipperProductById = async (id: number) => {
+    try {
+        const dropshipperProduct = await prisma.dropshipperProduct.findFirst({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (!dropshipperProduct) {
+            return {
+                status: false,
+                message: "Dropshipper product not found.",
+                product: null,
+            };
+        }
+
+        return {
+            status: true,
+            message: "Dropshipper product ID fetched successfully.",
+            dropshipperProduct: serializeBigInt(dropshipperProduct),
+        };
+    } catch (error) {
+        console.error("❌ Error in getDropshipperProductById:", error);
+        return {
+            status: false,
+            message: "Internal server error.",
+            product: null,
+        };
     }
 };

@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { generateToken, generatePasswordResetToken } from '@/utils/auth/authUtils';
 import { comparePassword } from '@/utils/hashUtils';
 import { verifyToken } from '@/utils/auth/authUtils';
-import { getEmailConfig } from '@/app/models/emailConfig';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
 import bcrypt from 'bcryptjs';
 import { logMessage } from '@/utils/commonUtils';
@@ -472,6 +472,7 @@ export async function adminByUsernameRole(username: string, role: string) {
 
         const adminRoleStr = String(role); // Ensure it's a string
         const adminModel = ["admin", "dropshipper", "supplier"].includes(adminRoleStr) ? "admin" : "adminStaff";
+        console.log(`adminRoleStr - `, adminRoleStr);
 
         // Fetch admin details from database
         let admin

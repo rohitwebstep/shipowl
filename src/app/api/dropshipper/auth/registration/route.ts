@@ -7,7 +7,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { generateRegistrationToken } from '@/utils/auth/authUtils';
-import { getEmailConfig } from '@/app/models/emailConfig';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
 /*
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';

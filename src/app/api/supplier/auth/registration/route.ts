@@ -10,7 +10,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier } from '@/app/models/supplier/supplier';
-import { getEmailConfig } from '@/app/models/emailConfig';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
 /*
 import { createSupplierCompany } from '@/app/models/supplier/company';

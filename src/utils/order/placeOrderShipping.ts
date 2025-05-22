@@ -1,5 +1,5 @@
 import { getOrderById } from "@/app/models/order/order";
-import { getProductById, getProductVariantById } from "@/app/models/product/product";
+import { getProductById, getProductVariantById } from "@/app/models/admin/product/product";
 import { logMessage } from "../commonUtils";
 
 interface Result {

@@ -1,12 +1,17 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
 
+interface Variant {
+    variantId: number;
+    stock: number;
+    price: number;
+    status?: boolean;
+}
+
 interface Product {
     productId: number;
     supplierId: number;
-    stock: number;
-    price: number;
-    status: boolean;
+    variants: Variant[];
     createdBy?: number | null;
     createdByRole?: string | null;
     updatedBy?: number | null;
@@ -45,35 +50,68 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
-export async function createSupplierProduct(supplierId: number, supplierRole: string, product: Product) {
+export async function createSupplierProduct(
+    supplierId: number,
+    supplierRole: string,
+    product: Product
+) {
     try {
-        const {
-            productId,
-            supplierId,
-            stock,
-            price,
-            status,
-            createdBy,
-            createdByRole
-        } = product;
+        const { productId, variants, createdBy, createdByRole } = product;
 
-        // Create the product in the database
-        const newProduct = await prisma.supplierProduct.create({
+        // Step 1: Check if main product exists
+        const existingProduct = await prisma.product.findUnique({
+            where: { id: productId },
+        });
+
+        if (!existingProduct) {
+            return { status: false, message: "Product does not exist." };
+        }
+
+        // Step 2: Validate each variant under this product
+        const variantIds = variants.map(v => v.variantId);
+        const existingVariants = await prisma.productVariant.findMany({
+            where: {
+                id: { in: variantIds },
+                productId: productId,
+            },
+        });
+
+        if (existingVariants.length !== variantIds.length) {
+            return { status: false, message: "One or more variants are invalid for this product." };
+        }
+
+        // Step 3: Create supplierProduct
+        const newSupplierProduct = await prisma.supplierProduct.create({
             data: {
                 productId,
                 supplierId,
-                stock,
-                price,
-                status,
                 createdBy,
                 createdByRole,
                 createdAt: new Date(),
             },
         });
 
-        return { status: true, product: serializeBigInt(newProduct) };
+        // Step 4: Create supplierProductVariants
+        for (const variant of variants) {
+            await prisma.supplierProductVariant.create({
+                data: {
+                    supplierId, // Add this
+                    productId: newSupplierProduct.productId, // Add this
+                    supplierProductId: newSupplierProduct.id,
+                    productVariantId: variant.variantId,
+                    stock: variant.stock,
+                    price: variant.price,
+                    status: variant.status ?? true,
+                    createdBy,
+                    createdByRole,
+                    createdAt: new Date(),
+                },
+            });
+        }
+
+        return { status: true, product: serializeBigInt(newSupplierProduct) };
     } catch (error) {
-        console.error(`Error creating product:`, error);
+        logMessage("error", "Error creating supplier product:", error);
         return { status: false, message: "Internal Server Error" };
     }
 }
@@ -85,46 +123,70 @@ export const updateSupplierProduct = async (
     product: Product
 ) => {
     try {
-        const {
-            supplierId,
-            stock,
-            price,
-            status,
-            updatedBy,
-            updatedByRole
-        } = product;
+        const { variants, updatedBy, updatedByRole } = product;
 
-        // Fetch existing product once
-        const productResult = await checkSupplierProductForSupplier(supplierId, supplierProductId);
-        if (!productResult?.status || !productResult.existsInSupplierProduct) {
-            return {
-                status: false,
-                message: productResult.message || "Product not found.",
-            };
+        // Step 1: Check if supplier product exists
+        const supplierProduct = await prisma.supplierProduct.findUnique({
+            where: { id: supplierProductId },
+        });
+
+        if (!supplierProduct) {
+            return { status: false, message: "Supplier product not found." };
         }
 
-        // Update the product details
-        const updatedProduct = await prisma.supplierProduct.update({
+        // Step 2: Update supplierProduct
+        await prisma.supplierProduct.update({
             where: { id: supplierProductId },
             data: {
-                productId: productResult?.supplierProduct?.productId,
-                supplierId,
-                stock,
-                price,
-                status,
                 updatedBy,
                 updatedByRole,
                 updatedAt: new Date(),
             },
         });
 
-        const sanitizedProducts = serializeBigInt(updatedProduct);
-        logMessage('debug', 'fetched products :', sanitizedProducts);
+        // Step 3: Update or Create each variant
+        for (const variant of variants) {
+            const existing = await prisma.supplierProductVariant.findFirst({
+                where: {
+                    supplierProductId,
+                    productVariantId: variant.variantId,
+                },
+            });
 
-        return { status: true, product: sanitizedProducts };
+            if (existing) {
+                await prisma.supplierProductVariant.update({
+                    where: { id: existing.id },
+                    data: {
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date(),
+                    },
+                });
+            } else {
+                await prisma.supplierProductVariant.create({
+                    data: {
+                        supplierId,
+                        productId: supplierProduct.productId,
+                        supplierProductId,
+                        productVariantId: variant.variantId,
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date(),
+                    },
+                });
+            }
+        }
+
+        return { status: true, message: "Supplier product updated successfully." };
     } catch (error) {
-        console.error("❌ updateProduct Error:", error);
-        return { status: false, message: "Error updating product" };
+        console.error("Update error:", error);
+        return { status: false, message: "Something went wrong." };
     }
 };
 
@@ -164,7 +226,15 @@ export const getProductsByFiltersAndStatus = async (
         if (type === "my") {
             const supplierProducts = await prisma.supplierProduct.findMany({
                 where: { ...baseFilters, supplierId },
-                include: { product: { include: { variants: true } } },
+                include: {
+                    product: true,
+                    supplier: true,
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                },
                 orderBy: { id: "desc" },
             });
             products = supplierProducts.map((sp) => sp.product);
@@ -173,7 +243,9 @@ export const getProductsByFiltersAndStatus = async (
         if (type === "notmy") {
             const myProductIds = await prisma.supplierProduct.findMany({
                 where: { supplierId },
-                select: { productId: true },
+                include: {
+                    variants: true,
+                }
             }).then(data => data.map(d => d.productId));
 
             const notMyProducts = await prisma.product.findMany({
@@ -185,20 +257,34 @@ export const getProductsByFiltersAndStatus = async (
                 include: { variants: true },
             });
 
-            // Attach lowest price from other suppliers for each product
+            console.dir(notMyProducts, { depth: null, colors: true });
+
+            // Attach each variant's lowest suggested_price from other suppliers
             const enrichedProducts = await Promise.all(
                 notMyProducts.map(async (product) => {
-                    const lowestPriceData = await prisma.supplierProduct.findFirst({
-                        where: {
-                            productId: product.id,
-                        },
-                        orderBy: { price: "asc" },
-                        select: { price: true },
-                    });
+                    const enrichedVariants = await Promise.all(
+                        product.variants.map(async (variant) => {
+                            const priceData = await prisma.supplierProductVariant.findFirst({
+                                where: {
+                                    productVariantId: variant.id,
+                                    supplierProduct: {
+                                        supplierId: { not: supplierId }, // Only other suppliers
+                                    },
+                                },
+                                orderBy: { price: "asc" },
+                                select: { price: true },
+                            });
+
+                            return {
+                                ...variant,
+                                lowestOtherSupplierSuggestedPrice: priceData?.price ?? null,
+                            };
+                        })
+                    );
 
                     return {
                         ...product,
-                        lowestOtherSupplierPrice: lowestPriceData?.price ?? null,
+                        variants: enrichedVariants, // Overwrite with enriched variants
                     };
                 })
             );
@@ -245,17 +331,26 @@ export const getProductsByStatus = async (
         } else if (type === "my") {
             const supplierProducts = await prisma.supplierProduct.findMany({
                 where: { ...statusCondition, supplierId },
-                include: { product: { include: { variants: true } } },
+                include: {
+                    product: true,
+                    supplier: true,
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                },
                 orderBy: { id: "desc" },
             });
+
             products = supplierProducts.map((sp) => sp.product);
         } else if (type === "notmy") {
-            const myProductIds = await prisma.supplierProduct
-                .findMany({
-                    where: { supplierId },
-                    select: { productId: true },
-                })
-                .then((data) => data.map((d) => d.productId));
+            const myProductIds = await prisma.supplierProduct.findMany({
+                where: { supplierId },
+                include: {
+                    variants: true,
+                }
+            }).then(data => data.map(d => d.productId));
 
             const notMyProducts = await prisma.product.findMany({
                 where: {
@@ -266,20 +361,34 @@ export const getProductsByStatus = async (
                 include: { variants: true },
             });
 
-            // Attach lowest price from other suppliers for each product
+            console.dir(notMyProducts, { depth: null, colors: true });
+
+            // Attach each variant's lowest suggested_price from other suppliers
             const enrichedProducts = await Promise.all(
                 notMyProducts.map(async (product) => {
-                    const lowestPriceData = await prisma.supplierProduct.findFirst({
-                        where: {
-                            productId: product.id,
-                        },
-                        orderBy: { price: "asc" },
-                        select: { price: true },
-                    });
+                    const enrichedVariants = await Promise.all(
+                        product.variants.map(async (variant) => {
+                            const priceData = await prisma.supplierProductVariant.findFirst({
+                                where: {
+                                    productVariantId: variant.id,
+                                    supplierProduct: {
+                                        supplierId: { not: supplierId }, // Only other suppliers
+                                    },
+                                },
+                                orderBy: { price: "asc" },
+                                select: { price: true },
+                            });
+
+                            return {
+                                ...variant,
+                                lowestOtherSupplierSuggestedPrice: priceData?.price ?? null,
+                            };
+                        })
+                    );
 
                     return {
                         ...product,
-                        lowestOtherSupplierPrice: lowestPriceData?.price ?? null,
+                        variants: enrichedVariants, // Overwrite with enriched variants
                     };
                 })
             );
@@ -295,7 +404,6 @@ export const getProductsByStatus = async (
         return { status: false, message: "Error fetching products", products: [] };
     }
 };
-
 
 export const checkProductForSupplier = async (
     supplierId: number,
@@ -323,7 +431,6 @@ export const checkProductForSupplier = async (
                 supplierId,
                 productId,
             },
-            select: { id: true },
         });
 
         if (!supplierProduct) {
@@ -342,6 +449,7 @@ export const checkProductForSupplier = async (
             existsInProduct: true,
             existsInSupplierProduct: true,
             product,
+            supplierProduct
         };
     } catch (error) {
         console.error("Error checking product for supplier:", error);
@@ -365,6 +473,15 @@ export const checkSupplierProductForSupplier = async (
                 id: supplierProductId,
                 supplierId,
             },
+            include: {
+                product: true,
+                supplier: true,
+                variants: {
+                    include: {
+                        variant: true
+                    }
+                },
+            }
         });
 
         if (!supplierProduct) {
@@ -380,7 +497,7 @@ export const checkSupplierProductForSupplier = async (
             status: true,
             message: "Supplier product exists and is assigned to the supplier.",
             existsInSupplierProduct: true,
-            supplierProduct,
+            supplierProduct: serializeBigInt(supplierProduct),
         };
     } catch (error) {
         console.error("❌ Error checking supplier product for supplier:", error);
@@ -394,52 +511,87 @@ export const checkSupplierProductForSupplier = async (
 };
 
 // 🟢 RESTORE (Restores a soft-deleted product and its variants by setting deletedAt to null)
-export const restoreSupplierProduct = async (supplierId: number, supplierRole: string, id: number) => {
+export const restoreSupplierProduct = async (
+    supplierId: number,
+    supplierRole: string,
+    id: number
+) => {
     try {
-        // Restore the product
+        const updatedAt = new Date();
+
+        // Step 1: Restore the supplier product
         const restoredSupplierProduct = await prisma.supplierProduct.update({
             where: { id },
             data: {
-                deletedBy: null,      // Reset the deletedBy field
-                deletedAt: null,      // Set deletedAt to null
-                deletedByRole: null,  // Reset the deletedByRole field
-                updatedBy: supplierId,   // Record the user restoring the product
-                updatedByRole: supplierRole, // Record the role of the user
-                updatedAt: new Date(), // Update the updatedAt field
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: supplierId,
+                updatedByRole: supplierRole,
+                updatedAt,
+            },
+        });
+
+        // Step 2: Restore all associated supplierProductVariants
+        await prisma.supplierProductVariant.updateMany({
+            where: { supplierProductId: id },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: supplierId,
+                updatedByRole: supplierRole,
+                updatedAt,
             },
         });
 
         return {
             status: true,
-            message: "Supplier Product restored successfully",
-            restoredSupplierProduct: serializeBigInt(restoredSupplierProduct)
+            message: "Supplier product and variants restored successfully.",
+            restoredSupplierProduct: serializeBigInt(restoredSupplierProduct),
         };
     } catch (error) {
-        console.error("❌ restoreProduct Error:", error);
-        return { status: false, message: "Error restoring Supplier Product" };
+        console.error("❌ restoreSupplierProduct Error:", error);
+        return { status: false, message: "Error restoring supplier product." };
     }
 };
 
-export const softDeleteSupplierProduct = async (supplierId: number, supplierRole: string, id: number) => {
+export const softDeleteSupplierProduct = async (
+    supplierId: number,
+    supplierRole: string,
+    id: number
+) => {
     try {
-        // Soft delete the supplierProduct
+        const deletedAt = new Date();
+
+        // Step 1: Soft delete supplierProduct
         const updatedSupplierProduct = await prisma.supplierProduct.update({
             where: { id },
             data: {
                 deletedBy: supplierId,
-                deletedAt: new Date(),
                 deletedByRole: supplierRole,
+                deletedAt,
+            },
+        });
+
+        // Step 2: Soft delete all related supplierProductVariants
+        await prisma.supplierProductVariant.updateMany({
+            where: { supplierProductId: id },
+            data: {
+                deletedBy: supplierId,
+                deletedByRole: supplierRole,
+                deletedAt,
             },
         });
 
         return {
             status: true,
-            message: "Product and variants soft deleted successfully",
-            updatedSupplierProduct
+            message: "Supplier product and its variants soft deleted successfully.",
+            updatedSupplierProduct,
         };
     } catch (error) {
         console.error("❌ softDeleteSupplierProduct Error:", error);
-        return { status: false, message: "Error soft deleting supplier product" };
+        return { status: false, message: "Error soft deleting supplier product." };
     }
 };
 

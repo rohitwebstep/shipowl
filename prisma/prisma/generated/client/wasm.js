@@ -537,6 +537,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   package_height_image: 'package_height_image',
   product_detail_video: 'product_detail_video',
   training_guidance_video: 'training_guidance_video',
+  isVisibleToAll: 'isVisibleToAll',
   status: 'status',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
@@ -562,6 +563,21 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   shipowl_price: 'shipowl_price',
   rto_suggested_price: 'rto_suggested_price',
   rto_price: 'rto_price',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.ProductSupplierVisibilityScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  supplierId: 'supplierId',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -712,6 +728,24 @@ exports.Prisma.SupplierProductScalarFieldEnum = {
   id: 'id',
   supplierId: 'supplierId',
   productId: 'productId',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.SupplierProductVariantScalarFieldEnum = {
+  id: 'id',
+  supplierId: 'supplierId',
+  productId: 'productId',
+  productVariantId: 'productVariantId',
+  supplierProductId: 'supplierProductId',
   price: 'price',
   stock: 'stock',
   status: 'status',
@@ -732,6 +766,25 @@ exports.Prisma.DropshipperProductScalarFieldEnum = {
   supplierId: 'supplierId',
   supplierProductId: 'supplierProductId',
   productId: 'productId',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.DropshipperProductVariantScalarFieldEnum = {
+  id: 'id',
+  dropshipperId: 'dropshipperId',
+  productId: 'productId',
+  supplierProductId: 'supplierProductId',
+  dropshipperProductId: 'dropshipperProductId',
+  supplierProductVariantId: 'supplierProductVariantId',
   price: 'price',
   stock: 'stock',
   status: 'status',
@@ -1036,6 +1089,12 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.productSupplierVisibilityOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.courierCompanyOrderByRelevanceFieldEnum = {
   name: 'name',
   slug: 'slug',
@@ -1104,7 +1163,19 @@ exports.Prisma.supplierProductOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.supplierProductVariantOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.dropshipperProductOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.dropshipperProductVariantOrderByRelevanceFieldEnum = {
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1131,6 +1202,7 @@ exports.Prisma.ModelName = {
   productRequest: 'productRequest',
   product: 'product',
   productVariant: 'productVariant',
+  productSupplierVisibility: 'productSupplierVisibility',
   courierCompany: 'courierCompany',
   highRto: 'highRto',
   badPincode: 'badPincode',
@@ -1139,7 +1211,9 @@ exports.Prisma.ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   supplierProduct: 'supplierProduct',
-  dropshipperProduct: 'dropshipperProduct'
+  supplierProductVariant: 'supplierProductVariant',
+  dropshipperProduct: 'dropshipperProduct',
+  dropshipperProductVariant: 'dropshipperProductVariant'
 };
 
 /**

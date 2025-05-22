@@ -5,7 +5,7 @@ import {
   getSupplierById,
   updateSupplierStatus,
 } from '@/app/models/supplier/supplier';
-import { getEmailConfig } from '@/app/models/emailConfig';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
 
 export async function PATCH(req: NextRequest) {

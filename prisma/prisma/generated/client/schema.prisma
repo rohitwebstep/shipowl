@@ -83,13 +83,16 @@ model admin {
   permanentState   state?   @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry country? @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
-  staff                    adminStaff[]
-  companyDetail            companyDetail?            @relation
-  bankAccount              bankAccount?              @relation
-  supplierProducts         supplierProduct[]         @relation("SupplierProducts")
-  dropshipperProducts      dropshipperProduct[]      @relation("DropshipperProducts")
-  suppliedProducts         dropshipperProduct[]      @relation("SuppliedProducts")
-  bankAccountChangeRequest bankAccountChangeRequest? @relation
+  staff                      adminStaff[]
+  companyDetail              companyDetail?              @relation
+  bankAccount                bankAccount?                @relation
+  supplierProducts           supplierProduct[]           @relation("SupplierProducts")
+  dropshipperProducts        dropshipperProduct[]        @relation("DropshipperProducts")
+  suppliedProducts           dropshipperProduct[]        @relation("SuppliedProducts")
+  bankAccountChangeRequest   bankAccountChangeRequest?   @relation
+  productVisibility          productSupplierVisibility[]
+  supplierProductVariants    supplierProductVariant[]    @relation
+  dropshipperProductVariants dropshipperProductVariant[] @relation
 }
 
 model companyDetail {
@@ -592,6 +595,8 @@ model product {
   product_detail_video    String? @db.LongText
   training_guidance_video String? @db.LongText
 
+  isVisibleToAll Boolean @default(true)
+
   status        Boolean   @default(true)
   createdAt     DateTime  @default(now())
   createdBy     Int?
@@ -608,10 +613,13 @@ model product {
   originCountry   country  @relation("OriginCountryRelation", fields: [originCountryId], references: [id])
   shippingCountry country  @relation("ShippingCountryRelation", fields: [shippingCountryId], references: [id])
 
-  variants            productVariant[]
-  orderItems          OrderItem[]
-  supplierProducts    supplierProduct[]
-  dropshipperProducts dropshipperProduct[]
+  variants                   productVariant[]
+  orderItems                 OrderItem[]
+  supplierProducts           supplierProduct[]
+  dropshipperProducts        dropshipperProduct[]
+  supplierVisibility         productSupplierVisibility[]
+  supplierProductVariants    supplierProductVariant[]    @relation
+  dropshipperProductVariants dropshipperProductVariant[] @relation
 
   @@index([categoryId])
   @@index([brandId])
@@ -648,9 +656,34 @@ model productVariant {
 
   product product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  orderItems OrderItem[]
+  orderItems              OrderItem[]
+  supplierProductVariants supplierProductVariant[] @relation
 
   @@index([productId])
+}
+
+model productSupplierVisibility {
+  id            Int       @id @default(autoincrement())
+  productId     Int
+  supplierId    Int
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  product  product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  supplier admin   @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([supplierId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model courierCompany {
@@ -861,8 +894,6 @@ model supplierProduct {
   id         Int     @id @default(autoincrement())
   supplierId Int
   productId  Int
-  price      Float
-  stock      Int
   status     Boolean @default(true)
 
   createdAt     DateTime  @default(now())
@@ -875,10 +906,11 @@ model supplierProduct {
   deletedBy     Int?
   deletedByRole String?
 
-  supplier admin   @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
-  product  product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  dropshipperProducts dropshipperProduct[] @relation("SupplierProductRelation")
+  supplier                   admin                       @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product                    product                     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variants                   supplierProductVariant[] // Relation to the new variant model
+  dropshipperProducts        dropshipperProduct[]        @relation("SupplierProductRelation")
+  dropshipperProductVariants dropshipperProductVariant[] @relation
 
   @@index([supplierId])
   @@index([productId])
@@ -887,12 +919,12 @@ model supplierProduct {
   @@index([deletedAt])
 }
 
-model dropshipperProduct {
+model supplierProductVariant {
   id                Int     @id @default(autoincrement())
-  dropshipperId     Int
   supplierId        Int
-  supplierProductId Int
   productId         Int
+  productVariantId  Int
+  supplierProductId Int
   price             Float
   stock             Int
   status            Boolean @default(true)
@@ -907,14 +939,84 @@ model dropshipperProduct {
   deletedBy     Int?
   deletedByRole String?
 
-  dropshipper     admin           @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
-  supplier        admin           @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
-  product         product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  supplierProduct supplierProduct @relation("SupplierProductRelation", fields: [supplierProductId], references: [id], onDelete: Cascade)
+  supplier            admin                       @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  product             product                     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant             productVariant?             @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+  supplierProduct     supplierProduct             @relation(fields: [supplierProductId], references: [id], onDelete: Cascade)
+  dropshipperVariants dropshipperProductVariant[] @relation("SupplierToDropshipperVariant")
+
+  @@index([supplierId])
+  @@index([productId])
+  @@index([supplierProductId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
+model dropshipperProduct {
+  id                Int     @id @default(autoincrement())
+  dropshipperId     Int
+  supplierId        Int
+  supplierProductId Int
+  productId         Int
+  status            Boolean @default(true)
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  dropshipper     admin                       @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
+  supplier        admin                       @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
+  product         product                     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  supplierProduct supplierProduct             @relation("SupplierProductRelation", fields: [supplierProductId], references: [id], onDelete: Cascade)
+  variants        dropshipperProductVariant[]
 
   @@index([dropshipperId])
   @@index([supplierId])
   @@index([productId])
+  @@index([supplierProductId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
+model dropshipperProductVariant {
+  id                       Int     @id @default(autoincrement())
+  dropshipperId            Int
+  productId                Int
+  supplierProductId        Int
+  dropshipperProductId     Int
+  supplierProductVariantId Int
+  price                    Float
+  stock                    Int
+  status                   Boolean @default(true)
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  dropshipper            admin                  @relation(fields: [dropshipperId], references: [id], onDelete: Cascade)
+  product                product                @relation(fields: [productId], references: [id], onDelete: Cascade)
+  supplierProduct        supplierProduct        @relation(fields: [supplierProductId], references: [id], onDelete: Cascade)
+  dropshipperProduct     dropshipperProduct     @relation(fields: [dropshipperProductId], references: [id], onDelete: Cascade)
+  supplierProductVariant supplierProductVariant @relation("SupplierToDropshipperVariant", fields: [supplierProductVariantId], references: [id], onDelete: Cascade)
+
+  @@index([dropshipperId])
+  @@index([productId])
+  @@index([supplierProductId])
+  @@index([dropshipperProductId])
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])

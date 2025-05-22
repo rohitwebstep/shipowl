@@ -6,7 +6,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkPaymentIdAvailability, createOrder, getOrdersByStatus } from '@/app/models/order/order';
 import { createOrderItem } from '@/app/models/order/item';
-import { getProductById, getProductVariantById } from '@/app/models/product/product';
+import { getProductById, getProductVariantById } from '@/app/models/admin/product/product';
 // import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 
 interface Item {
