@@ -228,7 +228,7 @@ export const getProductsByFiltersAndStatus = async (
         }
 
         if (type === "my") {
-            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
+            products = await prisma.dropshipperProduct.findMany({
                 where: { ...baseFilters, dropshipperId },
                 include: {
                     product: true,
@@ -237,7 +237,6 @@ export const getProductsByFiltersAndStatus = async (
                 },
                 orderBy: { id: "desc" },
             });
-            products = dropshipperProducts.map((sp) => sp.product);
         }
 
         if (type === "notmy") {
@@ -254,7 +253,13 @@ export const getProductsByFiltersAndStatus = async (
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
                 },
                 orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    }
+                },
             });
 
             console.dir(notMyProducts, { depth: null, colors: true });
@@ -329,7 +334,7 @@ export const getProductsByStatus = async (
                 include: { variants: true },
             });
         } else if (type === "my") {
-            const dropshipperProducts = await prisma.dropshipperProduct.findMany({
+            products = await prisma.dropshipperProduct.findMany({
                 where: { ...statusCondition, dropshipperId },
                 include: {
                     product: true,
@@ -338,8 +343,6 @@ export const getProductsByStatus = async (
                 },
                 orderBy: { id: "desc" },
             });
-
-            products = dropshipperProducts.map((sp) => sp.product);
         } else if (type === "notmy") {
             const myProductIds = await prisma.dropshipperProduct.findMany({
                 where: { dropshipperId },
@@ -354,7 +357,13 @@ export const getProductsByStatus = async (
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
                 },
                 orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    }
+                },
             });
 
             console.dir(notMyProducts, { depth: null, colors: true });
