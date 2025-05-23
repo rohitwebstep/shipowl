@@ -185,6 +185,9 @@ export const getDropshippersByStatus = async (
             include: {
                 companyDetail: true,
                 bankAccount: true,
+                permanentCity: true,
+                permanentCountry: true,
+                permanentState: true,
             }
         });
 

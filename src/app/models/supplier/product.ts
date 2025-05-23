@@ -256,7 +256,7 @@ export const getProductsByFiltersAndStatus = async (
         }
 
         if (type === "my") {
-            const supplierProducts = await prisma.supplierProduct.findMany({
+            products = await prisma.supplierProduct.findMany({
                 where: { ...baseFilters, supplierId },
                 include: {
                     product: true,
@@ -269,7 +269,6 @@ export const getProductsByFiltersAndStatus = async (
                 },
                 orderBy: { id: "desc" },
             });
-            products = supplierProducts.map((sp) => sp.product);
         }
 
         if (type === "notmy") {
@@ -389,7 +388,7 @@ export const getProductsByStatus = async (
                 },
             });
         } else if (type === "my") {
-            const supplierProducts = await prisma.supplierProduct.findMany({
+            products = await prisma.supplierProduct.findMany({
                 where: { ...statusCondition, supplierId },
                 include: {
                     product: true,
@@ -402,8 +401,6 @@ export const getProductsByStatus = async (
                 },
                 orderBy: { id: "desc" },
             });
-
-            products = supplierProducts.map((sp) => sp.product);
         } else if (type === "notmy") {
             const myProductIds = await prisma.supplierProduct.findMany({
                 where: { supplierId },

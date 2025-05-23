@@ -9692,9 +9692,26 @@ async function createSupplierProduct(supplierId, supplierRole, product) {
     try {
         const { productId, variants, createdBy, createdByRole } = product;
         // Step 1: Check if main product exists
-        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findFirst({
             where: {
-                id: productId
+                id: productId,
+                OR: [
+                    {
+                        isVisibleToAll: true
+                    },
+                    {
+                        supplierVisibility: {
+                            some: {
+                                supplierId: supplierId,
+                                deletedAt: null
+                            }
+                        }
+                    }
+                ]
+            },
+            include: {
+                variants: true,
+                supplierVisibility: true
             }
         });
         if (!existingProduct) {
@@ -9875,17 +9892,30 @@ const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=
         let products;
         if (type === "all") {
             products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: baseFilters,
-                orderBy: {
-                    id: "desc"
+                where: {
+                    ...baseFilters,
+                    OR: [
+                        {
+                            isVisibleToAll: true
+                        },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null
+                                }
+                            }
+                        }
+                    ]
                 },
                 include: {
-                    variants: true
+                    variants: true,
+                    supplierVisibility: true
                 }
             });
         }
         if (type === "my") {
-            const supplierProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
                 where: {
                     ...baseFilters,
                     supplierId
@@ -9903,7 +9933,6 @@ const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=
                     id: "desc"
                 }
             });
-            products = supplierProducts.map((sp)=>sp.product);
         }
         if (type === "notmy") {
             const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
@@ -9921,13 +9950,24 @@ const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=
                         notIn: myProductIds.length ? myProductIds : [
                             0
                         ]
-                    }
-                },
-                orderBy: {
-                    id: "desc"
+                    },
+                    OR: [
+                        {
+                            isVisibleToAll: true
+                        },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null
+                                }
+                            }
+                        }
+                    ]
                 },
                 include: {
-                    variants: true
+                    variants: true,
+                    supplierVisibility: true
                 }
             });
             console.dir(notMyProducts, {
@@ -10009,16 +10049,29 @@ const getProductsByStatus = async (type, supplierId, status)=>{
         let products = [];
         if (type === "all") {
             products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: statusCondition,
-                orderBy: {
-                    id: "desc"
+                where: {
+                    ...statusCondition,
+                    OR: [
+                        {
+                            isVisibleToAll: true
+                        },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null
+                                }
+                            }
+                        }
+                    ]
                 },
                 include: {
-                    variants: true
+                    variants: true,
+                    supplierVisibility: true
                 }
             });
         } else if (type === "my") {
-            const supplierProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
                 where: {
                     ...statusCondition,
                     supplierId
@@ -10036,7 +10089,6 @@ const getProductsByStatus = async (type, supplierId, status)=>{
                     id: "desc"
                 }
             });
-            products = supplierProducts.map((sp)=>sp.product);
         } else if (type === "notmy") {
             const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
                 where: {
@@ -10053,13 +10105,24 @@ const getProductsByStatus = async (type, supplierId, status)=>{
                         notIn: myProductIds.length ? myProductIds : [
                             0
                         ]
-                    }
-                },
-                orderBy: {
-                    id: "desc"
+                    },
+                    OR: [
+                        {
+                            isVisibleToAll: true
+                        },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null
+                                }
+                            }
+                        }
+                    ]
                 },
                 include: {
-                    variants: true
+                    variants: true,
+                    supplierVisibility: true
                 }
             });
             console.dir(notMyProducts, {
@@ -10119,13 +10182,26 @@ const getProductsByStatus = async (type, supplierId, status)=>{
 };
 const checkProductForSupplier = async (supplierId, productId)=>{
     try {
-        // 1. Check if product exists
-        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findUnique({
+        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
             where: {
-                id: productId
+                id: productId,
+                OR: [
+                    {
+                        isVisibleToAll: true
+                    },
+                    {
+                        supplierVisibility: {
+                            some: {
+                                supplierId: supplierId,
+                                deletedAt: null
+                            }
+                        }
+                    }
+                ]
             },
             include: {
-                variants: true
+                variants: true,
+                supplierVisibility: true
             }
         });
         if (!product) {
@@ -10526,11 +10602,11 @@ async function POST(req) {
                         status: 400
                     });
                 }
-            } catch (err) {
+            } catch (error) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                     status: false,
                     message: 'Invalid variants JSON',
-                    error: err.message
+                    error
                 }, {
                     status: 400
                 });
