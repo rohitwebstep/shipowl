@@ -322,8 +322,8 @@ export async function PUT(req: NextRequest) {
       training_guidance_video: uploadedFiles['training_guidance_video'],
       isVisibleToAll,
       video_url: extractString('video_url'),
-      createdBy: adminId,
-      createdByRole: adminRole,
+      updatedBy: adminId,
+      updatedByRole: adminRole,
     };
 
     if (Array.isArray(productPayload.variants) && productPayload.variants.length > 0) {
@@ -354,7 +354,7 @@ export async function PUT(req: NextRequest) {
       }
     }
 
-    logMessage('info', 'Product payload created:', productPayload);
+    logMessage('info', 'Product payload updated:', productPayload);
 
     const productCreateResult = await updateProduct(adminId, String(adminRole), productIdNum, productPayload);
 

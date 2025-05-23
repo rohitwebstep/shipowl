@@ -59,8 +59,25 @@ export async function createSupplierProduct(
         const { productId, variants, createdBy, createdByRole } = product;
 
         // Step 1: Check if main product exists
-        const existingProduct = await prisma.product.findUnique({
-            where: { id: productId },
+        const existingProduct = await prisma.product.findFirst({
+            where: {
+                id: productId,
+                OR: [
+                    { isVisibleToAll: true },
+                    {
+                        supplierVisibility: {
+                            some: {
+                                supplierId: supplierId,
+                                deletedAt: null, // exclude soft-deleted visibility entries
+                            },
+                        },
+                    },
+                ],
+            },
+            include: {
+                variants: true,
+                supplierVisibility: true,
+            },
         });
 
         if (!existingProduct) {
@@ -217,9 +234,24 @@ export const getProductsByFiltersAndStatus = async (
 
         if (type === "all") {
             products = await prisma.product.findMany({
-                where: baseFilters,
-                orderBy: { id: "desc" },
-                include: { variants: true },
+                where: {
+                    ...baseFilters,
+                    OR: [
+                        { isVisibleToAll: true },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null, // exclude soft-deleted visibility entries
+                                },
+                            },
+                        },
+                    ],
+                },
+                include: {
+                    variants: true,
+                    supplierVisibility: true,
+                },
             });
         }
 
@@ -252,9 +284,22 @@ export const getProductsByFiltersAndStatus = async (
                 where: {
                     ...baseFilters,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
+                    OR: [
+                        { isVisibleToAll: true },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null, // exclude soft-deleted visibility entries
+                                },
+                            },
+                        },
+                    ],
                 },
-                orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: true,
+                    supplierVisibility: true,
+                },
             });
 
             console.dir(notMyProducts, { depth: null, colors: true });
@@ -324,9 +369,24 @@ export const getProductsByStatus = async (
         let products = [];
         if (type === "all") {
             products = await prisma.product.findMany({
-                where: statusCondition,
-                orderBy: { id: "desc" },
-                include: { variants: true },
+                where: {
+                    ...statusCondition,
+                    OR: [
+                        { isVisibleToAll: true },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null,
+                                },
+                            },
+                        },
+                    ],
+                },
+                include: {
+                    variants: true,
+                    supplierVisibility: true,
+                },
             });
         } else if (type === "my") {
             const supplierProducts = await prisma.supplierProduct.findMany({
@@ -356,9 +416,22 @@ export const getProductsByStatus = async (
                 where: {
                     ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
+                    OR: [
+                        { isVisibleToAll: true },
+                        {
+                            supplierVisibility: {
+                                some: {
+                                    supplierId: supplierId,
+                                    deletedAt: null, // exclude soft-deleted visibility entries
+                                },
+                            },
+                        },
+                    ],
                 },
-                orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: true,
+                    supplierVisibility: true,
+                },
             });
 
             console.dir(notMyProducts, { depth: null, colors: true });
@@ -410,10 +483,26 @@ export const checkProductForSupplier = async (
     productId: number
 ) => {
     try {
-        // 1. Check if product exists
-        const product = await prisma.product.findUnique({
-            where: { id: productId },
-            include: { variants: true }, // optional: remove if you don't need variants
+
+        const product = await prisma.product.findMany({
+            where: {
+                id: productId,
+                OR: [
+                    { isVisibleToAll: true },
+                    {
+                        supplierVisibility: {
+                            some: {
+                                supplierId: supplierId,
+                                deletedAt: null, // exclude soft-deleted visibility entries
+                            },
+                        },
+                    },
+                ],
+            },
+            include: {
+                variants: true,
+                supplierVisibility: true,
+            },
         });
 
         if (!product) {

@@ -429,50 +429,49 @@ export const updateSupplierStatus = async (
 
 // 🔴 Soft DELETE (marks as deleted by setting deletedAt field for supplier and variants)
 export const softDeleteSupplier = async (adminId: number, adminRole: string, id: number) => {
-    try {
-        // Soft delete the supplier
-        const updatedSupplier = await prisma.admin.update({
-            where: { id, role: 'supplier' },
-            data: {
-                deletedBy: adminId,
-                deletedAt: new Date(),
-                deletedByRole: adminRole,
-            },
-        });
+  try {
+    // Soft delete the supplier
+    const updatedSupplier = await prisma.admin.update({
+      where: { id, role: 'supplier' },
+      data: {
+        deletedBy: adminId,
+        deletedAt: new Date(),
+        deletedByRole: adminRole,
+      },
+    });
 
-        // Soft delete the companyDetails of this supplier
-        const updatedCompanyDeatil = await prisma.companyDetail.update({
-            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
-            data: {
-                deletedBy: adminId,
-                deletedAt: new Date(),
-                deletedByRole: adminRole,
-            },
-        });
+    // Soft delete the companyDetails of this supplier
+    const updatedCompanyDetail = await prisma.companyDetail.updateMany({
+      where: { adminId: id },
+      data: {
+        deletedBy: adminId,
+        deletedAt: new Date(),
+        deletedByRole: adminRole,
+      },
+    });
 
-        // Soft delete the bankAccounts of this supplier
-        const updatedBankAccounts = await prisma.bankAccount.updateMany({
-            where: { adminId: id },  // assuming `supplierId` is the foreign key in the variant table
-            data: {
-                deletedBy: adminId,
-                deletedAt: new Date(),
-                deletedByRole: adminRole,
-            },
-        });
+    // Soft delete the bankAccounts of this supplier
+    const updatedBankAccounts = await prisma.bankAccount.updateMany({
+      where: { adminId: id },
+      data: {
+        deletedBy: adminId,
+        deletedAt: new Date(),
+        deletedByRole: adminRole,
+      },
+    });
 
-        return {
-            status: true,
-            message: "Supplier soft deleted successfully",
-            updatedSupplier: serializeBigInt(updatedSupplier),
-            updatedCompanyDeatil: serializeBigInt(updatedCompanyDeatil),
-            updatedBankAccounts: serializeBigInt(updatedBankAccounts)
-        };
-    } catch (error) {
-        console.error("❌ softDeleteSupplier Error:", error);
-        return { status: false, message: "Error soft deleting supplier" };
-    }
+    return {
+      status: true,
+      message: "Supplier soft deleted successfully",
+      updatedSupplier: serializeBigInt(updatedSupplier),
+      updatedCompanyDetail: serializeBigInt(updatedCompanyDetail),
+      updatedBankAccounts: serializeBigInt(updatedBankAccounts),
+    };
+  } catch (error) {
+    console.error("❌ softDeleteSupplier Error:", error);
+    return { status: false, message: "Error soft deleting supplier" };
+  }
 };
-
 
 // 🟢 RESTORE (Restores a soft-deleted supplier setting deletedAt to null)
 export const restoreSupplier = async (adminId: number, adminRole: string, id: number) => {

@@ -736,7 +736,7 @@ export const getProductById = async (id: number, includeOtherSuppliers: boolean 
     try {
         const product = await prisma.product.findUnique({
             where: { id },
-            include: { variants: true },
+            include: { variants: true, supplierVisibility: true },
         });
 
         if (!product) return { status: false, message: "Product not found" };
@@ -936,7 +936,7 @@ export const updateProduct = async (
                     rto_price: variant.rto_price,
                     product_link: variant.product_link,
                     image: mergedVariantImages,
-                    updatedById: adminId,
+                    updatedBy: adminId,
                     updatedByRole: adminRole,
                     updatedAt: new Date(),
                 };
