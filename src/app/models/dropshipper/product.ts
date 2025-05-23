@@ -223,7 +223,14 @@ export const getProductsByFiltersAndStatus = async (
             products = await prisma.supplierProduct.findMany({
                 where: baseFilters,
                 orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: true
+                },
             });
         }
 
@@ -258,7 +265,8 @@ export const getProductsByFiltersAndStatus = async (
                         include: {
                             variant: true
                         }
-                    }
+                    },
+                    product: true
                 },
             });
 
@@ -331,7 +339,14 @@ export const getProductsByStatus = async (
             products = await prisma.supplierProduct.findMany({
                 where: statusCondition,
                 orderBy: { id: "desc" },
-                include: { variants: true },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: true
+                },
             });
         } else if (type === "my") {
             products = await prisma.dropshipperProduct.findMany({
@@ -362,7 +377,8 @@ export const getProductsByStatus = async (
                         include: {
                             variant: true
                         }
-                    }
+                    },
+                    product: true
                 },
             });
 

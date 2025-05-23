@@ -145,14 +145,14 @@ export async function POST(req: NextRequest) {
         parsedVariants = parsedVariants.map((variant, index) => {
           const errors = [];
 
-          if (typeof variant.variantId !== 'number') errors.push('variantId must be a number');
-          if (typeof variant.stock !== 'number') errors.push('stock must be a number');
-          if (typeof variant.price !== 'number') errors.push('price must be a number');
+          if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
+          if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
+          if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
 
           return {
-            variantId: variant.variantId,
-            stock: variant.stock,
-            price: variant.price,
+            variantId: Number(variant.variantId),
+            stock: Number(variant.stock),
+            price: Number(variant.price),
             status: typeof variant.status === 'boolean' ? variant.status : true,
             errors,
             index
