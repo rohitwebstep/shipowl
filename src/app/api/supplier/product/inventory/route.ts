@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
     const validTypes: ProductType[] = ['all', 'my', 'notmy'];
 
-    const status: ProductStatus = statusMap[rawStatus] ?? 'notDeleted';
+    const status: ProductStatus = statusMap[rawStatus] ?? 'active';
     const type: ProductType = validTypes.includes(rawType as ProductType) ? (rawType as ProductType) : 'all';
 
     const supplierId = Number(req.headers.get('x-supplier-id'));
