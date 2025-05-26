@@ -378,8 +378,8 @@ model country {
   originProducts        product[]       @relation("OriginCountryRelation")
   shippingProducts      product[]       @relation("ShippingCountryRelation")
 
-  shippingOrders        Order[]         @relation("CountryShippingRelation")
-  billingOrders         Order[]         @relation("CountryBillingRelation")
+  shippingOrders        order[]         @relation("CountryShippingRelation")
+  billingOrders         order[]         @relation("CountryBillingRelation")
 
   billingCompanyDetails companyDetail[] @relation("CompanyCountryRelation")
 
@@ -411,8 +411,8 @@ model state {
   admins          admin[]
   adminStaffs     adminStaff[]
 
-  shippingOrders  Order[] @relation("StateShippingRelation")
-  billingOrders   Order[] @relation("StateBillingRelation")
+  shippingOrders  order[] @relation("StateShippingRelation")
+  billingOrders   order[] @relation("StateBillingRelation")
 
   billingCompanyDetails companyDetail[] @relation("CompanyStateRelation")
 
@@ -441,8 +441,8 @@ model city {
   admins          admin[]
   adminStaffs     adminStaff[]
 
-  shippingOrders  Order[]     @relation("CityShippingRelation")
-  billingOrders   Order[]     @relation("CityBillingRelation")
+  shippingOrders  order[]     @relation("CityShippingRelation")
+  billingOrders   order[]     @relation("CityBillingRelation")
 
   billingCompanyDetails companyDetail[] @relation("CompanyCityRelation")
 
@@ -597,6 +597,7 @@ model product {
   isVisibleToAll                  Boolean          @default(true)
 
   status                          Boolean          @default(true)
+  isVarientExists                 Boolean          @default(true)
   createdAt                       DateTime         @default(now())
   createdBy                       Int?
   createdByRole                   String?
@@ -613,7 +614,7 @@ model product {
   shippingCountry                 country          @relation("ShippingCountryRelation", fields: [shippingCountryId], references: [id])
 
   variants                        productVariant[]
-  orderItems                      OrderItem[]
+  orderItems                      orderItem[]
   supplierProducts                supplierProduct[]
   dropshipperProducts             dropshipperProduct[]
   supplierVisibility              productSupplierVisibility[]
@@ -635,13 +636,8 @@ model productVariant {
   image                     String          @db.LongText
   color                     String
   sku                       String           @unique
-  qty                       Int
-  currency                  String
   product_link              String?
   suggested_price           Float?
-  shipowl_price             Float?
-  rto_suggested_price       Float?
-  rto_price                 Float?
 
   createdAt                 DateTime         @default(now())
   createdBy                 Int?
@@ -655,7 +651,7 @@ model productVariant {
 
   product                   product          @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  orderItems                OrderItem[]
+  orderItems                orderItem[]
   supplierProductVariants   supplierProductVariant[] @relation
 
   @@index([productId])
@@ -780,7 +776,7 @@ model goodPincode {
   @@index([deletedAt])
 }
 
-model Payment {
+model payment {
   id              Int       @id @default(autoincrement())
   transactionId   String    @unique
   cycle           String?
@@ -798,14 +794,14 @@ model Payment {
   deletedBy       Int?
   deletedByRole   String?
 
-  orders          Order[]   @relation("OrderPayment")
+  orders          order[]   @relation("OrderPayment")
 
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
 }
 
-model Order {
+model order {
   id              Int       @id @default(autoincrement())
   orderNumber     String    @unique
   status          String    // e.g., 'pending', 'processing', 'completed', 'cancelled'
@@ -846,9 +842,9 @@ model Order {
   billingState  state? @relation("StateBillingRelation", fields: [billingStateId], references: [id], onDelete: SetNull)
   billingCity  city? @relation("CityBillingRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
 
-  // Optional: Payment Reference
+  // Optional: payment Reference
   paymentId               Int?     
-  payment                 Payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
+  payment                 payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
 
   shippingApiResult       Json?
 
@@ -863,15 +859,15 @@ model Order {
   deletedBy               Int?
   deletedByRole           String?
 
-  // Order Items Relation
-  items           OrderItem[] // One-to-many with OrderItem model
+  // order Items Relation
+  items           orderItem[] // One-to-many with orderItem model
 
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
 }
 
-model OrderItem {
+model orderItem {
   id            Int                  @id @default(autoincrement())
   orderId       Int
   productId     Int?
@@ -880,7 +876,7 @@ model OrderItem {
   price         Float
   total         Float
 
-  order         Order                 @relation(fields: [orderId], references: [id])
+  order         order                 @relation(fields: [orderId], references: [id])
   product       product?               @relation(fields: [productId], references: [id], onDelete: SetNull)
   variant       productVariant?       @relation(fields: [variantId], references: [id], onDelete: SetNull)
 

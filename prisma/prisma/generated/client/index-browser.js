@@ -539,6 +539,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   training_guidance_video: 'training_guidance_video',
   isVisibleToAll: 'isVisibleToAll',
   status: 'status',
+  isVarientExists: 'isVarientExists',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -556,13 +557,8 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   image: 'image',
   color: 'color',
   sku: 'sku',
-  qty: 'qty',
-  currency: 'currency',
   product_link: 'product_link',
   suggested_price: 'suggested_price',
-  shipowl_price: 'shipowl_price',
-  rto_suggested_price: 'rto_suggested_price',
-  rto_price: 'rto_price',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -1082,7 +1078,6 @@ exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   image: 'image',
   color: 'color',
   sku: 'sku',
-  currency: 'currency',
   product_link: 'product_link',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
@@ -1128,7 +1123,7 @@ exports.Prisma.goodPincodeOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
+exports.Prisma.paymentOrderByRelevanceFieldEnum = {
   transactionId: 'transactionId',
   cycle: 'cycle',
   status: 'status',
@@ -1137,7 +1132,7 @@ exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.OrderOrderByRelevanceFieldEnum = {
+exports.Prisma.orderOrderByRelevanceFieldEnum = {
   orderNumber: 'orderNumber',
   status: 'status',
   orderNote: 'orderNote',
@@ -1207,9 +1202,9 @@ exports.Prisma.ModelName = {
   highRto: 'highRto',
   badPincode: 'badPincode',
   goodPincode: 'goodPincode',
-  Payment: 'Payment',
-  Order: 'Order',
-  OrderItem: 'OrderItem',
+  payment: 'payment',
+  order: 'order',
+  orderItem: 'orderItem',
   supplierProduct: 'supplierProduct',
   supplierProductVariant: 'supplierProductVariant',
   dropshipperProduct: 'dropshipperProduct',

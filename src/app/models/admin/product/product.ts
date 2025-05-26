@@ -4,17 +4,13 @@ import { deleteFile } from '@/utils/saveFiles';
 import { logMessage } from "@/utils/commonUtils";
 
 interface Variant {
-    id?: number; // Assuming you have an ID for the variant
-    color: string;
+    id?: number;
+    color?: string;
     sku: string;
-    qty: number;
-    currency: string;
-    suggested_price: number;
-    shipowl_price: number;
-    rto_suggested_price: number;
-    rto_price: number;
+    suggested_price?: number;
     product_link: string;
     images: string;
+    modal: string;
 }
 
 interface VariantSKUInput {
@@ -45,6 +41,7 @@ interface Product {
     variants: Variant[];
     product_detail_video?: string | null;
     status: boolean;
+    isVarientExists: boolean;
     package_weight_image?: string | null;
     package_length_image?: string | null;
     package_width_image?: string | null;
@@ -304,6 +301,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
             training_guidance_video,
             isVisibleToAll,
             status,
+            isVarientExists,
             package_weight_image,
             package_length_image,
             package_width_image,
@@ -345,6 +343,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 training_guidance_video,
                 isVisibleToAll,
                 status,
+                isVarientExists,
                 package_weight_image,
                 package_length_image,
                 package_width_image,
@@ -368,17 +367,13 @@ export async function createProduct(adminId: number, adminRole: string, product:
         // If there are variants, create them separately in the related productVariant model
         if (variants && variants.length > 0) {
             const productVariants = variants.map(variant => ({
-                color: variant.color,
-                sku: variant.sku,
-                qty: variant.qty,
-                currency: variant.currency,
-                suggested_price: variant.suggested_price,
-                shipowl_price: variant.shipowl_price,
-                rto_suggested_price: isNaN(Number(variant.rto_suggested_price)) ? null : Number(variant.rto_suggested_price),
-                rto_price: variant.rto_price,
-                image: variant.images,
-                product_link: variant.product_link,
-                productId: productWithStringBigInts.id // This associates the variant with the product
+                color: variant.color ?? '', // default to empty string if undefined
+                sku: variant.sku ?? '',
+                suggested_price: variant.suggested_price ?? 0,
+                image: variant.images ?? '',
+                product_link: variant.product_link ?? '',
+                productId: productWithStringBigInts.id,
+                modal: variant.modal ?? '',
             }));
 
             // Create variants in the database
@@ -926,18 +921,14 @@ export const updateProduct = async (
                 const mergedVariantImages = Array.from(new Set([...existingVariantImages, ...newVariantImages])).join(',');
 
                 const variantData = {
-                    color: variant.color,
-                    sku: variant.sku,
-                    qty: variant.qty,
-                    currency: variant.currency,
-                    suggested_price: variant.suggested_price,
-                    shipowl_price: variant.shipowl_price,
-                    rto_suggested_price: variant.rto_suggested_price,
-                    rto_price: variant.rto_price,
-                    product_link: variant.product_link,
-                    image: mergedVariantImages,
-                    updatedBy: adminId,
-                    updatedByRole: adminRole,
+                    color: variant.color ?? '',                       // string fallback
+                    sku: variant.sku ?? '',
+                    suggested_price: variant.suggested_price ?? 0,    // number fallback
+                    product_link: variant.product_link ?? '',
+                    image: mergedVariantImages ?? '',
+                    modal: variant.modal ?? '',
+                    updatedBy: adminId ?? 0,
+                    updatedByRole: adminRole ?? '',
                     updatedAt: new Date(),
                 };
 
