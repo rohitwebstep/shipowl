@@ -21,16 +21,12 @@ type UploadedFileInfo = {
 
 interface Variant {
   id?: number;
-  color: string;
+  color?: string;
   sku: string;
-  qty: number;
-  currency: string;
-  suggested_price: number;
-  shipowl_price: number;
-  rto_suggested_price: number;
-  rto_price: number;
+  suggested_price?: number;
   product_link: string;
   images: string;
+  modal: string;
 }
 
 export async function GET(req: NextRequest) {
@@ -162,6 +158,10 @@ export async function PUT(req: NextRequest) {
 
     const isVisibleToAllRaw = formData.get('isVisibleToAll')?.toString().toLowerCase();
     const isVisibleToAll = ['true', '1', true, 1, 'active'].includes(isVisibleToAllRaw as string | number | boolean);
+
+    const isVarientExistsRaw = formData.get('isVarientExists')?.toString().toLowerCase();
+    const isVarientExists = ['true', '1', true, 1, 'active'].includes(isVarientExistsRaw as string | number | boolean);
+
     let supplierIds: number[] = [];
 
     if (!isVisibleToAll) {
@@ -315,6 +315,7 @@ export async function PUT(req: NextRequest) {
       variants,
       product_detail_video: uploadedFiles['product_detail_video'],
       status,
+      isVarientExists,
       package_weight_image: uploadedFiles['package_weight_image'],
       package_length_image: uploadedFiles['package_length_image'],
       package_width_image: uploadedFiles['package_width_image'],

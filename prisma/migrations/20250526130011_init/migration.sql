@@ -544,6 +544,7 @@ CREATE TABLE `productVariant` (
     `productId` INTEGER NOT NULL,
     `image` LONGTEXT NOT NULL,
     `color` VARCHAR(191) NOT NULL,
+    `modal` VARCHAR(191) NOT NULL,
     `sku` VARCHAR(191) NOT NULL,
     `product_link` VARCHAR(191) NULL,
     `suggested_price` DOUBLE NULL,

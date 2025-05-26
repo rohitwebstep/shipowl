@@ -26572,6 +26572,7 @@ export namespace Prisma {
     productId: number | null
     image: string | null
     color: string | null
+    modal: string | null
     sku: string | null
     product_link: string | null
     suggested_price: number | null
@@ -26591,6 +26592,7 @@ export namespace Prisma {
     productId: number | null
     image: string | null
     color: string | null
+    modal: string | null
     sku: string | null
     product_link: string | null
     suggested_price: number | null
@@ -26610,6 +26612,7 @@ export namespace Prisma {
     productId: number
     image: number
     color: number
+    modal: number
     sku: number
     product_link: number
     suggested_price: number
@@ -26649,6 +26652,7 @@ export namespace Prisma {
     productId?: true
     image?: true
     color?: true
+    modal?: true
     sku?: true
     product_link?: true
     suggested_price?: true
@@ -26668,6 +26672,7 @@ export namespace Prisma {
     productId?: true
     image?: true
     color?: true
+    modal?: true
     sku?: true
     product_link?: true
     suggested_price?: true
@@ -26687,6 +26692,7 @@ export namespace Prisma {
     productId?: true
     image?: true
     color?: true
+    modal?: true
     sku?: true
     product_link?: true
     suggested_price?: true
@@ -26793,6 +26799,7 @@ export namespace Prisma {
     productId: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link: string | null
     suggested_price: number | null
@@ -26831,6 +26838,7 @@ export namespace Prisma {
     productId?: boolean
     image?: boolean
     color?: boolean
+    modal?: boolean
     sku?: boolean
     product_link?: boolean
     suggested_price?: boolean
@@ -26856,6 +26864,7 @@ export namespace Prisma {
     productId?: boolean
     image?: boolean
     color?: boolean
+    modal?: boolean
     sku?: boolean
     product_link?: boolean
     suggested_price?: boolean
@@ -26870,7 +26879,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "sku" | "product_link" | "suggested_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "modal" | "sku" | "product_link" | "suggested_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
     orderItems?: boolean | productVariant$orderItemsArgs<ExtArgs>
@@ -26890,6 +26899,7 @@ export namespace Prisma {
       productId: number
       image: string
       color: string
+      modal: string
       sku: string
       product_link: string | null
       suggested_price: number | null
@@ -27278,6 +27288,7 @@ export namespace Prisma {
     readonly productId: FieldRef<"productVariant", 'Int'>
     readonly image: FieldRef<"productVariant", 'String'>
     readonly color: FieldRef<"productVariant", 'String'>
+    readonly modal: FieldRef<"productVariant", 'String'>
     readonly sku: FieldRef<"productVariant", 'String'>
     readonly product_link: FieldRef<"productVariant", 'String'>
     readonly suggested_price: FieldRef<"productVariant", 'Float'>
@@ -41870,6 +41881,7 @@ export namespace Prisma {
     productId: 'productId',
     image: 'image',
     color: 'color',
+    modal: 'modal',
     sku: 'sku',
     product_link: 'product_link',
     suggested_price: 'suggested_price',
@@ -42499,6 +42511,7 @@ export namespace Prisma {
   export const productVariantOrderByRelevanceFieldEnum: {
     image: 'image',
     color: 'color',
+    modal: 'modal',
     sku: 'sku',
     product_link: 'product_link',
     createdByRole: 'createdByRole',
@@ -45359,6 +45372,7 @@ export namespace Prisma {
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
+    modal?: StringFilter<"productVariant"> | string
     sku?: StringFilter<"productVariant"> | string
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -45381,6 +45395,7 @@ export namespace Prisma {
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
+    modal?: SortOrder
     sku?: SortOrder
     product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
@@ -45408,6 +45423,7 @@ export namespace Prisma {
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
+    modal?: StringFilter<"productVariant"> | string
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
     createdAt?: DateTimeFilter<"productVariant"> | Date | string
@@ -45429,6 +45445,7 @@ export namespace Prisma {
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
+    modal?: SortOrder
     sku?: SortOrder
     product_link?: SortOrderInput | SortOrder
     suggested_price?: SortOrderInput | SortOrder
@@ -45456,6 +45473,7 @@ export namespace Prisma {
     productId?: IntWithAggregatesFilter<"productVariant"> | number
     image?: StringWithAggregatesFilter<"productVariant"> | string
     color?: StringWithAggregatesFilter<"productVariant"> | string
+    modal?: StringWithAggregatesFilter<"productVariant"> | string
     sku?: StringWithAggregatesFilter<"productVariant"> | string
     product_link?: StringNullableWithAggregatesFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableWithAggregatesFilter<"productVariant"> | number | null
@@ -50032,6 +50050,7 @@ export namespace Prisma {
   export type productVariantCreateInput = {
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -50054,6 +50073,7 @@ export namespace Prisma {
     productId: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -50073,6 +50093,7 @@ export namespace Prisma {
   export type productVariantUpdateInput = {
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -50095,6 +50116,7 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -50116,6 +50138,7 @@ export namespace Prisma {
     productId: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -50133,6 +50156,7 @@ export namespace Prisma {
   export type productVariantUpdateManyMutationInput = {
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -50152,6 +50176,7 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -54005,6 +54030,7 @@ export namespace Prisma {
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
+    modal?: SortOrder
     sku?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
@@ -54033,6 +54059,7 @@ export namespace Prisma {
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
+    modal?: SortOrder
     sku?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
@@ -54052,6 +54079,7 @@ export namespace Prisma {
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
+    modal?: SortOrder
     sku?: SortOrder
     product_link?: SortOrder
     suggested_price?: SortOrder
@@ -66080,6 +66108,7 @@ export namespace Prisma {
   export type productVariantCreateWithoutProductInput = {
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -66100,6 +66129,7 @@ export namespace Prisma {
     id?: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -66642,6 +66672,7 @@ export namespace Prisma {
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
+    modal?: StringFilter<"productVariant"> | string
     sku?: StringFilter<"productVariant"> | string
     product_link?: StringNullableFilter<"productVariant"> | string | null
     suggested_price?: FloatNullableFilter<"productVariant"> | number | null
@@ -68976,6 +69007,7 @@ export namespace Prisma {
   export type productVariantCreateWithoutOrderItemsInput = {
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -68997,6 +69029,7 @@ export namespace Prisma {
     productId: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -69229,6 +69262,7 @@ export namespace Prisma {
   export type productVariantUpdateWithoutOrderItemsInput = {
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -69250,6 +69284,7 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -70053,6 +70088,7 @@ export namespace Prisma {
   export type productVariantCreateWithoutSupplierProductVariantsInput = {
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -70074,6 +70110,7 @@ export namespace Prisma {
     productId: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -70403,6 +70440,7 @@ export namespace Prisma {
   export type productVariantUpdateWithoutSupplierProductVariantsInput = {
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -70424,6 +70462,7 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -76217,6 +76256,7 @@ export namespace Prisma {
     id?: number
     image: string
     color: string
+    modal: string
     sku: string
     product_link?: string | null
     suggested_price?: number | null
@@ -76328,6 +76368,7 @@ export namespace Prisma {
   export type productVariantUpdateWithoutProductInput = {
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -76348,6 +76389,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -76368,6 +76410,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    modal?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     product_link?: NullableStringFieldUpdateOperationsInput | string | null
     suggested_price?: NullableFloatFieldUpdateOperationsInput | number | null

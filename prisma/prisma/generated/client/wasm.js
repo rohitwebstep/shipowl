@@ -556,6 +556,7 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   productId: 'productId',
   image: 'image',
   color: 'color',
+  modal: 'modal',
   sku: 'sku',
   product_link: 'product_link',
   suggested_price: 'suggested_price',
@@ -1077,6 +1078,7 @@ exports.Prisma.productOrderByRelevanceFieldEnum = {
 exports.Prisma.productVariantOrderByRelevanceFieldEnum = {
   image: 'image',
   color: 'color',
+  modal: 'modal',
   sku: 'sku',
   product_link: 'product_link',
   createdByRole: 'createdByRole',

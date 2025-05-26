@@ -636,6 +636,7 @@ model productVariant {
   productId       Int
   image           String  @db.LongText
   color           String
+  modal           String
   sku             String  @unique
   product_link    String?
   suggested_price Float?
