@@ -243,10 +243,10 @@ export const getSuppliersByStatus = async (
                 whereCondition = { role: 'supplier', deletedAt: { not: null } };
                 break;
             case "inactive":
-                whereCondition = { status: 'inactive', deletedAt: null };
+                whereCondition = { role: 'supplier', status: 'inactive', deletedAt: null };
                 break;
             case "active":
-                whereCondition = { status: 'active', deletedAt: null };
+                whereCondition = { role: 'supplier', status: 'active', deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");
