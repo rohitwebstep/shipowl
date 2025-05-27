@@ -89,7 +89,7 @@ export async function placeOrderShipping(orderId: number): Promise<Result> {
                 return {
                     product_sku: (variant?.sku || "N/A").toString(),
                     product_name: product?.name || "Unknown Product",
-                    product_value: (variant?.shipowl_price || "0").toString(),
+                    product_value: "0",
                     product_hsnsac: "",
                     product_taxper: 0,
                     product_category: product?.categoryId?.toString() || "0",
