@@ -541,6 +541,7 @@ CREATE TABLE `product` (
 -- CreateTable
 CREATE TABLE `productVariant` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
     `productId` INTEGER NOT NULL,
     `image` LONGTEXT NOT NULL,
     `color` VARCHAR(191) NOT NULL,

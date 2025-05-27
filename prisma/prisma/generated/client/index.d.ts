@@ -26569,6 +26569,7 @@ export namespace Prisma {
 
   export type ProductVariantMinAggregateOutputType = {
     id: number | null
+    name: string | null
     productId: number | null
     image: string | null
     color: string | null
@@ -26589,6 +26590,7 @@ export namespace Prisma {
 
   export type ProductVariantMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     productId: number | null
     image: string | null
     color: string | null
@@ -26609,6 +26611,7 @@ export namespace Prisma {
 
   export type ProductVariantCountAggregateOutputType = {
     id: number
+    name: number
     productId: number
     image: number
     color: number
@@ -26649,6 +26652,7 @@ export namespace Prisma {
 
   export type ProductVariantMinAggregateInputType = {
     id?: true
+    name?: true
     productId?: true
     image?: true
     color?: true
@@ -26669,6 +26673,7 @@ export namespace Prisma {
 
   export type ProductVariantMaxAggregateInputType = {
     id?: true
+    name?: true
     productId?: true
     image?: true
     color?: true
@@ -26689,6 +26694,7 @@ export namespace Prisma {
 
   export type ProductVariantCountAggregateInputType = {
     id?: true
+    name?: true
     productId?: true
     image?: true
     color?: true
@@ -26796,6 +26802,7 @@ export namespace Prisma {
 
   export type ProductVariantGroupByOutputType = {
     id: number
+    name: string
     productId: number
     image: string
     color: string
@@ -26835,6 +26842,7 @@ export namespace Prisma {
 
   export type productVariantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     productId?: boolean
     image?: boolean
     color?: boolean
@@ -26861,6 +26869,7 @@ export namespace Prisma {
 
   export type productVariantSelectScalar = {
     id?: boolean
+    name?: boolean
     productId?: boolean
     image?: boolean
     color?: boolean
@@ -26879,7 +26888,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "image" | "color" | "modal" | "sku" | "product_link" | "suggested_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
+  export type productVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "productId" | "image" | "color" | "modal" | "sku" | "product_link" | "suggested_price" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["productVariant"]>
   export type productVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | productDefaultArgs<ExtArgs>
     orderItems?: boolean | productVariant$orderItemsArgs<ExtArgs>
@@ -26896,6 +26905,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string
       productId: number
       image: string
       color: string
@@ -27285,6 +27295,7 @@ export namespace Prisma {
    */
   interface productVariantFieldRefs {
     readonly id: FieldRef<"productVariant", 'Int'>
+    readonly name: FieldRef<"productVariant", 'String'>
     readonly productId: FieldRef<"productVariant", 'Int'>
     readonly image: FieldRef<"productVariant", 'String'>
     readonly color: FieldRef<"productVariant", 'String'>
@@ -41878,6 +41889,7 @@ export namespace Prisma {
 
   export const ProductVariantScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     productId: 'productId',
     image: 'image',
     color: 'color',
@@ -42509,6 +42521,7 @@ export namespace Prisma {
 
 
   export const productVariantOrderByRelevanceFieldEnum: {
+    name: 'name',
     image: 'image',
     color: 'color',
     modal: 'modal',
@@ -45369,6 +45382,7 @@ export namespace Prisma {
     OR?: productVariantWhereInput[]
     NOT?: productVariantWhereInput | productVariantWhereInput[]
     id?: IntFilter<"productVariant"> | number
+    name?: StringFilter<"productVariant"> | string
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
@@ -45392,6 +45406,7 @@ export namespace Prisma {
 
   export type productVariantOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
@@ -45420,6 +45435,7 @@ export namespace Prisma {
     AND?: productVariantWhereInput | productVariantWhereInput[]
     OR?: productVariantWhereInput[]
     NOT?: productVariantWhereInput | productVariantWhereInput[]
+    name?: StringFilter<"productVariant"> | string
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
@@ -45442,6 +45458,7 @@ export namespace Prisma {
 
   export type productVariantOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
@@ -45470,6 +45487,7 @@ export namespace Prisma {
     OR?: productVariantScalarWhereWithAggregatesInput[]
     NOT?: productVariantScalarWhereWithAggregatesInput | productVariantScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"productVariant"> | number
+    name?: StringWithAggregatesFilter<"productVariant"> | string
     productId?: IntWithAggregatesFilter<"productVariant"> | number
     image?: StringWithAggregatesFilter<"productVariant"> | string
     color?: StringWithAggregatesFilter<"productVariant"> | string
@@ -50048,6 +50066,7 @@ export namespace Prisma {
   }
 
   export type productVariantCreateInput = {
+    name: string
     image: string
     color: string
     modal: string
@@ -50070,6 +50089,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedCreateInput = {
     id?: number
+    name: string
     productId: number
     image: string
     color: string
@@ -50091,6 +50111,7 @@ export namespace Prisma {
   }
 
   export type productVariantUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -50113,6 +50134,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
@@ -50135,6 +50157,7 @@ export namespace Prisma {
 
   export type productVariantCreateManyInput = {
     id?: number
+    name: string
     productId: number
     image: string
     color: string
@@ -50154,6 +50177,7 @@ export namespace Prisma {
   }
 
   export type productVariantUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -50173,6 +50197,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
@@ -54027,6 +54052,7 @@ export namespace Prisma {
 
   export type productVariantCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
@@ -54056,6 +54082,7 @@ export namespace Prisma {
 
   export type productVariantMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
@@ -54076,6 +54103,7 @@ export namespace Prisma {
 
   export type productVariantMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     productId?: SortOrder
     image?: SortOrder
     color?: SortOrder
@@ -66106,6 +66134,7 @@ export namespace Prisma {
   }
 
   export type productVariantCreateWithoutProductInput = {
+    name: string
     image: string
     color: string
     modal: string
@@ -66127,6 +66156,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedCreateWithoutProductInput = {
     id?: number
+    name: string
     image: string
     color: string
     modal: string
@@ -66669,6 +66699,7 @@ export namespace Prisma {
     OR?: productVariantScalarWhereInput[]
     NOT?: productVariantScalarWhereInput | productVariantScalarWhereInput[]
     id?: IntFilter<"productVariant"> | number
+    name?: StringFilter<"productVariant"> | string
     productId?: IntFilter<"productVariant"> | number
     image?: StringFilter<"productVariant"> | string
     color?: StringFilter<"productVariant"> | string
@@ -69005,6 +69036,7 @@ export namespace Prisma {
   }
 
   export type productVariantCreateWithoutOrderItemsInput = {
+    name: string
     image: string
     color: string
     modal: string
@@ -69026,6 +69058,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedCreateWithoutOrderItemsInput = {
     id?: number
+    name: string
     productId: number
     image: string
     color: string
@@ -69260,6 +69293,7 @@ export namespace Prisma {
   }
 
   export type productVariantUpdateWithoutOrderItemsInput = {
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -69281,6 +69315,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateWithoutOrderItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
@@ -70086,6 +70121,7 @@ export namespace Prisma {
   }
 
   export type productVariantCreateWithoutSupplierProductVariantsInput = {
+    name: string
     image: string
     color: string
     modal: string
@@ -70107,6 +70143,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedCreateWithoutSupplierProductVariantsInput = {
     id?: number
+    name: string
     productId: number
     image: string
     color: string
@@ -70438,6 +70475,7 @@ export namespace Prisma {
   }
 
   export type productVariantUpdateWithoutSupplierProductVariantsInput = {
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -70459,6 +70497,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateWithoutSupplierProductVariantsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     productId?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
@@ -76254,6 +76293,7 @@ export namespace Prisma {
 
   export type productVariantCreateManyProductInput = {
     id?: number
+    name: string
     image: string
     color: string
     modal: string
@@ -76366,6 +76406,7 @@ export namespace Prisma {
   }
 
   export type productVariantUpdateWithoutProductInput = {
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -76387,6 +76428,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string
@@ -76408,6 +76450,7 @@ export namespace Prisma {
 
   export type productVariantUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     modal?: StringFieldUpdateOperationsInput | string

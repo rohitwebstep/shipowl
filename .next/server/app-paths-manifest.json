@@ -1,6 +1,3 @@
 {
-  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/product/inventory/route": "app/api/supplier/product/inventory/route.js",
-  "/api/supplier/product/my-inventory/[supplierProductId]/route": "app/api/supplier/product/my-inventory/[supplierProductId]/route.js",
-  "/api/supplier/product/my-inventory/route": "app/api/supplier/product/my-inventory/route.js"
+  "/api/supplier/product/route": "app/api/supplier/product/route.js"
 }

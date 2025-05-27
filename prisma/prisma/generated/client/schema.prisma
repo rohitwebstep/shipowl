@@ -633,6 +633,7 @@ model product {
 
 model productVariant {
   id              Int     @id @default(autoincrement())
+  name            String
   productId       Int
   image           String  @db.LongText
   color           String

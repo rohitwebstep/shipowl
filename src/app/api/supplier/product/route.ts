@@ -23,6 +23,7 @@ type UploadedFileInfo = {
 
 interface Variant {
   id?: number;
+  name: string;
   color: string;
   sku: string;
   qty: number;
@@ -178,6 +179,10 @@ export async function POST(req: NextRequest) {
     const status = false;
 
     const isVisibleToAll = false;
+
+    const isVarientExistsRaw = formData.get('isVarientExists')?.toString().toLowerCase();
+    const isVarientExists = ['true', '1', true, 1, 'active', 'yes'].includes(isVarientExistsRaw as string | number | boolean);
+
     let supplierIds: number[] = [];
 
     if (!isVisibleToAll) {
@@ -329,6 +334,7 @@ export async function POST(req: NextRequest) {
       package_height_image: uploadedFiles['package_height_image'],
       training_guidance_video: uploadedFiles['training_guidance_video'],
       isVisibleToAll,
+      isVarientExists,
       video_url: extractString('video_url'),
       createdBy: supplierId,
       createdByRole: supplierRole,
@@ -377,12 +383,17 @@ export async function POST(req: NextRequest) {
           if (visibilityResult.status) {
             logMessage('error', 'Failed to assign supplier visibility:', visibilityResult.message);
 
-            const parsedVariants = productCreateResult.product.variants.map(variant => ({
-              variantId: variant.id,
-              stock: variant.qty,
-              price: variant.suggested_price ?? 0, // fallback to 0 if null or undefined
-              status: true
-            }));
+            console.log(`productCreateResult.product.variants - `, productCreateResult.product.variants);
+            const parsedVariants = productCreateResult.product.variants.map(variant => {
+              const match = variants.find(v => v.name === variant.name && v.color === variant.color);
+              return {
+                variantId: variant.id,
+                stock: match?.qty ?? 0,
+                price: variant.suggested_price ?? 0, // fallback to 0 if null or undefined
+                status: true
+              };
+            });
+
 
             const productPayload = {
               productId: productCreateResult.product.id,

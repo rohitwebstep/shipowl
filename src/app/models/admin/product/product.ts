@@ -11,7 +11,7 @@ interface Variant {
   suggested_price?: number;
   product_link: string;
   images: string;
-  modal: string;
+  modal?: string;
 }
 
 interface VariantSKUInput {
