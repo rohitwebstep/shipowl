@@ -107,7 +107,7 @@ export async function PUT(req: NextRequest) {
 
     // Extract fields
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+    const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
     const badPincodePayload = {
       pincode: extractString('pincode') || '',

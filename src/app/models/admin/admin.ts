@@ -127,7 +127,7 @@ export async function createAdmin(adminId: number, adminRole: string, admin: Adm
         const { name, profilePicture, email, website, referralCode, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = admin;
 
         // Convert statusRaw to a boolean using the includes check
-        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
@@ -246,7 +246,7 @@ export const updateAdmin = async (
         } = admin;
 
         // Convert statusRaw to a boolean using the includes check
-        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';

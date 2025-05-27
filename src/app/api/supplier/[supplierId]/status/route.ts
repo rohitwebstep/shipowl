@@ -43,7 +43,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ status: false, message: 'Supplier not found' }, { status: 404 });
     }
 
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+    const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
     const updateResult = await updateSupplierStatus(adminId, String(adminRole), supplierIdNum, status);
 
     if (!updateResult?.status) {

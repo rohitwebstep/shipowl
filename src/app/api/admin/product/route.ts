@@ -21,6 +21,7 @@ type UploadedFileInfo = {
 
 interface Variant {
   id?: number;
+  name?: string;
   color?: string;
   sku: string;
   suggested_price?: number;
@@ -96,13 +97,13 @@ export async function POST(req: NextRequest) {
     };
 
     const statusRaw = extractString('status')?.toLowerCase();
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+    const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
     const isVisibleToAllRaw = formData.get('isVisibleToAll')?.toString().toLowerCase();
-    const isVisibleToAll = ['true', '1', true, 1, 'active'].includes(isVisibleToAllRaw as string | number | boolean);
+    const isVisibleToAll = ['true', '1', true, 1, 'active', 'yes'].includes(isVisibleToAllRaw as string | number | boolean);
 
     const isVarientExistsRaw = formData.get('isVarientExists')?.toString().toLowerCase();
-    const isVarientExists = ['true', '1', true, 1, 'active'].includes(isVarientExistsRaw as string | number | boolean);
+    const isVarientExists = ['true', '1', true, 1, 'active', 'yes'].includes(isVarientExistsRaw as string | number | boolean);
 
     let supplierIds: number[] = [];
 

@@ -4,13 +4,14 @@ import { deleteFile } from '@/utils/saveFiles';
 import { logMessage } from "@/utils/commonUtils";
 
 interface Variant {
-    id?: number;
-    color?: string;
-    sku: string;
-    suggested_price?: number;
-    product_link: string;
-    images: string;
-    modal: string;
+  id?: number;
+  name?: string;
+  color?: string;
+  sku: string;
+  suggested_price?: number;
+  product_link: string;
+  images: string;
+  modal: string;
 }
 
 interface VariantSKUInput {
@@ -367,7 +368,8 @@ export async function createProduct(adminId: number, adminRole: string, product:
         // If there are variants, create them separately in the related productVariant model
         if (variants && variants.length > 0) {
             const productVariants = variants.map(variant => ({
-                color: variant.color ?? '', // default to empty string if undefined
+                name: variant.name ?? '',
+                color: variant.color ?? '',
                 sku: variant.sku ?? '',
                 suggested_price: variant.suggested_price ?? 0,
                 image: variant.images ?? '',
@@ -923,9 +925,10 @@ export const updateProduct = async (
                 const mergedVariantImages = Array.from(new Set([...existingVariantImages, ...newVariantImages])).join(',');
 
                 const variantData = {
-                    color: variant.color ?? '',                       // string fallback
+                    name: variant.name ?? '',
+                    color: variant.color ?? '',
                     sku: variant.sku ?? '',
-                    suggested_price: variant.suggested_price ?? 0,    // number fallback
+                    suggested_price: variant.suggested_price ?? 0,
                     product_link: variant.product_link ?? '',
                     image: mergedVariantImages ?? '',
                     modal: variant.modal ?? '',

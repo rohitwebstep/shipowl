@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     }
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
-    const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+    const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
     const pincode = extractString('pincode');
 

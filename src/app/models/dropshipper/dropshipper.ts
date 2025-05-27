@@ -127,7 +127,7 @@ export async function createDropshipper(adminId: number, adminRole: string, drop
         const { name, profilePicture, email, website, referralCode, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = dropshipper;
 
         // Convert statusRaw to a boolean using the includes check
-        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
@@ -250,7 +250,7 @@ export const updateDropshipper = async (
         } = dropshipper;
 
         // Convert statusRaw to a boolean using the includes check
-        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
@@ -321,7 +321,7 @@ export const updateDropshipperStatus = async (
     try {
 
         // Convert status to a boolean using the includes check
-        const status = ['true', '1', true, 1, 'active'].includes(statusRaw as string | number | boolean);
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
