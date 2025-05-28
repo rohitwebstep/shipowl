@@ -203,40 +203,46 @@ export const getProductsByFiltersAndStatus = async (
     try {
         const statusCondition = (() => {
             switch (status) {
-                case "active": return { status: true, deletedAt: null };
-                case "inactive": return { status: false, deletedAt: null };
-                case "deleted": return { deletedAt: { not: null } };
-                case "notDeleted": return { deletedAt: null };
-                default: throw new Error("Invalid status");
+                case "active":
+                    return { status: true, deletedAt: null };
+                case "inactive":
+                    return { status: false, deletedAt: null };
+                case "deleted":
+                    return { deletedAt: { not: null } };
+                case "notDeleted":
+                    return { deletedAt: null };
+                default:
+                    throw new Error("Invalid status");
             }
         })();
-
-        const baseFilters = {
-            ...statusCondition,
-            ...(filters.categoryId && { categoryId: filters.categoryId }),
-            ...(filters.brandId && { brandId: filters.brandId }),
-        };
 
         let products;
 
         if (type === "all") {
             products = await prisma.supplierProduct.findMany({
-                where: baseFilters,
+                where: {
+                    ...statusCondition,
+                    ...(filters.categoryId ? { product: { categoryId: filters.categoryId } } : {}),
+                    ...(filters.brandId ? { product: { brandId: filters.brandId } } : {}),
+                },
                 orderBy: { id: "desc" },
                 include: {
                     variants: {
-                        include: {
-                            variant: true
-                        }
+                        include: { variant: true },
                     },
-                    product: true
+                    product: true,
                 },
             });
         }
 
         if (type === "my") {
             products = await prisma.dropshipperProduct.findMany({
-                where: { ...baseFilters, dropshipperId },
+                where: {
+                    ...statusCondition,
+                    dropshipperId,
+                    ...(filters.categoryId ? { product: { categoryId: filters.categoryId } } : {}),
+                    ...(filters.brandId ? { product: { brandId: filters.brandId } } : {}),
+                },
                 include: {
                     product: true,
                     dropshipper: true,
@@ -244,11 +250,11 @@ export const getProductsByFiltersAndStatus = async (
                         include: {
                             supplierProductVariant: {
                                 include: {
-                                    variant: true
-                                }
-                            }
-                        }
-                    }
+                                    variant: true,
+                                },
+                            },
+                        },
+                    },
                 },
                 orderBy: { id: "desc" },
             });
@@ -257,30 +263,25 @@ export const getProductsByFiltersAndStatus = async (
         if (type === "notmy") {
             const myProductIds = await prisma.dropshipperProduct.findMany({
                 where: { dropshipperId },
-                include: {
-                    variants: true,
-                }
+                select: { supplierProductId: true },
             }).then(data => data.map(d => d.supplierProductId));
 
             const notMyProducts = await prisma.supplierProduct.findMany({
                 where: {
-                    ...baseFilters,
+                    ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
+                    ...(filters.categoryId ? { product: { categoryId: filters.categoryId } } : {}),
+                    ...(filters.brandId ? { product: { brandId: filters.brandId } } : {}),
                 },
                 orderBy: { id: "desc" },
                 include: {
                     variants: {
-                        include: {
-                            variant: true
-                        }
+                        include: { variant: true },
                     },
-                    product: true
+                    product: true,
                 },
             });
 
-            console.dir(notMyProducts, { depth: null, colors: true });
-
-            // Attach each variant's lowest suggested_price from other dropshippers
             const enrichedProducts = await Promise.all(
                 notMyProducts.map(async (product) => {
                     const enrichedVariants = await Promise.all(
@@ -289,7 +290,7 @@ export const getProductsByFiltersAndStatus = async (
                                 where: {
                                     supplierProductVariantId: variant.id,
                                     dropshipperProduct: {
-                                        dropshipperId: { not: dropshipperId }, // Only other dropshippers
+                                        dropshipperId: { not: dropshipperId },
                                     },
                                 },
                                 orderBy: { price: "asc" },
@@ -305,7 +306,7 @@ export const getProductsByFiltersAndStatus = async (
 
                     return {
                         ...product,
-                        variants: enrichedVariants, // Overwrite with enriched variants
+                        variants: enrichedVariants,
                     };
                 })
             );
@@ -319,6 +320,7 @@ export const getProductsByFiltersAndStatus = async (
         return { status: false, message: "Error fetching products" };
     }
 };
+
 
 export const getProductsByStatus = async (
     type: "all" | "my" | "notmy",

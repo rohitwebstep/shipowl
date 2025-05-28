@@ -180,6 +180,7 @@ exports.Prisma.AdminScalarFieldEnum = {
 exports.Prisma.ShopifyStoreScalarFieldEnum = {
   id: 'id',
   adminId: 'adminId',
+  name: 'name',
   shop: 'shop',
   accessToken: 'accessToken',
   apiKey: 'apiKey',
@@ -887,6 +888,7 @@ exports.Prisma.adminOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.shopifyStoreOrderByRelevanceFieldEnum = {
+  name: 'name',
   shop: 'shop',
   accessToken: 'accessToken',
   apiKey: 'apiKey',

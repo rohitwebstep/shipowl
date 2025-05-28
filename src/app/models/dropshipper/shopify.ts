@@ -4,26 +4,55 @@ import { deleteFile } from '@/utils/saveFiles';
 import { logMessage } from "@/utils/commonUtils";
 
 interface ShopifyStore {
+    // === Primary Keys and Relations ===
     admin: {
-        connect: { id: number }
-    }
+        connect: { id: number };
+    };
     id?: bigint; // Optional: ID of the dropshipperShopifyStore (if exists)
+    createdBy?: number;
+    createdByRole?: string | null;
+    updatedBy?: number;
+    updatedByRole?: string | null;
+    deletedBy?: number;
+    deletedByRole?: string | null;
+
+    // === Shopify Store Identifiers ===
     shop: string;
-    apiKey: string;
-    apiSecret: string;
-    scopes: string;
-    redirectUri: string;
+    accessToken?: string;
+
+    // === Shopify App Configuration ===
+    apiKey?: string;        // Formerly SHOPIFY_API_KEY
+    apiSecret?: string;     // Formerly SHOPIFY_API_SECRET
+    scopes?: string;        // Formerly SHOPIFY_SCOPES (comma-separated)
+    redirectUri?: string;
+
+    // === Shopify API & Version (optional, add if needed) ===
+    // apiVersion?: string; 
+
+    // === Store Metadata ===
+    email?: string;
+    name?: string;              // corresponds to shopName in Prisma
+    planName?: string;
+    countryName?: string;       // corresponds to country in Prisma
+    shopOwner?: string;
+    domain?: string;
+    myshopifyDomain?: string;   // corresponds to myshopifyDomain in Prisma
+    province?: string;
+    city?: string;
+    phone?: string;
+    currency?: string;
+    moneyFormat?: string;
+    ianaTimezone?: string;      // corresponds to timezone in Prisma
+    shopCreatedAt?: string;     // corresponds to createdAtShop in Prisma
+
+    // === Status Flags ===
     verificationStatus?: boolean;
-    status?: boolean; // Status of the dropshipperShopifyStore (active, inactive, etc.)
-    createdAt?: Date; // Timestamp of when the dropshipperShopifyStore was created
-    updatedAt?: Date; // Timestamp of when the dropshipperShopifyStore was last updated
-    deletedAt?: Date | null; // Timestamp of when the dropshipperShopifyStore was deleted, or null if not deleted
-    createdBy?: number; // ID of the dropshipperShopifyStore who created the dropshipperShopifyStore
-    updatedBy?: number; // ID of the dropshipperShopifyStore who last updated the dropshipperShopifyStore
-    deletedBy?: number; // ID of the dropshipperShopifyStore who deleted the dropshipperShopifyStore
-    createdByRole?: string | null; // Role of the dropshipperShopifyStore who created the dropshipperShopifyStore
-    updatedByRole?: string | null; // Role of the dropshipperShopifyStore who last updated the dropshipperShopifyStore
-    deletedByRole?: string | null; // Role of the dropshipperShopifyStore who deleted the dropshipperShopifyStore
+    status?: boolean;
+
+    // === Timestamps ===
+    createdAt?: Date;
+    updatedAt?: Date;
+    deletedAt?: Date | null;
 }
 
 const serializeBigInt = <T>(obj: T): T => {
@@ -113,6 +142,67 @@ export async function createDropshipperShopifyStore(dropshipperId: number, drops
         });
 
         return { status: true, dropshipperShopifyStore: serializeBigInt(newShopifyStore) };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function verifyDropshipperShopifyStore(dropshipperId: number, dropshipperRole: string, dropshipperShopifyStore: ShopifyStore) {
+    try {
+        const {
+            shop,
+            accessToken,
+            email,
+            shopOwner,
+            name,
+            domain,
+            myshopifyDomain,
+            planName,
+            countryName,
+            province,
+            city,
+            phone,
+            currency,
+            moneyFormat,
+            ianaTimezone,
+            shopCreatedAt,
+        } = dropshipperShopifyStore;
+
+        const existing = await isShopUsedAndVerified(shop);
+
+        // 🚫 Stop if already verified
+        if (existing.status && existing.shopifyStore) {
+            return { status: true, message: "Shop already verified and connected." };
+        }
+
+        if (!existing.shopifyStore) {
+            return { status: false, message: "Shopify store not found." };
+        }
+
+        // ✅ Update the accessToken and mark verified
+        await prisma.shopifyStore.update({
+            where: { id: Number(existing.shopifyStore.id) },
+            data: {
+                accessToken,
+                email,
+                shopOwner,
+                name,
+                domain,
+                myshopifyDomain,
+                planName,
+                country: countryName,
+                province,
+                city,
+                phone,
+                currency,
+                moneyFormat,
+                timezone: ianaTimezone,
+                createdAtShop: shopCreatedAt
+            }
+        });
+
+        return { status: true };
     } catch (error) {
         console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };

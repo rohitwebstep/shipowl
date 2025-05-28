@@ -100,14 +100,15 @@ model shopifyStore {
   id              Int      @id @default(autoincrement())
   adminId         Int
 
+  name            String?
   shop            String   @unique
   accessToken     String?
 
   // Shopify app configuration stored per store
-  apiKey          String                         // Formerly SHOPIFY_API_KEY
+  apiKey          String?                         // Formerly SHOPIFY_API_KEY
   apiSecret       String?                         // Formerly SHOPIFY_API_SECRET
   apiVersion      String?                         // Formerly SHOPIFY_API_VERSION (e.g., '2023-04')
-  scopes          String                         // Formerly SHOPIFY_SCOPES (comma-separated string)
+  scopes          String?                         // Formerly SHOPIFY_SCOPES (comma-separated string)
   redirectUri     String?   @db.LongText
 
   // Store metadata

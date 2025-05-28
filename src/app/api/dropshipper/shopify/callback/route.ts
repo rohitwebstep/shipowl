@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import axios from 'axios';
 import qs from 'qs';
 import { logMessage } from '@/utils/commonUtils';
-import { isShopUsedAndVerified } from '@/app/models/dropshipper/shopify';
+import { isShopUsedAndVerified, verifyDropshipperShopifyStore } from '@/app/models/dropshipper/shopify';
 
 export async function GET(req: NextRequest) {
     try {
@@ -82,13 +82,18 @@ export async function GET(req: NextRequest) {
         const shopData = shopInfoRes.data.shop;
 
         const payload = {
+            admin: {
+                connect: {
+                    id: shopData.adminId
+                }
+            },
             shop: shop,
             accessToken: accessToken,
             email: shopData.email,
             shopOwner: shopData.shop_owner,
             name: shopData.name,
             domain: shopData.domain,
-            myshopifDdomain: shopData.myshopify_domain,
+            myshopifyDomain: shopData.myshopify_domain,
             planName: shopData.plan_name,
             countryName: shopData.country_name,
             province: shopData.province,
