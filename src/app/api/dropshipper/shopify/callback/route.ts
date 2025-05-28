@@ -125,9 +125,8 @@ export async function GET(req: NextRequest) {
             error: result?.message || 'Store creation failed',
         }, { status: 500 });
 
-    } catch (err: any) {
-        const errorMsg = err.response?.data || err.message || 'OAuth callback failed.';
-        logMessage('error', 'OAuth Callback Error:', errorMsg);
-        return NextResponse.json({ status: false, error: errorMsg }, { status: 500 });
+    } catch (error) {
+        logMessage('error', 'OAuth Callback Error:', error);
+        return NextResponse.json({ status: false, error }, { status: 500 });
     }
 }

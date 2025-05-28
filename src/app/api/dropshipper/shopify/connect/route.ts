@@ -115,9 +115,8 @@ export async function POST(req: NextRequest) {
             { status: 500 }
         );
 
-    } catch (err: unknown) {
-        const errorMsg = err instanceof Error ? err.message : 'Internal Server Error';
-        logMessage('error', 'Exception in Shopify store linking:', errorMsg);
-        return NextResponse.json({ status: false, error: errorMsg }, { status: 500 });
+    } catch (error) {
+        logMessage('error', 'Exception in Shopify store linking:', error);
+        return NextResponse.json({ status: false, error }, { status: 500 });
     }
 }
