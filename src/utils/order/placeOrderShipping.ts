@@ -73,10 +73,10 @@ export async function placeOrderShipping(orderId: number): Promise<Result> {
 
         const products: ShippingProduct[] = await Promise.all(
             order.items.map(async (item) => {
-                const productRes = await getProductById(item.productId ?? 0);
+                const productRes = await getProductById(item.dropshipperProductId ?? 0);
                 const product = productRes?.product;
 
-                const variantRes = await getProductVariantById(item.variantId ?? 0);
+                const variantRes = await getProductVariantById(item.dropshipperProductVariantId ?? 0);
                 const variant = variantRes?.variant;
 
                 if (product) {
