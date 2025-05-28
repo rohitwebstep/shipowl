@@ -1,3 +1,13 @@
 {
-  "/api/supplier/product/route": "app/api/supplier/product/route.js"
+  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
+  "/api/admin/brand/route": "app/api/admin/brand/route.js",
+  "/api/admin/category/route": "app/api/admin/category/route.js",
+  "/api/admin/product/route": "app/api/admin/product/route.js",
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
+  "/api/dropshipper/product/inventory/route": "app/api/dropshipper/product/inventory/route.js",
+  "/api/dropshipper/product/my-inventory/route": "app/api/dropshipper/product/my-inventory/route.js",
+  "/api/payment/route": "app/api/payment/route.js",
+  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
+  "/api/supplier/product/inventory/route": "app/api/supplier/product/inventory/route.js",
+  "/api/supplier/product/my-inventory/route": "app/api/supplier/product/my-inventory/route.js"
 }

@@ -240,7 +240,15 @@ export const getProductsByFiltersAndStatus = async (
                 include: {
                     product: true,
                     dropshipper: true,
-                    variants: true
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
                 },
                 orderBy: { id: "desc" },
             });
@@ -354,7 +362,15 @@ export const getProductsByStatus = async (
                 include: {
                     product: true,
                     dropshipper: true,
-                    variants: true
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
                 },
                 orderBy: { id: "desc" },
             });
@@ -497,7 +513,15 @@ export const checkDropshipperProductForDropshipper = async (
             include: {
                 product: true,
                 dropshipper: true,
-                variants: true,
+                variants: {
+                    include: {
+                        supplierProductVariant: {
+                            include: {
+                                variant: true
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -653,6 +677,66 @@ export const getDropshipperProductById = async (id: number) => {
             status: false,
             message: "Internal server error.",
             product: null,
+        };
+    }
+};
+
+export const checkSupplierProductForDropshipper = async (
+    dropshipperId: number,
+    supplierProductId: number
+) => {
+    try {
+        // 1. Find the supplier product
+        const supplierProduct = await prisma.supplierProduct.findFirst({
+            where: { id: supplierProductId },
+            include: {
+                product: true,
+                supplier: true,
+                variants: {
+                    include: { variant: true }
+                }
+            }
+        });
+
+        if (!supplierProduct) {
+            return {
+                status: true,
+                message: "Supplier product not found or not assigned to the supplier.",
+                existsInSupplierProduct: false,
+                supplierProduct: null,
+                otherSuppliers: [],
+            };
+        }
+
+        // 2. Find other suppliers listing the same product
+        const otherSuppliers = await prisma.supplierProduct.findMany({
+            where: {
+                productId: supplierProduct.productId,
+                supplierId: { not: supplierProduct.supplierId } // Exclude current supplier
+            },
+            include: {
+                supplier: true,
+                variants: {
+                    include: { variant: true }
+                }
+            }
+        });
+
+        return {
+            status: true,
+            message: "Supplier product exists and is assigned to the supplier.",
+            existsInSupplierProduct: true,
+            supplierProduct: serializeBigInt(supplierProduct),
+            otherSuppliers: serializeBigInt(otherSuppliers),
+        };
+    } catch (error) {
+        console.error("❌ Error checking supplier product for supplier:", error);
+        return {
+            status: false,
+            message: "Internal server error while checking supplier product.",
+            existsInSupplierProduct: false,
+            supplierProduct: null,
+            otherSuppliers: [],
         };
     }
 };

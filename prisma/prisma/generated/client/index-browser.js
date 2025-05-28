@@ -655,73 +655,6 @@ exports.Prisma.GoodPincodeScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.PaymentScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  cycle: 'cycle',
-  amount: 'amount',
-  status: 'status',
-  date: 'date',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.OrderScalarFieldEnum = {
-  id: 'id',
-  orderNumber: 'orderNumber',
-  status: 'status',
-  orderNote: 'orderNote',
-  subtotal: 'subtotal',
-  tax: 'tax',
-  discount: 'discount',
-  totalAmount: 'totalAmount',
-  currency: 'currency',
-  shippingName: 'shippingName',
-  shippingPhone: 'shippingPhone',
-  shippingEmail: 'shippingEmail',
-  shippingAddress: 'shippingAddress',
-  shippingZip: 'shippingZip',
-  shippingCountryId: 'shippingCountryId',
-  shippingStateId: 'shippingStateId',
-  shippingCityId: 'shippingCityId',
-  billingName: 'billingName',
-  billingPhone: 'billingPhone',
-  billingEmail: 'billingEmail',
-  billingAddress: 'billingAddress',
-  billingZip: 'billingZip',
-  billingCountryId: 'billingCountryId',
-  billingStateId: 'billingStateId',
-  billingCityId: 'billingCityId',
-  paymentId: 'paymentId',
-  shippingApiResult: 'shippingApiResult',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.OrderItemScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
-  productId: 'productId',
-  variantId: 'variantId',
-  quantity: 'quantity',
-  price: 'price',
-  total: 'total'
-};
-
 exports.Prisma.SupplierProductScalarFieldEnum = {
   id: 'id',
   supplierId: 'supplierId',
@@ -795,6 +728,73 @@ exports.Prisma.DropshipperProductVariantScalarFieldEnum = {
   deletedAt: 'deletedAt',
   deletedBy: 'deletedBy',
   deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  cycle: 'cycle',
+  amount: 'amount',
+  status: 'status',
+  date: 'date',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  status: 'status',
+  orderNote: 'orderNote',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  discount: 'discount',
+  totalAmount: 'totalAmount',
+  currency: 'currency',
+  shippingName: 'shippingName',
+  shippingPhone: 'shippingPhone',
+  shippingEmail: 'shippingEmail',
+  shippingAddress: 'shippingAddress',
+  shippingZip: 'shippingZip',
+  shippingCountryId: 'shippingCountryId',
+  shippingStateId: 'shippingStateId',
+  shippingCityId: 'shippingCityId',
+  billingName: 'billingName',
+  billingPhone: 'billingPhone',
+  billingEmail: 'billingEmail',
+  billingAddress: 'billingAddress',
+  billingZip: 'billingZip',
+  billingCountryId: 'billingCountryId',
+  billingStateId: 'billingStateId',
+  billingCityId: 'billingCityId',
+  paymentId: 'paymentId',
+  shippingApiResult: 'shippingApiResult',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  variantId: 'variantId',
+  quantity: 'quantity',
+  price: 'price',
+  total: 'total'
 };
 
 exports.Prisma.SortOrder = {
@@ -1127,6 +1127,30 @@ exports.Prisma.goodPincodeOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.supplierProductOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.supplierProductVariantOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.dropshipperProductOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.dropshipperProductVariantOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.paymentOrderByRelevanceFieldEnum = {
   transactionId: 'transactionId',
   cycle: 'cycle',
@@ -1151,30 +1175,6 @@ exports.Prisma.orderOrderByRelevanceFieldEnum = {
   billingEmail: 'billingEmail',
   billingAddress: 'billingAddress',
   billingZip: 'billingZip',
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.supplierProductOrderByRelevanceFieldEnum = {
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.supplierProductVariantOrderByRelevanceFieldEnum = {
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.dropshipperProductOrderByRelevanceFieldEnum = {
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.dropshipperProductVariantOrderByRelevanceFieldEnum = {
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1206,13 +1206,13 @@ exports.Prisma.ModelName = {
   highRto: 'highRto',
   badPincode: 'badPincode',
   goodPincode: 'goodPincode',
-  payment: 'payment',
-  order: 'order',
-  orderItem: 'orderItem',
   supplierProduct: 'supplierProduct',
   supplierProductVariant: 'supplierProductVariant',
   dropshipperProduct: 'dropshipperProduct',
-  dropshipperProductVariant: 'dropshipperProductVariant'
+  dropshipperProductVariant: 'dropshipperProductVariant',
+  payment: 'payment',
+  order: 'order',
+  orderItem: 'orderItem'
 };
 
 /**
