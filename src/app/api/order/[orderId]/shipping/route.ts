@@ -91,13 +91,27 @@ export async function POST(req: NextRequest) {
       }, { status: 500 });
     }
 
+    // Safe access with runtime checks
+    const result = placeOrderShippingResult.result;
+
+    const isObject = (val: unknown): val is Record<string, unknown> =>
+      val !== null && typeof val === 'object';
+
+    let message = 'Shipping started.';
+    let data = null;
+
+    if (isObject(result) && typeof result.responsemsg === 'string') {
+      message = result.responsemsg;
+      data = (result as any).data ?? null; // If you know the shape, replace any with proper type
+    }
+
     return NextResponse.json({
       status: true,
-      message: 'Shipping started.',
-      result: placeOrderShippingResult,
-      isHighRto: false,  // This tells frontend that the order is not in a high RTO zone
-      isBadPincode: false,  // This tells frontend that the order does not have a bad pincode
-    }, { status: 200 });  // 200 OK for successful operation
+      message,
+      result: data,
+      isHighRto: false,
+      isBadPincode: false,
+    }, { status: 200 });
 
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';

@@ -790,6 +790,7 @@ exports.Prisma.PaymentScalarFieldEnum = {
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   orderNumber: 'orderNumber',
+  awbNumber: 'awbNumber',
   status: 'status',
   orderNote: 'orderNote',
   subtotal: 'subtotal',
@@ -815,6 +816,9 @@ exports.Prisma.OrderScalarFieldEnum = {
   billingCityId: 'billingCityId',
   paymentId: 'paymentId',
   shippingApiResult: 'shippingApiResult',
+  complete: 'complete',
+  rtoDelivered: 'rtoDelivered',
+  lastRefreshAt: 'lastRefreshAt',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',
@@ -1228,6 +1232,7 @@ exports.Prisma.paymentOrderByRelevanceFieldEnum = {
 
 exports.Prisma.orderOrderByRelevanceFieldEnum = {
   orderNumber: 'orderNumber',
+  awbNumber: 'awbNumber',
   status: 'status',
   orderNote: 'orderNote',
   currency: 'currency',

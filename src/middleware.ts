@@ -78,6 +78,7 @@ export function middleware(req: NextRequest) {
                 { route: "/api/location/city", methods: ["GET"] },
                 { route: "/api/brand", methods: ["GET"] },
                 { route: "/api/category", methods: ["GET"] },
+                "api/order/shipping/status"
             ],
         },
         {

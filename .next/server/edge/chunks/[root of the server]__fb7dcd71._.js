@@ -188,7 +188,8 @@ function middleware(req) {
                     methods: [
                         "GET"
                     ]
-                }
+                },
+                "api/order/shipping/status"
             ]
         },
         {

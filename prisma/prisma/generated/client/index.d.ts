@@ -40309,6 +40309,7 @@ export namespace Prisma {
   export type OrderMinAggregateOutputType = {
     id: number | null
     orderNumber: string | null
+    awbNumber: string | null
     status: string | null
     orderNote: string | null
     subtotal: number | null
@@ -40333,6 +40334,9 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
+    complete: boolean | null
+    rtoDelivered: boolean | null
+    lastRefreshAt: Date | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -40347,6 +40351,7 @@ export namespace Prisma {
   export type OrderMaxAggregateOutputType = {
     id: number | null
     orderNumber: string | null
+    awbNumber: string | null
     status: string | null
     orderNote: string | null
     subtotal: number | null
@@ -40371,6 +40376,9 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
+    complete: boolean | null
+    rtoDelivered: boolean | null
+    lastRefreshAt: Date | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -40385,6 +40393,7 @@ export namespace Prisma {
   export type OrderCountAggregateOutputType = {
     id: number
     orderNumber: number
+    awbNumber: number
     status: number
     orderNote: number
     subtotal: number
@@ -40410,6 +40419,9 @@ export namespace Prisma {
     billingCityId: number
     paymentId: number
     shippingApiResult: number
+    complete: number
+    rtoDelivered: number
+    lastRefreshAt: number
     createdAt: number
     createdBy: number
     createdByRole: number
@@ -40462,6 +40474,7 @@ export namespace Prisma {
   export type OrderMinAggregateInputType = {
     id?: true
     orderNumber?: true
+    awbNumber?: true
     status?: true
     orderNote?: true
     subtotal?: true
@@ -40486,6 +40499,9 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
+    complete?: true
+    rtoDelivered?: true
+    lastRefreshAt?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -40500,6 +40516,7 @@ export namespace Prisma {
   export type OrderMaxAggregateInputType = {
     id?: true
     orderNumber?: true
+    awbNumber?: true
     status?: true
     orderNote?: true
     subtotal?: true
@@ -40524,6 +40541,9 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
+    complete?: true
+    rtoDelivered?: true
+    lastRefreshAt?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -40538,6 +40558,7 @@ export namespace Prisma {
   export type OrderCountAggregateInputType = {
     id?: true
     orderNumber?: true
+    awbNumber?: true
     status?: true
     orderNote?: true
     subtotal?: true
@@ -40563,6 +40584,9 @@ export namespace Prisma {
     billingCityId?: true
     paymentId?: true
     shippingApiResult?: true
+    complete?: true
+    rtoDelivered?: true
+    lastRefreshAt?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -40664,6 +40688,7 @@ export namespace Prisma {
   export type OrderGroupByOutputType = {
     id: number
     orderNumber: string
+    awbNumber: string | null
     status: string
     orderNote: string | null
     subtotal: number
@@ -40689,6 +40714,9 @@ export namespace Prisma {
     billingCityId: bigint | null
     paymentId: number | null
     shippingApiResult: JsonValue | null
+    complete: boolean
+    rtoDelivered: boolean
+    lastRefreshAt: Date | null
     createdAt: Date
     createdBy: number | null
     createdByRole: string | null
@@ -40722,6 +40750,7 @@ export namespace Prisma {
   export type orderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     orderNumber?: boolean
+    awbNumber?: boolean
     status?: boolean
     orderNote?: boolean
     subtotal?: boolean
@@ -40747,6 +40776,9 @@ export namespace Prisma {
     billingCityId?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -40772,6 +40804,7 @@ export namespace Prisma {
   export type orderSelectScalar = {
     id?: boolean
     orderNumber?: boolean
+    awbNumber?: boolean
     status?: boolean
     orderNote?: boolean
     subtotal?: boolean
@@ -40797,6 +40830,9 @@ export namespace Prisma {
     billingCityId?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -40808,7 +40844,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
+  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "complete" | "rtoDelivered" | "lastRefreshAt" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
   export type orderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shippingCountry?: boolean | order$shippingCountryArgs<ExtArgs>
     shippingState?: boolean | order$shippingStateArgs<ExtArgs>
@@ -40836,6 +40872,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       orderNumber: string
+      awbNumber: string | null
       status: string
       orderNote: string | null
       subtotal: number
@@ -40861,6 +40898,9 @@ export namespace Prisma {
       billingCityId: bigint | null
       paymentId: number | null
       shippingApiResult: Prisma.JsonValue | null
+      complete: boolean
+      rtoDelivered: boolean
+      lastRefreshAt: Date | null
       createdAt: Date
       createdBy: number | null
       createdByRole: string | null
@@ -41249,6 +41289,7 @@ export namespace Prisma {
   interface orderFieldRefs {
     readonly id: FieldRef<"order", 'Int'>
     readonly orderNumber: FieldRef<"order", 'String'>
+    readonly awbNumber: FieldRef<"order", 'String'>
     readonly status: FieldRef<"order", 'String'>
     readonly orderNote: FieldRef<"order", 'String'>
     readonly subtotal: FieldRef<"order", 'Float'>
@@ -41274,6 +41315,9 @@ export namespace Prisma {
     readonly billingCityId: FieldRef<"order", 'BigInt'>
     readonly paymentId: FieldRef<"order", 'Int'>
     readonly shippingApiResult: FieldRef<"order", 'Json'>
+    readonly complete: FieldRef<"order", 'Boolean'>
+    readonly rtoDelivered: FieldRef<"order", 'Boolean'>
+    readonly lastRefreshAt: FieldRef<"order", 'DateTime'>
     readonly createdAt: FieldRef<"order", 'DateTime'>
     readonly createdBy: FieldRef<"order", 'Int'>
     readonly createdByRole: FieldRef<"order", 'String'>
@@ -43630,6 +43674,7 @@ export namespace Prisma {
   export const OrderScalarFieldEnum: {
     id: 'id',
     orderNumber: 'orderNumber',
+    awbNumber: 'awbNumber',
     status: 'status',
     orderNote: 'orderNote',
     subtotal: 'subtotal',
@@ -43655,6 +43700,9 @@ export namespace Prisma {
     billingCityId: 'billingCityId',
     paymentId: 'paymentId',
     shippingApiResult: 'shippingApiResult',
+    complete: 'complete',
+    rtoDelivered: 'rtoDelivered',
+    lastRefreshAt: 'lastRefreshAt',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
@@ -44179,6 +44227,7 @@ export namespace Prisma {
 
   export const orderOrderByRelevanceFieldEnum: {
     orderNumber: 'orderNumber',
+    awbNumber: 'awbNumber',
     status: 'status',
     orderNote: 'orderNote',
     currency: 'currency',
@@ -48376,6 +48425,7 @@ export namespace Prisma {
     NOT?: orderWhereInput | orderWhereInput[]
     id?: IntFilter<"order"> | number
     orderNumber?: StringFilter<"order"> | string
+    awbNumber?: StringNullableFilter<"order"> | string | null
     status?: StringFilter<"order"> | string
     orderNote?: StringNullableFilter<"order"> | string | null
     subtotal?: FloatFilter<"order"> | number
@@ -48401,6 +48451,9 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    complete?: BoolFilter<"order"> | boolean
+    rtoDelivered?: BoolFilter<"order"> | boolean
+    lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
     createdBy?: IntNullableFilter<"order"> | number | null
     createdByRole?: StringNullableFilter<"order"> | string | null
@@ -48423,6 +48476,7 @@ export namespace Prisma {
   export type orderOrderByWithRelationInput = {
     id?: SortOrder
     orderNumber?: SortOrder
+    awbNumber?: SortOrderInput | SortOrder
     status?: SortOrder
     orderNote?: SortOrderInput | SortOrder
     subtotal?: SortOrder
@@ -48448,6 +48502,9 @@ export namespace Prisma {
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
+    complete?: SortOrder
+    rtoDelivered?: SortOrder
+    lastRefreshAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -48471,6 +48528,7 @@ export namespace Prisma {
   export type orderWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     orderNumber?: string
+    awbNumber?: string
     AND?: orderWhereInput | orderWhereInput[]
     OR?: orderWhereInput[]
     NOT?: orderWhereInput | orderWhereInput[]
@@ -48499,6 +48557,9 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    complete?: BoolFilter<"order"> | boolean
+    rtoDelivered?: BoolFilter<"order"> | boolean
+    lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
     createdBy?: IntNullableFilter<"order"> | number | null
     createdByRole?: StringNullableFilter<"order"> | string | null
@@ -48516,11 +48577,12 @@ export namespace Prisma {
     billingCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
     payment?: XOR<PaymentNullableScalarRelationFilter, paymentWhereInput> | null
     items?: OrderItemListRelationFilter
-  }, "id" | "orderNumber">
+  }, "id" | "orderNumber" | "awbNumber">
 
   export type orderOrderByWithAggregationInput = {
     id?: SortOrder
     orderNumber?: SortOrder
+    awbNumber?: SortOrderInput | SortOrder
     status?: SortOrder
     orderNote?: SortOrderInput | SortOrder
     subtotal?: SortOrder
@@ -48546,6 +48608,9 @@ export namespace Prisma {
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
+    complete?: SortOrder
+    rtoDelivered?: SortOrder
+    lastRefreshAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -48568,6 +48633,7 @@ export namespace Prisma {
     NOT?: orderScalarWhereWithAggregatesInput | orderScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"order"> | number
     orderNumber?: StringWithAggregatesFilter<"order"> | string
+    awbNumber?: StringNullableWithAggregatesFilter<"order"> | string | null
     status?: StringWithAggregatesFilter<"order"> | string
     orderNote?: StringNullableWithAggregatesFilter<"order"> | string | null
     subtotal?: FloatWithAggregatesFilter<"order"> | number
@@ -48593,6 +48659,9 @@ export namespace Prisma {
     billingCityId?: BigIntNullableWithAggregatesFilter<"order"> | bigint | number | null
     paymentId?: IntNullableWithAggregatesFilter<"order"> | number | null
     shippingApiResult?: JsonNullableWithAggregatesFilter<"order">
+    complete?: BoolWithAggregatesFilter<"order"> | boolean
+    rtoDelivered?: BoolWithAggregatesFilter<"order"> | boolean
+    lastRefreshAt?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"order"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"order"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"order"> | string | null
@@ -53453,6 +53522,7 @@ export namespace Prisma {
 
   export type orderCreateInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -53471,6 +53541,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53493,6 +53566,7 @@ export namespace Prisma {
   export type orderUncheckedCreateInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -53518,6 +53592,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53532,6 +53609,7 @@ export namespace Prisma {
 
   export type orderUpdateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -53550,6 +53628,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53572,6 +53653,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -53597,6 +53679,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53612,6 +53697,7 @@ export namespace Prisma {
   export type orderCreateManyInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -53637,6 +53723,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -53650,6 +53739,7 @@ export namespace Prisma {
 
   export type orderUpdateManyMutationInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -53668,6 +53758,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53682,6 +53775,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -53707,6 +53801,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57150,6 +57247,7 @@ export namespace Prisma {
   export type orderCountOrderByAggregateInput = {
     id?: SortOrder
     orderNumber?: SortOrder
+    awbNumber?: SortOrder
     status?: SortOrder
     orderNote?: SortOrder
     subtotal?: SortOrder
@@ -57175,6 +57273,9 @@ export namespace Prisma {
     billingCityId?: SortOrder
     paymentId?: SortOrder
     shippingApiResult?: SortOrder
+    complete?: SortOrder
+    rtoDelivered?: SortOrder
+    lastRefreshAt?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -57207,6 +57308,7 @@ export namespace Prisma {
   export type orderMaxOrderByAggregateInput = {
     id?: SortOrder
     orderNumber?: SortOrder
+    awbNumber?: SortOrder
     status?: SortOrder
     orderNote?: SortOrder
     subtotal?: SortOrder
@@ -57231,6 +57333,9 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
+    complete?: SortOrder
+    rtoDelivered?: SortOrder
+    lastRefreshAt?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -57245,6 +57350,7 @@ export namespace Prisma {
   export type orderMinOrderByAggregateInput = {
     id?: SortOrder
     orderNumber?: SortOrder
+    awbNumber?: SortOrder
     status?: SortOrder
     orderNote?: SortOrder
     subtotal?: SortOrder
@@ -57269,6 +57375,9 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
+    complete?: SortOrder
+    rtoDelivered?: SortOrder
+    lastRefreshAt?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -65329,6 +65438,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingCountryInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -65347,6 +65457,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -65368,6 +65481,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingCountryInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -65392,6 +65506,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -65416,6 +65533,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingCountryInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -65434,6 +65552,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -65455,6 +65576,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingCountryInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -65479,6 +65601,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -65902,6 +66027,7 @@ export namespace Prisma {
     NOT?: orderScalarWhereInput | orderScalarWhereInput[]
     id?: IntFilter<"order"> | number
     orderNumber?: StringFilter<"order"> | string
+    awbNumber?: StringNullableFilter<"order"> | string | null
     status?: StringFilter<"order"> | string
     orderNote?: StringNullableFilter<"order"> | string | null
     subtotal?: FloatFilter<"order"> | number
@@ -65927,6 +66053,9 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    complete?: BoolFilter<"order"> | boolean
+    rtoDelivered?: BoolFilter<"order"> | boolean
+    lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
     createdBy?: IntNullableFilter<"order"> | number | null
     createdByRole?: StringNullableFilter<"order"> | string | null
@@ -66398,6 +66527,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingStateInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -66416,6 +66546,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -66437,6 +66570,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingStateInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -66461,6 +66595,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -66485,6 +66622,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingStateInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -66503,6 +66641,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -66524,6 +66665,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingStateInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -66548,6 +66690,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -67238,6 +67383,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingCityInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -67256,6 +67402,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -67277,6 +67426,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingCityInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -67301,6 +67451,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -67325,6 +67478,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingCityInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -67343,6 +67497,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -67364,6 +67521,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingCityInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -67388,6 +67546,9 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -73158,6 +73319,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutPaymentInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -73176,6 +73338,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -73197,6 +73362,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutPaymentInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -73221,6 +73387,9 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -74102,6 +74271,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutItemsInput = {
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -74120,6 +74290,9 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -74141,6 +74314,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutItemsInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -74166,6 +74340,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -74283,6 +74460,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutItemsInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -74301,6 +74479,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74322,6 +74503,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -74347,6 +74529,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75479,6 +75664,7 @@ export namespace Prisma {
   export type orderCreateManyShippingCountryInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -75503,6 +75689,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -75517,6 +75706,7 @@ export namespace Prisma {
   export type orderCreateManyBillingCountryInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -75541,6 +75731,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -76321,6 +76514,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutShippingCountryInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76339,6 +76533,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76360,6 +76557,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutShippingCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76384,6 +76582,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76399,6 +76600,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutShippingCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76423,6 +76625,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76436,6 +76641,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutBillingCountryInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76454,6 +76660,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76475,6 +76684,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutBillingCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76499,6 +76709,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76514,6 +76727,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutBillingCountryInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -76538,6 +76752,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76774,6 +76991,7 @@ export namespace Prisma {
   export type orderCreateManyShippingStateInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -76798,6 +77016,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -76812,6 +77033,7 @@ export namespace Prisma {
   export type orderCreateManyBillingStateInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -76836,6 +77058,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -77272,6 +77497,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutShippingStateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77290,6 +77516,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77311,6 +77540,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutShippingStateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77335,6 +77565,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77350,6 +77583,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutShippingStateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77374,6 +77608,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77387,6 +77624,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutBillingStateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77405,6 +77643,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77426,6 +77667,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutBillingStateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77450,6 +77692,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77465,6 +77710,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutBillingStateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -77489,6 +77735,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77710,6 +77959,7 @@ export namespace Prisma {
   export type orderCreateManyShippingCityInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -77734,6 +77984,9 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -77748,6 +78001,7 @@ export namespace Prisma {
   export type orderCreateManyBillingCityInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -77772,6 +78026,9 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -78149,6 +78406,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutShippingCityInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78167,6 +78425,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78188,6 +78449,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutShippingCityInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78212,6 +78474,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78227,6 +78492,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutShippingCityInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78251,6 +78517,9 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78264,6 +78533,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutBillingCityInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78282,6 +78552,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78303,6 +78576,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutBillingCityInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78327,6 +78601,9 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78342,6 +78619,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutBillingCityInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -78366,6 +78644,9 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79893,6 +80174,7 @@ export namespace Prisma {
   export type orderCreateManyPaymentInput = {
     id?: number
     orderNumber: string
+    awbNumber?: string | null
     status?: string
     orderNote?: string | null
     subtotal?: number
@@ -79917,6 +80199,9 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: boolean
+    rtoDelivered?: boolean
+    lastRefreshAt?: Date | string | null
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -79930,6 +80215,7 @@ export namespace Prisma {
 
   export type orderUpdateWithoutPaymentInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -79948,6 +80234,9 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79969,6 +80258,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateWithoutPaymentInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -79993,6 +80283,9 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80008,6 +80301,7 @@ export namespace Prisma {
   export type orderUncheckedUpdateManyWithoutPaymentInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderNumber?: StringFieldUpdateOperationsInput | string
+    awbNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     orderNote?: NullableStringFieldUpdateOperationsInput | string | null
     subtotal?: FloatFieldUpdateOperationsInput | number
@@ -80032,6 +80326,9 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    complete?: BoolFieldUpdateOperationsInput | boolean
+    rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
+    lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null

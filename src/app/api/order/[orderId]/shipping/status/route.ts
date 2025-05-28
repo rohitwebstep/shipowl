@@ -39,6 +39,7 @@ export async function GET(req: NextRequest) {
         // Extract and return actual response JSON
         const shippingResult = await shippingResponse.json();
 
+        logMessage(`debug`, `shippingResult:`, shippingResult);
         if (!shippingResult?.status) {
             logMessage('warn', 'Order shipping status not found', { orderId });
             return NextResponse.json({ status: false, message: 'Order shipping status not found' }, { status: 404 });

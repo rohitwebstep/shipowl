@@ -49,6 +49,12 @@ export async function getOrderShippingStatus(orderId: number) {
         if (isShippingApiResult(order.shippingApiResult)) {
             orderAWBNumber = order.shippingApiResult.data.awb_number || '';
         }
+
+        if (!orderAWBNumber) {
+            orderAWBNumber = order.awbNumber || '';
+        }
+
+        logMessage(`debug`, `orderAWBNumber:`, orderAWBNumber);
     } catch (e) {
         logMessage('error', 'Error while extracting awb_number', { error: e });
         return NextResponse.json({ status: false, message: 'Invalid shipping data format' }, { status: 500 });
@@ -68,6 +74,8 @@ export async function getOrderShippingStatus(orderId: number) {
             headers: myHeaders,
             redirect: "follow"
         };
+
+        orderAWBNumber = '13630911339376';
 
         // 13630911339376
         const response = await fetch(`https://app.parcelx.in/api/v1/track_order?awb=${orderAWBNumber}`, requestOptions);

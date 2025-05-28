@@ -991,6 +991,7 @@ model payment {
 model order {
   id          Int     @id @default(autoincrement())
   orderNumber String  @unique
+  awbNumber   String? @unique
   status      String  @default("pending") // e.g., 'pending', 'processing', 'completed', 'cancelled'
   orderNote   String? // Optional customer note
 
@@ -1034,6 +1035,10 @@ model order {
   payment   payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
 
   shippingApiResult Json?
+
+  complete      Boolean   @default(false)
+  rtoDelivered  Boolean   @default(false)
+  lastRefreshAt DateTime? // nullable, updated when status refreshed
 
   // Meta / Audit Info
   createdAt     DateTime  @default(now())

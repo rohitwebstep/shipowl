@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { logMessage } from "@/utils/commonUtils";
 
 interface Order {
     id?: string;
@@ -304,13 +305,74 @@ export const updateShippingApiResultOfOrder = async (
             shippingApiJson,
         } = data;
 
+        const shippingApiObj = typeof shippingApiJson === 'string' ? JSON.parse(shippingApiJson) : shippingApiJson;
+        const awbNumber = shippingApiObj?.data?.awb_number || null;
+
         const order = await prisma.order.update({
             where: { id: orderId }, // Assuming 'id' is the correct primary key field
             data: {
+                awbNumber: awbNumber,
                 shippingApiResult: shippingApiJson,
                 updatedAt: new Date(),
                 updatedBy: updatedBy,
                 updatedByRole: updatedByRole,
+            },
+        });
+
+        return { status: true, order: serializeBigInt(order) };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return { status: false, message: "Error updating order" };
+    }
+};
+
+export const refreshShippingApiResultOfOrder = async (
+    orderId: number,
+    data: string
+) => {
+    try {
+        const order = await prisma.order.update({
+            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+            data: {
+                shippingApiResult: data,
+            },
+        });
+
+        return { status: true, order: serializeBigInt(order) };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return { status: false, message: "Error updating order" };
+    }
+};
+
+export const updateRTIDeliveredStatusOfOrder = async (
+    orderId: number,
+    status: boolean
+) => {
+    try {
+        const order = await prisma.order.update({
+            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+            data: {
+                rtoDelivered: status,
+            },
+        });
+
+        return { status: true, order: serializeBigInt(order) };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return { status: false, message: "Error updating order" };
+    }
+};
+
+export const updateAWBNuberOfOrder = async (
+    orderId: number,
+    awbNumber: string
+) => {
+    try {
+        const order = await prisma.order.update({
+            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+            data: {
+                awbNumber,
             },
         });
 
@@ -447,3 +509,51 @@ export const deleteOrder = async (id: number) => {
         return { status: false, message: "Error deleting order" };
     }
 };
+
+export async function refreshPendingOrdersShippingStatus() {
+    try {
+        // Calculate the cutoff date/time (1 hour ago)
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+        // Fetch orders with complete = false and lastRefreshAt <= oneHourAgo or null
+        const ordersToRefresh = await prisma.order.findMany({
+            where: {
+                complete: false,
+                AND: [
+                    {
+                        OR: [
+                            { lastRefreshAt: null },
+                            { lastRefreshAt: { lt: oneHourAgo } }
+                        ]
+                    }
+                ]
+            },
+            orderBy: {
+                lastRefreshAt: 'asc', // oldest first
+            },
+            take: 100,
+            select: {
+                id: true,
+                orderNumber: true,
+                lastRefreshAt: true,
+                shippingApiResult: true,
+            },
+        });
+
+        logMessage('info', `Found ${ordersToRefresh.length} orders to refresh shipping status`);
+
+        return {
+            status: true,
+            message: `Fetched ${ordersToRefresh.length} orders for shipping status refresh`,
+            orders: ordersToRefresh,
+        };
+
+    } catch (error) {
+        logMessage('error', 'Error fetching orders for shipping status refresh', { error });
+        return {
+            status: false,
+            message: 'Failed to fetch orders for shipping status refresh',
+            error: error instanceof Error ? error.message : 'Unknown error',
+        };
+    }
+}
