@@ -210,6 +210,7 @@ function middleware(req) {
         },
         {
             routes: [
+                "/api/dropshipper",
                 "/api/dropshipper/list",
                 "/api/dropshipper/auth/verify",
                 "/api/dropshipper/profile",

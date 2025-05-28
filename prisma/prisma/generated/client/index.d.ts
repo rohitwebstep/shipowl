@@ -24,6 +24,11 @@ export type emailConfig = $Result.DefaultSelection<Prisma.$emailConfigPayload>
  */
 export type admin = $Result.DefaultSelection<Prisma.$adminPayload>
 /**
+ * Model shopifyStore
+ * 
+ */
+export type shopifyStore = $Result.DefaultSelection<Prisma.$shopifyStorePayload>
+/**
  * Model companyDetail
  * 
  */
@@ -313,6 +318,16 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.adminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.shopifyStore`: Exposes CRUD operations for the **shopifyStore** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ShopifyStores
+    * const shopifyStores = await prisma.shopifyStore.findMany()
+    * ```
+    */
+  get shopifyStore(): Prisma.shopifyStoreDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.companyDetail`: Exposes CRUD operations for the **companyDetail** model.
@@ -1045,6 +1060,7 @@ export namespace Prisma {
   export const ModelName: {
     emailConfig: 'emailConfig',
     admin: 'admin',
+    shopifyStore: 'shopifyStore',
     companyDetail: 'companyDetail',
     bankAccount: 'bankAccount',
     bankAccountChangeRequest: 'bankAccountChangeRequest',
@@ -1092,7 +1108,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "adminStaffHasPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem"
+      modelProps: "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "adminStaffHasPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1225,6 +1241,72 @@ export namespace Prisma {
           count: {
             args: Prisma.adminCountArgs<ExtArgs>
             result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      shopifyStore: {
+        payload: Prisma.$shopifyStorePayload<ExtArgs>
+        fields: Prisma.shopifyStoreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.shopifyStoreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.shopifyStoreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          findFirst: {
+            args: Prisma.shopifyStoreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.shopifyStoreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          findMany: {
+            args: Prisma.shopifyStoreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>[]
+          }
+          create: {
+            args: Prisma.shopifyStoreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          createMany: {
+            args: Prisma.shopifyStoreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.shopifyStoreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          update: {
+            args: Prisma.shopifyStoreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          deleteMany: {
+            args: Prisma.shopifyStoreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.shopifyStoreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.shopifyStoreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$shopifyStorePayload>
+          }
+          aggregate: {
+            args: Prisma.ShopifyStoreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateShopifyStore>
+          }
+          groupBy: {
+            args: Prisma.shopifyStoreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ShopifyStoreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.shopifyStoreCountArgs<ExtArgs>
+            result: $Utils.Optional<ShopifyStoreCountAggregateOutputType> | number
           }
         }
       }
@@ -3228,6 +3310,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     emailConfig?: emailConfigOmit
     admin?: adminOmit
+    shopifyStore?: shopifyStoreOmit
     companyDetail?: companyDetailOmit
     bankAccount?: bankAccountOmit
     bankAccountChangeRequest?: bankAccountChangeRequestOmit
@@ -3351,6 +3434,7 @@ export namespace Prisma {
    */
 
   export type AdminCountOutputType = {
+    shopifyStores: number
     staff: number
     supplierProducts: number
     dropshipperProducts: number
@@ -3361,6 +3445,7 @@ export namespace Prisma {
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    shopifyStores?: boolean | AdminCountOutputTypeCountShopifyStoresArgs
     staff?: boolean | AdminCountOutputTypeCountStaffArgs
     supplierProducts?: boolean | AdminCountOutputTypeCountSupplierProductsArgs
     dropshipperProducts?: boolean | AdminCountOutputTypeCountDropshipperProductsArgs
@@ -3379,6 +3464,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the AdminCountOutputType
      */
     select?: AdminCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountShopifyStoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: shopifyStoreWhereInput
   }
 
   /**
@@ -5714,6 +5806,7 @@ export namespace Prisma {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
     permanentCountry?: boolean | admin$permanentCountryArgs<ExtArgs>
+    shopifyStores?: boolean | admin$shopifyStoresArgs<ExtArgs>
     staff?: boolean | admin$staffArgs<ExtArgs>
     companyDetail?: boolean | admin$companyDetailArgs<ExtArgs>
     bankAccount?: boolean | admin$bankAccountArgs<ExtArgs>
@@ -5768,6 +5861,7 @@ export namespace Prisma {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
     permanentCountry?: boolean | admin$permanentCountryArgs<ExtArgs>
+    shopifyStores?: boolean | admin$shopifyStoresArgs<ExtArgs>
     staff?: boolean | admin$staffArgs<ExtArgs>
     companyDetail?: boolean | admin$companyDetailArgs<ExtArgs>
     bankAccount?: boolean | admin$bankAccountArgs<ExtArgs>
@@ -5787,6 +5881,7 @@ export namespace Prisma {
       permanentCity: Prisma.$cityPayload<ExtArgs> | null
       permanentState: Prisma.$statePayload<ExtArgs> | null
       permanentCountry: Prisma.$countryPayload<ExtArgs> | null
+      shopifyStores: Prisma.$shopifyStorePayload<ExtArgs>[]
       staff: Prisma.$adminStaffPayload<ExtArgs>[]
       companyDetail: Prisma.$companyDetailPayload<ExtArgs> | null
       bankAccount: Prisma.$bankAccountPayload<ExtArgs> | null
@@ -6173,6 +6268,7 @@ export namespace Prisma {
     permanentCity<T extends admin$permanentCityArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentCityArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     permanentState<T extends admin$permanentStateArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentStateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     permanentCountry<T extends admin$permanentCountryArgs<ExtArgs> = {}>(args?: Subset<T, admin$permanentCountryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    shopifyStores<T extends admin$shopifyStoresArgs<ExtArgs> = {}>(args?: Subset<T, admin$shopifyStoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     staff<T extends admin$staffArgs<ExtArgs> = {}>(args?: Subset<T, admin$staffArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     companyDetail<T extends admin$companyDetailArgs<ExtArgs> = {}>(args?: Subset<T, admin$companyDetailArgs<ExtArgs>>): Prisma__companyDetailClient<$Result.GetResult<Prisma.$companyDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bankAccount<T extends admin$bankAccountArgs<ExtArgs> = {}>(args?: Subset<T, admin$bankAccountArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6643,6 +6739,30 @@ export namespace Prisma {
   }
 
   /**
+   * admin.shopifyStores
+   */
+  export type admin$shopifyStoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    where?: shopifyStoreWhereInput
+    orderBy?: shopifyStoreOrderByWithRelationInput | shopifyStoreOrderByWithRelationInput[]
+    cursor?: shopifyStoreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ShopifyStoreScalarFieldEnum | ShopifyStoreScalarFieldEnum[]
+  }
+
+  /**
    * admin.staff
    */
   export type admin$staffArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6883,6 +7003,1319 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: adminInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model shopifyStore
+   */
+
+  export type AggregateShopifyStore = {
+    _count: ShopifyStoreCountAggregateOutputType | null
+    _avg: ShopifyStoreAvgAggregateOutputType | null
+    _sum: ShopifyStoreSumAggregateOutputType | null
+    _min: ShopifyStoreMinAggregateOutputType | null
+    _max: ShopifyStoreMaxAggregateOutputType | null
+  }
+
+  export type ShopifyStoreAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    userId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ShopifyStoreSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    userId: number | null
+    createdBy: number | null
+    updatedBy: number | null
+    deletedBy: number | null
+  }
+
+  export type ShopifyStoreMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    shop: string | null
+    accessToken: string | null
+    apiKey: string | null
+    apiSecret: string | null
+    apiVersion: string | null
+    scopes: string | null
+    redirectUri: string | null
+    email: string | null
+    shopName: string | null
+    planName: string | null
+    country: string | null
+    shopOwner: string | null
+    domain: string | null
+    myshopifyDomain: string | null
+    province: string | null
+    city: string | null
+    phone: string | null
+    currency: string | null
+    moneyFormat: string | null
+    timezone: string | null
+    createdAtShop: Date | null
+    userId: number | null
+    verificationStatus: boolean | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ShopifyStoreMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    shop: string | null
+    accessToken: string | null
+    apiKey: string | null
+    apiSecret: string | null
+    apiVersion: string | null
+    scopes: string | null
+    redirectUri: string | null
+    email: string | null
+    shopName: string | null
+    planName: string | null
+    country: string | null
+    shopOwner: string | null
+    domain: string | null
+    myshopifyDomain: string | null
+    province: string | null
+    city: string | null
+    phone: string | null
+    currency: string | null
+    moneyFormat: string | null
+    timezone: string | null
+    createdAtShop: Date | null
+    userId: number | null
+    verificationStatus: boolean | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type ShopifyStoreCountAggregateOutputType = {
+    id: number
+    adminId: number
+    shop: number
+    accessToken: number
+    apiKey: number
+    apiSecret: number
+    apiVersion: number
+    scopes: number
+    redirectUri: number
+    email: number
+    shopName: number
+    planName: number
+    country: number
+    shopOwner: number
+    domain: number
+    myshopifyDomain: number
+    province: number
+    city: number
+    phone: number
+    currency: number
+    moneyFormat: number
+    timezone: number
+    createdAtShop: number
+    userId: number
+    verificationStatus: number
+    status: number
+    createdAt: number
+    createdBy: number
+    createdByRole: number
+    updatedAt: number
+    updatedBy: number
+    updatedByRole: number
+    deletedAt: number
+    deletedBy: number
+    deletedByRole: number
+    _all: number
+  }
+
+
+  export type ShopifyStoreAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+    userId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ShopifyStoreSumAggregateInputType = {
+    id?: true
+    adminId?: true
+    userId?: true
+    createdBy?: true
+    updatedBy?: true
+    deletedBy?: true
+  }
+
+  export type ShopifyStoreMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    shop?: true
+    accessToken?: true
+    apiKey?: true
+    apiSecret?: true
+    apiVersion?: true
+    scopes?: true
+    redirectUri?: true
+    email?: true
+    shopName?: true
+    planName?: true
+    country?: true
+    shopOwner?: true
+    domain?: true
+    myshopifyDomain?: true
+    province?: true
+    city?: true
+    phone?: true
+    currency?: true
+    moneyFormat?: true
+    timezone?: true
+    createdAtShop?: true
+    userId?: true
+    verificationStatus?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ShopifyStoreMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    shop?: true
+    accessToken?: true
+    apiKey?: true
+    apiSecret?: true
+    apiVersion?: true
+    scopes?: true
+    redirectUri?: true
+    email?: true
+    shopName?: true
+    planName?: true
+    country?: true
+    shopOwner?: true
+    domain?: true
+    myshopifyDomain?: true
+    province?: true
+    city?: true
+    phone?: true
+    currency?: true
+    moneyFormat?: true
+    timezone?: true
+    createdAtShop?: true
+    userId?: true
+    verificationStatus?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type ShopifyStoreCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    shop?: true
+    accessToken?: true
+    apiKey?: true
+    apiSecret?: true
+    apiVersion?: true
+    scopes?: true
+    redirectUri?: true
+    email?: true
+    shopName?: true
+    planName?: true
+    country?: true
+    shopOwner?: true
+    domain?: true
+    myshopifyDomain?: true
+    province?: true
+    city?: true
+    phone?: true
+    currency?: true
+    moneyFormat?: true
+    timezone?: true
+    createdAtShop?: true
+    userId?: true
+    verificationStatus?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+    _all?: true
+  }
+
+  export type ShopifyStoreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which shopifyStore to aggregate.
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of shopifyStores to fetch.
+     */
+    orderBy?: shopifyStoreOrderByWithRelationInput | shopifyStoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: shopifyStoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` shopifyStores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` shopifyStores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned shopifyStores
+    **/
+    _count?: true | ShopifyStoreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ShopifyStoreAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ShopifyStoreSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ShopifyStoreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ShopifyStoreMaxAggregateInputType
+  }
+
+  export type GetShopifyStoreAggregateType<T extends ShopifyStoreAggregateArgs> = {
+        [P in keyof T & keyof AggregateShopifyStore]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateShopifyStore[P]>
+      : GetScalarType<T[P], AggregateShopifyStore[P]>
+  }
+
+
+
+
+  export type shopifyStoreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: shopifyStoreWhereInput
+    orderBy?: shopifyStoreOrderByWithAggregationInput | shopifyStoreOrderByWithAggregationInput[]
+    by: ShopifyStoreScalarFieldEnum[] | ShopifyStoreScalarFieldEnum
+    having?: shopifyStoreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ShopifyStoreCountAggregateInputType | true
+    _avg?: ShopifyStoreAvgAggregateInputType
+    _sum?: ShopifyStoreSumAggregateInputType
+    _min?: ShopifyStoreMinAggregateInputType
+    _max?: ShopifyStoreMaxAggregateInputType
+  }
+
+  export type ShopifyStoreGroupByOutputType = {
+    id: number
+    adminId: number
+    shop: string
+    accessToken: string | null
+    apiKey: string
+    apiSecret: string | null
+    apiVersion: string | null
+    scopes: string
+    redirectUri: string | null
+    email: string | null
+    shopName: string | null
+    planName: string | null
+    country: string | null
+    shopOwner: string | null
+    domain: string | null
+    myshopifyDomain: string | null
+    province: string | null
+    city: string | null
+    phone: string | null
+    currency: string | null
+    moneyFormat: string | null
+    timezone: string | null
+    createdAtShop: Date | null
+    userId: number | null
+    verificationStatus: boolean
+    status: boolean
+    createdAt: Date
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+    _count: ShopifyStoreCountAggregateOutputType | null
+    _avg: ShopifyStoreAvgAggregateOutputType | null
+    _sum: ShopifyStoreSumAggregateOutputType | null
+    _min: ShopifyStoreMinAggregateOutputType | null
+    _max: ShopifyStoreMaxAggregateOutputType | null
+  }
+
+  type GetShopifyStoreGroupByPayload<T extends shopifyStoreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ShopifyStoreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ShopifyStoreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ShopifyStoreGroupByOutputType[P]>
+            : GetScalarType<T[P], ShopifyStoreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type shopifyStoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    shop?: boolean
+    accessToken?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiVersion?: boolean
+    scopes?: boolean
+    redirectUri?: boolean
+    email?: boolean
+    shopName?: boolean
+    planName?: boolean
+    country?: boolean
+    shopOwner?: boolean
+    domain?: boolean
+    myshopifyDomain?: boolean
+    province?: boolean
+    city?: boolean
+    phone?: boolean
+    currency?: boolean
+    moneyFormat?: boolean
+    timezone?: boolean
+    createdAtShop?: boolean
+    userId?: boolean
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["shopifyStore"]>
+
+
+
+  export type shopifyStoreSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    shop?: boolean
+    accessToken?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiVersion?: boolean
+    scopes?: boolean
+    redirectUri?: boolean
+    email?: boolean
+    shopName?: boolean
+    planName?: boolean
+    country?: boolean
+    shopOwner?: boolean
+    domain?: boolean
+    myshopifyDomain?: boolean
+    province?: boolean
+    city?: boolean
+    phone?: boolean
+    currency?: boolean
+    moneyFormat?: boolean
+    timezone?: boolean
+    createdAtShop?: boolean
+    userId?: boolean
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    createdByRole?: boolean
+    updatedAt?: boolean
+    updatedBy?: boolean
+    updatedByRole?: boolean
+    deletedAt?: boolean
+    deletedBy?: boolean
+    deletedByRole?: boolean
+  }
+
+  export type shopifyStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "shop" | "accessToken" | "apiKey" | "apiSecret" | "apiVersion" | "scopes" | "redirectUri" | "email" | "shopName" | "planName" | "country" | "shopOwner" | "domain" | "myshopifyDomain" | "province" | "city" | "phone" | "currency" | "moneyFormat" | "timezone" | "createdAtShop" | "userId" | "verificationStatus" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["shopifyStore"]>
+  export type shopifyStoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | adminDefaultArgs<ExtArgs>
+  }
+
+  export type $shopifyStorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "shopifyStore"
+    objects: {
+      admin: Prisma.$adminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      shop: string
+      accessToken: string | null
+      apiKey: string
+      apiSecret: string | null
+      apiVersion: string | null
+      scopes: string
+      redirectUri: string | null
+      email: string | null
+      shopName: string | null
+      planName: string | null
+      country: string | null
+      shopOwner: string | null
+      domain: string | null
+      myshopifyDomain: string | null
+      province: string | null
+      city: string | null
+      phone: string | null
+      currency: string | null
+      moneyFormat: string | null
+      timezone: string | null
+      createdAtShop: Date | null
+      userId: number | null
+      verificationStatus: boolean
+      status: boolean
+      createdAt: Date
+      createdBy: number | null
+      createdByRole: string | null
+      updatedAt: Date
+      updatedBy: number | null
+      updatedByRole: string | null
+      deletedAt: Date | null
+      deletedBy: number | null
+      deletedByRole: string | null
+    }, ExtArgs["result"]["shopifyStore"]>
+    composites: {}
+  }
+
+  type shopifyStoreGetPayload<S extends boolean | null | undefined | shopifyStoreDefaultArgs> = $Result.GetResult<Prisma.$shopifyStorePayload, S>
+
+  type shopifyStoreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<shopifyStoreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ShopifyStoreCountAggregateInputType | true
+    }
+
+  export interface shopifyStoreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['shopifyStore'], meta: { name: 'shopifyStore' } }
+    /**
+     * Find zero or one ShopifyStore that matches the filter.
+     * @param {shopifyStoreFindUniqueArgs} args - Arguments to find a ShopifyStore
+     * @example
+     * // Get one ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends shopifyStoreFindUniqueArgs>(args: SelectSubset<T, shopifyStoreFindUniqueArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ShopifyStore that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {shopifyStoreFindUniqueOrThrowArgs} args - Arguments to find a ShopifyStore
+     * @example
+     * // Get one ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends shopifyStoreFindUniqueOrThrowArgs>(args: SelectSubset<T, shopifyStoreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ShopifyStore that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreFindFirstArgs} args - Arguments to find a ShopifyStore
+     * @example
+     * // Get one ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends shopifyStoreFindFirstArgs>(args?: SelectSubset<T, shopifyStoreFindFirstArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ShopifyStore that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreFindFirstOrThrowArgs} args - Arguments to find a ShopifyStore
+     * @example
+     * // Get one ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends shopifyStoreFindFirstOrThrowArgs>(args?: SelectSubset<T, shopifyStoreFindFirstOrThrowArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ShopifyStores that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ShopifyStores
+     * const shopifyStores = await prisma.shopifyStore.findMany()
+     * 
+     * // Get first 10 ShopifyStores
+     * const shopifyStores = await prisma.shopifyStore.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const shopifyStoreWithIdOnly = await prisma.shopifyStore.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends shopifyStoreFindManyArgs>(args?: SelectSubset<T, shopifyStoreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ShopifyStore.
+     * @param {shopifyStoreCreateArgs} args - Arguments to create a ShopifyStore.
+     * @example
+     * // Create one ShopifyStore
+     * const ShopifyStore = await prisma.shopifyStore.create({
+     *   data: {
+     *     // ... data to create a ShopifyStore
+     *   }
+     * })
+     * 
+     */
+    create<T extends shopifyStoreCreateArgs>(args: SelectSubset<T, shopifyStoreCreateArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ShopifyStores.
+     * @param {shopifyStoreCreateManyArgs} args - Arguments to create many ShopifyStores.
+     * @example
+     * // Create many ShopifyStores
+     * const shopifyStore = await prisma.shopifyStore.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends shopifyStoreCreateManyArgs>(args?: SelectSubset<T, shopifyStoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ShopifyStore.
+     * @param {shopifyStoreDeleteArgs} args - Arguments to delete one ShopifyStore.
+     * @example
+     * // Delete one ShopifyStore
+     * const ShopifyStore = await prisma.shopifyStore.delete({
+     *   where: {
+     *     // ... filter to delete one ShopifyStore
+     *   }
+     * })
+     * 
+     */
+    delete<T extends shopifyStoreDeleteArgs>(args: SelectSubset<T, shopifyStoreDeleteArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ShopifyStore.
+     * @param {shopifyStoreUpdateArgs} args - Arguments to update one ShopifyStore.
+     * @example
+     * // Update one ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends shopifyStoreUpdateArgs>(args: SelectSubset<T, shopifyStoreUpdateArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ShopifyStores.
+     * @param {shopifyStoreDeleteManyArgs} args - Arguments to filter ShopifyStores to delete.
+     * @example
+     * // Delete a few ShopifyStores
+     * const { count } = await prisma.shopifyStore.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends shopifyStoreDeleteManyArgs>(args?: SelectSubset<T, shopifyStoreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ShopifyStores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ShopifyStores
+     * const shopifyStore = await prisma.shopifyStore.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends shopifyStoreUpdateManyArgs>(args: SelectSubset<T, shopifyStoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ShopifyStore.
+     * @param {shopifyStoreUpsertArgs} args - Arguments to update or create a ShopifyStore.
+     * @example
+     * // Update or create a ShopifyStore
+     * const shopifyStore = await prisma.shopifyStore.upsert({
+     *   create: {
+     *     // ... data to create a ShopifyStore
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ShopifyStore we want to update
+     *   }
+     * })
+     */
+    upsert<T extends shopifyStoreUpsertArgs>(args: SelectSubset<T, shopifyStoreUpsertArgs<ExtArgs>>): Prisma__shopifyStoreClient<$Result.GetResult<Prisma.$shopifyStorePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ShopifyStores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreCountArgs} args - Arguments to filter ShopifyStores to count.
+     * @example
+     * // Count the number of ShopifyStores
+     * const count = await prisma.shopifyStore.count({
+     *   where: {
+     *     // ... the filter for the ShopifyStores we want to count
+     *   }
+     * })
+    **/
+    count<T extends shopifyStoreCountArgs>(
+      args?: Subset<T, shopifyStoreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ShopifyStoreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ShopifyStore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopifyStoreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ShopifyStoreAggregateArgs>(args: Subset<T, ShopifyStoreAggregateArgs>): Prisma.PrismaPromise<GetShopifyStoreAggregateType<T>>
+
+    /**
+     * Group by ShopifyStore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {shopifyStoreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends shopifyStoreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: shopifyStoreGroupByArgs['orderBy'] }
+        : { orderBy?: shopifyStoreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, shopifyStoreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShopifyStoreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the shopifyStore model
+   */
+  readonly fields: shopifyStoreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for shopifyStore.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__shopifyStoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the shopifyStore model
+   */
+  interface shopifyStoreFieldRefs {
+    readonly id: FieldRef<"shopifyStore", 'Int'>
+    readonly adminId: FieldRef<"shopifyStore", 'Int'>
+    readonly shop: FieldRef<"shopifyStore", 'String'>
+    readonly accessToken: FieldRef<"shopifyStore", 'String'>
+    readonly apiKey: FieldRef<"shopifyStore", 'String'>
+    readonly apiSecret: FieldRef<"shopifyStore", 'String'>
+    readonly apiVersion: FieldRef<"shopifyStore", 'String'>
+    readonly scopes: FieldRef<"shopifyStore", 'String'>
+    readonly redirectUri: FieldRef<"shopifyStore", 'String'>
+    readonly email: FieldRef<"shopifyStore", 'String'>
+    readonly shopName: FieldRef<"shopifyStore", 'String'>
+    readonly planName: FieldRef<"shopifyStore", 'String'>
+    readonly country: FieldRef<"shopifyStore", 'String'>
+    readonly shopOwner: FieldRef<"shopifyStore", 'String'>
+    readonly domain: FieldRef<"shopifyStore", 'String'>
+    readonly myshopifyDomain: FieldRef<"shopifyStore", 'String'>
+    readonly province: FieldRef<"shopifyStore", 'String'>
+    readonly city: FieldRef<"shopifyStore", 'String'>
+    readonly phone: FieldRef<"shopifyStore", 'String'>
+    readonly currency: FieldRef<"shopifyStore", 'String'>
+    readonly moneyFormat: FieldRef<"shopifyStore", 'String'>
+    readonly timezone: FieldRef<"shopifyStore", 'String'>
+    readonly createdAtShop: FieldRef<"shopifyStore", 'DateTime'>
+    readonly userId: FieldRef<"shopifyStore", 'Int'>
+    readonly verificationStatus: FieldRef<"shopifyStore", 'Boolean'>
+    readonly status: FieldRef<"shopifyStore", 'Boolean'>
+    readonly createdAt: FieldRef<"shopifyStore", 'DateTime'>
+    readonly createdBy: FieldRef<"shopifyStore", 'Int'>
+    readonly createdByRole: FieldRef<"shopifyStore", 'String'>
+    readonly updatedAt: FieldRef<"shopifyStore", 'DateTime'>
+    readonly updatedBy: FieldRef<"shopifyStore", 'Int'>
+    readonly updatedByRole: FieldRef<"shopifyStore", 'String'>
+    readonly deletedAt: FieldRef<"shopifyStore", 'DateTime'>
+    readonly deletedBy: FieldRef<"shopifyStore", 'Int'>
+    readonly deletedByRole: FieldRef<"shopifyStore", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * shopifyStore findUnique
+   */
+  export type shopifyStoreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter, which shopifyStore to fetch.
+     */
+    where: shopifyStoreWhereUniqueInput
+  }
+
+  /**
+   * shopifyStore findUniqueOrThrow
+   */
+  export type shopifyStoreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter, which shopifyStore to fetch.
+     */
+    where: shopifyStoreWhereUniqueInput
+  }
+
+  /**
+   * shopifyStore findFirst
+   */
+  export type shopifyStoreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter, which shopifyStore to fetch.
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of shopifyStores to fetch.
+     */
+    orderBy?: shopifyStoreOrderByWithRelationInput | shopifyStoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for shopifyStores.
+     */
+    cursor?: shopifyStoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` shopifyStores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` shopifyStores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of shopifyStores.
+     */
+    distinct?: ShopifyStoreScalarFieldEnum | ShopifyStoreScalarFieldEnum[]
+  }
+
+  /**
+   * shopifyStore findFirstOrThrow
+   */
+  export type shopifyStoreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter, which shopifyStore to fetch.
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of shopifyStores to fetch.
+     */
+    orderBy?: shopifyStoreOrderByWithRelationInput | shopifyStoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for shopifyStores.
+     */
+    cursor?: shopifyStoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` shopifyStores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` shopifyStores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of shopifyStores.
+     */
+    distinct?: ShopifyStoreScalarFieldEnum | ShopifyStoreScalarFieldEnum[]
+  }
+
+  /**
+   * shopifyStore findMany
+   */
+  export type shopifyStoreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter, which shopifyStores to fetch.
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of shopifyStores to fetch.
+     */
+    orderBy?: shopifyStoreOrderByWithRelationInput | shopifyStoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing shopifyStores.
+     */
+    cursor?: shopifyStoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` shopifyStores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` shopifyStores.
+     */
+    skip?: number
+    distinct?: ShopifyStoreScalarFieldEnum | ShopifyStoreScalarFieldEnum[]
+  }
+
+  /**
+   * shopifyStore create
+   */
+  export type shopifyStoreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a shopifyStore.
+     */
+    data: XOR<shopifyStoreCreateInput, shopifyStoreUncheckedCreateInput>
+  }
+
+  /**
+   * shopifyStore createMany
+   */
+  export type shopifyStoreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many shopifyStores.
+     */
+    data: shopifyStoreCreateManyInput | shopifyStoreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * shopifyStore update
+   */
+  export type shopifyStoreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a shopifyStore.
+     */
+    data: XOR<shopifyStoreUpdateInput, shopifyStoreUncheckedUpdateInput>
+    /**
+     * Choose, which shopifyStore to update.
+     */
+    where: shopifyStoreWhereUniqueInput
+  }
+
+  /**
+   * shopifyStore updateMany
+   */
+  export type shopifyStoreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update shopifyStores.
+     */
+    data: XOR<shopifyStoreUpdateManyMutationInput, shopifyStoreUncheckedUpdateManyInput>
+    /**
+     * Filter which shopifyStores to update
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * Limit how many shopifyStores to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * shopifyStore upsert
+   */
+  export type shopifyStoreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the shopifyStore to update in case it exists.
+     */
+    where: shopifyStoreWhereUniqueInput
+    /**
+     * In case the shopifyStore found by the `where` argument doesn't exist, create a new shopifyStore with this data.
+     */
+    create: XOR<shopifyStoreCreateInput, shopifyStoreUncheckedCreateInput>
+    /**
+     * In case the shopifyStore was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<shopifyStoreUpdateInput, shopifyStoreUncheckedUpdateInput>
+  }
+
+  /**
+   * shopifyStore delete
+   */
+  export type shopifyStoreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
+    /**
+     * Filter which shopifyStore to delete.
+     */
+    where: shopifyStoreWhereUniqueInput
+  }
+
+  /**
+   * shopifyStore deleteMany
+   */
+  export type shopifyStoreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which shopifyStores to delete
+     */
+    where?: shopifyStoreWhereInput
+    /**
+     * Limit how many shopifyStores to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * shopifyStore without action
+   */
+  export type shopifyStoreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the shopifyStore
+     */
+    select?: shopifyStoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the shopifyStore
+     */
+    omit?: shopifyStoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: shopifyStoreInclude<ExtArgs> | null
   }
 
 
@@ -40372,8 +41805,8 @@ export namespace Prisma {
   export type OrderItemAvgAggregateOutputType = {
     id: number | null
     orderId: number | null
-    productId: number | null
-    variantId: number | null
+    dropshipperProductId: number | null
+    dropshipperProductVariantId: number | null
     quantity: number | null
     price: number | null
     total: number | null
@@ -40382,8 +41815,8 @@ export namespace Prisma {
   export type OrderItemSumAggregateOutputType = {
     id: number | null
     orderId: number | null
-    productId: number | null
-    variantId: number | null
+    dropshipperProductId: number | null
+    dropshipperProductVariantId: number | null
     quantity: number | null
     price: number | null
     total: number | null
@@ -40392,8 +41825,8 @@ export namespace Prisma {
   export type OrderItemMinAggregateOutputType = {
     id: number | null
     orderId: number | null
-    productId: number | null
-    variantId: number | null
+    dropshipperProductId: number | null
+    dropshipperProductVariantId: number | null
     quantity: number | null
     price: number | null
     total: number | null
@@ -40402,8 +41835,8 @@ export namespace Prisma {
   export type OrderItemMaxAggregateOutputType = {
     id: number | null
     orderId: number | null
-    productId: number | null
-    variantId: number | null
+    dropshipperProductId: number | null
+    dropshipperProductVariantId: number | null
     quantity: number | null
     price: number | null
     total: number | null
@@ -40412,8 +41845,8 @@ export namespace Prisma {
   export type OrderItemCountAggregateOutputType = {
     id: number
     orderId: number
-    productId: number
-    variantId: number
+    dropshipperProductId: number
+    dropshipperProductVariantId: number
     quantity: number
     price: number
     total: number
@@ -40424,8 +41857,8 @@ export namespace Prisma {
   export type OrderItemAvgAggregateInputType = {
     id?: true
     orderId?: true
-    productId?: true
-    variantId?: true
+    dropshipperProductId?: true
+    dropshipperProductVariantId?: true
     quantity?: true
     price?: true
     total?: true
@@ -40434,8 +41867,8 @@ export namespace Prisma {
   export type OrderItemSumAggregateInputType = {
     id?: true
     orderId?: true
-    productId?: true
-    variantId?: true
+    dropshipperProductId?: true
+    dropshipperProductVariantId?: true
     quantity?: true
     price?: true
     total?: true
@@ -40444,8 +41877,8 @@ export namespace Prisma {
   export type OrderItemMinAggregateInputType = {
     id?: true
     orderId?: true
-    productId?: true
-    variantId?: true
+    dropshipperProductId?: true
+    dropshipperProductVariantId?: true
     quantity?: true
     price?: true
     total?: true
@@ -40454,8 +41887,8 @@ export namespace Prisma {
   export type OrderItemMaxAggregateInputType = {
     id?: true
     orderId?: true
-    productId?: true
-    variantId?: true
+    dropshipperProductId?: true
+    dropshipperProductVariantId?: true
     quantity?: true
     price?: true
     total?: true
@@ -40464,8 +41897,8 @@ export namespace Prisma {
   export type OrderItemCountAggregateInputType = {
     id?: true
     orderId?: true
-    productId?: true
-    variantId?: true
+    dropshipperProductId?: true
+    dropshipperProductVariantId?: true
     quantity?: true
     price?: true
     total?: true
@@ -40561,8 +41994,8 @@ export namespace Prisma {
   export type OrderItemGroupByOutputType = {
     id: number
     orderId: number
-    productId: number | null
-    variantId: number | null
+    dropshipperProductId: number | null
+    dropshipperProductVariantId: number | null
     quantity: number
     price: number
     total: number
@@ -40590,8 +42023,8 @@ export namespace Prisma {
   export type orderItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     orderId?: boolean
-    productId?: boolean
-    variantId?: boolean
+    dropshipperProductId?: boolean
+    dropshipperProductVariantId?: boolean
     quantity?: boolean
     price?: boolean
     total?: boolean
@@ -40605,14 +42038,14 @@ export namespace Prisma {
   export type orderItemSelectScalar = {
     id?: boolean
     orderId?: boolean
-    productId?: boolean
-    variantId?: boolean
+    dropshipperProductId?: boolean
+    dropshipperProductVariantId?: boolean
     quantity?: boolean
     price?: boolean
     total?: boolean
   }
 
-  export type orderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "variantId" | "quantity" | "price" | "total", ExtArgs["result"]["orderItem"]>
+  export type orderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "dropshipperProductId" | "dropshipperProductVariantId" | "quantity" | "price" | "total", ExtArgs["result"]["orderItem"]>
   export type orderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | orderDefaultArgs<ExtArgs>
     product?: boolean | orderItem$productArgs<ExtArgs>
@@ -40629,8 +42062,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       orderId: number
-      productId: number | null
-      variantId: number | null
+      dropshipperProductId: number | null
+      dropshipperProductVariantId: number | null
       quantity: number
       price: number
       total: number
@@ -41008,8 +42441,8 @@ export namespace Prisma {
   interface orderItemFieldRefs {
     readonly id: FieldRef<"orderItem", 'Int'>
     readonly orderId: FieldRef<"orderItem", 'Int'>
-    readonly productId: FieldRef<"orderItem", 'Int'>
-    readonly variantId: FieldRef<"orderItem", 'Int'>
+    readonly dropshipperProductId: FieldRef<"orderItem", 'Int'>
+    readonly dropshipperProductVariantId: FieldRef<"orderItem", 'Int'>
     readonly quantity: FieldRef<"orderItem", 'Int'>
     readonly price: FieldRef<"orderItem", 'Float'>
     readonly total: FieldRef<"orderItem", 'Float'>
@@ -41487,6 +42920,47 @@ export namespace Prisma {
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+  export const ShopifyStoreScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    shop: 'shop',
+    accessToken: 'accessToken',
+    apiKey: 'apiKey',
+    apiSecret: 'apiSecret',
+    apiVersion: 'apiVersion',
+    scopes: 'scopes',
+    redirectUri: 'redirectUri',
+    email: 'email',
+    shopName: 'shopName',
+    planName: 'planName',
+    country: 'country',
+    shopOwner: 'shopOwner',
+    domain: 'domain',
+    myshopifyDomain: 'myshopifyDomain',
+    province: 'province',
+    city: 'city',
+    phone: 'phone',
+    currency: 'currency',
+    moneyFormat: 'moneyFormat',
+    timezone: 'timezone',
+    createdAtShop: 'createdAtShop',
+    userId: 'userId',
+    verificationStatus: 'verificationStatus',
+    status: 'status',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    createdByRole: 'createdByRole',
+    updatedAt: 'updatedAt',
+    updatedBy: 'updatedBy',
+    updatedByRole: 'updatedByRole',
+    deletedAt: 'deletedAt',
+    deletedBy: 'deletedBy',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type ShopifyStoreScalarFieldEnum = (typeof ShopifyStoreScalarFieldEnum)[keyof typeof ShopifyStoreScalarFieldEnum]
 
 
   export const CompanyDetailScalarFieldEnum: {
@@ -42186,8 +43660,8 @@ export namespace Prisma {
   export const OrderItemScalarFieldEnum: {
     id: 'id',
     orderId: 'orderId',
-    productId: 'productId',
-    variantId: 'variantId',
+    dropshipperProductId: 'dropshipperProductId',
+    dropshipperProductVariantId: 'dropshipperProductVariantId',
     quantity: 'quantity',
     price: 'price',
     total: 'total'
@@ -42260,6 +43734,35 @@ export namespace Prisma {
   };
 
   export type adminOrderByRelevanceFieldEnum = (typeof adminOrderByRelevanceFieldEnum)[keyof typeof adminOrderByRelevanceFieldEnum]
+
+
+  export const shopifyStoreOrderByRelevanceFieldEnum: {
+    shop: 'shop',
+    accessToken: 'accessToken',
+    apiKey: 'apiKey',
+    apiSecret: 'apiSecret',
+    apiVersion: 'apiVersion',
+    scopes: 'scopes',
+    redirectUri: 'redirectUri',
+    email: 'email',
+    shopName: 'shopName',
+    planName: 'planName',
+    country: 'country',
+    shopOwner: 'shopOwner',
+    domain: 'domain',
+    myshopifyDomain: 'myshopifyDomain',
+    province: 'province',
+    city: 'city',
+    phone: 'phone',
+    currency: 'currency',
+    moneyFormat: 'moneyFormat',
+    timezone: 'timezone',
+    createdByRole: 'createdByRole',
+    updatedByRole: 'updatedByRole',
+    deletedByRole: 'deletedByRole'
+  };
+
+  export type shopifyStoreOrderByRelevanceFieldEnum = (typeof shopifyStoreOrderByRelevanceFieldEnum)[keyof typeof shopifyStoreOrderByRelevanceFieldEnum]
 
 
   export const companyDetailOrderByRelevanceFieldEnum: {
@@ -42916,6 +44419,7 @@ export namespace Prisma {
     permanentCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
     permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
     permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    shopifyStores?: ShopifyStoreListRelationFilter
     staff?: AdminStaffListRelationFilter
     companyDetail?: XOR<CompanyDetailNullableScalarRelationFilter, companyDetailWhereInput> | null
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
@@ -42963,6 +44467,7 @@ export namespace Prisma {
     permanentCity?: cityOrderByWithRelationInput
     permanentState?: stateOrderByWithRelationInput
     permanentCountry?: countryOrderByWithRelationInput
+    shopifyStores?: shopifyStoreOrderByRelationAggregateInput
     staff?: adminStaffOrderByRelationAggregateInput
     companyDetail?: companyDetailOrderByWithRelationInput
     bankAccount?: bankAccountOrderByWithRelationInput
@@ -43014,6 +44519,7 @@ export namespace Prisma {
     permanentCity?: XOR<CityNullableScalarRelationFilter, cityWhereInput> | null
     permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
     permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
+    shopifyStores?: ShopifyStoreListRelationFilter
     staff?: AdminStaffListRelationFilter
     companyDetail?: XOR<CompanyDetailNullableScalarRelationFilter, companyDetailWhereInput> | null
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
@@ -43100,6 +44606,214 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"admin"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"admin"> | string | null
+  }
+
+  export type shopifyStoreWhereInput = {
+    AND?: shopifyStoreWhereInput | shopifyStoreWhereInput[]
+    OR?: shopifyStoreWhereInput[]
+    NOT?: shopifyStoreWhereInput | shopifyStoreWhereInput[]
+    id?: IntFilter<"shopifyStore"> | number
+    adminId?: IntFilter<"shopifyStore"> | number
+    shop?: StringFilter<"shopifyStore"> | string
+    accessToken?: StringNullableFilter<"shopifyStore"> | string | null
+    apiKey?: StringFilter<"shopifyStore"> | string
+    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
+    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
+    scopes?: StringFilter<"shopifyStore"> | string
+    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
+    email?: StringNullableFilter<"shopifyStore"> | string | null
+    shopName?: StringNullableFilter<"shopifyStore"> | string | null
+    planName?: StringNullableFilter<"shopifyStore"> | string | null
+    country?: StringNullableFilter<"shopifyStore"> | string | null
+    shopOwner?: StringNullableFilter<"shopifyStore"> | string | null
+    domain?: StringNullableFilter<"shopifyStore"> | string | null
+    myshopifyDomain?: StringNullableFilter<"shopifyStore"> | string | null
+    province?: StringNullableFilter<"shopifyStore"> | string | null
+    city?: StringNullableFilter<"shopifyStore"> | string | null
+    phone?: StringNullableFilter<"shopifyStore"> | string | null
+    currency?: StringNullableFilter<"shopifyStore"> | string | null
+    moneyFormat?: StringNullableFilter<"shopifyStore"> | string | null
+    timezone?: StringNullableFilter<"shopifyStore"> | string | null
+    createdAtShop?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    userId?: IntNullableFilter<"shopifyStore"> | number | null
+    verificationStatus?: BoolFilter<"shopifyStore"> | boolean
+    status?: BoolFilter<"shopifyStore"> | boolean
+    createdAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    createdBy?: IntNullableFilter<"shopifyStore"> | number | null
+    createdByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    updatedAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    updatedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    updatedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    deletedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    deletedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }
+
+  export type shopifyStoreOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    shop?: SortOrder
+    accessToken?: SortOrderInput | SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrderInput | SortOrder
+    apiVersion?: SortOrderInput | SortOrder
+    scopes?: SortOrder
+    redirectUri?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    shopName?: SortOrderInput | SortOrder
+    planName?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    shopOwner?: SortOrderInput | SortOrder
+    domain?: SortOrderInput | SortOrder
+    myshopifyDomain?: SortOrderInput | SortOrder
+    province?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    moneyFormat?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
+    createdAtShop?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    admin?: adminOrderByWithRelationInput
+    _relevance?: shopifyStoreOrderByRelevanceInput
+  }
+
+  export type shopifyStoreWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    shop?: string
+    AND?: shopifyStoreWhereInput | shopifyStoreWhereInput[]
+    OR?: shopifyStoreWhereInput[]
+    NOT?: shopifyStoreWhereInput | shopifyStoreWhereInput[]
+    adminId?: IntFilter<"shopifyStore"> | number
+    accessToken?: StringNullableFilter<"shopifyStore"> | string | null
+    apiKey?: StringFilter<"shopifyStore"> | string
+    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
+    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
+    scopes?: StringFilter<"shopifyStore"> | string
+    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
+    email?: StringNullableFilter<"shopifyStore"> | string | null
+    shopName?: StringNullableFilter<"shopifyStore"> | string | null
+    planName?: StringNullableFilter<"shopifyStore"> | string | null
+    country?: StringNullableFilter<"shopifyStore"> | string | null
+    shopOwner?: StringNullableFilter<"shopifyStore"> | string | null
+    domain?: StringNullableFilter<"shopifyStore"> | string | null
+    myshopifyDomain?: StringNullableFilter<"shopifyStore"> | string | null
+    province?: StringNullableFilter<"shopifyStore"> | string | null
+    city?: StringNullableFilter<"shopifyStore"> | string | null
+    phone?: StringNullableFilter<"shopifyStore"> | string | null
+    currency?: StringNullableFilter<"shopifyStore"> | string | null
+    moneyFormat?: StringNullableFilter<"shopifyStore"> | string | null
+    timezone?: StringNullableFilter<"shopifyStore"> | string | null
+    createdAtShop?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    userId?: IntNullableFilter<"shopifyStore"> | number | null
+    verificationStatus?: BoolFilter<"shopifyStore"> | boolean
+    status?: BoolFilter<"shopifyStore"> | boolean
+    createdAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    createdBy?: IntNullableFilter<"shopifyStore"> | number | null
+    createdByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    updatedAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    updatedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    updatedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    deletedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    deletedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
+  }, "id" | "shop">
+
+  export type shopifyStoreOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    shop?: SortOrder
+    accessToken?: SortOrderInput | SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrderInput | SortOrder
+    apiVersion?: SortOrderInput | SortOrder
+    scopes?: SortOrder
+    redirectUri?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    shopName?: SortOrderInput | SortOrder
+    planName?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    shopOwner?: SortOrderInput | SortOrder
+    domain?: SortOrderInput | SortOrder
+    myshopifyDomain?: SortOrderInput | SortOrder
+    province?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    moneyFormat?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
+    createdAtShop?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    createdByRole?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrderInput | SortOrder
+    updatedByRole?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedBy?: SortOrderInput | SortOrder
+    deletedByRole?: SortOrderInput | SortOrder
+    _count?: shopifyStoreCountOrderByAggregateInput
+    _avg?: shopifyStoreAvgOrderByAggregateInput
+    _max?: shopifyStoreMaxOrderByAggregateInput
+    _min?: shopifyStoreMinOrderByAggregateInput
+    _sum?: shopifyStoreSumOrderByAggregateInput
+  }
+
+  export type shopifyStoreScalarWhereWithAggregatesInput = {
+    AND?: shopifyStoreScalarWhereWithAggregatesInput | shopifyStoreScalarWhereWithAggregatesInput[]
+    OR?: shopifyStoreScalarWhereWithAggregatesInput[]
+    NOT?: shopifyStoreScalarWhereWithAggregatesInput | shopifyStoreScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"shopifyStore"> | number
+    adminId?: IntWithAggregatesFilter<"shopifyStore"> | number
+    shop?: StringWithAggregatesFilter<"shopifyStore"> | string
+    accessToken?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    apiKey?: StringWithAggregatesFilter<"shopifyStore"> | string
+    apiSecret?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    apiVersion?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    scopes?: StringWithAggregatesFilter<"shopifyStore"> | string
+    redirectUri?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    email?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    shopName?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    planName?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    country?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    shopOwner?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    domain?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    myshopifyDomain?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    province?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    city?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    currency?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    moneyFormat?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    timezone?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    createdAtShop?: DateTimeNullableWithAggregatesFilter<"shopifyStore"> | Date | string | null
+    userId?: IntNullableWithAggregatesFilter<"shopifyStore"> | number | null
+    verificationStatus?: BoolWithAggregatesFilter<"shopifyStore"> | boolean
+    status?: BoolWithAggregatesFilter<"shopifyStore"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"shopifyStore"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"shopifyStore"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"shopifyStore"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"shopifyStore"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"shopifyStore"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"shopifyStore"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
   }
 
   export type companyDetailWhereInput = {
@@ -46878,8 +48592,8 @@ export namespace Prisma {
     NOT?: orderItemWhereInput | orderItemWhereInput[]
     id?: IntFilter<"orderItem"> | number
     orderId?: IntFilter<"orderItem"> | number
-    productId?: IntNullableFilter<"orderItem"> | number | null
-    variantId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductVariantId?: IntNullableFilter<"orderItem"> | number | null
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
@@ -46891,8 +48605,8 @@ export namespace Prisma {
   export type orderItemOrderByWithRelationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrderInput | SortOrder
-    variantId?: SortOrderInput | SortOrder
+    dropshipperProductId?: SortOrderInput | SortOrder
+    dropshipperProductVariantId?: SortOrderInput | SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -46907,8 +48621,8 @@ export namespace Prisma {
     OR?: orderItemWhereInput[]
     NOT?: orderItemWhereInput | orderItemWhereInput[]
     orderId?: IntFilter<"orderItem"> | number
-    productId?: IntNullableFilter<"orderItem"> | number | null
-    variantId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductVariantId?: IntNullableFilter<"orderItem"> | number | null
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
@@ -46920,8 +48634,8 @@ export namespace Prisma {
   export type orderItemOrderByWithAggregationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrderInput | SortOrder
-    variantId?: SortOrderInput | SortOrder
+    dropshipperProductId?: SortOrderInput | SortOrder
+    dropshipperProductVariantId?: SortOrderInput | SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -46938,8 +48652,8 @@ export namespace Prisma {
     NOT?: orderItemScalarWhereWithAggregatesInput | orderItemScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"orderItem"> | number
     orderId?: IntWithAggregatesFilter<"orderItem"> | number
-    productId?: IntNullableWithAggregatesFilter<"orderItem"> | number | null
-    variantId?: IntNullableWithAggregatesFilter<"orderItem"> | number | null
+    dropshipperProductId?: IntNullableWithAggregatesFilter<"orderItem"> | number | null
+    dropshipperProductVariantId?: IntNullableWithAggregatesFilter<"orderItem"> | number | null
     quantity?: IntWithAggregatesFilter<"orderItem"> | number
     price?: FloatWithAggregatesFilter<"orderItem"> | number
     total?: FloatWithAggregatesFilter<"orderItem"> | number
@@ -47137,6 +48851,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -47181,6 +48896,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -47224,6 +48940,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -47268,6 +48985,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -47367,6 +49085,268 @@ export namespace Prisma {
     pr_token?: NullableStringFieldUpdateOperationsInput | string | null
     pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type shopifyStoreCreateInput = {
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    admin: adminCreateNestedOneWithoutShopifyStoresInput
+  }
+
+  export type shopifyStoreUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type shopifyStoreUpdateInput = {
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    admin?: adminUpdateOneRequiredWithoutShopifyStoresNestedInput
+  }
+
+  export type shopifyStoreUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type shopifyStoreCreateManyInput = {
+    id?: number
+    adminId: number
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type shopifyStoreUpdateManyMutationInput = {
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type shopifyStoreUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51448,7 +53428,7 @@ export namespace Prisma {
 
   export type orderCreateInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -51488,7 +53468,7 @@ export namespace Prisma {
   export type orderUncheckedCreateInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -51607,7 +53587,7 @@ export namespace Prisma {
   export type orderCreateManyInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -51725,8 +53705,8 @@ export namespace Prisma {
   export type orderItemUncheckedCreateInput = {
     id?: number
     orderId: number
-    productId?: number | null
-    variantId?: number | null
+    dropshipperProductId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -51744,8 +53724,8 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -51754,8 +53734,8 @@ export namespace Prisma {
   export type orderItemCreateManyInput = {
     id?: number
     orderId: number
-    productId?: number | null
-    variantId?: number | null
+    dropshipperProductId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -51770,8 +53750,8 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -52093,6 +54073,12 @@ export namespace Prisma {
     isNot?: countryWhereInput | null
   }
 
+  export type ShopifyStoreListRelationFilter = {
+    every?: shopifyStoreWhereInput
+    some?: shopifyStoreWhereInput
+    none?: shopifyStoreWhereInput
+  }
+
   export type AdminStaffListRelationFilter = {
     every?: adminStaffWhereInput
     some?: adminStaffWhereInput
@@ -52142,6 +54128,10 @@ export namespace Prisma {
     every?: dropshipperProductVariantWhereInput
     some?: dropshipperProductVariantWhereInput
     none?: dropshipperProductVariantWhereInput
+  }
+
+  export type shopifyStoreOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type adminStaffOrderByRelationAggregateInput = {
@@ -52329,6 +54319,144 @@ export namespace Prisma {
   export type AdminScalarRelationFilter = {
     is?: adminWhereInput
     isNot?: adminWhereInput
+  }
+
+  export type shopifyStoreOrderByRelevanceInput = {
+    fields: shopifyStoreOrderByRelevanceFieldEnum | shopifyStoreOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type shopifyStoreCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    shop?: SortOrder
+    accessToken?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiVersion?: SortOrder
+    scopes?: SortOrder
+    redirectUri?: SortOrder
+    email?: SortOrder
+    shopName?: SortOrder
+    planName?: SortOrder
+    country?: SortOrder
+    shopOwner?: SortOrder
+    domain?: SortOrder
+    myshopifyDomain?: SortOrder
+    province?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    currency?: SortOrder
+    moneyFormat?: SortOrder
+    timezone?: SortOrder
+    createdAtShop?: SortOrder
+    userId?: SortOrder
+    verificationStatus?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type shopifyStoreAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    userId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
+  }
+
+  export type shopifyStoreMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    shop?: SortOrder
+    accessToken?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiVersion?: SortOrder
+    scopes?: SortOrder
+    redirectUri?: SortOrder
+    email?: SortOrder
+    shopName?: SortOrder
+    planName?: SortOrder
+    country?: SortOrder
+    shopOwner?: SortOrder
+    domain?: SortOrder
+    myshopifyDomain?: SortOrder
+    province?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    currency?: SortOrder
+    moneyFormat?: SortOrder
+    timezone?: SortOrder
+    createdAtShop?: SortOrder
+    userId?: SortOrder
+    verificationStatus?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type shopifyStoreMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    shop?: SortOrder
+    accessToken?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiVersion?: SortOrder
+    scopes?: SortOrder
+    redirectUri?: SortOrder
+    email?: SortOrder
+    shopName?: SortOrder
+    planName?: SortOrder
+    country?: SortOrder
+    shopOwner?: SortOrder
+    domain?: SortOrder
+    myshopifyDomain?: SortOrder
+    province?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    currency?: SortOrder
+    moneyFormat?: SortOrder
+    timezone?: SortOrder
+    createdAtShop?: SortOrder
+    userId?: SortOrder
+    verificationStatus?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type shopifyStoreSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    userId?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
+    deletedBy?: SortOrder
   }
 
   export type companyDetailOrderByRelevanceInput = {
@@ -55160,8 +57288,8 @@ export namespace Prisma {
   export type orderItemCountOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrder
-    variantId?: SortOrder
+    dropshipperProductId?: SortOrder
+    dropshipperProductVariantId?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -55170,8 +57298,8 @@ export namespace Prisma {
   export type orderItemAvgOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrder
-    variantId?: SortOrder
+    dropshipperProductId?: SortOrder
+    dropshipperProductVariantId?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -55180,8 +57308,8 @@ export namespace Prisma {
   export type orderItemMaxOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrder
-    variantId?: SortOrder
+    dropshipperProductId?: SortOrder
+    dropshipperProductVariantId?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -55190,8 +57318,8 @@ export namespace Prisma {
   export type orderItemMinOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrder
-    variantId?: SortOrder
+    dropshipperProductId?: SortOrder
+    dropshipperProductVariantId?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -55200,8 +57328,8 @@ export namespace Prisma {
   export type orderItemSumOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    productId?: SortOrder
-    variantId?: SortOrder
+    dropshipperProductId?: SortOrder
+    dropshipperProductVariantId?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
@@ -55263,6 +57391,13 @@ export namespace Prisma {
     create?: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
     connectOrCreate?: countryCreateOrConnectWithoutAdminsInput
     connect?: countryWhereUniqueInput
+  }
+
+  export type shopifyStoreCreateNestedManyWithoutAdminInput = {
+    create?: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput> | shopifyStoreCreateWithoutAdminInput[] | shopifyStoreUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: shopifyStoreCreateOrConnectWithoutAdminInput | shopifyStoreCreateOrConnectWithoutAdminInput[]
+    createMany?: shopifyStoreCreateManyAdminInputEnvelope
+    connect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
   }
 
   export type adminStaffCreateNestedManyWithoutAdminInput = {
@@ -55330,6 +57465,13 @@ export namespace Prisma {
     connectOrCreate?: dropshipperProductVariantCreateOrConnectWithoutDropshipperInput | dropshipperProductVariantCreateOrConnectWithoutDropshipperInput[]
     createMany?: dropshipperProductVariantCreateManyDropshipperInputEnvelope
     connect?: dropshipperProductVariantWhereUniqueInput | dropshipperProductVariantWhereUniqueInput[]
+  }
+
+  export type shopifyStoreUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput> | shopifyStoreCreateWithoutAdminInput[] | shopifyStoreUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: shopifyStoreCreateOrConnectWithoutAdminInput | shopifyStoreCreateOrConnectWithoutAdminInput[]
+    createMany?: shopifyStoreCreateManyAdminInputEnvelope
+    connect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
   }
 
   export type adminStaffUncheckedCreateNestedManyWithoutAdminInput = {
@@ -55431,6 +57573,20 @@ export namespace Prisma {
     delete?: countryWhereInput | boolean
     connect?: countryWhereUniqueInput
     update?: XOR<XOR<countryUpdateToOneWithWhereWithoutAdminsInput, countryUpdateWithoutAdminsInput>, countryUncheckedUpdateWithoutAdminsInput>
+  }
+
+  export type shopifyStoreUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput> | shopifyStoreCreateWithoutAdminInput[] | shopifyStoreUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: shopifyStoreCreateOrConnectWithoutAdminInput | shopifyStoreCreateOrConnectWithoutAdminInput[]
+    upsert?: shopifyStoreUpsertWithWhereUniqueWithoutAdminInput | shopifyStoreUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: shopifyStoreCreateManyAdminInputEnvelope
+    set?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    disconnect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    delete?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    connect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    update?: shopifyStoreUpdateWithWhereUniqueWithoutAdminInput | shopifyStoreUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: shopifyStoreUpdateManyWithWhereWithoutAdminInput | shopifyStoreUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: shopifyStoreScalarWhereInput | shopifyStoreScalarWhereInput[]
   }
 
   export type adminStaffUpdateManyWithoutAdminNestedInput = {
@@ -55569,6 +57725,20 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
+  export type shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput> | shopifyStoreCreateWithoutAdminInput[] | shopifyStoreUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: shopifyStoreCreateOrConnectWithoutAdminInput | shopifyStoreCreateOrConnectWithoutAdminInput[]
+    upsert?: shopifyStoreUpsertWithWhereUniqueWithoutAdminInput | shopifyStoreUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: shopifyStoreCreateManyAdminInputEnvelope
+    set?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    disconnect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    delete?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    connect?: shopifyStoreWhereUniqueInput | shopifyStoreWhereUniqueInput[]
+    update?: shopifyStoreUpdateWithWhereUniqueWithoutAdminInput | shopifyStoreUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: shopifyStoreUpdateManyWithWhereWithoutAdminInput | shopifyStoreUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: shopifyStoreScalarWhereInput | shopifyStoreScalarWhereInput[]
+  }
+
   export type adminStaffUncheckedUpdateManyWithoutAdminNestedInput = {
     create?: XOR<adminStaffCreateWithoutAdminInput, adminStaffUncheckedCreateWithoutAdminInput> | adminStaffCreateWithoutAdminInput[] | adminStaffUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: adminStaffCreateOrConnectWithoutAdminInput | adminStaffCreateOrConnectWithoutAdminInput[]
@@ -55695,6 +57865,20 @@ export namespace Prisma {
     update?: dropshipperProductVariantUpdateWithWhereUniqueWithoutDropshipperInput | dropshipperProductVariantUpdateWithWhereUniqueWithoutDropshipperInput[]
     updateMany?: dropshipperProductVariantUpdateManyWithWhereWithoutDropshipperInput | dropshipperProductVariantUpdateManyWithWhereWithoutDropshipperInput[]
     deleteMany?: dropshipperProductVariantScalarWhereInput | dropshipperProductVariantScalarWhereInput[]
+  }
+
+  export type adminCreateNestedOneWithoutShopifyStoresInput = {
+    create?: XOR<adminCreateWithoutShopifyStoresInput, adminUncheckedCreateWithoutShopifyStoresInput>
+    connectOrCreate?: adminCreateOrConnectWithoutShopifyStoresInput
+    connect?: adminWhereUniqueInput
+  }
+
+  export type adminUpdateOneRequiredWithoutShopifyStoresNestedInput = {
+    create?: XOR<adminCreateWithoutShopifyStoresInput, adminUncheckedCreateWithoutShopifyStoresInput>
+    connectOrCreate?: adminCreateOrConnectWithoutShopifyStoresInput
+    upsert?: adminUpsertWithoutShopifyStoresInput
+    connect?: adminWhereUniqueInput
+    update?: XOR<XOR<adminUpdateToOneWithWhereWithoutShopifyStoresInput, adminUpdateWithoutShopifyStoresInput>, adminUncheckedUpdateWithoutShopifyStoresInput>
   }
 
   export type countryCreateNestedOneWithoutBillingCompanyDetailsInput = {
@@ -59018,6 +61202,89 @@ export namespace Prisma {
     create: XOR<countryCreateWithoutAdminsInput, countryUncheckedCreateWithoutAdminsInput>
   }
 
+  export type shopifyStoreCreateWithoutAdminInput = {
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type shopifyStoreUncheckedCreateWithoutAdminInput = {
+    id?: number
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
+  export type shopifyStoreCreateOrConnectWithoutAdminInput = {
+    where: shopifyStoreWhereUniqueInput
+    create: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput>
+  }
+
+  export type shopifyStoreCreateManyAdminInputEnvelope = {
+    data: shopifyStoreCreateManyAdminInput | shopifyStoreCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
   export type adminStaffCreateWithoutAdminInput = {
     profilePicture?: string | null
     name: string
@@ -59724,6 +61991,63 @@ export namespace Prisma {
     billingCompanyDetails?: companyDetailUncheckedUpdateManyWithoutBillingCountryNestedInput
   }
 
+  export type shopifyStoreUpsertWithWhereUniqueWithoutAdminInput = {
+    where: shopifyStoreWhereUniqueInput
+    update: XOR<shopifyStoreUpdateWithoutAdminInput, shopifyStoreUncheckedUpdateWithoutAdminInput>
+    create: XOR<shopifyStoreCreateWithoutAdminInput, shopifyStoreUncheckedCreateWithoutAdminInput>
+  }
+
+  export type shopifyStoreUpdateWithWhereUniqueWithoutAdminInput = {
+    where: shopifyStoreWhereUniqueInput
+    data: XOR<shopifyStoreUpdateWithoutAdminInput, shopifyStoreUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type shopifyStoreUpdateManyWithWhereWithoutAdminInput = {
+    where: shopifyStoreScalarWhereInput
+    data: XOR<shopifyStoreUpdateManyMutationInput, shopifyStoreUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type shopifyStoreScalarWhereInput = {
+    AND?: shopifyStoreScalarWhereInput | shopifyStoreScalarWhereInput[]
+    OR?: shopifyStoreScalarWhereInput[]
+    NOT?: shopifyStoreScalarWhereInput | shopifyStoreScalarWhereInput[]
+    id?: IntFilter<"shopifyStore"> | number
+    adminId?: IntFilter<"shopifyStore"> | number
+    shop?: StringFilter<"shopifyStore"> | string
+    accessToken?: StringNullableFilter<"shopifyStore"> | string | null
+    apiKey?: StringFilter<"shopifyStore"> | string
+    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
+    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
+    scopes?: StringFilter<"shopifyStore"> | string
+    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
+    email?: StringNullableFilter<"shopifyStore"> | string | null
+    shopName?: StringNullableFilter<"shopifyStore"> | string | null
+    planName?: StringNullableFilter<"shopifyStore"> | string | null
+    country?: StringNullableFilter<"shopifyStore"> | string | null
+    shopOwner?: StringNullableFilter<"shopifyStore"> | string | null
+    domain?: StringNullableFilter<"shopifyStore"> | string | null
+    myshopifyDomain?: StringNullableFilter<"shopifyStore"> | string | null
+    province?: StringNullableFilter<"shopifyStore"> | string | null
+    city?: StringNullableFilter<"shopifyStore"> | string | null
+    phone?: StringNullableFilter<"shopifyStore"> | string | null
+    currency?: StringNullableFilter<"shopifyStore"> | string | null
+    moneyFormat?: StringNullableFilter<"shopifyStore"> | string | null
+    timezone?: StringNullableFilter<"shopifyStore"> | string | null
+    createdAtShop?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    userId?: IntNullableFilter<"shopifyStore"> | number | null
+    verificationStatus?: BoolFilter<"shopifyStore"> | boolean
+    status?: BoolFilter<"shopifyStore"> | boolean
+    createdAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    createdBy?: IntNullableFilter<"shopifyStore"> | number | null
+    createdByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    updatedAt?: DateTimeFilter<"shopifyStore"> | Date | string
+    updatedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    updatedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"shopifyStore"> | Date | string | null
+    deletedBy?: IntNullableFilter<"shopifyStore"> | number | null
+    deletedByRole?: StringNullableFilter<"shopifyStore"> | string | null
+  }
+
   export type adminStaffUpsertWithWhereUniqueWithoutAdminInput = {
     where: adminStaffWhereUniqueInput
     update: XOR<adminStaffUpdateWithoutAdminInput, adminStaffUncheckedUpdateWithoutAdminInput>
@@ -60166,6 +62490,196 @@ export namespace Prisma {
     deletedByRole?: StringNullableFilter<"dropshipperProductVariant"> | string | null
   }
 
+  export type adminCreateWithoutShopifyStoresInput = {
+    profilePicture?: string | null
+    name: string
+    username?: string | null
+    website?: string | null
+    email: string
+    referralCode?: string | null
+    password: string
+    role?: string
+    type?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    permanentCity?: cityCreateNestedOneWithoutAdminsInput
+    permanentState?: stateCreateNestedOneWithoutAdminsInput
+    permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    staff?: adminStaffCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
+    bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
+    supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
+    dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
+    suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
+    supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
+    dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
+  }
+
+  export type adminUncheckedCreateWithoutShopifyStoresInput = {
+    id?: number
+    profilePicture?: string | null
+    name: string
+    username?: string | null
+    website?: string | null
+    email: string
+    referralCode?: string | null
+    password: string
+    role?: string
+    type?: string
+    status?: string
+    dateOfBirth?: Date | string | null
+    phoneNumber?: string | null
+    currentAddress?: string | null
+    permanentAddress?: string | null
+    permanentPostalCode?: string | null
+    permanentCityId?: bigint | number | null
+    permanentStateId?: bigint | number | null
+    permanentCountryId?: bigint | number | null
+    pr_token?: string | null
+    pr_expires_at?: Date | string | null
+    pr_last_reset?: Date | string | null
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+    staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
+    companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
+    bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
+    supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
+    dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
+    suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
+    supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
+    dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
+  }
+
+  export type adminCreateOrConnectWithoutShopifyStoresInput = {
+    where: adminWhereUniqueInput
+    create: XOR<adminCreateWithoutShopifyStoresInput, adminUncheckedCreateWithoutShopifyStoresInput>
+  }
+
+  export type adminUpsertWithoutShopifyStoresInput = {
+    update: XOR<adminUpdateWithoutShopifyStoresInput, adminUncheckedUpdateWithoutShopifyStoresInput>
+    create: XOR<adminCreateWithoutShopifyStoresInput, adminUncheckedCreateWithoutShopifyStoresInput>
+    where?: adminWhereInput
+  }
+
+  export type adminUpdateToOneWithWhereWithoutShopifyStoresInput = {
+    where?: adminWhereInput
+    data: XOR<adminUpdateWithoutShopifyStoresInput, adminUncheckedUpdateWithoutShopifyStoresInput>
+  }
+
+  export type adminUpdateWithoutShopifyStoresInput = {
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCity?: cityUpdateOneWithoutAdminsNestedInput
+    permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    staff?: adminStaffUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
+    bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
+    supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
+    dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
+    suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
+    supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
+    dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
+  }
+
+  export type adminUncheckedUpdateWithoutShopifyStoresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
+    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
+    companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
+    bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
+    supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
+    dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
+    suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
+    supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
+    dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
+  }
+
   export type countryCreateWithoutBillingCompanyDetailsInput = {
     id?: bigint | number
     name: string
@@ -60366,6 +62880,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
@@ -60409,6 +62924,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
@@ -60654,6 +63170,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
@@ -60697,6 +63214,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
@@ -60739,6 +63257,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
@@ -60782,6 +63301,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
@@ -60892,6 +63412,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
@@ -60935,6 +63456,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
@@ -61035,6 +63557,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -61078,6 +63601,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -61184,6 +63708,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -61227,6 +63752,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -61492,6 +64018,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
@@ -61535,6 +64062,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
@@ -61817,6 +64345,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
@@ -61860,6 +64389,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
@@ -62416,6 +64946,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -62459,6 +64990,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -62766,7 +65298,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingCountryInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -62805,7 +65337,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingCountryInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -62853,7 +65385,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingCountryInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -62892,7 +65424,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingCountryInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -63697,6 +66229,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -63740,6 +66273,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -63833,7 +66367,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingStateInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -63872,7 +66406,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingStateInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -63920,7 +66454,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingStateInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -63959,7 +66493,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingStateInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -64535,6 +67069,7 @@ export namespace Prisma {
     deletedByRole?: string | null
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -64578,6 +67113,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -64671,7 +67207,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutShippingCityInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -64710,7 +67246,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutShippingCityInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -64758,7 +67294,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutBillingCityInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -64797,7 +67333,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutBillingCityInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -67208,6 +69744,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -67251,6 +69788,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -67417,6 +69955,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -67460,6 +69999,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -67858,6 +70398,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -67901,6 +70442,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -68208,6 +70750,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -68251,6 +70794,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -68449,6 +70993,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -68492,6 +71037,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -68789,6 +71335,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -68832,6 +71379,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -69096,6 +71644,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -69139,6 +71688,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -69186,6 +71736,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -69229,6 +71780,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -69449,7 +72001,7 @@ export namespace Prisma {
   export type orderItemUncheckedCreateWithoutProductInput = {
     id?: number
     orderId: number
-    variantId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -69507,6 +72059,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -69550,6 +72103,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -69603,6 +72157,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -69646,6 +72201,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -69849,8 +72405,8 @@ export namespace Prisma {
     NOT?: orderItemScalarWhereInput | orderItemScalarWhereInput[]
     id?: IntFilter<"orderItem"> | number
     orderId?: IntFilter<"orderItem"> | number
-    productId?: IntNullableFilter<"orderItem"> | number | null
-    variantId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductId?: IntNullableFilter<"orderItem"> | number | null
+    dropshipperProductVariantId?: IntNullableFilter<"orderItem"> | number | null
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
@@ -69887,6 +72443,7 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminsInput
     permanentState?: stateCreateNestedOneWithoutAdminsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminsInput
+    shopifyStores?: shopifyStoreCreateNestedManyWithoutAdminInput
     staff?: adminStaffCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
@@ -69930,6 +72487,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+    shopifyStores?: shopifyStoreUncheckedCreateNestedManyWithoutAdminInput
     staff?: adminStaffUncheckedCreateNestedManyWithoutAdminInput
     companyDetail?: companyDetailUncheckedCreateNestedOneWithoutAdminInput
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
@@ -70185,7 +72743,7 @@ export namespace Prisma {
   export type orderItemUncheckedCreateWithoutVariantInput = {
     id?: number
     orderId: number
-    productId?: number | null
+    dropshipperProductId?: number | null
     quantity: number
     price: number
     total: number
@@ -70243,6 +72801,7 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -70286,6 +72845,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -70567,7 +73127,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutPaymentInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -70606,7 +73166,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutPaymentInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -71056,8 +73616,8 @@ export namespace Prisma {
 
   export type orderItemUncheckedCreateWithoutOrderInput = {
     id?: number
-    productId?: number | null
-    variantId?: number | null
+    dropshipperProductId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -71511,7 +74071,7 @@ export namespace Prisma {
 
   export type orderCreateWithoutItemsInput = {
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -71550,7 +74110,7 @@ export namespace Prisma {
   export type orderUncheckedCreateWithoutItemsInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -71867,6 +74427,43 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type shopifyStoreCreateManyAdminInput = {
+    id?: number
+    shop: string
+    accessToken?: string | null
+    apiKey: string
+    apiSecret?: string | null
+    apiVersion?: string | null
+    scopes: string
+    redirectUri?: string | null
+    email?: string | null
+    shopName?: string | null
+    planName?: string | null
+    country?: string | null
+    shopOwner?: string | null
+    domain?: string | null
+    myshopifyDomain?: string | null
+    province?: string | null
+    city?: string | null
+    phone?: string | null
+    currency?: string | null
+    moneyFormat?: string | null
+    timezone?: string | null
+    createdAtShop?: Date | string | null
+    userId?: number | null
+    verificationStatus?: boolean
+    status?: boolean
+    createdAt?: Date | string
+    createdBy?: number | null
+    createdByRole?: string | null
+    updatedAt?: Date | string
+    updatedBy?: number | null
+    updatedByRole?: string | null
+    deletedAt?: Date | string | null
+    deletedBy?: number | null
+    deletedByRole?: string | null
+  }
+
   export type adminStaffCreateManyAdminInput = {
     id?: number
     profilePicture?: string | null
@@ -71996,6 +74593,116 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
+  }
+
+  export type shopifyStoreUpdateWithoutAdminInput = {
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type shopifyStoreUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type shopifyStoreUncheckedUpdateManyWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    shop?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    scopes?: StringFieldUpdateOperationsInput | string
+    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    shopName?: NullableStringFieldUpdateOperationsInput | string | null
+    planName?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    shopOwner?: NullableStringFieldUpdateOperationsInput | string | null
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    myshopifyDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    moneyFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAtShop?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    verificationStatus?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type adminStaffUpdateWithoutAdminInput = {
@@ -72737,7 +75444,7 @@ export namespace Prisma {
   export type orderCreateManyShippingCountryInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -72775,7 +75482,7 @@ export namespace Prisma {
   export type orderCreateManyBillingCountryInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -73119,6 +75826,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -73162,6 +75870,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -74030,7 +76739,7 @@ export namespace Prisma {
   export type orderCreateManyShippingStateInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -74068,7 +76777,7 @@ export namespace Prisma {
   export type orderCreateManyBillingStateInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -74348,6 +77057,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     permanentCity?: cityUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -74391,6 +77101,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -74964,7 +77675,7 @@ export namespace Prisma {
   export type orderCreateManyShippingCityInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -75002,7 +77713,7 @@ export namespace Prisma {
   export type orderCreateManyBillingCityInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -75223,6 +77934,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
     permanentState?: stateUpdateOneWithoutAdminsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminsNestedInput
+    shopifyStores?: shopifyStoreUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
@@ -75266,6 +77978,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+    shopifyStores?: shopifyStoreUncheckedUpdateManyWithoutAdminNestedInput
     staff?: adminStaffUncheckedUpdateManyWithoutAdminNestedInput
     companyDetail?: companyDetailUncheckedUpdateOneWithoutAdminNestedInput
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
@@ -77014,7 +79727,7 @@ export namespace Prisma {
   export type orderItemCreateManyProductInput = {
     id?: number
     orderId: number
-    variantId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -77092,7 +79805,7 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -77101,7 +79814,7 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -77110,7 +79823,7 @@ export namespace Prisma {
   export type orderItemCreateManyVariantInput = {
     id?: number
     orderId: number
-    productId?: number | null
+    dropshipperProductId?: number | null
     quantity: number
     price: number
     total: number
@@ -77127,7 +79840,7 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateWithoutVariantInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -77136,7 +79849,7 @@ export namespace Prisma {
   export type orderItemUncheckedUpdateManyWithoutVariantInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -77145,7 +79858,7 @@ export namespace Prisma {
   export type orderCreateManyPaymentInput = {
     id?: number
     orderNumber: string
-    status: string
+    status?: string
     orderNote?: string | null
     subtotal?: number
     tax?: number
@@ -77297,8 +80010,8 @@ export namespace Prisma {
 
   export type orderItemCreateManyOrderInput = {
     id?: number
-    productId?: number | null
-    variantId?: number | null
+    dropshipperProductId?: number | null
+    dropshipperProductVariantId?: number | null
     quantity: number
     price: number
     total: number
@@ -77314,8 +80027,8 @@ export namespace Prisma {
 
   export type orderItemUncheckedUpdateWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
@@ -77323,8 +80036,8 @@ export namespace Prisma {
 
   export type orderItemUncheckedUpdateManyWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number
-    productId?: NullableIntFieldUpdateOperationsInput | number | null
-    variantId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductId?: NullableIntFieldUpdateOperationsInput | number | null
+    dropshipperProductVariantId?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number

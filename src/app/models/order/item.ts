@@ -1,8 +1,8 @@
 import prisma from "@/lib/prisma";
 
 interface Item {
-    productId: number;
-    variantId: number;
+    dropshipperProductId: number;
+    dropshipperProductVariantId: number;
     quantity: number;
     price: number;
     total: number;

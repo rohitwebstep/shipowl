@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
     }
 
     logMessage('info', 'Product found:', productResult.dropshipperProduct);
-    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, type: 'my' }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(

@@ -65,6 +65,48 @@ CREATE TABLE `admin` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `shopifyStore` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminId` INTEGER NOT NULL,
+    `shop` VARCHAR(191) NOT NULL,
+    `accessToken` VARCHAR(191) NULL,
+    `apiKey` VARCHAR(191) NOT NULL,
+    `apiSecret` VARCHAR(191) NULL,
+    `apiVersion` VARCHAR(191) NULL,
+    `scopes` VARCHAR(191) NOT NULL,
+    `redirectUri` LONGTEXT NULL,
+    `email` VARCHAR(191) NULL,
+    `shopName` VARCHAR(191) NULL,
+    `planName` VARCHAR(191) NULL,
+    `country` VARCHAR(191) NULL,
+    `shopOwner` VARCHAR(191) NULL,
+    `domain` VARCHAR(191) NULL,
+    `myshopifyDomain` VARCHAR(191) NULL,
+    `province` VARCHAR(191) NULL,
+    `city` VARCHAR(191) NULL,
+    `phone` VARCHAR(191) NULL,
+    `currency` VARCHAR(191) NULL,
+    `moneyFormat` VARCHAR(191) NULL,
+    `timezone` VARCHAR(191) NULL,
+    `createdAtShop` DATETIME(3) NULL,
+    `userId` INTEGER NULL,
+    `verificationStatus` BOOLEAN NOT NULL DEFAULT true,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `shopifyStore_shop_key`(`shop`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `companyDetail` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `adminId` INTEGER NOT NULL,
@@ -822,7 +864,7 @@ CREATE TABLE `payment` (
 CREATE TABLE `order` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `orderNumber` VARCHAR(191) NOT NULL,
-    `status` VARCHAR(191) NOT NULL,
+    `status` VARCHAR(191) NOT NULL DEFAULT 'pending',
     `orderNote` VARCHAR(191) NULL,
     `subtotal` DOUBLE NOT NULL DEFAULT 0.0,
     `tax` DOUBLE NOT NULL DEFAULT 0.0,
@@ -868,15 +910,15 @@ CREATE TABLE `order` (
 CREATE TABLE `orderItem` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `orderId` INTEGER NOT NULL,
-    `productId` INTEGER NULL,
-    `variantId` INTEGER NULL,
+    `dropshipperProductId` INTEGER NULL,
+    `dropshipperProductVariantId` INTEGER NULL,
     `quantity` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
     `total` DOUBLE NOT NULL,
 
     INDEX `orderItem_orderId_idx`(`orderId`),
-    INDEX `orderItem_productId_idx`(`productId`),
-    INDEX `orderItem_variantId_idx`(`variantId`),
+    INDEX `orderItem_dropshipperProductId_idx`(`dropshipperProductId`),
+    INDEX `orderItem_dropshipperProductVariantId_idx`(`dropshipperProductVariantId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -888,6 +930,9 @@ ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentStateId_fkey` FOREIGN KEY (`p
 
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCountryId_fkey` FOREIGN KEY (`permanentCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `shopifyStore` ADD CONSTRAINT `shopifyStore_adminId_fkey` FOREIGN KEY (`adminId`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `companyDetail` ADD CONSTRAINT `companyDetail_billingCountryId_fkey` FOREIGN KEY (`billingCountryId`) REFERENCES `country`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1049,7 +1094,7 @@ ALTER TABLE `order` ADD CONSTRAINT `order_paymentId_fkey` FOREIGN KEY (`paymentI
 ALTER TABLE `orderItem` ADD CONSTRAINT `orderItem_orderId_fkey` FOREIGN KEY (`orderId`) REFERENCES `order`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `orderItem` ADD CONSTRAINT `orderItem_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `dropshipperProduct`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `orderItem` ADD CONSTRAINT `orderItem_dropshipperProductId_fkey` FOREIGN KEY (`dropshipperProductId`) REFERENCES `dropshipperProduct`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `orderItem` ADD CONSTRAINT `orderItem_variantId_fkey` FOREIGN KEY (`variantId`) REFERENCES `dropshipperProductVariant`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `orderItem` ADD CONSTRAINT `orderItem_dropshipperProductVariantId_fkey` FOREIGN KEY (`dropshipperProductVariantId`) REFERENCES `dropshipperProductVariant`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

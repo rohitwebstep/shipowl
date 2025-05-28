@@ -681,6 +681,24 @@ export const getDropshipperProductById = async (id: number) => {
     }
 };
 
+export const getDropshipperProductVariantById = async (id: number) => {
+    try {
+        const dropshipperProductVariant = await prisma.dropshipperProductVariant.findUnique({
+            where: { id }
+        });
+
+        if (!dropshipperProductVariant) return { status: false, message: "dropshipperProductVariant Variant not found" };
+
+        const sanitizedDropshipperProductVariant = serializeBigInt(dropshipperProductVariant);
+        logMessage('debug', 'fetched product variants :', sanitizedDropshipperProductVariant);
+
+        return { status: true, variant: sanitizedDropshipperProductVariant };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return { status: false, message: "Error fetching product variant" };
+    }
+};
+
 export const checkSupplierProductForDropshipper = async (
     dropshipperId: number,
     supplierProductId: number

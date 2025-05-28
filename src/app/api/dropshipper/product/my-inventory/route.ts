@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
 
     if (productsResult?.status) {
       return NextResponse.json(
-        { status: true, products: productsResult.products },
+        { status: true, products: productsResult.products, type },
         { status: 200 }
       );
     }

@@ -6,12 +6,12 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkPaymentIdAvailability, createOrder, getOrdersByStatus } from '@/app/models/order/order';
 import { createOrderItem } from '@/app/models/order/item';
-import { getProductById, getProductVariantById } from '@/app/models/admin/product/product';
+import { getDropshipperProductById, getDropshipperProductVariantById } from '@/app/models/dropshipper/product';
 // import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 
 interface Item {
-  productId: number;
-  variantId: number;
+  dropshipperProductId: number;
+  dropshipperProductVariantId: number;
   quantity: number;
   price: number;
   total: number;
@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
     logMessage('debug', 'POST request received for order creation');
 
     const requiredFields = [
-      'status',
       'subtotal',
       'tax',
       'discount',
@@ -51,7 +50,6 @@ export async function POST(req: NextRequest) {
     const validation = validateFormData(formData, {
       requiredFields: requiredFields,
       patternValidations: {
-        status: 'string',
         subtotal: 'number',
         tax: 'number',
         discount: 'number',
@@ -169,7 +167,7 @@ export async function POST(req: NextRequest) {
     console.log(`items - `, items);
 
     const orderPayload = {
-      status: extractString('status') || '',
+      status: 'pending',
       orderNote: extractString('orderNote') || '',
       subtotal: extractNumber('subtotal') || 0,
       tax: extractNumber('tax') || 0,
@@ -235,12 +233,12 @@ export async function POST(req: NextRequest) {
     const orderItemPayload: Item[] = [];
 
     for (const item of items) {
-      const productId = Number(item.productId);
-      const variantId = Number(item.variantId);
+      const dropshipperProductId = Number(item.dropshipperProductId);
+      const dropshipperProductVariantId = Number(item.dropshipperProductVariantId);
 
       const [productExists, variantExists] = await Promise.all([
-        await getProductById(productId),
-        await getProductVariantById(variantId),
+        await getDropshipperProductById(dropshipperProductId),
+        await getDropshipperProductVariantById(dropshipperProductVariantId),
       ]);
 
       if (!productExists.status || !variantExists.status) {
@@ -249,8 +247,8 @@ export async function POST(req: NextRequest) {
       }
 
       orderItemPayload.push({
-        productId,
-        variantId,
+        dropshipperProductId,
+        dropshipperProductVariantId,
         quantity: Number(item.quantity),
         price: Number(item.price),
         total: Number(item.total),

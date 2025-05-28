@@ -177,6 +177,44 @@ exports.Prisma.AdminScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.ShopifyStoreScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  shop: 'shop',
+  accessToken: 'accessToken',
+  apiKey: 'apiKey',
+  apiSecret: 'apiSecret',
+  apiVersion: 'apiVersion',
+  scopes: 'scopes',
+  redirectUri: 'redirectUri',
+  email: 'email',
+  shopName: 'shopName',
+  planName: 'planName',
+  country: 'country',
+  shopOwner: 'shopOwner',
+  domain: 'domain',
+  myshopifyDomain: 'myshopifyDomain',
+  province: 'province',
+  city: 'city',
+  phone: 'phone',
+  currency: 'currency',
+  moneyFormat: 'moneyFormat',
+  timezone: 'timezone',
+  createdAtShop: 'createdAtShop',
+  userId: 'userId',
+  verificationStatus: 'verificationStatus',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.CompanyDetailScalarFieldEnum = {
   id: 'id',
   adminId: 'adminId',
@@ -790,8 +828,8 @@ exports.Prisma.OrderScalarFieldEnum = {
 exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
-  productId: 'productId',
-  variantId: 'variantId',
+  dropshipperProductId: 'dropshipperProductId',
+  dropshipperProductVariantId: 'dropshipperProductVariantId',
   quantity: 'quantity',
   price: 'price',
   total: 'total'
@@ -843,6 +881,32 @@ exports.Prisma.adminOrderByRelevanceFieldEnum = {
   permanentAddress: 'permanentAddress',
   permanentPostalCode: 'permanentPostalCode',
   pr_token: 'pr_token',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.shopifyStoreOrderByRelevanceFieldEnum = {
+  shop: 'shop',
+  accessToken: 'accessToken',
+  apiKey: 'apiKey',
+  apiSecret: 'apiSecret',
+  apiVersion: 'apiVersion',
+  scopes: 'scopes',
+  redirectUri: 'redirectUri',
+  email: 'email',
+  shopName: 'shopName',
+  planName: 'planName',
+  country: 'country',
+  shopOwner: 'shopOwner',
+  domain: 'domain',
+  myshopifyDomain: 'myshopifyDomain',
+  province: 'province',
+  city: 'city',
+  phone: 'phone',
+  currency: 'currency',
+  moneyFormat: 'moneyFormat',
+  timezone: 'timezone',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1184,6 +1248,7 @@ exports.Prisma.orderOrderByRelevanceFieldEnum = {
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
   admin: 'admin',
+  shopifyStore: 'shopifyStore',
   companyDetail: 'companyDetail',
   bankAccount: 'bankAccount',
   bankAccountChangeRequest: 'bankAccountChangeRequest',

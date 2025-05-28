@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
     }
 
     logMessage('info', 'Product found:', productResult.supplierProduct);
-    return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct, type: 'notmy' }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(

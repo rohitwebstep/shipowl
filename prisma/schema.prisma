@@ -83,6 +83,7 @@ model admin {
   permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
+  shopifyStores                   shopifyStore[]
   staff                           adminStaff[]
   companyDetail                   companyDetail?              @relation
   bankAccount                     bankAccount?                @relation
@@ -93,6 +94,54 @@ model admin {
   productVisibility               productSupplierVisibility[]
   supplierProductVariants         supplierProductVariant[]    @relation
   dropshipperProductVariants      dropshipperProductVariant[] @relation
+}
+
+model shopifyStore {
+  id              Int      @id @default(autoincrement())
+  adminId         Int
+
+  shop            String   @unique
+  accessToken     String?
+
+  // Shopify app configuration stored per store
+  apiKey          String                         // Formerly SHOPIFY_API_KEY
+  apiSecret       String?                         // Formerly SHOPIFY_API_SECRET
+  apiVersion      String?                         // Formerly SHOPIFY_API_VERSION (e.g., '2023-04')
+  scopes          String                         // Formerly SHOPIFY_SCOPES (comma-separated string)
+  redirectUri     String?   @db.LongText
+
+  // Store metadata
+  email           String?
+  shopName        String?
+  planName        String?
+  country         String?
+  shopOwner       String?
+  domain          String?
+  myshopifyDomain String?
+  province        String?
+  city            String?
+  phone           String?
+  currency        String?
+  moneyFormat     String?
+  timezone        String?
+  createdAtShop   DateTime?
+
+  userId          Int?
+
+  verificationStatus Boolean    @default(true)
+  status          Boolean    @default(true)
+
+  createdAt       DateTime  @default(now())
+  createdBy       Int?
+  createdByRole   String?
+  updatedAt       DateTime  @updatedAt
+  updatedBy       Int?
+  updatedByRole   String?
+  deletedAt       DateTime?
+  deletedBy       Int?
+  deletedByRole   String?
+
+  admin           admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
 }
 
 model companyDetail {
@@ -940,7 +989,7 @@ model payment {
 model order {
   id              Int       @id @default(autoincrement())
   orderNumber     String    @unique
-  status          String    // e.g., 'pending', 'processing', 'completed', 'cancelled'
+  status          String    @default("pending")    // e.g., 'pending', 'processing', 'completed', 'cancelled'
   orderNote       String?   // Optional customer note
 
   // Financial Summary
@@ -1006,17 +1055,17 @@ model order {
 model orderItem {
   id            Int                  @id @default(autoincrement())
   orderId       Int
-  productId     Int?
-  variantId     Int?
+  dropshipperProductId     Int?
+  dropshipperProductVariantId     Int?
   quantity      Int
   price         Float
   total         Float
 
   order         order                            @relation(fields: [orderId], references: [id])
-  product       dropshipperProduct?              @relation(fields: [productId], references: [id], onDelete: SetNull)
-  variant       dropshipperProductVariant?       @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  product       dropshipperProduct?              @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
+  variant       dropshipperProductVariant?       @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
 
   @@index([orderId])
-  @@index([productId])
-  @@index([variantId])
+  @@index([dropshipperProductId])
+  @@index([dropshipperProductVariantId])
 }
