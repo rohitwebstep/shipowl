@@ -1,3 +1,4 @@
 {
+  "/api/dropshipper/product/rto/inventory/route": "app/api/dropshipper/product/rto/inventory/route.js",
   "/api/order/shipping/status/route": "app/api/order/shipping/status/route.js"
 }

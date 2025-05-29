@@ -17,6 +17,10 @@ function routeMatches(pathname: string, routes: string[]): boolean {
     return routes.some((route) => pathname === route || pathname.startsWith(route));
 }
 
+function normalizePath(path: string): string {
+    return path.startsWith("/") ? path : `/${path}`;
+}
+
 // Helper function to check if pathname + method match any skippable route entry
 function routeMatchesWithMethod(
     pathname: string,
@@ -25,14 +29,13 @@ function routeMatchesWithMethod(
 ): boolean {
     return routes.some((routeObj) => {
         if (typeof routeObj === "string") {
-            // String route means skip for all methods
-            return pathname === routeObj || pathname.startsWith(routeObj);
+            const route = normalizePath(routeObj);
+            return pathname === route || pathname.startsWith(route);
         } else {
-            // Object with route + optional methods array
-            const matchesRoute =
-                pathname === routeObj.route || pathname.startsWith(routeObj.route);
+            const route = normalizePath(routeObj.route);
+            const matchesRoute = pathname === route || pathname.startsWith(route);
             if (!matchesRoute) return false;
-            if (!routeObj.methods) return true; // no method specified means skip all methods
+            if (!routeObj.methods) return true;
             return routeObj.methods.includes(method);
         }
     });
@@ -78,7 +81,7 @@ export function middleware(req: NextRequest) {
                 { route: "/api/location/city", methods: ["GET"] },
                 { route: "/api/brand", methods: ["GET"] },
                 { route: "/api/category", methods: ["GET"] },
-                "api/order/shipping/status"
+                { route: "api/order/shipping/status", methods: ["GET"] },
             ],
         },
         {

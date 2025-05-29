@@ -166,7 +166,7 @@ export const updateSupplierProduct = async (
             const existing = await prisma.supplierProductVariant.findFirst({
                 where: {
                     supplierProductId,
-                    productVariantId: variant.variantId,
+                    id: variant.variantId,
                 },
             });
 

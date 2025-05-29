@@ -230,7 +230,12 @@ export const getProductsByFiltersAndStatus = async (
                     variants: {
                         include: { variant: true },
                     },
-                    product: true,
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true,
+                        }
+                    },
                 },
             });
         }
@@ -244,7 +249,12 @@ export const getProductsByFiltersAndStatus = async (
                     ...(filters.brandId ? { product: { brandId: filters.brandId } } : {}),
                 },
                 include: {
-                    product: true,
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true,
+                        }
+                    },
                     dropshipper: true,
                     variants: {
                         include: {

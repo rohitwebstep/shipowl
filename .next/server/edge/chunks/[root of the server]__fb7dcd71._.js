@@ -101,17 +101,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$middlewares$2f$adminA
 function routeMatches(pathname, routes) {
     return routes.some((route)=>pathname === route || pathname.startsWith(route));
 }
+function normalizePath(path) {
+    return path.startsWith("/") ? path : `/${path}`;
+}
 // Helper function to check if pathname + method match any skippable route entry
 function routeMatchesWithMethod(pathname, method, routes) {
     return routes.some((routeObj)=>{
         if (typeof routeObj === "string") {
-            // String route means skip for all methods
-            return pathname === routeObj || pathname.startsWith(routeObj);
+            const route = normalizePath(routeObj);
+            return pathname === route || pathname.startsWith(route);
         } else {
-            // Object with route + optional methods array
-            const matchesRoute = pathname === routeObj.route || pathname.startsWith(routeObj.route);
+            const route = normalizePath(routeObj.route);
+            const matchesRoute = pathname === route || pathname.startsWith(route);
             if (!matchesRoute) return false;
-            if (!routeObj.methods) return true; // no method specified means skip all methods
+            if (!routeObj.methods) return true;
             return routeObj.methods.includes(method);
         }
     });
@@ -189,7 +192,12 @@ function middleware(req) {
                         "GET"
                     ]
                 },
-                "api/order/shipping/status"
+                {
+                    route: "api/order/shipping/status",
+                    methods: [
+                        "GET"
+                    ]
+                }
             ]
         },
         {

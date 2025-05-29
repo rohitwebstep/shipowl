@@ -840,6 +840,26 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   total: 'total'
 };
 
+exports.Prisma.RtoInventoryScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  orderItemId: 'orderItemId',
+  dropshipperId: 'dropshipperId',
+  dropshipperProductId: 'dropshipperProductId',
+  dropshipperProductVariantId: 'dropshipperProductVariantId',
+  quantity: 'quantity',
+  price: 'price',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1251,6 +1271,12 @@ exports.Prisma.orderOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.rtoInventoryOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 
 exports.Prisma.ModelName = {
   emailConfig: 'emailConfig',
@@ -1284,7 +1310,8 @@ exports.Prisma.ModelName = {
   dropshipperProductVariant: 'dropshipperProductVariant',
   payment: 'payment',
   order: 'order',
-  orderItem: 'orderItem'
+  orderItem: 'orderItem',
+  rtoInventory: 'rtoInventory'
 };
 
 /**

@@ -94,6 +94,7 @@ model admin {
   productVisibility          productSupplierVisibility[]
   supplierProductVariants    supplierProductVariant[]    @relation
   dropshipperProductVariants dropshipperProductVariant[] @relation
+  rtoInventories             rtoInventory[]              @relation("AdminToRtoInventory")
 }
 
 model shopifyStore {
@@ -914,7 +915,8 @@ model dropshipperProduct {
   supplierProduct supplierProduct             @relation("SupplierProductRelation", fields: [supplierProductId], references: [id], onDelete: Cascade)
   variants        dropshipperProductVariant[]
 
-  orderItems orderItem[]
+  orderItems     orderItem[]
+  rtoInventories rtoInventory[] @relation("ProductToRtoInventory")
 
   @@index([dropshipperId])
   @@index([supplierId])
@@ -952,7 +954,8 @@ model dropshipperProductVariant {
   dropshipperProduct     dropshipperProduct     @relation(fields: [dropshipperProductId], references: [id], onDelete: Cascade)
   supplierProductVariant supplierProductVariant @relation("SupplierToDropshipperVariant", fields: [supplierProductVariantId], references: [id], onDelete: Cascade)
 
-  orderItems orderItem[]
+  orderItems     orderItem[]
+  rtoInventories rtoInventory[] @relation("VariantToRtoInventory")
 
   @@index([dropshipperId])
   @@index([productId])
@@ -1052,7 +1055,8 @@ model order {
   deletedByRole String?
 
   // order Items Relation
-  items orderItem[] // One-to-many with orderItem model
+  items          orderItem[] // One-to-many with orderItem model
+  rtoInventories rtoInventory[] @relation("OrderToRtoInventory")
 
   @@index([createdBy])
   @@index([updatedBy])
@@ -1068,11 +1072,46 @@ model orderItem {
   price                       Float
   total                       Float
 
-  order   order                      @relation(fields: [orderId], references: [id])
-  product dropshipperProduct?        @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
-  variant dropshipperProductVariant? @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
+  order          order                      @relation(fields: [orderId], references: [id])
+  product        dropshipperProduct?        @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
+  variant        dropshipperProductVariant? @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
+  rtoInventories rtoInventory?              @relation("OrderItemToRtoInventory")
 
   @@index([orderId])
   @@index([dropshipperProductId])
   @@index([dropshipperProductVariantId])
+}
+
+model rtoInventory {
+  id                          Int   @id @default(autoincrement())
+  orderId                     Int
+  orderItemId                 Int   @unique
+  dropshipperId               Int
+  dropshipperProductId        Int
+  dropshipperProductVariantId Int
+  quantity                    Int   @default(1)
+  price                       Float @default(0.0) // Unit price of the returned item
+
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+
+  // Relations
+  dropshipper               admin                     @relation("AdminToRtoInventory", fields: [dropshipperId], references: [id], onDelete: Cascade)
+  order                     order                     @relation("OrderToRtoInventory", fields: [orderId], references: [id])
+  orderItem                 orderItem                 @relation("OrderItemToRtoInventory", fields: [orderItemId], references: [id])
+  dropshipperProduct        dropshipperProduct        @relation("ProductToRtoInventory", fields: [dropshipperProductId], references: [id])
+  dropshipperProductVariant dropshipperProductVariant @relation("VariantToRtoInventory", fields: [dropshipperProductVariantId], references: [id])
+
+  @@index([orderId])
+  @@index([dropshipperId])
+  @@index([dropshipperProductId])
+  @@index([dropshipperProductVariantId])
+  @@index([deletedAt])
 }

@@ -59,6 +59,26 @@ type ShippingUpdatePayload = {
     shippingApiJson: string | undefined;
 };
 
+interface RTOInventory {
+    order: {
+        connect: { id: number };
+    };
+    orderItem: {
+        connect: { id: number };
+    };
+    dropshipper: {
+        connect: { id: number };
+    };
+    dropshipperProduct: {
+        connect: { id: number };
+    };
+    dropshipperProductVariant: {
+        connect: { id: number };
+    };
+    quantity: number;
+    price: number;
+}
+
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
     if (Array.isArray(obj)) {
@@ -519,24 +539,36 @@ export async function refreshPendingOrdersShippingStatus() {
         const ordersToRefresh = await prisma.order.findMany({
             where: {
                 complete: false,
-                AND: [
-                    {
-                        OR: [
-                            { lastRefreshAt: null },
-                            { lastRefreshAt: { lt: oneHourAgo } }
-                        ]
-                    }
-                ]
+                OR: [
+                    { lastRefreshAt: null },
+                    { lastRefreshAt: { lt: oneHourAgo } }
+                ],
             },
             orderBy: {
-                lastRefreshAt: 'asc', // oldest first
+                lastRefreshAt: 'asc',
             },
             take: 100,
-            select: {
-                id: true,
-                orderNumber: true,
-                lastRefreshAt: true,
-                shippingApiResult: true,
+            // select: {
+            //     id: true,
+            //     orderNumber: true,
+            //     lastRefreshAt: true,
+            //     shippingApiResult: true,
+            // },
+            include: {
+                items: {
+                    include: {
+                        variant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        },
+                        product: true,
+                    },
+                },
             },
         });
 
@@ -555,5 +587,54 @@ export async function refreshPendingOrdersShippingStatus() {
             message: 'Failed to fetch orders for shipping status refresh',
             error: error instanceof Error ? error.message : 'Unknown error',
         };
+    }
+}
+
+export async function createRTOInventory(RTOInventory: RTOInventory) {
+    try {
+        const {
+            order,
+            orderItem,
+            dropshipper,
+            dropshipperProduct,
+            dropshipperProductVariant,
+            quantity,
+            price,
+        } = RTOInventory;
+
+        // Check for existing RTO Inventory using unique orderItem ID
+        const existing = await prisma.rtoInventory.findFirst({
+            where: {
+                orderItemId: orderItem.connect.id,
+            },
+        });
+
+        if (existing) {
+            return {
+                status: false,
+                message: 'RTO Inventory already exists for this order item.',
+                existing: serializeBigInt(existing),
+            };
+        }
+
+        // Create new RTO Inventory
+        const newOrder = await prisma.rtoInventory.create({
+            data: {
+                order,
+                orderItem,
+                dropshipper,
+                dropshipperProduct,
+                dropshipperProductVariant,
+                quantity,
+                price,
+                createdAt: new Date(),
+            },
+        });
+
+        return { status: true, order: serializeBigInt(newOrder) };
+
+    } catch (error) {
+        console.error(`Error creating RTO Inventory:`, error);
+        return { status: false, message: 'Internal Server Error' };
     }
 }
