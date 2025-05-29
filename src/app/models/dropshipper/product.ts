@@ -743,7 +743,7 @@ export const checkSupplierProductForDropshipper = async (
                 productId: supplierProduct.productId,
                 supplierId: { not: supplierProduct.supplierId } // Exclude current supplier
             },
-            select: {
+            include: {
                 supplier: true,
                 variants: {
                     include: { variant: true }
