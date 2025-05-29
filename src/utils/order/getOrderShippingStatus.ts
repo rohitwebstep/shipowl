@@ -75,8 +75,6 @@ export async function getOrderShippingStatus(orderId: number) {
             redirect: "follow"
         };
 
-        orderAWBNumber = '13630911339376';
-
         // 13630911339376
         const response = await fetch(`https://app.parcelx.in/api/v1/track_order?awb=${orderAWBNumber}`, requestOptions);
         const trackingData = await response.json();
