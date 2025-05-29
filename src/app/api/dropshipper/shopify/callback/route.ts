@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
         }
 
         const shopifyStore = isAlreadyUsed.shopifyStore;
+        const dropshipper = isAlreadyUsed.shopifyStore.admin;
 
         // ✅ Check for required shopifyStore fields
         if (!shopifyStore.apiSecret || !shopifyStore.apiKey || !shopifyStore.apiVersion) {
@@ -106,12 +107,11 @@ export async function GET(req: NextRequest) {
         };
 
         // 🧩 Replace with actual dropshipper ID and role
-        const dropshipperId = shopifyStore.adminId;
-        const dropshipperRole = 'admin';
+        const dropshipperId = dropshipper.id;
 
         const result = await verifyDropshipperShopifyStore(
             dropshipperId,
-            dropshipperRole,
+            dropshipper.role,
             payload
         );
 

@@ -324,13 +324,12 @@ export const getProductsByFiltersAndStatus = async (
             products = enrichedProducts;
         }
 
-        return { status: true, products };
+        return { status: true, products: serializeBigInt(products) };
     } catch (error) {
         console.error("Error fetching products:", error);
         return { status: false, message: "Error fetching products" };
     }
 };
-
 
 export const getProductsByStatus = async (
     type: "all" | "my" | "notmy",
@@ -744,7 +743,7 @@ export const checkSupplierProductForDropshipper = async (
                 productId: supplierProduct.productId,
                 supplierId: { not: supplierProduct.supplierId } // Exclude current supplier
             },
-            include: {
+            select: {
                 supplier: true,
                 variants: {
                     include: { variant: true }

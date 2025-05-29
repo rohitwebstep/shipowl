@@ -78,6 +78,9 @@ export async function isShopUsedAndVerified(shop: string) {
             where: {
                 shop: shop,
                 verificationStatus: true,
+            },
+            include: {
+                admin: true
             }
         });
 

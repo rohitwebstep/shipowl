@@ -55,6 +55,27 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
+export async function generateUniqueSupplierId() {
+    let supplierId = '';
+    let isTaken = true;
+
+    while (isTaken) {
+        const randomNumber = Math.floor(1000 + Math.random() * 9000); // generates a 4-digit number
+        supplierId = `SUP-${randomNumber}`;
+
+        const existingSupplier = await prisma.admin.findFirst({
+            where: {
+                role: 'supplier',
+                uniqeId: supplierId, // assuming supplierId is stored in DB
+            },
+        });
+
+        isTaken = !!existingSupplier;
+    }
+
+    return supplierId;
+}
+
 export async function checkEmailAvailability(email: string) {
     try {
         // Query to find if an email already exists with role 'supplier'
@@ -202,6 +223,7 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
         const newSupplier = await prisma.admin.create({
             data: {
                 name,
+                uniqeId: await generateUniqueSupplierId(),
                 profilePicture,
                 username,
                 email,

@@ -31,6 +31,7 @@ CREATE TABLE `admin` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `profilePicture` LONGTEXT NULL,
     `name` VARCHAR(191) NOT NULL,
+    `uniqeId` VARCHAR(191) NOT NULL,
     `username` VARCHAR(191) NULL,
     `website` VARCHAR(191) NULL,
     `email` VARCHAR(191) NOT NULL,
@@ -60,6 +61,7 @@ CREATE TABLE `admin` (
     `deletedBy` INTEGER NULL,
     `deletedByRole` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `admin_uniqeId_key`(`uniqeId`),
     UNIQUE INDEX `admin_username_key`(`username`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
