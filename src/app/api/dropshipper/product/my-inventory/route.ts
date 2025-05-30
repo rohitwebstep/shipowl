@@ -265,6 +265,7 @@ export async function POST(req: NextRequest) {
       const shopDomain = shopifyApp.shop;
       const accessToken = shopifyApp.accessToken;
       const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION;
+      const APP_HOST = process.env.URL || '';
 
       try {
 
@@ -275,7 +276,7 @@ export async function POST(req: NextRequest) {
           mainProduct.package_height_image
         ]
           .filter(src => typeof src === 'string' && src.trim() !== '')
-          .map(src => ({ src }));
+          .map(src => ({ src: APP_HOST + src }));
 
         const shopifyProductPayload = {
           product: {

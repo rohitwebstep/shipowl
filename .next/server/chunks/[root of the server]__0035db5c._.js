@@ -11954,10 +11954,10 @@ async function POST(req) {
         const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkProductForDropshipper"])(dropshipperId, supplierProductId);
         if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true,
+                status: false,
                 message: productResult.message
             }, {
-                status: 200
+                status: 404
             });
         }
         const mainProduct = productResult.product?.product;
@@ -12122,13 +12122,6 @@ async function POST(req) {
                 status: 400
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            status: false,
-            error: productCreateResult?.message || 'Product creation failed'
-        }, {
-            status: 500
-        });
     } catch (err) {
         const error = err instanceof Error ? err.message : 'Internal Server Error';
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Exception:', error);
