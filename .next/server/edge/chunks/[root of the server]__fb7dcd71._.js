@@ -197,6 +197,12 @@ function middleware(req) {
                     methods: [
                         "GET"
                     ]
+                },
+                {
+                    route: "api/dropshipper/shopify/callback",
+                    methods: [
+                        "GET"
+                    ]
                 }
             ]
         },

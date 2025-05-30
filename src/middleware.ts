@@ -82,6 +82,7 @@ export function middleware(req: NextRequest) {
                 { route: "/api/brand", methods: ["GET"] },
                 { route: "/api/category", methods: ["GET"] },
                 { route: "api/order/shipping/status", methods: ["GET"] },
+                { route: "api/dropshipper/shopify/callback", methods: ["GET"] },
             ],
         },
         {
