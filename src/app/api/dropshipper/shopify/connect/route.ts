@@ -5,6 +5,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import {
     isShopUsedAndVerified,
     createDropshipperShopifyStore,
+    deleteShopIfNotVerified,
 } from '@/app/models/dropshipper/shopify';
 
 export async function POST(req: NextRequest) {
@@ -67,15 +68,25 @@ export async function POST(req: NextRequest) {
 
         // Check if the Shopify store is already registered and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
-        console.log(`isAlreadyUsed - `, isAlreadyUsed);
         if (isAlreadyUsed.status) {
-            return NextResponse.json(
-                {
-                    status: false,
-                    message: isAlreadyUsed.message || 'This Shopify store is already registered and verified.',
-                },
-                { status: 409 }
-            );
+            if (isAlreadyUsed.verified) {
+                return NextResponse.json(
+                    {
+                        status: false,
+                        message: isAlreadyUsed.message || 'This Shopify store is already registered and verified.',
+                    },
+                    { status: 409 }
+                );
+            } else {
+                const deleteShop = await deleteShopIfNotVerified(shop);
+                return NextResponse.json(
+                    {
+                        status: false,
+                        message: deleteShop.message || 'This Shopify store is already registered and verified.',
+                    },
+                    { status: 409 }
+                );
+            }
         }
 
         // Prepare payload

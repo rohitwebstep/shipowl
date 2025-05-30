@@ -73,50 +73,44 @@ const serializeBigInt = <T>(obj: T): T => {
 };
 
 export async function isShopUsedAndVerified(shop: string) {
-  try {
-    // Find the shop record regardless of verification status
-    const existingStore = await prisma.shopifyStore.findFirst({
-      where: { shop: shop },
-      include: { admin: true }
-    });
-
-    if (existingStore) {
-      if (existingStore.verificationStatus) {
-        // Shop exists and is verified — return positive result
-        return {
-          status: true,
-          shopifyStore: existingStore,
-          message: 'Shop is used and verified.'
-        };
-      } else {
-        // Shop exists but is NOT verified — delete it
-        await prisma.shopifyStore.delete({
-          where: { id: existingStore.id }
+    try {
+        // Find the shop regardless of verification status
+        const existingStore = await prisma.shopifyStore.findFirst({
+            where: {
+                shop: shop
+            },
+            include: {
+                admin: true
+            }
         });
 
-        return {
-          status: false,
-          shopifyStore: null,
-          message: 'Shop was found but not verified, so it was deleted.'
-        };
-      }
-    } else {
-      // Shop not found
-      return {
-        status: false,
-        shopifyStore: null,
-        message: 'Shop not found.'
-      };
-    }
+        if (existingStore) {
+            return {
+                status: true,                        // shop exists
+                verified: !!existingStore.verificationStatus,  // true if verified, else false
+                shopifyStore: existingStore,
+                message: existingStore.verificationStatus
+                    ? 'Shop is used and verified.'
+                    : 'Shop is used but not verified.'
+            };
+        } else {
+            return {
+                status: false,
+                verified: false,
+                shopifyStore: null,
+                message: 'Shop not found.'
+            };
+        }
 
-  } catch (error) {
-    console.error(`Error checking if shop is used and verified:`, error);
-    return {
-      status: false,
-      shopifyStore: null,
-      message: 'An error occurred while checking the shop.'
-    };
-  }
+    } catch (error) {
+        console.error(`Error checking if shop is used and verified:`, error);
+        return {
+            status: false,
+            verified: false,
+            shopifyStore: null,
+            message: 'An error occurred while checking the shop.'
+        };
+    }
 }
 
 export async function createDropshipperShopifyStore(dropshipperId: number, dropshipperRole: string, dropshipperShopifyStore: ShopifyStore) {
@@ -217,5 +211,45 @@ export async function verifyDropshipperShopifyStore(dropshipperId: number, drops
     } catch (error) {
         console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function deleteShopIfNotVerified(shop: string) {
+    try {
+        // Find the shop record regardless of verification status
+        const existingStore = await prisma.shopifyStore.findFirst({
+            where: { shop: shop }
+        });
+
+        if (!existingStore) {
+            return {
+                status: false,
+                message: 'Shop not found.'
+            };
+        }
+
+        // Check verification status
+        if (existingStore.verificationStatus) {
+            return {
+                status: false,
+                message: 'Shop is verified and will not be deleted.'
+            };
+        }
+
+        // Delete the shop because it is not verified
+        await prisma.shopifyStore.delete({
+            where: { id: existingStore.id }
+        });
+
+        return {
+            status: true,
+            message: 'Shop was found but not verified, so it was deleted.'
+        };
+    } catch (error) {
+        console.error(`Error deleting shop if not verified:`, error);
+        return {
+            status: false,
+            message: 'An error occurred while trying to delete the shop.'
+        };
     }
 }
