@@ -179,7 +179,7 @@ export async function verifyDropshipperShopifyStore(dropshipperId: number, drops
         const existing = await isShopUsedAndVerified(shop);
 
         // 🚫 Stop if already verified
-        if (existing.status && existing.shopifyStore && !existing.verified) {
+        if (existing.status && existing.shopifyStore && existing.verified) {
             return { status: true, message: "Shop already verified and connected." };
         }
 
