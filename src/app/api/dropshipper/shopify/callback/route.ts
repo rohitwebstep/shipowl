@@ -8,32 +8,40 @@ import { isShopUsedAndVerified, verifyDropshipperShopifyStore } from '@/app/mode
 export async function GET(req: NextRequest) {
     try {
         logMessage('debug', 'Received GET request to complete Shopify OAuth');
+        console.log('Step 1: Start processing GET request');
 
         const url = new URL(req.url);
         const shop = url.searchParams.get('shop');
         const code = url.searchParams.get('code');
         const hmac = url.searchParams.get('hmac');
+        console.log(`Step 2: Extracted query params - shop: ${shop}, code: ${code}, hmac: ${hmac}`);
 
         if (!shop || !code || !hmac) {
+            console.log('Step 3: Missing required parameters');
             return NextResponse.json({ error: 'Missing required parameters.' }, { status: 400 });
         }
 
         // ✅ Check if shop is already used and verified
+        console.log(`Step 4: Checking if shop "${shop}" is already used and verified...`);
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
-        console.log(`isAlreadyUsed - `, isAlreadyUsed);
+        console.log('Step 5: isShopUsedAndVerified result:', isAlreadyUsed);
+
         if (!isAlreadyUsed.status || !isAlreadyUsed.shopifyStore) {
+            console.log('Step 6: Shop not used or not verified, aborting');
             return NextResponse.json({ status: false, message: isAlreadyUsed.message }, { status: 401 });
         }
 
         const shopifyStore = isAlreadyUsed.shopifyStore;
-        const dropshipper = isAlreadyUsed.shopifyStore.admin;
+        const dropshipper = shopifyStore.admin;
+        console.log('Step 7: shopifyStore and dropshipper info:', { shopifyStore, dropshipper });
 
         // ✅ Check for required shopifyStore fields
-        console.log(`shopifyStore.apiSecret - `, shopifyStore.apiSecret);
-        console.log(`shopifyStore.apiKey - `, shopifyStore.apiKey);
-        console.log(`shopifyStore.apiVersion - `, shopifyStore.apiVersion);
+        console.log(`Step 8: shopifyStore.apiSecret - ${shopifyStore.apiSecret}`);
+        console.log(`Step 9: shopifyStore.apiKey - ${shopifyStore.apiKey}`);
+        console.log(`Step 10: shopifyStore.apiVersion - ${shopifyStore.apiVersion}`);
 
         if (!shopifyStore.apiSecret || !shopifyStore.apiKey || !shopifyStore.apiVersion) {
+            console.log('Step 11: Incomplete Shopify store configuration');
             return NextResponse.json({
                 error: 'Shopify store configuration is incomplete (missing apiKey, apiSecret, or apiVersion).',
             }, { status: 500 });
@@ -46,23 +54,30 @@ export async function GET(req: NextRequest) {
                 params[key] = value;
             }
         });
+        console.log('Step 12: Params for HMAC validation:', params);
 
         const message = new URLSearchParams(params).toString();
+        console.log('Step 13: Message string for HMAC:', message);
+
         const generatedHash = crypto
             .createHmac('sha256', shopifyStore.apiSecret)
             .update(message)
             .digest('hex');
+        console.log('Step 14: Generated HMAC hash:', generatedHash);
 
         const hmacValid = crypto.timingSafeEqual(
             Buffer.from(hmac, 'utf-8'),
             Buffer.from(generatedHash, 'utf-8')
         );
-        
+        console.log('Step 15: HMAC valid?', hmacValid);
+
         if (!hmacValid) {
+            console.log('Step 16: HMAC validation failed');
             return NextResponse.json({ error: 'HMAC validation failed.' }, { status: 401 });
         }
 
         // 🔐 Exchange code for access token
+        console.log('Step 17: Exchanging code for access token...');
         const tokenRes = await axios.post(
             `https://${shop}/admin/oauth/access_token`,
             qs.stringify({
@@ -72,10 +87,12 @@ export async function GET(req: NextRequest) {
             }),
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
         );
+        console.log('Step 18: Received access token response:', tokenRes.data);
 
         const accessToken = tokenRes.data.access_token;
 
         // 🛒 Fetch shop data
+        console.log('Step 19: Fetching shop data from Shopify API...');
         const shopInfoRes = await axios.get(
             `https://${shop}/admin/api/${shopifyStore.apiVersion}/shop.json`,
             {
@@ -84,6 +101,7 @@ export async function GET(req: NextRequest) {
                 }
             }
         );
+        console.log('Step 20: Received shop info:', shopInfoRes.data.shop);
 
         const shopData = shopInfoRes.data.shop;
 
@@ -110,21 +128,26 @@ export async function GET(req: NextRequest) {
             ianaTimezone: shopData.iana_timezone,
             shopCreatedAt: shopData.created_at
         };
+        console.log('Step 21: Prepared payload for verifyDropshipperShopifyStore:', payload);
 
         // 🧩 Replace with actual dropshipper ID and role
         const dropshipperId = dropshipper.id;
+        console.log(`Step 22: dropshipperId: ${dropshipperId}, role: ${dropshipper.role}`);
 
         const result = await verifyDropshipperShopifyStore(
             dropshipperId,
             dropshipper.role,
             payload
         );
+        console.log('Step 23: Result from verifyDropshipperShopifyStore:', result);
 
         if (result?.status) {
+            console.log('Step 24: Store verified successfully, sending success response');
             return NextResponse.json({ status: true }, { status: 200 });
         }
 
         logMessage('error', 'Failed to create store:', result?.message || 'Unknown error');
+        console.log('Step 25: Store creation failed:', result?.message || 'Unknown error');
         return NextResponse.json({
             status: false,
             error: result?.message || 'Store creation failed',
@@ -132,6 +155,7 @@ export async function GET(req: NextRequest) {
 
     } catch (error) {
         logMessage('error', 'OAuth Callback Error:', error);
+        console.log('Step 26: Exception caught in OAuth flow:', error);
         return NextResponse.json({ status: false, error }, { status: 500 });
     }
 }
