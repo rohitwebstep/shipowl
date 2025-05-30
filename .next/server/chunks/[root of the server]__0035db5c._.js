@@ -12066,6 +12066,7 @@ async function POST(req) {
             const shopDomain = shopifyApp.shop;
             const accessToken = shopifyApp.accessToken;
             const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION;
+            const APP_HOST = process.env.URL || '';
             try {
                 const shopifyImages = [
                     mainProduct.package_weight_image,
@@ -12073,7 +12074,7 @@ async function POST(req) {
                     mainProduct.package_width_image,
                     mainProduct.package_height_image
                 ].filter((src)=>typeof src === 'string' && src.trim() !== '').map((src)=>({
-                        src
+                        src: APP_HOST + src
                     }));
                 const shopifyProductPayload = {
                     product: {

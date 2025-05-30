@@ -281,7 +281,7 @@ export async function POST(req: NextRequest) {
         const shopifyProductPayload = {
           product: {
             title: mainProduct?.name,
-            body_html: "<strong>Static description for your product.</strong>",
+            body_html: mainProduct?.description,
             images: shopifyImages,
             variants: parsedVariants.map(v => ({
               price: v.price.toFixed(2),
