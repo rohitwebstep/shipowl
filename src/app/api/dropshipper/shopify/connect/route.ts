@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
                     { status: 409 }
                 );
             } else {
-                const deleteShop = await deleteShopIfNotVerified(shop);
+                await deleteShopIfNotVerified(shop);
             }
         }
 
