@@ -67,11 +67,12 @@ export async function POST(req: NextRequest) {
 
         // Check if the Shopify store is already registered and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
-        if (isAlreadyUsed) {
+        console.log(`isAlreadyUsed - `, isAlreadyUsed);
+        if (isAlreadyUsed.status) {
             return NextResponse.json(
                 {
                     status: false,
-                    message: 'This Shopify store is already registered and verified.',
+                    message: isAlreadyUsed.message || 'This Shopify store is already registered and verified.',
                 },
                 { status: 409 }
             );
