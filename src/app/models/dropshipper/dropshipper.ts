@@ -55,6 +55,27 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
+export async function generateUniqueDropshipperId() {
+    let dropshipperId = '';
+    let isTaken = true;
+
+    while (isTaken) {
+        const randomNumber = Math.floor(1000 + Math.random() * 9000); // generates a 4-digit number
+        dropshipperId = `DROP-${randomNumber}`;
+
+        const existingDropshipper = await prisma.admin.findFirst({
+            where: {
+                role: 'dropshipper',
+                uniqeId: dropshipperId, // assuming dropshipperId is stored in DB
+            },
+        });
+
+        isTaken = !!existingDropshipper;
+    }
+
+    return dropshipperId;
+}
+
 export async function checkEmailAvailability(email: string) {
     try {
         // Query to find if an email already exists with role 'dropshipper'
@@ -135,6 +156,7 @@ export async function createDropshipper(adminId: number, adminRole: string, drop
         const newDropshipper = await prisma.admin.create({
             data: {
                 name,
+                uniqeId: await generateUniqueDropshipperId(),
                 profilePicture,
                 email,
                 website,

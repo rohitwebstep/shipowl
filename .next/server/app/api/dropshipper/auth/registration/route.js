@@ -1,6 +1,6 @@
 const CHUNK_PUBLIC_PATH = "server/app/api/dropshipper/auth/registration/route.js";
 const runtime = require("../../../../../chunks/[turbopack]_runtime.js");
-runtime.loadChunk("server/chunks/[root of the server]__9604b6c7._.js");
+runtime.loadChunk("server/chunks/[root of the server]__63292133._.js");
 runtime.loadChunk("server/chunks/node_modules_next_99fac1b2._.js");
 runtime.loadChunk("server/chunks/node_modules_nodemailer_a9f338b9._.js");
 runtime.loadChunk("server/chunks/node_modules_c9860578._.js");
