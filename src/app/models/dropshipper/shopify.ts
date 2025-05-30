@@ -22,6 +22,7 @@ interface ShopifyStore {
     apiSecret?: string;     // Formerly SHOPIFY_API_SECRET
     scopes?: string;        // Formerly SHOPIFY_SCOPES (comma-separated)
     redirectUri?: string;
+    apiVersion?: string;
 
     // === Shopify API & Version (optional, add if needed) ===
     // apiVersion?: string; 
