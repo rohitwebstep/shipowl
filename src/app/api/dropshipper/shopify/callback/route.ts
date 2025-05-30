@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
 
         if (result?.status) {
             console.log('Step 24: Store verified successfully, sending success response');
-            return NextResponse.json({ status: true }, { status: 200 });
+            return NextResponse.json({ status: true, tokenRes, shopInfoRes }, { status: 200 });
         }
 
         logMessage('error', 'Failed to create store:', result?.message || 'Unknown error');
@@ -151,6 +151,8 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({
             status: false,
             error: result?.message || 'Store creation failed',
+            tokenRes,
+            shopInfoRes
         }, { status: 500 });
 
     } catch (error) {
