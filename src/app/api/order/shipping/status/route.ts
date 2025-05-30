@@ -11,7 +11,7 @@ import {
 
 export async function GET(req: NextRequest) {
     try {
-        logMessage('debug', '🚚 Order shipping status request received');
+        logMessage('debug', '🚚 Order shipping status request received', req);
 
         const { orders } = await refreshPendingOrdersShippingStatus() || {};
 

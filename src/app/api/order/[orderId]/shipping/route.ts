@@ -7,14 +7,26 @@ import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';
 import { getBadPincodeByPincode } from '@/app/models/badPincode';
 
+interface ShippingApiResult {
+  responsemsg: string;
+  data?: unknown;
+}
+
+function isShippingApiResult(obj: unknown): obj is ShippingApiResult {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'responsemsg' in obj &&
+    typeof (obj as Record<string, unknown>).responsemsg === 'string'
+  );
+}
+
 export async function POST(req: NextRequest) {
   try {
-    // Extract orderIdId directly from the URL path
     const parts = req.nextUrl.pathname.split('/');
-    const orderIdId = parts[parts.length - 2]; // Get the second-to-last segment
+    const orderIdId = parts[parts.length - 2];
     logMessage('debug', 'Requested OrderId ID:', orderIdId);
 
-    // Get headers
     const adminIdHeader = req.headers.get("x-admin-id");
     const adminRole = req.headers.get("x-admin-role");
 
@@ -27,7 +39,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if admin exists
     const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
@@ -54,7 +65,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         status: false,
         message: 'Bad Pincode found',
-        isBadPincode: true,  // Flag indicating the pincode is bad
+        isBadPincode: true,
       }, { status: 400 });
     }
 
@@ -65,11 +76,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         status: false,
         message: 'High RTO Pincode found',
-        isHighRto: true,  // Flag indicating high RTO for this pincode
+        isHighRto: true,
       }, { status: 400 });
     }
 
-    // Process shipping if no bad pincode or high RTO
     const placeOrderShippingResult = await placeOrderShipping(orderIdIdNum);
 
     const orderPayload = {
@@ -91,18 +101,14 @@ export async function POST(req: NextRequest) {
       }, { status: 500 });
     }
 
-    // Safe access with runtime checks
     const result = placeOrderShippingResult.result;
-
-    const isObject = (val: unknown): val is Record<string, unknown> =>
-      val !== null && typeof val === 'object';
 
     let message = 'Shipping started.';
     let data = null;
 
-    if (isObject(result) && typeof result.responsemsg === 'string') {
+    if (isShippingApiResult(result)) {
       message = result.responsemsg;
-      data = (result as any).data ?? null; // If you know the shape, replace any with proper type
+      data = result.data ?? null;
     }
 
     return NextResponse.json({
