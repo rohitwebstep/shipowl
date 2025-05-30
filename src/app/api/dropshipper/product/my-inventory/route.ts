@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
+import { getShopifyStoreById, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
+import { getSupplierProductVariantById } from '@/app/models/supplier/product';
 
 type Variant = {
   variantId: number;
@@ -98,37 +101,50 @@ export async function POST(req: NextRequest) {
     const dropshipperId = Number(dropshipperIdHeader);
 
     if (!dropshipperIdHeader || isNaN(dropshipperId)) {
-      logMessage('warn', `Invalid dropshipperIdHeader: ${dropshipperIdHeader}`);
-      return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
+      logMessage('warn', `Invalid dropshipper ID: ${dropshipperIdHeader}`);
+      return NextResponse.json(
+        { error: 'Missing or invalid dropshipper ID in request.' },
+        { status: 400 }
+      );
     }
 
     const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { error: `User not found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
 
     const requiredFields = ['supplierProductId'];
     const formData = await req.formData();
+
     const validation = validateFormData(formData, {
       requiredFields,
-      patternValidations: {
-        supplierProductId: 'number',
-      },
+      patternValidations: { supplierProductId: 'number' },
     });
 
     if (!validation.isValid) {
       logMessage('warn', 'Form validation failed', validation.error);
-      return NextResponse.json({ status: false, error: validation.error, message: validation.message }, { status: 400 });
+      return NextResponse.json(
+        { status: false, error: validation.error, message: validation.message },
+        { status: 400 }
+      );
     }
 
     const extractNumber = (key: string) => Number(formData.get(key)) || 0;
     const supplierProductId = extractNumber('supplierProductId');
 
     const productResult = await checkProductForDropshipper(dropshipperId, supplierProductId);
-    if (!productResult?.status || productResult.existsInDropshipperProduct) {
-      return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
+    if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
+      return NextResponse.json(
+        { status: false, message: productResult.message },
+        { status: 404 }
+      );
     }
+
+    const mainProduct = productResult.product?.product;
 
     const rawVariants = formData.get('variants') as string | null;
     let parsedVariants: Variant[] = [];
@@ -138,36 +154,95 @@ export async function POST(req: NextRequest) {
         parsedVariants = JSON.parse(rawVariants);
 
         if (!Array.isArray(parsedVariants)) {
-          throw new Error('Variants must be an array');
+          throw new Error('Variants must be an array.');
         }
 
-        // Validate and sanitize each variant
-        parsedVariants = parsedVariants.map((variant, index) => {
-          const errors = [];
+        const variantsWithStatus = await Promise.all(
+          parsedVariants.map(async (variant, index) => {
+            const errors: string[] = [];
 
-          if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
-          if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
-          if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
+            if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
+            if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
+            if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
 
-          return {
-            variantId: Number(variant.variantId),
-            stock: Number(variant.stock),
-            price: Number(variant.price),
-            status: typeof variant.status === 'boolean' ? variant.status : true,
-            errors,
-            index
-          };
-        });
+            const variantResult = await getSupplierProductVariantById(variant.variantId);
+            if (!variantResult.status) {
+              // Skip this variant by returning null or undefined
+              return null;
+            }
+
+            return {
+              variantId: Number(variant.variantId),
+              stock: Number(variant.stock),
+              price: Number(variant.price),
+              status: typeof variant.status === 'boolean' ? variant.status : true,
+              errors,
+              index,
+            };
+          })
+        );
+
+        // Filter out any null (invalid) variants
+        parsedVariants = variantsWithStatus.filter(v => v !== null);
 
         const variantErrors = parsedVariants.filter(v => v.errors.length > 0);
         if (variantErrors.length > 0) {
-          const errorDetails = variantErrors.map(v => `Variant at index ${v.index}: ${v.errors.join(', ')}`).join('; ');
-          return NextResponse.json({ status: false, message: 'Variant validation failed', error: errorDetails }, { status: 400 });
+          const errorDetails = variantErrors
+            .map(v => `Variant at index ${v.index}: ${v.errors.join(', ')}`)
+            .join('; ');
+          return NextResponse.json(
+            { status: false, message: 'Variant validation failed', error: errorDetails },
+            { status: 400 }
+          );
         }
-
       } catch (error) {
-        return NextResponse.json({ status: false, message: 'Invalid variants JSON', error }, { status: 400 });
+        return NextResponse.json(
+          { status: false, message: 'Invalid variants JSON format.', error },
+          { status: 400 }
+        );
       }
+    }
+
+    const shopifyAppId = extractNumber('shopyfyApp');
+    let shopifyApp;
+
+    if (shopifyAppId && !isNaN(shopifyAppId)) {
+      const shopifyAppResult = await getShopifyStoreById(shopifyAppId);
+      if (!shopifyAppResult.status) {
+        return NextResponse.json(
+          { status: false, message: 'Invalid Shopify store ID. Store not found.' },
+          { status: 400 }
+        );
+      }
+      shopifyApp = shopifyAppResult.shopifyStore;
+    } else {
+      const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+      if (!shopifyAppsResult.status) {
+        return NextResponse.json(
+          { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
+          { status: 400 }
+        );
+      }
+
+      shopifyApp = shopifyAppsResult.shopifyStores[0];
+
+      /*
+      return NextResponse.json(
+        {
+          status: false,
+          message: 'Missing or invalid Shopify store ID. Using all stores instead.',
+          shopifyStores: shopifyAppsResult.shopifyStores,
+        },
+        { status: 400 }
+      );
+      */
+    }
+
+    if (!shopifyApp) {
+      return NextResponse.json(
+        { status: false, message: 'Shopify store data is unavailable. Please verify the input.' },
+        { status: 400 }
+      );
     }
 
     const productPayload = {
@@ -178,22 +253,90 @@ export async function POST(req: NextRequest) {
       createdByRole: dropshipperRole,
     };
 
-    logMessage('info', 'Product payload created:', productPayload);
+    logMessage('info', 'Creating product with payload:', productPayload);
 
-    const productCreateResult = await createDropshipperProduct(dropshipperId, String(dropshipperRole), productPayload);
+    const productCreateResult = await createDropshipperProduct(
+      dropshipperId,
+      String(dropshipperRole),
+      productPayload
+    );
 
     if (productCreateResult?.status) {
-      return NextResponse.json({ status: true, product: productCreateResult.product }, { status: 200 });
-    }
+      const shopDomain = shopifyApp.shop;
+      const accessToken = shopifyApp.accessToken;
+      const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION;
 
-    logMessage('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
-    return NextResponse.json(
-      { status: false, error: productCreateResult?.message || 'Product creation failed' },
-      { status: 500 }
-    );
+      try {
+
+        const shopifyImages = [
+          mainProduct.package_weight_image,
+          mainProduct.package_length_image,
+          mainProduct.package_width_image,
+          mainProduct.package_height_image
+        ]
+          .filter(src => typeof src === 'string' && src.trim() !== '')
+          .map(src => ({ src }));
+
+        const shopifyProductPayload = {
+          product: {
+            title: mainProduct?.name,
+            body_html: "<strong>Static description for your product.</strong>",
+            images: shopifyImages,
+            variants: parsedVariants.map(v => ({
+              price: v.price.toFixed(2),
+              inventory_quantity: v.stock,
+              option1: `Variant ${v.variantId}`,
+            }))
+          }
+        };
+
+        console.log('shopifyProductPayload - ', shopifyProductPayload);
+        console.log('shopifyProductPayload.product.images - ', shopifyProductPayload.product.images);
+        console.log('shopifyProductPayload.product.variants - ', shopifyProductPayload.product.variants);
+
+        const shopifyResponse = await axios.post(
+          `https://${shopDomain}/admin/api/${SHOPIFY_API_VERSION}/products.json`,
+          shopifyProductPayload,
+          {
+            headers: {
+              'X-Shopify-Access-Token': accessToken,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        console.log('Shopify API response:', shopifyResponse.data);
+
+        return NextResponse.json(
+          { status: true, product: productCreateResult.product },
+          { status: 200 }
+        );
+      } catch (error) {
+        // Log the error if you have a logger or console
+        console.error('Shopify API error:', error);
+
+        return NextResponse.json(
+          {
+            status: false,
+            message: 'Failed to create product on Shopify',
+            error: error instanceof Error ? error.message : 'Unknown error'
+          },
+          { status: 500 }
+        );
+      }
+    } else {
+      return NextResponse.json(
+        {
+          status: false,
+          message: productCreateResult?.message || 'Failed to create product',
+        },
+        { status: 400 }
+      );
+    }
   } catch (err: unknown) {
     const error = err instanceof Error ? err.message : 'Internal Server Error';
-    logMessage('error', 'Product Creation Error:', error);
+    logMessage('error', 'Product Creation Exception:', error);
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
+

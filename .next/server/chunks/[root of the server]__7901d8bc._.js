@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/dropshipper/shopify/callback/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/dropshipper/product/my-inventory/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,110 +50,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("crypto", () => require("crypto"));
-
-module.exports = mod;
-}}),
-"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("util", () => require("util"));
-
-module.exports = mod;
-}}),
-"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
-
-module.exports = mod;
-}}),
-"[externals]/http [external] (http, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("http", () => require("http"));
-
-module.exports = mod;
-}}),
-"[externals]/https [external] (https, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("https", () => require("https"));
-
-module.exports = mod;
-}}),
-"[externals]/url [external] (url, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("url", () => require("url"));
-
-module.exports = mod;
-}}),
-"[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("fs", () => require("fs"));
-
-module.exports = mod;
-}}),
-"[externals]/assert [external] (assert, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("assert", () => require("assert"));
-
-module.exports = mod;
-}}),
-"[externals]/tty [external] (tty, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tty", () => require("tty"));
-
-module.exports = mod;
-}}),
-"[externals]/os [external] (os, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("os", () => require("os"));
-
-module.exports = mod;
-}}),
-"[externals]/zlib [external] (zlib, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("zlib", () => require("zlib"));
-
-module.exports = mod;
-}}),
-"[externals]/events [external] (events, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("events", () => require("events"));
 
 module.exports = mod;
 }}),
@@ -8166,6 +8062,22 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
+"[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs", () => require("fs"));
+
+module.exports = mod;
+}}),
 "[project]/prisma/prisma/generated/client/index.js [app-route] (ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9610,6 +9522,1144 @@ async function fetchLogInfo(module, action, req) {
     }
 }
 }}),
+"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("buffer", () => require("buffer"));
+
+module.exports = mod;
+}}),
+"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}}),
+"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}}),
+"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}}),
+"[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "generatePasswordResetToken": (()=>generatePasswordResetToken),
+    "generateRegistrationToken": (()=>generateRegistrationToken),
+    "generateToken": (()=>generateToken),
+    "isUserExist": (()=>isUserExist),
+    "verifyToken": (()=>verifyToken)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+;
+;
+const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
+function generateToken(adminId, adminRole) {
+    console.log(`adminId: ${adminId}, adminRole: ${adminRole}`);
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '3h'
+    });
+}
+function generatePasswordResetToken(adminId, adminRole) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '1h'
+    });
+}
+function generateRegistrationToken(adminId, adminRole) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '1h'
+    });
+}
+async function verifyToken(token) {
+    try {
+        const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
+        return {
+            payload,
+            status: true,
+            message: "Token is valid"
+        };
+    } catch (error) {
+        let message = "Authentication failed. Please try again.";
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error;
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
+            }
+        }
+        return {
+            payload: null,
+            status: false,
+            message
+        };
+    }
+}
+async function isUserExist(adminId, adminRole) {
+    try {
+        const adminRoleStr = String(adminRole); // Ensure it's a string
+        const adminModel = [
+            "admin",
+            "dropshipper",
+            "supplier"
+        ].includes(adminRoleStr) ? "admin" : "adminStaff";
+        // Fetch admin details from database
+        let admin;
+        if (adminModel === "admin") {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
+                where: {
+                    id: adminId,
+                    role: adminRoleStr
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        } else {
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
+                where: {
+                    id: adminId,
+                    role: adminRoleStr
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true
+                }
+            });
+        }
+        // If admin doesn't exist, return false with a message
+        if (!admin) {
+            return {
+                status: false,
+                message: "User with the provided ID does not exist"
+            };
+        }
+        // Return admin details if found
+        return {
+            status: true,
+            admin
+        };
+    } catch (error) {
+        console.error("Error fetching admin by ID:", error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+}}),
+"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "validateFormData": (()=>validateFormData)
+});
+function toReadableFieldName(field) {
+    // Converts camelCase or snake_case to Title Case
+    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
+}
+function validateFormData(formData, { requiredFields = [], patternValidations = {}, fileExtensionValidations = {} }) {
+    const error = {};
+    // Required fields
+    for (const field of requiredFields){
+        const value = formData.get(field);
+        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
+            error[field] = `${toReadableFieldName(field)} is required`;
+        }
+    }
+    // Pattern validations
+    for (const [field, expectedType] of Object.entries(patternValidations)){
+        const value = formData.get(field);
+        if (value !== null) {
+            const val = typeof value === 'string' ? value.trim() : value;
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean = expectedType === 'boolean' && ![
+                'true',
+                'false',
+                '1',
+                '0',
+                true,
+                false,
+                1,
+                0,
+                'active',
+                'inactive'
+            ].includes(val.toString().toLowerCase());
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
+            }
+        }
+    }
+    // File extension validations
+    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations)){
+        const file = formData.get(field);
+        if (file instanceof File) {
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop() || '';
+            if (!allowedExtensions.map((ext)=>ext.toLowerCase()).includes(fileExtension)) {
+                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
+            }
+        } else if (file !== null) {
+            error[field] = `${toReadableFieldName(field)} must be a valid file`;
+        }
+    }
+    const errorCount = Object.keys(error).length;
+    return {
+        isValid: errorCount === 0,
+        ...errorCount > 0 && {
+            error
+        },
+        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
+    };
+}
+}}),
+"[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkDropshipperProductForDropshipper": (()=>checkDropshipperProductForDropshipper),
+    "checkProductForDropshipper": (()=>checkProductForDropshipper),
+    "checkSupplierProductForDropshipper": (()=>checkSupplierProductForDropshipper),
+    "createDropshipperProduct": (()=>createDropshipperProduct),
+    "deleteDropshipperProduct": (()=>deleteDropshipperProduct),
+    "getDropshipperProductById": (()=>getDropshipperProductById),
+    "getDropshipperProductVariantById": (()=>getDropshipperProductVariantById),
+    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
+    "getProductsByStatus": (()=>getProductsByStatus),
+    "restoreDropshipperProduct": (()=>restoreDropshipperProduct),
+    "softDeleteDropshipperProduct": (()=>softDeleteDropshipperProduct),
+    "updateDropshipperProduct": (()=>updateDropshipperProduct)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
+;
+const serializeBigInt = (obj)=>{
+    // If it's an array, recursively apply serializeBigInt to each element
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    } else if (typeof obj === 'bigint') {
+        return obj.toString();
+    }
+    // Return the value unchanged if it's not an array, object, or BigInt
+    return obj;
+};
+async function createDropshipperProduct(dropshipperId, dropshipperRole, product) {
+    try {
+        const { supplierProductId, variants, createdBy, createdByRole } = product;
+        // Step 1: Check if main product exists
+        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
+            where: {
+                id: supplierProductId
+            }
+        });
+        if (!existingProduct) {
+            return {
+                status: false,
+                message: "Product does not exist."
+            };
+        }
+        // Step 2: Validate each variant under this product
+        const variantIds = variants.map((v)=>v.variantId);
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findMany({
+            where: {
+                id: {
+                    in: variantIds
+                },
+                supplierProductId: supplierProductId
+            }
+        });
+        if (existingVariants.length !== variantIds.length) {
+            return {
+                status: false,
+                message: "One or more variants are invalid for this product."
+            };
+        }
+        // Step 3: Create dropshipperProduct
+        const newDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.create({
+            data: {
+                supplierProductId,
+                supplierId: existingProduct.supplierId,
+                productId: existingProduct.productId,
+                dropshipperId,
+                createdBy,
+                createdByRole,
+                createdAt: new Date()
+            }
+        });
+        // Step 4: Create dropshipperProductVariants
+        for (const variant of variants){
+            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
+                data: {
+                    dropshipperId,
+                    supplierProductId: newDropshipperProduct.supplierProductId,
+                    dropshipperProductId: newDropshipperProduct.id,
+                    productId: newDropshipperProduct.productId,
+                    supplierProductVariantId: variant.variantId,
+                    stock: variant.stock,
+                    price: variant.price,
+                    status: variant.status ?? true,
+                    createdBy,
+                    createdByRole,
+                    createdAt: new Date()
+                }
+            });
+        }
+        return {
+            status: true,
+            product: serializeBigInt(newDropshipperProduct)
+        };
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("error", "Error creating dropshipper product:", error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateDropshipperProduct = async (dropshipperId, dropshipperRole, dropshipperProductId, product)=>{
+    try {
+        const { variants, updatedBy, updatedByRole } = product;
+        // Step 1: Check if dropshipper product exists
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findUnique({
+            where: {
+                id: dropshipperProductId
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: false,
+                message: "Dropshipper product not found."
+            };
+        }
+        // Step 2: Update dropshipperProduct
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id: dropshipperProductId
+            },
+            data: {
+                updatedBy,
+                updatedByRole,
+                updatedAt: new Date()
+            }
+        });
+        // Step 3: Update or Create each variant
+        for (const variant of variants){
+            const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                where: {
+                    dropshipperProductId,
+                    supplierProductVariantId: variant.variantId
+                }
+            });
+            if (existing) {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.update({
+                    where: {
+                        id: existing.id
+                    },
+                    data: {
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date()
+                    }
+                });
+            } else {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
+                    data: {
+                        dropshipperId,
+                        supplierProductId: dropshipperProduct.supplierProductId,
+                        dropshipperProductId,
+                        productId: dropshipperProduct.productId,
+                        supplierProductVariantId: variant.variantId,
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date()
+                    }
+                });
+            }
+        }
+        return {
+            status: true,
+            message: "Dropshipper product updated successfully."
+        };
+    } catch (error) {
+        console.error("Update error:", error);
+        return {
+            status: false,
+            message: "Something went wrong."
+        };
+    }
+};
+const getProductsByFiltersAndStatus = async (type, filters, dropshipperId, status)=>{
+    try {
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
+            }
+        })();
+        let products;
+        if (type === "all") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    ...filters.categoryId ? {
+                        product: {
+                            categoryId: filters.categoryId
+                        }
+                    } : {},
+                    ...filters.brandId ? {
+                        product: {
+                            brandId: filters.brandId
+                        }
+                    } : {}
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true
+                        }
+                    }
+                }
+            });
+        }
+        if (type === "my") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    dropshipperId,
+                    ...filters.categoryId ? {
+                        product: {
+                            categoryId: filters.categoryId
+                        }
+                    } : {},
+                    ...filters.brandId ? {
+                        product: {
+                            brandId: filters.brandId
+                        }
+                    } : {}
+                },
+                include: {
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true
+                        }
+                    },
+                    dropshipper: true,
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                }
+            });
+        }
+        if (type === "notmy") {
+            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    dropshipperId
+                },
+                include: {
+                    variants: true
+                }
+            }).then((data)=>data.map((d)=>d.supplierProductId));
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    id: {
+                        notIn: myProductIds.length ? myProductIds : [
+                            0
+                        ]
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    product: true,
+                    variants: {
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            price: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            console.dir(notMyProducts, {
+                depth: null,
+                colors: true
+            });
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
+                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                        where: {
+                            supplierProductVariantId: variant.id,
+                            dropshipperProduct: {
+                                dropshipperId: {
+                                    not: dropshipperId
+                                }
+                            }
+                        },
+                        orderBy: {
+                            price: "asc"
+                        },
+                        select: {
+                            price: true
+                        }
+                    });
+                    return {
+                        ...variant,
+                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
+                    };
+                }));
+                return {
+                    ...product,
+                    variants: enrichedVariants
+                };
+            }));
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+            for (const item of enrichedProducts){
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+            products = uniqueByProductId;
+        }
+        return {
+            status: true,
+            products: serializeBigInt(products)
+        };
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return {
+            status: false,
+            message: "Error fetching products"
+        };
+    }
+};
+const getProductsByStatus = async (type, dropshipperId, status)=>{
+    try {
+        console.log(`type - ${type} // dropshipperId - ${dropshipperId} // status - ${status}`);
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
+            }
+        })();
+        let products = [];
+        if (type === "all") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: statusCondition,
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: true
+                }
+            });
+        } else if (type === "my") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    dropshipperId
+                },
+                include: {
+                    product: true,
+                    dropshipper: true,
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                }
+            });
+        } else if (type === "notmy") {
+            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    dropshipperId
+                },
+                include: {
+                    variants: true
+                }
+            }).then((data)=>data.map((d)=>d.supplierProductId));
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    id: {
+                        notIn: myProductIds.length ? myProductIds : [
+                            0
+                        ]
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    product: true,
+                    variants: {
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            price: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            console.dir(notMyProducts, {
+                depth: null,
+                colors: true
+            });
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
+                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                        where: {
+                            supplierProductVariantId: variant.id,
+                            dropshipperProduct: {
+                                dropshipperId: {
+                                    not: dropshipperId
+                                }
+                            }
+                        },
+                        orderBy: {
+                            price: "asc"
+                        },
+                        select: {
+                            price: true
+                        }
+                    });
+                    return {
+                        ...variant,
+                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
+                    };
+                }));
+                return {
+                    ...product,
+                    variants: enrichedVariants
+                };
+            }));
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+            for (const item of enrichedProducts){
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+            products = uniqueByProductId;
+        } else {
+            return {
+                status: false,
+                message: "Invalid type parameter",
+                products: []
+            };
+        }
+        return {
+            status: true,
+            message: "Products fetched successfully",
+            products: serializeBigInt(products)
+        };
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return {
+            status: false,
+            message: "Error fetching products",
+            products: []
+        };
+    }
+};
+const checkProductForDropshipper = async (dropshipperId, supplierProductId)=>{
+    try {
+        // 1. Check if product exists
+        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
+            where: {
+                id: supplierProductId
+            },
+            include: {
+                variants: true
+            }
+        });
+        if (!product) {
+            return {
+                status: false,
+                message: "Product not found",
+                existsInProduct: false,
+                existsInDropshipperProduct: false
+            };
+        }
+        // 2. Check if product exists for the given dropshipper
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                dropshipperId,
+                supplierProductId
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: true,
+                message: "Product exists but is not assigned to the dropshipper",
+                existsInProduct: true,
+                existsInDropshipperProduct: false,
+                product
+            };
+        }
+        return {
+            status: true,
+            message: "Product exists and is assigned to the dropshipper",
+            existsInProduct: true,
+            existsInDropshipperProduct: true,
+            product,
+            dropshipperProduct
+        };
+    } catch (error) {
+        console.error("Error checking product for dropshipper:", error);
+        return {
+            status: false,
+            message: "Internal server error",
+            existsInProduct: false,
+            existsInDropshipperProduct: false
+        };
+    }
+};
+const checkDropshipperProductForDropshipper = async (dropshipperId, dropshipperProductId)=>{
+    try {
+        // Check if the dropshipper product exists for the given dropshipper
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                id: dropshipperProductId,
+                dropshipperId
+            },
+            include: {
+                product: true,
+                dropshipper: true,
+                variants: {
+                    include: {
+                        supplierProductVariant: {
+                            include: {
+                                variant: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: true,
+                message: "Dropshipper product not found or not assigned to the dropshipper.",
+                existsInDropshipperProduct: false,
+                dropshipperProduct: null
+            };
+        }
+        return {
+            status: true,
+            message: "Dropshipper product exists and is assigned to the dropshipper.",
+            existsInDropshipperProduct: true,
+            dropshipperProduct: serializeBigInt(dropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ Error checking dropshipper product for dropshipper:", error);
+        return {
+            status: false,
+            message: "Internal server error while checking dropshipper product.",
+            existsInDropshipperProduct: false,
+            dropshipperProduct: null
+        };
+    }
+};
+const restoreDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
+    try {
+        const updatedAt = new Date();
+        // Step 1: Restore the dropshipper product
+        const restoredDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt
+            }
+        });
+        // Step 2: Restore all associated dropshipperProductVariants
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
+            where: {
+                dropshipperProductId: id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper product and variants restored successfully.",
+            restoredDropshipperProduct: serializeBigInt(restoredDropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ restoreDropshipperProduct Error:", error);
+        return {
+            status: false,
+            message: "Error restoring dropshipper product."
+        };
+    }
+};
+const softDeleteDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
+    try {
+        const deletedAt = new Date();
+        // Step 1: Soft delete dropshipperProduct
+        const updatedDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: dropshipperId,
+                deletedByRole: dropshipperRole,
+                deletedAt
+            }
+        });
+        // Step 2: Soft delete all related dropshipperProductVariants
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
+            where: {
+                dropshipperProductId: id
+            },
+            data: {
+                deletedBy: dropshipperId,
+                deletedByRole: dropshipperRole,
+                deletedAt
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper product and its variants soft deleted successfully.",
+            updatedDropshipperProduct
+        };
+    } catch (error) {
+        console.error("❌ softDeleteDropshipperProduct Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting dropshipper product."
+        };
+    }
+};
+const deleteDropshipperProduct = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper Product deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteProduct Error:", error);
+        return {
+            status: false,
+            message: "Error deleting dropshipper product"
+        };
+    }
+};
+const getDropshipperProductById = async (id)=>{
+    try {
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                id
+            },
+            select: {
+                id: true
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: false,
+                message: "Dropshipper product not found.",
+                product: null
+            };
+        }
+        return {
+            status: true,
+            message: "Dropshipper product ID fetched successfully.",
+            dropshipperProduct: serializeBigInt(dropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ Error in getDropshipperProductById:", error);
+        return {
+            status: false,
+            message: "Internal server error.",
+            product: null
+        };
+    }
+};
+const getDropshipperProductVariantById = async (id)=>{
+    try {
+        const dropshipperProductVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!dropshipperProductVariant) return {
+            status: false,
+            message: "dropshipperProductVariant Variant not found"
+        };
+        const sanitizedDropshipperProductVariant = serializeBigInt(dropshipperProductVariant);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedDropshipperProductVariant);
+        return {
+            status: true,
+            variant: sanitizedDropshipperProductVariant
+        };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product variant"
+        };
+    }
+};
+const checkSupplierProductForDropshipper = async (dropshipperId, supplierProductId)=>{
+    try {
+        // 1. Find the supplier product
+        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
+            where: {
+                id: supplierProductId
+            },
+            include: {
+                product: true,
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
+                variants: {
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        if (!supplierProduct) {
+            return {
+                status: true,
+                message: "Supplier product not found or not assigned to the supplier.",
+                existsInSupplierProduct: false,
+                supplierProduct: null,
+                otherSuppliers: []
+            };
+        }
+        // 2. Find other suppliers listing the same product
+        const otherSuppliers = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+            where: {
+                productId: supplierProduct.productId,
+                supplierId: {
+                    not: supplierProduct.supplierId
+                } // Exclude current supplier
+            },
+            include: {
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
+                variants: {
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return {
+            status: true,
+            message: "Supplier product exists and is assigned to the supplier.",
+            existsInSupplierProduct: true,
+            supplierProduct: serializeBigInt(supplierProduct),
+            otherSuppliers: serializeBigInt(otherSuppliers)
+        };
+    } catch (error) {
+        console.error("❌ Error checking supplier product for supplier:", error);
+        return {
+            status: false,
+            message: "Internal server error while checking supplier product.",
+            existsInSupplierProduct: false,
+            supplierProduct: null,
+            otherSuppliers: []
+        };
+    }
+};
+}}),
 "[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9890,20 +10940,23 @@ async function getShopifyStoreById(storeId) {
     }
 }
 }}),
-"[project]/src/app/api/dropshipper/shopify/callback/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/dropshipper/product/my-inventory/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "GET": (()=>GET)
+    "GET": (()=>GET),
+    "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/crypto [external] (crypto, cjs)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$qs$2f$lib$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/qs/lib/index.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)");
+;
+;
 ;
 ;
 ;
@@ -9912,144 +10965,231 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$drop
 ;
 async function GET(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Received GET request to complete Shopify OAuth');
-        console.log('Step 1: Start processing GET request');
-        const url = new URL(req.url);
-        const shop = url.searchParams.get('shop');
-        const code = url.searchParams.get('code');
-        const hmac = url.searchParams.get('hmac');
-        console.log(`Step 2: Extracted query params - shop: ${shop}, code: ${code}, hmac: ${hmac}`);
-        if (!shop || !code || !hmac) {
-            console.log('Step 3: Missing required parameters');
+        const urlParams = req.nextUrl.searchParams;
+        const categoryId = urlParams.get('category');
+        const brandId = urlParams.get('brand');
+        const rawStatus = (urlParams.get('status') ?? '').trim().toLowerCase();
+        const rawType = (urlParams.get('type') ?? '').trim().toLowerCase();
+        const statusMap = {
+            active: 'active',
+            inactive: 'inactive',
+            deleted: 'deleted',
+            notdeleted: 'notDeleted'
+        };
+        const validTypes = [
+            'all',
+            'my',
+            'notmy'
+        ];
+        const status = statusMap[rawStatus] ?? 'notDeleted';
+        const type = validTypes.includes(rawType) ? rawType : 'all';
+        const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
+            dropshipperId,
+            dropshipperRole
+        });
+        if (!dropshipperId || isNaN(dropshipperId)) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Missing required parameters.'
+                status: false,
+                error: 'Invalid or missing dropshipper ID'
             }, {
                 status: 400
             });
         }
-        // ✅ Check if shop is already used and verified
-        console.log(`Step 4: Checking if shop "${shop}" is already used and verified...`);
-        const isAlreadyUsed = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isShopUsedAndVerified"])(shop);
-        console.log('Step 5: isShopUsedAndVerified result:', isAlreadyUsed);
-        if (!isAlreadyUsed.status || !isAlreadyUsed.shopifyStore) {
-            console.log('Step 6: Shop not used or not verified, aborting');
+        const userExistence = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userExistence.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                message: isAlreadyUsed.message
+                error: `User Not Found: ${userExistence.message}`
             }, {
-                status: 401
+                status: 404
             });
         }
-        const shopifyStore = isAlreadyUsed.shopifyStore;
-        const dropshipper = shopifyStore.admin;
-        console.log('Step 7: shopifyStore and dropshipper info:', {
-            shopifyStore,
-            dropshipper
-        });
-        // ✅ Check for required shopifyStore fields
-        console.log(`Step 8: shopifyStore.apiSecret - ${shopifyStore.apiSecret}`);
-        console.log(`Step 9: shopifyStore.apiKey - ${shopifyStore.apiKey}`);
-        console.log(`Step 10: shopifyStore.apiVersion - ${shopifyStore.apiVersion}`);
-        if (!shopifyStore.apiSecret || !shopifyStore.apiKey || !shopifyStore.apiVersion) {
-            console.log('Step 11: Incomplete Shopify store configuration');
+        const filters = {};
+        if (categoryId) filters.categoryId = Number(categoryId);
+        if (brandId) filters.brandId = Number(brandId);
+        const productsResult = categoryId || brandId ? await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByFiltersAndStatus"])(type, filters, dropshipperId, status) : await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByStatus"])(type, dropshipperId, status);
+        if (productsResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Shopify store configuration is incomplete (missing apiKey, apiSecret, or apiVersion).'
-            }, {
-                status: 500
-            });
-        }
-        // ✅ Validate HMAC
-        const params = {};
-        url.searchParams.forEach((value, key)=>{
-            if (key !== 'hmac' && key !== 'signature') {
-                params[key] = value;
-            }
-        });
-        console.log('Step 12: Params for HMAC validation:', params);
-        const message = new URLSearchParams(params).toString();
-        console.log('Step 13: Message string for HMAC:', message);
-        const generatedHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHmac('sha256', shopifyStore.apiSecret).update(message).digest('hex');
-        console.log('Step 14: Generated HMAC hash:', generatedHash);
-        const hmacValid = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].timingSafeEqual(Buffer.from(hmac, 'utf-8'), Buffer.from(generatedHash, 'utf-8'));
-        console.log('Step 15: HMAC valid?', hmacValid);
-        if (!hmacValid) {
-            console.log('Step 16: HMAC validation failed');
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'HMAC validation failed.'
-            }, {
-                status: 401
-            });
-        }
-        // 🔐 Exchange code for access token
-        console.log('Step 17: Exchanging code for access token...');
-        const tokenRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].post(`https://${shop}/admin/oauth/access_token`, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$qs$2f$lib$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].stringify({
-            client_id: shopifyStore.apiKey,
-            client_secret: shopifyStore.apiSecret,
-            code
-        }), {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
-        console.log('Step 18: Received access token response:', tokenRes.data);
-        const accessToken = tokenRes.data.access_token;
-        // 🛒 Fetch shop data
-        console.log('Step 19: Fetching shop data from Shopify API...');
-        const shopInfoRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].get(`https://${shop}/admin/api/${shopifyStore.apiVersion}/shop.json`, {
-            headers: {
-                'X-Shopify-Access-Token': accessToken
-            }
-        });
-        console.log('Step 20: Received shop info:', shopInfoRes.data.shop);
-        const shopData = shopInfoRes.data.shop;
-        const payload = {
-            admin: {
-                connect: {
-                    id: shopData.adminId
-                }
-            },
-            shop: shop,
-            accessToken: accessToken,
-            email: shopData.email,
-            shopOwner: shopData.shop_owner,
-            name: shopData.name,
-            domain: shopData.domain,
-            myshopifyDomain: shopData.myshopify_domain,
-            planName: shopData.plan_name,
-            countryName: shopData.country_name,
-            province: shopData.province,
-            city: shopData.city,
-            phone: shopData.phone,
-            currency: shopData.currency,
-            moneyFormat: shopData.money_format,
-            ianaTimezone: shopData.iana_timezone,
-            shopCreatedAt: shopData.created_at
-        };
-        console.log('Step 21: Prepared payload for verifyDropshipperShopifyStore:', payload);
-        // 🧩 Replace with actual dropshipper ID and role
-        const dropshipperId = dropshipper.id;
-        console.log(`Step 22: dropshipperId: ${dropshipperId}, role: ${dropshipper.role}`);
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyDropshipperShopifyStore"])(dropshipperId, dropshipper.role, payload);
-        console.log('Step 23: Result from verifyDropshipperShopifyStore:', result);
-        if (result?.status) {
-            console.log('Step 24: Store verified successfully, sending success response');
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: true
+                status: true,
+                products: productsResult.products,
+                type
             }, {
                 status: 200
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Failed to create store:', result?.message || 'Unknown error');
-        console.log('Step 25: Store creation failed:', result?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: result?.message || 'Store creation failed'
+            error: 'No products found'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching products', {
+            error
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Failed to fetch products due to an internal error'
         }, {
             status: 500
         });
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'OAuth Callback Error:', error);
-        console.log('Step 26: Exception caught in OAuth flow:', error);
+    }
+}
+async function POST(req) {
+    try {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for product creation');
+        const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        const dropshipperId = Number(dropshipperIdHeader);
+        if (!dropshipperIdHeader || isNaN(dropshipperId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid dropshipper ID: ${dropshipperIdHeader}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Missing or invalid dropshipper ID in request.'
+            }, {
+                status: 400
+            });
+        }
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User not found: ${userCheck.message}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: `User not found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const requiredFields = [
+            'supplierProductId'
+        ];
+        const formData = await req.formData();
+        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
+            requiredFields,
+            patternValidations: {
+                supplierProductId: 'number'
+            }
+        });
+        if (!validation.isValid) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.error);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: validation.error,
+                message: validation.message
+            }, {
+                status: 400
+            });
+        }
+        const extractNumber = (key)=>Number(formData.get(key)) || 0;
+        const supplierProductId = extractNumber('supplierProductId');
+        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkProductForDropshipper"])(dropshipperId, supplierProductId);
+        if (!productResult?.status || productResult.existsInDropshipperProduct) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: productResult.message
+            }, {
+                status: 200
+            });
+        }
+        const rawVariants = formData.get('variants');
+        let parsedVariants = [];
+        if (rawVariants) {
+            try {
+                parsedVariants = JSON.parse(rawVariants);
+                if (!Array.isArray(parsedVariants)) {
+                    throw new Error('Variants must be an array.');
+                }
+                parsedVariants = parsedVariants.map((variant, index)=>{
+                    const errors = [];
+                    if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
+                    if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
+                    if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
+                    return {
+                        variantId: Number(variant.variantId),
+                        stock: Number(variant.stock),
+                        price: Number(variant.price),
+                        status: typeof variant.status === 'boolean' ? variant.status : true,
+                        errors,
+                        index
+                    };
+                });
+                const variantErrors = parsedVariants.filter((v)=>v.errors.length > 0);
+                if (variantErrors.length > 0) {
+                    const errorDetails = variantErrors.map((v)=>`Variant at index ${v.index}: ${v.errors.join(', ')}`).join('; ');
+                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                        status: false,
+                        message: 'Variant validation failed',
+                        error: errorDetails
+                    }, {
+                        status: 400
+                    });
+                }
+            } catch (error) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: 'Invalid variants JSON format.',
+                    error
+                }, {
+                    status: 400
+                });
+            }
+        }
+        const shopifyAppId = extractNumber('shopyfyApp');
+        let shopifyApp;
+        if (shopifyAppId && !isNaN(shopifyAppId)) {
+            const shopifyAppResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoreById"])(shopifyAppId);
+            if (!shopifyAppResult.status) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: 'Invalid Shopify store ID. Store not found.'
+                }, {
+                    status: 400
+                });
+            }
+            shopifyApp = shopifyAppResult.shopifyStore;
+        } else {
+            const shopifyAppsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoresByDropshipperId"])(dropshipperId);
+            if (!shopifyAppsResult.status) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: 'Unable to retrieve Shopify stores for the dropshipper.'
+                }, {
+                    status: 400
+                });
+            }
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Missing or invalid Shopify store ID. Using all stores instead.',
+                shopifyStores: shopifyAppsResult.shopifyStores
+            }, {
+                status: 400
+            });
+        }
+        if (!shopifyApp) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Shopify store data is unavailable. Please verify the input.'
+            }, {
+                status: 400
+            });
+        }
+        const productPayload = {
+            supplierProductId,
+            dropshipperId,
+            variants: parsedVariants,
+            createdBy: dropshipperId,
+            createdByRole: dropshipperRole
+        };
+        console.log(`productPayload - `, productPayload);
+        return;
+        "TURBOPACK unreachable";
+        const productCreateResult = undefined;
+        const shopDomain = undefined;
+        const accessToken = undefined;
+        const SHOPIFY_API_VERSION = undefined;
+    } catch (err) {
+        const error = err instanceof Error ? err.message : 'Internal Server Error';
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Exception:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
             error
@@ -10062,4 +11202,4 @@ async function GET(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__0051b14f._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__7901d8bc._.js.map

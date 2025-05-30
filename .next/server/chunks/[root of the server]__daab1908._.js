@@ -9756,6 +9756,8 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "createDropshipperShopifyStore": (()=>createDropshipperShopifyStore),
     "deleteShopIfNotVerified": (()=>deleteShopIfNotVerified),
+    "getShopifyStoreById": (()=>getShopifyStoreById),
+    "getShopifyStoresByDropshipperId": (()=>getShopifyStoresByDropshipperId),
     "isShopUsedAndVerified": (()=>isShopUsedAndVerified),
     "verifyDropshipperShopifyStore": (()=>verifyDropshipperShopifyStore)
 });
@@ -9875,7 +9877,7 @@ async function verifyDropshipperShopifyStore(dropshipperId, dropshipperRole, dro
         const { shop, accessToken, email, shopOwner, name, domain, myshopifyDomain, planName, countryName, province, city, phone, currency, moneyFormat, ianaTimezone, shopCreatedAt } = dropshipperShopifyStore;
         const existing = await isShopUsedAndVerified(shop);
         // 🚫 Stop if already verified
-        if (existing.status && existing.shopifyStore) {
+        if (existing.status && existing.shopifyStore && existing.verified) {
             return {
                 status: true,
                 message: "Shop already verified and connected."
@@ -9957,6 +9959,71 @@ async function deleteShopIfNotVerified(shop) {
         return {
             status: false,
             message: 'An error occurred while trying to delete the shop.'
+        };
+    }
+}
+async function getShopifyStoresByDropshipperId(dropshipperId) {
+    try {
+        const stores = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findMany({
+            where: {
+                createdBy: dropshipperId
+            },
+            include: {
+                admin: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        if (!stores || stores.length === 0) {
+            return {
+                status: false,
+                message: 'No Shopify stores found for this dropshipper.',
+                shopifyStores: []
+            };
+        }
+        return {
+            status: true,
+            shopifyStores: serializeBigInt(stores),
+            message: `${stores.length} store(s) found for this dropshipper.`
+        };
+    } catch (error) {
+        console.error(`Error fetching Shopify stores by dropshipperId:`, error);
+        return {
+            status: false,
+            shopifyStores: [],
+            message: 'Internal Server Error'
+        };
+    }
+}
+async function getShopifyStoreById(storeId) {
+    try {
+        const store = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findUnique({
+            where: {
+                id: storeId
+            },
+            include: {
+                admin: true
+            }
+        });
+        if (!store) {
+            return {
+                status: false,
+                message: 'Shopify store not found.',
+                shopifyStore: null
+            };
+        }
+        return {
+            status: true,
+            shopifyStore: serializeBigInt(store),
+            message: 'Shopify store found.'
+        };
+    } catch (error) {
+        console.error(`Error fetching Shopify store by ID:`, error);
+        return {
+            status: false,
+            shopifyStore: null,
+            message: 'Internal Server Error'
         };
     }
 }
@@ -10049,7 +10116,7 @@ async function POST(req) {
                     status: 409
                 });
             } else {
-                const deleteShop = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteShopIfNotVerified"])(shop);
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteShopIfNotVerified"])(shop);
             }
         }
         // Prepare payload

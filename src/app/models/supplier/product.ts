@@ -725,3 +725,38 @@ export const getSupplierProductById = async (id: number) => {
         };
     }
 };
+
+export const getSupplierProductVariantById = async (id: number) => {
+    try {
+        const supplierProductVariant = await prisma.supplierProductVariant.findFirst({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (!supplierProductVariant) {
+            return {
+                status: false,
+                message: "Supplier product variant not found.",
+                supplierProductVariant: null,
+            };
+        }
+
+        return {
+            status: true,
+            message: "Supplier product variant ID fetched successfully.",
+            supplierProductVariant: serializeBigInt(supplierProductVariant),
+        };
+    } catch (error) {
+        console.error("❌ Error in getSupplierProductVariantById:", error);
+        return {
+            status: false,
+            message: "Internal server error.",
+            product: null,
+        };
+    }
+};
+

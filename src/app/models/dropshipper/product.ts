@@ -90,7 +90,7 @@ export async function createDropshipperProduct(
                 createdBy,
                 createdByRole,
                 createdAt: new Date(),
-            },
+            }
         });
 
         // Step 4: Create dropshipperProductVariants
@@ -516,7 +516,7 @@ export const checkProductForDropshipper = async (
         // 1. Check if product exists
         const product = await prisma.supplierProduct.findUnique({
             where: { id: supplierProductId },
-            include: { variants: true }, // optional: remove if you don't need variants
+            include: { variants: true, product: true }, // optional: remove if you don't need variants
         });
 
         if (!product) {

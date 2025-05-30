@@ -255,3 +255,76 @@ export async function deleteShopIfNotVerified(shop: string) {
         };
     }
 }
+
+export async function getShopifyStoresByDropshipperId(dropshipperId: number) {
+    try {
+        const stores = await prisma.shopifyStore.findMany({
+            where: {
+                createdBy: dropshipperId
+            },
+            include: {
+                admin: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+
+        if (!stores || stores.length === 0) {
+            return {
+                status: false,
+                message: 'No Shopify stores found for this dropshipper.',
+                shopifyStores: []
+            };
+        }
+
+        return {
+            status: true,
+            shopifyStores: serializeBigInt(stores),
+            message: `${stores.length} store(s) found for this dropshipper.`
+        };
+
+    } catch (error) {
+        console.error(`Error fetching Shopify stores by dropshipperId:`, error);
+        return {
+            status: false,
+            shopifyStores: [],
+            message: 'Internal Server Error'
+        };
+    }
+}
+
+export async function getShopifyStoreById(storeId: number) {
+    try {
+        const store = await prisma.shopifyStore.findUnique({
+            where: {
+                id: storeId
+            },
+            include: {
+                admin: true
+            }
+        });
+
+        if (!store) {
+            return {
+                status: false,
+                message: 'Shopify store not found.',
+                shopifyStore: null
+            };
+        }
+
+        return {
+            status: true,
+            shopifyStore: serializeBigInt(store),
+            message: 'Shopify store found.'
+        };
+
+    } catch (error) {
+        console.error(`Error fetching Shopify store by ID:`, error);
+        return {
+            status: false,
+            shopifyStore: null,
+            message: 'Internal Server Error'
+        };
+    }
+}
