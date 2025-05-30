@@ -55,6 +55,27 @@ const serializeBigInt = <T>(obj: T): T => {
     return obj;
 };
 
+export async function generateUniqueAdminId() {
+    let adminId = '';
+    let isTaken = true;
+
+    while (isTaken) {
+        const randomNumber = Math.floor(1000 + Math.random() * 9000); // generates a 4-digit number
+        adminId = `DROP-${randomNumber}`;
+
+        const existingAdmin = await prisma.admin.findFirst({
+            where: {
+                role: 'Admin',
+                uniqeId: adminId, // assuming adminId is stored in DB
+            },
+        });
+
+        isTaken = !!existingAdmin;
+    }
+
+    return adminId;
+}
+
 export async function checkEmailAvailability(email: string) {
     try {
         // Query to find if an email already exists with role 'admin'
@@ -135,6 +156,7 @@ export async function createAdmin(adminId: number, adminRole: string, admin: Adm
         const newAdmin = await prisma.admin.create({
             data: {
                 name,
+                uniqeId: await generateUniqueAdminId(),
                 profilePicture,
                 email,
                 website,
