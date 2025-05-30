@@ -115,7 +115,7 @@ export async function isShopUsedAndVerified(shop: string) {
 
 export async function createDropshipperShopifyStore(dropshipperId: number, dropshipperRole: string, dropshipperShopifyStore: ShopifyStore) {
     try {
-        const { admin, shop, apiKey, apiSecret, scopes, redirectUri, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
+        const { admin, shop, apiKey, apiSecret, scopes, redirectUri, apiVersion, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
 
         // 🚫 Check if the shop is already used and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
@@ -138,6 +138,7 @@ export async function createDropshipperShopifyStore(dropshipperId: number, drops
                 apiSecret,
                 scopes,
                 redirectUri,
+                apiVersion,
                 status,
                 verificationStatus,
                 createdAt,

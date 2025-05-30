@@ -37,13 +37,14 @@ export async function POST(req: NextRequest) {
         // Parse and validate form data
         const formData = await req.formData();
         const validation = validateFormData(formData, {
-            requiredFields: ['shop', 'apiKey', 'apiSecret', 'scopes', 'redirectUri'],
+            requiredFields: ['shop', 'apiKey', 'apiSecret', 'scopes', 'redirectUri', 'apiVersion'],
             patternValidations: {
                 shop: 'string',
                 apiKey: 'string',
                 apiSecret: 'string',
                 scopes: 'string',
                 redirectUri: 'string',
+                apiVersion: 'string',
             },
         });
 
@@ -65,6 +66,7 @@ export async function POST(req: NextRequest) {
         const apiSecret = extractString('apiSecret');
         const scopes = extractString('scopes');
         const redirectUri = extractString('redirectUri');
+        const apiVersion = extractString('apiVersion');
 
         // Check if the Shopify store is already registered and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
@@ -79,13 +81,6 @@ export async function POST(req: NextRequest) {
                 );
             } else {
                 const deleteShop = await deleteShopIfNotVerified(shop);
-                return NextResponse.json(
-                    {
-                        status: false,
-                        message: deleteShop.message || 'This Shopify store is already registered and verified.',
-                    },
-                    { status: 409 }
-                );
             }
         }
 
@@ -97,6 +92,7 @@ export async function POST(req: NextRequest) {
             apiSecret,
             scopes,
             redirectUri,
+            apiVersion,
             createdAt: new Date(),
             createdBy: dropshipperId,
             createdByRole: dropshipperRole,

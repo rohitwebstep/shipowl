@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
 
         // ✅ Check if shop is already used and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
+        console.log(`isAlreadyUsed - `, isAlreadyUsed);
         if (!isAlreadyUsed.status || !isAlreadyUsed.shopifyStore) {
             return NextResponse.json({ status: false, message: isAlreadyUsed.message }, { status: 401 });
         }
@@ -28,6 +29,10 @@ export async function GET(req: NextRequest) {
         const dropshipper = isAlreadyUsed.shopifyStore.admin;
 
         // ✅ Check for required shopifyStore fields
+        console.log(`shopifyStore.apiSecret - `, shopifyStore.apiSecret);
+        console.log(`shopifyStore.apiKey - `, shopifyStore.apiKey);
+        console.log(`shopifyStore.apiVersion - `, shopifyStore.apiVersion);
+
         if (!shopifyStore.apiSecret || !shopifyStore.apiKey || !shopifyStore.apiVersion) {
             return NextResponse.json({
                 error: 'Shopify store configuration is incomplete (missing apiKey, apiSecret, or apiVersion).',
@@ -52,7 +57,7 @@ export async function GET(req: NextRequest) {
             Buffer.from(hmac, 'utf-8'),
             Buffer.from(generatedHash, 'utf-8')
         );
-
+        
         if (!hmacValid) {
             return NextResponse.json({ error: 'HMAC validation failed.' }, { status: 401 });
         }
