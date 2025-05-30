@@ -1,4 +1,10 @@
 {
-  "/api/dropshipper/shopify/callback/route": "app/api/dropshipper/shopify/callback/route.js",
-  "/api/dropshipper/shopify/connect/route": "app/api/dropshipper/shopify/connect/route.js"
+  "/api/admin/product/route": "app/api/admin/product/route.js",
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
+  "/api/dropshipper/product/inventory/[supplierProductId]/route": "app/api/dropshipper/product/inventory/[supplierProductId]/route.js",
+  "/api/dropshipper/product/inventory/route": "app/api/dropshipper/product/inventory/route.js",
+  "/api/dropshipper/product/my-inventory/[dropshipperProductId]/route": "app/api/dropshipper/product/my-inventory/[dropshipperProductId]/route.js",
+  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
+  "/api/supplier/product/inventory/route": "app/api/supplier/product/inventory/route.js",
+  "/api/supplier/product/my-inventory/route": "app/api/supplier/product/my-inventory/route.js"
 }

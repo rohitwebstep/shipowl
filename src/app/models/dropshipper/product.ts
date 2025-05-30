@@ -400,12 +400,26 @@ export const getProductsByStatus = async (
                 },
                 orderBy: { id: "desc" },
                 include: {
+                    product: true,
                     variants: {
-                        include: {
-                            variant: true
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
                         }
-                    },
-                    product: true
+                    }
                 },
             });
 
@@ -441,7 +455,17 @@ export const getProductsByStatus = async (
                 })
             );
 
-            products = enrichedProducts;
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+
+            for (const item of enrichedProducts) {
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+
+            products = uniqueByProductId;
         } else {
             return { status: false, message: "Invalid type parameter", products: [] };
         }
@@ -720,9 +744,25 @@ export const checkSupplierProductForDropshipper = async (
             where: { id: supplierProductId },
             include: {
                 product: true,
-                supplier: true,
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
                 variants: {
-                    include: { variant: true }
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -744,9 +784,25 @@ export const checkSupplierProductForDropshipper = async (
                 supplierId: { not: supplierProduct.supplierId } // Exclude current supplier
             },
             include: {
-                supplier: true,
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
                 variants: {
-                    include: { variant: true }
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
                 }
             }
         });

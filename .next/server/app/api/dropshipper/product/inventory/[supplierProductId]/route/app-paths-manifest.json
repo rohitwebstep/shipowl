@@ -1,0 +1,3 @@
+{
+  "/api/dropshipper/product/inventory/[supplierProductId]/route": "app/api/dropshipper/product/inventory/[supplierProductId]/route.js"
+}
