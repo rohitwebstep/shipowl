@@ -273,25 +273,45 @@ export const getProductsByFiltersAndStatus = async (
         if (type === "notmy") {
             const myProductIds = await prisma.dropshipperProduct.findMany({
                 where: { dropshipperId },
-                select: { supplierProductId: true },
+                include: {
+                    variants: true,
+                }
             }).then(data => data.map(d => d.supplierProductId));
 
             const notMyProducts = await prisma.supplierProduct.findMany({
                 where: {
                     ...statusCondition,
                     id: { notIn: myProductIds.length ? myProductIds : [0] },
-                    ...(filters.categoryId ? { product: { categoryId: filters.categoryId } } : {}),
-                    ...(filters.brandId ? { product: { brandId: filters.brandId } } : {}),
                 },
                 orderBy: { id: "desc" },
                 include: {
-                    variants: {
-                        include: { variant: true },
-                    },
                     product: true,
+                    variants: {
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            price: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
+                        }
+                    }
                 },
             });
 
+            console.dir(notMyProducts, { depth: null, colors: true });
+
+            // Attach each variant's lowest suggested_price from other dropshippers
             const enrichedProducts = await Promise.all(
                 notMyProducts.map(async (product) => {
                     const enrichedVariants = await Promise.all(
@@ -300,7 +320,7 @@ export const getProductsByFiltersAndStatus = async (
                                 where: {
                                     supplierProductVariantId: variant.id,
                                     dropshipperProduct: {
-                                        dropshipperId: { not: dropshipperId },
+                                        dropshipperId: { not: dropshipperId }, // Only other dropshippers
                                     },
                                 },
                                 orderBy: { price: "asc" },
@@ -316,12 +336,22 @@ export const getProductsByFiltersAndStatus = async (
 
                     return {
                         ...product,
-                        variants: enrichedVariants,
+                        variants: enrichedVariants, // Overwrite with enriched variants
                     };
                 })
             );
 
-            products = enrichedProducts;
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+
+            for (const item of enrichedProducts) {
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+
+            products = uniqueByProductId;
         }
 
         return { status: true, products: serializeBigInt(products) };
@@ -408,6 +438,7 @@ export const getProductsByStatus = async (
                             productId: true,
                             productVariantId: true,
                             supplierProductId: true,
+                            price: true,
                             variant: {
                                 select: {
                                     id: true,
