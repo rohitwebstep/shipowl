@@ -224,9 +224,6 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      shopifyApp = shopifyAppsResult.shopifyStores[0];
-
-      /*
       return NextResponse.json(
         {
           status: false,
@@ -235,7 +232,6 @@ export async function POST(req: NextRequest) {
         },
         { status: 400 }
       );
-      */
     }
 
     if (!shopifyApp) {
