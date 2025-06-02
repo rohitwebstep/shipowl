@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { handleVerifyStatus } from '@/app/api/controllers/admin/authController';
+import { handleVerifyStatus } from '../../../../../controllers/admin/authController';
 
 export async function POST(req: NextRequest) {
     const adminRole = "dropshipper";

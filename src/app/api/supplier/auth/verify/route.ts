@@ -1,4 +1,4 @@
-import { handleVerifyLogin } from '../../../controllers/admin/authController';
+import { handleVerifyLogin } from '../../../../controllers/admin/authController';
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
