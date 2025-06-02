@@ -4,6 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
+import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 
 type Variant = {
   variantId: number;
@@ -45,8 +46,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
     }
 
+    const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+    if (!shopifyAppsResult.status) {
+      return NextResponse.json(
+        { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
+        { status: 400 }
+      );
+    }
+
     logMessage('info', 'Product found:', productResult.dropshipperProduct);
-    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, type: 'my' }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, shopifyStores: shopifyAppsResult.shopifyStores, type: 'my' }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(

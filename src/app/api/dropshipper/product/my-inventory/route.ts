@@ -6,7 +6,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
-import { getShopifyStoreById, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
+import { getShopifyStoreByIdForDropshipper, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getSupplierProductVariantById } from '@/app/models/supplier/product';
 
 type Variant = {
@@ -72,11 +72,21 @@ export async function GET(req: NextRequest) {
       : await getProductsByStatus(type, dropshipperId, status);
 
     if (productsResult?.status) {
+
+      const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+      if (!shopifyAppsResult.status) {
+        return NextResponse.json(
+          { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
+          { status: 400 }
+        );
+      }
+
       return NextResponse.json(
-        { status: true, products: productsResult.products, type },
+        { status: true, products: productsResult.products, shopifyStores: shopifyAppsResult.shopifyStores, type },
         { status: 200 }
       );
     }
+
 
     return NextResponse.json(
       { status: false, error: 'No products found' },
@@ -207,7 +217,7 @@ export async function POST(req: NextRequest) {
     let shopifyApp;
 
     if (shopifyAppId && !isNaN(shopifyAppId)) {
-      const shopifyAppResult = await getShopifyStoreById(shopifyAppId);
+      const shopifyAppResult = await getShopifyStoreByIdForDropshipper(shopifyAppId, dropshipperId);
       if (!shopifyAppResult.status) {
         return NextResponse.json(
           { status: false, message: 'Invalid Shopify store ID. Store not found.' },

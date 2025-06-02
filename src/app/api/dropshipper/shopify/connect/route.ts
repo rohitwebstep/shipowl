@@ -37,14 +37,9 @@ export async function POST(req: NextRequest) {
         // Parse and validate form data
         const formData = await req.formData();
         const validation = validateFormData(formData, {
-            requiredFields: ['shop', 'apiKey', 'apiSecret', 'scopes', 'redirectUri', 'apiVersion'],
+            requiredFields: ['shop'],
             patternValidations: {
-                shop: 'string',
-                apiKey: 'string',
-                apiSecret: 'string',
-                scopes: 'string',
-                redirectUri: 'string',
-                apiVersion: 'string',
+                shop: 'string'
             },
         });
 
@@ -62,11 +57,37 @@ export async function POST(req: NextRequest) {
         const extractString = (key: string) => (formData.get(key) as string)?.trim() || '';
 
         const shop = extractString('shop');
-        const apiKey = extractString('apiKey');
-        const apiSecret = extractString('apiSecret');
-        const scopes = extractString('scopes');
-        const redirectUri = extractString('redirectUri');
-        const apiVersion = extractString('apiVersion');
+
+        // Required environment variables
+        const requiredEnvVars = {
+            SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY,
+            SHOPIFY_API_SECRET: process.env.SHOPIFY_API_SECRET,
+            SHOPIFY_SCOPES: process.env.SHOPIFY_SCOPES,
+            SHOPIFY_REDIRECT_URI: process.env.SHOPIFY_REDIRECT_URI,
+            SHOPIFY_API_VERSION: process.env.SHOPIFY_API_VERSION,
+        };
+
+        // Identify missing or empty env variables
+        const missingVars = Object.entries(requiredEnvVars)
+            .filter(([_, val]) => !val || val.trim() === '')
+            .map(([key]) => key);
+
+        if (missingVars.length > 0) {
+            return NextResponse.json(
+                {
+                    error: 'Missing or empty required environment variables.',
+                    missing: missingVars,
+                },
+                { status: 400 }
+            );
+        }
+
+        // Safe to use non-null assertion here because we checked above
+        const apiKey = requiredEnvVars.SHOPIFY_API_KEY!;
+        const apiSecret = requiredEnvVars.SHOPIFY_API_SECRET!;
+        const scopes = requiredEnvVars.SHOPIFY_SCOPES!;
+        const redirectUri = requiredEnvVars.SHOPIFY_REDIRECT_URI!;
+        const apiVersion = requiredEnvVars.SHOPIFY_API_VERSION!;
 
         // Check if the Shopify store is already registered and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
+import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 
 export async function GET(req: NextRequest) {
   try {
@@ -58,8 +59,17 @@ export async function GET(req: NextRequest) {
       : await getProductsByStatus(type, dropshipperId, status);
 
     if (productsResult?.status) {
+
+      const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+      if (!shopifyAppsResult.status) {
+        return NextResponse.json(
+          { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
+          { status: 400 }
+        );
+      }
+
       return NextResponse.json(
-        { status: true, products: productsResult.products, type },
+        { status: true, products: productsResult.products, shopifyStores: shopifyAppsResult.shopifyStores, type },
         { status: 200 }
       );
     }
