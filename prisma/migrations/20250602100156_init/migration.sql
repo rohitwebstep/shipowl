@@ -893,6 +893,7 @@ CREATE TABLE `order` (
     `billingCityId` BIGINT NULL,
     `paymentId` INTEGER NULL,
     `shippingApiResult` JSON NULL,
+    `barcodeImage` LONGTEXT NULL,
     `complete` BOOLEAN NOT NULL DEFAULT false,
     `rtoDelivered` BOOLEAN NOT NULL DEFAULT false,
     `lastRefreshAt` DATETIME(3) NULL,

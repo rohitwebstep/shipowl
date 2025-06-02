@@ -47,8 +47,8 @@ export async function POST(req: NextRequest) {
       admin_id: adminId,
       role: String(adminRole),
       panel: "admin",
-      module: "category",
-      action: "view"
+      module: "brand",
+      action: "create"
     });
 
     if (!permissionResult.status) {

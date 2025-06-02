@@ -817,6 +817,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   billingCityId: 'billingCityId',
   paymentId: 'paymentId',
   shippingApiResult: 'shippingApiResult',
+  barcodeImage: 'barcodeImage',
   complete: 'complete',
   rtoDelivered: 'rtoDelivered',
   lastRefreshAt: 'lastRefreshAt',
@@ -1268,6 +1269,7 @@ exports.Prisma.orderOrderByRelevanceFieldEnum = {
   billingEmail: 'billingEmail',
   billingAddress: 'billingAddress',
   billingZip: 'billingZip',
+  barcodeImage: 'barcodeImage',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'

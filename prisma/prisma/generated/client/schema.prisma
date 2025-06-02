@@ -1040,6 +1040,9 @@ model order {
 
   shippingApiResult Json?
 
+  // Barcode image path
+  barcodeImage String? @db.LongText
+
   complete      Boolean   @default(false)
   rtoDelivered  Boolean   @default(false)
   lastRefreshAt DateTime? // nullable, updated when status refreshed

@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
+import bwipjs from 'bwip-js';
+import fs from 'fs/promises';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
-import { checkPaymentIdAvailability, createOrder, getOrdersByStatus } from '@/app/models/order/order';
+import { checkPaymentIdAvailability, createOrder, getOrdersByStatus, updateBarcodeOfOrder } from '@/app/models/order/order';
 import { createOrderItem } from '@/app/models/order/item';
 import { getDropshipperProductById, getDropshipperProductVariantById } from '@/app/models/dropshipper/product';
 // import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
@@ -228,6 +231,43 @@ export async function POST(req: NextRequest) {
     if (!orderCreateResult || !orderCreateResult.status || !orderCreateResult.order) {
       logMessage('error', 'Order creation failed:', orderCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: orderCreateResult?.message || 'Order creation failed' }, { status: 500 });
+    }
+
+    const order = orderCreateResult.order;
+
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'order', 'bar-code');
+
+    // Generate a barcode based on brand name
+    const barcodeFileName = `barcode-${Date.now()}.png`;
+    const barcodePath = path.join(uploadDir, barcodeFileName);
+    const barcodePublicPath = `/uploads/brand/${barcodeFileName}`;
+
+    try {
+      // Ensure folder exists
+      const barcodeDir = path.dirname(barcodePath);
+      await fs.mkdir(barcodeDir, { recursive: true });
+
+      // Generate barcode
+      const pngBuffer = await bwipjs.toBuffer({
+        bcid: 'code128',             // Barcode type
+        text: order.orderNumber,     // Barcode text
+        scale: 3,
+        height: 10,
+        includetext: true,
+        textxalign: 'center',
+      });
+
+      // Save the buffer as a PNG file
+      await fs.writeFile(barcodePath, pngBuffer);
+      logMessage('info', `Barcode image saved: ${barcodePublicPath}`);
+    } catch (barcodeErr) {
+      logMessage('error', 'Barcode generation failed:', barcodeErr);
+    }
+    const updateBarcodeOfOrderResult = await updateBarcodeOfOrder(order.id, barcodePublicPath);
+
+    if (!updateBarcodeOfOrderResult || !updateBarcodeOfOrderResult.status || !updateBarcodeOfOrderResult.order) {
+      logMessage('error', 'Order barcode updation failed:', updateBarcodeOfOrderResult?.message || 'Unknown error');
+      return NextResponse.json({ status: false, error: updateBarcodeOfOrderResult?.message || 'Order barcode updation failed' }, { status: 500 });
     }
 
     const orderItemPayload: Item[] = [];

@@ -40548,6 +40548,7 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
+    barcodeImage: string | null
     complete: boolean | null
     rtoDelivered: boolean | null
     lastRefreshAt: Date | null
@@ -40590,6 +40591,7 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
+    barcodeImage: string | null
     complete: boolean | null
     rtoDelivered: boolean | null
     lastRefreshAt: Date | null
@@ -40633,6 +40635,7 @@ export namespace Prisma {
     billingCityId: number
     paymentId: number
     shippingApiResult: number
+    barcodeImage: number
     complete: number
     rtoDelivered: number
     lastRefreshAt: number
@@ -40713,6 +40716,7 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
+    barcodeImage?: true
     complete?: true
     rtoDelivered?: true
     lastRefreshAt?: true
@@ -40755,6 +40759,7 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
+    barcodeImage?: true
     complete?: true
     rtoDelivered?: true
     lastRefreshAt?: true
@@ -40798,6 +40803,7 @@ export namespace Prisma {
     billingCityId?: true
     paymentId?: true
     shippingApiResult?: true
+    barcodeImage?: true
     complete?: true
     rtoDelivered?: true
     lastRefreshAt?: true
@@ -40928,6 +40934,7 @@ export namespace Prisma {
     billingCityId: bigint | null
     paymentId: number | null
     shippingApiResult: JsonValue | null
+    barcodeImage: string | null
     complete: boolean
     rtoDelivered: boolean
     lastRefreshAt: Date | null
@@ -40990,6 +40997,7 @@ export namespace Prisma {
     billingCityId?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
+    barcodeImage?: boolean
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: boolean
@@ -41045,6 +41053,7 @@ export namespace Prisma {
     billingCityId?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
+    barcodeImage?: boolean
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: boolean
@@ -41059,7 +41068,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "complete" | "rtoDelivered" | "lastRefreshAt" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
+  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "barcodeImage" | "complete" | "rtoDelivered" | "lastRefreshAt" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
   export type orderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shippingCountry?: boolean | order$shippingCountryArgs<ExtArgs>
     shippingState?: boolean | order$shippingStateArgs<ExtArgs>
@@ -41115,6 +41124,7 @@ export namespace Prisma {
       billingCityId: bigint | null
       paymentId: number | null
       shippingApiResult: Prisma.JsonValue | null
+      barcodeImage: string | null
       complete: boolean
       rtoDelivered: boolean
       lastRefreshAt: Date | null
@@ -41533,6 +41543,7 @@ export namespace Prisma {
     readonly billingCityId: FieldRef<"order", 'BigInt'>
     readonly paymentId: FieldRef<"order", 'Int'>
     readonly shippingApiResult: FieldRef<"order", 'Json'>
+    readonly barcodeImage: FieldRef<"order", 'String'>
     readonly complete: FieldRef<"order", 'Boolean'>
     readonly rtoDelivered: FieldRef<"order", 'Boolean'>
     readonly lastRefreshAt: FieldRef<"order", 'DateTime'>
@@ -45117,6 +45128,7 @@ export namespace Prisma {
     billingCityId: 'billingCityId',
     paymentId: 'paymentId',
     shippingApiResult: 'shippingApiResult',
+    barcodeImage: 'barcodeImage',
     complete: 'complete',
     rtoDelivered: 'rtoDelivered',
     lastRefreshAt: 'lastRefreshAt',
@@ -45682,6 +45694,7 @@ export namespace Prisma {
     billingEmail: 'billingEmail',
     billingAddress: 'billingAddress',
     billingZip: 'billingZip',
+    barcodeImage: 'barcodeImage',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
     deletedByRole: 'deletedByRole'
@@ -49915,6 +49928,7 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
@@ -49967,6 +49981,7 @@ export namespace Prisma {
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
+    barcodeImage?: SortOrderInput | SortOrder
     complete?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
@@ -50023,6 +50038,7 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
@@ -50075,6 +50091,7 @@ export namespace Prisma {
     billingCityId?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
+    barcodeImage?: SortOrderInput | SortOrder
     complete?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
@@ -50126,6 +50143,7 @@ export namespace Prisma {
     billingCityId?: BigIntNullableWithAggregatesFilter<"order"> | bigint | number | null
     paymentId?: IntNullableWithAggregatesFilter<"order"> | number | null
     shippingApiResult?: JsonNullableWithAggregatesFilter<"order">
+    barcodeImage?: StringNullableWithAggregatesFilter<"order"> | string | null
     complete?: BoolWithAggregatesFilter<"order"> | boolean
     rtoDelivered?: BoolWithAggregatesFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
@@ -55160,6 +55178,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -55212,6 +55231,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -55249,6 +55269,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -55301,6 +55322,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -55346,6 +55368,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -55381,6 +55404,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -55424,6 +55448,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -59045,6 +59070,7 @@ export namespace Prisma {
     billingCityId?: SortOrder
     paymentId?: SortOrder
     shippingApiResult?: SortOrder
+    barcodeImage?: SortOrder
     complete?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
@@ -59105,6 +59131,7 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
+    barcodeImage?: SortOrder
     complete?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
@@ -59147,6 +59174,7 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
+    barcodeImage?: SortOrder
     complete?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
@@ -67744,6 +67772,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -67794,6 +67823,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -67841,6 +67871,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -67891,6 +67922,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -68345,6 +68377,7 @@ export namespace Prisma {
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
+    barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
@@ -68842,6 +68875,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -68892,6 +68926,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -68939,6 +68974,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -68989,6 +69025,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -69706,6 +69743,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -69756,6 +69794,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -69803,6 +69842,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -69853,6 +69893,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -75840,6 +75881,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -75890,6 +75932,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -76859,6 +76902,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -76910,6 +76954,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -77096,6 +77141,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -77147,6 +77193,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -77431,6 +77478,7 @@ export namespace Prisma {
     billingAddress: string
     billingZip: string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -77482,6 +77530,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -77752,6 +77801,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -77803,6 +77853,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -79080,6 +79131,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -79122,6 +79174,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -79929,6 +79982,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -79979,6 +80033,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80023,6 +80078,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80058,6 +80114,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80108,6 +80165,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80152,6 +80210,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80417,6 +80476,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -80459,6 +80519,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -80922,6 +80983,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -80972,6 +81034,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81016,6 +81079,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81051,6 +81115,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81101,6 +81166,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81145,6 +81211,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81395,6 +81462,7 @@ export namespace Prisma {
     billingCityId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -81437,6 +81505,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -81841,6 +81910,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81891,6 +81961,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81935,6 +82006,7 @@ export namespace Prisma {
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -81970,6 +82042,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -82020,6 +82093,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -82064,6 +82138,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -83785,6 +83860,7 @@ export namespace Prisma {
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: string | null
     complete?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
@@ -83820,6 +83896,7 @@ export namespace Prisma {
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -83870,6 +83947,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -83914,6 +83992,7 @@ export namespace Prisma {
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
+    barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

@@ -34,4 +34,4 @@ INSERT INTO `permission` (`panel`, `module`, `action`, `status`, `createdAt`, `c
 ('admin', 'brand', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'brand', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'brand', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('dropshipper', 'product', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL);

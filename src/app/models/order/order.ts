@@ -312,6 +312,26 @@ export const updateOrder = async (
     }
 };
 
+export const updateBarcodeOfOrder = async (
+    orderId: number,
+    barcodeImage: string
+) => {
+    try {
+        const order = await prisma.order.update({
+            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+            data: {
+                barcodeImage,
+                updatedAt: new Date()
+            },
+        });
+
+        return { status: true, order: serializeBigInt(order) };
+    } catch (error) {
+        console.error("❌ updateBarcodeOfOrder Error:", error);
+        return { status: false, message: "Error updating order barcode" };
+    }
+};
+
 export const updateShippingApiResultOfOrder = async (
     adminId: number,
     adminRole: string,

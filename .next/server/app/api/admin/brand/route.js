@@ -1,6 +1,6 @@
 const CHUNK_PUBLIC_PATH = "server/app/api/admin/brand/route.js";
 const runtime = require("../../../../chunks/[turbopack]_runtime.js");
-runtime.loadChunk("server/chunks/[root of the server]__f9f71d03._.js");
+runtime.loadChunk("server/chunks/[root of the server]__1ecbedc8._.js");
 runtime.loadChunk("server/chunks/node_modules_next_f5bc9eed._.js");
 runtime.loadChunk("server/chunks/node_modules_bwip-js_dist_bwipp_mjs_e2cd5be5._.js");
 runtime.loadChunk("server/chunks/node_modules_bwip-js_dist_bwip-js-node_mjs_eaa81536._.js");
