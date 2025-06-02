@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getProductById, restoreProduct } from '@/app/models/admin/product/product';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 export async function PATCH(req: NextRequest) {
   try {
@@ -29,6 +30,24 @@ export async function PATCH(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "product",
+      action: "restore"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const productIdNum = Number(productId);

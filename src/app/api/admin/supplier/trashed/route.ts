@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getSuppliersByStatus } from '@/app/models/supplier/supplier';
-
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 export async function GET(req: NextRequest) {
   try {
@@ -29,6 +29,24 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(
         { status: false, error: `User Not Found: ${result.message}` },
         { status: 404 }
+      );
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "trash-view"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
       );
     }
 

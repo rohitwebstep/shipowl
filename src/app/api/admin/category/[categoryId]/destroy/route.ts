@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getCategoryById, deleteCategory } from '@/app/models/admin/category';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -26,6 +27,24 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "permanent-delete"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     // Validate category ID

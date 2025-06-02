@@ -9,6 +9,7 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getDropshipperById, checkEmailAvailabilityForUpdate, updateDropshipper, restoreDropshipper, softDeleteDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';
 import { updateDropshipperBankAccount } from '@/app/models/dropshipper/bankAccount';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -48,6 +49,24 @@ export async function GET(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "view"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const dropshipperIdNum = Number(dropshipperId);

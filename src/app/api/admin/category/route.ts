@@ -6,6 +6,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createCategory, getCategoriesByStatus } from '@/app/models/admin/category';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -37,6 +38,24 @@ export async function POST(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "create"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const isMultipleImages = true; // Set true to allow multiple image uploads

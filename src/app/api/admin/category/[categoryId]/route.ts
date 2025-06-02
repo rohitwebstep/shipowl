@@ -6,6 +6,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getCategoryById, updateCategory, softDeleteCategory, restoreCategory } from '@/app/models/admin/category';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -34,6 +35,24 @@ export async function GET(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "view"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const categoryIdNum = Number(categoryId);
@@ -80,6 +99,24 @@ export async function PUT(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "edit"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const categoryIdNum = Number(categoryId);
@@ -204,6 +241,24 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "restore"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
+    }
+
     const categoryIdNum = Number(categoryId);
     if (isNaN(categoryIdNum)) {
       logMessage('warn', 'Invalid category ID', { categoryId });
@@ -256,6 +311,24 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "category",
+      action: "soft-delete"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     // Validate category ID

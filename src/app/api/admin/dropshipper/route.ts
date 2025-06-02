@@ -9,6 +9,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createDropshipper, getDropshippersByStatus } from '@/app/models/dropshipper/dropshipper';
 import { createDropshipperCompany } from '@/app/models/dropshipper/company';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -35,6 +36,24 @@ export async function POST(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "create"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const requiredFields = ['name', 'email', 'password'];

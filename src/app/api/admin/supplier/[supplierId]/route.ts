@@ -8,6 +8,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getSupplierById, checkEmailAvailabilityForUpdate, checkUsernameAvailabilityForUpdate, updateSupplier, restoreSupplier, softDeleteSupplier } from '@/app/models/supplier/supplier';
 import { updateSupplierCompany } from '@/app/models/supplier/company';
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -36,6 +37,24 @@ export async function GET(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "view"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const supplierIdNum = Number(supplierId);
@@ -93,6 +112,24 @@ export async function PUT(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "edit"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const requiredFields = ['name', 'username', 'email'];
@@ -487,6 +524,24 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const permissionResult = await checkAdminPermission({
+      admin_id: Number(adminId),
+      role: String(adminRole),
+      panel: "admin",
+      module: "dropshipper",
+      action: "edit"
+    });
+
+    if (!permissionResult.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: permissionResult.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     // Validate supplier ID

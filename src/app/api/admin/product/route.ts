@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
+import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
@@ -47,6 +48,24 @@ export async function POST(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const result = await checkAdminPermission({
+      admin_id: 1,
+      panel: "admin",
+      role: "admin",
+      module: "product",
+      action: "create"
+    });
+
+    if (!result.status) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: result.message || "You do not have permission to perform this action."
+        },
+        { status: 403 }
+      );
     }
 
     const requiredFields = ['name', 'category', 'main_sku', 'brand', 'origin_country', 'shipping_country'];
