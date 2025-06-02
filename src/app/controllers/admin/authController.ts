@@ -1,0 +1,577 @@
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from "@/lib/prisma";
+import { generateToken, generatePasswordResetToken } from '@/utils/auth/authUtils';
+import { comparePassword } from '@/utils/hashUtils';
+import { verifyToken } from '@/utils/auth/authUtils';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
+import { sendEmail } from "@/utils/email/sendEmail";
+import bcrypt from 'bcryptjs';
+import { logMessage } from '@/utils/commonUtils';
+
+interface Admin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    createdAt: Date;
+}
+
+export async function handleLogin(req: NextRequest, adminRole: string, adminStaffRole: string) {
+    try {
+        const { email, password } = await req.json();
+
+        // Hash the password using bcrypt
+        const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
+
+        // Fetch admin by email and role
+        let adminResponse = await adminByUsernameRole(email, adminRole);
+        if (!adminResponse.status || !adminResponse.admin) {
+            adminResponse = await adminByUsernameRole(email, adminStaffRole);
+            if (!adminResponse.status || !adminResponse.admin) {
+                return NextResponse.json({ message: adminResponse.message || "Invalid email or password", status: false }, { status: 401 });
+            }
+        }
+
+        const admin = adminResponse.admin;
+
+        console.log(`admin - `, admin);
+
+        // Correct usage of .toLowerCase() as a function
+        if (admin.status.toLowerCase() !== 'active') {
+            return NextResponse.json(
+                { message: "Admin account is not active", status: false },
+                { status: 403 }
+            );
+        }
+
+        // Compare the provided password with the stored hash
+        const isPasswordValid = await comparePassword(password, admin.password);
+        if (!isPasswordValid) {
+            return NextResponse.json({ message: 'Invalid email or password', status: false }, { status: 401 });
+        }
+
+        // Generate authentication token
+        const token = generateToken(admin.id, admin.role);
+
+        return NextResponse.json({
+            message: "Login successful",
+            token,
+            admin: {
+                id: admin.id,
+                name: admin.name,
+                email: admin.email,
+                role: admin.role,
+            },
+        });
+    } catch (error) {
+        console.error(`Error during login:`, error);
+        return NextResponse.json({ message: "Internal Server Error", status: false }, { status: 500 });
+    }
+}
+
+export async function handleVerifyLogin(req: NextRequest, adminRole: string, adminStaffRole: string) {
+    try {
+        // Extract token from Authorization header
+        const token = req.headers.get('authorization')?.split(' ')[1];
+        if (!token) {
+            return NextResponse.json({ message: 'No token provided', status: false }, { status: 401 });
+        }
+
+        // Use adminByToken to verify token and fetch admin details
+        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
+
+        if (!status) {
+            return NextResponse.json({ message: message || "Invalid email or password", status: false }, { status: 401 });
+        }
+
+        return NextResponse.json({ message: "Token is valid", admin, status: true });
+    } catch (error) {
+        console.error(`error - `, error);
+        return NextResponse.json({ message: "Internal Server Error", status: false }, { status: 500 });
+    }
+}
+
+export async function handleForgetPassword(
+    req: NextRequest,
+    panel: string,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { email } = await req.json();
+
+        if (!email) {
+            return NextResponse.json(
+                { message: "Email is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Attempt to fetch admin or adminStaff by email
+        let userResponse = await adminByUsernameRole(email, adminRole);
+        if (!userResponse.status || !userResponse.admin) {
+            userResponse = await adminByUsernameRole(email, adminStaffRole);
+            if (!userResponse.status || !userResponse.admin) {
+                return NextResponse.json(
+                    {
+                        message: "No account found with this email.",
+                        status: false,
+                    },
+                    { status: 404 }
+                );
+            }
+        }
+
+        const admin = userResponse.admin;
+        const token = generatePasswordResetToken(admin.id, admin.role);
+        const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+        // Update token and expiry in database
+        const updateData = {
+            pr_token: token,
+            pr_expires_at: expiry,
+        };
+
+        if (admin.role === adminRole) {
+            await prisma.admin.update({ where: { id: admin.id }, data: updateData });
+        } else {
+            await prisma.adminStaff.update({ where: { id: admin.id }, data: updateData });
+        }
+
+        // Optional: Send email
+        // await sendPasswordResetEmail(admin.email, token);
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig("admin", "auth", "forget-password", true);
+        logMessage('debug', 'Email Config:', emailConfig);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        let urlPanel;
+        if (panel == 'dropshipper') {
+            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
+        } else {
+            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
+        }
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{resetUrl}}": urlPanel,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
+
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email }
+            ],
+            cc: [],
+            bcc: [],
+            subject,
+            htmlBody,
+            attachments: [],
+        };
+
+        const emailResult = await sendEmail(emailConfig, mailData);
+
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Reset token created but failed to send email. Please try again.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        return NextResponse.json(
+            {
+                message: "Password reset link has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Forgot password error:", error);
+        return NextResponse.json(
+            { message: "Something went wrong. Please try again later.", status: false },
+            { status: 500 }
+        );
+    }
+}
+
+export async function handleResetPassword(
+    req: NextRequest,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { token, password } = await req.json();
+
+        // Check if token is provided
+        if (!token) {
+            return NextResponse.json(
+                { message: "Token is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Verify token and fetch admin details using adminByToken function
+        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
+
+        if (!tokenStatus || !admin) {
+            return NextResponse.json(
+                { status: false, message: tokenMessage || "Invalid token or role." },
+                { status: 401 }
+            );
+        }
+
+        // Hash the password using bcrypt
+        const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
+
+        // Prepare the update data
+        const updateData = {
+            pr_token: null,
+            pr_expires_at: null,
+            pr_last_reset: new Date(),
+            password: hashedPassword,
+        };
+
+        // Update the admin or admin staff record based on the role
+        if (admin.role === adminRole) {
+            await prisma.admin.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        } else {
+            await prisma.adminStaff.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        }
+
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig("admin", "auth", "reset-password", true);
+        logMessage('debug', 'Email Config:', emailConfig);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
+
+        // Replace placeholders in the HTML template
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email: admin.email },
+            ],
+            subject,
+            htmlBody,
+            attachments: [],
+        };
+
+        // Send email notification
+        const emailResult = await sendEmail(emailConfig, mailData);
+
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Password reset successful, but failed to send email notification.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        // Return success response
+        return NextResponse.json(
+            {
+                message: "Password reset successful. A notification has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Password reset error:", error);
+        return NextResponse.json(
+            { message: "An error occurred while resetting the password. Please try again later.", status: false },
+            { status: 500 }
+        );
+    }
+}
+
+export async function handleVerifyStatus(
+    req: NextRequest,
+    adminRole: string,
+    adminStaffRole: string
+) {
+    try {
+        const { token } = await req.json();
+
+        // Check if token is provided
+        if (!token) {
+            return NextResponse.json(
+                { message: "Token is required.", status: false },
+                { status: 400 }
+            );
+        }
+
+        // Verify token and fetch admin details using adminByToken function
+        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
+
+        if (!tokenStatus || !admin) {
+            return NextResponse.json(
+                { status: false, message: tokenMessage || "Invalid token or role." },
+                { status: 401 }
+            );
+        }
+
+        // Prepare the update data
+        const updateData = {
+            status: 'active'
+        };
+
+        // Update the admin or admin staff record based on the role
+        if (admin.role === adminRole) {
+            await prisma.admin.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        } else {
+            await prisma.adminStaff.update({
+                where: { id: admin.id },
+                data: updateData,
+            });
+        }
+
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('dropshipper', 'auth', 'verify', true);
+        logMessage('debug', 'Email Config:', emailConfig);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Use index signature to avoid TS error
+        const replacements: Record<string, string> = {
+            "{{name}}": admin.name,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{loginLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`,
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear {{name}},</p><p>Your account has been verified successfully.</p>";
+
+        // Replace placeholders in the HTML template
+        Object.keys(replacements).forEach((key) => {
+            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        let subject = emailSubject;
+        Object.keys(replacements).forEach((key) => {
+            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
+        });
+
+        logMessage('debug', 'HTML Body:', htmlBody);
+
+        const mailData = {
+            recipient: [
+                { name: admin.name, email: admin.email },
+            ],
+            subject,
+            htmlBody,
+            attachments: [],
+        };
+
+        // Send email notification
+        const emailResult = await sendEmail(emailConfig, mailData);
+
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Account Verified successful, but failed to send email notification.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        // Return success response
+        return NextResponse.json(
+            {
+                message: "Account Verified successful. A notification has been sent to your email.",
+                status: true,
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("❌ Account Verified error:", error);
+        return NextResponse.json(
+            { message: "An error occurred while verifing the account. Please try again later.", status: false },
+            { status: 500 }
+        );
+    }
+}
+
+export async function adminByUsernameRole(username: string, role: string) {
+    try {
+
+        const adminRoleStr = String(role); // Ensure it's a string
+        const adminModel = ["admin", "dropshipper", "supplier"].includes(adminRoleStr) ? "admin" : "adminStaff";
+        console.log(`adminRoleStr - `, adminRoleStr);
+
+        // Fetch admin details from database
+        let admin
+        if (adminModel === "admin") {
+            admin = await prisma.admin.findFirst({
+                where: { email: username, role },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true, // Hashed password stored in DB
+                    role: true,
+                    status: true,
+                },
+            });
+        } else {
+            admin = await prisma.adminStaff.findFirst({
+                where: { email: username, role },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    password: true,
+                    role: true,
+                    status: true,
+                },
+            });
+        }
+
+        // If admin doesn't exist, return false with a message
+        if (!admin) {
+            return { status: false, message: "User with the provided ID does not exist" };
+        }
+
+        return { status: true, admin };
+    } catch (error) {
+        console.error(`Error fetching admin:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function adminByToken(
+    token: string,
+    adminRole: string,
+    adminStaffRole: string
+): Promise<{ status: boolean, message: string, admin?: Admin }> {
+    try {
+        // Verify token and extract admin details
+        const { payload, status, message } = await verifyToken(token);
+        if (!status || !payload || typeof payload.adminId !== 'number') {
+            return { status: false, message: message || "Unauthorized access. Invalid token." };
+        }
+
+        // Determine the admin model based on role
+        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
+
+        if (![adminRole, adminStaffRole].includes(payloadAdminRole)) {
+            return { status: false, message: "Access denied. Invalid role." };
+        }
+
+        // Set the correct admin model
+        const adminModel = ["admin", "dropshipper", "supplier"].includes(payloadAdminRole) ? "admin" : "adminStaff";
+
+        // Fetch the admin from the database
+        let admin: Admin | null;
+        if (adminModel === "admin") {
+            admin = await prisma.admin.findUnique({
+                where: { id: payload.adminId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        } else {
+            admin = await prisma.adminStaff.findUnique({
+                where: { id: payload.adminId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    createdAt: true,
+                },
+            });
+        }
+
+        // If admin not found, return error
+        if (!admin) {
+            return { status: false, message: "Invalid admin credentials or account not found." };
+        }
+
+        // Return success with admin details
+        return { status: true, message: "Token is valid", admin };
+    } catch (error) {
+        console.error("Error fetching admin:", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+

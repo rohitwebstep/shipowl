@@ -1,4 +1,4 @@
-import { handleForgetPassword } from '../../../../controllers/admin/authController';
+import { handleForgetPassword } from '../../../../../controllers/admin/authController';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {

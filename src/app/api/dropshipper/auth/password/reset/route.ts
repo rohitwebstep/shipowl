@@ -1,4 +1,4 @@
-import { handleResetPassword } from '../../../../controllers/admin/authController';
+import { handleResetPassword } from '../../../../../controllers/admin/authController';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
