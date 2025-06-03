@@ -1,22 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { validateFormData } from '@/utils/validateFormData';
-import { createDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
-import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
-import { getShopifyStoreByIdForDropshipper, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
-import { getSupplierProductVariantById } from '@/app/models/supplier/product';
-
-type Variant = {
-    variantId: number;
-    stock: number;
-    price: number;
-    status?: boolean;
-    errors: string[];
-    index: number;
-};
+import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 
 export async function GET(req: NextRequest) {
     try {

@@ -96,9 +96,9 @@ export async function POST(req: NextRequest) {
 
     try {
       permissionsObj = JSON.parse(rawPermissions);
-    } catch (e) {
+    } catch (error) {
       return NextResponse.json(
-        { status: false, error: "Permissions JSON is invalid" },
+        { status: false, message: error },
         { status: 400 }
       );
     }
