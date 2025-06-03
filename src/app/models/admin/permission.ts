@@ -49,6 +49,38 @@ export const getAllAdminStaffPermissions = async () => {
     }
 };
 
+export const getAllPermissionsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
+    try {
+        let whereCondition;
+        switch (status) {
+            case "active":
+                whereCondition = { status: true, deletedAt: null };
+                break;
+            case "inactive":
+                whereCondition = { status: false, deletedAt: null };
+                break;
+            case "deleted":
+                whereCondition = { deletedAt: { not: null } };
+                break;
+            case "notDeleted":
+                whereCondition = { deletedAt: null };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+
+        const permissions = await prisma.permission.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+        });
+
+        return { status: true, permissions: serializeBigInt(permissions) };
+    } catch (error) {
+        console.error(`Error fetching permissions by status (${status}):`, error);
+        return { status: false, message: "Error fetching permissions" };
+    }
+};
+
 export const getAdminStaffPermissionsByStatus = async (status: "active" | "inactive" | "deleted" | "notDeleted") => {
     try {
         let whereCondition: Record<string, unknown> = {

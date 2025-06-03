@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { getAdminStaffPermissionsByStatus, updateAdminPermissions } from '@/app/models/admin/permission';
+import { getAllPermissionsByStatus, updateAdminPermissions } from '@/app/models/admin/permission';
 
 
 export async function GET(req: NextRequest) {
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch all admins
-    const adminsResult = await getAdminStaffPermissionsByStatus("notDeleted");
+    const adminsResult = await getAllPermissionsByStatus("notDeleted");
 
     if (adminsResult?.status) {
       return NextResponse.json(
