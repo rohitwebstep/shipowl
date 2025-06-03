@@ -1,33 +1,6 @@
 import prisma from "@/lib/prisma";
 import { logMessage } from "@/utils/commonUtils";
 
-interface AdminHasPermission {
-    id?: number;
-    admin?: {
-        connect: { id: number }; // or whatever your relation is
-    };
-    permission?: {
-        connect: { id: number }; // or whatever your relation is
-    };
-    adminStaffId?: number;
-    permissionId?: number;
-}
-
-interface AdminPermissionsPayload {
-    admin?: { connect: { id: number } };
-    adminStaffId?: number;
-    permissions: AdminHasPermission[];
-    createdAt?: Date; // Timestamp of when the dropshipper was created
-    updatedAt?: Date; // Timestamp of when the dropshipper was last updated
-    deletedAt?: Date | null; // Timestamp of when the dropshipper was deleted, or null if not deleted
-    createdBy?: number; // ID of the admin who created the dropshipper
-    updatedBy?: number; // ID of the admin who last updated the dropshipper
-    deletedBy?: number; // ID of the admin who deleted the dropshipper
-    createdByRole?: string | null; // Role of the admin who created the dropshipper
-    updatedByRole?: string | null; // Role of the admin who last updated the dropshipper
-    deletedByRole?: string | null; // Role of the admin who deleted the dropshipper
-}
-
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
     if (Array.isArray(obj)) {
@@ -62,60 +35,6 @@ export const getAdminPermissionById = async (id: number) => {
         return { status: false, message: "Error fetching permission" };
     }
 };
-
-
-export async function assignAdminStaffPermission(
-    adminStaffId: number,
-    adminRole: string,
-    payload: AdminPermissionsPayload
-) {
-    try {
-        const permissionOperations = payload.permissions.map(async (permission) => {
-            const targetAdminId = Number(payload.adminStaffId);
-            const targetPermissionId = Number(permission.permissionId);
-
-            const { status: found, permission: currentPermission, message } = await getAdminPermissionById(targetPermissionId);
-            if (!found || !currentPermission) {
-                return { status: false, message: message || "Permission record not found." };
-            }
-
-            // Check if the permission is already assigned to this admin
-            const existingPermission = await prisma.adminStaffHasPermission.findFirst({
-                where: {
-                    adminStaffId: targetAdminId,
-                    permissionId: targetPermissionId,
-                }
-            });
-
-            if (existingPermission) {
-                return {
-                    status: false,
-                    message: `Permission (ID: ${targetPermissionId}) is already assigned to Admin (ID: ${targetAdminId}).`,
-                };
-            }
-
-            // Create new permission entry
-            const newPermission = await prisma.adminStaffHasPermission.create({
-                data: {
-                    adminStaffId: targetAdminId,
-                    permissionId: targetPermissionId,
-                    updatedAt: payload.updatedAt,
-                    updatedBy: payload.updatedBy,
-                    updatedByRole: payload.updatedByRole,
-                }
-            });
-
-            return { status: true, permission: newPermission };
-        });
-
-        const results = await Promise.all(permissionOperations);
-
-        return { status: true, permissions: results };
-    } catch (error) {
-        logMessage("error", "Error while updating/creating admin permissions", error);
-        return { status: false, message: "Internal Server Error" };
-    }
-}
 
 // 🟣 GET ALL
 export const getAllAdminStaffPermissions = async () => {
@@ -165,25 +84,34 @@ export const getAdminStaffPermissionsByStatus = async (status: "active" | "inact
     }
 };
 
-export const getPermissionsOfAdminStaff = async (adminStaffId: number) => {
+export const updateAdminPermissions = async (
+    adminId: number,
+    adminRole: string,
+    payload: {
+        permissions: { permissionId: number; status: boolean }[];
+        updatedAt?: Date;
+        updatedBy?: number;
+        updatedByRole?: string | null;
+    }
+) => {
     try {
-        if (!adminStaffId || isNaN(adminStaffId)) {
-            return { status: false, message: "Invalid Admin ID" };
-        }
+        const updates = payload.permissions.map(({ permissionId, status }) =>
+            prisma.permission.update({
+                where: { id: permissionId },
+                data: {
+                    status,
+                    updatedAt: payload.updatedAt,
+                    updatedBy: payload.updatedBy,
+                    updatedByRole: payload.updatedByRole,
+                },
+            })
+        );
 
-        const permissions = await prisma.adminStaffHasPermission.findMany({
-            where: { adminStaffId },
-            include: {
-                permission: true // Include full permission details
-            },
-            orderBy: {
-                permissionId: "asc"
-            }
-        });
+        const result = await Promise.all(updates);
 
-        return { status: true, permissions: serializeBigInt(permissions) };
+        return { status: true, updatedPermissions: serializeBigInt(result) };
     } catch (error) {
-        logMessage("error", `Failed to get permissions for adminStaffId ${adminStaffId}`, error);
-        return { status: false, message: "Failed to fetch admin permissions" };
+        logMessage("error", "Failed to update permissions", error);
+        return { status: false, message: "Internal Server Error" };
     }
 };

@@ -309,27 +309,6 @@ model permission {
   deletedAt                       DateTime?
   deletedBy                       Int?
   deletedByRole                   String?
-
-  adminStaffPermissions                adminStaffHasPermission[]
-}
-
-model adminStaffHasPermission {
-  id                              Int            @id @default(autoincrement())
-  adminStaffId                    Int
-  permissionId                    Int
-
-  createdAt                       DateTime       @default(now())
-  createdBy                       Int?
-  createdByRole                   String?
-  updatedAt                       DateTime       @updatedAt
-  updatedBy                       Int?
-  updatedByRole                   String?
-  deletedAt                       DateTime?
-  deletedBy                       Int?
-  deletedByRole                   String?
-
-  adminStaff                      adminStaff      @relation(fields: [adminStaffId], references: [id], onDelete: Cascade)
-  permission                      permission      @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 }
 
 model loginLog {

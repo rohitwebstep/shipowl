@@ -63,60 +63,6 @@ export const getSupplierPermissionById = async (id: number) => {
     }
 };
 
-
-export async function assignSupplierStaffPermission(
-    supplierStaffId: number,
-    supplierRole: string,
-    payload: SupplierPermissionsPayload
-) {
-    try {
-        const permissionOperations = payload.permissions.map(async (permission) => {
-            const targetSupplierId = Number(payload.supplierStaffId);
-            const targetPermissionId = Number(permission.permissionId);
-
-            const { status: found, permission: currentPermission, message } = await getSupplierPermissionById(targetPermissionId);
-            if (!found || !currentPermission) {
-                return { status: false, message: message || "Permission record not found." };
-            }
-
-            // Check if the permission is already assigned to this supplier
-            const existingPermission = await prisma.adminStaffHasPermission.findFirst({
-                where: {
-                    adminStaffId: targetSupplierId,
-                    permissionId: targetPermissionId,
-                }
-            });
-
-            if (existingPermission) {
-                return {
-                    status: false,
-                    message: `Permission (ID: ${targetPermissionId}) is already assigned to Supplier (ID: ${targetSupplierId}).`,
-                };
-            }
-
-            // Create new permission entry
-            const newPermission = await prisma.adminStaffHasPermission.create({
-                data: {
-                    adminStaffId: targetSupplierId,
-                    permissionId: targetPermissionId,
-                    updatedAt: payload.updatedAt,
-                    updatedBy: payload.updatedBy,
-                    updatedByRole: payload.updatedByRole,
-                }
-            });
-
-            return { status: true, permission: newPermission };
-        });
-
-        const results = await Promise.all(permissionOperations);
-
-        return { status: true, permissions: results };
-    } catch (error) {
-        logMessage("error", "Error while updating/creating supplier permissions", error);
-        return { status: false, message: "Internal Server Error" };
-    }
-}
-
 // 🟣 GET ALL
 export const getAllSupplierStaffPermissions = async () => {
     try {
@@ -162,28 +108,5 @@ export const getSupplierStaffPermissionsByStatus = async (status: "active" | "in
     } catch (error) {
         console.error(`Error fetching permissions by status (${status}):`, error);
         return { status: false, message: "Error fetching permissions" };
-    }
-};
-
-export const getPermissionsOfSupplierStaff = async (supplierStaffId: number) => {
-    try {
-        if (!supplierStaffId || isNaN(supplierStaffId)) {
-            return { status: false, message: "Invalid Supplier ID" };
-        }
-
-        const permissions = await prisma.adminStaffHasPermission.findMany({
-            where: { adminStaffId: supplierStaffId },
-            include: {
-                permission: true // Include full permission details
-            },
-            orderBy: {
-                permissionId: "asc"
-            }
-        });
-
-        return { status: true, permissions: serializeBigInt(permissions) };
-    } catch (error) {
-        logMessage("error", `Failed to get permissions for supplierStaffId ${supplierStaffId}`, error);
-        return { status: false, message: "Failed to fetch supplier permissions" };
     }
 };

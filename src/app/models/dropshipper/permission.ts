@@ -64,59 +64,6 @@ export const getDropshipperPermissionById = async (id: number) => {
 };
 
 
-export async function assignDropshipperStaffPermission(
-    dropshipperStaffId: number,
-    dropshipperRole: string,
-    payload: DropshipperPermissionsPayload
-) {
-    try {
-        const permissionOperations = payload.permissions.map(async (permission) => {
-            const targetDropshipperId = Number(payload.dropshipperStaffId);
-            const targetPermissionId = Number(permission.permissionId);
-
-            const { status: found, permission: currentPermission, message } = await getDropshipperPermissionById(targetPermissionId);
-            if (!found || !currentPermission) {
-                return { status: false, message: message || "Permission record not found." };
-            }
-
-            // Check if the permission is already assigned to this dropshipper
-            const existingPermission = await prisma.adminStaffHasPermission.findFirst({
-                where: {
-                    adminStaffId: targetDropshipperId,
-                    permissionId: targetPermissionId,
-                }
-            });
-
-            if (existingPermission) {
-                return {
-                    status: false,
-                    message: `Permission (ID: ${targetPermissionId}) is already assigned to Dropshipper (ID: ${targetDropshipperId}).`,
-                };
-            }
-
-            // Create new permission entry
-            const newPermission = await prisma.adminStaffHasPermission.create({
-                data: {
-                    adminStaffId: targetDropshipperId,
-                    permissionId: targetPermissionId,
-                    updatedAt: payload.updatedAt,
-                    updatedBy: payload.updatedBy,
-                    updatedByRole: payload.updatedByRole,
-                }
-            });
-
-            return { status: true, permission: newPermission };
-        });
-
-        const results = await Promise.all(permissionOperations);
-
-        return { status: true, permissions: results };
-    } catch (error) {
-        logMessage("error", "Error while updating/creating dropshipper permissions", error);
-        return { status: false, message: "Internal Server Error" };
-    }
-}
-
 // 🟣 GET ALL
 export const getAllDropshipperStaffPermissions = async () => {
     try {
@@ -162,28 +109,5 @@ export const getDropshipperStaffPermissionsByStatus = async (status: "active" | 
     } catch (error) {
         console.error(`Error fetching permissions by status (${status}):`, error);
         return { status: false, message: "Error fetching permissions" };
-    }
-};
-
-export const getPermissionsOfDropshipperStaff = async (dropshipperStaffId: number) => {
-    try {
-        if (!dropshipperStaffId || isNaN(dropshipperStaffId)) {
-            return { status: false, message: "Invalid Dropshipper ID" };
-        }
-
-        const permissions = await prisma.adminStaffHasPermission.findMany({
-            where: { adminStaffId: dropshipperStaffId },
-            include: {
-                permission: true // Include full permission details
-            },
-            orderBy: {
-                permissionId: "asc"
-            }
-        });
-
-        return { status: true, permissions: serializeBigInt(permissions) };
-    } catch (error) {
-        logMessage("error", `Failed to get permissions for dropshipperStaffId ${dropshipperStaffId}`, error);
-        return { status: false, message: "Failed to fetch dropshipper permissions" };
     }
 };
