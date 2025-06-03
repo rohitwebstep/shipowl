@@ -1,4 +1,3 @@
-import { getPermissionsOfAdminStaff } from "@/app/models/admin/permission";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { logMessage } from "@/utils/commonUtils";
 
@@ -31,31 +30,6 @@ export async function checkAdminPermission({
             status: false,
             message: `Permission denied for action "${action}" on module "${module}" - User not found.`
         };
-    }
-
-    const getPermissionsOfAdminResult = await getPermissionsOfAdminStaff(admin_id);
-    if (getPermissionsOfAdminResult.status && Array.isArray(getPermissionsOfAdminResult.permissions)) {
-        const hasPermission = getPermissionsOfAdminResult.permissions.some((perm) => {
-            return (
-                perm.permission &&
-                perm.permission.panel === panel &&
-                perm.permission.module === module &&
-                perm.permission.action === action &&
-                perm.permission.status === true
-            );
-        });
-
-        if (hasPermission) {
-            return {
-                status: true,
-                message: `Permission granted for action "${action}" on module "${module}".`
-            };
-        } else {
-            return {
-                status: false,
-                message: `Permission denied for action "${action}" on module "${module}".`
-            };
-        }
     }
 
     return {
