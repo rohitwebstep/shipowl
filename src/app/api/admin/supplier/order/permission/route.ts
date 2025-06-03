@@ -3,6 +3,16 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getPermissions, updatePermission } from '@/app/models/admin/supplier/order/permission';
 
+interface RawPermission {
+  permissionId: number | string;
+  status: boolean | string | number;
+}
+
+interface CleanedPermission {
+  permissionId: number;
+  status: boolean;
+}
+
 export async function GET(req: NextRequest) {
   try {
     logMessage('debug', 'GET request received for fetching permissions');
@@ -92,12 +102,12 @@ export async function POST(req: NextRequest) {
     }
 
     // Clean and validate permissions array
-    const cleanedPermissions = permissions.map((perm: any) => {
-      return {
+    const cleanedPermissions: CleanedPermission[] = (permissions as RawPermission[])
+      .map((perm) => ({
         permissionId: Number(perm.permissionId),
         status: perm.status === true || perm.status === 'true' || perm.status === 1 || perm.status === '1'
-      };
-    }).filter((perm: any) => !isNaN(perm.permissionId) && typeof perm.status === 'boolean');
+      }))
+      .filter((perm) => !isNaN(perm.permissionId) && typeof perm.status === 'boolean');
 
     // Now you have cleanedPermissions with permissionId as number and status as boolean
 
