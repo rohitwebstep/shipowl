@@ -182,9 +182,6 @@ export const getDropshipperStaffsByStatus = async (
         const dropshipperStaffs = await prisma.adminStaff.findMany({
             where: whereCondition,
             orderBy: { name: "asc" },
-            include: {
-                permissions: true
-            }
         });
 
         logMessage(`debug`, `withPassword:`, withPassword);
@@ -201,14 +198,6 @@ export const getDropshipperStaffById = async (id: number, withPassword: boolean 
     try {
         const dropshipperStaff = await prisma.adminStaff.findUnique({
             where: { id, role: 'dropshipper_staff' },
-            include: {
-                permissions: {
-                    include: {
-                        permission: true,
-                    },
-                },
-            }
-
         });
 
         logMessage(`debug`, `withPassword:`, withPassword);
@@ -339,7 +328,6 @@ export const restoreDropshipperStaff = async (dropshipperId: number, dropshipper
         // Restore the dropshipperStaff
         const restoredDropshipperStaff = await prisma.adminStaff.update({
             where: { id },
-            include: { permissions: true },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null
