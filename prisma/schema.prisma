@@ -290,7 +290,6 @@ model adminStaff {
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
   admin                admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
-  permissions          adminStaffHasPermission[]
 }
 
 model permission {
