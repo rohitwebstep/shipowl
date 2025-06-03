@@ -120,13 +120,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const rawPermissions = extractJSON('permissions');
-
-    if (!Array.isArray(rawPermissions) || rawPermissions.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    
     const password = extractString('password') || '';
     // Hash the password using bcrypt
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds

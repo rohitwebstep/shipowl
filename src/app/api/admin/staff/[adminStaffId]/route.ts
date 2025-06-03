@@ -160,13 +160,6 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const rawPermissions = extractJSON('permissions');
-
-    if (!Array.isArray(rawPermissions) || rawPermissions.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    
     const adminUploadDir = path.join(process.cwd(), 'public', 'uploads', 'admin');
     const adminFileFields = [
       'profilePicture'

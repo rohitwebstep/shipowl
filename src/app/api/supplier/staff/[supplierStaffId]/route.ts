@@ -7,7 +7,6 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getSupplierStaffById, checkEmailAvailabilityForUpdate, updateSupplierStaff, restoreSupplierStaff, softDeleteSupplierStaff } from '@/app/models/supplier/staff';
-import { assignSupplierStaffPermission } from '@/app/models/supplier/permission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -161,14 +160,6 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const rawPermissions = extractJSON('permissions');
-
-    if (!Array.isArray(rawPermissions) || rawPermissions.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const permissions: SupplierHasPermission[] = Array.isArray(rawPermissions) ? rawPermissions as SupplierHasPermission[] : [];
-
     const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
     const supplierFileFields = [
       'profilePicture'
@@ -254,29 +245,6 @@ export async function PUT(req: NextRequest) {
       }
       logMessage('error', 'Supplier creation failed:', supplierStaffCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: supplierStaffCreateResult?.message || 'Supplier creation failed' }, { status: 500 });
-    }
-
-    logMessage('debug', 'Supplier Staff\'s permissions:', permissions);
-
-    const supplierPermissionPayload = {
-      supplierStaffId: supplierStaffCreateResult.supplierStaff.id,
-      permissions,
-      updatedAt: new Date(),
-      updatedBy: supplierId,
-      updatedByRole: supplierRole,
-    }
-
-    const supplierPermissionCreateResult = await assignSupplierStaffPermission(supplierId, String(supplierRole), supplierPermissionPayload);
-    if (
-      !supplierPermissionCreateResult ||
-      !supplierPermissionCreateResult.status ||
-      !supplierPermissionCreateResult.permissions
-    ) {
-      logMessage('error', 'Supplier company creation failed', supplierPermissionCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: supplierPermissionCreateResult?.message || 'Supplier company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(

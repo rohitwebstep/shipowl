@@ -8,7 +8,6 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createDropshipperStaff, getDropshipperStaffsByStatus } from '@/app/models/dropshipper/staff';
-import { assignDropshipperStaffPermission } from '@/app/models/dropshipper/permission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -121,14 +120,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const rawPermissions = extractJSON('permissions');
-
-    if (!Array.isArray(rawPermissions) || rawPermissions.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const permissions: DropshipperHasPermission[] = Array.isArray(rawPermissions) ? rawPermissions as DropshipperHasPermission[] : [];
-
     const password = extractString('password') || '';
     // Hash the password using bcrypt
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
@@ -219,29 +210,6 @@ export async function POST(req: NextRequest) {
       }
       logMessage('error', 'Dropshipper creation failed:', dropshipperStaffCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: dropshipperStaffCreateResult?.message || 'Dropshipper creation failed' }, { status: 500 });
-    }
-
-    logMessage('debug', 'Dropshipper Staff\'s permissions:', permissions);
-
-    const dropshipperPermissionPayload = {
-      dropshipperStaffId: dropshipperStaffCreateResult.dropshipperStaff.id,
-      permissions,
-      updatedAt: new Date(),
-      updatedBy: dropshipperId,
-      updatedByRole: dropshipperRole,
-    }
-
-    const dropshipperPermissionCreateResult = await assignDropshipperStaffPermission(dropshipperId, String(dropshipperRole), dropshipperPermissionPayload);
-    if (
-      !dropshipperPermissionCreateResult ||
-      !dropshipperPermissionCreateResult.status ||
-      !dropshipperPermissionCreateResult.permissions
-    ) {
-      logMessage('error', 'Dropshipper company creation failed', dropshipperPermissionCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: dropshipperPermissionCreateResult?.message || 'Dropshipper company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(
