@@ -16,18 +16,6 @@ type UploadedFileInfo = {
   url: string;
 };
 
-interface AdminHasPermission {
-  id?: number;
-  admin?: {
-    connect: { id: number }; // or whatever your relation is
-  };
-  permission?: {
-    connect: { id: number }; // or whatever your relation is
-  };
-  adminId?: number;
-  permissionId?: number;
-}
-
 export async function GET(req: NextRequest) {
   try {
     const adminId = req.headers.get('x-admin-id');
@@ -98,38 +86,6 @@ export async function PUT(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
-    const extractJSON = (key: string): Record<string, unknown> | null => {
-
-      const value = extractString(key);
-      const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
-
-      let parsedData;
-      if (typeof cleanedValue === 'string') {
-        try {
-          parsedData = JSON.parse(cleanedValue);
-          logMessage('info', "✅ Parsed value: 1", parsedData);
-          return parsedData;
-        } catch (error) {
-          logMessage('warn', 'Failed to parse JSON value:', error);
-        }
-
-        try {
-          parsedData = JSON.parse(cleanedValue);
-          logMessage('info', "✅ Parsed value: 2", parsedData);
-          return parsedData;
-        } catch (error) {
-          logMessage('warn', 'Failed to parse JSON value:', error);
-          return null;
-        }
-      }
-
-      if (typeof cleanedValue === 'object' && cleanedValue !== null) {
-        logMessage('info', "✅ Parsed value: 3", cleanedValue);
-        return cleanedValue;
-      }
-
-      return null;
-    };
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);

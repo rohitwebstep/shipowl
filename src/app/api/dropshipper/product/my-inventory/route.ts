@@ -213,7 +213,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const shopifyAppId = extractNumber('shopyfyApp');
+    const shopifyAppId = extractNumber('shopifyApp');
     let shopifyApp;
 
     if (shopifyAppId && !isNaN(shopifyAppId)) {
