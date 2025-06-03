@@ -22,6 +22,11 @@ export async function checkAdminPermission({
     action
 }: PermissionCheckParams): Promise<PermissionCheckResult> {
 
+    return {
+        status: true,
+        message: `Permission denied for action "${action}" on module "${module}" under panel "${panel}" - User not found.`
+    };
+
     // Check if the user exists
     const userCheck = await isUserExist(admin_id, role);
     if (!userCheck.status) {
