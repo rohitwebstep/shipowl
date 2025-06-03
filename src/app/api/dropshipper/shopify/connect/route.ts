@@ -69,7 +69,13 @@ export async function POST(req: NextRequest) {
 
         // Identify missing or empty env variables
         const missingVars = Object.entries(requiredEnvVars)
-            .filter(([key, val]) => !val || val.trim() === '')
+            .filter(([key, val]) => {
+                const isMissing = !val || val.trim() === '';
+                if (isMissing) {
+                    console.log(`Missing env variable: ${key}`);
+                }
+                return isMissing;
+            })
             .map(([key]) => key);
 
         if (missingVars.length > 0) {

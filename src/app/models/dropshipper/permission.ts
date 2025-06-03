@@ -1,32 +1,4 @@
 import prisma from "@/lib/prisma";
-import { logMessage } from "@/utils/commonUtils";
-
-interface DropshipperHasPermission {
-    id?: number;
-    admin?: {
-        connect: { id: number }; // or whatever your relation is
-    };
-    permission?: {
-        connect: { id: number }; // or whatever your relation is
-    };
-    dropshipperStaffId?: number;
-    permissionId?: number;
-}
-
-interface DropshipperPermissionsPayload {
-    dropshipper?: { connect: { id: number } };
-    dropshipperStaffId?: number;
-    permissions: DropshipperHasPermission[];
-    createdAt?: Date; // Timestamp of when the dropshipper was created
-    updatedAt?: Date; // Timestamp of when the dropshipper was last updated
-    deletedAt?: Date | null; // Timestamp of when the dropshipper was deleted, or null if not deleted
-    createdBy?: number; // ID of the dropshipper who created the dropshipper
-    updatedBy?: number; // ID of the dropshipper who last updated the dropshipper
-    deletedBy?: number; // ID of the dropshipper who deleted the dropshipper
-    createdByRole?: string | null; // Role of the dropshipper who created the dropshipper
-    updatedByRole?: string | null; // Role of the dropshipper who last updated the dropshipper
-    deletedByRole?: string | null; // Role of the dropshipper who deleted the dropshipper
-}
 
 const serializeBigInt = <T>(obj: T): T => {
     // If it's an array, recursively apply serializeBigInt to each element
