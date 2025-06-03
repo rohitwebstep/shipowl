@@ -25,14 +25,13 @@ export const updatePermission = async (
     }
 ) => {
     try {
-        // Build an object with all columns to update dynamically
-        const updateData: Record<string, any> = {
-        };
+        // Use boolean instead of any
+        const updateData: Record<string, boolean> = {};
 
         for (const perm of data.permissions) {
             updateData[perm.permissionIndex] = perm.status;
         }
-        
+
         // Update the single row with id = 1 (change if needed)
         const updatedPermissions = await prisma.supplierOrderPermission.update({
             where: { id: 1 },
