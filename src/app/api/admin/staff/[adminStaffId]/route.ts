@@ -166,8 +166,7 @@ export async function PUT(req: NextRequest) {
       logMessage('warn', 'Variants are not valid or empty');
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
     }
-    const permissions: AdminHasPermission[] = Array.isArray(rawPermissions) ? rawPermissions as AdminHasPermission[] : [];
-
+    
     const adminUploadDir = path.join(process.cwd(), 'public', 'uploads', 'admin');
     const adminFileFields = [
       'profilePicture'

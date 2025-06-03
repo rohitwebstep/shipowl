@@ -126,8 +126,7 @@ export async function POST(req: NextRequest) {
       logMessage('warn', 'Variants are not valid or empty');
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
     }
-    const permissions: AdminHasPermission[] = Array.isArray(rawPermissions) ? rawPermissions as AdminHasPermission[] : [];
-
+    
     const password = extractString('password') || '';
     // Hash the password using bcrypt
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
