@@ -347,21 +347,6 @@ exports.Prisma.PermissionScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
-exports.Prisma.AdminStaffHasPermissionScalarFieldEnum = {
-  id: 'id',
-  adminStaffId: 'adminStaffId',
-  permissionId: 'permissionId',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  createdByRole: 'createdByRole',
-  updatedAt: 'updatedAt',
-  updatedBy: 'updatedBy',
-  updatedByRole: 'updatedByRole',
-  deletedAt: 'deletedAt',
-  deletedBy: 'deletedBy',
-  deletedByRole: 'deletedByRole'
-};
-
 exports.Prisma.LoginLogScalarFieldEnum = {
   id: 'id',
   adminId: 'adminId',
@@ -733,6 +718,7 @@ exports.Prisma.SupplierProductVariantScalarFieldEnum = {
 
 exports.Prisma.DropshipperProductScalarFieldEnum = {
   id: 'id',
+  shopifyProductId: 'shopifyProductId',
   dropshipperId: 'dropshipperId',
   supplierId: 'supplierId',
   supplierProductId: 'supplierProductId',
@@ -860,6 +846,35 @@ exports.Prisma.RtoInventoryScalarFieldEnum = {
   deletedAt: 'deletedAt',
   deletedBy: 'deletedBy',
   deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.SupplierOrderPermissionScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  awbNumber: 'awbNumber',
+  status: 'status',
+  orderNote: 'orderNote',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  discount: 'discount',
+  totalAmount: 'totalAmount',
+  currency: 'currency',
+  shippingName: 'shippingName',
+  shippingPhone: 'shippingPhone',
+  shippingEmail: 'shippingEmail',
+  shippingAddress: 'shippingAddress',
+  shippingZip: 'shippingZip',
+  shippingCountry: 'shippingCountry',
+  shippingState: 'shippingState',
+  shippingCity: 'shippingCity',
+  billingName: 'billingName',
+  billingPhone: 'billingPhone',
+  billingEmail: 'billingEmail',
+  billingAddress: 'billingAddress',
+  billingZip: 'billingZip',
+  billingCountry: 'billingCountry',
+  billingState: 'billingState',
+  billingCity: 'billingCity'
 };
 
 exports.Prisma.SortOrder = {
@@ -1017,12 +1032,6 @@ exports.Prisma.permissionOrderByRelevanceFieldEnum = {
   panel: 'panel',
   module: 'module',
   action: 'action',
-  createdByRole: 'createdByRole',
-  updatedByRole: 'updatedByRole',
-  deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.adminStaffHasPermissionOrderByRelevanceFieldEnum = {
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1233,6 +1242,7 @@ exports.Prisma.supplierProductVariantOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.dropshipperProductOrderByRelevanceFieldEnum = {
+  shopifyProductId: 'shopifyProductId',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
@@ -1291,7 +1301,6 @@ exports.Prisma.ModelName = {
   bankAccountChangeRequest: 'bankAccountChangeRequest',
   adminStaff: 'adminStaff',
   permission: 'permission',
-  adminStaffHasPermission: 'adminStaffHasPermission',
   loginLog: 'loginLog',
   activityLog: 'activityLog',
   country: 'country',
@@ -1315,7 +1324,8 @@ exports.Prisma.ModelName = {
   payment: 'payment',
   order: 'order',
   orderItem: 'orderItem',
-  rtoInventory: 'rtoInventory'
+  rtoInventory: 'rtoInventory',
+  supplierOrderPermission: 'supplierOrderPermission'
 };
 
 /**

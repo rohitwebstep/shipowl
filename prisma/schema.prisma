@@ -1097,3 +1097,38 @@ model rtoInventory {
   @@index([dropshipperProductVariantId])
   @@index([deletedAt])
 }
+
+model supplierOrderPermission {
+  id              Int     @id @default(autoincrement())
+  orderNumber     Boolean @default(false)
+  awbNumber       Boolean @default(false)
+  status          Boolean @default(false)
+  orderNote       Boolean @default(false)
+
+  // Financial Summary
+  subtotal        Boolean @default(false)
+  tax             Boolean @default(false)
+  discount        Boolean @default(false)
+  totalAmount     Boolean @default(false)
+  currency        Boolean @default(false)
+
+  // Shipping Address
+  shippingName    Boolean @default(false)
+  shippingPhone   Boolean @default(false)
+  shippingEmail   Boolean @default(false)
+  shippingAddress Boolean @default(false)
+  shippingZip     Boolean @default(false)
+  shippingCountry Boolean @default(false)
+  shippingState   Boolean @default(false)
+  shippingCity    Boolean @default(false)
+
+  // Billing Address
+  billingName     Boolean @default(false)
+  billingPhone    Boolean @default(false)
+  billingEmail    Boolean @default(false)
+  billingAddress  Boolean @default(false)
+  billingZip      Boolean @default(false)
+  billingCountry  Boolean @default(false)
+  billingState    Boolean @default(false)
+  billingCity     Boolean @default(false)
+}

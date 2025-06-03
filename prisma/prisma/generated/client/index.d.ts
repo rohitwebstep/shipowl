@@ -54,11 +54,6 @@ export type adminStaff = $Result.DefaultSelection<Prisma.$adminStaffPayload>
  */
 export type permission = $Result.DefaultSelection<Prisma.$permissionPayload>
 /**
- * Model adminStaffHasPermission
- * 
- */
-export type adminStaffHasPermission = $Result.DefaultSelection<Prisma.$adminStaffHasPermissionPayload>
-/**
  * Model loginLog
  * 
  */
@@ -178,6 +173,11 @@ export type orderItem = $Result.DefaultSelection<Prisma.$orderItemPayload>
  * 
  */
 export type rtoInventory = $Result.DefaultSelection<Prisma.$rtoInventoryPayload>
+/**
+ * Model supplierOrderPermission
+ * 
+ */
+export type supplierOrderPermission = $Result.DefaultSelection<Prisma.$supplierOrderPermissionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -383,16 +383,6 @@ export class PrismaClient<
     * ```
     */
   get permission(): Prisma.permissionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.adminStaffHasPermission`: Exposes CRUD operations for the **adminStaffHasPermission** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more AdminStaffHasPermissions
-    * const adminStaffHasPermissions = await prisma.adminStaffHasPermission.findMany()
-    * ```
-    */
-  get adminStaffHasPermission(): Prisma.adminStaffHasPermissionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.loginLog`: Exposes CRUD operations for the **loginLog** model.
@@ -633,6 +623,16 @@ export class PrismaClient<
     * ```
     */
   get rtoInventory(): Prisma.rtoInventoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.supplierOrderPermission`: Exposes CRUD operations for the **supplierOrderPermission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupplierOrderPermissions
+    * const supplierOrderPermissions = await prisma.supplierOrderPermission.findMany()
+    * ```
+    */
+  get supplierOrderPermission(): Prisma.supplierOrderPermissionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1081,7 +1081,6 @@ export namespace Prisma {
     bankAccountChangeRequest: 'bankAccountChangeRequest',
     adminStaff: 'adminStaff',
     permission: 'permission',
-    adminStaffHasPermission: 'adminStaffHasPermission',
     loginLog: 'loginLog',
     activityLog: 'activityLog',
     country: 'country',
@@ -1105,7 +1104,8 @@ export namespace Prisma {
     payment: 'payment',
     order: 'order',
     orderItem: 'orderItem',
-    rtoInventory: 'rtoInventory'
+    rtoInventory: 'rtoInventory',
+    supplierOrderPermission: 'supplierOrderPermission'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1124,7 +1124,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "adminStaffHasPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory"
+      modelProps: "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory" | "supplierOrderPermission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1653,72 +1653,6 @@ export namespace Prisma {
           count: {
             args: Prisma.permissionCountArgs<ExtArgs>
             result: $Utils.Optional<PermissionCountAggregateOutputType> | number
-          }
-        }
-      }
-      adminStaffHasPermission: {
-        payload: Prisma.$adminStaffHasPermissionPayload<ExtArgs>
-        fields: Prisma.adminStaffHasPermissionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.adminStaffHasPermissionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.adminStaffHasPermissionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          findFirst: {
-            args: Prisma.adminStaffHasPermissionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.adminStaffHasPermissionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          findMany: {
-            args: Prisma.adminStaffHasPermissionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>[]
-          }
-          create: {
-            args: Prisma.adminStaffHasPermissionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          createMany: {
-            args: Prisma.adminStaffHasPermissionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.adminStaffHasPermissionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          update: {
-            args: Prisma.adminStaffHasPermissionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          deleteMany: {
-            args: Prisma.adminStaffHasPermissionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.adminStaffHasPermissionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.adminStaffHasPermissionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$adminStaffHasPermissionPayload>
-          }
-          aggregate: {
-            args: Prisma.AdminStaffHasPermissionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAdminStaffHasPermission>
-          }
-          groupBy: {
-            args: Prisma.adminStaffHasPermissionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AdminStaffHasPermissionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.adminStaffHasPermissionCountArgs<ExtArgs>
-            result: $Utils.Optional<AdminStaffHasPermissionCountAggregateOutputType> | number
           }
         }
       }
@@ -3306,6 +3240,72 @@ export namespace Prisma {
           }
         }
       }
+      supplierOrderPermission: {
+        payload: Prisma.$supplierOrderPermissionPayload<ExtArgs>
+        fields: Prisma.supplierOrderPermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.supplierOrderPermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.supplierOrderPermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.supplierOrderPermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.supplierOrderPermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          findMany: {
+            args: Prisma.supplierOrderPermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>[]
+          }
+          create: {
+            args: Prisma.supplierOrderPermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          createMany: {
+            args: Prisma.supplierOrderPermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.supplierOrderPermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          update: {
+            args: Prisma.supplierOrderPermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.supplierOrderPermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.supplierOrderPermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.supplierOrderPermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$supplierOrderPermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.SupplierOrderPermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupplierOrderPermission>
+          }
+          groupBy: {
+            args: Prisma.supplierOrderPermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupplierOrderPermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.supplierOrderPermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<SupplierOrderPermissionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3398,7 +3398,6 @@ export namespace Prisma {
     bankAccountChangeRequest?: bankAccountChangeRequestOmit
     adminStaff?: adminStaffOmit
     permission?: permissionOmit
-    adminStaffHasPermission?: adminStaffHasPermissionOmit
     loginLog?: loginLogOmit
     activityLog?: activityLogOmit
     country?: countryOmit
@@ -3423,6 +3422,7 @@ export namespace Prisma {
     order?: orderOmit
     orderItem?: orderItemOmit
     rtoInventory?: rtoInventoryOmit
+    supplierOrderPermission?: supplierOrderPermissionOmit
   }
 
   /* Types for Logging */
@@ -3612,68 +3612,6 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountRtoInventoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: rtoInventoryWhereInput
-  }
-
-
-  /**
-   * Count Type AdminStaffCountOutputType
-   */
-
-  export type AdminStaffCountOutputType = {
-    permissions: number
-  }
-
-  export type AdminStaffCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permissions?: boolean | AdminStaffCountOutputTypeCountPermissionsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AdminStaffCountOutputType without action
-   */
-  export type AdminStaffCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AdminStaffCountOutputType
-     */
-    select?: AdminStaffCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AdminStaffCountOutputType without action
-   */
-  export type AdminStaffCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: adminStaffHasPermissionWhereInput
-  }
-
-
-  /**
-   * Count Type PermissionCountOutputType
-   */
-
-  export type PermissionCountOutputType = {
-    adminStaffPermissions: number
-  }
-
-  export type PermissionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adminStaffPermissions?: boolean | PermissionCountOutputTypeCountAdminStaffPermissionsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PermissionCountOutputType without action
-   */
-  export type PermissionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PermissionCountOutputType
-     */
-    select?: PermissionCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PermissionCountOutputType without action
-   */
-  export type PermissionCountOutputTypeCountAdminStaffPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: adminStaffHasPermissionWhereInput
   }
 
 
@@ -12611,8 +12549,6 @@ export namespace Prisma {
     permanentState?: boolean | adminStaff$permanentStateArgs<ExtArgs>
     permanentCountry?: boolean | adminStaff$permanentCountryArgs<ExtArgs>
     admin?: boolean | adminDefaultArgs<ExtArgs>
-    permissions?: boolean | adminStaff$permissionsArgs<ExtArgs>
-    _count?: boolean | AdminStaffCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminStaff"]>
 
 
@@ -12653,8 +12589,6 @@ export namespace Prisma {
     permanentState?: boolean | adminStaff$permanentStateArgs<ExtArgs>
     permanentCountry?: boolean | adminStaff$permanentCountryArgs<ExtArgs>
     admin?: boolean | adminDefaultArgs<ExtArgs>
-    permissions?: boolean | adminStaff$permissionsArgs<ExtArgs>
-    _count?: boolean | AdminStaffCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $adminStaffPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12664,7 +12598,6 @@ export namespace Prisma {
       permanentState: Prisma.$statePayload<ExtArgs> | null
       permanentCountry: Prisma.$countryPayload<ExtArgs> | null
       admin: Prisma.$adminPayload<ExtArgs>
-      permissions: Prisma.$adminStaffHasPermissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13038,7 +12971,6 @@ export namespace Prisma {
     permanentState<T extends adminStaff$permanentStateArgs<ExtArgs> = {}>(args?: Subset<T, adminStaff$permanentStateArgs<ExtArgs>>): Prisma__stateClient<$Result.GetResult<Prisma.$statePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     permanentCountry<T extends adminStaff$permanentCountryArgs<ExtArgs> = {}>(args?: Subset<T, adminStaff$permanentCountryArgs<ExtArgs>>): Prisma__countryClient<$Result.GetResult<Prisma.$countryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    permissions<T extends adminStaff$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, adminStaff$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13495,30 +13427,6 @@ export namespace Prisma {
   }
 
   /**
-   * adminStaff.permissions
-   */
-  export type adminStaff$permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    where?: adminStaffHasPermissionWhereInput
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdminStaffHasPermissionScalarFieldEnum | AdminStaffHasPermissionScalarFieldEnum[]
-  }
-
-  /**
    * adminStaff without action
    */
   export type adminStaffDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13819,8 +13727,6 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
-    adminStaffPermissions?: boolean | permission$adminStaffPermissionsArgs<ExtArgs>
-    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["permission"]>
 
 
@@ -13843,16 +13749,10 @@ export namespace Prisma {
   }
 
   export type permissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panel" | "module" | "action" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["permission"]>
-  export type permissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adminStaffPermissions?: boolean | permission$adminStaffPermissionsArgs<ExtArgs>
-    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
-  }
 
   export type $permissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "permission"
-    objects: {
-      adminStaffPermissions: Prisma.$adminStaffHasPermissionPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
       panel: string
@@ -14208,7 +14108,6 @@ export namespace Prisma {
    */
   export interface Prisma__permissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    adminStaffPermissions<T extends permission$adminStaffPermissionsArgs<ExtArgs> = {}>(args?: Subset<T, permission$adminStaffPermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14269,10 +14168,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * Filter, which permission to fetch.
      */
     where: permissionWhereUniqueInput
@@ -14291,10 +14186,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * Filter, which permission to fetch.
      */
     where: permissionWhereUniqueInput
@@ -14312,10 +14203,6 @@ export namespace Prisma {
      * Omit specific fields from the permission
      */
     omit?: permissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
     /**
      * Filter, which permission to fetch.
      */
@@ -14365,10 +14252,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * Filter, which permission to fetch.
      */
     where?: permissionWhereInput
@@ -14417,10 +14300,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * Filter, which permissions to fetch.
      */
     where?: permissionWhereInput
@@ -14464,10 +14343,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * The data needed to create a permission.
      */
     data: XOR<permissionCreateInput, permissionUncheckedCreateInput>
@@ -14496,10 +14371,6 @@ export namespace Prisma {
      * Omit specific fields from the permission
      */
     omit?: permissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
     /**
      * The data needed to update a permission.
      */
@@ -14541,10 +14412,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * The filter to search for the permission to update in case it exists.
      */
     where: permissionWhereUniqueInput
@@ -14571,10 +14438,6 @@ export namespace Prisma {
      */
     omit?: permissionOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-    /**
      * Filter which permission to delete.
      */
     where: permissionWhereUniqueInput
@@ -14595,30 +14458,6 @@ export namespace Prisma {
   }
 
   /**
-   * permission.adminStaffPermissions
-   */
-  export type permission$adminStaffPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    where?: adminStaffHasPermissionWhereInput
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdminStaffHasPermissionScalarFieldEnum | AdminStaffHasPermissionScalarFieldEnum[]
-  }
-
-  /**
    * permission without action
    */
   export type permissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14630,1074 +14469,6 @@ export namespace Prisma {
      * Omit specific fields from the permission
      */
     omit?: permissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permissionInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model adminStaffHasPermission
-   */
-
-  export type AggregateAdminStaffHasPermission = {
-    _count: AdminStaffHasPermissionCountAggregateOutputType | null
-    _avg: AdminStaffHasPermissionAvgAggregateOutputType | null
-    _sum: AdminStaffHasPermissionSumAggregateOutputType | null
-    _min: AdminStaffHasPermissionMinAggregateOutputType | null
-    _max: AdminStaffHasPermissionMaxAggregateOutputType | null
-  }
-
-  export type AdminStaffHasPermissionAvgAggregateOutputType = {
-    id: number | null
-    adminStaffId: number | null
-    permissionId: number | null
-    createdBy: number | null
-    updatedBy: number | null
-    deletedBy: number | null
-  }
-
-  export type AdminStaffHasPermissionSumAggregateOutputType = {
-    id: number | null
-    adminStaffId: number | null
-    permissionId: number | null
-    createdBy: number | null
-    updatedBy: number | null
-    deletedBy: number | null
-  }
-
-  export type AdminStaffHasPermissionMinAggregateOutputType = {
-    id: number | null
-    adminStaffId: number | null
-    permissionId: number | null
-    createdAt: Date | null
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date | null
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-  }
-
-  export type AdminStaffHasPermissionMaxAggregateOutputType = {
-    id: number | null
-    adminStaffId: number | null
-    permissionId: number | null
-    createdAt: Date | null
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date | null
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-  }
-
-  export type AdminStaffHasPermissionCountAggregateOutputType = {
-    id: number
-    adminStaffId: number
-    permissionId: number
-    createdAt: number
-    createdBy: number
-    createdByRole: number
-    updatedAt: number
-    updatedBy: number
-    updatedByRole: number
-    deletedAt: number
-    deletedBy: number
-    deletedByRole: number
-    _all: number
-  }
-
-
-  export type AdminStaffHasPermissionAvgAggregateInputType = {
-    id?: true
-    adminStaffId?: true
-    permissionId?: true
-    createdBy?: true
-    updatedBy?: true
-    deletedBy?: true
-  }
-
-  export type AdminStaffHasPermissionSumAggregateInputType = {
-    id?: true
-    adminStaffId?: true
-    permissionId?: true
-    createdBy?: true
-    updatedBy?: true
-    deletedBy?: true
-  }
-
-  export type AdminStaffHasPermissionMinAggregateInputType = {
-    id?: true
-    adminStaffId?: true
-    permissionId?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-  }
-
-  export type AdminStaffHasPermissionMaxAggregateInputType = {
-    id?: true
-    adminStaffId?: true
-    permissionId?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-  }
-
-  export type AdminStaffHasPermissionCountAggregateInputType = {
-    id?: true
-    adminStaffId?: true
-    permissionId?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-    _all?: true
-  }
-
-  export type AdminStaffHasPermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which adminStaffHasPermission to aggregate.
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of adminStaffHasPermissions to fetch.
-     */
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` adminStaffHasPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` adminStaffHasPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned adminStaffHasPermissions
-    **/
-    _count?: true | AdminStaffHasPermissionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: AdminStaffHasPermissionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AdminStaffHasPermissionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AdminStaffHasPermissionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AdminStaffHasPermissionMaxAggregateInputType
-  }
-
-  export type GetAdminStaffHasPermissionAggregateType<T extends AdminStaffHasPermissionAggregateArgs> = {
-        [P in keyof T & keyof AggregateAdminStaffHasPermission]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAdminStaffHasPermission[P]>
-      : GetScalarType<T[P], AggregateAdminStaffHasPermission[P]>
-  }
-
-
-
-
-  export type adminStaffHasPermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: adminStaffHasPermissionWhereInput
-    orderBy?: adminStaffHasPermissionOrderByWithAggregationInput | adminStaffHasPermissionOrderByWithAggregationInput[]
-    by: AdminStaffHasPermissionScalarFieldEnum[] | AdminStaffHasPermissionScalarFieldEnum
-    having?: adminStaffHasPermissionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AdminStaffHasPermissionCountAggregateInputType | true
-    _avg?: AdminStaffHasPermissionAvgAggregateInputType
-    _sum?: AdminStaffHasPermissionSumAggregateInputType
-    _min?: AdminStaffHasPermissionMinAggregateInputType
-    _max?: AdminStaffHasPermissionMaxAggregateInputType
-  }
-
-  export type AdminStaffHasPermissionGroupByOutputType = {
-    id: number
-    adminStaffId: number
-    permissionId: number
-    createdAt: Date
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-    _count: AdminStaffHasPermissionCountAggregateOutputType | null
-    _avg: AdminStaffHasPermissionAvgAggregateOutputType | null
-    _sum: AdminStaffHasPermissionSumAggregateOutputType | null
-    _min: AdminStaffHasPermissionMinAggregateOutputType | null
-    _max: AdminStaffHasPermissionMaxAggregateOutputType | null
-  }
-
-  type GetAdminStaffHasPermissionGroupByPayload<T extends adminStaffHasPermissionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AdminStaffHasPermissionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AdminStaffHasPermissionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AdminStaffHasPermissionGroupByOutputType[P]>
-            : GetScalarType<T[P], AdminStaffHasPermissionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type adminStaffHasPermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    adminStaffId?: boolean
-    permissionId?: boolean
-    createdAt?: boolean
-    createdBy?: boolean
-    createdByRole?: boolean
-    updatedAt?: boolean
-    updatedBy?: boolean
-    updatedByRole?: boolean
-    deletedAt?: boolean
-    deletedBy?: boolean
-    deletedByRole?: boolean
-    adminStaff?: boolean | adminStaffDefaultArgs<ExtArgs>
-    permission?: boolean | permissionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["adminStaffHasPermission"]>
-
-
-
-  export type adminStaffHasPermissionSelectScalar = {
-    id?: boolean
-    adminStaffId?: boolean
-    permissionId?: boolean
-    createdAt?: boolean
-    createdBy?: boolean
-    createdByRole?: boolean
-    updatedAt?: boolean
-    updatedBy?: boolean
-    updatedByRole?: boolean
-    deletedAt?: boolean
-    deletedBy?: boolean
-    deletedByRole?: boolean
-  }
-
-  export type adminStaffHasPermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminStaffId" | "permissionId" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["adminStaffHasPermission"]>
-  export type adminStaffHasPermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adminStaff?: boolean | adminStaffDefaultArgs<ExtArgs>
-    permission?: boolean | permissionDefaultArgs<ExtArgs>
-  }
-
-  export type $adminStaffHasPermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "adminStaffHasPermission"
-    objects: {
-      adminStaff: Prisma.$adminStaffPayload<ExtArgs>
-      permission: Prisma.$permissionPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      adminStaffId: number
-      permissionId: number
-      createdAt: Date
-      createdBy: number | null
-      createdByRole: string | null
-      updatedAt: Date
-      updatedBy: number | null
-      updatedByRole: string | null
-      deletedAt: Date | null
-      deletedBy: number | null
-      deletedByRole: string | null
-    }, ExtArgs["result"]["adminStaffHasPermission"]>
-    composites: {}
-  }
-
-  type adminStaffHasPermissionGetPayload<S extends boolean | null | undefined | adminStaffHasPermissionDefaultArgs> = $Result.GetResult<Prisma.$adminStaffHasPermissionPayload, S>
-
-  type adminStaffHasPermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<adminStaffHasPermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AdminStaffHasPermissionCountAggregateInputType | true
-    }
-
-  export interface adminStaffHasPermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['adminStaffHasPermission'], meta: { name: 'adminStaffHasPermission' } }
-    /**
-     * Find zero or one AdminStaffHasPermission that matches the filter.
-     * @param {adminStaffHasPermissionFindUniqueArgs} args - Arguments to find a AdminStaffHasPermission
-     * @example
-     * // Get one AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends adminStaffHasPermissionFindUniqueArgs>(args: SelectSubset<T, adminStaffHasPermissionFindUniqueArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one AdminStaffHasPermission that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {adminStaffHasPermissionFindUniqueOrThrowArgs} args - Arguments to find a AdminStaffHasPermission
-     * @example
-     * // Get one AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends adminStaffHasPermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, adminStaffHasPermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AdminStaffHasPermission that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionFindFirstArgs} args - Arguments to find a AdminStaffHasPermission
-     * @example
-     * // Get one AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends adminStaffHasPermissionFindFirstArgs>(args?: SelectSubset<T, adminStaffHasPermissionFindFirstArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AdminStaffHasPermission that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionFindFirstOrThrowArgs} args - Arguments to find a AdminStaffHasPermission
-     * @example
-     * // Get one AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends adminStaffHasPermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, adminStaffHasPermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more AdminStaffHasPermissions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all AdminStaffHasPermissions
-     * const adminStaffHasPermissions = await prisma.adminStaffHasPermission.findMany()
-     * 
-     * // Get first 10 AdminStaffHasPermissions
-     * const adminStaffHasPermissions = await prisma.adminStaffHasPermission.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const adminStaffHasPermissionWithIdOnly = await prisma.adminStaffHasPermission.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends adminStaffHasPermissionFindManyArgs>(args?: SelectSubset<T, adminStaffHasPermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a AdminStaffHasPermission.
-     * @param {adminStaffHasPermissionCreateArgs} args - Arguments to create a AdminStaffHasPermission.
-     * @example
-     * // Create one AdminStaffHasPermission
-     * const AdminStaffHasPermission = await prisma.adminStaffHasPermission.create({
-     *   data: {
-     *     // ... data to create a AdminStaffHasPermission
-     *   }
-     * })
-     * 
-     */
-    create<T extends adminStaffHasPermissionCreateArgs>(args: SelectSubset<T, adminStaffHasPermissionCreateArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many AdminStaffHasPermissions.
-     * @param {adminStaffHasPermissionCreateManyArgs} args - Arguments to create many AdminStaffHasPermissions.
-     * @example
-     * // Create many AdminStaffHasPermissions
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends adminStaffHasPermissionCreateManyArgs>(args?: SelectSubset<T, adminStaffHasPermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a AdminStaffHasPermission.
-     * @param {adminStaffHasPermissionDeleteArgs} args - Arguments to delete one AdminStaffHasPermission.
-     * @example
-     * // Delete one AdminStaffHasPermission
-     * const AdminStaffHasPermission = await prisma.adminStaffHasPermission.delete({
-     *   where: {
-     *     // ... filter to delete one AdminStaffHasPermission
-     *   }
-     * })
-     * 
-     */
-    delete<T extends adminStaffHasPermissionDeleteArgs>(args: SelectSubset<T, adminStaffHasPermissionDeleteArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one AdminStaffHasPermission.
-     * @param {adminStaffHasPermissionUpdateArgs} args - Arguments to update one AdminStaffHasPermission.
-     * @example
-     * // Update one AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends adminStaffHasPermissionUpdateArgs>(args: SelectSubset<T, adminStaffHasPermissionUpdateArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more AdminStaffHasPermissions.
-     * @param {adminStaffHasPermissionDeleteManyArgs} args - Arguments to filter AdminStaffHasPermissions to delete.
-     * @example
-     * // Delete a few AdminStaffHasPermissions
-     * const { count } = await prisma.adminStaffHasPermission.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends adminStaffHasPermissionDeleteManyArgs>(args?: SelectSubset<T, adminStaffHasPermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AdminStaffHasPermissions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many AdminStaffHasPermissions
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends adminStaffHasPermissionUpdateManyArgs>(args: SelectSubset<T, adminStaffHasPermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one AdminStaffHasPermission.
-     * @param {adminStaffHasPermissionUpsertArgs} args - Arguments to update or create a AdminStaffHasPermission.
-     * @example
-     * // Update or create a AdminStaffHasPermission
-     * const adminStaffHasPermission = await prisma.adminStaffHasPermission.upsert({
-     *   create: {
-     *     // ... data to create a AdminStaffHasPermission
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the AdminStaffHasPermission we want to update
-     *   }
-     * })
-     */
-    upsert<T extends adminStaffHasPermissionUpsertArgs>(args: SelectSubset<T, adminStaffHasPermissionUpsertArgs<ExtArgs>>): Prisma__adminStaffHasPermissionClient<$Result.GetResult<Prisma.$adminStaffHasPermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of AdminStaffHasPermissions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionCountArgs} args - Arguments to filter AdminStaffHasPermissions to count.
-     * @example
-     * // Count the number of AdminStaffHasPermissions
-     * const count = await prisma.adminStaffHasPermission.count({
-     *   where: {
-     *     // ... the filter for the AdminStaffHasPermissions we want to count
-     *   }
-     * })
-    **/
-    count<T extends adminStaffHasPermissionCountArgs>(
-      args?: Subset<T, adminStaffHasPermissionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AdminStaffHasPermissionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a AdminStaffHasPermission.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdminStaffHasPermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AdminStaffHasPermissionAggregateArgs>(args: Subset<T, AdminStaffHasPermissionAggregateArgs>): Prisma.PrismaPromise<GetAdminStaffHasPermissionAggregateType<T>>
-
-    /**
-     * Group by AdminStaffHasPermission.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {adminStaffHasPermissionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends adminStaffHasPermissionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: adminStaffHasPermissionGroupByArgs['orderBy'] }
-        : { orderBy?: adminStaffHasPermissionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, adminStaffHasPermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminStaffHasPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the adminStaffHasPermission model
-   */
-  readonly fields: adminStaffHasPermissionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for adminStaffHasPermission.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__adminStaffHasPermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    adminStaff<T extends adminStaffDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminStaffDefaultArgs<ExtArgs>>): Prisma__adminStaffClient<$Result.GetResult<Prisma.$adminStaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    permission<T extends permissionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, permissionDefaultArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the adminStaffHasPermission model
-   */
-  interface adminStaffHasPermissionFieldRefs {
-    readonly id: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly adminStaffId: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly permissionId: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly createdAt: FieldRef<"adminStaffHasPermission", 'DateTime'>
-    readonly createdBy: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly createdByRole: FieldRef<"adminStaffHasPermission", 'String'>
-    readonly updatedAt: FieldRef<"adminStaffHasPermission", 'DateTime'>
-    readonly updatedBy: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly updatedByRole: FieldRef<"adminStaffHasPermission", 'String'>
-    readonly deletedAt: FieldRef<"adminStaffHasPermission", 'DateTime'>
-    readonly deletedBy: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly deletedByRole: FieldRef<"adminStaffHasPermission", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * adminStaffHasPermission findUnique
-   */
-  export type adminStaffHasPermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which adminStaffHasPermission to fetch.
-     */
-    where: adminStaffHasPermissionWhereUniqueInput
-  }
-
-  /**
-   * adminStaffHasPermission findUniqueOrThrow
-   */
-  export type adminStaffHasPermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which adminStaffHasPermission to fetch.
-     */
-    where: adminStaffHasPermissionWhereUniqueInput
-  }
-
-  /**
-   * adminStaffHasPermission findFirst
-   */
-  export type adminStaffHasPermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which adminStaffHasPermission to fetch.
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of adminStaffHasPermissions to fetch.
-     */
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for adminStaffHasPermissions.
-     */
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` adminStaffHasPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` adminStaffHasPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of adminStaffHasPermissions.
-     */
-    distinct?: AdminStaffHasPermissionScalarFieldEnum | AdminStaffHasPermissionScalarFieldEnum[]
-  }
-
-  /**
-   * adminStaffHasPermission findFirstOrThrow
-   */
-  export type adminStaffHasPermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which adminStaffHasPermission to fetch.
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of adminStaffHasPermissions to fetch.
-     */
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for adminStaffHasPermissions.
-     */
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` adminStaffHasPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` adminStaffHasPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of adminStaffHasPermissions.
-     */
-    distinct?: AdminStaffHasPermissionScalarFieldEnum | AdminStaffHasPermissionScalarFieldEnum[]
-  }
-
-  /**
-   * adminStaffHasPermission findMany
-   */
-  export type adminStaffHasPermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which adminStaffHasPermissions to fetch.
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of adminStaffHasPermissions to fetch.
-     */
-    orderBy?: adminStaffHasPermissionOrderByWithRelationInput | adminStaffHasPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing adminStaffHasPermissions.
-     */
-    cursor?: adminStaffHasPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` adminStaffHasPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` adminStaffHasPermissions.
-     */
-    skip?: number
-    distinct?: AdminStaffHasPermissionScalarFieldEnum | AdminStaffHasPermissionScalarFieldEnum[]
-  }
-
-  /**
-   * adminStaffHasPermission create
-   */
-  export type adminStaffHasPermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a adminStaffHasPermission.
-     */
-    data: XOR<adminStaffHasPermissionCreateInput, adminStaffHasPermissionUncheckedCreateInput>
-  }
-
-  /**
-   * adminStaffHasPermission createMany
-   */
-  export type adminStaffHasPermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many adminStaffHasPermissions.
-     */
-    data: adminStaffHasPermissionCreateManyInput | adminStaffHasPermissionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * adminStaffHasPermission update
-   */
-  export type adminStaffHasPermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a adminStaffHasPermission.
-     */
-    data: XOR<adminStaffHasPermissionUpdateInput, adminStaffHasPermissionUncheckedUpdateInput>
-    /**
-     * Choose, which adminStaffHasPermission to update.
-     */
-    where: adminStaffHasPermissionWhereUniqueInput
-  }
-
-  /**
-   * adminStaffHasPermission updateMany
-   */
-  export type adminStaffHasPermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update adminStaffHasPermissions.
-     */
-    data: XOR<adminStaffHasPermissionUpdateManyMutationInput, adminStaffHasPermissionUncheckedUpdateManyInput>
-    /**
-     * Filter which adminStaffHasPermissions to update
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * Limit how many adminStaffHasPermissions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * adminStaffHasPermission upsert
-   */
-  export type adminStaffHasPermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the adminStaffHasPermission to update in case it exists.
-     */
-    where: adminStaffHasPermissionWhereUniqueInput
-    /**
-     * In case the adminStaffHasPermission found by the `where` argument doesn't exist, create a new adminStaffHasPermission with this data.
-     */
-    create: XOR<adminStaffHasPermissionCreateInput, adminStaffHasPermissionUncheckedCreateInput>
-    /**
-     * In case the adminStaffHasPermission was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<adminStaffHasPermissionUpdateInput, adminStaffHasPermissionUncheckedUpdateInput>
-  }
-
-  /**
-   * adminStaffHasPermission delete
-   */
-  export type adminStaffHasPermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
-    /**
-     * Filter which adminStaffHasPermission to delete.
-     */
-    where: adminStaffHasPermissionWhereUniqueInput
-  }
-
-  /**
-   * adminStaffHasPermission deleteMany
-   */
-  export type adminStaffHasPermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which adminStaffHasPermissions to delete
-     */
-    where?: adminStaffHasPermissionWhereInput
-    /**
-     * Limit how many adminStaffHasPermissions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * adminStaffHasPermission without action
-   */
-  export type adminStaffHasPermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the adminStaffHasPermission
-     */
-    select?: adminStaffHasPermissionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the adminStaffHasPermission
-     */
-    omit?: adminStaffHasPermissionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: adminStaffHasPermissionInclude<ExtArgs> | null
   }
 
 
@@ -36974,6 +35745,7 @@ export namespace Prisma {
 
   export type DropshipperProductMinAggregateOutputType = {
     id: number | null
+    shopifyProductId: string | null
     dropshipperId: number | null
     supplierId: number | null
     supplierProductId: number | null
@@ -36992,6 +35764,7 @@ export namespace Prisma {
 
   export type DropshipperProductMaxAggregateOutputType = {
     id: number | null
+    shopifyProductId: string | null
     dropshipperId: number | null
     supplierId: number | null
     supplierProductId: number | null
@@ -37010,6 +35783,7 @@ export namespace Prisma {
 
   export type DropshipperProductCountAggregateOutputType = {
     id: number
+    shopifyProductId: number
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -37052,6 +35826,7 @@ export namespace Prisma {
 
   export type DropshipperProductMinAggregateInputType = {
     id?: true
+    shopifyProductId?: true
     dropshipperId?: true
     supplierId?: true
     supplierProductId?: true
@@ -37070,6 +35845,7 @@ export namespace Prisma {
 
   export type DropshipperProductMaxAggregateInputType = {
     id?: true
+    shopifyProductId?: true
     dropshipperId?: true
     supplierId?: true
     supplierProductId?: true
@@ -37088,6 +35864,7 @@ export namespace Prisma {
 
   export type DropshipperProductCountAggregateInputType = {
     id?: true
+    shopifyProductId?: true
     dropshipperId?: true
     supplierId?: true
     supplierProductId?: true
@@ -37193,6 +35970,7 @@ export namespace Prisma {
 
   export type DropshipperProductGroupByOutputType = {
     id: number
+    shopifyProductId: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -37230,6 +36008,7 @@ export namespace Prisma {
 
   export type dropshipperProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    shopifyProductId?: boolean
     dropshipperId?: boolean
     supplierId?: boolean
     supplierProductId?: boolean
@@ -37258,6 +36037,7 @@ export namespace Prisma {
 
   export type dropshipperProductSelectScalar = {
     id?: boolean
+    shopifyProductId?: boolean
     dropshipperId?: boolean
     supplierId?: boolean
     supplierProductId?: boolean
@@ -37274,7 +36054,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type dropshipperProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dropshipperId" | "supplierId" | "supplierProductId" | "productId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProduct"]>
+  export type dropshipperProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shopifyProductId" | "dropshipperId" | "supplierId" | "supplierProductId" | "productId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProduct"]>
   export type dropshipperProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dropshipper?: boolean | adminDefaultArgs<ExtArgs>
     supplier?: boolean | adminDefaultArgs<ExtArgs>
@@ -37299,6 +36079,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      shopifyProductId: string | null
       dropshipperId: number
       supplierId: number
       supplierProductId: number
@@ -37690,6 +36471,7 @@ export namespace Prisma {
    */
   interface dropshipperProductFieldRefs {
     readonly id: FieldRef<"dropshipperProduct", 'Int'>
+    readonly shopifyProductId: FieldRef<"dropshipperProduct", 'String'>
     readonly dropshipperId: FieldRef<"dropshipperProduct", 'Int'>
     readonly supplierId: FieldRef<"dropshipperProduct", 'Int'>
     readonly supplierProductId: FieldRef<"dropshipperProduct", 'Int'>
@@ -44328,6 +43110,1153 @@ export namespace Prisma {
 
 
   /**
+   * Model supplierOrderPermission
+   */
+
+  export type AggregateSupplierOrderPermission = {
+    _count: SupplierOrderPermissionCountAggregateOutputType | null
+    _avg: SupplierOrderPermissionAvgAggregateOutputType | null
+    _sum: SupplierOrderPermissionSumAggregateOutputType | null
+    _min: SupplierOrderPermissionMinAggregateOutputType | null
+    _max: SupplierOrderPermissionMaxAggregateOutputType | null
+  }
+
+  export type SupplierOrderPermissionAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SupplierOrderPermissionSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SupplierOrderPermissionMinAggregateOutputType = {
+    id: number | null
+    orderNumber: boolean | null
+    awbNumber: boolean | null
+    status: boolean | null
+    orderNote: boolean | null
+    subtotal: boolean | null
+    tax: boolean | null
+    discount: boolean | null
+    totalAmount: boolean | null
+    currency: boolean | null
+    shippingName: boolean | null
+    shippingPhone: boolean | null
+    shippingEmail: boolean | null
+    shippingAddress: boolean | null
+    shippingZip: boolean | null
+    shippingCountry: boolean | null
+    shippingState: boolean | null
+    shippingCity: boolean | null
+    billingName: boolean | null
+    billingPhone: boolean | null
+    billingEmail: boolean | null
+    billingAddress: boolean | null
+    billingZip: boolean | null
+    billingCountry: boolean | null
+    billingState: boolean | null
+    billingCity: boolean | null
+  }
+
+  export type SupplierOrderPermissionMaxAggregateOutputType = {
+    id: number | null
+    orderNumber: boolean | null
+    awbNumber: boolean | null
+    status: boolean | null
+    orderNote: boolean | null
+    subtotal: boolean | null
+    tax: boolean | null
+    discount: boolean | null
+    totalAmount: boolean | null
+    currency: boolean | null
+    shippingName: boolean | null
+    shippingPhone: boolean | null
+    shippingEmail: boolean | null
+    shippingAddress: boolean | null
+    shippingZip: boolean | null
+    shippingCountry: boolean | null
+    shippingState: boolean | null
+    shippingCity: boolean | null
+    billingName: boolean | null
+    billingPhone: boolean | null
+    billingEmail: boolean | null
+    billingAddress: boolean | null
+    billingZip: boolean | null
+    billingCountry: boolean | null
+    billingState: boolean | null
+    billingCity: boolean | null
+  }
+
+  export type SupplierOrderPermissionCountAggregateOutputType = {
+    id: number
+    orderNumber: number
+    awbNumber: number
+    status: number
+    orderNote: number
+    subtotal: number
+    tax: number
+    discount: number
+    totalAmount: number
+    currency: number
+    shippingName: number
+    shippingPhone: number
+    shippingEmail: number
+    shippingAddress: number
+    shippingZip: number
+    shippingCountry: number
+    shippingState: number
+    shippingCity: number
+    billingName: number
+    billingPhone: number
+    billingEmail: number
+    billingAddress: number
+    billingZip: number
+    billingCountry: number
+    billingState: number
+    billingCity: number
+    _all: number
+  }
+
+
+  export type SupplierOrderPermissionAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SupplierOrderPermissionSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SupplierOrderPermissionMinAggregateInputType = {
+    id?: true
+    orderNumber?: true
+    awbNumber?: true
+    status?: true
+    orderNote?: true
+    subtotal?: true
+    tax?: true
+    discount?: true
+    totalAmount?: true
+    currency?: true
+    shippingName?: true
+    shippingPhone?: true
+    shippingEmail?: true
+    shippingAddress?: true
+    shippingZip?: true
+    shippingCountry?: true
+    shippingState?: true
+    shippingCity?: true
+    billingName?: true
+    billingPhone?: true
+    billingEmail?: true
+    billingAddress?: true
+    billingZip?: true
+    billingCountry?: true
+    billingState?: true
+    billingCity?: true
+  }
+
+  export type SupplierOrderPermissionMaxAggregateInputType = {
+    id?: true
+    orderNumber?: true
+    awbNumber?: true
+    status?: true
+    orderNote?: true
+    subtotal?: true
+    tax?: true
+    discount?: true
+    totalAmount?: true
+    currency?: true
+    shippingName?: true
+    shippingPhone?: true
+    shippingEmail?: true
+    shippingAddress?: true
+    shippingZip?: true
+    shippingCountry?: true
+    shippingState?: true
+    shippingCity?: true
+    billingName?: true
+    billingPhone?: true
+    billingEmail?: true
+    billingAddress?: true
+    billingZip?: true
+    billingCountry?: true
+    billingState?: true
+    billingCity?: true
+  }
+
+  export type SupplierOrderPermissionCountAggregateInputType = {
+    id?: true
+    orderNumber?: true
+    awbNumber?: true
+    status?: true
+    orderNote?: true
+    subtotal?: true
+    tax?: true
+    discount?: true
+    totalAmount?: true
+    currency?: true
+    shippingName?: true
+    shippingPhone?: true
+    shippingEmail?: true
+    shippingAddress?: true
+    shippingZip?: true
+    shippingCountry?: true
+    shippingState?: true
+    shippingCity?: true
+    billingName?: true
+    billingPhone?: true
+    billingEmail?: true
+    billingAddress?: true
+    billingZip?: true
+    billingCountry?: true
+    billingState?: true
+    billingCity?: true
+    _all?: true
+  }
+
+  export type SupplierOrderPermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which supplierOrderPermission to aggregate.
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of supplierOrderPermissions to fetch.
+     */
+    orderBy?: supplierOrderPermissionOrderByWithRelationInput | supplierOrderPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: supplierOrderPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` supplierOrderPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` supplierOrderPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned supplierOrderPermissions
+    **/
+    _count?: true | SupplierOrderPermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SupplierOrderPermissionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SupplierOrderPermissionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupplierOrderPermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupplierOrderPermissionMaxAggregateInputType
+  }
+
+  export type GetSupplierOrderPermissionAggregateType<T extends SupplierOrderPermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupplierOrderPermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupplierOrderPermission[P]>
+      : GetScalarType<T[P], AggregateSupplierOrderPermission[P]>
+  }
+
+
+
+
+  export type supplierOrderPermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: supplierOrderPermissionWhereInput
+    orderBy?: supplierOrderPermissionOrderByWithAggregationInput | supplierOrderPermissionOrderByWithAggregationInput[]
+    by: SupplierOrderPermissionScalarFieldEnum[] | SupplierOrderPermissionScalarFieldEnum
+    having?: supplierOrderPermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupplierOrderPermissionCountAggregateInputType | true
+    _avg?: SupplierOrderPermissionAvgAggregateInputType
+    _sum?: SupplierOrderPermissionSumAggregateInputType
+    _min?: SupplierOrderPermissionMinAggregateInputType
+    _max?: SupplierOrderPermissionMaxAggregateInputType
+  }
+
+  export type SupplierOrderPermissionGroupByOutputType = {
+    id: number
+    orderNumber: boolean
+    awbNumber: boolean
+    status: boolean
+    orderNote: boolean
+    subtotal: boolean
+    tax: boolean
+    discount: boolean
+    totalAmount: boolean
+    currency: boolean
+    shippingName: boolean
+    shippingPhone: boolean
+    shippingEmail: boolean
+    shippingAddress: boolean
+    shippingZip: boolean
+    shippingCountry: boolean
+    shippingState: boolean
+    shippingCity: boolean
+    billingName: boolean
+    billingPhone: boolean
+    billingEmail: boolean
+    billingAddress: boolean
+    billingZip: boolean
+    billingCountry: boolean
+    billingState: boolean
+    billingCity: boolean
+    _count: SupplierOrderPermissionCountAggregateOutputType | null
+    _avg: SupplierOrderPermissionAvgAggregateOutputType | null
+    _sum: SupplierOrderPermissionSumAggregateOutputType | null
+    _min: SupplierOrderPermissionMinAggregateOutputType | null
+    _max: SupplierOrderPermissionMaxAggregateOutputType | null
+  }
+
+  type GetSupplierOrderPermissionGroupByPayload<T extends supplierOrderPermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupplierOrderPermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupplierOrderPermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupplierOrderPermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], SupplierOrderPermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type supplierOrderPermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderNumber?: boolean
+    awbNumber?: boolean
+    status?: boolean
+    orderNote?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    discount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    shippingName?: boolean
+    shippingPhone?: boolean
+    shippingEmail?: boolean
+    shippingAddress?: boolean
+    shippingZip?: boolean
+    shippingCountry?: boolean
+    shippingState?: boolean
+    shippingCity?: boolean
+    billingName?: boolean
+    billingPhone?: boolean
+    billingEmail?: boolean
+    billingAddress?: boolean
+    billingZip?: boolean
+    billingCountry?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+  }, ExtArgs["result"]["supplierOrderPermission"]>
+
+
+
+  export type supplierOrderPermissionSelectScalar = {
+    id?: boolean
+    orderNumber?: boolean
+    awbNumber?: boolean
+    status?: boolean
+    orderNote?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    discount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    shippingName?: boolean
+    shippingPhone?: boolean
+    shippingEmail?: boolean
+    shippingAddress?: boolean
+    shippingZip?: boolean
+    shippingCountry?: boolean
+    shippingState?: boolean
+    shippingCity?: boolean
+    billingName?: boolean
+    billingPhone?: boolean
+    billingEmail?: boolean
+    billingAddress?: boolean
+    billingZip?: boolean
+    billingCountry?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+  }
+
+  export type supplierOrderPermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountry" | "shippingState" | "shippingCity" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountry" | "billingState" | "billingCity", ExtArgs["result"]["supplierOrderPermission"]>
+
+  export type $supplierOrderPermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "supplierOrderPermission"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      orderNumber: boolean
+      awbNumber: boolean
+      status: boolean
+      orderNote: boolean
+      subtotal: boolean
+      tax: boolean
+      discount: boolean
+      totalAmount: boolean
+      currency: boolean
+      shippingName: boolean
+      shippingPhone: boolean
+      shippingEmail: boolean
+      shippingAddress: boolean
+      shippingZip: boolean
+      shippingCountry: boolean
+      shippingState: boolean
+      shippingCity: boolean
+      billingName: boolean
+      billingPhone: boolean
+      billingEmail: boolean
+      billingAddress: boolean
+      billingZip: boolean
+      billingCountry: boolean
+      billingState: boolean
+      billingCity: boolean
+    }, ExtArgs["result"]["supplierOrderPermission"]>
+    composites: {}
+  }
+
+  type supplierOrderPermissionGetPayload<S extends boolean | null | undefined | supplierOrderPermissionDefaultArgs> = $Result.GetResult<Prisma.$supplierOrderPermissionPayload, S>
+
+  type supplierOrderPermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<supplierOrderPermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SupplierOrderPermissionCountAggregateInputType | true
+    }
+
+  export interface supplierOrderPermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['supplierOrderPermission'], meta: { name: 'supplierOrderPermission' } }
+    /**
+     * Find zero or one SupplierOrderPermission that matches the filter.
+     * @param {supplierOrderPermissionFindUniqueArgs} args - Arguments to find a SupplierOrderPermission
+     * @example
+     * // Get one SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends supplierOrderPermissionFindUniqueArgs>(args: SelectSubset<T, supplierOrderPermissionFindUniqueArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SupplierOrderPermission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {supplierOrderPermissionFindUniqueOrThrowArgs} args - Arguments to find a SupplierOrderPermission
+     * @example
+     * // Get one SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends supplierOrderPermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, supplierOrderPermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SupplierOrderPermission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionFindFirstArgs} args - Arguments to find a SupplierOrderPermission
+     * @example
+     * // Get one SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends supplierOrderPermissionFindFirstArgs>(args?: SelectSubset<T, supplierOrderPermissionFindFirstArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SupplierOrderPermission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionFindFirstOrThrowArgs} args - Arguments to find a SupplierOrderPermission
+     * @example
+     * // Get one SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends supplierOrderPermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, supplierOrderPermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SupplierOrderPermissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupplierOrderPermissions
+     * const supplierOrderPermissions = await prisma.supplierOrderPermission.findMany()
+     * 
+     * // Get first 10 SupplierOrderPermissions
+     * const supplierOrderPermissions = await prisma.supplierOrderPermission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supplierOrderPermissionWithIdOnly = await prisma.supplierOrderPermission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends supplierOrderPermissionFindManyArgs>(args?: SelectSubset<T, supplierOrderPermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SupplierOrderPermission.
+     * @param {supplierOrderPermissionCreateArgs} args - Arguments to create a SupplierOrderPermission.
+     * @example
+     * // Create one SupplierOrderPermission
+     * const SupplierOrderPermission = await prisma.supplierOrderPermission.create({
+     *   data: {
+     *     // ... data to create a SupplierOrderPermission
+     *   }
+     * })
+     * 
+     */
+    create<T extends supplierOrderPermissionCreateArgs>(args: SelectSubset<T, supplierOrderPermissionCreateArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SupplierOrderPermissions.
+     * @param {supplierOrderPermissionCreateManyArgs} args - Arguments to create many SupplierOrderPermissions.
+     * @example
+     * // Create many SupplierOrderPermissions
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends supplierOrderPermissionCreateManyArgs>(args?: SelectSubset<T, supplierOrderPermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SupplierOrderPermission.
+     * @param {supplierOrderPermissionDeleteArgs} args - Arguments to delete one SupplierOrderPermission.
+     * @example
+     * // Delete one SupplierOrderPermission
+     * const SupplierOrderPermission = await prisma.supplierOrderPermission.delete({
+     *   where: {
+     *     // ... filter to delete one SupplierOrderPermission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends supplierOrderPermissionDeleteArgs>(args: SelectSubset<T, supplierOrderPermissionDeleteArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SupplierOrderPermission.
+     * @param {supplierOrderPermissionUpdateArgs} args - Arguments to update one SupplierOrderPermission.
+     * @example
+     * // Update one SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends supplierOrderPermissionUpdateArgs>(args: SelectSubset<T, supplierOrderPermissionUpdateArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SupplierOrderPermissions.
+     * @param {supplierOrderPermissionDeleteManyArgs} args - Arguments to filter SupplierOrderPermissions to delete.
+     * @example
+     * // Delete a few SupplierOrderPermissions
+     * const { count } = await prisma.supplierOrderPermission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends supplierOrderPermissionDeleteManyArgs>(args?: SelectSubset<T, supplierOrderPermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupplierOrderPermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupplierOrderPermissions
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends supplierOrderPermissionUpdateManyArgs>(args: SelectSubset<T, supplierOrderPermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SupplierOrderPermission.
+     * @param {supplierOrderPermissionUpsertArgs} args - Arguments to update or create a SupplierOrderPermission.
+     * @example
+     * // Update or create a SupplierOrderPermission
+     * const supplierOrderPermission = await prisma.supplierOrderPermission.upsert({
+     *   create: {
+     *     // ... data to create a SupplierOrderPermission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupplierOrderPermission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends supplierOrderPermissionUpsertArgs>(args: SelectSubset<T, supplierOrderPermissionUpsertArgs<ExtArgs>>): Prisma__supplierOrderPermissionClient<$Result.GetResult<Prisma.$supplierOrderPermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SupplierOrderPermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionCountArgs} args - Arguments to filter SupplierOrderPermissions to count.
+     * @example
+     * // Count the number of SupplierOrderPermissions
+     * const count = await prisma.supplierOrderPermission.count({
+     *   where: {
+     *     // ... the filter for the SupplierOrderPermissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends supplierOrderPermissionCountArgs>(
+      args?: Subset<T, supplierOrderPermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupplierOrderPermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupplierOrderPermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupplierOrderPermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupplierOrderPermissionAggregateArgs>(args: Subset<T, SupplierOrderPermissionAggregateArgs>): Prisma.PrismaPromise<GetSupplierOrderPermissionAggregateType<T>>
+
+    /**
+     * Group by SupplierOrderPermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {supplierOrderPermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends supplierOrderPermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: supplierOrderPermissionGroupByArgs['orderBy'] }
+        : { orderBy?: supplierOrderPermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, supplierOrderPermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupplierOrderPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the supplierOrderPermission model
+   */
+  readonly fields: supplierOrderPermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for supplierOrderPermission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__supplierOrderPermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the supplierOrderPermission model
+   */
+  interface supplierOrderPermissionFieldRefs {
+    readonly id: FieldRef<"supplierOrderPermission", 'Int'>
+    readonly orderNumber: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly awbNumber: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly status: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly orderNote: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly subtotal: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly tax: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly discount: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly totalAmount: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly currency: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingName: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingPhone: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingEmail: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingAddress: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingZip: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingCountry: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingState: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly shippingCity: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingName: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingPhone: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingEmail: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingAddress: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingZip: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingCountry: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingState: FieldRef<"supplierOrderPermission", 'Boolean'>
+    readonly billingCity: FieldRef<"supplierOrderPermission", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * supplierOrderPermission findUnique
+   */
+  export type supplierOrderPermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which supplierOrderPermission to fetch.
+     */
+    where: supplierOrderPermissionWhereUniqueInput
+  }
+
+  /**
+   * supplierOrderPermission findUniqueOrThrow
+   */
+  export type supplierOrderPermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which supplierOrderPermission to fetch.
+     */
+    where: supplierOrderPermissionWhereUniqueInput
+  }
+
+  /**
+   * supplierOrderPermission findFirst
+   */
+  export type supplierOrderPermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which supplierOrderPermission to fetch.
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of supplierOrderPermissions to fetch.
+     */
+    orderBy?: supplierOrderPermissionOrderByWithRelationInput | supplierOrderPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for supplierOrderPermissions.
+     */
+    cursor?: supplierOrderPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` supplierOrderPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` supplierOrderPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of supplierOrderPermissions.
+     */
+    distinct?: SupplierOrderPermissionScalarFieldEnum | SupplierOrderPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * supplierOrderPermission findFirstOrThrow
+   */
+  export type supplierOrderPermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which supplierOrderPermission to fetch.
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of supplierOrderPermissions to fetch.
+     */
+    orderBy?: supplierOrderPermissionOrderByWithRelationInput | supplierOrderPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for supplierOrderPermissions.
+     */
+    cursor?: supplierOrderPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` supplierOrderPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` supplierOrderPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of supplierOrderPermissions.
+     */
+    distinct?: SupplierOrderPermissionScalarFieldEnum | SupplierOrderPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * supplierOrderPermission findMany
+   */
+  export type supplierOrderPermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which supplierOrderPermissions to fetch.
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of supplierOrderPermissions to fetch.
+     */
+    orderBy?: supplierOrderPermissionOrderByWithRelationInput | supplierOrderPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing supplierOrderPermissions.
+     */
+    cursor?: supplierOrderPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` supplierOrderPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` supplierOrderPermissions.
+     */
+    skip?: number
+    distinct?: SupplierOrderPermissionScalarFieldEnum | SupplierOrderPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * supplierOrderPermission create
+   */
+  export type supplierOrderPermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a supplierOrderPermission.
+     */
+    data?: XOR<supplierOrderPermissionCreateInput, supplierOrderPermissionUncheckedCreateInput>
+  }
+
+  /**
+   * supplierOrderPermission createMany
+   */
+  export type supplierOrderPermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many supplierOrderPermissions.
+     */
+    data: supplierOrderPermissionCreateManyInput | supplierOrderPermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * supplierOrderPermission update
+   */
+  export type supplierOrderPermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a supplierOrderPermission.
+     */
+    data: XOR<supplierOrderPermissionUpdateInput, supplierOrderPermissionUncheckedUpdateInput>
+    /**
+     * Choose, which supplierOrderPermission to update.
+     */
+    where: supplierOrderPermissionWhereUniqueInput
+  }
+
+  /**
+   * supplierOrderPermission updateMany
+   */
+  export type supplierOrderPermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update supplierOrderPermissions.
+     */
+    data: XOR<supplierOrderPermissionUpdateManyMutationInput, supplierOrderPermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which supplierOrderPermissions to update
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * Limit how many supplierOrderPermissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * supplierOrderPermission upsert
+   */
+  export type supplierOrderPermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the supplierOrderPermission to update in case it exists.
+     */
+    where: supplierOrderPermissionWhereUniqueInput
+    /**
+     * In case the supplierOrderPermission found by the `where` argument doesn't exist, create a new supplierOrderPermission with this data.
+     */
+    create: XOR<supplierOrderPermissionCreateInput, supplierOrderPermissionUncheckedCreateInput>
+    /**
+     * In case the supplierOrderPermission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<supplierOrderPermissionUpdateInput, supplierOrderPermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * supplierOrderPermission delete
+   */
+  export type supplierOrderPermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+    /**
+     * Filter which supplierOrderPermission to delete.
+     */
+    where: supplierOrderPermissionWhereUniqueInput
+  }
+
+  /**
+   * supplierOrderPermission deleteMany
+   */
+  export type supplierOrderPermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which supplierOrderPermissions to delete
+     */
+    where?: supplierOrderPermissionWhereInput
+    /**
+     * Limit how many supplierOrderPermissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * supplierOrderPermission without action
+   */
+  export type supplierOrderPermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the supplierOrderPermission
+     */
+    select?: supplierOrderPermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the supplierOrderPermission
+     */
+    omit?: supplierOrderPermissionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -44590,24 +44519,6 @@ export namespace Prisma {
   };
 
   export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
-
-
-  export const AdminStaffHasPermissionScalarFieldEnum: {
-    id: 'id',
-    adminStaffId: 'adminStaffId',
-    permissionId: 'permissionId',
-    createdAt: 'createdAt',
-    createdBy: 'createdBy',
-    createdByRole: 'createdByRole',
-    updatedAt: 'updatedAt',
-    updatedBy: 'updatedBy',
-    updatedByRole: 'updatedByRole',
-    deletedAt: 'deletedAt',
-    deletedBy: 'deletedBy',
-    deletedByRole: 'deletedByRole'
-  };
-
-  export type AdminStaffHasPermissionScalarFieldEnum = (typeof AdminStaffHasPermissionScalarFieldEnum)[keyof typeof AdminStaffHasPermissionScalarFieldEnum]
 
 
   export const LoginLogScalarFieldEnum: {
@@ -45035,6 +44946,7 @@ export namespace Prisma {
 
   export const DropshipperProductScalarFieldEnum: {
     id: 'id',
+    shopifyProductId: 'shopifyProductId',
     dropshipperId: 'dropshipperId',
     supplierId: 'supplierId',
     supplierProductId: 'supplierProductId',
@@ -45180,6 +45092,38 @@ export namespace Prisma {
   };
 
   export type RtoInventoryScalarFieldEnum = (typeof RtoInventoryScalarFieldEnum)[keyof typeof RtoInventoryScalarFieldEnum]
+
+
+  export const SupplierOrderPermissionScalarFieldEnum: {
+    id: 'id',
+    orderNumber: 'orderNumber',
+    awbNumber: 'awbNumber',
+    status: 'status',
+    orderNote: 'orderNote',
+    subtotal: 'subtotal',
+    tax: 'tax',
+    discount: 'discount',
+    totalAmount: 'totalAmount',
+    currency: 'currency',
+    shippingName: 'shippingName',
+    shippingPhone: 'shippingPhone',
+    shippingEmail: 'shippingEmail',
+    shippingAddress: 'shippingAddress',
+    shippingZip: 'shippingZip',
+    shippingCountry: 'shippingCountry',
+    shippingState: 'shippingState',
+    shippingCity: 'shippingCity',
+    billingName: 'billingName',
+    billingPhone: 'billingPhone',
+    billingEmail: 'billingEmail',
+    billingAddress: 'billingAddress',
+    billingZip: 'billingZip',
+    billingCountry: 'billingCountry',
+    billingState: 'billingState',
+    billingCity: 'billingCity'
+  };
+
+  export type SupplierOrderPermissionScalarFieldEnum = (typeof SupplierOrderPermissionScalarFieldEnum)[keyof typeof SupplierOrderPermissionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -45373,15 +45317,6 @@ export namespace Prisma {
   };
 
   export type permissionOrderByRelevanceFieldEnum = (typeof permissionOrderByRelevanceFieldEnum)[keyof typeof permissionOrderByRelevanceFieldEnum]
-
-
-  export const adminStaffHasPermissionOrderByRelevanceFieldEnum: {
-    createdByRole: 'createdByRole',
-    updatedByRole: 'updatedByRole',
-    deletedByRole: 'deletedByRole'
-  };
-
-  export type adminStaffHasPermissionOrderByRelevanceFieldEnum = (typeof adminStaffHasPermissionOrderByRelevanceFieldEnum)[keyof typeof adminStaffHasPermissionOrderByRelevanceFieldEnum]
 
 
   export const loginLogOrderByRelevanceFieldEnum: {
@@ -45649,6 +45584,7 @@ export namespace Prisma {
 
 
   export const dropshipperProductOrderByRelevanceFieldEnum: {
+    shopifyProductId: 'shopifyProductId',
     createdByRole: 'createdByRole',
     updatedByRole: 'updatedByRole',
     deletedByRole: 'deletedByRole'
@@ -46873,7 +46809,6 @@ export namespace Prisma {
     permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
     permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
-    permissions?: AdminStaffHasPermissionListRelationFilter
   }
 
   export type adminStaffOrderByWithRelationInput = {
@@ -46908,7 +46843,6 @@ export namespace Prisma {
     permanentState?: stateOrderByWithRelationInput
     permanentCountry?: countryOrderByWithRelationInput
     admin?: adminOrderByWithRelationInput
-    permissions?: adminStaffHasPermissionOrderByRelationAggregateInput
     _relevance?: adminStaffOrderByRelevanceInput
   }
 
@@ -46947,7 +46881,6 @@ export namespace Prisma {
     permanentState?: XOR<StateNullableScalarRelationFilter, stateWhereInput> | null
     permanentCountry?: XOR<CountryNullableScalarRelationFilter, countryWhereInput> | null
     admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
-    permissions?: AdminStaffHasPermissionListRelationFilter
   }, "id" | "email">
 
   export type adminStaffOrderByWithAggregationInput = {
@@ -47036,7 +46969,6 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"permission"> | Date | string | null
     deletedBy?: IntNullableFilter<"permission"> | number | null
     deletedByRole?: StringNullableFilter<"permission"> | string | null
-    adminStaffPermissions?: AdminStaffHasPermissionListRelationFilter
   }
 
   export type permissionOrderByWithRelationInput = {
@@ -47054,7 +46986,6 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
-    adminStaffPermissions?: adminStaffHasPermissionOrderByRelationAggregateInput
     _relevance?: permissionOrderByRelevanceInput
   }
 
@@ -47076,7 +47007,6 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"permission"> | Date | string | null
     deletedBy?: IntNullableFilter<"permission"> | number | null
     deletedByRole?: StringNullableFilter<"permission"> | string | null
-    adminStaffPermissions?: AdminStaffHasPermissionListRelationFilter
   }, "id">
 
   export type permissionOrderByWithAggregationInput = {
@@ -47119,102 +47049,6 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"permission"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"permission"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"permission"> | string | null
-  }
-
-  export type adminStaffHasPermissionWhereInput = {
-    AND?: adminStaffHasPermissionWhereInput | adminStaffHasPermissionWhereInput[]
-    OR?: adminStaffHasPermissionWhereInput[]
-    NOT?: adminStaffHasPermissionWhereInput | adminStaffHasPermissionWhereInput[]
-    id?: IntFilter<"adminStaffHasPermission"> | number
-    adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
-    permissionId?: IntFilter<"adminStaffHasPermission"> | number
-    createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    updatedAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    updatedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    updatedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    deletedAt?: DateTimeNullableFilter<"adminStaffHasPermission"> | Date | string | null
-    deletedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    deletedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    adminStaff?: XOR<AdminStaffScalarRelationFilter, adminStaffWhereInput>
-    permission?: XOR<PermissionScalarRelationFilter, permissionWhereInput>
-  }
-
-  export type adminStaffHasPermissionOrderByWithRelationInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrderInput | SortOrder
-    createdByRole?: SortOrderInput | SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrderInput | SortOrder
-    updatedByRole?: SortOrderInput | SortOrder
-    deletedAt?: SortOrderInput | SortOrder
-    deletedBy?: SortOrderInput | SortOrder
-    deletedByRole?: SortOrderInput | SortOrder
-    adminStaff?: adminStaffOrderByWithRelationInput
-    permission?: permissionOrderByWithRelationInput
-    _relevance?: adminStaffHasPermissionOrderByRelevanceInput
-  }
-
-  export type adminStaffHasPermissionWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: adminStaffHasPermissionWhereInput | adminStaffHasPermissionWhereInput[]
-    OR?: adminStaffHasPermissionWhereInput[]
-    NOT?: adminStaffHasPermissionWhereInput | adminStaffHasPermissionWhereInput[]
-    adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
-    permissionId?: IntFilter<"adminStaffHasPermission"> | number
-    createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    updatedAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    updatedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    updatedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    deletedAt?: DateTimeNullableFilter<"adminStaffHasPermission"> | Date | string | null
-    deletedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    deletedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    adminStaff?: XOR<AdminStaffScalarRelationFilter, adminStaffWhereInput>
-    permission?: XOR<PermissionScalarRelationFilter, permissionWhereInput>
-  }, "id">
-
-  export type adminStaffHasPermissionOrderByWithAggregationInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrderInput | SortOrder
-    createdByRole?: SortOrderInput | SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrderInput | SortOrder
-    updatedByRole?: SortOrderInput | SortOrder
-    deletedAt?: SortOrderInput | SortOrder
-    deletedBy?: SortOrderInput | SortOrder
-    deletedByRole?: SortOrderInput | SortOrder
-    _count?: adminStaffHasPermissionCountOrderByAggregateInput
-    _avg?: adminStaffHasPermissionAvgOrderByAggregateInput
-    _max?: adminStaffHasPermissionMaxOrderByAggregateInput
-    _min?: adminStaffHasPermissionMinOrderByAggregateInput
-    _sum?: adminStaffHasPermissionSumOrderByAggregateInput
-  }
-
-  export type adminStaffHasPermissionScalarWhereWithAggregatesInput = {
-    AND?: adminStaffHasPermissionScalarWhereWithAggregatesInput | adminStaffHasPermissionScalarWhereWithAggregatesInput[]
-    OR?: adminStaffHasPermissionScalarWhereWithAggregatesInput[]
-    NOT?: adminStaffHasPermissionScalarWhereWithAggregatesInput | adminStaffHasPermissionScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
-    adminStaffId?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
-    permissionId?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"adminStaffHasPermission"> | Date | string
-    createdBy?: IntNullableWithAggregatesFilter<"adminStaffHasPermission"> | number | null
-    createdByRole?: StringNullableWithAggregatesFilter<"adminStaffHasPermission"> | string | null
-    updatedAt?: DateTimeWithAggregatesFilter<"adminStaffHasPermission"> | Date | string
-    updatedBy?: IntNullableWithAggregatesFilter<"adminStaffHasPermission"> | number | null
-    updatedByRole?: StringNullableWithAggregatesFilter<"adminStaffHasPermission"> | string | null
-    deletedAt?: DateTimeNullableWithAggregatesFilter<"adminStaffHasPermission"> | Date | string | null
-    deletedBy?: IntNullableWithAggregatesFilter<"adminStaffHasPermission"> | number | null
-    deletedByRole?: StringNullableWithAggregatesFilter<"adminStaffHasPermission"> | string | null
   }
 
   export type loginLogWhereInput = {
@@ -49526,6 +49360,7 @@ export namespace Prisma {
     OR?: dropshipperProductWhereInput[]
     NOT?: dropshipperProductWhereInput | dropshipperProductWhereInput[]
     id?: IntFilter<"dropshipperProduct"> | number
+    shopifyProductId?: StringNullableFilter<"dropshipperProduct"> | string | null
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
     supplierProductId?: IntFilter<"dropshipperProduct"> | number
@@ -49551,6 +49386,7 @@ export namespace Prisma {
 
   export type dropshipperProductOrderByWithRelationInput = {
     id?: SortOrder
+    shopifyProductId?: SortOrderInput | SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
     supplierProductId?: SortOrder
@@ -49580,6 +49416,7 @@ export namespace Prisma {
     AND?: dropshipperProductWhereInput | dropshipperProductWhereInput[]
     OR?: dropshipperProductWhereInput[]
     NOT?: dropshipperProductWhereInput | dropshipperProductWhereInput[]
+    shopifyProductId?: StringNullableFilter<"dropshipperProduct"> | string | null
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
     supplierProductId?: IntFilter<"dropshipperProduct"> | number
@@ -49605,6 +49442,7 @@ export namespace Prisma {
 
   export type dropshipperProductOrderByWithAggregationInput = {
     id?: SortOrder
+    shopifyProductId?: SortOrderInput | SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
     supplierProductId?: SortOrder
@@ -49631,6 +49469,7 @@ export namespace Prisma {
     OR?: dropshipperProductScalarWhereWithAggregatesInput[]
     NOT?: dropshipperProductScalarWhereWithAggregatesInput | dropshipperProductScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"dropshipperProduct"> | number
+    shopifyProductId?: StringNullableWithAggregatesFilter<"dropshipperProduct"> | string | null
     dropshipperId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     supplierId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
     supplierProductId?: IntWithAggregatesFilter<"dropshipperProduct"> | number
@@ -50362,6 +50201,165 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"rtoInventory"> | Date | string | null
     deletedBy?: IntNullableWithAggregatesFilter<"rtoInventory"> | number | null
     deletedByRole?: StringNullableWithAggregatesFilter<"rtoInventory"> | string | null
+  }
+
+  export type supplierOrderPermissionWhereInput = {
+    AND?: supplierOrderPermissionWhereInput | supplierOrderPermissionWhereInput[]
+    OR?: supplierOrderPermissionWhereInput[]
+    NOT?: supplierOrderPermissionWhereInput | supplierOrderPermissionWhereInput[]
+    id?: IntFilter<"supplierOrderPermission"> | number
+    orderNumber?: BoolFilter<"supplierOrderPermission"> | boolean
+    awbNumber?: BoolFilter<"supplierOrderPermission"> | boolean
+    status?: BoolFilter<"supplierOrderPermission"> | boolean
+    orderNote?: BoolFilter<"supplierOrderPermission"> | boolean
+    subtotal?: BoolFilter<"supplierOrderPermission"> | boolean
+    tax?: BoolFilter<"supplierOrderPermission"> | boolean
+    discount?: BoolFilter<"supplierOrderPermission"> | boolean
+    totalAmount?: BoolFilter<"supplierOrderPermission"> | boolean
+    currency?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingName?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingPhone?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingEmail?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingAddress?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingZip?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingCountry?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingState?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingCity?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingName?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingPhone?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingEmail?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingAddress?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingZip?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingCountry?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingState?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingCity?: BoolFilter<"supplierOrderPermission"> | boolean
+  }
+
+  export type supplierOrderPermissionOrderByWithRelationInput = {
+    id?: SortOrder
+    orderNumber?: SortOrder
+    awbNumber?: SortOrder
+    status?: SortOrder
+    orderNote?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    discount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    shippingName?: SortOrder
+    shippingPhone?: SortOrder
+    shippingEmail?: SortOrder
+    shippingAddress?: SortOrder
+    shippingZip?: SortOrder
+    shippingCountry?: SortOrder
+    shippingState?: SortOrder
+    shippingCity?: SortOrder
+    billingName?: SortOrder
+    billingPhone?: SortOrder
+    billingEmail?: SortOrder
+    billingAddress?: SortOrder
+    billingZip?: SortOrder
+    billingCountry?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+  }
+
+  export type supplierOrderPermissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: supplierOrderPermissionWhereInput | supplierOrderPermissionWhereInput[]
+    OR?: supplierOrderPermissionWhereInput[]
+    NOT?: supplierOrderPermissionWhereInput | supplierOrderPermissionWhereInput[]
+    orderNumber?: BoolFilter<"supplierOrderPermission"> | boolean
+    awbNumber?: BoolFilter<"supplierOrderPermission"> | boolean
+    status?: BoolFilter<"supplierOrderPermission"> | boolean
+    orderNote?: BoolFilter<"supplierOrderPermission"> | boolean
+    subtotal?: BoolFilter<"supplierOrderPermission"> | boolean
+    tax?: BoolFilter<"supplierOrderPermission"> | boolean
+    discount?: BoolFilter<"supplierOrderPermission"> | boolean
+    totalAmount?: BoolFilter<"supplierOrderPermission"> | boolean
+    currency?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingName?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingPhone?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingEmail?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingAddress?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingZip?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingCountry?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingState?: BoolFilter<"supplierOrderPermission"> | boolean
+    shippingCity?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingName?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingPhone?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingEmail?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingAddress?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingZip?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingCountry?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingState?: BoolFilter<"supplierOrderPermission"> | boolean
+    billingCity?: BoolFilter<"supplierOrderPermission"> | boolean
+  }, "id">
+
+  export type supplierOrderPermissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    orderNumber?: SortOrder
+    awbNumber?: SortOrder
+    status?: SortOrder
+    orderNote?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    discount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    shippingName?: SortOrder
+    shippingPhone?: SortOrder
+    shippingEmail?: SortOrder
+    shippingAddress?: SortOrder
+    shippingZip?: SortOrder
+    shippingCountry?: SortOrder
+    shippingState?: SortOrder
+    shippingCity?: SortOrder
+    billingName?: SortOrder
+    billingPhone?: SortOrder
+    billingEmail?: SortOrder
+    billingAddress?: SortOrder
+    billingZip?: SortOrder
+    billingCountry?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+    _count?: supplierOrderPermissionCountOrderByAggregateInput
+    _avg?: supplierOrderPermissionAvgOrderByAggregateInput
+    _max?: supplierOrderPermissionMaxOrderByAggregateInput
+    _min?: supplierOrderPermissionMinOrderByAggregateInput
+    _sum?: supplierOrderPermissionSumOrderByAggregateInput
+  }
+
+  export type supplierOrderPermissionScalarWhereWithAggregatesInput = {
+    AND?: supplierOrderPermissionScalarWhereWithAggregatesInput | supplierOrderPermissionScalarWhereWithAggregatesInput[]
+    OR?: supplierOrderPermissionScalarWhereWithAggregatesInput[]
+    NOT?: supplierOrderPermissionScalarWhereWithAggregatesInput | supplierOrderPermissionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"supplierOrderPermission"> | number
+    orderNumber?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    awbNumber?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    status?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    orderNote?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    subtotal?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    tax?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    discount?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    totalAmount?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    currency?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingName?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingPhone?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingEmail?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingAddress?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingZip?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingCountry?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingState?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    shippingCity?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingName?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingPhone?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingEmail?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingAddress?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingZip?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingCountry?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingState?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+    billingCity?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
   }
 
   export type emailConfigCreateInput = {
@@ -51677,7 +51675,6 @@ export namespace Prisma {
     permanentState?: stateCreateNestedOneWithoutAdminStaffsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminStaffsInput
     admin: adminCreateNestedOneWithoutStaffInput
-    permissions?: adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUncheckedCreateInput = {
@@ -51708,7 +51705,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    permissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUpdateInput = {
@@ -51738,7 +51734,6 @@ export namespace Prisma {
     permanentState?: stateUpdateOneWithoutAdminStaffsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminStaffsNestedInput
     admin?: adminUpdateOneRequiredWithoutStaffNestedInput
-    permissions?: adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateInput = {
@@ -51769,7 +51764,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffCreateManyInput = {
@@ -51871,7 +51865,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    adminStaffPermissions?: adminStaffHasPermissionCreateNestedManyWithoutPermissionInput
   }
 
   export type permissionUncheckedCreateInput = {
@@ -51889,7 +51882,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    adminStaffPermissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutPermissionInput
   }
 
   export type permissionUpdateInput = {
@@ -51906,7 +51898,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    adminStaffPermissions?: adminStaffHasPermissionUpdateManyWithoutPermissionNestedInput
   }
 
   export type permissionUncheckedUpdateInput = {
@@ -51924,7 +51915,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    adminStaffPermissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutPermissionNestedInput
   }
 
   export type permissionCreateManyInput = {
@@ -51966,106 +51956,6 @@ export namespace Prisma {
     module?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionCreateInput = {
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-    adminStaff: adminStaffCreateNestedOneWithoutPermissionsInput
-    permission: permissionCreateNestedOneWithoutAdminStaffPermissionsInput
-  }
-
-  export type adminStaffHasPermissionUncheckedCreateInput = {
-    id?: number
-    adminStaffId: number
-    permissionId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionUpdateInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    adminStaff?: adminStaffUpdateOneRequiredWithoutPermissionsNestedInput
-    permission?: permissionUpdateOneRequiredWithoutAdminStaffPermissionsNestedInput
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    adminStaffId?: IntFieldUpdateOperationsInput | number
-    permissionId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionCreateManyInput = {
-    id?: number
-    adminStaffId: number
-    permissionId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionUpdateManyMutationInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    adminStaffId?: IntFieldUpdateOperationsInput | number
-    permissionId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54753,6 +54643,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -54774,6 +54665,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -54794,6 +54686,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -54815,6 +54708,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -54836,6 +54730,7 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManyInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -54853,6 +54748,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateManyMutationInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -54867,6 +54763,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -55661,6 +55558,206 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type supplierOrderPermissionCreateInput = {
+    orderNumber?: boolean
+    awbNumber?: boolean
+    status?: boolean
+    orderNote?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    discount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    shippingName?: boolean
+    shippingPhone?: boolean
+    shippingEmail?: boolean
+    shippingAddress?: boolean
+    shippingZip?: boolean
+    shippingCountry?: boolean
+    shippingState?: boolean
+    shippingCity?: boolean
+    billingName?: boolean
+    billingPhone?: boolean
+    billingEmail?: boolean
+    billingAddress?: boolean
+    billingZip?: boolean
+    billingCountry?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+  }
+
+  export type supplierOrderPermissionUncheckedCreateInput = {
+    id?: number
+    orderNumber?: boolean
+    awbNumber?: boolean
+    status?: boolean
+    orderNote?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    discount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    shippingName?: boolean
+    shippingPhone?: boolean
+    shippingEmail?: boolean
+    shippingAddress?: boolean
+    shippingZip?: boolean
+    shippingCountry?: boolean
+    shippingState?: boolean
+    shippingCity?: boolean
+    billingName?: boolean
+    billingPhone?: boolean
+    billingEmail?: boolean
+    billingAddress?: boolean
+    billingZip?: boolean
+    billingCountry?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+  }
+
+  export type supplierOrderPermissionUpdateInput = {
+    orderNumber?: BoolFieldUpdateOperationsInput | boolean
+    awbNumber?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    orderNote?: BoolFieldUpdateOperationsInput | boolean
+    subtotal?: BoolFieldUpdateOperationsInput | boolean
+    tax?: BoolFieldUpdateOperationsInput | boolean
+    discount?: BoolFieldUpdateOperationsInput | boolean
+    totalAmount?: BoolFieldUpdateOperationsInput | boolean
+    currency?: BoolFieldUpdateOperationsInput | boolean
+    shippingName?: BoolFieldUpdateOperationsInput | boolean
+    shippingPhone?: BoolFieldUpdateOperationsInput | boolean
+    shippingEmail?: BoolFieldUpdateOperationsInput | boolean
+    shippingAddress?: BoolFieldUpdateOperationsInput | boolean
+    shippingZip?: BoolFieldUpdateOperationsInput | boolean
+    shippingCountry?: BoolFieldUpdateOperationsInput | boolean
+    shippingState?: BoolFieldUpdateOperationsInput | boolean
+    shippingCity?: BoolFieldUpdateOperationsInput | boolean
+    billingName?: BoolFieldUpdateOperationsInput | boolean
+    billingPhone?: BoolFieldUpdateOperationsInput | boolean
+    billingEmail?: BoolFieldUpdateOperationsInput | boolean
+    billingAddress?: BoolFieldUpdateOperationsInput | boolean
+    billingZip?: BoolFieldUpdateOperationsInput | boolean
+    billingCountry?: BoolFieldUpdateOperationsInput | boolean
+    billingState?: BoolFieldUpdateOperationsInput | boolean
+    billingCity?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type supplierOrderPermissionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderNumber?: BoolFieldUpdateOperationsInput | boolean
+    awbNumber?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    orderNote?: BoolFieldUpdateOperationsInput | boolean
+    subtotal?: BoolFieldUpdateOperationsInput | boolean
+    tax?: BoolFieldUpdateOperationsInput | boolean
+    discount?: BoolFieldUpdateOperationsInput | boolean
+    totalAmount?: BoolFieldUpdateOperationsInput | boolean
+    currency?: BoolFieldUpdateOperationsInput | boolean
+    shippingName?: BoolFieldUpdateOperationsInput | boolean
+    shippingPhone?: BoolFieldUpdateOperationsInput | boolean
+    shippingEmail?: BoolFieldUpdateOperationsInput | boolean
+    shippingAddress?: BoolFieldUpdateOperationsInput | boolean
+    shippingZip?: BoolFieldUpdateOperationsInput | boolean
+    shippingCountry?: BoolFieldUpdateOperationsInput | boolean
+    shippingState?: BoolFieldUpdateOperationsInput | boolean
+    shippingCity?: BoolFieldUpdateOperationsInput | boolean
+    billingName?: BoolFieldUpdateOperationsInput | boolean
+    billingPhone?: BoolFieldUpdateOperationsInput | boolean
+    billingEmail?: BoolFieldUpdateOperationsInput | boolean
+    billingAddress?: BoolFieldUpdateOperationsInput | boolean
+    billingZip?: BoolFieldUpdateOperationsInput | boolean
+    billingCountry?: BoolFieldUpdateOperationsInput | boolean
+    billingState?: BoolFieldUpdateOperationsInput | boolean
+    billingCity?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type supplierOrderPermissionCreateManyInput = {
+    id?: number
+    orderNumber?: boolean
+    awbNumber?: boolean
+    status?: boolean
+    orderNote?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    discount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    shippingName?: boolean
+    shippingPhone?: boolean
+    shippingEmail?: boolean
+    shippingAddress?: boolean
+    shippingZip?: boolean
+    shippingCountry?: boolean
+    shippingState?: boolean
+    shippingCity?: boolean
+    billingName?: boolean
+    billingPhone?: boolean
+    billingEmail?: boolean
+    billingAddress?: boolean
+    billingZip?: boolean
+    billingCountry?: boolean
+    billingState?: boolean
+    billingCity?: boolean
+  }
+
+  export type supplierOrderPermissionUpdateManyMutationInput = {
+    orderNumber?: BoolFieldUpdateOperationsInput | boolean
+    awbNumber?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    orderNote?: BoolFieldUpdateOperationsInput | boolean
+    subtotal?: BoolFieldUpdateOperationsInput | boolean
+    tax?: BoolFieldUpdateOperationsInput | boolean
+    discount?: BoolFieldUpdateOperationsInput | boolean
+    totalAmount?: BoolFieldUpdateOperationsInput | boolean
+    currency?: BoolFieldUpdateOperationsInput | boolean
+    shippingName?: BoolFieldUpdateOperationsInput | boolean
+    shippingPhone?: BoolFieldUpdateOperationsInput | boolean
+    shippingEmail?: BoolFieldUpdateOperationsInput | boolean
+    shippingAddress?: BoolFieldUpdateOperationsInput | boolean
+    shippingZip?: BoolFieldUpdateOperationsInput | boolean
+    shippingCountry?: BoolFieldUpdateOperationsInput | boolean
+    shippingState?: BoolFieldUpdateOperationsInput | boolean
+    shippingCity?: BoolFieldUpdateOperationsInput | boolean
+    billingName?: BoolFieldUpdateOperationsInput | boolean
+    billingPhone?: BoolFieldUpdateOperationsInput | boolean
+    billingEmail?: BoolFieldUpdateOperationsInput | boolean
+    billingAddress?: BoolFieldUpdateOperationsInput | boolean
+    billingZip?: BoolFieldUpdateOperationsInput | boolean
+    billingCountry?: BoolFieldUpdateOperationsInput | boolean
+    billingState?: BoolFieldUpdateOperationsInput | boolean
+    billingCity?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type supplierOrderPermissionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderNumber?: BoolFieldUpdateOperationsInput | boolean
+    awbNumber?: BoolFieldUpdateOperationsInput | boolean
+    status?: BoolFieldUpdateOperationsInput | boolean
+    orderNote?: BoolFieldUpdateOperationsInput | boolean
+    subtotal?: BoolFieldUpdateOperationsInput | boolean
+    tax?: BoolFieldUpdateOperationsInput | boolean
+    discount?: BoolFieldUpdateOperationsInput | boolean
+    totalAmount?: BoolFieldUpdateOperationsInput | boolean
+    currency?: BoolFieldUpdateOperationsInput | boolean
+    shippingName?: BoolFieldUpdateOperationsInput | boolean
+    shippingPhone?: BoolFieldUpdateOperationsInput | boolean
+    shippingEmail?: BoolFieldUpdateOperationsInput | boolean
+    shippingAddress?: BoolFieldUpdateOperationsInput | boolean
+    shippingZip?: BoolFieldUpdateOperationsInput | boolean
+    shippingCountry?: BoolFieldUpdateOperationsInput | boolean
+    shippingState?: BoolFieldUpdateOperationsInput | boolean
+    shippingCity?: BoolFieldUpdateOperationsInput | boolean
+    billingName?: BoolFieldUpdateOperationsInput | boolean
+    billingPhone?: BoolFieldUpdateOperationsInput | boolean
+    billingEmail?: BoolFieldUpdateOperationsInput | boolean
+    billingAddress?: BoolFieldUpdateOperationsInput | boolean
+    billingZip?: BoolFieldUpdateOperationsInput | boolean
+    billingCountry?: BoolFieldUpdateOperationsInput | boolean
+    billingState?: BoolFieldUpdateOperationsInput | boolean
+    billingCity?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -56704,16 +56801,6 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
-  export type AdminStaffHasPermissionListRelationFilter = {
-    every?: adminStaffHasPermissionWhereInput
-    some?: adminStaffHasPermissionWhereInput
-    none?: adminStaffHasPermissionWhereInput
-  }
-
-  export type adminStaffHasPermissionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type adminStaffOrderByRelevanceInput = {
     fields: adminStaffOrderByRelevanceFieldEnum | adminStaffOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -56898,85 +56985,6 @@ export namespace Prisma {
 
   export type permissionSumOrderByAggregateInput = {
     id?: SortOrder
-    createdBy?: SortOrder
-    updatedBy?: SortOrder
-    deletedBy?: SortOrder
-  }
-
-  export type AdminStaffScalarRelationFilter = {
-    is?: adminStaffWhereInput
-    isNot?: adminStaffWhereInput
-  }
-
-  export type PermissionScalarRelationFilter = {
-    is?: permissionWhereInput
-    isNot?: permissionWhereInput
-  }
-
-  export type adminStaffHasPermissionOrderByRelevanceInput = {
-    fields: adminStaffHasPermissionOrderByRelevanceFieldEnum | adminStaffHasPermissionOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type adminStaffHasPermissionCountOrderByAggregateInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type adminStaffHasPermissionAvgOrderByAggregateInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdBy?: SortOrder
-    updatedBy?: SortOrder
-    deletedBy?: SortOrder
-  }
-
-  export type adminStaffHasPermissionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type adminStaffHasPermissionMinOrderByAggregateInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type adminStaffHasPermissionSumOrderByAggregateInput = {
-    id?: SortOrder
-    adminStaffId?: SortOrder
-    permissionId?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -58773,6 +58781,7 @@ export namespace Prisma {
 
   export type dropshipperProductCountOrderByAggregateInput = {
     id?: SortOrder
+    shopifyProductId?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
     supplierProductId?: SortOrder
@@ -58802,6 +58811,7 @@ export namespace Prisma {
 
   export type dropshipperProductMaxOrderByAggregateInput = {
     id?: SortOrder
+    shopifyProductId?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
     supplierProductId?: SortOrder
@@ -58820,6 +58830,7 @@ export namespace Prisma {
 
   export type dropshipperProductMinOrderByAggregateInput = {
     id?: SortOrder
+    shopifyProductId?: SortOrder
     dropshipperId?: SortOrder
     supplierId?: SortOrder
     supplierProductId?: SortOrder
@@ -59379,6 +59390,101 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
+  }
+
+  export type supplierOrderPermissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    orderNumber?: SortOrder
+    awbNumber?: SortOrder
+    status?: SortOrder
+    orderNote?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    discount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    shippingName?: SortOrder
+    shippingPhone?: SortOrder
+    shippingEmail?: SortOrder
+    shippingAddress?: SortOrder
+    shippingZip?: SortOrder
+    shippingCountry?: SortOrder
+    shippingState?: SortOrder
+    shippingCity?: SortOrder
+    billingName?: SortOrder
+    billingPhone?: SortOrder
+    billingEmail?: SortOrder
+    billingAddress?: SortOrder
+    billingZip?: SortOrder
+    billingCountry?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+  }
+
+  export type supplierOrderPermissionAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type supplierOrderPermissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    orderNumber?: SortOrder
+    awbNumber?: SortOrder
+    status?: SortOrder
+    orderNote?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    discount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    shippingName?: SortOrder
+    shippingPhone?: SortOrder
+    shippingEmail?: SortOrder
+    shippingAddress?: SortOrder
+    shippingZip?: SortOrder
+    shippingCountry?: SortOrder
+    shippingState?: SortOrder
+    shippingCity?: SortOrder
+    billingName?: SortOrder
+    billingPhone?: SortOrder
+    billingEmail?: SortOrder
+    billingAddress?: SortOrder
+    billingZip?: SortOrder
+    billingCountry?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+  }
+
+  export type supplierOrderPermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    orderNumber?: SortOrder
+    awbNumber?: SortOrder
+    status?: SortOrder
+    orderNote?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    discount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    shippingName?: SortOrder
+    shippingPhone?: SortOrder
+    shippingEmail?: SortOrder
+    shippingAddress?: SortOrder
+    shippingZip?: SortOrder
+    shippingCountry?: SortOrder
+    shippingState?: SortOrder
+    shippingCity?: SortOrder
+    billingName?: SortOrder
+    billingPhone?: SortOrder
+    billingEmail?: SortOrder
+    billingAddress?: SortOrder
+    billingZip?: SortOrder
+    billingCountry?: SortOrder
+    billingState?: SortOrder
+    billingCity?: SortOrder
+  }
+
+  export type supplierOrderPermissionSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -60131,20 +60237,6 @@ export namespace Prisma {
     connect?: adminWhereUniqueInput
   }
 
-  export type adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput> | adminStaffHasPermissionCreateWithoutAdminStaffInput[] | adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput | adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput[]
-    createMany?: adminStaffHasPermissionCreateManyAdminStaffInputEnvelope
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-  }
-
-  export type adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput> | adminStaffHasPermissionCreateWithoutAdminStaffInput[] | adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput | adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput[]
-    createMany?: adminStaffHasPermissionCreateManyAdminStaffInputEnvelope
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-  }
-
   export type cityUpdateOneWithoutAdminStaffsNestedInput = {
     create?: XOR<cityCreateWithoutAdminStaffsInput, cityUncheckedCreateWithoutAdminStaffsInput>
     connectOrCreate?: cityCreateOrConnectWithoutAdminStaffsInput
@@ -60181,104 +60273,6 @@ export namespace Prisma {
     upsert?: adminUpsertWithoutStaffInput
     connect?: adminWhereUniqueInput
     update?: XOR<XOR<adminUpdateToOneWithWhereWithoutStaffInput, adminUpdateWithoutStaffInput>, adminUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput> | adminStaffHasPermissionCreateWithoutAdminStaffInput[] | adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput | adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput[]
-    upsert?: adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput | adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput[]
-    createMany?: adminStaffHasPermissionCreateManyAdminStaffInputEnvelope
-    set?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    disconnect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    delete?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    update?: adminStaffHasPermissionUpdateWithWhereUniqueWithoutAdminStaffInput | adminStaffHasPermissionUpdateWithWhereUniqueWithoutAdminStaffInput[]
-    updateMany?: adminStaffHasPermissionUpdateManyWithWhereWithoutAdminStaffInput | adminStaffHasPermissionUpdateManyWithWhereWithoutAdminStaffInput[]
-    deleteMany?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput> | adminStaffHasPermissionCreateWithoutAdminStaffInput[] | adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput | adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput[]
-    upsert?: adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput | adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput[]
-    createMany?: adminStaffHasPermissionCreateManyAdminStaffInputEnvelope
-    set?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    disconnect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    delete?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    update?: adminStaffHasPermissionUpdateWithWhereUniqueWithoutAdminStaffInput | adminStaffHasPermissionUpdateWithWhereUniqueWithoutAdminStaffInput[]
-    updateMany?: adminStaffHasPermissionUpdateManyWithWhereWithoutAdminStaffInput | adminStaffHasPermissionUpdateManyWithWhereWithoutAdminStaffInput[]
-    deleteMany?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-  }
-
-  export type adminStaffHasPermissionCreateNestedManyWithoutPermissionInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput> | adminStaffHasPermissionCreateWithoutPermissionInput[] | adminStaffHasPermissionUncheckedCreateWithoutPermissionInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutPermissionInput | adminStaffHasPermissionCreateOrConnectWithoutPermissionInput[]
-    createMany?: adminStaffHasPermissionCreateManyPermissionInputEnvelope
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-  }
-
-  export type adminStaffHasPermissionUncheckedCreateNestedManyWithoutPermissionInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput> | adminStaffHasPermissionCreateWithoutPermissionInput[] | adminStaffHasPermissionUncheckedCreateWithoutPermissionInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutPermissionInput | adminStaffHasPermissionCreateOrConnectWithoutPermissionInput[]
-    createMany?: adminStaffHasPermissionCreateManyPermissionInputEnvelope
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-  }
-
-  export type adminStaffHasPermissionUpdateManyWithoutPermissionNestedInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput> | adminStaffHasPermissionCreateWithoutPermissionInput[] | adminStaffHasPermissionUncheckedCreateWithoutPermissionInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutPermissionInput | adminStaffHasPermissionCreateOrConnectWithoutPermissionInput[]
-    upsert?: adminStaffHasPermissionUpsertWithWhereUniqueWithoutPermissionInput | adminStaffHasPermissionUpsertWithWhereUniqueWithoutPermissionInput[]
-    createMany?: adminStaffHasPermissionCreateManyPermissionInputEnvelope
-    set?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    disconnect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    delete?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    update?: adminStaffHasPermissionUpdateWithWhereUniqueWithoutPermissionInput | adminStaffHasPermissionUpdateWithWhereUniqueWithoutPermissionInput[]
-    updateMany?: adminStaffHasPermissionUpdateManyWithWhereWithoutPermissionInput | adminStaffHasPermissionUpdateManyWithWhereWithoutPermissionInput[]
-    deleteMany?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateManyWithoutPermissionNestedInput = {
-    create?: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput> | adminStaffHasPermissionCreateWithoutPermissionInput[] | adminStaffHasPermissionUncheckedCreateWithoutPermissionInput[]
-    connectOrCreate?: adminStaffHasPermissionCreateOrConnectWithoutPermissionInput | adminStaffHasPermissionCreateOrConnectWithoutPermissionInput[]
-    upsert?: adminStaffHasPermissionUpsertWithWhereUniqueWithoutPermissionInput | adminStaffHasPermissionUpsertWithWhereUniqueWithoutPermissionInput[]
-    createMany?: adminStaffHasPermissionCreateManyPermissionInputEnvelope
-    set?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    disconnect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    delete?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    connect?: adminStaffHasPermissionWhereUniqueInput | adminStaffHasPermissionWhereUniqueInput[]
-    update?: adminStaffHasPermissionUpdateWithWhereUniqueWithoutPermissionInput | adminStaffHasPermissionUpdateWithWhereUniqueWithoutPermissionInput[]
-    updateMany?: adminStaffHasPermissionUpdateManyWithWhereWithoutPermissionInput | adminStaffHasPermissionUpdateManyWithWhereWithoutPermissionInput[]
-    deleteMany?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-  }
-
-  export type adminStaffCreateNestedOneWithoutPermissionsInput = {
-    create?: XOR<adminStaffCreateWithoutPermissionsInput, adminStaffUncheckedCreateWithoutPermissionsInput>
-    connectOrCreate?: adminStaffCreateOrConnectWithoutPermissionsInput
-    connect?: adminStaffWhereUniqueInput
-  }
-
-  export type permissionCreateNestedOneWithoutAdminStaffPermissionsInput = {
-    create?: XOR<permissionCreateWithoutAdminStaffPermissionsInput, permissionUncheckedCreateWithoutAdminStaffPermissionsInput>
-    connectOrCreate?: permissionCreateOrConnectWithoutAdminStaffPermissionsInput
-    connect?: permissionWhereUniqueInput
-  }
-
-  export type adminStaffUpdateOneRequiredWithoutPermissionsNestedInput = {
-    create?: XOR<adminStaffCreateWithoutPermissionsInput, adminStaffUncheckedCreateWithoutPermissionsInput>
-    connectOrCreate?: adminStaffCreateOrConnectWithoutPermissionsInput
-    upsert?: adminStaffUpsertWithoutPermissionsInput
-    connect?: adminStaffWhereUniqueInput
-    update?: XOR<XOR<adminStaffUpdateToOneWithWhereWithoutPermissionsInput, adminStaffUpdateWithoutPermissionsInput>, adminStaffUncheckedUpdateWithoutPermissionsInput>
-  }
-
-  export type permissionUpdateOneRequiredWithoutAdminStaffPermissionsNestedInput = {
-    create?: XOR<permissionCreateWithoutAdminStaffPermissionsInput, permissionUncheckedCreateWithoutAdminStaffPermissionsInput>
-    connectOrCreate?: permissionCreateOrConnectWithoutAdminStaffPermissionsInput
-    upsert?: permissionUpsertWithoutAdminStaffPermissionsInput
-    connect?: permissionWhereUniqueInput
-    update?: XOR<XOR<permissionUpdateToOneWithWhereWithoutAdminStaffPermissionsInput, permissionUpdateWithoutAdminStaffPermissionsInput>, permissionUncheckedUpdateWithoutAdminStaffPermissionsInput>
   }
 
   export type stateCreateNestedManyWithoutCountryInput = {
@@ -63629,7 +63623,6 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminStaffsInput
     permanentState?: stateCreateNestedOneWithoutAdminStaffsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminStaffsInput
-    permissions?: adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUncheckedCreateWithoutAdminInput = {
@@ -63659,7 +63652,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    permissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffCreateOrConnectWithoutAdminInput = {
@@ -63840,6 +63832,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutDropshipperInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -63860,6 +63853,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutDropshipperInput = {
     id?: number
+    shopifyProductId?: string | null
     supplierId: number
     supplierProductId: number
     productId: number
@@ -63889,6 +63883,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutSupplierInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -63909,6 +63904,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutSupplierInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierProductId: number
     productId: number
@@ -64659,6 +64655,7 @@ export namespace Prisma {
     OR?: dropshipperProductScalarWhereInput[]
     NOT?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
     id?: IntFilter<"dropshipperProduct"> | number
+    shopifyProductId?: StringNullableFilter<"dropshipperProduct"> | string | null
     dropshipperId?: IntFilter<"dropshipperProduct"> | number
     supplierId?: IntFilter<"dropshipperProduct"> | number
     supplierProductId?: IntFilter<"dropshipperProduct"> | number
@@ -66526,43 +66523,6 @@ export namespace Prisma {
     create: XOR<adminCreateWithoutStaffInput, adminUncheckedCreateWithoutStaffInput>
   }
 
-  export type adminStaffHasPermissionCreateWithoutAdminStaffInput = {
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-    permission: permissionCreateNestedOneWithoutAdminStaffPermissionsInput
-  }
-
-  export type adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput = {
-    id?: number
-    permissionId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionCreateOrConnectWithoutAdminStaffInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    create: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput>
-  }
-
-  export type adminStaffHasPermissionCreateManyAdminStaffInputEnvelope = {
-    data: adminStaffHasPermissionCreateManyAdminStaffInput | adminStaffHasPermissionCreateManyAdminStaffInput[]
-    skipDuplicates?: boolean
-  }
-
   export type cityUpsertWithoutAdminStaffsInput = {
     update: XOR<cityUpdateWithoutAdminStaffsInput, cityUncheckedUpdateWithoutAdminStaffsInput>
     create: XOR<cityCreateWithoutAdminStaffsInput, cityUncheckedCreateWithoutAdminStaffsInput>
@@ -66850,309 +66810,6 @@ export namespace Prisma {
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
     rtoInventories?: rtoInventoryUncheckedUpdateManyWithoutDropshipperNestedInput
-  }
-
-  export type adminStaffHasPermissionUpsertWithWhereUniqueWithoutAdminStaffInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    update: XOR<adminStaffHasPermissionUpdateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedUpdateWithoutAdminStaffInput>
-    create: XOR<adminStaffHasPermissionCreateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput>
-  }
-
-  export type adminStaffHasPermissionUpdateWithWhereUniqueWithoutAdminStaffInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    data: XOR<adminStaffHasPermissionUpdateWithoutAdminStaffInput, adminStaffHasPermissionUncheckedUpdateWithoutAdminStaffInput>
-  }
-
-  export type adminStaffHasPermissionUpdateManyWithWhereWithoutAdminStaffInput = {
-    where: adminStaffHasPermissionScalarWhereInput
-    data: XOR<adminStaffHasPermissionUpdateManyMutationInput, adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffInput>
-  }
-
-  export type adminStaffHasPermissionScalarWhereInput = {
-    AND?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-    OR?: adminStaffHasPermissionScalarWhereInput[]
-    NOT?: adminStaffHasPermissionScalarWhereInput | adminStaffHasPermissionScalarWhereInput[]
-    id?: IntFilter<"adminStaffHasPermission"> | number
-    adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
-    permissionId?: IntFilter<"adminStaffHasPermission"> | number
-    createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    updatedAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
-    updatedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    updatedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-    deletedAt?: DateTimeNullableFilter<"adminStaffHasPermission"> | Date | string | null
-    deletedBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
-    deletedByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
-  }
-
-  export type adminStaffHasPermissionCreateWithoutPermissionInput = {
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-    adminStaff: adminStaffCreateNestedOneWithoutPermissionsInput
-  }
-
-  export type adminStaffHasPermissionUncheckedCreateWithoutPermissionInput = {
-    id?: number
-    adminStaffId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionCreateOrConnectWithoutPermissionInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    create: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput>
-  }
-
-  export type adminStaffHasPermissionCreateManyPermissionInputEnvelope = {
-    data: adminStaffHasPermissionCreateManyPermissionInput | adminStaffHasPermissionCreateManyPermissionInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type adminStaffHasPermissionUpsertWithWhereUniqueWithoutPermissionInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    update: XOR<adminStaffHasPermissionUpdateWithoutPermissionInput, adminStaffHasPermissionUncheckedUpdateWithoutPermissionInput>
-    create: XOR<adminStaffHasPermissionCreateWithoutPermissionInput, adminStaffHasPermissionUncheckedCreateWithoutPermissionInput>
-  }
-
-  export type adminStaffHasPermissionUpdateWithWhereUniqueWithoutPermissionInput = {
-    where: adminStaffHasPermissionWhereUniqueInput
-    data: XOR<adminStaffHasPermissionUpdateWithoutPermissionInput, adminStaffHasPermissionUncheckedUpdateWithoutPermissionInput>
-  }
-
-  export type adminStaffHasPermissionUpdateManyWithWhereWithoutPermissionInput = {
-    where: adminStaffHasPermissionScalarWhereInput
-    data: XOR<adminStaffHasPermissionUpdateManyMutationInput, adminStaffHasPermissionUncheckedUpdateManyWithoutPermissionInput>
-  }
-
-  export type adminStaffCreateWithoutPermissionsInput = {
-    profilePicture?: string | null
-    name: string
-    email: string
-    phoneNumber?: string | null
-    currentAddress?: string | null
-    permanentAddress?: string | null
-    permanentPostalCode?: string | null
-    password: string
-    role?: string
-    status?: string
-    pr_token?: string | null
-    pr_expires_at?: Date | string | null
-    pr_last_reset?: Date | string | null
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-    permanentCity?: cityCreateNestedOneWithoutAdminStaffsInput
-    permanentState?: stateCreateNestedOneWithoutAdminStaffsInput
-    permanentCountry?: countryCreateNestedOneWithoutAdminStaffsInput
-    admin: adminCreateNestedOneWithoutStaffInput
-  }
-
-  export type adminStaffUncheckedCreateWithoutPermissionsInput = {
-    id?: number
-    admin_id: number
-    profilePicture?: string | null
-    name: string
-    email: string
-    phoneNumber?: string | null
-    currentAddress?: string | null
-    permanentAddress?: string | null
-    permanentPostalCode?: string | null
-    permanentCityId?: bigint | number | null
-    permanentStateId?: bigint | number | null
-    permanentCountryId?: bigint | number | null
-    password: string
-    role?: string
-    status?: string
-    pr_token?: string | null
-    pr_expires_at?: Date | string | null
-    pr_last_reset?: Date | string | null
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffCreateOrConnectWithoutPermissionsInput = {
-    where: adminStaffWhereUniqueInput
-    create: XOR<adminStaffCreateWithoutPermissionsInput, adminStaffUncheckedCreateWithoutPermissionsInput>
-  }
-
-  export type permissionCreateWithoutAdminStaffPermissionsInput = {
-    panel: string
-    module: string
-    action: string
-    status?: boolean
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type permissionUncheckedCreateWithoutAdminStaffPermissionsInput = {
-    id?: number
-    panel: string
-    module: string
-    action: string
-    status?: boolean
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type permissionCreateOrConnectWithoutAdminStaffPermissionsInput = {
-    where: permissionWhereUniqueInput
-    create: XOR<permissionCreateWithoutAdminStaffPermissionsInput, permissionUncheckedCreateWithoutAdminStaffPermissionsInput>
-  }
-
-  export type adminStaffUpsertWithoutPermissionsInput = {
-    update: XOR<adminStaffUpdateWithoutPermissionsInput, adminStaffUncheckedUpdateWithoutPermissionsInput>
-    create: XOR<adminStaffCreateWithoutPermissionsInput, adminStaffUncheckedCreateWithoutPermissionsInput>
-    where?: adminStaffWhereInput
-  }
-
-  export type adminStaffUpdateToOneWithWhereWithoutPermissionsInput = {
-    where?: adminStaffWhereInput
-    data: XOR<adminStaffUpdateWithoutPermissionsInput, adminStaffUncheckedUpdateWithoutPermissionsInput>
-  }
-
-  export type adminStaffUpdateWithoutPermissionsInput = {
-    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
-    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentCity?: cityUpdateOneWithoutAdminStaffsNestedInput
-    permanentState?: stateUpdateOneWithoutAdminStaffsNestedInput
-    permanentCountry?: countryUpdateOneWithoutAdminStaffsNestedInput
-    admin?: adminUpdateOneRequiredWithoutStaffNestedInput
-  }
-
-  export type adminStaffUncheckedUpdateWithoutPermissionsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    admin_id?: IntFieldUpdateOperationsInput | number
-    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    currentAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentPostalCode?: NullableStringFieldUpdateOperationsInput | string | null
-    permanentCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    permanentStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    permanentCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    pr_token?: NullableStringFieldUpdateOperationsInput | string | null
-    pr_expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pr_last_reset?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type permissionUpsertWithoutAdminStaffPermissionsInput = {
-    update: XOR<permissionUpdateWithoutAdminStaffPermissionsInput, permissionUncheckedUpdateWithoutAdminStaffPermissionsInput>
-    create: XOR<permissionCreateWithoutAdminStaffPermissionsInput, permissionUncheckedCreateWithoutAdminStaffPermissionsInput>
-    where?: permissionWhereInput
-  }
-
-  export type permissionUpdateToOneWithWhereWithoutAdminStaffPermissionsInput = {
-    where?: permissionWhereInput
-    data: XOR<permissionUpdateWithoutAdminStaffPermissionsInput, permissionUncheckedUpdateWithoutAdminStaffPermissionsInput>
-  }
-
-  export type permissionUpdateWithoutAdminStaffPermissionsInput = {
-    panel?: StringFieldUpdateOperationsInput | string
-    module?: StringFieldUpdateOperationsInput | string
-    action?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type permissionUncheckedUpdateWithoutAdminStaffPermissionsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    panel?: StringFieldUpdateOperationsInput | string
-    module?: StringFieldUpdateOperationsInput | string
-    action?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type stateCreateWithoutCountryInput = {
@@ -67494,7 +67151,6 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminStaffsInput
     permanentState?: stateCreateNestedOneWithoutAdminStaffsInput
     admin: adminCreateNestedOneWithoutStaffInput
-    permissions?: adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUncheckedCreateWithoutPermanentCountryInput = {
@@ -67524,7 +67180,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    permissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffCreateOrConnectWithoutPermanentCountryInput = {
@@ -68811,7 +68466,6 @@ export namespace Prisma {
     permanentCity?: cityCreateNestedOneWithoutAdminStaffsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminStaffsInput
     admin: adminCreateNestedOneWithoutStaffInput
-    permissions?: adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUncheckedCreateWithoutPermanentStateInput = {
@@ -68841,7 +68495,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    permissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffCreateOrConnectWithoutPermanentStateInput = {
@@ -69679,7 +69332,6 @@ export namespace Prisma {
     permanentState?: stateCreateNestedOneWithoutAdminStaffsInput
     permanentCountry?: countryCreateNestedOneWithoutAdminStaffsInput
     admin: adminCreateNestedOneWithoutStaffInput
-    permissions?: adminStaffHasPermissionCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffUncheckedCreateWithoutPermanentCityInput = {
@@ -69709,7 +69361,6 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    permissions?: adminStaffHasPermissionUncheckedCreateNestedManyWithoutAdminStaffInput
   }
 
   export type adminStaffCreateOrConnectWithoutPermanentCityInput = {
@@ -71334,6 +70985,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutProductInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -71354,6 +71006,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutProductInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -73168,6 +72821,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutSupplierProductInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -73188,6 +72842,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutSupplierProductInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     productId: number
@@ -75309,6 +74964,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutVariantsInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -75329,6 +74985,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutVariantsInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -75740,6 +75397,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutVariantsInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75760,6 +75418,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutVariantsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -76976,6 +76635,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutOrderItemsInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -76996,6 +76656,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutOrderItemsInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -77221,6 +76882,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutOrderItemsInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -77241,6 +76903,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutOrderItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -77576,6 +77239,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductCreateWithoutRtoInventoriesInput = {
+    shopifyProductId?: string | null
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -77596,6 +77260,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedCreateWithoutRtoInventoriesInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -77911,6 +77576,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutRtoInventoriesInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -77931,6 +77597,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutRtoInventoriesInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -78087,6 +77754,7 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManyDropshipperInput = {
     id?: number
+    shopifyProductId?: string | null
     supplierId: number
     supplierProductId: number
     productId: number
@@ -78104,6 +77772,7 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManySupplierInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierProductId: number
     productId: number
@@ -78330,7 +77999,6 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminStaffsNestedInput
     permanentState?: stateUpdateOneWithoutAdminStaffsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminStaffsNestedInput
-    permissions?: adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateWithoutAdminInput = {
@@ -78360,7 +78028,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateManyWithoutAdminInput = {
@@ -78443,6 +78110,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutDropshipperInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78463,6 +78131,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutDropshipperInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
@@ -78483,6 +78152,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateManyWithoutDropshipperInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
@@ -78499,6 +78169,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutSupplierInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78519,6 +78190,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutSupplierInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
@@ -78539,6 +78211,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateManyWithoutSupplierInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
@@ -78761,116 +78434,6 @@ export namespace Prisma {
     dropshipperProductVariantId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionCreateManyAdminStaffInput = {
-    id?: number
-    permissionId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionUpdateWithoutAdminStaffInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permission?: permissionUpdateOneRequiredWithoutAdminStaffPermissionsNestedInput
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateWithoutAdminStaffInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    permissionId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    permissionId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionCreateManyPermissionInput = {
-    id?: number
-    adminStaffId: number
-    createdAt?: Date | string
-    createdBy?: number | null
-    createdByRole?: string | null
-    updatedAt?: Date | string
-    updatedBy?: number | null
-    updatedByRole?: string | null
-    deletedAt?: Date | string | null
-    deletedBy?: number | null
-    deletedByRole?: string | null
-  }
-
-  export type adminStaffHasPermissionUpdateWithoutPermissionInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    adminStaff?: adminStaffUpdateOneRequiredWithoutPermissionsNestedInput
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateWithoutPermissionInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    adminStaffId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: NullableIntFieldUpdateOperationsInput | number | null
-    createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    updatedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
-    deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type adminStaffHasPermissionUncheckedUpdateManyWithoutPermissionInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    adminStaffId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79619,7 +79182,6 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminStaffsNestedInput
     permanentState?: stateUpdateOneWithoutAdminStaffsNestedInput
     admin?: adminUpdateOneRequiredWithoutStaffNestedInput
-    permissions?: adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateWithoutPermanentCountryInput = {
@@ -79649,7 +79211,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateManyWithoutPermanentCountryInput = {
@@ -80900,7 +80461,6 @@ export namespace Prisma {
     permanentCity?: cityUpdateOneWithoutAdminStaffsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminStaffsNestedInput
     admin?: adminUpdateOneRequiredWithoutStaffNestedInput
-    permissions?: adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateWithoutPermanentStateInput = {
@@ -80930,7 +80490,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateManyWithoutPermanentStateInput = {
@@ -81827,7 +81386,6 @@ export namespace Prisma {
     permanentState?: stateUpdateOneWithoutAdminStaffsNestedInput
     permanentCountry?: countryUpdateOneWithoutAdminStaffsNestedInput
     admin?: adminUpdateOneRequiredWithoutStaffNestedInput
-    permissions?: adminStaffHasPermissionUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateWithoutPermanentCityInput = {
@@ -81857,7 +81415,6 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    permissions?: adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffNestedInput
   }
 
   export type adminStaffUncheckedUpdateManyWithoutPermanentCityInput = {
@@ -82735,6 +82292,7 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManyProductInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     supplierProductId: number
@@ -82915,6 +82473,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutProductInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -82935,6 +82494,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -82955,6 +82515,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     supplierProductId?: IntFieldUpdateOperationsInput | number
@@ -83230,6 +82791,7 @@ export namespace Prisma {
 
   export type dropshipperProductCreateManySupplierProductInput = {
     id?: number
+    shopifyProductId?: string | null
     dropshipperId: number
     supplierId: number
     productId: number
@@ -83324,6 +82886,7 @@ export namespace Prisma {
   }
 
   export type dropshipperProductUpdateWithoutSupplierProductInput = {
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -83344,6 +82907,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateWithoutSupplierProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
@@ -83364,6 +82928,7 @@ export namespace Prisma {
 
   export type dropshipperProductUncheckedUpdateManyWithoutSupplierProductInput = {
     id?: IntFieldUpdateOperationsInput | number
+    shopifyProductId?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperId?: IntFieldUpdateOperationsInput | number
     supplierId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number

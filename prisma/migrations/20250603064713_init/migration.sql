@@ -265,24 +265,6 @@ CREATE TABLE `permission` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `adminStaffHasPermission` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `adminStaffId` INTEGER NOT NULL,
-    `permissionId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `createdBy` INTEGER NULL,
-    `createdByRole` VARCHAR(191) NULL,
-    `updatedAt` DATETIME(3) NOT NULL,
-    `updatedBy` INTEGER NULL,
-    `updatedByRole` VARCHAR(191) NULL,
-    `deletedAt` DATETIME(3) NULL,
-    `deletedBy` INTEGER NULL,
-    `deletedByRole` VARCHAR(191) NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `loginLog` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `adminId` INTEGER NOT NULL,
@@ -782,6 +764,7 @@ CREATE TABLE `supplierProductVariant` (
 -- CreateTable
 CREATE TABLE `dropshipperProduct` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `shopifyProductId` VARCHAR(191) NULL,
     `dropshipperId` INTEGER NOT NULL,
     `supplierId` INTEGER NOT NULL,
     `supplierProductId` INTEGER NOT NULL,
@@ -960,6 +943,38 @@ CREATE TABLE `rtoInventory` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `supplierOrderPermission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `orderNumber` BOOLEAN NOT NULL DEFAULT false,
+    `awbNumber` BOOLEAN NOT NULL DEFAULT false,
+    `status` BOOLEAN NOT NULL DEFAULT false,
+    `orderNote` BOOLEAN NOT NULL DEFAULT false,
+    `subtotal` BOOLEAN NOT NULL DEFAULT false,
+    `tax` BOOLEAN NOT NULL DEFAULT false,
+    `discount` BOOLEAN NOT NULL DEFAULT false,
+    `totalAmount` BOOLEAN NOT NULL DEFAULT false,
+    `currency` BOOLEAN NOT NULL DEFAULT false,
+    `shippingName` BOOLEAN NOT NULL DEFAULT false,
+    `shippingPhone` BOOLEAN NOT NULL DEFAULT false,
+    `shippingEmail` BOOLEAN NOT NULL DEFAULT false,
+    `shippingAddress` BOOLEAN NOT NULL DEFAULT false,
+    `shippingZip` BOOLEAN NOT NULL DEFAULT false,
+    `shippingCountry` BOOLEAN NOT NULL DEFAULT false,
+    `shippingState` BOOLEAN NOT NULL DEFAULT false,
+    `shippingCity` BOOLEAN NOT NULL DEFAULT false,
+    `billingName` BOOLEAN NOT NULL DEFAULT false,
+    `billingPhone` BOOLEAN NOT NULL DEFAULT false,
+    `billingEmail` BOOLEAN NOT NULL DEFAULT false,
+    `billingAddress` BOOLEAN NOT NULL DEFAULT false,
+    `billingZip` BOOLEAN NOT NULL DEFAULT false,
+    `billingCountry` BOOLEAN NOT NULL DEFAULT false,
+    `billingState` BOOLEAN NOT NULL DEFAULT false,
+    `billingCity` BOOLEAN NOT NULL DEFAULT false,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `admin` ADD CONSTRAINT `admin_permanentCityId_fkey` FOREIGN KEY (`permanentCityId`) REFERENCES `city`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -1004,12 +1019,6 @@ ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_permanentCountryId_fkey` FOR
 
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_admin_id_fkey` FOREIGN KEY (`admin_id`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `adminStaffHasPermission` ADD CONSTRAINT `adminStaffHasPermission_adminStaffId_fkey` FOREIGN KEY (`adminStaffId`) REFERENCES `adminStaff`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `adminStaffHasPermission` ADD CONSTRAINT `adminStaffHasPermission_permissionId_fkey` FOREIGN KEY (`permissionId`) REFERENCES `permission`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `state` ADD CONSTRAINT `state_countryId_fkey` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

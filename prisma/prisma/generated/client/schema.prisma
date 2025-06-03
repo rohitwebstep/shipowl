@@ -289,8 +289,7 @@ model adminStaff {
   permanentState   state?   @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry country? @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
-  admin       admin                     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
-  permissions adminStaffHasPermission[]
+  admin admin @relation(fields: [admin_id], references: [id], onDelete: Cascade)
 }
 
 model permission {
@@ -309,27 +308,6 @@ model permission {
   deletedAt     DateTime?
   deletedBy     Int?
   deletedByRole String?
-
-  adminStaffPermissions adminStaffHasPermission[]
-}
-
-model adminStaffHasPermission {
-  id           Int @id @default(autoincrement())
-  adminStaffId Int
-  permissionId Int
-
-  createdAt     DateTime  @default(now())
-  createdBy     Int?
-  createdByRole String?
-  updatedAt     DateTime  @updatedAt
-  updatedBy     Int?
-  updatedByRole String?
-  deletedAt     DateTime?
-  deletedBy     Int?
-  deletedByRole String?
-
-  adminStaff adminStaff @relation(fields: [adminStaffId], references: [id], onDelete: Cascade)
-  permission permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 }
 
 model loginLog {
@@ -894,6 +872,7 @@ model supplierProductVariant {
 
 model dropshipperProduct {
   id                Int     @id @default(autoincrement())
+  shopifyProductId  String?
   dropshipperId     Int
   supplierId        Int
   supplierProductId Int
@@ -1118,4 +1097,39 @@ model rtoInventory {
   @@index([dropshipperProductId])
   @@index([dropshipperProductVariantId])
   @@index([deletedAt])
+}
+
+model supplierOrderPermission {
+  id          Int     @id @default(autoincrement())
+  orderNumber Boolean @default(false)
+  awbNumber   Boolean @default(false)
+  status      Boolean @default(false)
+  orderNote   Boolean @default(false)
+
+  // Financial Summary
+  subtotal    Boolean @default(false)
+  tax         Boolean @default(false)
+  discount    Boolean @default(false)
+  totalAmount Boolean @default(false)
+  currency    Boolean @default(false)
+
+  // Shipping Address
+  shippingName    Boolean @default(false)
+  shippingPhone   Boolean @default(false)
+  shippingEmail   Boolean @default(false)
+  shippingAddress Boolean @default(false)
+  shippingZip     Boolean @default(false)
+  shippingCountry Boolean @default(false)
+  shippingState   Boolean @default(false)
+  shippingCity    Boolean @default(false)
+
+  // Billing Address
+  billingName    Boolean @default(false)
+  billingPhone   Boolean @default(false)
+  billingEmail   Boolean @default(false)
+  billingAddress Boolean @default(false)
+  billingZip     Boolean @default(false)
+  billingCountry Boolean @default(false)
+  billingState   Boolean @default(false)
+  billingCity    Boolean @default(false)
 }
