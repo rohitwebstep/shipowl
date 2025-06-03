@@ -8,7 +8,6 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createAdminStaff, getAdminStaffsByStatus } from '@/app/models/admin/staff';
-import { assignAdminStaffPermission } from '@/app/models/admin/permission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -219,29 +218,6 @@ export async function POST(req: NextRequest) {
       }
       logMessage('error', 'Admin creation failed:', adminStaffCreateResult?.message || 'Unknown error');
       return NextResponse.json({ status: false, error: adminStaffCreateResult?.message || 'Admin creation failed' }, { status: 500 });
-    }
-
-    logMessage('debug', 'Admin Staff\'s permissions:', permissions);
-
-    const adminPermissionPayload = {
-      adminStaffId: adminStaffCreateResult.adminStaff.id,
-      permissions,
-      updatedAt: new Date(),
-      updatedBy: adminId,
-      updatedByRole: adminRole,
-    }
-
-    const adminPermissionCreateResult = await assignAdminStaffPermission(adminId, String(adminRole), adminPermissionPayload);
-    if (
-      !adminPermissionCreateResult ||
-      !adminPermissionCreateResult.status ||
-      !adminPermissionCreateResult.permissions
-    ) {
-      logMessage('error', 'Admin company creation failed', adminPermissionCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: adminPermissionCreateResult?.message || 'Admin company creation failed'
-      }, { status: 500 });
     }
 
     return NextResponse.json(
