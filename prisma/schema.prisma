@@ -871,6 +871,7 @@ model supplierProductVariant {
 
 model dropshipperProduct {
   id                Int       @id @default(autoincrement())
+  shopifyProductId  String?      
   dropshipperId     Int
   supplierId        Int
   supplierProductId Int
