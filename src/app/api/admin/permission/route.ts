@@ -87,23 +87,18 @@ export async function PUT(req: NextRequest) {
 
     // Parse FormData from request
     const formData = await req.formData();
-    const permissions: { permissionId: number; status: boolean }[] = [];
+    const permissionsRaw = formData.get('permissions');
 
-    // Extract FormData entries
-    for (const [key, value] of formData.entries()) {
-      const match = key.match(/^permissions\[(\d+)]\[(permissionId|status)]$/);
-      if (match) {
-        const index = parseInt(match[1], 10);
-        const field = match[2];
+    let permissions: { permissionId: number; status: boolean }[] = [];
 
-        if (!permissions[index]) permissions[index] = { permissionId: 0, status: false };
-
-        if (field === 'permissionId') {
-          permissions[index].permissionId = Number(value);
-        } else if (field === 'status') {
-          permissions[index].status = value === 'true';
-        }
+    if (typeof permissionsRaw === 'string') {
+      try {
+        permissions = JSON.parse(permissionsRaw);
+      } catch (e) {
+        console.error('Failed to parse permissions JSON:', e);
       }
+    } else {
+      console.warn('permissions field not found or is not a string');
     }
 
     if (permissions.length === 0) {
