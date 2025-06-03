@@ -182,9 +182,6 @@ export const getAdminStaffsByStatus = async (
         const adminStaffs = await prisma.adminStaff.findMany({
             where: whereCondition,
             orderBy: { name: "asc" },
-            include: {
-                permissions: true
-            }
         });
 
         logMessage(`debug`, `withPassword:`, withPassword);
@@ -339,7 +336,6 @@ export const restoreAdminStaff = async (adminId: number, adminStaffRole: string,
         // Restore the adminStaff
         const restoredAdminStaff = await prisma.adminStaff.update({
             where: { id },
-            include: { permissions: true },
             data: {
                 deletedBy: null,      // Reset the deletedBy field
                 deletedAt: null,      // Set deletedAt to null
