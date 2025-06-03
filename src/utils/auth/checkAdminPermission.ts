@@ -28,7 +28,7 @@ export async function checkAdminPermission({
         logMessage('warn', `User not found: ${userCheck.message}`);
         return {
             status: false,
-            message: `Permission denied for action "${action}" on module "${module}" - User not found.`
+            message: `Permission denied for action "${action}" on module "${module}" under panel "${panel}" - User not found.`
         };
     }
 
