@@ -49,6 +49,8 @@ export async function GET(req: NextRequest) {
     const parseDate = (value: string | null, outputFormat: string): string | null => {
       if (!value) return null;
 
+      console.log(`outputFormat - `, outputFormat);
+
       const patterns = [
         { regex: /^(\d{2})-(\d{2})-(\d{4})$/, order: ['year', 'month', 'day'] },  // DD-MM-YYYY
         { regex: /^(\d{4})-(\d{2})-(\d{2})$/, order: ['year', 'month', 'day'] },  // YYYY-MM-DD
@@ -89,8 +91,6 @@ export async function GET(req: NextRequest) {
     if (!configResult.status || !appConfig) {
       return NextResponse.json({ status: false, error: 'No app config found' }, { status: 404 });
     }
-
-    const shippingCost = Number(appConfig.shippingCost) || 0;
 
     const reportAnalytics = {
       shipowl: {
