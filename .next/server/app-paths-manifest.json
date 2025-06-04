@@ -1,1 +1,4 @@
-{}
+{
+  "/api/admin/dropshipper/[dropshipperId]/payment-report/route": "app/api/admin/dropshipper/[dropshipperId]/payment-report/route.js",
+  "/api/admin/supplier/[supplierId]/payment-report/route": "app/api/admin/supplier/[supplierId]/payment-report/route.js"
+}

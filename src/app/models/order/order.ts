@@ -480,6 +480,15 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
                 items: {
                     include: {
                         product: true,
+                        variant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        }
                     },
                 },
                 shippingCountry: true,
@@ -495,6 +504,192 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
         return { status: true, orders: serializeBigInt(orders) };
     } catch (error) {
         console.error(`Error fetching orders by status (${status}):`, error);
+        return { status: false, message: "Error fetching orders" };
+    }
+};
+
+export const getOrdersByStatusForDropshipperReporting = async (
+    status: "active" | "inactive" | "deleted" | "notDeleted" | "completedOrRto",
+    dropshipperId: number,
+    fromDate: string,
+    toDate: string
+) => {
+    try {
+        const whereCondition = {};
+
+        // Apply base conditions
+        if (status === "active") {
+            Object.assign(whereCondition, { status: true, deletedAt: null });
+        } else if (status === "inactive") {
+            Object.assign(whereCondition, { status: false, deletedAt: null });
+        } else if (status === "deleted") {
+            Object.assign(whereCondition, { deletedAt: { not: null } });
+        } else if (status === "notDeleted") {
+            Object.assign(whereCondition, { deletedAt: null });
+        } else if (status === "completedOrRto") {
+            Object.assign(whereCondition, {
+                deletedAt: null,
+                OR: [{ complete: true }, { rtoDelivered: true }],
+            });
+        }
+
+        // Date filter + dropshipperId filter
+        const andConditions = [];
+
+        if (
+            fromDate &&
+            toDate &&
+            !isNaN(Date.parse(fromDate)) &&
+            !isNaN(Date.parse(toDate))
+        ) {
+            andConditions.push({
+                completeDate: {
+                    gte: new Date(fromDate),
+                    lte: new Date(toDate),
+                },
+            });
+        }
+
+        andConditions.push({
+            items: {
+                some: {
+                    product: {
+                        dropshipperId
+                    },
+                },
+            },
+        });
+
+        if (andConditions.length > 0) {
+            Object.assign(whereCondition, {
+                AND: andConditions,
+            });
+        }
+
+        const orders = await prisma.order.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                        variant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true,
+            },
+        });
+
+        return { status: true, orders: serializeBigInt(orders) };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return { status: false, message: "Error fetching orders" };
+    }
+};
+
+export const getOrdersByStatusForSupplierReporting = async (
+    status: "active" | "inactive" | "deleted" | "notDeleted" | "completedOrRto",
+    supplierId: number,
+    fromDate: string,
+    toDate: string
+) => {
+    try {
+        const whereCondition = {};
+
+        // Apply base conditions
+        if (status === "active") {
+            Object.assign(whereCondition, { status: true, deletedAt: null });
+        } else if (status === "inactive") {
+            Object.assign(whereCondition, { status: false, deletedAt: null });
+        } else if (status === "deleted") {
+            Object.assign(whereCondition, { deletedAt: { not: null } });
+        } else if (status === "notDeleted") {
+            Object.assign(whereCondition, { deletedAt: null });
+        } else if (status === "completedOrRto") {
+            Object.assign(whereCondition, {
+                deletedAt: null,
+                OR: [{ complete: true }, { rtoDelivered: true }],
+            });
+        }
+
+        // Date filter + supplierId filter
+        const andConditions = [];
+
+        if (
+            fromDate &&
+            toDate &&
+            !isNaN(Date.parse(fromDate)) &&
+            !isNaN(Date.parse(toDate))
+        ) {
+            andConditions.push({
+                completeDate: {
+                    gte: new Date(fromDate),
+                    lte: new Date(toDate),
+                },
+            });
+        }
+
+        andConditions.push({
+            items: {
+                some: {
+                    product: {
+                        supplierId
+                    },
+                },
+            },
+        });
+
+        if (andConditions.length > 0) {
+            Object.assign(whereCondition, {
+                AND: andConditions,
+            });
+        }
+
+        const orders = await prisma.order.findMany({
+            where: whereCondition,
+            orderBy: { id: "desc" },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                        variant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true,
+            },
+        });
+
+        return { status: true, orders: serializeBigInt(orders) };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
         return { status: false, message: "Error fetching orders" };
     }
 };

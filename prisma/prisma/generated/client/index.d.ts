@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model appConfig
+ * 
+ */
+export type appConfig = $Result.DefaultSelection<Prisma.$appConfigPayload>
+/**
  * Model emailConfig
  * 
  */
@@ -186,8 +191,8 @@ export type supplierOrderPermission = $Result.DefaultSelection<Prisma.$supplierO
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more EmailConfigs
- * const emailConfigs = await prisma.emailConfig.findMany()
+ * // Fetch zero or more AppConfigs
+ * const appConfigs = await prisma.appConfig.findMany()
  * ```
  *
  *
@@ -207,8 +212,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more EmailConfigs
-   * const emailConfigs = await prisma.emailConfig.findMany()
+   * // Fetch zero or more AppConfigs
+   * const appConfigs = await prisma.appConfig.findMany()
    * ```
    *
    *
@@ -305,6 +310,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.appConfig`: Exposes CRUD operations for the **appConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AppConfigs
+    * const appConfigs = await prisma.appConfig.findMany()
+    * ```
+    */
+  get appConfig(): Prisma.appConfigDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.emailConfig`: Exposes CRUD operations for the **emailConfig** model.
     * Example usage:
     * ```ts
@@ -691,8 +706,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -1073,6 +1088,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    appConfig: 'appConfig',
     emailConfig: 'emailConfig',
     admin: 'admin',
     shopifyStore: 'shopifyStore',
@@ -1124,10 +1140,76 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory" | "supplierOrderPermission"
+      modelProps: "appConfig" | "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "permission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory" | "supplierOrderPermission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      appConfig: {
+        payload: Prisma.$appConfigPayload<ExtArgs>
+        fields: Prisma.appConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.appConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.appConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.appConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.appConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          findMany: {
+            args: Prisma.appConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>[]
+          }
+          create: {
+            args: Prisma.appConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          createMany: {
+            args: Prisma.appConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.appConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          update: {
+            args: Prisma.appConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.appConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.appConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.appConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$appConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.AppConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAppConfig>
+          }
+          groupBy: {
+            args: Prisma.appConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AppConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.appConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<AppConfigCountAggregateOutputType> | number
+          }
+        }
+      }
       emailConfig: {
         payload: Prisma.$emailConfigPayload<ExtArgs>
         fields: Prisma.emailConfigFieldRefs
@@ -3390,6 +3472,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    appConfig?: appConfigOmit
     emailConfig?: emailConfigOmit
     admin?: adminOmit
     shopifyStore?: shopifyStoreOmit
@@ -4336,6 +4419,904 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model appConfig
+   */
+
+  export type AggregateAppConfig = {
+    _count: AppConfigCountAggregateOutputType | null
+    _avg: AppConfigAvgAggregateOutputType | null
+    _sum: AppConfigSumAggregateOutputType | null
+    _min: AppConfigMinAggregateOutputType | null
+    _max: AppConfigMaxAggregateOutputType | null
+  }
+
+  export type AppConfigAvgAggregateOutputType = {
+    id: number | null
+    shippingCost: number | null
+  }
+
+  export type AppConfigSumAggregateOutputType = {
+    id: bigint | null
+    shippingCost: bigint | null
+  }
+
+  export type AppConfigMinAggregateOutputType = {
+    id: bigint | null
+    shippingCost: bigint | null
+    status: boolean | null
+  }
+
+  export type AppConfigMaxAggregateOutputType = {
+    id: bigint | null
+    shippingCost: bigint | null
+    status: boolean | null
+  }
+
+  export type AppConfigCountAggregateOutputType = {
+    id: number
+    shippingCost: number
+    status: number
+    _all: number
+  }
+
+
+  export type AppConfigAvgAggregateInputType = {
+    id?: true
+    shippingCost?: true
+  }
+
+  export type AppConfigSumAggregateInputType = {
+    id?: true
+    shippingCost?: true
+  }
+
+  export type AppConfigMinAggregateInputType = {
+    id?: true
+    shippingCost?: true
+    status?: true
+  }
+
+  export type AppConfigMaxAggregateInputType = {
+    id?: true
+    shippingCost?: true
+    status?: true
+  }
+
+  export type AppConfigCountAggregateInputType = {
+    id?: true
+    shippingCost?: true
+    status?: true
+    _all?: true
+  }
+
+  export type AppConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which appConfig to aggregate.
+     */
+    where?: appConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of appConfigs to fetch.
+     */
+    orderBy?: appConfigOrderByWithRelationInput | appConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: appConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` appConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` appConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned appConfigs
+    **/
+    _count?: true | AppConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AppConfigAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AppConfigSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AppConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AppConfigMaxAggregateInputType
+  }
+
+  export type GetAppConfigAggregateType<T extends AppConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateAppConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAppConfig[P]>
+      : GetScalarType<T[P], AggregateAppConfig[P]>
+  }
+
+
+
+
+  export type appConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: appConfigWhereInput
+    orderBy?: appConfigOrderByWithAggregationInput | appConfigOrderByWithAggregationInput[]
+    by: AppConfigScalarFieldEnum[] | AppConfigScalarFieldEnum
+    having?: appConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AppConfigCountAggregateInputType | true
+    _avg?: AppConfigAvgAggregateInputType
+    _sum?: AppConfigSumAggregateInputType
+    _min?: AppConfigMinAggregateInputType
+    _max?: AppConfigMaxAggregateInputType
+  }
+
+  export type AppConfigGroupByOutputType = {
+    id: bigint
+    shippingCost: bigint
+    status: boolean
+    _count: AppConfigCountAggregateOutputType | null
+    _avg: AppConfigAvgAggregateOutputType | null
+    _sum: AppConfigSumAggregateOutputType | null
+    _min: AppConfigMinAggregateOutputType | null
+    _max: AppConfigMaxAggregateOutputType | null
+  }
+
+  type GetAppConfigGroupByPayload<T extends appConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AppConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AppConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AppConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], AppConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type appConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shippingCost?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["appConfig"]>
+
+
+
+  export type appConfigSelectScalar = {
+    id?: boolean
+    shippingCost?: boolean
+    status?: boolean
+  }
+
+  export type appConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shippingCost" | "status", ExtArgs["result"]["appConfig"]>
+
+  export type $appConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "appConfig"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      shippingCost: bigint
+      status: boolean
+    }, ExtArgs["result"]["appConfig"]>
+    composites: {}
+  }
+
+  type appConfigGetPayload<S extends boolean | null | undefined | appConfigDefaultArgs> = $Result.GetResult<Prisma.$appConfigPayload, S>
+
+  type appConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<appConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AppConfigCountAggregateInputType | true
+    }
+
+  export interface appConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['appConfig'], meta: { name: 'appConfig' } }
+    /**
+     * Find zero or one AppConfig that matches the filter.
+     * @param {appConfigFindUniqueArgs} args - Arguments to find a AppConfig
+     * @example
+     * // Get one AppConfig
+     * const appConfig = await prisma.appConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends appConfigFindUniqueArgs>(args: SelectSubset<T, appConfigFindUniqueArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AppConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {appConfigFindUniqueOrThrowArgs} args - Arguments to find a AppConfig
+     * @example
+     * // Get one AppConfig
+     * const appConfig = await prisma.appConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends appConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, appConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigFindFirstArgs} args - Arguments to find a AppConfig
+     * @example
+     * // Get one AppConfig
+     * const appConfig = await prisma.appConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends appConfigFindFirstArgs>(args?: SelectSubset<T, appConfigFindFirstArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigFindFirstOrThrowArgs} args - Arguments to find a AppConfig
+     * @example
+     * // Get one AppConfig
+     * const appConfig = await prisma.appConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends appConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, appConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AppConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AppConfigs
+     * const appConfigs = await prisma.appConfig.findMany()
+     * 
+     * // Get first 10 AppConfigs
+     * const appConfigs = await prisma.appConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const appConfigWithIdOnly = await prisma.appConfig.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends appConfigFindManyArgs>(args?: SelectSubset<T, appConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AppConfig.
+     * @param {appConfigCreateArgs} args - Arguments to create a AppConfig.
+     * @example
+     * // Create one AppConfig
+     * const AppConfig = await prisma.appConfig.create({
+     *   data: {
+     *     // ... data to create a AppConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends appConfigCreateArgs>(args: SelectSubset<T, appConfigCreateArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AppConfigs.
+     * @param {appConfigCreateManyArgs} args - Arguments to create many AppConfigs.
+     * @example
+     * // Create many AppConfigs
+     * const appConfig = await prisma.appConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends appConfigCreateManyArgs>(args?: SelectSubset<T, appConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a AppConfig.
+     * @param {appConfigDeleteArgs} args - Arguments to delete one AppConfig.
+     * @example
+     * // Delete one AppConfig
+     * const AppConfig = await prisma.appConfig.delete({
+     *   where: {
+     *     // ... filter to delete one AppConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends appConfigDeleteArgs>(args: SelectSubset<T, appConfigDeleteArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AppConfig.
+     * @param {appConfigUpdateArgs} args - Arguments to update one AppConfig.
+     * @example
+     * // Update one AppConfig
+     * const appConfig = await prisma.appConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends appConfigUpdateArgs>(args: SelectSubset<T, appConfigUpdateArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AppConfigs.
+     * @param {appConfigDeleteManyArgs} args - Arguments to filter AppConfigs to delete.
+     * @example
+     * // Delete a few AppConfigs
+     * const { count } = await prisma.appConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends appConfigDeleteManyArgs>(args?: SelectSubset<T, appConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AppConfigs
+     * const appConfig = await prisma.appConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends appConfigUpdateManyArgs>(args: SelectSubset<T, appConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AppConfig.
+     * @param {appConfigUpsertArgs} args - Arguments to update or create a AppConfig.
+     * @example
+     * // Update or create a AppConfig
+     * const appConfig = await prisma.appConfig.upsert({
+     *   create: {
+     *     // ... data to create a AppConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AppConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends appConfigUpsertArgs>(args: SelectSubset<T, appConfigUpsertArgs<ExtArgs>>): Prisma__appConfigClient<$Result.GetResult<Prisma.$appConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AppConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigCountArgs} args - Arguments to filter AppConfigs to count.
+     * @example
+     * // Count the number of AppConfigs
+     * const count = await prisma.appConfig.count({
+     *   where: {
+     *     // ... the filter for the AppConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends appConfigCountArgs>(
+      args?: Subset<T, appConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AppConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AppConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AppConfigAggregateArgs>(args: Subset<T, AppConfigAggregateArgs>): Prisma.PrismaPromise<GetAppConfigAggregateType<T>>
+
+    /**
+     * Group by AppConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {appConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends appConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: appConfigGroupByArgs['orderBy'] }
+        : { orderBy?: appConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, appConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAppConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the appConfig model
+   */
+  readonly fields: appConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for appConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__appConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the appConfig model
+   */
+  interface appConfigFieldRefs {
+    readonly id: FieldRef<"appConfig", 'BigInt'>
+    readonly shippingCost: FieldRef<"appConfig", 'BigInt'>
+    readonly status: FieldRef<"appConfig", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * appConfig findUnique
+   */
+  export type appConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which appConfig to fetch.
+     */
+    where: appConfigWhereUniqueInput
+  }
+
+  /**
+   * appConfig findUniqueOrThrow
+   */
+  export type appConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which appConfig to fetch.
+     */
+    where: appConfigWhereUniqueInput
+  }
+
+  /**
+   * appConfig findFirst
+   */
+  export type appConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which appConfig to fetch.
+     */
+    where?: appConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of appConfigs to fetch.
+     */
+    orderBy?: appConfigOrderByWithRelationInput | appConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for appConfigs.
+     */
+    cursor?: appConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` appConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` appConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of appConfigs.
+     */
+    distinct?: AppConfigScalarFieldEnum | AppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * appConfig findFirstOrThrow
+   */
+  export type appConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which appConfig to fetch.
+     */
+    where?: appConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of appConfigs to fetch.
+     */
+    orderBy?: appConfigOrderByWithRelationInput | appConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for appConfigs.
+     */
+    cursor?: appConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` appConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` appConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of appConfigs.
+     */
+    distinct?: AppConfigScalarFieldEnum | AppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * appConfig findMany
+   */
+  export type appConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter, which appConfigs to fetch.
+     */
+    where?: appConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of appConfigs to fetch.
+     */
+    orderBy?: appConfigOrderByWithRelationInput | appConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing appConfigs.
+     */
+    cursor?: appConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` appConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` appConfigs.
+     */
+    skip?: number
+    distinct?: AppConfigScalarFieldEnum | AppConfigScalarFieldEnum[]
+  }
+
+  /**
+   * appConfig create
+   */
+  export type appConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * The data needed to create a appConfig.
+     */
+    data: XOR<appConfigCreateInput, appConfigUncheckedCreateInput>
+  }
+
+  /**
+   * appConfig createMany
+   */
+  export type appConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many appConfigs.
+     */
+    data: appConfigCreateManyInput | appConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * appConfig update
+   */
+  export type appConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * The data needed to update a appConfig.
+     */
+    data: XOR<appConfigUpdateInput, appConfigUncheckedUpdateInput>
+    /**
+     * Choose, which appConfig to update.
+     */
+    where: appConfigWhereUniqueInput
+  }
+
+  /**
+   * appConfig updateMany
+   */
+  export type appConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update appConfigs.
+     */
+    data: XOR<appConfigUpdateManyMutationInput, appConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which appConfigs to update
+     */
+    where?: appConfigWhereInput
+    /**
+     * Limit how many appConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * appConfig upsert
+   */
+  export type appConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * The filter to search for the appConfig to update in case it exists.
+     */
+    where: appConfigWhereUniqueInput
+    /**
+     * In case the appConfig found by the `where` argument doesn't exist, create a new appConfig with this data.
+     */
+    create: XOR<appConfigCreateInput, appConfigUncheckedCreateInput>
+    /**
+     * In case the appConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<appConfigUpdateInput, appConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * appConfig delete
+   */
+  export type appConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+    /**
+     * Filter which appConfig to delete.
+     */
+    where: appConfigWhereUniqueInput
+  }
+
+  /**
+   * appConfig deleteMany
+   */
+  export type appConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which appConfigs to delete
+     */
+    where?: appConfigWhereInput
+    /**
+     * Limit how many appConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * appConfig without action
+   */
+  export type appConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the appConfig
+     */
+    select?: appConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the appConfig
+     */
+    omit?: appConfigOmit<ExtArgs> | null
+  }
+
 
   /**
    * Model emailConfig
@@ -39329,9 +40310,11 @@ export namespace Prisma {
     billingCountryId: bigint | null
     billingStateId: bigint | null
     billingCityId: bigint | null
+    isPostpaid: boolean | null
     paymentId: number | null
     barcodeImage: string | null
     complete: boolean | null
+    completeDate: Date | null
     rtoDelivered: boolean | null
     lastRefreshAt: Date | null
     createdAt: Date | null
@@ -39372,9 +40355,11 @@ export namespace Prisma {
     billingCountryId: bigint | null
     billingStateId: bigint | null
     billingCityId: bigint | null
+    isPostpaid: boolean | null
     paymentId: number | null
     barcodeImage: string | null
     complete: boolean | null
+    completeDate: Date | null
     rtoDelivered: boolean | null
     lastRefreshAt: Date | null
     createdAt: Date | null
@@ -39415,10 +40400,12 @@ export namespace Prisma {
     billingCountryId: number
     billingStateId: number
     billingCityId: number
+    isPostpaid: number
     paymentId: number
     shippingApiResult: number
     barcodeImage: number
     complete: number
+    completeDate: number
     rtoDelivered: number
     lastRefreshAt: number
     createdAt: number
@@ -39497,9 +40484,11 @@ export namespace Prisma {
     billingCountryId?: true
     billingStateId?: true
     billingCityId?: true
+    isPostpaid?: true
     paymentId?: true
     barcodeImage?: true
     complete?: true
+    completeDate?: true
     rtoDelivered?: true
     lastRefreshAt?: true
     createdAt?: true
@@ -39540,9 +40529,11 @@ export namespace Prisma {
     billingCountryId?: true
     billingStateId?: true
     billingCityId?: true
+    isPostpaid?: true
     paymentId?: true
     barcodeImage?: true
     complete?: true
+    completeDate?: true
     rtoDelivered?: true
     lastRefreshAt?: true
     createdAt?: true
@@ -39583,10 +40574,12 @@ export namespace Prisma {
     billingCountryId?: true
     billingStateId?: true
     billingCityId?: true
+    isPostpaid?: true
     paymentId?: true
     shippingApiResult?: true
     barcodeImage?: true
     complete?: true
+    completeDate?: true
     rtoDelivered?: true
     lastRefreshAt?: true
     createdAt?: true
@@ -39714,10 +40707,12 @@ export namespace Prisma {
     billingCountryId: bigint | null
     billingStateId: bigint | null
     billingCityId: bigint | null
+    isPostpaid: boolean
     paymentId: number | null
     shippingApiResult: JsonValue | null
     barcodeImage: string | null
     complete: boolean
+    completeDate: Date | null
     rtoDelivered: boolean
     lastRefreshAt: Date | null
     createdAt: Date
@@ -39777,10 +40772,12 @@ export namespace Prisma {
     billingCountryId?: boolean
     billingStateId?: boolean
     billingCityId?: boolean
+    isPostpaid?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
     barcodeImage?: boolean
     complete?: boolean
+    completeDate?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: boolean
     createdAt?: boolean
@@ -39833,10 +40830,12 @@ export namespace Prisma {
     billingCountryId?: boolean
     billingStateId?: boolean
     billingCityId?: boolean
+    isPostpaid?: boolean
     paymentId?: boolean
     shippingApiResult?: boolean
     barcodeImage?: boolean
     complete?: boolean
+    completeDate?: boolean
     rtoDelivered?: boolean
     lastRefreshAt?: boolean
     createdAt?: boolean
@@ -39850,7 +40849,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "paymentId" | "shippingApiResult" | "barcodeImage" | "complete" | "rtoDelivered" | "lastRefreshAt" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
+  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "isPostpaid" | "paymentId" | "shippingApiResult" | "barcodeImage" | "complete" | "completeDate" | "rtoDelivered" | "lastRefreshAt" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
   export type orderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shippingCountry?: boolean | order$shippingCountryArgs<ExtArgs>
     shippingState?: boolean | order$shippingStateArgs<ExtArgs>
@@ -39904,10 +40903,12 @@ export namespace Prisma {
       billingCountryId: bigint | null
       billingStateId: bigint | null
       billingCityId: bigint | null
+      isPostpaid: boolean
       paymentId: number | null
       shippingApiResult: Prisma.JsonValue | null
       barcodeImage: string | null
       complete: boolean
+      completeDate: Date | null
       rtoDelivered: boolean
       lastRefreshAt: Date | null
       createdAt: Date
@@ -40323,10 +41324,12 @@ export namespace Prisma {
     readonly billingCountryId: FieldRef<"order", 'BigInt'>
     readonly billingStateId: FieldRef<"order", 'BigInt'>
     readonly billingCityId: FieldRef<"order", 'BigInt'>
+    readonly isPostpaid: FieldRef<"order", 'Boolean'>
     readonly paymentId: FieldRef<"order", 'Int'>
     readonly shippingApiResult: FieldRef<"order", 'Json'>
     readonly barcodeImage: FieldRef<"order", 'String'>
     readonly complete: FieldRef<"order", 'Boolean'>
+    readonly completeDate: FieldRef<"order", 'DateTime'>
     readonly rtoDelivered: FieldRef<"order", 'Boolean'>
     readonly lastRefreshAt: FieldRef<"order", 'DateTime'>
     readonly createdAt: FieldRef<"order", 'DateTime'>
@@ -44270,6 +45273,15 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const AppConfigScalarFieldEnum: {
+    id: 'id',
+    shippingCost: 'shippingCost',
+    status: 'status'
+  };
+
+  export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
+
+
   export const EmailConfigScalarFieldEnum: {
     id: 'id',
     panel: 'panel',
@@ -45038,10 +46050,12 @@ export namespace Prisma {
     billingCountryId: 'billingCountryId',
     billingStateId: 'billingStateId',
     billingCityId: 'billingCityId',
+    isPostpaid: 'isPostpaid',
     paymentId: 'paymentId',
     shippingApiResult: 'shippingApiResult',
     barcodeImage: 'barcodeImage',
     complete: 'complete',
+    completeDate: 'completeDate',
     rtoDelivered: 'rtoDelivered',
     lastRefreshAt: 'lastRefreshAt',
     createdAt: 'createdAt',
@@ -45661,16 +46675,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'String'
+   * Reference to a field of type 'Boolean'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'String'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 
@@ -45711,6 +46725,50 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type appConfigWhereInput = {
+    AND?: appConfigWhereInput | appConfigWhereInput[]
+    OR?: appConfigWhereInput[]
+    NOT?: appConfigWhereInput | appConfigWhereInput[]
+    id?: BigIntFilter<"appConfig"> | bigint | number
+    shippingCost?: BigIntFilter<"appConfig"> | bigint | number
+    status?: BoolFilter<"appConfig"> | boolean
+  }
+
+  export type appConfigOrderByWithRelationInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+    status?: SortOrder
+  }
+
+  export type appConfigWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: appConfigWhereInput | appConfigWhereInput[]
+    OR?: appConfigWhereInput[]
+    NOT?: appConfigWhereInput | appConfigWhereInput[]
+    shippingCost?: BigIntFilter<"appConfig"> | bigint | number
+    status?: BoolFilter<"appConfig"> | boolean
+  }, "id">
+
+  export type appConfigOrderByWithAggregationInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+    status?: SortOrder
+    _count?: appConfigCountOrderByAggregateInput
+    _avg?: appConfigAvgOrderByAggregateInput
+    _max?: appConfigMaxOrderByAggregateInput
+    _min?: appConfigMinOrderByAggregateInput
+    _sum?: appConfigSumOrderByAggregateInput
+  }
+
+  export type appConfigScalarWhereWithAggregatesInput = {
+    AND?: appConfigScalarWhereWithAggregatesInput | appConfigScalarWhereWithAggregatesInput[]
+    OR?: appConfigScalarWhereWithAggregatesInput[]
+    NOT?: appConfigScalarWhereWithAggregatesInput | appConfigScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"appConfig"> | bigint | number
+    shippingCost?: BigIntWithAggregatesFilter<"appConfig"> | bigint | number
+    status?: BoolWithAggregatesFilter<"appConfig"> | boolean
+  }
 
   export type emailConfigWhereInput = {
     AND?: emailConfigWhereInput | emailConfigWhereInput[]
@@ -49765,10 +50823,12 @@ export namespace Prisma {
     billingCountryId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingStateId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
+    isPostpaid?: BoolFilter<"order"> | boolean
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
     barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
+    completeDate?: DateTimeNullableFilter<"order"> | Date | string | null
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
@@ -49818,10 +50878,12 @@ export namespace Prisma {
     billingCountryId?: SortOrderInput | SortOrder
     billingStateId?: SortOrderInput | SortOrder
     billingCityId?: SortOrderInput | SortOrder
+    isPostpaid?: SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
     barcodeImage?: SortOrderInput | SortOrder
     complete?: SortOrder
+    completeDate?: SortOrderInput | SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -49875,10 +50937,12 @@ export namespace Prisma {
     billingCountryId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingStateId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
+    isPostpaid?: BoolFilter<"order"> | boolean
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
     barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
+    completeDate?: DateTimeNullableFilter<"order"> | Date | string | null
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
@@ -49928,10 +50992,12 @@ export namespace Prisma {
     billingCountryId?: SortOrderInput | SortOrder
     billingStateId?: SortOrderInput | SortOrder
     billingCityId?: SortOrderInput | SortOrder
+    isPostpaid?: SortOrder
     paymentId?: SortOrderInput | SortOrder
     shippingApiResult?: SortOrderInput | SortOrder
     barcodeImage?: SortOrderInput | SortOrder
     complete?: SortOrder
+    completeDate?: SortOrderInput | SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -49980,10 +51046,12 @@ export namespace Prisma {
     billingCountryId?: BigIntNullableWithAggregatesFilter<"order"> | bigint | number | null
     billingStateId?: BigIntNullableWithAggregatesFilter<"order"> | bigint | number | null
     billingCityId?: BigIntNullableWithAggregatesFilter<"order"> | bigint | number | null
+    isPostpaid?: BoolWithAggregatesFilter<"order"> | boolean
     paymentId?: IntNullableWithAggregatesFilter<"order"> | number | null
     shippingApiResult?: JsonNullableWithAggregatesFilter<"order">
     barcodeImage?: StringNullableWithAggregatesFilter<"order"> | string | null
     complete?: BoolWithAggregatesFilter<"order"> | boolean
+    completeDate?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
     rtoDelivered?: BoolWithAggregatesFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"order"> | Date | string
@@ -50360,6 +51428,48 @@ export namespace Prisma {
     billingCountry?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
     billingState?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
     billingCity?: BoolWithAggregatesFilter<"supplierOrderPermission"> | boolean
+  }
+
+  export type appConfigCreateInput = {
+    id?: bigint | number
+    shippingCost: bigint | number
+    status: boolean
+  }
+
+  export type appConfigUncheckedCreateInput = {
+    id?: bigint | number
+    shippingCost: bigint | number
+    status: boolean
+  }
+
+  export type appConfigUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCost?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type appConfigUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCost?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type appConfigCreateManyInput = {
+    id?: bigint | number
+    shippingCost: bigint | number
+    status: boolean
+  }
+
+  export type appConfigUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCost?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type appConfigUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    shippingCost?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type emailConfigCreateInput = {
@@ -55074,9 +56184,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -55126,10 +56238,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -55165,9 +56279,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55217,10 +56333,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55263,10 +56381,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -55300,9 +56420,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55343,10 +56465,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55771,6 +56895,63 @@ export namespace Prisma {
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type appConfigCountOrderByAggregateInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+    status?: SortOrder
+  }
+
+  export type appConfigAvgOrderByAggregateInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+  }
+
+  export type appConfigMaxOrderByAggregateInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+    status?: SortOrder
+  }
+
+  export type appConfigMinOrderByAggregateInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+    status?: SortOrder
+  }
+
+  export type appConfigSumOrderByAggregateInput = {
+    id?: SortOrder
+    shippingCost?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -55799,11 +56980,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -55933,22 +57109,6 @@ export namespace Prisma {
     updatedBy?: SortOrder
   }
 
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -55983,14 +57143,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -59079,10 +60231,12 @@ export namespace Prisma {
     billingCountryId?: SortOrder
     billingStateId?: SortOrder
     billingCityId?: SortOrder
+    isPostpaid?: SortOrder
     paymentId?: SortOrder
     shippingApiResult?: SortOrder
     barcodeImage?: SortOrder
     complete?: SortOrder
+    completeDate?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
     createdAt?: SortOrder
@@ -59141,9 +60295,11 @@ export namespace Prisma {
     billingCountryId?: SortOrder
     billingStateId?: SortOrder
     billingCityId?: SortOrder
+    isPostpaid?: SortOrder
     paymentId?: SortOrder
     barcodeImage?: SortOrder
     complete?: SortOrder
+    completeDate?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
     createdAt?: SortOrder
@@ -59184,9 +60340,11 @@ export namespace Prisma {
     billingCountryId?: SortOrder
     billingStateId?: SortOrder
     billingCityId?: SortOrder
+    isPostpaid?: SortOrder
     paymentId?: SortOrder
     barcodeImage?: SortOrder
     complete?: SortOrder
+    completeDate?: SortOrder
     rtoDelivered?: SortOrder
     lastRefreshAt?: SortOrder
     createdAt?: SortOrder
@@ -59495,16 +60653,16 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -63040,6 +64198,57 @@ export namespace Prisma {
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -63070,22 +64279,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -63106,33 +64299,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -63169,14 +64335,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -67426,9 +68584,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -67476,10 +68636,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -67525,9 +68687,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -67575,10 +68739,12 @@ export namespace Prisma {
     billingZip: string
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -68030,10 +69196,12 @@ export namespace Prisma {
     billingCountryId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingStateId?: BigIntNullableFilter<"order"> | bigint | number | null
     billingCityId?: BigIntNullableFilter<"order"> | bigint | number | null
+    isPostpaid?: BoolFilter<"order"> | boolean
     paymentId?: IntNullableFilter<"order"> | number | null
     shippingApiResult?: JsonNullableFilter<"order">
     barcodeImage?: StringNullableFilter<"order"> | string | null
     complete?: BoolFilter<"order"> | boolean
+    completeDate?: DateTimeNullableFilter<"order"> | Date | string | null
     rtoDelivered?: BoolFilter<"order"> | boolean
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
     createdAt?: DateTimeFilter<"order"> | Date | string
@@ -68527,9 +69695,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -68577,10 +69747,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -68626,9 +69798,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -68676,10 +69850,12 @@ export namespace Prisma {
     billingZip: string
     billingCountryId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -69393,9 +70569,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -69443,10 +70621,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -69492,9 +70672,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -69542,10 +70724,12 @@ export namespace Prisma {
     billingZip: string
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -75539,9 +76723,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -75590,9 +76776,11 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -76560,9 +77748,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -76611,10 +77801,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -76801,9 +77993,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -76852,10 +78046,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77140,9 +78336,11 @@ export namespace Prisma {
     billingEmail: string
     billingAddress: string
     billingZip: string
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -77191,10 +78389,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -77465,9 +78665,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77516,10 +78718,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -78692,10 +79896,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -78735,10 +79941,12 @@ export namespace Prisma {
     billingZip: string
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -79542,9 +80750,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79592,10 +80802,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79637,10 +80849,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79674,9 +80888,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79724,10 +80940,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79769,10 +80987,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80035,10 +81255,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -80078,10 +81300,12 @@ export namespace Prisma {
     billingZip: string
     billingCountryId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -80541,9 +81765,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80591,10 +81817,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80636,10 +81864,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80673,9 +81903,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80723,10 +81955,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80768,10 +82002,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81019,10 +82255,12 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -81062,10 +82300,12 @@ export namespace Prisma {
     billingZip: string
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
+    isPostpaid?: boolean
     paymentId?: number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -81466,9 +82706,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81516,10 +82758,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81561,10 +82805,12 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81598,9 +82844,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81648,10 +82896,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81693,10 +82943,12 @@ export namespace Prisma {
     billingZip?: StringFieldUpdateOperationsInput | string
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     paymentId?: NullableIntFieldUpdateOperationsInput | number | null
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83424,9 +84676,11 @@ export namespace Prisma {
     billingCountryId?: bigint | number | null
     billingStateId?: bigint | number | null
     billingCityId?: bigint | number | null
+    isPostpaid?: boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: string | null
     complete?: boolean
+    completeDate?: Date | string | null
     rtoDelivered?: boolean
     lastRefreshAt?: Date | string | null
     createdAt?: Date | string
@@ -83460,9 +84714,11 @@ export namespace Prisma {
     billingEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: StringFieldUpdateOperationsInput | string
     billingZip?: StringFieldUpdateOperationsInput | string
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83511,9 +84767,11 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83556,9 +84814,11 @@ export namespace Prisma {
     billingCountryId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingStateId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     billingCityId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    isPostpaid?: BoolFieldUpdateOperationsInput | boolean
     shippingApiResult?: NullableJsonNullValueInput | InputJsonValue
     barcodeImage?: NullableStringFieldUpdateOperationsInput | string | null
     complete?: BoolFieldUpdateOperationsInput | boolean
+    completeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

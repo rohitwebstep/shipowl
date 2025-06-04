@@ -1,0 +1,3 @@
+{
+  "/api/admin/supplier/[supplierId]/payment-report/route": "app/api/admin/supplier/[supplierId]/payment-report/route.js"
+}
