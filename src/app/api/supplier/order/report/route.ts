@@ -132,7 +132,7 @@ export async function GET(req: NextRequest) {
             }
         }
 
-        return NextResponse.json({ status: true, reportAnalytics }, { status: 200 });
+        return NextResponse.json({ status: true, reportAnalytics, orders }, { status: 200 });
 
     } catch (error) {
         logMessage('error', 'Internal error occurred', { error });

@@ -209,7 +209,7 @@ export async function GET(req: NextRequest) {
         console.log('ShipOwl Analytics:', reportAnalytics.shipowl);
 
         return NextResponse.json(
-            { status: true, reportAnalytics },
+            { status: true, reportAnalytics, orders },
             { status: 200 }
         );
 
