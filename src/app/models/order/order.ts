@@ -649,6 +649,7 @@ export const getOrdersByStatusForDropshipperReporting = async (
                                 supplierProductVariant: {
                                     include: {
                                         variant: true,
+                                        product: true,
                                     },
                                 },
                             },
@@ -763,7 +764,8 @@ export const getOrdersByStatusForSupplierReporting = async (
                             include: {
                                 supplierProductVariant: {
                                     include: {
-                                        variant: true
+                                        variant: true,
+                                        product: true,
                                     }
                                 }
                             }
