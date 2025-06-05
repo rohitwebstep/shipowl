@@ -624,7 +624,7 @@ export const getOrdersByStatusForDropshipperReporting = async (
         andConditions.push({
             items: {
                 some: {
-                    product: {
+                    dropshipperProduct: {
                         dropshipperId
                     },
                 },
@@ -741,7 +741,7 @@ export const getOrdersByStatusForSupplierReporting = async (
         andConditions.push({
             items: {
                 some: {
-                    product: {
+                    dropshipperProduct: {
                         supplierId: supplierId
                     }
                 }

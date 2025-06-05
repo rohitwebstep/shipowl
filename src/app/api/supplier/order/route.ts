@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
         const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
         const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
 
-        const ordersResult = await getOrdersByStatusForSupplierReporting('RTO', supplierId, fromDate, toDate);
+        const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
         const orders = ordersResult.orders;
 
         console.log(`ordersResult - `, ordersResult);

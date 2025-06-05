@@ -4,24 +4,34 @@ import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByStatusForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
+import { getSupplierById } from '@/app/models/supplier/supplier';
 
 export async function GET(req: NextRequest) {
     try {
-        const supplierIdHeader = req.headers.get('x-supplier-id');
-        const supplierRole = req.headers.get('x-supplier-role');
+        const adminIdHeader = req.headers.get('x-admin-id');
+        const adminRole = req.headers.get('x-admin-role');
 
-        logMessage('info', 'Supplier headers received', { supplierIdHeader, supplierRole });
+        logMessage('info', 'Admin headers received', { adminIdHeader, adminRole });
 
-        const supplierId = Number(supplierIdHeader);
-        if (!supplierIdHeader || isNaN(supplierId)) {
-            logMessage('warn', 'Invalid supplier ID', { supplierIdHeader });
-            return NextResponse.json({ status: false, error: 'Invalid or missing supplier ID' }, { status: 400 });
+        const adminId = Number(adminIdHeader);
+        if (!adminIdHeader || isNaN(adminId)) {
+            logMessage('warn', 'Invalid admin ID', { adminIdHeader });
+            return NextResponse.json({ status: false, error: 'Invalid or missing admin ID' }, { status: 400 });
         }
 
-        const userCheck = await isUserExist(supplierId, String(supplierRole));
+        const userCheck = await isUserExist(adminId, String(adminRole));
         if (!userCheck.status) {
-            logMessage('warn', 'User not found', { supplierId, supplierRole });
+            logMessage('warn', 'User not found', { adminId, adminRole });
             return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+        }
+
+        const parts = req.nextUrl.pathname.split('/');
+        const supplierId = Number(parts[parts.length - 2]); // Get the second-to-last segment
+
+        const supplierResult = await getSupplierById(supplierId);
+        if (!supplierResult?.status) {
+            logMessage('warn', 'Supplier not found', { supplierId });
+            return NextResponse.json({ status: false, message: 'Supplier not found' }, { status: 404 });
         }
 
         const searchParams = req.nextUrl.searchParams;
@@ -63,6 +73,7 @@ export async function GET(req: NextRequest) {
         const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
         const orders = ordersResult.orders;
 
+        console.log(`ordersResult - `, ordersResult);
         if (!ordersResult?.status || !orders?.length) {
             return NextResponse.json({ status: false, error: 'No orders found' }, { status: 404 });
         }
@@ -132,6 +143,7 @@ export async function GET(req: NextRequest) {
             }
         }
 
+        console.log(`rtoDeliveredDate - `, orders[0].rtoDeliveredDate);
         return NextResponse.json({ status: true, reportAnalytics, orders }, { status: 200 });
 
     } catch (error) {
