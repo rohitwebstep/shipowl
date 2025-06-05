@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
 
 interface Item {
-    dropshipperProductId: number;
-    dropshipperProductVariantId: number;
-    quantity: number;
-    price: number;
-    total: number;
-    orderId: number;
+  dropshipperProductId: number;
+  dropshipperProductVariantId: number;
+  quantity: number;
+  price: number;
+  total: number;
+  orderId: number;
 }
 
 interface UpdateRTOInfoInput {
@@ -19,39 +19,45 @@ interface UpdateRTOInfoInput {
   };
 }
 
-export async function createOrderItem(items: Item[]) {
-    try {
-        const newOrderItems = await prisma.orderItem.createMany({
-            data: items,
-            skipDuplicates: true,
-        });
+interface UpdateData {
+  supplierRTOResponse: string;
+  packingGallery: string | null;
+  unboxingGallery: string | null;
+}
 
-        return { status: true, orderItems: newOrderItems };
-    } catch (error) {
-        console.error(`Error creating order items:`, error);
-        return { status: false, message: "Internal Server Error" };
-    }
+export async function createOrderItem(items: Item[]) {
+  try {
+    const newOrderItems = await prisma.orderItem.createMany({
+      data: items,
+      skipDuplicates: true,
+    });
+
+    return { status: true, orderItems: newOrderItems };
+  } catch (error) {
+    console.error(`Error creating order items:`, error);
+    return { status: false, message: "Internal Server Error" };
+  }
 }
 
 export async function getOrderItem(orderId: number, orderItemId: number) {
-    try {
-        const orderItem = await prisma.orderItem.findUnique({
-            where: { id: orderItemId },
-        });
+  try {
+    const orderItem = await prisma.orderItem.findUnique({
+      where: { id: orderItemId },
+    });
 
-        if (!orderItem) {
-            return { status: false, message: "Order item not found" };
-        }
-
-        if (orderItem.orderId !== orderId) {
-            return { status: false, message: "Order ID does not match with the order item" };
-        }
-
-        return { status: true, message: "Order item found", orderItem };
-    } catch (error) {
-        console.error("Error fetching order item:", error);
-        return { status: false, message: "Internal Server Error" };
+    if (!orderItem) {
+      return { status: false, message: "Order item not found" };
     }
+
+    if (orderItem.orderId !== orderId) {
+      return { status: false, message: "Order ID does not match with the order item" };
+    }
+
+    return { status: true, message: "Order item found", orderItem };
+  } catch (error) {
+    console.error("Error fetching order item:", error);
+    return { status: false, message: "Internal Server Error" };
+  }
 }
 
 export async function updateOrderItemRTOInfo({
@@ -96,8 +102,10 @@ export async function updateOrderItemRTOInfo({
     }
 
     // Prepare update data
-    const updateData: any = {
+    const updateData: UpdateData = {
       supplierRTOResponse: status,
+      packingGallery: null,
+      unboxingGallery: null,
     };
 
     if (status.toLowerCase() === 'wrong item received') {

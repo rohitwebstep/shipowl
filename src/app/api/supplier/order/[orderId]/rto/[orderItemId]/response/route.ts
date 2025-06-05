@@ -7,6 +7,10 @@ import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { getOrderById } from '@/app/models/order/order';
 import { getOrderItem, updateOrderItemRTOInfo } from '@/app/models/order/item';
 
+interface UploadedFile {
+    url: string;
+}
+
 export async function POST(req: NextRequest) {
     try {
         // Extract and validate supplier ID and role headers
@@ -134,8 +138,8 @@ export async function POST(req: NextRequest) {
             }
 
             uploadedMedia = {
-                packingGallery: packingFiles.map((file: any) => file.url).join(','),
-                unboxingGallery: unboxingFiles.map((file: any) => file.url).join(','),
+                packingGallery: packingFiles.map((file: UploadedFile) => file.url).join(','),
+                unboxingGallery: unboxingFiles.map((file: UploadedFile) => file.url).join(','),
             };
 
             logMessage('info', 'Packing and unboxing media URLs recorded successfully.');
