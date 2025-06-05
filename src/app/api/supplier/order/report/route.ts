@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
         const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
         const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
 
-        const ordersResult = await getOrdersByStatusForSupplierReporting('completedOrRto', supplierId, fromDate, toDate);
+        const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
         const orders = ordersResult.orders;
 
         if (!ordersResult?.status || !orders?.length) {
@@ -106,7 +106,7 @@ export async function GET(req: NextRequest) {
 
             for (const item of orderItems) {
                 const quantity = Number(item.quantity) || 0;
-                const variant = item.variant?.supplierProductVariant;
+                const variant = item.dropshipperVariant?.supplierProductVariant;
 
                 if (!variant) continue;
 
