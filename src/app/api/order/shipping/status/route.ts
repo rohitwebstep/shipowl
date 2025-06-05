@@ -84,14 +84,14 @@ export async function GET(req: NextRequest) {
                 }
 
                 const selfShipItems = order.items.filter(
-                    item => item?.variant?.supplierProductVariant?.variant?.modal === 'selfship'
+                    item => item?.dropshipperVariant?.supplierProductVariant?.variant?.modal === 'selfship'
                 );
 
                 if (selfShipItems.length) {
                     logMessage('debug', '📦 SelfShip Items Found', { orderId, count: selfShipItems.length });
 
                     for (const item of selfShipItems) {
-                        const dropshipperId = item.product?.dropshipperId;
+                        const dropshipperId = item.dropshipperProduct?.dropshipperId;
                         const dropshipperProductId = item.dropshipperProductId;
                         const dropshipperProductVariantId = item.dropshipperProductVariantId;
 
