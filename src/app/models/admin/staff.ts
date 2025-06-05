@@ -37,23 +37,26 @@ interface AdminStaff {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-    // If it's an array, recursively apply serializeBigInt to each element
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt) as T;
-    }
-    // If it's an object, recursively apply serializeBigInt to each key-value pair
-    else if (obj && typeof obj === 'object') {
-        return Object.fromEntries(
-            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-        ) as T;
-    }
-    // If it's a BigInt, convert it to a string
-    else if (typeof obj === 'bigint') {
-        return obj.toString() as T;
-    }
+  if (typeof obj === "bigint") {
+    return obj.toString() as unknown as T;
+  }
 
-    // Return the value unchanged if it's not an array, object, or BigInt
+  if (obj instanceof Date) {
+    // Return Date object unchanged, no conversion
     return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(serializeBigInt) as unknown as T;
+  }
+
+  if (obj && typeof obj === "object") {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+    ) as T;
+  }
+
+  return obj;
 };
 
 export async function checkEmailAvailability(email: string) {

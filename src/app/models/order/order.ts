@@ -80,23 +80,26 @@ interface RTOInventory {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-    // If it's an array, recursively apply serializeBigInt to each element
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt) as T;
-    }
-    // If it's an object, recursively apply serializeBigInt to each key-value pair
-    else if (obj && typeof obj === 'object') {
-        return Object.fromEntries(
-            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-        ) as T;
-    }
-    // If it's a BigInt, convert it to a string
-    else if (typeof obj === 'bigint') {
-        return obj.toString() as T;
-    }
+  if (typeof obj === "bigint") {
+    return obj.toString() as unknown as T;
+  }
 
-    // Return the value unchanged if it's not an array, object, or BigInt
+  if (obj instanceof Date) {
+    // Return Date object unchanged, no conversion
     return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(serializeBigInt) as unknown as T;
+  }
+
+  if (obj && typeof obj === "object") {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+    ) as T;
+  }
+
+  return obj;
 };
 
 export async function generateOrderNumber(base: string = '') {
@@ -385,19 +388,64 @@ export const refreshShippingApiResultOfOrder = async (
     }
 };
 
-export const updateRTIDeliveredStatusOfOrder = async (
+export const updateRTODeliveredStatusOfOrder = async (
     orderId: number,
     status: boolean
 ) => {
     try {
-        const order = await prisma.order.update({
-            where: { id: orderId }, // Assuming 'id' is the correct primary key field
+        const order = await prisma.order.findUnique({
+            where: { id: orderId },
+        });
+
+        if (!order) {
+            return { status: false, message: "Order not found" };
+        }
+
+        if (order.rtoDelivered && order.rtoDeliveredDate) {
+            return { status: false, message: "rtoDeliveredDate already set" };
+        }
+
+        const updatedOrder = await prisma.order.update({
+            where: { id: orderId },
             data: {
                 rtoDelivered: status,
+                rtoDeliveredDate: new Date(),
             },
         });
 
-        return { status: true, order: serializeBigInt(order) };
+        return { status: true, order: serializeBigInt(updatedOrder) };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return { status: false, message: "Error updating order" };
+    }
+};
+
+export const updateDeliveredStatusOfOrder = async (
+    orderId: number,
+    status: boolean
+) => {
+    try {
+        const order = await prisma.order.findUnique({
+            where: { id: orderId },
+        });
+
+        if (!order) {
+            return { status: false, message: "Order not found" };
+        }
+
+        if (order.delivered && order.deliveredDate) {
+            return { status: false, message: "deliveredDate already set" };
+        }
+
+        const updatedOrder = await prisma.order.update({
+            where: { id: orderId },
+            data: {
+                delivered: status,
+                deliveredDate: new Date(),
+            },
+        });
+
+        return { status: true, order: serializeBigInt(updatedOrder) };
     } catch (error) {
         console.error("❌ updateOrder Error:", error);
         return { status: false, message: "Error updating order" };
@@ -479,8 +527,8 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
             include: {
                 items: {
                     include: {
-                        product: true,
-                        variant: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
                             include: {
                                 supplierProductVariant: {
                                     include: {
@@ -509,45 +557,68 @@ export const getOrdersByStatus = async (status: "active" | "inactive" | "deleted
 };
 
 export const getOrdersByStatusForDropshipperReporting = async (
-    status: "active" | "inactive" | "deleted" | "notDeleted" | "completedOrRto",
+    status: "active" | "inactive" | "deleted" | "notDeleted" | "deliveredOrRto" | "delivered" | "RTO",
     dropshipperId: number,
     fromDate: string,
     toDate: string
 ) => {
     try {
-        const whereCondition = {};
+        const baseWhere: Record<string, unknown> = {};
 
-        // Apply base conditions
-        if (status === "active") {
-            Object.assign(whereCondition, { status: true, deletedAt: null });
-        } else if (status === "inactive") {
-            Object.assign(whereCondition, { status: false, deletedAt: null });
-        } else if (status === "deleted") {
-            Object.assign(whereCondition, { deletedAt: { not: null } });
-        } else if (status === "notDeleted") {
-            Object.assign(whereCondition, { deletedAt: null });
-        } else if (status === "completedOrRto") {
-            Object.assign(whereCondition, {
-                deletedAt: null,
-                OR: [{ complete: true }, { rtoDelivered: true }],
-            });
+        // Base status logic
+        switch (status) {
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = { not: null };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [{ delivered: true }, { rtoDelivered: true }];
+                break;
         }
 
-        // Date filter + dropshipperId filter
-        const andConditions = [];
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
 
-        if (
-            fromDate &&
-            toDate &&
-            !isNaN(Date.parse(fromDate)) &&
-            !isNaN(Date.parse(toDate))
-        ) {
-            andConditions.push({
-                completeDate: {
-                    gte: new Date(fromDate),
-                    lte: new Date(toDate),
-                },
-            });
+        const andConditions: Record<string, unknown>[] = [];
+
+        if (isValidRange) {
+            if (status === "delivered") {
+                andConditions.push({
+                    deliveredDate: { gte: from, lte: to }
+                });
+            } else if (status === "RTO") {
+                andConditions.push({
+                    rtoDeliveredDate: { gte: from, lte: to }
+                });
+            } else if (status === "deliveredOrRto") {
+                andConditions.push({
+                    OR: [
+                        { deliveredDate: { gte: from, lte: to } },
+                        { rtoDeliveredDate: { gte: from, lte: to } }
+                    ]
+                });
+            }
         }
 
         andConditions.push({
@@ -561,19 +632,19 @@ export const getOrdersByStatusForDropshipperReporting = async (
         });
 
         if (andConditions.length > 0) {
-            Object.assign(whereCondition, {
+            Object.assign(baseWhere, {
                 AND: andConditions,
             });
         }
 
         const orders = await prisma.order.findMany({
-            where: whereCondition,
+            where: baseWhere,
             orderBy: { id: "desc" },
             include: {
                 items: {
                     include: {
-                        product: true,
-                        variant: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
                             include: {
                                 supplierProductVariant: {
                                     include: {
@@ -602,80 +673,102 @@ export const getOrdersByStatusForDropshipperReporting = async (
 };
 
 export const getOrdersByStatusForSupplierReporting = async (
-    status: "active" | "inactive" | "deleted" | "notDeleted" | "completedOrRto",
+    status: "active" | "inactive" | "deleted" | "notDeleted" | "deliveredOrRto" | "delivered" | "RTO",
     supplierId: number,
     fromDate: string,
     toDate: string
 ) => {
     try {
-        const whereCondition = {};
+        const baseWhere: Record<string, unknown> = {};
 
-        // Apply base conditions
-        if (status === "active") {
-            Object.assign(whereCondition, { status: true, deletedAt: null });
-        } else if (status === "inactive") {
-            Object.assign(whereCondition, { status: false, deletedAt: null });
-        } else if (status === "deleted") {
-            Object.assign(whereCondition, { deletedAt: { not: null } });
-        } else if (status === "notDeleted") {
-            Object.assign(whereCondition, { deletedAt: null });
-        } else if (status === "completedOrRto") {
-            Object.assign(whereCondition, {
-                deletedAt: null,
-                OR: [{ complete: true }, { rtoDelivered: true }],
-            });
+        // Base status logic
+        switch (status) {
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = { not: null };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [{ delivered: true }, { rtoDelivered: true }];
+                break;
         }
 
-        // Date filter + supplierId filter
-        const andConditions = [];
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
 
-        if (
-            fromDate &&
-            toDate &&
-            !isNaN(Date.parse(fromDate)) &&
-            !isNaN(Date.parse(toDate))
-        ) {
-            andConditions.push({
-                completeDate: {
-                    gte: new Date(fromDate),
-                    lte: new Date(toDate),
-                },
-            });
+        const andConditions: Record<string, unknown>[] = [];
+
+        if (isValidRange) {
+            if (status === "delivered") {
+                andConditions.push({
+                    deliveredDate: { gte: from, lte: to }
+                });
+            } else if (status === "RTO") {
+                andConditions.push({
+                    rtoDeliveredDate: { gte: from, lte: to }
+                });
+            } else if (status === "deliveredOrRto") {
+                andConditions.push({
+                    OR: [
+                        { deliveredDate: { gte: from, lte: to } },
+                        { rtoDeliveredDate: { gte: from, lte: to } }
+                    ]
+                });
+            }
         }
 
+        // Supplier condition
         andConditions.push({
             items: {
                 some: {
                     product: {
-                        supplierId
-                    },
-                },
-            },
+                        supplierId: supplierId
+                    }
+                }
+            }
         });
 
         if (andConditions.length > 0) {
-            Object.assign(whereCondition, {
-                AND: andConditions,
-            });
+            baseWhere.AND = andConditions;
         }
 
         const orders = await prisma.order.findMany({
-            where: whereCondition,
+            where: baseWhere,
             orderBy: { id: "desc" },
             include: {
                 items: {
                     include: {
-                        product: true,
-                        variant: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
                             include: {
                                 supplierProductVariant: {
                                     include: {
-                                        variant: true,
-                                    },
-                                },
-                            },
-                        },
-                    },
+                                        variant: true
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 shippingCountry: true,
                 shippingState: true,
@@ -683,9 +776,11 @@ export const getOrdersByStatusForSupplierReporting = async (
                 billingCountry: true,
                 billingState: true,
                 billingCity: true,
-                payment: true,
-            },
+                payment: true
+            }
         });
+
+        console.log(`orders - `, orders);
 
         return { status: true, orders: serializeBigInt(orders) };
     } catch (error) {
@@ -750,10 +845,10 @@ export async function refreshPendingOrdersShippingStatus() {
         // Calculate the cutoff date/time (1 hour ago)
         const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
 
-        // Fetch orders with complete = false and lastRefreshAt <= oneHourAgo or null
+        // Fetch orders with delivered = false and lastRefreshAt <= oneHourAgo or null
         const ordersToRefresh = await prisma.order.findMany({
             where: {
-                complete: false,
+                delivered: false,
                 OR: [
                     { lastRefreshAt: null },
                     { lastRefreshAt: { lt: oneHourAgo } }
@@ -772,7 +867,7 @@ export async function refreshPendingOrdersShippingStatus() {
             include: {
                 items: {
                     include: {
-                        variant: {
+                        dropshipperVariant: {
                             include: {
                                 supplierProductVariant: {
                                     include: {
@@ -781,7 +876,7 @@ export async function refreshPendingOrdersShippingStatus() {
                                 }
                             }
                         },
-                        product: true,
+                        dropshipperProduct: true,
                     },
                 },
             },

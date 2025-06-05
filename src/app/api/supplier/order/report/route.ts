@@ -114,7 +114,7 @@ export async function GET(req: NextRequest) {
 
                 if (modal === 'shipowl') {
                     shipOwlInOrder = true;
-                    if (order.complete) {
+                    if (order.delivered) {
                         reportAnalytics.shipowl.deliveredOrder++;
                         reportAnalytics.shipowl.totalProductCost += quantity * (variant.price || 0);
                     } else if (order.rtoDelivered) {

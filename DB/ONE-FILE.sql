@@ -1,3 +1,5 @@
+INSERT INTO `appconfig` (`id`, `shippingCost`, `status`) VALUES (NULL, '75', '1');
+
 INSERT INTO `admin` (`id`, `name`, `uniqeId`, `username`, `email`, `password`, `role`, `status`, `createdAt`, `updatedAt`, `pr_token`, `pr_expires_at`, `pr_last_reset`) VALUES
 (1, 'Rohit Admin', 'ADMIN-12', 'rohit-admin', 'rohitwebstep-admin@gmail.com', '$2b$10$hW8vbhToemWerVuNQ5W4l.7RVppP2Y3a8hooIZTPidgugCkWMcOyC', 'admin', 'active', '2025-04-07 05:19:36.000', '2025-04-14 06:32:13.419', NULL, NULL, '2025-04-14 06:32:13.417'),
 (2, 'Rohit Dropshipper', 'ADMIN-132', 'rohit-dropshipper', 'rohitwebstep-drop@gmail.com', '$2b$10$vws6emtcbykca5VJkQIsu.o3mzNY5Qj/g/2659P/uHooVQ79VQg5q', 'dropshipper', 'active', '2025-04-07 05:19:36.000', '2025-04-07 05:19:39.000', NULL, NULL, NULL),
@@ -101,52 +103,122 @@ INSERT INTO `emailConfig` (`id`, `panel`, `module`, `subject`, `action`, `html_t
 (5, 'dropshipper', 'auth', 'Dropshipper Registration', 'registration', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Welcome Dropshipper</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f7f9; font-family: \'Segoe UI\', Arial, sans-serif;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding: 40px 0;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden;\">\n          <tr>\n            <td style=\"background-color: #34495e; padding: 20px; text-align: center;\">\n              <h2 style=\"margin: 0; color: #ffffff;\">Welcome to {{appName}}!</h2>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding: 30px;\">\n              <p style=\"font-size: 16px; color: #333;\">Hi <strong>{{name}}</strong>,</p>\n\n              <p style=\"font-size: 16px; color: #333;\">\n                We’re excited to have you on board as a <strong>dropshipper</strong> at <strong>{{appName}}</strong>.\n              </p>\n\n              <p style=\"font-size: 15px; color: #555;\">\n                To get started, please verify your account by clicking the button below:\n              </p>\n\n              <p style=\"margin: 25px 0; text-align: center;\">\n                <a href=\"{{verificationLink}}\" style=\"display: inline-block; padding: 12px 25px; background-color: #27ae60; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;\">\n                  Verify Your Account\n                </a>\n              </p>\n\n              <p style=\"font-size: 15px; color: #555;\">\n                After verification, you’ll be able to access your dashboard and start selling!\n              </p>\n\n              <p style=\"margin-top: 30px; font-size: 15px;\">Welcome again,<br><strong>{{appName}} Team</strong></p>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"background-color: #eeeeee; text-align: center; padding: 15px; font-size: 13px; color: #777;\">\n              &copy; {{year}} {{appName}}. All rights reserved.\n            </td>\n          </tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>\n', 'smtp.gmail.com', 1, 465, 'rohitwebstep@gmail.com', 'dxoaeeczgiapoybi', 'rohitwebstep@gmail.com', 'Shipping OWL', 1, '2025-04-14 10:37:10.000', NULL, NULL, '2025-04-14 10:37:17.000', NULL, NULL),
 (6, 'dropshipper', 'auth', 'Dropshipper Registration', 'verify', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Account Verified</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f5f8fa; font-family: \'Segoe UI\', Arial, sans-serif;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding: 40px 0;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden;\">\n          <tr>\n            <td style=\"background-color: #2ecc71; padding: 20px; text-align: center;\">\n              <h2 style=\"margin: 0; color: #ffffff;\">Account Verified Successfully</h2>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding: 30px;\">\n              <p style=\"font-size: 16px; color: #333;\">Hi <strong>{{name}}</strong>,</p>\n\n              <p style=\"font-size: 16px; color: #333;\">\n                🎉 Congratulations! Your dropshipper account with <strong>{{appName}}</strong> has been verified successfully.\n              </p>\n\n              <p style=\"font-size: 15px; color: #555;\">\n                You can now log in and start exploring your dashboard.\n              </p>\n\n              <p style=\"margin: 25px 0; text-align: center;\">\n                <a href=\"{{loginLink}}\" style=\"display: inline-block; padding: 12px 25px; background-color: #2980b9; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;\">\n                  Log In to Your Account\n                </a>\n              </p>\n\n              <p style=\"font-size: 15px; color: #555;\">\n                If you have any questions, feel free to contact our support team.\n              </p>\n\n              <p style=\"margin-top: 30px; font-size: 15px;\">Regards,<br><strong>{{appName}} Team</strong></p>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"background-color: #eeeeee; text-align: center; padding: 15px; font-size: 13px; color: #777;\">\n              &copy; {{year}} {{appName}}. All rights reserved.\n            </td>\n          </tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>\n', 'smtp.gmail.com', 1, 465, 'rohitwebstep@gmail.com', 'dxoaeeczgiapoybi', 'rohitwebstep@gmail.com', 'Shipping OWL', 1, '2025-04-14 10:37:10.000', NULL, NULL, '2025-04-14 10:37:17.000', NULL, NULL);
 
-INSERT INTO `permission` (`panel`, `module`, `action`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
-('admin', 'admin', 'create', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'edit', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'soft-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'admin', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'create', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'edit', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'soft-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'product', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'create', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'edit', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'soft-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'dropshipper', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'create', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'edit', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'soft-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'category', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'create', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'edit', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'soft-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'trash-view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'restore', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('admin', 'brand', 'permanent-delete', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL),
-('dropshipper', 'product', 'view', 1, '2025-05-09 15:38:39.000', NULL, NULL, '2025-05-09 15:39:07.000', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `product` (
+  `id`, `shippingOwlProductId`, `categoryId`, `name`, `slug`, `main_sku`,
+  `description`, `tags`, `brandId`, `originCountryId`, `hsnCode`, `taxRate`,
+  `rtoAddress`, `pickupAddress`, `shippingCountryId`, `video_url`, `list_as`,
+  `shipping_time`, `weight`, `package_length`, `package_width`, `package_height`,
+  `chargeable_weight`, `package_weight_image`, `package_length_image`,
+  `package_width_image`, `package_height_image`, `product_detail_video`,
+  `training_guidance_video`, `isVisibleToAll`, `status`, `isVarientExists`,
+  `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`,
+  `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES (
+  1, 'PRD-675363', 1, 'Wireless Bluetooth Headphones', 'wireless-bluetooth-headphones', 'WH-12345',
+  'High-quality wireless headphones with noise cancellation and 30 hours battery life.',
+  '["wireless","bluetooth","audio","music"]', 3, 101, '85183000', 18,
+  'Warehouse RTO Address, Mumbai', 'Pickup Hub A, New Delhi', 101,
+  'https://example.com/video/product-demo.mp4', 'warehouse', '2-3 Days', 0.45,
+  20, 18, 10, NULL,
+  'https://example.com/images/weight.jpg', 'https://example.com/images/length.jpg',
+  'https://example.com/images/width.jpg', 'https://example.com/images/height.jpg',
+  'https://example.com/videos/detail.mp4', 'https://example.com/videos/guidance.mp4',
+  1, 1, 1, '2025-05-28 04:55:32', 1, 'admin',
+  '2025-05-28 04:55:32', 1, 'admin', NULL, NULL, NULL
+);
 
-INSERT INTO `product` (`id`, `shippingOwlProductId`, `categoryId`, `name`, `slug`, `main_sku`, `description`, `tags`, `brandId`, `originCountryId`, `hsnCode`, `taxRate`, `rtoAddress`, `pickupAddress`, `shippingCountryId`, `video_url`, `list_as`, `shipping_time`, `weight`, `package_length`, `package_width`, `package_height`, `chargeable_weight`, `package_weight_image`, `package_length_image`, `package_width_image`, `package_height_image`, `product_detail_video`, `training_guidance_video`, `isVisibleToAll`, `status`, `isVarientExists`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
-(1, 'PRD-675363', 1, 'demo 12', 'demo-12', '13432', 'Vel voluptas corrupt', '\"[\\\"e\\\",\\\"rr\\\",\\\"tt\\\"]\"', 1, 87, 'fdhfd', 46, 'Address 1', 'Address 1', 68, NULL, 'warehouse', '1', 76, 30, 20, 10, NULL, '', '', '', '', '', '', 0, 1, 1, '2025-05-28 04:55:32.905', 1, 'admin', '2025-05-28 04:55:32.999', 1, 'admin', NULL, NULL, NULL);
+INSERT INTO `productVariant` (
+  `id`, `name`, `productId`, `image`, `color`, `modal`, `sku`,
+  `product_link`, `suggested_price`, `createdAt`, `createdBy`, `createdByRole`,
+  `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES (
+  1, 'Black Color - Wireless Edition', 1,
+  'https://example.com/images/variant-black.jpg', 'Black', 'shipowl', 'WH-BLK-01',
+  'https://example.com/product/wireless-bluetooth-headphones-black', 4499.00,
+  '2025-05-28 04:55:32', 1, 'admin', '2025-05-28 04:55:32', 1, 'admin',
+  NULL, NULL, NULL
+),
+(
+  2, 'Blue Color - Self Ship Edition', 1,
+  'https://example.com/images/variant-blue.jpg', 'Blue', 'selfship', 'WH-BLU-01',
+  'https://example.com/product/wireless-bluetooth-headphones-blue', 4299.00,
+  '2025-05-28 04:56:32', 1, 'admin', '2025-05-28 04:56:32', 1, 'admin',
+  NULL, NULL, NULL
+);
 
-INSERT INTO `productVariant` (`id`, `name`, `productId`, `image`, `color`, `modal`, `sku`, `product_link`, `suggested_price`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
-(1, '', 1, '', 'Blue', '', '13324', 'Cumquetrconsequat Es', 4444, '2025-05-28 04:55:32.927', NULL, NULL, '2025-05-28 04:55:32.927', NULL, NULL, NULL, NULL, NULL);
-
-INSERT INTO `supplierProduct` (`id`, `supplierId`, `productId`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
+INSERT INTO `supplierProduct` (
+  `id`, `supplierId`, `productId`, `status`, `createdAt`, `createdBy`, `createdByRole`,
+  `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
 (1, 3, 1, 1, '2025-05-28 04:58:20.637', 3, 'supplier', '2025-05-28 04:58:20.639', NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO `supplierProductVariant` (`id`, `supplierId`, `productId`, `productVariantId`, `supplierProductId`, `price`, `stock`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
-(1, 3, 1, 1, 1, 99.99, 10, 1, '2025-05-28 04:58:20.646', 3, 'supplier', '2025-05-28 04:58:20.650', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `supplierProductVariant` (
+  `id`, `supplierId`, `productId`, `productVariantId`, `supplierProductId`,
+  `price`, `stock`, `status`, `createdAt`, `createdBy`, `createdByRole`,
+  `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+(1, 3, 1, 1, 1, 99.99, 10, 1, '2025-05-28 04:58:20.646', 3, 'supplier', '2025-05-28 04:58:20.650', NULL, NULL, NULL, NULL, NULL),
+(2, 3, 1, 2, 1, 89.50, 20, 1, '2025-05-28 05:01:20.000', 3, 'supplier', '2025-05-28 05:01:20.100', NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO `dropshipperProduct` (
+  `id`, `dropshipperId`, `supplierId`, `supplierProductId`, `productId`,
+  `status`, `createdAt`, `createdBy`, `createdByRole`,
+  `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+(1, 2, 3, 1, 1, 1, '2025-05-28 05:09:11.534', 2, 'dropshipper', '2025-05-28 05:09:11.536', NULL, NULL, NULL, NULL, NULL),
+(2, 2, 3, 1, 1, 1, '2025-05-28 05:12:22.100', 2, 'dropshipper', '2025-05-28 05:12:22.101', NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO `dropshipperProductVariant` (
+  `id`, `dropshipperId`, `productId`, `supplierProductId`, `dropshipperProductId`,
+  `supplierProductVariantId`, `price`, `stock`, `status`,
+  `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`,
+  `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+(1, 2, 1, 1, 1, 1, 99.99, 10, 1, '2025-05-28 05:09:11.545', 2, 'dropshipper', '2025-05-28 05:09:11.547', NULL, NULL, NULL, NULL, NULL),
+(2, 2, 1, 1, 2, 2, 89.50, 5, 1, '2025-05-28 05:13:13.600', 2, 'dropshipper', '2025-05-28 05:13:13.602', NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO `payment` (
+  `id`, `transactionId`, `cycle`, `amount`, `status`, `date`,
+  `createdAt`, `createdBy`, `createdByRole`,
+  `updatedAt`, `updatedBy`, `updatedByRole`,
+  `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+(1, 'TXN202508041001', 'monthly', 499.99, 'pending', '2025-08-04 12:00:00',
+ '2025-05-28 05:12:00.000', 2, 'supplier', '2025-05-28 05:12:30.000', NULL, NULL, NULL, NULL, NULL),
+(2, 'TXN202508041002', 'yearly', 999.00, 'failed', '2025-08-04 14:45:00',
+ '2025-05-28 05:15:00.000', 3, 'dropshipper', '2025-05-28 05:15:20.000', NULL, NULL, NULL, NULL, NULL),
+(3, 'TXN202508041003', 'cod', 1899.50, 'success', '2025-08-04 16:00:00',
+ '2025-05-28 05:18:00.000', 1, 'admin', '2025-05-28 05:18:45.000', NULL, NULL, NULL, NULL, NULL);
+
+-- Insert into `order`
+INSERT INTO `order` (
+  `id`, `orderNumber`, `status`, `orderNote`, `subtotal`, `tax`, `discount`, `totalAmount`, `currency`,
+  `shippingName`, `shippingPhone`, `shippingEmail`, `shippingAddress`, `shippingZip`, `shippingCountryId`,
+  `shippingStateId`, `shippingCityId`, `billingName`, `billingPhone`, `billingEmail`, `billingAddress`,
+  `billingZip`, `billingCountryId`, `billingStateId`, `billingCityId`, `paymentId`, `shippingApiResult`,
+  `delivered`, `lastRefreshAt`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`,
+  `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+(1, 'M62LMGXI', 'pending', 'Lsdsd', 100, 10, 5, 105, 'INR', 'Meena Joshi', '9811122233', 'meena.joshi@example.com', '207, Inder Nagar, Ambala City', '110067', 101, 4007, 57675, 'John Doe', '9874563210', 'john@example.com', 'Flat No. 403, Mahavir Dham CHS, Plot No. 112, Sector 12, Dwarka', '110067', 101, 4007, 57675, 1,
+'{\"status\":true,\"responsemsg\":\"Order Placed Successfully.\",\"data\":{\"awb_number\":\"13630911386265\",\"order_number\":\"12513560\",\"job_id\":null,\"lrnum\":\"\",\"waybills_num_json\":null,\"lable_data\":null,\"routing_code\":\"DEL/KIS\",\"payment_mode\":\"COD\",\"client_order_id\":\"1\",\"partner_display_name\":\"Delhivery\",\"courier_code\":\"PXDEL01\",\"pickup_id\":\"4257544\",\"courier_name\":\"Delhivery\"}}',
+0, NULL, '2025-05-28 10:00:35.215', NULL, NULL, '2025-05-28 10:36:02.808', 1, 'admin', NULL, NULL, NULL),
+
+(2, 'X73YDHLW', 'confirmed', 'Please deliver between 9AM-1PM', 180, 15, 10, 185, 'INR',
+'Ravi Sharma', '9898989898', 'ravi.sharma@example.com', 'A-50, Model Town, Ludhiana', '141002', 101, 4007, 57675,
+'Ravi Sharma', '9898989898', 'ravi.billing@example.com', 'A-50, Model Town, Ludhiana', '141002', 101, 4007, 57675, 2,
+'{\"status\":true,\"responsemsg\":\"Order Created.\",\"data\":{\"awb_number\":\"13630911386266\",\"order_number\":\"12513561\",\"payment_mode\":\"Prepaid\",\"courier_name\":\"Delhivery\"}}',
+1, NULL, '2025-05-29 09:30:12.000', 2, 'dropshipper', '2025-05-29 09:32:55.000', 1, 'admin', NULL, NULL, NULL),
+
+(3, 'Z94PLQRE', 'shipped', 'Urgent order for gifting', 90, 9, 0, 99, 'INR',
+'Anita Verma', '9876543210', 'anita.verma@example.com', '24, Green Park, Delhi', '110016', 101, 4007, 57675,
+'Anita Verma', '9876543210', 'anita.billing@example.com', '24, Green Park, Delhi', '110016', 101, 4007, 57675, 3,
+'{\"status\":true,\"responsemsg\":\"Shipped via Delhivery.\",\"data\":{\"awb_number\":\"13630911386267\",\"order_number\":\"12513562\",\"payment_mode\":\"COD\",\"courier_name\":\"Delhivery\"}}',
+1, NULL, '2025-05-30 11:00:00.000', 2, 'dropshipper', '2025-05-30 11:15:00.000', 1, 'admin', NULL, NULL, NULL);
+
+-- Insert into `orderitem`
+INSERT INTO `orderItem` (
+  `id`, `orderId`, `dropshipperProductId`, `dropshipperProductVariantId`, `dropshipperId`, `supplierProductId`, `supplierProductVariantId`, `supplierId`, `quantity`, `price`, `total`
+) VALUES
+(1, 1, 1, 1, 2, 1, 1, 3, 2, 50, 100),
+(2, 2, 2, 2, 2, 1, 2, 3, 2, 90, 180),
+(3, 3, 1, 1, 2, 1, 1, 3, 1, 90, 90);

@@ -22,31 +22,25 @@ model appConfig {
 
 model emailConfig {
   id             BigInt   @id @default(autoincrement())
-
   panel          String
   module         String
   subject        String
   action         String
   html_template  String?   @db.LongText
-
   smtp_host      String
   smtp_secure    Boolean
   smtp_port      Int
   smtp_username  String
   smtp_password  String
-
   from_email     String
   from_name      String
-
   status         Boolean
-
   createdAt      DateTime @default(now())
   createdBy      Int?
   createdByRole  String?
   updatedAt      DateTime @updatedAt
   updatedBy      Int?
   updatedByRole  String?
-
   @@index([createdBy])
   @@index([updatedBy])
 }
@@ -75,7 +69,6 @@ model admin {
   pr_token             String?
   pr_expires_at        DateTime?
   pr_last_reset        DateTime?
-
   createdAt            DateTime  @default(now())
   createdBy            Int?
   createdByRole        String?
@@ -90,36 +83,33 @@ model admin {
   permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
 
-  shopifyStores                   shopifyStore[]
-  staff                           adminStaff[]
-  companyDetail                   companyDetail?              @relation
-  bankAccount                     bankAccount?                @relation
-  supplierProducts                supplierProduct[]           @relation("SupplierProducts")
-  dropshipperProducts             dropshipperProduct[]        @relation("DropshipperProducts")
-  suppliedProducts                dropshipperProduct[]        @relation("SuppliedProducts")
-  bankAccountChangeRequest        bankAccountChangeRequest?   @relation
-  productVisibility               productSupplierVisibility[]
-  supplierProductVariants         supplierProductVariant[]    @relation
-  dropshipperProductVariants      dropshipperProductVariant[] @relation
-  rtoInventories  rtoInventory[]   @relation("AdminToRtoInventory")
+  orderItemsDropshipper orderItem[]           @relation("OrderItemToDropshipper")
+  orderItemsSupplier    orderItem[]           @relation("OrderItemToSupplier")
+  shopifyStores         shopifyStore[]        @relation
+  staff                 adminStaff[]          @relation("AdminToStaff")
+  companyDetail         companyDetail?        @relation("AdminToCompanyDetail", map: "admin_company_detail_fkey")
+  bankAccount           bankAccount?          @relation("AdminToBankAccount", map: "admin_bank_account_fkey")
+  supplierProducts      supplierProduct[]     @relation("SupplierProducts")
+  dropshipperProducts   dropshipperProduct[]  @relation("DropshipperProducts")
+  suppliedProducts      dropshipperProduct[]  @relation("SuppliedProducts")
+  bankAccountChangeRequest bankAccountChangeRequest? @relation("AdminToBankAccountChangeRequest", map: "admin_bank_account_change_request_fkey")
+  productVisibility     productSupplierVisibility[] @relation
+  supplierProductVariants   supplierProductVariant[] @relation("AdminToSupplierProductVariant", map: "admin_supplier_product_variant_fkey")
+  dropshipperProductVariants dropshipperProductVariant[] @relation("AdminToDropshipperProductVariant", map: "admin_dropshipper_product_variant_fkey")
+  rtoInventories        rtoInventory[]        @relation("AdminToRtoInventory")
 }
 
 model shopifyStore {
   id              Int      @id @default(autoincrement())
   adminId         Int
-
   name            String?
   shop            String   @unique
   accessToken     String?
-
-  // Shopify app configuration stored per store
-  apiKey          String?                         // Formerly SHOPIFY_API_KEY
-  apiSecret       String?                         // Formerly SHOPIFY_API_SECRET
-  apiVersion      String?                         // Formerly SHOPIFY_API_VERSION (e.g., '2023-04')
-  scopes          String?                         // Formerly SHOPIFY_SCOPES (comma-separated string)
+  apiKey          String?
+  apiSecret       String?
+  apiVersion      String?
+  scopes          String?
   redirectUri     String?   @db.LongText
-
-  // Store metadata
   email           String?
   shopName        String?
   planName        String?
@@ -134,12 +124,9 @@ model shopifyStore {
   moneyFormat     String?
   timezone        String?
   createdAtShop   DateTime?
-
   userId          Int?
-
   verificationStatus Boolean    @default(true)
   status          Boolean    @default(true)
-
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -149,7 +136,6 @@ model shopifyStore {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   admin           admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
 }
 
@@ -161,31 +147,26 @@ model companyDetail {
   brandShortName                  String?
   billingAddress                  String?
   billingPincode                  String?
-
   billingCountryId                BigInt?
   billingCountry                  country?  @relation("CompanyCountryRelation", fields: [billingCountryId], references: [id], onDelete: SetNull)
-
   billingStateId                  BigInt?
   billingState                    state?    @relation("CompanyStateRelation", fields: [billingStateId], references: [id], onDelete: SetNull)
-
   billingCityId                   BigInt?
   billingCity                     city?     @relation("CompanyCityRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
-
   businessType                    String?
   clientEntryType                 String?
   gstNumber                       String?
   companyPanNumber                String?
   aadharNumber                    String?
-  gstDocument                     String?     // File path or URL
+  gstDocument                     String?
   panCardHolderName               String?
   aadharCardHolderName            String?
   panCardImage                    String?     @db.LongText
   aadharCardImage                 String?     @db.LongText
-  additionalDocumentUpload        String?  // Optional file or zip path
+  additionalDocumentUpload        String?
   documentId                      String?
   documentName                    String?
   documentImage                   String?     @db.LongText
-
   createdAt                       DateTime  @default(now())
   createdBy                       Int?
   createdByRole                   String?
@@ -195,35 +176,31 @@ model companyDetail {
   deletedAt                       DateTime?
   deletedBy                       Int?
   deletedByRole                   String?
-
-  admin                           admin      @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  admin                           admin      @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "AdminToCompanyDetail", map: "admin_company_detail_fkey")
 }
 
 model bankAccount {
-  id                              Int                               @id @default(autoincrement())
-  adminId                         Int                               @unique
+  id                              Int       @id @default(autoincrement())
+  adminId                         Int       @unique
   accountHolderName               String
   accountNumber                   String
   bankName                        String
   bankBranch                      String
   accountType                     String
   ifscCode                        String
-  cancelledChequeImage            String?                           @db.LongText
+  cancelledChequeImage            String?   @db.LongText
   paymentMethod                   String?
-
-  createdAt                       DateTime                          @default(now())
+  createdAt                       DateTime  @default(now())
   createdBy                       Int?
   createdByRole                   String?
-  updatedAt                       DateTime                          @updatedAt
+  updatedAt                       DateTime  @updatedAt
   updatedBy                       Int?
   updatedByRole                   String?
   deletedAt                       DateTime?
   deletedBy                       Int?
   deletedByRole                   String?
-
-  admin                           admin                             @relation(fields: [adminId], references: [id], onDelete: Cascade)
-
-  bankAccountChangeRequest       bankAccountChangeRequest?          @relation
+  admin                           admin     @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "AdminToBankAccount", map: "admin_bank_account_fkey")
+  bankAccountChangeRequest       bankAccountChangeRequest? @relation
 }
 
 model bankAccountChangeRequest {
@@ -238,9 +215,8 @@ model bankAccountChangeRequest {
   ifscCode               String
   cancelledChequeImage   String?   @db.LongText
   paymentMethod          String?
-  status                 String    @default("pending") // e.g., 'pending', 'approved', 'rejected'
-  remarks                String?   @db.LongText // Optional admin remarks for approval/rejection
-
+  status                 String    @default("pending")
+  remarks                String?   @db.LongText
   createdAt              DateTime  @default(now())
   createdBy              Int?
   createdByRole          String?
@@ -250,10 +226,8 @@ model bankAccountChangeRequest {
   deletedAt              DateTime?
   deletedBy              Int?
   deletedByRole          String?
-
-  supplier               admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  supplier               admin     @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "AdminToBankAccountChangeRequest", map: "admin_bank_account_change_request_fkey")
   bankAccount            bankAccount? @relation(fields: [bankAccountId], references: [id], onDelete: SetNull)
-
   @@index([adminId])
   @@index([bankAccountId])
   @@index([createdBy])
@@ -280,7 +254,6 @@ model adminStaff {
   pr_token             String?
   pr_expires_at        DateTime?
   pr_last_reset        DateTime?
-
   createdAt            DateTime  @default(now())
   createdBy            Int?
   createdByRole        String?
@@ -290,12 +263,10 @@ model adminStaff {
   deletedAt            DateTime?
   deletedBy            Int?
   deletedByRole        String?
-
   permanentCity       city?       @relation(fields: [permanentCityId], references: [id], onDelete: SetNull)
   permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
-
-  admin                admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+  admin                admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade, name: "AdminToStaff")
 }
 
 model permission {
@@ -304,7 +275,6 @@ model permission {
   module                          String
   action                          String
   status                          Boolean   @default(true)
-
   createdAt                       DateTime  @default(now())
   createdBy                       Int?
   createdByRole                   String?
@@ -322,13 +292,11 @@ model loginLog {
   adminRole               String
   action                  String
   response                String?
-
   ipv4                    String?
   ipv6                    String?
   internetServiceProvider String?
   clientInformation       String?
   userAgent               String?
-
   createdAt               DateTime  @default(now())
   createdBy               Int?
   createdByRole           String?
@@ -338,7 +306,6 @@ model loginLog {
   deletedAt               DateTime?
   deletedBy               Int?
   deletedByRole           String?
-
   @@index([adminId])
   @@index([adminRole])
   @@index([action])
@@ -358,13 +325,11 @@ model activityLog {
   response                String?     @db.LongText
   result                  Boolean
   data                    String?     @db.LongText
-
   ipv4                    String?
   ipv6                    String?
   internetServiceProvider String?
   clientInformation       String?
   userAgent               String?
-
   createdAt               DateTime   @default(now())
   createdBy               Int?
   createdByRole           String?
@@ -374,7 +339,6 @@ model activityLog {
   deletedAt               DateTime?
   deletedBy               Int?
   deletedByRole           String?
-
   @@index([adminId])
   @@index([adminRole])
   @@index([module])
@@ -402,23 +366,17 @@ model country {
   deletedAt             DateTime?
   deletedBy             Int?
   deletedByRole         String?
-
   states                state[]
   cities                city[]
   warehouses            warehouse[]
   highRtos              highRto[]
   admins                admin[]
   adminStaffs           adminStaff[]
-
-  // Add the relation fields for originCountry and shippingCountry
   originProducts        product[]       @relation("OriginCountryRelation")
   shippingProducts      product[]       @relation("ShippingCountryRelation")
-
   shippingOrders        order[]         @relation("CountryShippingRelation")
   billingOrders         order[]         @relation("CountryBillingRelation")
-
   billingCompanyDetails companyDetail[] @relation("CompanyCountryRelation")
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -439,19 +397,15 @@ model state {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   country         country    @relation(fields: [countryId], references: [id], onDelete: Cascade)
   cities          city[]
   warehouses      warehouse[]
   highRtos        highRto[]
   admins          admin[]
   adminStaffs     adminStaff[]
-
   shippingOrders  order[] @relation("StateShippingRelation")
   billingOrders   order[] @relation("StateBillingRelation")
-
   billingCompanyDetails companyDetail[] @relation("CompanyStateRelation")
-
   @@index([countryId])
 }
 
@@ -469,19 +423,15 @@ model city {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   state           state      @relation(fields: [stateId], references: [id], onDelete: Cascade)
   country         country    @relation(fields: [countryId], references: [id], onDelete: Cascade)
   warehouses      warehouse[]
   highRtos        highRto[]
   admins          admin[]
   adminStaffs     adminStaff[]
-
   shippingOrders  order[]     @relation("CityShippingRelation")
   billingOrders   order[]     @relation("CityBillingRelation")
-
   billingCompanyDetails companyDetail[] @relation("CompanyCityRelation")
-
   @@index([stateId])
   @@index([countryId])
 }
@@ -496,17 +446,13 @@ model warehouse {
   address_line_1  String
   address_line_2  String?
   postal_code     String
-
   countryId       BigInt?
   stateId         BigInt?
   cityId          BigInt?
-
   country         country?    @relation(fields: [countryId], references: [id], onDelete: SetNull)
   state           state?      @relation(fields: [stateId], references: [id], onDelete: SetNull)
   city            city?       @relation(fields: [cityId], references: [id], onDelete: SetNull)
-
   status          Boolean   @default(false)
-  
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -516,7 +462,6 @@ model warehouse {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   @@index([countryId])
   @@index([stateId])
   @@index([cityId])
@@ -541,10 +486,8 @@ model category {
   deletedAt            DateTime?
   deletedBy            Int?
   deletedByRole        String?
-
   products             product[]
   productRequests      productRequest[]
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -566,7 +509,6 @@ model brand {
   deletedAt      DateTime?
   deletedBy      Int?
   deletedByRole  String?
-
   products      product[]
   @@index([createdBy])
   @@index([updatedBy])
@@ -581,7 +523,6 @@ model productRequest {
   expectedDailyOrders       String?
   url                       String?         @db.LongText
   image                     String?         @db.LongText
-
   status                    Boolean         @default(true)
   createdAt                 DateTime        @default(now())
   createdBy                 Int?
@@ -592,7 +533,6 @@ model productRequest {
   deletedAt                 DateTime?
   deletedBy                 Int?
   deletedByRole             String?
-
   category                  category        @relation(fields: [categoryId], references: [id])
 }
 
@@ -604,34 +544,29 @@ model product {
   slug                            String           @unique
   main_sku                        String           @unique
   description                     String?          @db.LongText
-  tags                            Json?            // store as array of strings
+  tags                            Json?
   brandId                         Int
   originCountryId                 BigInt
   hsnCode                         String?
   taxRate                         Float?
   rtoAddress                      String?
   pickupAddress                   String?
-
   shippingCountryId               BigInt
   video_url                       String?          @db.LongText
-  list_as                         String?          // e.g., featured, trending, etc.
-
+  list_as                         String?
   shipping_time                   String?
   weight                          Float?
-
-  package_length                  Float?           // Updated from package_len
-  package_width                   Float?           // Updated from pack_width
-  package_height                  Float?           // Updated from package_heig
-  chargeable_weight               Float?           // Updated from chargab_weig
+  package_length                  Float?
+  package_width                   Float?
+  package_height                  Float?
+  chargeable_weight               Float?
   package_weight_image            String?          @db.LongText
   package_length_image            String?          @db.LongText
   package_width_image             String?          @db.LongText
   package_height_image            String?          @db.LongText
   product_detail_video            String?          @db.LongText
   training_guidance_video         String?          @db.LongText
-
   isVisibleToAll                  Boolean          @default(true)
-
   status                          Boolean          @default(true)
   isVarientExists                 Boolean          @default(true)
   createdAt                       DateTime         @default(now())
@@ -643,19 +578,16 @@ model product {
   deletedAt                       DateTime?
   deletedBy                       Int?
   deletedByRole                   String?
-
   category                        category         @relation(fields: [categoryId], references: [id])
   brand                           brand            @relation(fields: [brandId], references: [id])
   originCountry                   country          @relation("OriginCountryRelation", fields: [originCountryId], references: [id])
   shippingCountry                 country          @relation("ShippingCountryRelation", fields: [shippingCountryId], references: [id])
-
   variants                        productVariant[]
   supplierProducts                supplierProduct[]
   dropshipperProducts             dropshipperProduct[]
   supplierVisibility              productSupplierVisibility[]
   supplierProductVariants         supplierProductVariant[] @relation
   dropshipperProductVariants      dropshipperProductVariant[] @relation
-
   @@index([categoryId])
   @@index([brandId])
   @@index([originCountryId])
@@ -675,7 +607,6 @@ model productVariant {
   sku                       String           @unique
   product_link              String?
   suggested_price           Float?
-
   createdAt                 DateTime         @default(now())
   createdBy                 Int?
   createdByRole             String?
@@ -685,11 +616,8 @@ model productVariant {
   deletedAt                 DateTime?
   deletedBy                 Int?
   deletedByRole             String?
-
   product                   product          @relation(fields: [productId], references: [id], onDelete: Cascade)
-
   supplierProductVariants   supplierProductVariant[] @relation
-
   @@index([productId])
 }
 
@@ -706,10 +634,8 @@ model productSupplierVisibility {
   deletedAt     DateTime?
   deletedBy     Int?
   deletedByRole String?
-
   product       product   @relation(fields: [productId], references: [id], onDelete: Cascade)
   supplier      admin     @relation(fields: [supplierId], references: [id], onDelete: Cascade)
-
   @@index([productId])
   @@index([supplierId])
   @@index([createdBy])
@@ -726,7 +652,6 @@ model courierCompany {
   email                String
   phoneNumber          String?
   status               Boolean     @default(true)
-
   createdAt            DateTime    @default(now())
   createdBy            Int?
   createdByRole        String?
@@ -741,17 +666,13 @@ model courierCompany {
 model highRto {
   id              Int       @id @default(autoincrement())
   pincode         String
-
   countryId       BigInt?
   stateId         BigInt?
   cityId          BigInt?
-
   country         country?    @relation(fields: [countryId], references: [id], onDelete: SetNull)
   state           state?      @relation(fields: [stateId], references: [id], onDelete: SetNull)
   city            city?       @relation(fields: [cityId], references: [id], onDelete: SetNull)
-
   status          Boolean   @default(false)
-  
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -761,7 +682,6 @@ model highRto {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   @@index([countryId])
   @@index([stateId])
   @@index([cityId])
@@ -773,9 +693,7 @@ model highRto {
 model badPincode {
   id              Int       @id @default(autoincrement())
   pincode         String
-
   status          Boolean   @default(false)
-  
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -785,7 +703,6 @@ model badPincode {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -794,9 +711,7 @@ model badPincode {
 model goodPincode {
   id              Int       @id @default(autoincrement())
   pincode         String
-
   status          Boolean   @default(false)
-  
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -806,7 +721,6 @@ model goodPincode {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -817,7 +731,6 @@ model supplierProduct {
   supplierId    Int
   productId     Int
   status        Boolean   @default(true)
-
   createdAt     DateTime  @default(now())
   createdBy     Int?
   createdByRole String?
@@ -827,13 +740,12 @@ model supplierProduct {
   deletedAt     DateTime?
   deletedBy     Int?
   deletedByRole String?
-
+  orderItems                      orderItem[]
   supplier                        admin     @relation("SupplierProducts", fields: [supplierId], references: [id], onDelete: Cascade)
   product                         product   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variants                        supplierProductVariant[] // Relation to the new variant model
+  variants                        supplierProductVariant[]
   dropshipperProducts             dropshipperProduct[] @relation("SupplierProductRelation")
   dropshipperProductVariants      dropshipperProductVariant[] @relation
-
   @@index([supplierId])
   @@index([productId])
   @@index([createdBy])
@@ -850,7 +762,6 @@ model supplierProductVariant {
   price             Float
   stock             Int
   status            Boolean   @default(true)
-
   createdAt         DateTime  @default(now())
   createdBy         Int?
   createdByRole     String?
@@ -860,13 +771,12 @@ model supplierProductVariant {
   deletedAt         DateTime?
   deletedBy         Int?
   deletedByRole     String?
-
-  supplier          admin                 @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  orderItems                      orderItem[]
+  supplier          admin                 @relation(fields: [supplierId], references: [id], onDelete: Cascade, name: "AdminToSupplierProductVariant", map: "admin_supplier_product_variant_fkey")
   product           product               @relation(fields: [productId], references: [id], onDelete: Cascade)
   variant           productVariant?       @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
   supplierProduct   supplierProduct       @relation(fields: [supplierProductId], references: [id], onDelete: Cascade)
   dropshipperVariants dropshipperProductVariant[] @relation("SupplierToDropshipperVariant")
-
   @@index([supplierId])
   @@index([productId])
   @@index([supplierProductId])
@@ -883,7 +793,6 @@ model dropshipperProduct {
   supplierProductId Int
   productId         Int
   status            Boolean   @default(true)
-
   createdAt         DateTime  @default(now())
   createdBy         Int?
   createdByRole     String?
@@ -893,16 +802,13 @@ model dropshipperProduct {
   deletedAt         DateTime?
   deletedBy         Int?
   deletedByRole     String?
-
   dropshipper       admin             @relation("DropshipperProducts", fields: [dropshipperId], references: [id], onDelete: Cascade)
   supplier          admin             @relation("SuppliedProducts", fields: [supplierId], references: [id], onDelete: Cascade)
   product           product           @relation(fields: [productId], references: [id], onDelete: Cascade)
   supplierProduct   supplierProduct   @relation("SupplierProductRelation", fields: [supplierProductId], references: [id], onDelete: Cascade)
   variants          dropshipperProductVariant[]
-
   orderItems                      orderItem[]
   rtoInventories  rtoInventory[]   @relation("ProductToRtoInventory")
-  
   @@index([dropshipperId])
   @@index([supplierId])
   @@index([productId])
@@ -922,7 +828,6 @@ model dropshipperProductVariant {
   price             Float
   stock             Int
   status            Boolean   @default(true)
-
   createdAt         DateTime  @default(now())
   createdBy         Int?
   createdByRole     String?
@@ -932,16 +837,13 @@ model dropshipperProductVariant {
   deletedAt         DateTime?
   deletedBy         Int?
   deletedByRole     String?
-
-  dropshipper       admin             @relation(fields: [dropshipperId], references: [id], onDelete: Cascade)
+  dropshipper       admin             @relation(fields: [dropshipperId], references: [id], onDelete: Cascade, name: "AdminToDropshipperProductVariant", map: "admin_dropshipper_product_variant_fkey")
   product           product           @relation(fields: [productId], references: [id], onDelete: Cascade)
   supplierProduct   supplierProduct   @relation(fields: [supplierProductId], references: [id], onDelete: Cascade)
   dropshipperProduct dropshipperProduct @relation(fields: [dropshipperProductId], references: [id], onDelete: Cascade)
   supplierProductVariant  supplierProductVariant @relation("SupplierToDropshipperVariant", fields: [supplierProductVariantId], references: [id], onDelete: Cascade)
-
   orderItems                orderItem[]
   rtoInventories  rtoInventory[]   @relation("VariantToRtoInventory")
-
   @@index([dropshipperId])
   @@index([productId])
   @@index([supplierProductId])
@@ -958,7 +860,6 @@ model payment {
   amount          Float?
   status          String?
   date            DateTime?
-  
   createdAt       DateTime  @default(now())
   createdBy       Int?
   createdByRole   String?
@@ -968,9 +869,7 @@ model payment {
   deletedAt       DateTime?
   deletedBy       Int?
   deletedByRole   String?
-
   orders          order[]   @relation("OrderPayment")
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -980,17 +879,13 @@ model order {
   id              Int       @id @default(autoincrement())
   orderNumber     String    @unique
   awbNumber      String?   @unique
-  status          String    @default("pending")    // e.g., 'pending', 'processing', 'completed', 'cancelled'
-  orderNote       String?   // Optional customer note
-
-  // Financial Summary
+  status          String    @default("pending")
+  orderNote       String?
   subtotal        Float     @default(0.0)
   tax             Float     @default(0.0)
   discount        Float     @default(0.0)
   totalAmount     Float     @default(0.0)
   currency        String    @default("USD")
-
-  // Shipping Address
   shippingName            String
   shippingPhone           String
   shippingEmail           String
@@ -999,12 +894,9 @@ model order {
   shippingCountryId       BigInt?
   shippingStateId         BigInt?
   shippingCityId          BigInt?
-
   shippingCountry country? @relation("CountryShippingRelation", fields: [shippingCountryId], references: [id], onDelete: SetNull)
   shippingState state? @relation("StateShippingRelation", fields: [shippingStateId], references: [id], onDelete: SetNull)
   shippingCity city? @relation("CityShippingRelation", fields: [shippingCityId], references: [id], onDelete: SetNull)
-
-  // Billing Address
   billingName             String
   billingPhone            String
   billingEmail            String
@@ -1013,28 +905,19 @@ model order {
   billingCountryId        BigInt?
   billingStateId          BigInt?
   billingCityId           BigInt?
-
   billingCountry  country? @relation("CountryBillingRelation", fields: [billingCountryId], references: [id], onDelete: SetNull)
   billingState  state? @relation("StateBillingRelation", fields: [billingStateId], references: [id], onDelete: SetNull)
   billingCity  city? @relation("CityBillingRelation", fields: [billingCityId], references: [id], onDelete: SetNull)
-
-  // Optional: payment Reference
   isPostpaid              Boolean   @default(false)
   paymentId               Int?     
   payment                 payment? @relation("OrderPayment", fields: [paymentId], references: [id], onDelete: SetNull)
-
   shippingApiResult       Json?
-
-  // Barcode image path
   barcodeImage            String?   @db.LongText
-
-  complete                Boolean   @default(false)
-  completeDate            DateTime?
-
+  delivered               Boolean   @default(false)
+  deliveredDate           DateTime?
   rtoDelivered            Boolean   @default(false)
-  lastRefreshAt           DateTime? // nullable, updated when status refreshed
-
-  // Meta / Audit Info
+  rtoDeliveredDate        DateTime?
+  lastRefreshAt           DateTime?
   createdAt               DateTime  @default(now())
   createdBy               Int?
   createdByRole           String?
@@ -1044,11 +927,8 @@ model order {
   deletedAt               DateTime?
   deletedBy               Int?
   deletedByRole           String?
-
-  // order Items Relation
-  items           orderItem[] // One-to-many with orderItem model
+  items           orderItem[]
   rtoInventories  rtoInventory[]   @relation("OrderToRtoInventory")
-
   @@index([createdBy])
   @@index([updatedBy])
   @@index([deletedAt])
@@ -1059,15 +939,21 @@ model orderItem {
   orderId       Int
   dropshipperProductId     Int?
   dropshipperProductVariantId     Int?
+  dropshipperId     Int?
+  supplierProductId     Int?
+  supplierProductVariantId     Int?
+  supplierId     Int?
   quantity      Int
   price         Float
   total         Float
-
   order         order                            @relation(fields: [orderId], references: [id])
-  product       dropshipperProduct?              @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
-  variant       dropshipperProductVariant?       @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
+  dropshipperProduct       dropshipperProduct?              @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
+  dropshipperVariant       dropshipperProductVariant?       @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
+  dropshipper       admin?       @relation("OrderItemToDropshipper", fields: [dropshipperId], references: [id], onDelete: SetNull)
+  supplierProduct       supplierProduct?              @relation(fields: [supplierProductId], references: [id], onDelete: SetNull)
+  supplierVariant       supplierProductVariant?       @relation(fields: [supplierProductVariantId], references: [id], onDelete: SetNull)
+  supplier       admin?       @relation("OrderItemToSupplier", fields: [supplierId], references: [id], onDelete: SetNull)
   rtoInventories rtoInventory?        @relation("OrderItemToRtoInventory")
-
   @@index([orderId])
   @@index([dropshipperProductId])
   @@index([dropshipperProductVariantId])
@@ -1081,8 +967,7 @@ model rtoInventory {
   dropshipperProductId        Int
   dropshipperProductVariantId Int
   quantity                    Int       @default(1)
-  price                       Float     @default(0.0) // Unit price of the returned item
-
+  price                       Float     @default(0.0)
   createdAt                   DateTime  @default(now())
   createdBy                   Int?
   createdByRole               String?
@@ -1092,14 +977,11 @@ model rtoInventory {
   deletedAt                   DateTime?
   deletedBy                   Int?
   deletedByRole               String?
-
-  // Relations
   dropshipper               admin                     @relation("AdminToRtoInventory", fields: [dropshipperId], references: [id], onDelete: Cascade)
   order                     order                     @relation("OrderToRtoInventory", fields: [orderId], references: [id])
   orderItem                 orderItem                 @relation("OrderItemToRtoInventory", fields: [orderItemId], references: [id])
   dropshipperProduct        dropshipperProduct        @relation("ProductToRtoInventory", fields: [dropshipperProductId], references: [id])
   dropshipperProductVariant dropshipperProductVariant @relation("VariantToRtoInventory", fields: [dropshipperProductVariantId], references: [id])
-
   @@index([orderId])
   @@index([dropshipperId])
   @@index([dropshipperProductId])
@@ -1113,15 +995,11 @@ model supplierOrderPermission {
   awbNumber       Boolean @default(false)
   status          Boolean @default(false)
   orderNote       Boolean @default(false)
-
-  // Financial Summary
   subtotal        Boolean @default(false)
   tax             Boolean @default(false)
   discount        Boolean @default(false)
   totalAmount     Boolean @default(false)
   currency        Boolean @default(false)
-
-  // Shipping Address
   shippingName    Boolean @default(false)
   shippingPhone   Boolean @default(false)
   shippingEmail   Boolean @default(false)
@@ -1130,8 +1008,6 @@ model supplierOrderPermission {
   shippingCountry Boolean @default(false)
   shippingState   Boolean @default(false)
   shippingCity    Boolean @default(false)
-
-  // Billing Address
   billingName     Boolean @default(false)
   billingPhone    Boolean @default(false)
   billingEmail    Boolean @default(false)

@@ -5,7 +5,8 @@ import {
     refreshPendingOrdersShippingStatus,
     refreshShippingApiResultOfOrder,
     updateAWBNuberOfOrder,
-    updateRTIDeliveredStatusOfOrder,
+    updateRTODeliveredStatusOfOrder,
+    updateDeliveredStatusOfOrder,
     createRTOInventory
 } from '@/app/models/order/order';
 
@@ -58,12 +59,24 @@ export async function GET(req: NextRequest) {
                     results.push({ orderId, status: false, message: 'Shipping API result update failed' });
                 }
 
-                const isDeliveredOrRTO = shippingData.some((item: { status_title: string }) =>
+                const isRTODelivered = shippingData.some((item: { status_title: string }) =>
                     ['rto', 'delivered'].some(keyword => item.status_title.toLowerCase().includes(keyword))
                 );
 
-                if (isDeliveredOrRTO) {
-                    const updateStatus = await updateRTIDeliveredStatusOfOrder(orderId, true);
+                const isDelivered = shippingData.some((item: { status_title: string }) =>
+                    ['delivered'].some(keyword => item.status_title.toLowerCase().includes(keyword))
+                );
+
+                if (isRTODelivered) {
+                    const updateStatus = await updateRTODeliveredStatusOfOrder(orderId, true);
+                    if (!updateStatus?.status) {
+                        logMessage('warn', '⚠️ Failed to update delivered/RTO status', { orderId });
+                        results.push({ orderId, status: false, message: 'Failed to update RTO/Delivered status' });
+                    }
+                }
+
+                if (!isRTODelivered && isDelivered) {
+                    const updateStatus = await updateDeliveredStatusOfOrder(orderId, true);
                     if (!updateStatus?.status) {
                         logMessage('warn', '⚠️ Failed to update delivered/RTO status', { orderId });
                         results.push({ orderId, status: false, message: 'Failed to update RTO/Delivered status' });

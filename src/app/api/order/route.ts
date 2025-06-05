@@ -15,6 +15,14 @@ import { getDropshipperProductById, getDropshipperProductVariantById } from '@/a
 interface Item {
   dropshipperProductId: number;
   dropshipperProductVariantId: number;
+  dropshipper: {
+    connect: { id: number }; // City ID for permanent city (connected to a city record)
+  };
+  supplierProductId: number;
+  supplierProductVariantId: number;
+  supplier: {
+    connect: { id: number }; // City ID for permanent city (connected to a city record)
+  };
   quantity: number;
   price: number;
   total: number;
@@ -286,9 +294,24 @@ export async function POST(req: NextRequest) {
         continue;
       }
 
+      const dropshipperProduct = productExists.dropshipperProduct;
+      const dropshipperVariant = variantExists.variant;
+
       orderItemPayload.push({
         dropshipperProductId,
         dropshipperProductVariantId,
+        dropshipper: {
+          connect: {
+            id: dropshipperProduct?.dropshipperId || 0,
+          },
+        },
+        supplierProductId: dropshipperProduct?.supplierProductId || 0,
+        supplierProductVariantId: dropshipperVariant?.supplierProductVariantId || 0,
+        supplier: {
+          connect: {
+            id: dropshipperProduct?.supplierId || 0,
+          },
+        },
         quantity: Number(item.quantity),
         price: Number(item.price),
         total: Number(item.total),

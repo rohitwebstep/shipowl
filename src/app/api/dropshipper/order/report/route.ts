@@ -165,7 +165,7 @@ export async function GET(req: NextRequest) {
                 if (modal === 'shipowl') {
                     hasShipOwlProduct = true;
 
-                    if (order.complete) {
+                    if (order.delivered) {
                         reportAnalytics.shipowl.deliveredOrder += 1;
                         reportAnalytics.shipowl.totalCODCollected += orderItemQty * Number(dropshipperVariant.price || 0);
                         reportAnalytics.shipowl.totalProductCost += orderItemQty * Number(supplierVariant.price || 0);
@@ -182,7 +182,7 @@ export async function GET(req: NextRequest) {
                 } else if (modal === 'selfship') {
                     const section = reportAnalytics.selfship[orderType];
 
-                    if (order.complete) {
+                    if (order.delivered) {
                         section.deliveredOrder += 1;
                         section.totalCODCollected += orderItemQty * Number(dropshipperVariant.price || 0);
                     } else if (order.rtoDelivered) {
