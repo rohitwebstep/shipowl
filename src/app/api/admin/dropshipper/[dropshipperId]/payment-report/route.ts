@@ -107,7 +107,7 @@ export async function GET(req: NextRequest) {
     console.log(`fromDate - `, fromDate);
     console.log(`toDate - `, toDate);
 
-    const ordersResult = await getOrdersByStatusForDropshipperReporting('completedOrRto', dropshipperIdNum, fromDate, toDate);
+    const ordersResult = await getOrdersByStatusForDropshipperReporting('deliveredOrRto', dropshipperIdNum, fromDate, toDate);
     const orders = ordersResult.orders;
 
     if (!ordersResult?.status || !orders) {
@@ -169,7 +169,7 @@ export async function GET(req: NextRequest) {
 
       orderItems.forEach(item => {
         const orderItemQty = Number(item.quantity) || 0;
-        const dropshipperVariant = item.variant;
+        const dropshipperVariant = item.dropshipperVariant;
 
         if (!dropshipperVariant?.supplierProductVariant) return;
 
