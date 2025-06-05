@@ -90,10 +90,7 @@ export async function updateOrderItemRTOInfo({
     // If status is 'wrong item received', validate uploadedMedia
     if (status.toLowerCase() === 'wrong item received') {
       const { packingGallery, unboxingGallery } = uploadedMedia;
-      if (
-        !Array.isArray(packingGallery) || packingGallery.length === 0 ||
-        !Array.isArray(unboxingGallery) || unboxingGallery.length === 0
-      ) {
+      if (!packingGallery || !unboxingGallery) {
         return {
           status: false,
           message: 'Both packingGallery and unboxingGallery files must be provided when status is "wrong item received".',

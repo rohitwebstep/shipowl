@@ -90,7 +90,8 @@ export async function POST(req: NextRequest) {
 
         // Validate status query parameter
         const urlParams = req.nextUrl.searchParams;
-        const status = urlParams.get('status');
+        const status = decodeURIComponent(urlParams.get('status') || '');
+
         const allowedStatuses = ['received', 'not received', 'wrong item received'];
 
         if (!status || !allowedStatuses.includes(status.toLowerCase())) {
@@ -124,8 +125,8 @@ export async function POST(req: NextRequest) {
             if (
                 !Array.isArray(packingFiles) ||
                 !Array.isArray(unboxingFiles) ||
-                packingFiles.length === 0 ||
-                unboxingFiles.length === 0
+                (Array.isArray(packingFiles) && packingFiles.length === 0) ||
+                (Array.isArray(unboxingFiles) && unboxingFiles.length === 0)
             ) {
                 return NextResponse.json(
                     {
