@@ -923,6 +923,9 @@ CREATE TABLE `orderItem` (
     `quantity` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
     `total` DOUBLE NOT NULL,
+    `supplierRTOResponse` VARCHAR(191) NULL,
+    `packingGallery` LONGTEXT NULL,
+    `unboxingGallery` LONGTEXT NULL,
 
     INDEX `orderItem_orderId_idx`(`orderId`),
     INDEX `orderItem_dropshipperProductId_idx`(`dropshipperProductId`),

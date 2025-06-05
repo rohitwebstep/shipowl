@@ -9,6 +9,16 @@ interface Item {
     orderId: number;
 }
 
+interface UpdateRTOInfoInput {
+  orderId: number;
+  orderItemId: number;
+  status: string;
+  uploadedMedia?: {
+    packingGallery?: string[];
+    unboxingGallery?: string[];
+  };
+}
+
 export async function createOrderItem(items: Item[]) {
     try {
         const newOrderItems = await prisma.orderItem.createMany({
@@ -21,4 +31,92 @@ export async function createOrderItem(items: Item[]) {
         console.error(`Error creating order items:`, error);
         return { status: false, message: "Internal Server Error" };
     }
+}
+
+export async function getOrderItem(orderId: number, orderItemId: number) {
+    try {
+        const orderItem = await prisma.orderItem.findUnique({
+            where: { id: orderItemId },
+        });
+
+        if (!orderItem) {
+            return { status: false, message: "Order item not found" };
+        }
+
+        if (orderItem.orderId !== orderId) {
+            return { status: false, message: "Order ID does not match with the order item" };
+        }
+
+        return { status: true, message: "Order item found", orderItem };
+    } catch (error) {
+        console.error("Error fetching order item:", error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function updateOrderItemRTOInfo({
+  orderId,
+  orderItemId,
+  status,
+  uploadedMedia = {},
+}: UpdateRTOInfoInput) {
+  const allowedStatuses = ['received', 'not received', 'wrong item received'];
+
+  try {
+    // Validate status
+    if (!allowedStatuses.includes(status.toLowerCase())) {
+      return { status: false, message: `Invalid status. Allowed values: ${allowedStatuses.join(', ')}` };
+    }
+
+    // Fetch order item
+    const orderItem = await prisma.orderItem.findUnique({
+      where: { id: orderItemId },
+    });
+
+    if (!orderItem) {
+      return { status: false, message: "Order item not found." };
+    }
+
+    if (orderItem.orderId !== orderId) {
+      return { status: false, message: "Order ID does not match the order item." };
+    }
+
+    // If status is 'wrong item received', validate uploadedMedia
+    if (status.toLowerCase() === 'wrong item received') {
+      const { packingGallery, unboxingGallery } = uploadedMedia;
+      if (
+        !Array.isArray(packingGallery) || packingGallery.length === 0 ||
+        !Array.isArray(unboxingGallery) || unboxingGallery.length === 0
+      ) {
+        return {
+          status: false,
+          message: 'Both packingGallery and unboxingGallery files must be provided when status is "wrong item received".',
+        };
+      }
+    }
+
+    // Prepare update data
+    const updateData: any = {
+      supplierRTOResponse: status,
+    };
+
+    if (status.toLowerCase() === 'wrong item received') {
+      updateData.packingGallery = JSON.stringify(uploadedMedia.packingGallery);
+      updateData.unboxingGallery = JSON.stringify(uploadedMedia.unboxingGallery);
+    } else {
+      updateData.packingGallery = null;
+      updateData.unboxingGallery = null;
+    }
+
+    // Update orderItem record
+    const updatedOrderItem = await prisma.orderItem.update({
+      where: { id: orderItemId },
+      data: updateData,
+    });
+
+    return { status: true, message: "Order item RTO info updated successfully.", orderItem: updatedOrderItem };
+  } catch (error) {
+    console.error("Error updating order item RTO info:", error);
+    return { status: false, message: "Internal Server Error" };
+  }
 }

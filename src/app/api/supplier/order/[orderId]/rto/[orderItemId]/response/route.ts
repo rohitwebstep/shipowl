@@ -1,0 +1,179 @@
+import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
+
+import { logMessage } from '@/utils/commonUtils';
+import { isUserExist } from '@/utils/auth/authUtils';
+import { saveFilesFromFormData } from '@/utils/saveFiles';
+import { getOrderById } from '@/app/models/order/order';
+import { getOrderItem, updateOrderItemRTOInfo } from '@/app/models/order/item';
+
+export async function POST(req: NextRequest) {
+    try {
+        // Extract and validate supplier ID and role headers
+        const supplierIdHeader = req.headers.get('x-supplier-id');
+        const supplierRole = req.headers.get('x-supplier-role');
+        const supplierId = Number(supplierIdHeader);
+
+        if (!supplierIdHeader || isNaN(supplierId)) {
+            logMessage('warn', `Invalid or missing supplier ID: ${supplierIdHeader}`);
+            return NextResponse.json(
+                { error: 'Supplier ID is missing or invalid. Please provide a valid supplier ID.' },
+                { status: 400 }
+            );
+        }
+
+        // Verify user existence
+        const userCheck = await isUserExist(supplierId, String(supplierRole));
+        if (!userCheck.status) {
+            logMessage('warn', `User verification failed: ${userCheck.message}`);
+            return NextResponse.json(
+                { error: `User not found or unauthorized: ${userCheck.message}` },
+                { status: 404 }
+            );
+        }
+
+        // TODO: Replace hardcoded IDs with dynamic values as needed
+        const parts = req.nextUrl.pathname.split('/');
+        const orderId = Number(parts[parts.length - 4]);
+        const orderItemId = Number(parts[parts.length - 2]);
+
+        // Fetch order and order itemW
+        const orderResult = await getOrderById(orderId);
+        const orderItemResult = await getOrderItem(orderId, orderItemId);
+
+        if (!orderResult.status || !orderResult.order) {
+            logMessage('warn', `Order not found or inaccessible. Order ID: ${orderId}`);
+            return NextResponse.json(
+                { status: false, message: 'Order not found or you do not have permission to access it.' },
+                { status: 404 }
+            );
+        }
+
+        if (!orderItemResult.status || !orderItemResult.orderItem) {
+            logMessage('warn', `Order item not found or does not belong to order. Order Item ID: ${orderItemId}`);
+            return NextResponse.json(
+                { status: false, message: 'Order item not found or does not belong to the specified order.' },
+                { status: 404 }
+            );
+        }
+
+        const order = orderResult.order;
+        const orderItem = orderItemResult.orderItem;
+
+        const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+        if (order.rtoDelivered && order.rtoDeliveredDate) {
+            const rtoDeliveredTime = new Date(order.rtoDeliveredDate).getTime();
+            const now = Date.now();
+
+            if (now - rtoDeliveredTime > ONE_DAY_MS) {
+                logMessage('warn', `Dispute period expired for order item ID: ${orderItemId}`);
+                return NextResponse.json(
+                    { status: false, message: 'Dispute period of 24 hours has expired; you cannot dispute now.' },
+                    { status: 400 }
+                );
+            }
+        }
+
+        // Check if RTO Response already submitted
+        if (orderItem.supplierRTOResponse) {
+            logMessage('warn', `RTO response already submitted for order item ID: ${orderItemId}`);
+            return NextResponse.json(
+                { status: false, message: 'RTO response has already been submitted for this order item.' },
+                { status: 409 } // Conflict
+            );
+        }
+
+        // Validate status query parameter
+        const urlParams = req.nextUrl.searchParams;
+        const status = urlParams.get('status');
+        const allowedStatuses = ['received', 'not received', 'wrong item received'];
+
+        if (!status || !allowedStatuses.includes(status.toLowerCase())) {
+            logMessage('warn', `Invalid status received: ${status}`);
+            return NextResponse.json(
+                {
+                    error: `Invalid status value. Allowed values are: ${allowedStatuses.join(', ')}.`,
+                },
+                { status: 400 }
+            );
+        }
+
+        // Handle media uploads if status is "wrong item received"
+        let uploadedMedia: Record<string, string> = {};
+
+        if (status.toLowerCase() === 'wrong item received') {
+            const formData = await req.formData();
+
+            const packingFiles = await saveFilesFromFormData(formData, 'packingGallery', {
+                dir: path.join(process.cwd(), 'public', 'uploads', 'returns'),
+                pattern: 'slug-unique',
+                multiple: true,
+            });
+
+            const unboxingFiles = await saveFilesFromFormData(formData, 'unboxingGallery', {
+                dir: path.join(process.cwd(), 'public', 'uploads', 'returns'),
+                pattern: 'slug-unique',
+                multiple: true,
+            });
+
+            if (
+                !Array.isArray(packingFiles) ||
+                !Array.isArray(unboxingFiles) ||
+                packingFiles.length === 0 ||
+                unboxingFiles.length === 0
+            ) {
+                return NextResponse.json(
+                    {
+                        error: 'Media upload required.',
+                        message:
+                            'Please upload files for both packingGallery and unboxingGallery when status is "wrong item received".',
+                    },
+                    { status: 400 }
+                );
+            }
+
+            uploadedMedia = {
+                packingGallery: packingFiles.map((file: any) => file.url).join(','),
+                unboxingGallery: unboxingFiles.map((file: any) => file.url).join(','),
+            };
+
+            logMessage('info', 'Packing and unboxing media URLs recorded successfully.');
+        }
+
+        // Prepare payload for update
+        const orderItemRTOPayload = {
+            orderId,
+            orderItemId,
+            status,
+            uploadedMedia,
+        };
+
+        const result = await updateOrderItemRTOInfo(orderItemRTOPayload);
+
+        if (!result.status) {
+            logMessage('error', `Failed to update order item status: ${result.message}`);
+            return NextResponse.json(
+                { error: `Failed to update order item status: ${result.message}` },
+                { status: 400 }
+            );
+        }
+
+        logMessage('info', `Order item status updated successfully for orderItemId: ${orderItemId}`);
+
+        return NextResponse.json(
+            {
+                status: true,
+                message: 'Order item status updated successfully.',
+            },
+            { status: 200 }
+        );
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
+        logMessage('error', `Error updating order item status: ${errorMessage}`);
+        return NextResponse.json(
+            { status: false, error: 'An unexpected error occurred while processing your request. Please try again later.' },
+            { status: 500 }
+        );
+    }
+}

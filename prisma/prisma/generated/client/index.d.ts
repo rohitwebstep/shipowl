@@ -42094,6 +42094,9 @@ export namespace Prisma {
     quantity: number | null
     price: number | null
     total: number | null
+    supplierRTOResponse: string | null
+    packingGallery: string | null
+    unboxingGallery: string | null
   }
 
   export type OrderItemMaxAggregateOutputType = {
@@ -42108,6 +42111,9 @@ export namespace Prisma {
     quantity: number | null
     price: number | null
     total: number | null
+    supplierRTOResponse: string | null
+    packingGallery: string | null
+    unboxingGallery: string | null
   }
 
   export type OrderItemCountAggregateOutputType = {
@@ -42122,6 +42128,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse: number
+    packingGallery: number
+    unboxingGallery: number
     _all: number
   }
 
@@ -42166,6 +42175,9 @@ export namespace Prisma {
     quantity?: true
     price?: true
     total?: true
+    supplierRTOResponse?: true
+    packingGallery?: true
+    unboxingGallery?: true
   }
 
   export type OrderItemMaxAggregateInputType = {
@@ -42180,6 +42192,9 @@ export namespace Prisma {
     quantity?: true
     price?: true
     total?: true
+    supplierRTOResponse?: true
+    packingGallery?: true
+    unboxingGallery?: true
   }
 
   export type OrderItemCountAggregateInputType = {
@@ -42194,6 +42209,9 @@ export namespace Prisma {
     quantity?: true
     price?: true
     total?: true
+    supplierRTOResponse?: true
+    packingGallery?: true
+    unboxingGallery?: true
     _all?: true
   }
 
@@ -42295,6 +42313,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse: string | null
+    packingGallery: string | null
+    unboxingGallery: string | null
     _count: OrderItemCountAggregateOutputType | null
     _avg: OrderItemAvgAggregateOutputType | null
     _sum: OrderItemSumAggregateOutputType | null
@@ -42328,6 +42349,9 @@ export namespace Prisma {
     quantity?: boolean
     price?: boolean
     total?: boolean
+    supplierRTOResponse?: boolean
+    packingGallery?: boolean
+    unboxingGallery?: boolean
     order?: boolean | orderDefaultArgs<ExtArgs>
     dropshipperProduct?: boolean | orderItem$dropshipperProductArgs<ExtArgs>
     dropshipperVariant?: boolean | orderItem$dropshipperVariantArgs<ExtArgs>
@@ -42352,9 +42376,12 @@ export namespace Prisma {
     quantity?: boolean
     price?: boolean
     total?: boolean
+    supplierRTOResponse?: boolean
+    packingGallery?: boolean
+    unboxingGallery?: boolean
   }
 
-  export type orderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "dropshipperProductId" | "dropshipperProductVariantId" | "dropshipperId" | "supplierProductId" | "supplierProductVariantId" | "supplierId" | "quantity" | "price" | "total", ExtArgs["result"]["orderItem"]>
+  export type orderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "dropshipperProductId" | "dropshipperProductVariantId" | "dropshipperId" | "supplierProductId" | "supplierProductVariantId" | "supplierId" | "quantity" | "price" | "total" | "supplierRTOResponse" | "packingGallery" | "unboxingGallery", ExtArgs["result"]["orderItem"]>
   export type orderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | orderDefaultArgs<ExtArgs>
     dropshipperProduct?: boolean | orderItem$dropshipperProductArgs<ExtArgs>
@@ -42390,6 +42417,9 @@ export namespace Prisma {
       quantity: number
       price: number
       total: number
+      supplierRTOResponse: string | null
+      packingGallery: string | null
+      unboxingGallery: string | null
     }, ExtArgs["result"]["orderItem"]>
     composites: {}
   }
@@ -42778,6 +42808,9 @@ export namespace Prisma {
     readonly quantity: FieldRef<"orderItem", 'Int'>
     readonly price: FieldRef<"orderItem", 'Float'>
     readonly total: FieldRef<"orderItem", 'Float'>
+    readonly supplierRTOResponse: FieldRef<"orderItem", 'String'>
+    readonly packingGallery: FieldRef<"orderItem", 'String'>
+    readonly unboxingGallery: FieldRef<"orderItem", 'String'>
   }
     
 
@@ -46395,7 +46428,10 @@ export namespace Prisma {
     supplierId: 'supplierId',
     quantity: 'quantity',
     price: 'price',
-    total: 'total'
+    total: 'total',
+    supplierRTOResponse: 'supplierRTOResponse',
+    packingGallery: 'packingGallery',
+    unboxingGallery: 'unboxingGallery'
   };
 
   export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
@@ -46967,6 +47003,15 @@ export namespace Prisma {
   };
 
   export type orderOrderByRelevanceFieldEnum = (typeof orderOrderByRelevanceFieldEnum)[keyof typeof orderOrderByRelevanceFieldEnum]
+
+
+  export const orderItemOrderByRelevanceFieldEnum: {
+    supplierRTOResponse: 'supplierRTOResponse',
+    packingGallery: 'packingGallery',
+    unboxingGallery: 'unboxingGallery'
+  };
+
+  export type orderItemOrderByRelevanceFieldEnum = (typeof orderItemOrderByRelevanceFieldEnum)[keyof typeof orderItemOrderByRelevanceFieldEnum]
 
 
   export const rtoInventoryOrderByRelevanceFieldEnum: {
@@ -51413,6 +51458,9 @@ export namespace Prisma {
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
+    supplierRTOResponse?: StringNullableFilter<"orderItem"> | string | null
+    packingGallery?: StringNullableFilter<"orderItem"> | string | null
+    unboxingGallery?: StringNullableFilter<"orderItem"> | string | null
     order?: XOR<OrderScalarRelationFilter, orderWhereInput>
     dropshipperProduct?: XOR<DropshipperProductNullableScalarRelationFilter, dropshipperProductWhereInput> | null
     dropshipperVariant?: XOR<DropshipperProductVariantNullableScalarRelationFilter, dropshipperProductVariantWhereInput> | null
@@ -51435,6 +51483,9 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
+    supplierRTOResponse?: SortOrderInput | SortOrder
+    packingGallery?: SortOrderInput | SortOrder
+    unboxingGallery?: SortOrderInput | SortOrder
     order?: orderOrderByWithRelationInput
     dropshipperProduct?: dropshipperProductOrderByWithRelationInput
     dropshipperVariant?: dropshipperProductVariantOrderByWithRelationInput
@@ -51443,6 +51494,7 @@ export namespace Prisma {
     supplierVariant?: supplierProductVariantOrderByWithRelationInput
     supplier?: adminOrderByWithRelationInput
     rtoInventories?: rtoInventoryOrderByWithRelationInput
+    _relevance?: orderItemOrderByRelevanceInput
   }
 
   export type orderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -51460,6 +51512,9 @@ export namespace Prisma {
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
+    supplierRTOResponse?: StringNullableFilter<"orderItem"> | string | null
+    packingGallery?: StringNullableFilter<"orderItem"> | string | null
+    unboxingGallery?: StringNullableFilter<"orderItem"> | string | null
     order?: XOR<OrderScalarRelationFilter, orderWhereInput>
     dropshipperProduct?: XOR<DropshipperProductNullableScalarRelationFilter, dropshipperProductWhereInput> | null
     dropshipperVariant?: XOR<DropshipperProductVariantNullableScalarRelationFilter, dropshipperProductVariantWhereInput> | null
@@ -51482,6 +51537,9 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
+    supplierRTOResponse?: SortOrderInput | SortOrder
+    packingGallery?: SortOrderInput | SortOrder
+    unboxingGallery?: SortOrderInput | SortOrder
     _count?: orderItemCountOrderByAggregateInput
     _avg?: orderItemAvgOrderByAggregateInput
     _max?: orderItemMaxOrderByAggregateInput
@@ -51504,6 +51562,9 @@ export namespace Prisma {
     quantity?: IntWithAggregatesFilter<"orderItem"> | number
     price?: FloatWithAggregatesFilter<"orderItem"> | number
     total?: FloatWithAggregatesFilter<"orderItem"> | number
+    supplierRTOResponse?: StringNullableWithAggregatesFilter<"orderItem"> | string | null
+    packingGallery?: StringNullableWithAggregatesFilter<"orderItem"> | string | null
+    unboxingGallery?: StringNullableWithAggregatesFilter<"orderItem"> | string | null
   }
 
   export type rtoInventoryWhereInput = {
@@ -56876,6 +56937,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -56898,6 +56962,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -56905,6 +56972,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -56927,6 +56997,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -56942,12 +57015,18 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type orderItemUpdateManyMutationInput = {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderItemUncheckedUpdateManyInput = {
@@ -56962,6 +57041,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type rtoInventoryCreateInput = {
@@ -60826,6 +60908,12 @@ export namespace Prisma {
     isNot?: rtoInventoryWhereInput | null
   }
 
+  export type orderItemOrderByRelevanceInput = {
+    fields: orderItemOrderByRelevanceFieldEnum | orderItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type orderItemCountOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
@@ -60838,6 +60926,9 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
+    supplierRTOResponse?: SortOrder
+    packingGallery?: SortOrder
+    unboxingGallery?: SortOrder
   }
 
   export type orderItemAvgOrderByAggregateInput = {
@@ -60866,6 +60957,9 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
+    supplierRTOResponse?: SortOrder
+    packingGallery?: SortOrder
+    unboxingGallery?: SortOrder
   }
 
   export type orderItemMinOrderByAggregateInput = {
@@ -60880,6 +60974,9 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     total?: SortOrder
+    supplierRTOResponse?: SortOrder
+    packingGallery?: SortOrder
+    unboxingGallery?: SortOrder
   }
 
   export type orderItemSumOrderByAggregateInput = {
@@ -65356,6 +65453,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -65376,6 +65476,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -65393,6 +65496,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -65413,6 +65519,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -66307,6 +66416,9 @@ export namespace Prisma {
     quantity?: IntFilter<"orderItem"> | number
     price?: FloatFilter<"orderItem"> | number
     total?: FloatFilter<"orderItem"> | number
+    supplierRTOResponse?: StringNullableFilter<"orderItem"> | string | null
+    packingGallery?: StringNullableFilter<"orderItem"> | string | null
+    unboxingGallery?: StringNullableFilter<"orderItem"> | string | null
   }
 
   export type orderItemUpsertWithWhereUniqueWithoutSupplierInput = {
@@ -74649,6 +74761,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -74669,6 +74784,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -75321,6 +75439,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -75341,6 +75462,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -76444,6 +76568,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
     dropshipper?: adminCreateNestedOneWithoutOrderItemsDropshipperInput
@@ -76464,6 +76591,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -77280,6 +77410,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipper?: adminCreateNestedOneWithoutOrderItemsDropshipperInput
@@ -77300,6 +77433,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -78261,6 +78397,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
     dropshipper?: adminCreateNestedOneWithoutOrderItemsDropshipperInput
@@ -78281,6 +78420,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     rtoInventories?: rtoInventoryUncheckedCreateNestedOneWithoutOrderItemInput
   }
 
@@ -80093,6 +80235,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
     order: orderCreateNestedOneWithoutItemsInput
     dropshipperProduct?: dropshipperProductCreateNestedOneWithoutOrderItemsInput
     dropshipperVariant?: dropshipperProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -80114,6 +80259,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type orderItemCreateOrConnectWithoutRtoInventoriesInput = {
@@ -80442,6 +80590,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -80463,6 +80614,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type dropshipperProductUpsertWithoutRtoInventoriesInput = {
@@ -80582,6 +80736,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type orderItemCreateManySupplierInput = {
@@ -80595,6 +80752,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type shopifyStoreCreateManyAdminInput = {
@@ -80791,6 +80951,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -80811,6 +80974,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -80825,12 +80991,18 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderItemUpdateWithoutSupplierInput = {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -80851,6 +81023,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -80865,6 +81040,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type shopifyStoreUpdateWithoutAdminInput = {
@@ -85882,6 +86060,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type supplierProductVariantCreateManySupplierProductInput = {
@@ -85945,6 +86126,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -85965,6 +86149,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -85979,6 +86166,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type supplierProductVariantUpdateWithoutSupplierProductInput = {
@@ -86174,6 +86364,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type dropshipperProductVariantCreateManySupplierProductVariantInput = {
@@ -86200,6 +86393,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
@@ -86220,6 +86416,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -86234,6 +86433,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type dropshipperProductVariantUpdateWithoutSupplierProductVariantInput = {
@@ -86330,6 +86532,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type rtoInventoryCreateManyDropshipperProductInput = {
@@ -86418,6 +86623,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
     dropshipper?: adminUpdateOneWithoutOrderItemsDropshipperNestedInput
@@ -86438,6 +86646,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -86452,6 +86663,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type rtoInventoryUpdateWithoutDropshipperProductInput = {
@@ -86521,6 +86735,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type rtoInventoryCreateManyDropshipperProductVariantInput = {
@@ -86546,6 +86763,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     order?: orderUpdateOneRequiredWithoutItemsNestedInput
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipper?: adminUpdateOneWithoutOrderItemsDropshipperNestedInput
@@ -86566,6 +86786,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -86580,6 +86803,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type rtoInventoryUpdateWithoutDropshipperProductVariantInput = {
@@ -86836,6 +87062,9 @@ export namespace Prisma {
     quantity: number
     price: number
     total: number
+    supplierRTOResponse?: string | null
+    packingGallery?: string | null
+    unboxingGallery?: string | null
   }
 
   export type rtoInventoryCreateManyOrderInput = {
@@ -86861,6 +87090,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     dropshipperProduct?: dropshipperProductUpdateOneWithoutOrderItemsNestedInput
     dropshipperVariant?: dropshipperProductVariantUpdateOneWithoutOrderItemsNestedInput
     dropshipper?: adminUpdateOneWithoutOrderItemsDropshipperNestedInput
@@ -86881,6 +87113,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     rtoInventories?: rtoInventoryUncheckedUpdateOneWithoutOrderItemNestedInput
   }
 
@@ -86895,6 +87130,9 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
+    supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
+    unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type rtoInventoryUpdateWithoutOrderInput = {

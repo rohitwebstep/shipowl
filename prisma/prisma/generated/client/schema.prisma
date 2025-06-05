@@ -957,7 +957,7 @@ model order {
 }
 
 model orderItem {
-  id                          Int                        @id @default(autoincrement())
+  id                          Int   @id @default(autoincrement())
   orderId                     Int
   dropshipperProductId        Int?
   dropshipperProductVariantId Int?
@@ -968,14 +968,19 @@ model orderItem {
   quantity                    Int
   price                       Float
   total                       Float
-  order                       order                      @relation(fields: [orderId], references: [id])
-  dropshipperProduct          dropshipperProduct?        @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
-  dropshipperVariant          dropshipperProductVariant? @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
-  dropshipper                 admin?                     @relation("OrderItemToDropshipper", fields: [dropshipperId], references: [id], onDelete: SetNull)
-  supplierProduct             supplierProduct?           @relation(fields: [supplierProductId], references: [id], onDelete: SetNull)
-  supplierVariant             supplierProductVariant?    @relation(fields: [supplierProductVariantId], references: [id], onDelete: SetNull)
-  supplier                    admin?                     @relation("OrderItemToSupplier", fields: [supplierId], references: [id], onDelete: SetNull)
-  rtoInventories              rtoInventory?              @relation("OrderItemToRtoInventory")
+
+  supplierRTOResponse String?
+  packingGallery      String? @db.LongText
+  unboxingGallery     String? @db.LongText
+
+  order              order                      @relation(fields: [orderId], references: [id])
+  dropshipperProduct dropshipperProduct?        @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
+  dropshipperVariant dropshipperProductVariant? @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
+  dropshipper        admin?                     @relation("OrderItemToDropshipper", fields: [dropshipperId], references: [id], onDelete: SetNull)
+  supplierProduct    supplierProduct?           @relation(fields: [supplierProductId], references: [id], onDelete: SetNull)
+  supplierVariant    supplierProductVariant?    @relation(fields: [supplierProductVariantId], references: [id], onDelete: SetNull)
+  supplier           admin?                     @relation("OrderItemToSupplier", fields: [supplierId], references: [id], onDelete: SetNull)
+  rtoInventories     rtoInventory?              @relation("OrderItemToRtoInventory")
 
   @@index([orderId])
   @@index([dropshipperProductId])

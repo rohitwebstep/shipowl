@@ -946,6 +946,11 @@ model orderItem {
   quantity      Int
   price         Float
   total         Float
+
+  supplierRTOResponse           String?
+  packingGallery            String?   @db.LongText
+  unboxingGallery            String?   @db.LongText
+
   order         order                            @relation(fields: [orderId], references: [id])
   dropshipperProduct       dropshipperProduct?              @relation(fields: [dropshipperProductId], references: [id], onDelete: SetNull)
   dropshipperVariant       dropshipperProductVariant?       @relation(fields: [dropshipperProductVariantId], references: [id], onDelete: SetNull)
