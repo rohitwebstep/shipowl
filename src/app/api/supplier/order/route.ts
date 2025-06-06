@@ -4,6 +4,7 @@ import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByStatusForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
+import { getPermissions } from '@/app/models/supplier/order/permission';
 
 export async function GET(req: NextRequest) {
     try {
@@ -133,8 +134,10 @@ export async function GET(req: NextRequest) {
             }
         }
 
+        const suppliersResult = await getPermissions();
+
         console.log(`rtoDeliveredDate - `, orders[0].rtoDeliveredDate);
-        return NextResponse.json({ status: true, reportAnalytics, orders }, { status: 200 });
+        return NextResponse.json({ status: true, reportAnalytics, orders, permissions: suppliersResult.permissions }, { status: 200 });
 
     } catch (error) {
         logMessage('error', 'Internal error occurred', { error });
