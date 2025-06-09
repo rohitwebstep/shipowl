@@ -11,6 +11,38 @@ INSERT INTO `adminStaff` (`id`, `admin_id`, `name`, `email`, `password`, `role`,
 (2, 2, 'Rohit Dropshipper Staff', 'rohitwebstep-drop-staff@gmail.com', '$2b$10$vws6emtcbykca5VJkQIsu.o3mzNY5Qj/g/2659P/uHooVQ79VQg5q', 'dropshipper_staff', 'active', '2025-04-07 06:32:17.000', '2025-04-07 06:32:20.000', NULL, NULL, NULL),
 (3, 3, 'Rohit Supplier Staff', 'rohitwebstep-sup-staff@gmail.com', '$2b$10$vws6emtcbykca5VJkQIsu.o3mzNY5Qj/g/2659P/uHooVQ79VQg5q', 'supplier_staff', 'active', '2025-04-07 06:32:17.000', '2025-04-07 06:32:20.000', NULL, NULL, NULL);
 
+INSERT INTO `adminStaffPermission` (
+  `panel`, `module`, `action`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
+) VALUES
+('admin', 'dropshipper', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper', 'listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper', 'view', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper', 'soft-delete', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'dropshipper-order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'view', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'soft-delete', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'supplier-order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'view', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'soft-delete', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'product', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'view', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'soft-delete', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'product', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('dropshipper', 'order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL);
+
 INSERT INTO `brand` (`id`, `name`, `slug`, `description`, `image`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
 (1, 'Apple', 'apple', 'Leading consumer electronics brand', '', 1, '2025-05-28 04:55:12', 1, 'admin', '2025-05-28 04:55:12', NULL, NULL, NULL, NULL, NULL),
 (2, 'Samsung', 'samsung', 'Global electronics and appliances brand', '', 1, '2025-05-28 05:00:00', 1, 'admin', '2025-05-28 05:00:00', NULL, NULL, NULL, NULL, NULL),
