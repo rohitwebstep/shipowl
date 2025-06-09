@@ -254,6 +254,53 @@ CREATE TABLE `adminStaff` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `adminStaffPermission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `panel` VARCHAR(191) NOT NULL,
+    `module` VARCHAR(191) NOT NULL,
+    `action` VARCHAR(191) NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `adminStaffPermission_createdBy_idx`(`createdBy`),
+    INDEX `adminStaffPermission_updatedBy_idx`(`updatedBy`),
+    INDEX `adminStaffPermission_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `adminStaffHasPermission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `adminStaffId` INTEGER NOT NULL,
+    `adminStaffPermissionId` INTEGER NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdBy` INTEGER NULL,
+    `createdByRole` VARCHAR(191) NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedBy` INTEGER NULL,
+    `updatedByRole` VARCHAR(191) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `deletedBy` INTEGER NULL,
+    `deletedByRole` VARCHAR(191) NULL,
+
+    INDEX `adminStaffHasPermission_adminStaffId_idx`(`adminStaffId`),
+    INDEX `adminStaffHasPermission_adminStaffPermissionId_idx`(`adminStaffPermissionId`),
+    INDEX `adminStaffHasPermission_createdBy_idx`(`createdBy`),
+    INDEX `adminStaffHasPermission_updatedBy_idx`(`updatedBy`),
+    INDEX `adminStaffHasPermission_deletedAt_idx`(`deletedAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `permission` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `panel` VARCHAR(191) NOT NULL,
@@ -1038,6 +1085,12 @@ ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_permanentCountryId_fkey` FOR
 
 -- AddForeignKey
 ALTER TABLE `adminStaff` ADD CONSTRAINT `adminStaff_admin_id_fkey` FOREIGN KEY (`admin_id`) REFERENCES `admin`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `adminStaffHasPermission` ADD CONSTRAINT `adminStaffHasPermission_adminStaffId_fkey` FOREIGN KEY (`adminStaffId`) REFERENCES `adminStaff`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `adminStaffHasPermission` ADD CONSTRAINT `adminStaffHasPermission_adminStaffPermissionId_fkey` FOREIGN KEY (`adminStaffPermissionId`) REFERENCES `adminStaffPermission`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `state` ADD CONSTRAINT `state_countryId_fkey` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

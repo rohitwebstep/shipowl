@@ -336,6 +336,39 @@ exports.Prisma.AdminStaffScalarFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.AdminStaffPermissionScalarFieldEnum = {
+  id: 'id',
+  panel: 'panel',
+  module: 'module',
+  action: 'action',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.AdminStaffHasPermissionScalarFieldEnum = {
+  id: 'id',
+  adminStaffId: 'adminStaffId',
+  adminStaffPermissionId: 'adminStaffPermissionId',
+  status: 'status',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  createdByRole: 'createdByRole',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy',
+  updatedByRole: 'updatedByRole',
+  deletedAt: 'deletedAt',
+  deletedBy: 'deletedBy',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.PermissionScalarFieldEnum = {
   id: 'id',
   panel: 'panel',
@@ -1044,6 +1077,21 @@ exports.Prisma.adminStaffOrderByRelevanceFieldEnum = {
   deletedByRole: 'deletedByRole'
 };
 
+exports.Prisma.adminStaffPermissionOrderByRelevanceFieldEnum = {
+  panel: 'panel',
+  module: 'module',
+  action: 'action',
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
+exports.Prisma.adminStaffHasPermissionOrderByRelevanceFieldEnum = {
+  createdByRole: 'createdByRole',
+  updatedByRole: 'updatedByRole',
+  deletedByRole: 'deletedByRole'
+};
+
 exports.Prisma.permissionOrderByRelevanceFieldEnum = {
   panel: 'panel',
   module: 'module',
@@ -1323,6 +1371,8 @@ exports.Prisma.ModelName = {
   bankAccount: 'bankAccount',
   bankAccountChangeRequest: 'bankAccountChangeRequest',
   adminStaff: 'adminStaff',
+  adminStaffPermission: 'adminStaffPermission',
+  adminStaffHasPermission: 'adminStaffHasPermission',
   permission: 'permission',
   loginLog: 'loginLog',
   activityLog: 'activityLog',

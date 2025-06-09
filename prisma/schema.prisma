@@ -266,7 +266,52 @@ model adminStaff {
   permanentCity       city?       @relation(fields: [permanentCityId], references: [id], onDelete: SetNull)
   permanentState      state?      @relation(fields: [permanentStateId], references: [id], onDelete: SetNull)
   permanentCountry    country?    @relation(fields: [permanentCountryId], references: [id], onDelete: SetNull)
-  admin                admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade, name: "AdminToStaff")
+  admin               admin     @relation(fields: [admin_id], references: [id], onDelete: Cascade, name: "AdminToStaff")
+  adminStaffPermissions adminStaffHasPermission[] @relation("AdminStaffToHasPermission")
+}
+
+model adminStaffPermission {
+  id            Int       @id @default(autoincrement())
+  panel         String
+  module        String
+  action        String
+  status        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  createdBy     Int?
+  createdByRole String?
+  updatedAt     DateTime  @updatedAt
+  updatedBy     Int?
+  updatedByRole String?
+  deletedAt     DateTime?
+  deletedBy     Int?
+  deletedByRole String?
+  adminStaffHasPermissions adminStaffHasPermission[] @relation("PermissionToHasPermission")
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
+}
+
+model adminStaffHasPermission {
+  id                    Int       @id @default(autoincrement())
+  adminStaffId          Int
+  adminStaffPermissionId Int
+  status                Boolean   @default(true)
+  createdAt             DateTime  @default(now())
+  createdBy             Int?
+  createdByRole         String?
+  updatedAt             DateTime  @updatedAt
+  updatedBy             Int?
+  updatedByRole         String?
+  deletedAt             DateTime?
+  deletedBy             Int?
+  deletedByRole         String?
+  adminStaff            adminStaff @relation(fields: [adminStaffId], references: [id], onDelete: Cascade, name: "AdminStaffToHasPermission")
+  permission            adminStaffPermission @relation(fields: [adminStaffPermissionId], references: [id], onDelete: Cascade, name: "PermissionToHasPermission")
+  @@index([adminStaffId])
+  @@index([adminStaffPermissionId])
+  @@index([createdBy])
+  @@index([updatedBy])
+  @@index([deletedAt])
 }
 
 model permission {

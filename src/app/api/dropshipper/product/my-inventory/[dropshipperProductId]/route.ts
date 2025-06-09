@@ -5,6 +5,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
+import { getAppConfig } from '@/app/models/app/appConfig';
 
 type Variant = {
   variantId: number;
@@ -54,8 +55,10 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const configResult = await getAppConfig();
+
     logMessage('info', 'Product found:', productResult.dropshipperProduct);
-    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, shopifyStores: shopifyAppsResult.shopifyStores, type: 'my' }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, shopifyStores: shopifyAppsResult.shopifyStores, type: 'my', shippingCost: configResult?.appConfig?.shippingCost }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(
