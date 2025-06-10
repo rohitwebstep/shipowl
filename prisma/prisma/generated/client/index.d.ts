@@ -15910,7 +15910,6 @@ export namespace Prisma {
     id: number | null
     adminStaffId: number | null
     adminStaffPermissionId: number | null
-    status: boolean | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -15926,7 +15925,6 @@ export namespace Prisma {
     id: number | null
     adminStaffId: number | null
     adminStaffPermissionId: number | null
-    status: boolean | null
     createdAt: Date | null
     createdBy: number | null
     createdByRole: string | null
@@ -15942,7 +15940,6 @@ export namespace Prisma {
     id: number
     adminStaffId: number
     adminStaffPermissionId: number
-    status: number
     createdAt: number
     createdBy: number
     createdByRole: number
@@ -15978,7 +15975,6 @@ export namespace Prisma {
     id?: true
     adminStaffId?: true
     adminStaffPermissionId?: true
-    status?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -15994,7 +15990,6 @@ export namespace Prisma {
     id?: true
     adminStaffId?: true
     adminStaffPermissionId?: true
-    status?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -16010,7 +16005,6 @@ export namespace Prisma {
     id?: true
     adminStaffId?: true
     adminStaffPermissionId?: true
-    status?: true
     createdAt?: true
     createdBy?: true
     createdByRole?: true
@@ -16113,7 +16107,6 @@ export namespace Prisma {
     id: number
     adminStaffId: number
     adminStaffPermissionId: number
-    status: boolean
     createdAt: Date
     createdBy: number | null
     createdByRole: string | null
@@ -16148,7 +16141,6 @@ export namespace Prisma {
     id?: boolean
     adminStaffId?: boolean
     adminStaffPermissionId?: boolean
-    status?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -16168,7 +16160,6 @@ export namespace Prisma {
     id?: boolean
     adminStaffId?: boolean
     adminStaffPermissionId?: boolean
-    status?: boolean
     createdAt?: boolean
     createdBy?: boolean
     createdByRole?: boolean
@@ -16180,7 +16171,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type adminStaffHasPermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminStaffId" | "adminStaffPermissionId" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["adminStaffHasPermission"]>
+  export type adminStaffHasPermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminStaffId" | "adminStaffPermissionId" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["adminStaffHasPermission"]>
   export type adminStaffHasPermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     adminStaff?: boolean | adminStaffDefaultArgs<ExtArgs>
     permission?: boolean | adminStaffPermissionDefaultArgs<ExtArgs>
@@ -16196,7 +16187,6 @@ export namespace Prisma {
       id: number
       adminStaffId: number
       adminStaffPermissionId: number
-      status: boolean
       createdAt: Date
       createdBy: number | null
       createdByRole: string | null
@@ -16580,7 +16570,6 @@ export namespace Prisma {
     readonly id: FieldRef<"adminStaffHasPermission", 'Int'>
     readonly adminStaffId: FieldRef<"adminStaffHasPermission", 'Int'>
     readonly adminStaffPermissionId: FieldRef<"adminStaffHasPermission", 'Int'>
-    readonly status: FieldRef<"adminStaffHasPermission", 'Boolean'>
     readonly createdAt: FieldRef<"adminStaffHasPermission", 'DateTime'>
     readonly createdBy: FieldRef<"adminStaffHasPermission", 'Int'>
     readonly createdByRole: FieldRef<"adminStaffHasPermission", 'String'>
@@ -48314,7 +48303,6 @@ export namespace Prisma {
     id: 'id',
     adminStaffId: 'adminStaffId',
     adminStaffPermissionId: 'adminStaffPermissionId',
-    status: 'status',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
     createdByRole: 'createdByRole',
@@ -50982,7 +50970,6 @@ export namespace Prisma {
     id?: IntFilter<"adminStaffHasPermission"> | number
     adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
     adminStaffPermissionId?: IntFilter<"adminStaffHasPermission"> | number
-    status?: BoolFilter<"adminStaffHasPermission"> | boolean
     createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
     createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
     createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
@@ -51000,7 +50987,6 @@ export namespace Prisma {
     id?: SortOrder
     adminStaffId?: SortOrder
     adminStaffPermissionId?: SortOrder
-    status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -51022,7 +51008,6 @@ export namespace Prisma {
     NOT?: adminStaffHasPermissionWhereInput | adminStaffHasPermissionWhereInput[]
     adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
     adminStaffPermissionId?: IntFilter<"adminStaffHasPermission"> | number
-    status?: BoolFilter<"adminStaffHasPermission"> | boolean
     createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
     createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
     createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
@@ -51040,7 +51025,6 @@ export namespace Prisma {
     id?: SortOrder
     adminStaffId?: SortOrder
     adminStaffPermissionId?: SortOrder
-    status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
     createdByRole?: SortOrderInput | SortOrder
@@ -51064,7 +51048,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
     adminStaffId?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
     adminStaffPermissionId?: IntWithAggregatesFilter<"adminStaffHasPermission"> | number
-    status?: BoolWithAggregatesFilter<"adminStaffHasPermission"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"adminStaffHasPermission"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"adminStaffHasPermission"> | number | null
     createdByRole?: StringNullableWithAggregatesFilter<"adminStaffHasPermission"> | string | null
@@ -56220,7 +56203,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionCreateInput = {
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -56238,7 +56220,6 @@ export namespace Prisma {
     id?: number
     adminStaffId: number
     adminStaffPermissionId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -56251,7 +56232,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionUpdateInput = {
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56269,7 +56249,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffId?: IntFieldUpdateOperationsInput | number
     adminStaffPermissionId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56285,7 +56264,6 @@ export namespace Prisma {
     id?: number
     adminStaffId: number
     adminStaffPermissionId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -56298,7 +56276,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionUpdateManyMutationInput = {
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56314,7 +56291,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffId?: IntFieldUpdateOperationsInput | number
     adminStaffPermissionId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61607,7 +61583,6 @@ export namespace Prisma {
     id?: SortOrder
     adminStaffId?: SortOrder
     adminStaffPermissionId?: SortOrder
-    status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -61632,7 +61607,6 @@ export namespace Prisma {
     id?: SortOrder
     adminStaffId?: SortOrder
     adminStaffPermissionId?: SortOrder
-    status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -61648,7 +61622,6 @@ export namespace Prisma {
     id?: SortOrder
     adminStaffId?: SortOrder
     adminStaffPermissionId?: SortOrder
-    status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
     createdByRole?: SortOrder
@@ -71847,7 +71820,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionCreateWithoutAdminStaffInput = {
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -71863,7 +71835,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedCreateWithoutAdminStaffInput = {
     id?: number
     adminStaffPermissionId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -72201,7 +72172,6 @@ export namespace Prisma {
     id?: IntFilter<"adminStaffHasPermission"> | number
     adminStaffId?: IntFilter<"adminStaffHasPermission"> | number
     adminStaffPermissionId?: IntFilter<"adminStaffHasPermission"> | number
-    status?: BoolFilter<"adminStaffHasPermission"> | boolean
     createdAt?: DateTimeFilter<"adminStaffHasPermission"> | Date | string
     createdBy?: IntNullableFilter<"adminStaffHasPermission"> | number | null
     createdByRole?: StringNullableFilter<"adminStaffHasPermission"> | string | null
@@ -72214,7 +72184,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionCreateWithoutPermissionInput = {
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -72230,7 +72199,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedCreateWithoutPermissionInput = {
     id?: number
     adminStaffId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -85198,7 +85166,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionCreateManyAdminStaffInput = {
     id?: number
     adminStaffPermissionId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -85211,7 +85178,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionUpdateWithoutAdminStaffInput = {
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85227,7 +85193,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedUpdateWithoutAdminStaffInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffPermissionId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85242,7 +85207,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedUpdateManyWithoutAdminStaffInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffPermissionId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85257,7 +85221,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionCreateManyPermissionInput = {
     id?: number
     adminStaffId: number
-    status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
     createdByRole?: string | null
@@ -85270,7 +85233,6 @@ export namespace Prisma {
   }
 
   export type adminStaffHasPermissionUpdateWithoutPermissionInput = {
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85286,7 +85248,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedUpdateWithoutPermissionInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85301,7 +85262,6 @@ export namespace Prisma {
   export type adminStaffHasPermissionUncheckedUpdateManyWithoutPermissionInput = {
     id?: IntFieldUpdateOperationsInput | number
     adminStaffId?: IntFieldUpdateOperationsInput | number
-    status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdByRole?: NullableStringFieldUpdateOperationsInput | string | null

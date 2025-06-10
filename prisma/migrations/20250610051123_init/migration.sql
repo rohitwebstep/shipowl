@@ -281,7 +281,6 @@ CREATE TABLE `adminStaffHasPermission` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `adminStaffId` INTEGER NOT NULL,
     `adminStaffPermissionId` INTEGER NOT NULL,
-    `status` BOOLEAN NOT NULL DEFAULT true,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,
     `createdByRole` VARCHAR(191) NULL,

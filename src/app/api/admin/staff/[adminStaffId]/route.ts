@@ -149,6 +149,7 @@ export async function PUT(req: NextRequest) {
       profilePicture: adminUploadedFiles['profilePicture'],
       email,
       phoneNumber: extractString('phoneNumber') || '',
+      permissions: extractString('permissions') || '',
       password: '',
       permanentAddress: extractString('permanentAddress') || '',
       permanentPostalCode: extractString('permanentPostalCode') || '',

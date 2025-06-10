@@ -357,7 +357,6 @@ exports.Prisma.AdminStaffHasPermissionScalarFieldEnum = {
   id: 'id',
   adminStaffId: 'adminStaffId',
   adminStaffPermissionId: 'adminStaffPermissionId',
-  status: 'status',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   createdByRole: 'createdByRole',

@@ -12,6 +12,7 @@ interface AdminStaff {
     profilePicture: string,
     email: string; // Email address of the adminStaff
     phoneNumber: string;
+    permissions: string;
     password: string; // Password for the adminStaff account
     permanentAddress: string; // Permanent address of the adminStaff
     permanentPostalCode: string; // Postal code of the permanent address
@@ -37,26 +38,26 @@ interface AdminStaff {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function checkEmailAvailability(email: string) {
@@ -128,12 +129,27 @@ export async function checkEmailAvailabilityForUpdate(email: string, adminStaffI
 
 export async function createAdminStaff(adminId: number, adminRole: string, adminStaff: AdminStaff) {
     try {
-        const { admin, name, profilePicture, email, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = adminStaff;
+        const {
+            admin,
+            name,
+            profilePicture,
+            email,
+            phoneNumber,
+            permissions,
+            password,
+            permanentAddress,
+            permanentPostalCode,
+            permanentCity,
+            permanentState,
+            permanentCountry,
+            status: statusRaw,
+            createdAt,
+            createdBy,
+            createdByRole
+        } = adminStaff;
 
-        // Convert statusRaw to a boolean using the includes check
+        // Convert statusRaw to a boolean
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
-
-        // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
 
         const newAdminStaff = await prisma.adminStaff.create({
@@ -157,9 +173,33 @@ export async function createAdminStaff(adminId: number, adminRole: string, admin
             },
         });
 
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: Number(permission), panel: 'admin' }
+                });
+
+                if (permissionExists) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: newAdminStaff.id
+                        },
+                    });
+                }
+            }
+        }
+
         return { status: true, adminStaff: serializeBigInt(newAdminStaff) };
+
     } catch (error) {
-        console.error(`Error creating city:`, error);
+        console.error(`Error creating admin staff:`, error);
         return { status: false, message: "Internal Server Error" };
     }
 }
@@ -227,6 +267,7 @@ export const updateAdminStaff = async (
             profilePicture,
             email,
             phoneNumber,
+            permissions,
             permanentAddress,
             permanentPostalCode,
             permanentCity,
@@ -238,29 +279,27 @@ export const updateAdminStaff = async (
             updatedByRole
         } = adminStaff;
 
-        // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
-
-        // Convert boolean status to string ('active' or 'inactive')
         const statusString = status ? 'active' : 'inactive';
 
-        // Fetch current adminStaff details, including password based on withPassword flag
-        const { status: adminStaffStatus, adminStaff: currentAdminStaff, message } = await getAdminStaffById(adminStaffId, withPassword);
+        const { status: adminStaffStatus, adminStaff: currentAdminStaff, message } =
+            await getAdminStaffById(adminStaffId, withPassword);
 
         if (!adminStaffStatus || !currentAdminStaff) {
-            return { status: false, message: message || "AdminStaff not found." };
+            return { status: false, message: message || "Admin staff not found." };
         }
 
-        // Check if currentSupplier has a password (it should if the supplier is valid)
-        const password = (withPassword && currentAdminStaff.password) ? currentAdminStaff.password : '123456'; // Default password
+        const password = (withPassword && currentAdminStaff.password)
+            ? currentAdminStaff.password
+            : '123456'; // Default password fallback
 
+        // Delete old profile picture if new one is provided
         if (profilePicture && profilePicture.trim() !== '' && currentAdminStaff?.profilePicture?.trim()) {
             try {
                 const imageFileName = path.basename(currentAdminStaff.profilePicture.trim());
-                const filePath = path.join(process.cwd(), 'public', 'uploads', 'adminStaff');
+                const filePath = path.join(process.cwd(), 'public', 'uploads', 'adminStaff', imageFileName);
 
                 const fileDeleted = await deleteFile(filePath);
-
                 if (!fileDeleted) {
                     console.warn(`Failed to delete old profile picture: ${imageFileName}`);
                 }
@@ -285,17 +324,57 @@ export const updateAdminStaff = async (
             updatedBy,
             updatedByRole,
             updatedAt,
-            ...(profilePicture && profilePicture.trim() !== '' ? { profilePicture: profilePicture.trim() } : {})
+            ...(profilePicture?.trim() ? { profilePicture: profilePicture.trim() } : {})
         };
 
-        const newAdminStaff = await prisma.adminStaff.update({
+        const updatedAdminStaff = await prisma.adminStaff.update({
             where: { id: adminStaffId },
             data: updateData,
         });
 
-        return { status: true, adminStaff: serializeBigInt(newAdminStaff) };
+        // Assign new permissions if provided
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionId = Number(permission);
+                if (isNaN(permissionId)) {
+                    throw new Error(`Permission ID must be a number. Invalid at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: permissionId, panel: 'admin' }
+                });
+
+                const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({
+                    where: {
+                        adminStaffId: updatedAdminStaff.id,
+                        adminStaffPermissionId: permissionId
+                    }
+                });
+
+                if (permissionExists && !alreadyGivenPermission) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: updatedAdminStaff.id
+                        },
+                    });
+                }
+            }
+        }
+
+        return {
+            status: true,
+            adminStaff: serializeBigInt(updatedAdminStaff)
+        };
+
     } catch (error) {
-        console.error(`Error updating adminStaff:`, error);
+        console.error(`Error updating admin staff:`, error);
         return { status: false, message: "Internal Server Error" };
     }
 };

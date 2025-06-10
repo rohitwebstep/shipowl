@@ -12,6 +12,7 @@ interface SupplierStaff {
     profilePicture: string,
     email: string; // Email address of the supplierStaff
     phoneNumber: string;
+    permissions: string;
     password: string; // Password for the supplierStaff account
     permanentAddress: string; // Permanent address of the supplierStaff
     permanentPostalCode: string; // Postal code of the permanent address
@@ -37,26 +38,26 @@ interface SupplierStaff {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function checkEmailAvailability(email: string) {
@@ -128,7 +129,7 @@ export async function checkEmailAvailabilityForUpdate(email: string, supplierSta
 
 export async function createSupplierStaff(supplierId: number, supplierRole: string, supplierStaff: SupplierStaff) {
     try {
-        const { admin, name, profilePicture, email, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplierStaff;
+        const { admin, name, profilePicture, email, phoneNumber, permissions, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplierStaff;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
@@ -156,6 +157,29 @@ export async function createSupplierStaff(supplierId: number, supplierRole: stri
                 createdByRole
             },
         });
+
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: Number(permission), panel: 'supplier' }
+                });
+
+                if (permissionExists) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: newSupplierStaff.id
+                        },
+                    });
+                }
+            }
+        }
 
         return { status: true, supplierStaff: serializeBigInt(newSupplierStaff) };
     } catch (error) {
@@ -227,6 +251,7 @@ export const updateSupplierStaff = async (
             profilePicture,
             email,
             phoneNumber,
+            permissions,
             permanentAddress,
             permanentPostalCode,
             permanentCity,
@@ -288,12 +313,48 @@ export const updateSupplierStaff = async (
             ...(profilePicture && profilePicture.trim() !== '' ? { profilePicture: profilePicture.trim() } : {})
         };
 
-        const newSupplierStaff = await prisma.adminStaff.update({
+        const updatedSupplierStaff = await prisma.adminStaff.update({
             where: { id: supplierStaffId },
             data: updateData,
         });
 
-        return { status: true, supplierStaff: serializeBigInt(newSupplierStaff) };
+        // Assign new permissions if provided
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionId = Number(permission);
+                if (isNaN(permissionId)) {
+                    throw new Error(`Permission ID must be a number. Invalid at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: permissionId, panel: 'admin' }
+                });
+
+                const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({
+                    where: {
+                        adminStaffId: updatedSupplierStaff.id,
+                        adminStaffPermissionId: permissionId
+                    }
+                });
+
+                if (permissionExists && !alreadyGivenPermission) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: updatedSupplierStaff.id
+                        },
+                    });
+                }
+            }
+        }
+
+        return { status: true, supplierStaff: serializeBigInt(updatedSupplierStaff) };
     } catch (error) {
         console.error(`Error updating supplierStaff:`, error);
         return { status: false, message: "Internal Server Error" };
