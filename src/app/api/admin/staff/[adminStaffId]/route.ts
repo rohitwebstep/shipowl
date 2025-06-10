@@ -7,6 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getAdminStaffById, checkEmailAvailabilityForUpdate, updateAdminStaff, restoreAdminStaff, softDeleteAdminStaff } from '@/app/models/admin/staff';
+import { getStaffPermissions } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -37,7 +38,15 @@ export async function GET(req: NextRequest) {
     const adminStaffResult = await getAdminStaffById(Number(adminStaffId));
     if (adminStaffResult?.status) {
       logMessage('info', 'Admin found:', adminStaffResult.adminStaff);
-      return NextResponse.json({ status: true, adminStaff: adminStaffResult.adminStaff }, { status: 200 });
+
+      const options = {
+        panel: 'admin',
+      };
+
+      const staffPermissionsResult = await getStaffPermissions(options);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      return NextResponse.json({ status: true, adminStaff: adminStaffResult.adminStaff, staffPermissions: staffPermissionsResult?.staffPermissions }, { status: 200 });
     }
 
     logMessage('info', 'Admin Staff found:', adminStaffResult.adminStaff);

@@ -7,6 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getDropshipperStaffById, checkEmailAvailabilityForUpdate, updateDropshipperStaff, restoreDropshipperStaff, softDeleteDropshipperStaff } from '@/app/models/dropshipper/staff';
+import { getStaffPermissions } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -37,7 +38,15 @@ export async function GET(req: NextRequest) {
     const dropshipperStaffResult = await getDropshipperStaffById(Number(dropshipperStaffId));
     if (dropshipperStaffResult?.status) {
       logMessage('info', 'Dropshipper found:', dropshipperStaffResult.dropshipperStaff);
-      return NextResponse.json({ status: true, dropshipperStaff: dropshipperStaffResult.dropshipperStaff }, { status: 200 });
+
+      const options = {
+        panel: 'dropshipper',
+      };
+
+      const staffPermissionsResult = await getStaffPermissions(options);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      return NextResponse.json({ status: true, dropshipperStaff: dropshipperStaffResult.dropshipperStaff, staffPermissions: staffPermissionsResult?.staffPermissions }, { status: 200 });
     }
 
     logMessage('info', 'Dropshipper Staff found:', dropshipperStaffResult.dropshipperStaff);

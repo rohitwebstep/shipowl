@@ -7,6 +7,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getSupplierStaffById, checkEmailAvailabilityForUpdate, updateSupplierStaff, restoreSupplierStaff, softDeleteSupplierStaff } from '@/app/models/supplier/staff';
+import { getStaffPermissions } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -37,7 +38,15 @@ export async function GET(req: NextRequest) {
     const supplierStaffResult = await getSupplierStaffById(Number(supplierStaffId));
     if (supplierStaffResult?.status) {
       logMessage('info', 'Supplier found:', supplierStaffResult.supplierStaff);
-      return NextResponse.json({ status: true, supplierStaff: supplierStaffResult.supplierStaff }, { status: 200 });
+
+      const options = {
+        panel: 'supplier',
+      };
+
+      const staffPermissionsResult = await getStaffPermissions(options);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      return NextResponse.json({ status: true, supplierStaff: supplierStaffResult.supplierStaff, staffPermissions: staffPermissionsResult?.staffPermissions }, { status: 200 });
     }
 
     logMessage('info', 'Supplier Staff found:', supplierStaffResult.supplierStaff);
