@@ -323,38 +323,55 @@ export const updateSupplierStaff = async (
 
         // Assign new permissions if provided
         if (permissions && permissions.trim() !== '') {
-            const permissionsArray = permissions.split(',').map(p => p.trim());
+            const permissionsArray = permissions
+                .split(',')
+                .map(p => p.trim())
+                .filter(p => p !== '');
+
+            const validPermissionIds: number[] = [];
 
             for (const [index, permission] of permissionsArray.entries()) {
-                if (!permission) {
-                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
-                }
-
                 const permissionId = Number(permission);
                 if (isNaN(permissionId)) {
                     throw new Error(`Permission ID must be a number. Invalid at index ${index}: ${permission}`);
                 }
 
                 const permissionExists = await prisma.adminStaffPermission.findFirst({
-                    where: { id: permissionId, panel: 'supplier' }
+                    where: { id: permissionId, panel: 'supplier' },
                 });
+
+                if (!permissionExists) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                validPermissionIds.push(permissionId);
 
                 const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({
                     where: {
                         adminStaffId: updatedSupplierStaff.id,
-                        adminStaffPermissionId: permissionId
-                    }
+                        adminStaffPermissionId: permissionId,
+                    },
                 });
 
-                if (permissionExists && !alreadyGivenPermission) {
+                if (!alreadyGivenPermission) {
                     await prisma.adminStaffHasPermission.create({
                         data: {
-                            adminStaffPermissionId: permissionExists.id,
-                            adminStaffId: updatedSupplierStaff.id
+                            adminStaffPermissionId: permissionId,
+                            adminStaffId: updatedSupplierStaff.id,
                         },
                     });
                 }
             }
+
+            // Now delete permissions that are not in the new list
+            await prisma.adminStaffHasPermission.deleteMany({
+                where: {
+                    adminStaffId: updatedSupplierStaff.id,
+                    adminStaffPermissionId: {
+                        notIn: validPermissionIds,
+                    },
+                },
+            });
         }
 
         return { status: true, supplierStaff: serializeBigInt(updatedSupplierStaff) };
