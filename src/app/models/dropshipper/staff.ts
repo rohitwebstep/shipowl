@@ -167,7 +167,7 @@ export async function createDropshipperStaff(dropshipperId: number, dropshipperR
                 }
 
                 const permissionExists = await prisma.adminStaffPermission.findFirst({
-                    where: { id: Number(permission), panel: 'supplier' }
+                    where: { id: Number(permission), panel: 'dropshipper' }
                 });
 
                 if (permissionExists) {
@@ -336,7 +336,7 @@ export const updateDropshipperStaff = async (
                 }
 
                 const permissionExists = await prisma.adminStaffPermission.findFirst({
-                    where: { id: permissionId, panel: 'admin' }
+                    where: { id: permissionId, panel: 'dropshipper' }
                 });
 
                 const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({

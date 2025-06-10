@@ -336,7 +336,7 @@ export const updateSupplierStaff = async (
                 }
 
                 const permissionExists = await prisma.adminStaffPermission.findFirst({
-                    where: { id: permissionId, panel: 'admin' }
+                    where: { id: permissionId, panel: 'supplier' }
                 });
 
                 const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({
