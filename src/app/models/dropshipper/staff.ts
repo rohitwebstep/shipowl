@@ -12,6 +12,7 @@ interface DropshipperStaff {
     profilePicture: string,
     email: string; // Email address of the dropshipperStaff
     phoneNumber: string;
+    permissions: string;
     password: string; // Password for the dropshipperStaff account
     permanentAddress: string; // Permanent address of the dropshipperStaff
     permanentPostalCode: string; // Postal code of the permanent address
@@ -37,26 +38,26 @@ interface DropshipperStaff {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function checkEmailAvailability(email: string) {
@@ -128,7 +129,7 @@ export async function checkEmailAvailabilityForUpdate(email: string, dropshipper
 
 export async function createDropshipperStaff(dropshipperId: number, dropshipperRole: string, dropshipperStaff: DropshipperStaff) {
     try {
-        const { admin, name, profilePicture, email, phoneNumber, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = dropshipperStaff;
+        const { admin, name, profilePicture, email, phoneNumber, permissions, password, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = dropshipperStaff;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
@@ -156,6 +157,29 @@ export async function createDropshipperStaff(dropshipperId: number, dropshipperR
                 createdByRole
             },
         });
+
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: Number(permission), panel: 'supplier' }
+                });
+
+                if (permissionExists) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: newDropshipperStaff.id
+                        },
+                    });
+                }
+            }
+        }
 
         return { status: true, dropshipperStaff: serializeBigInt(newDropshipperStaff) };
     } catch (error) {
@@ -230,6 +254,7 @@ export const updateDropshipperStaff = async (
             profilePicture,
             email,
             phoneNumber,
+            permissions,
             permanentAddress,
             permanentPostalCode,
             permanentCity,
@@ -291,12 +316,48 @@ export const updateDropshipperStaff = async (
             ...(profilePicture && profilePicture.trim() !== '' ? { profilePicture: profilePicture.trim() } : {})
         };
 
-        const newDropshipperStaff = await prisma.adminStaff.update({
+        const updatedDropshipperStaff = await prisma.adminStaff.update({
             where: { id: dropshipperStaffId },
             data: updateData,
         });
 
-        return { status: true, dropshipperStaff: serializeBigInt(newDropshipperStaff) };
+        // Assign new permissions if provided
+        if (permissions && permissions.trim() !== '') {
+            const permissionsArray = permissions.split(',').map(p => p.trim());
+
+            for (const [index, permission] of permissionsArray.entries()) {
+                if (!permission) {
+                    throw new Error(`Invalid permission at index ${index}: ${permission}`);
+                }
+
+                const permissionId = Number(permission);
+                if (isNaN(permissionId)) {
+                    throw new Error(`Permission ID must be a number. Invalid at index ${index}: ${permission}`);
+                }
+
+                const permissionExists = await prisma.adminStaffPermission.findFirst({
+                    where: { id: permissionId, panel: 'admin' }
+                });
+
+                const alreadyGivenPermission = await prisma.adminStaffHasPermission.findFirst({
+                    where: {
+                        adminStaffId: updatedDropshipperStaff.id,
+                        adminStaffPermissionId: permissionId
+                    }
+                });
+
+                if (permissionExists && !alreadyGivenPermission) {
+                    await prisma.adminStaffHasPermission.create({
+                        data: {
+                            adminStaffPermissionId: permissionExists.id,
+                            adminStaffId: updatedDropshipperStaff.id
+                        },
+                    });
+                }
+            }
+        }
+
+        return { status: true, dropshipperStaff: serializeBigInt(updatedDropshipperStaff) };
     } catch (error) {
         console.error(`Error updating dropshipperStaff:`, error);
         return { status: false, message: "Internal Server Error" };

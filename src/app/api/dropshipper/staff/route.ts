@@ -114,6 +114,7 @@ export async function POST(req: NextRequest) {
       profilePicture: dropshipperUploadedFiles['profilePicture'],
       email,
       phoneNumber: extractString('phoneNumber') || '',
+      permissions: extractString('permissions') || '',
       password: hashedPassword,
       permanentAddress: extractString('permanentAddress') || '',
       permanentPostalCode: extractString('permanentPostalCode') || '',
