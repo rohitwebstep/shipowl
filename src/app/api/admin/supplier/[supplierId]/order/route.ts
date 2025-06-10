@@ -5,6 +5,7 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByStatusForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
 import { getSupplierById } from '@/app/models/supplier/supplier';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function GET(req: NextRequest) {
     try {
@@ -23,6 +24,29 @@ export async function GET(req: NextRequest) {
         if (!userCheck.status) {
             logMessage('warn', 'User not found', { adminId, adminRole });
             return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+        }
+
+        const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+        if (isStaff) {
+            const options = {
+                panel: 'admin',
+                module: 'supplier',
+                action: 'order-report',
+            };
+
+            const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+            logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+            if (!staffPermissionsResult.status) {
+                return NextResponse.json(
+                    {
+                        status: false,
+                        message: staffPermissionsResult.message || "You do not have permission to perform this action."
+                    },
+                    { status: 403 }
+                );
+            }
         }
 
         const parts = req.nextUrl.pathname.split('/');

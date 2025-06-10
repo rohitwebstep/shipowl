@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
@@ -50,22 +50,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const result = await checkAdminPermission({
-      admin_id: 1,
-      panel: "admin",
-      role: "admin",
-      module: "product",
-      action: "create"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!result.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: result.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'create',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'category', 'main_sku', 'brand', 'origin_country', 'shipping_country'];
@@ -408,6 +413,29 @@ export async function GET(req: NextRequest) {
         { status: false, error: `User Not Found: ${userExistence.message}` },
         { status: 404 }
       );
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'view-listing',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Check if categoryId and brandId exist, and construct productFilters accordingly

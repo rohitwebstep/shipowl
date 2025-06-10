@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function GET(req: NextRequest) {
   try {

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getDropshippersByStatus } from '@/app/models/dropshipper/dropshipper';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function GET(req: NextRequest) {
   try {
@@ -32,22 +32,27 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "dropshipper",
-      action: "trash-view"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'trash-listing',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Fetch all dropshippers

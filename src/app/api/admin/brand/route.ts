@@ -9,7 +9,7 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { createBrand, getBrandsByStatus } from '@/app/models/admin/brand';
 import { fetchLogInfo } from '@/utils/commonUtils';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+
     // Check if admin exists
     const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
@@ -43,22 +44,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: adminId,
-      role: String(adminRole),
-      panel: "admin",
-      module: "brand",
-      action: "create"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'brand',
+        action: 'create',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const isMultipleImages = true; // Set true to allow multiple image uploads

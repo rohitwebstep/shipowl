@@ -1,4 +1,4 @@
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 import { handleLogin } from '../../../../controllers/admin/authController';
 import { NextRequest } from 'next/server';
 

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getProductById, removeProductImageByIndex } from '@/app/models/admin/product/product';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type ImageType =
   | 'package_weight_image'
@@ -19,7 +20,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', `Attempting to delete image (${imageIndex}) from product (${productId})`);
 
     // Validate admin headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -41,6 +42,29 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', 'Admin authentication failed', { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate product existence

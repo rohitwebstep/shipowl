@@ -8,6 +8,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailabilityForUpdate, updateDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -38,6 +39,29 @@ export async function PUT(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'email'];

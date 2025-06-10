@@ -10,7 +10,7 @@ import { getCategoryById } from '@/app/models/admin/category';
 import { getCountryById } from '@/app/models/location/country'
 import { getProductById, checkMainSKUAvailabilityForUpdate, checkVariantSKUsAvailabilityForUpdate, updateProduct, assignProductVisibilityToSuppliers, softDeleteProduct, restoreProduct } from '@/app/models/admin/product/product';
 import { getSupplierById } from '@/app/models/supplier/supplier';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Product ID:', productId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -50,6 +50,29 @@ export async function GET(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'view',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const productIdNum = Number(productId);
@@ -108,22 +131,27 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const result = await checkAdminPermission({
-      admin_id: 1,
-      panel: "admin",
-      role: "admin",
-      module: "product",
-      action: "edit"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!result.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: result.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'category', 'main_sku', 'brand', 'origin_country', 'shipping_country'];
@@ -451,6 +479,29 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'restore',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     const productIdNum = Number(productId);
     if (isNaN(productIdNum)) {
       logMessage('warn', 'Invalid product ID', { productId });
@@ -489,7 +540,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', 'Delete Product Request:', { productId });
 
     // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     // Validate admin ID
@@ -503,6 +554,29 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'product',
+        action: 'soft-delete',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate product ID

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getCategoryById, deleteCategory } from '@/app/models/admin/category';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -13,7 +13,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', 'Delete Category Request:', { categoryId });
 
     // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     // Validate admin ID
@@ -29,22 +29,27 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "category",
-      action: "permanent-delete"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'category',
+        action: 'permanent-delete',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate category ID

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getBankAccountById, removeBankAccountImageByIndex } from '@/app/models/dropshipper/bankAccount';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type ImageType = "cancelledChequeImage";
 
@@ -26,19 +27,42 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', `Attempting to delete image (${imageIndex}) from bankAccount (${bankAccountId})`);
 
     // Validate admin headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
-    if (!adminId || isNaN(Number(adminId))) {
+    if (!adminId || isNaN(adminId)) {
       logMessage('warn', 'Missing or invalid admin ID header', { adminId });
       return NextResponse.json({ error: 'Admin ID is missing or invalid' }, { status: 400 });
     }
 
     // Authenticate admin user
-    const userCheck = await isUserExist(Number(adminId), String(adminRole));
+    const userCheck = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', 'Admin authentication failed', { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate bankAccount existence

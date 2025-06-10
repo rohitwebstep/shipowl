@@ -42,3 +42,71 @@ export const getStaffPermissions = async (filter: StaffPermissionFilter = {}) =>
         };
     }
 };
+
+export const checkStaffPermissionStatus = async (filter: StaffPermissionFilter = {}, staffId: number) => {
+    try {
+
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID",
+            };
+        }
+
+        // Fetch staff permissions based on the provided filter and staff ID
+        if (!filter.panel || !filter.module || !filter.action) {
+            return {
+                status: false,
+                message: "all of filter must be provided",
+            };
+        }
+
+        const isValidPanel = ["admin", "supplier", "customer"].includes(filter.panel);
+        if (!isValidPanel) {
+            return {
+                status: false,
+                message: "Invalid panel provided",
+            };
+        }
+
+        const staffPermissionsExist = await prisma.adminStaffPermission.findFirst({
+            where: {
+                panel: filter.panel,
+                module: filter.module,
+                action: filter.action
+            },
+        });
+
+        if (!staffPermissionsExist) {
+            return {
+                status: false,
+                message: "No permissions found for the given filter",
+            };
+        }
+
+        const staffPermissions = await prisma.adminStaffHasPermission.findFirst({
+            where: {
+                adminStaffPermissionId: staffPermissionsExist.id,
+                adminStaffId: staffId
+            },
+            orderBy: { id: "desc" },
+        });
+
+        if (!staffPermissions) {
+            return {
+                status: false,
+                message: "Action Unauthorized",
+            };
+        }
+        return {
+            status: true,
+            message: "Action Authorized",
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching staff permissions",
+        };
+    }
+};

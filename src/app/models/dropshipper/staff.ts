@@ -201,6 +201,9 @@ export const getDropshipperStaffById = async (id: number, withPassword: boolean 
     try {
         const dropshipperStaff = await prisma.adminStaff.findUnique({
             where: { id, role: 'dropshipper_staff' },
+            include: {
+                adminStaffPermissions: true,
+            }
         });
 
         logMessage(`debug`, `withPassword:`, withPassword);

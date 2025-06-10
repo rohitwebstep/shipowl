@@ -6,7 +6,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getCategoryById, updateCategory, softDeleteCategory, restoreCategory } from '@/app/models/admin/category';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Category ID:', categoryId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -37,22 +37,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "category",
-      action: "view"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'category',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const categoryIdNum = Number(categoryId);
@@ -101,22 +106,27 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "category",
-      action: "edit"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'category',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const categoryIdNum = Number(categoryId);
@@ -241,22 +251,27 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "category",
-      action: "restore"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'category',
+        action: 'restore',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const categoryIdNum = Number(categoryId);
@@ -297,7 +312,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', 'Delete Category Request:', { categoryId });
 
     // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     // Validate admin ID
@@ -313,22 +328,27 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "category",
-      action: "soft-delete"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'category',
+        action: 'soft-delete',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate category ID

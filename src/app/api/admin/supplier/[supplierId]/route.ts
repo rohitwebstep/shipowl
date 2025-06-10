@@ -8,7 +8,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getSupplierById, checkEmailAvailabilityForUpdate, checkUsernameAvailabilityForUpdate, updateSupplier, restoreSupplier, softDeleteSupplier } from '@/app/models/supplier/supplier';
 import { updateSupplierCompany } from '@/app/models/supplier/company';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Supplier ID:', supplierId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -39,22 +39,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "dropshipper",
-      action: "view"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'view',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const supplierIdNum = Number(supplierId);
@@ -114,22 +119,27 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "dropshipper",
-      action: "edit"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'view',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'username', 'email'];
@@ -472,6 +482,29 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'restore',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     const supplierIdNum = Number(supplierId);
     if (isNaN(supplierIdNum)) {
       logMessage('warn', 'Invalid supplier ID', { supplierId });
@@ -510,7 +543,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', 'Delete Supplier Request:', { supplierId });
 
     // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     // Validate admin ID
@@ -526,22 +559,27 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "dropshipper",
-      action: "edit"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'soft-delete',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate supplier ID

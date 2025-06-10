@@ -5,6 +5,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { getOrdersByStatusForDropshipperReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
 import { getDropshipperById } from '@/app/models/dropshipper/dropshipper';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function GET(req: NextRequest) {
   try {
@@ -34,6 +35,29 @@ export async function GET(req: NextRequest) {
         { status: false, error: `User Not Found: ${userExistence.message}` },
         { status: 404 }
       );
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'view',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate dropshipper ID

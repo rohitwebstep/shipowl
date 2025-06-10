@@ -7,6 +7,7 @@ import {
 } from '@/app/models/supplier/supplier';
 import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function PATCH(req: NextRequest) {
   try {
@@ -29,6 +30,29 @@ export async function PATCH(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', 'Admin user not found', { adminId, adminRole });
       return NextResponse.json({ error: `Admin user not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const supplierIdNum = Number(supplierId);

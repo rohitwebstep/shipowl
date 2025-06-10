@@ -3,13 +3,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getDropshipperById } from '@/app/models/dropshipper/dropshipper';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function GET(req: NextRequest) {
     try {
         const parts = req.nextUrl.pathname.split('/');
         const dropshipperId = Number(parts[parts.length - 2]); // Get the second-to-last segment
 
-        const adminId = req.headers.get('x-dropshipper-id');
+        const adminId = Number(req.headers.get('x-dropshipper-id'));
         const adminRole = req.headers.get('x-dropshipper-role');
 
         if (!adminId || isNaN(Number(adminId))) {
@@ -23,6 +24,29 @@ export async function GET(req: NextRequest) {
         if (!userCheck.status) {
             logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
             return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+        }
+
+        const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+        if (isStaff) {
+            const options = {
+                panel: 'admin',
+                module: 'dropshipper',
+                action: 'view',
+            };
+
+            const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+            logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+            if (!staffPermissionsResult.status) {
+                return NextResponse.json(
+                    {
+                        status: false,
+                        message: staffPermissionsResult.message || "You do not have permission to perform this action."
+                    },
+                    { status: 403 }
+                );
+            }
         }
 
         const dropshipperIdNum = Number(dropshipperId);

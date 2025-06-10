@@ -240,7 +240,10 @@ export const getAdminStaffsByStatus = async (
 export const getAdminStaffById = async (id: number, withPassword: boolean | string | number = false) => {
     try {
         const adminStaff = await prisma.adminStaff.findUnique({
-            where: { id, role: 'admin_staff' }
+            where: { id, role: 'admin_staff' },
+            include: {
+                adminStaffPermissions: true,
+            }
         });
 
         logMessage(`debug`, `withPassword:`, withPassword);

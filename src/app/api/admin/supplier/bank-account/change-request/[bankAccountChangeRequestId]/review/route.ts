@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getBankAccountChangeRequestById, reviewBankAccountChangeRequest } from '@/app/models/supplier/bankAccount';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,6 +36,29 @@ export async function POST(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'supplier',
+        action: 'review-bank-account-change-request',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const bankAccountChangeRequestIdNum = Number(bankAccountChangeRequestId);

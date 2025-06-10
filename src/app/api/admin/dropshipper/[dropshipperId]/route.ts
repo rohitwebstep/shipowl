@@ -9,7 +9,7 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getDropshipperById, checkEmailAvailabilityForUpdate, updateDropshipper, restoreDropshipper, softDeleteDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';
 import { updateDropshipperBankAccount } from '@/app/models/dropshipper/bankAccount';
-import { checkAdminPermission } from '@/utils/auth/checkAdminPermission';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Dropshipper ID:', dropshipperId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -51,22 +51,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
-    const permissionResult = await checkAdminPermission({
-      admin_id: Number(adminId),
-      role: String(adminRole),
-      panel: "admin",
-      module: "dropshipper",
-      action: "view"
-    });
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (!permissionResult.status) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: permissionResult.message || "You do not have permission to perform this action."
-        },
-        { status: 403 }
-      );
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const dropshipperIdNum = Number(dropshipperId);
@@ -88,7 +93,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ status: false, error: 'Server error' }, { status: 500 });
   }
 }
-
 
 export async function PUT(req: NextRequest) {
 
@@ -125,6 +129,29 @@ export async function PUT(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'update',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'email'];
@@ -425,6 +452,29 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
     }
 
+    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'restore',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     const dropshipperIdNum = Number(dropshipperId);
     if (isNaN(dropshipperIdNum)) {
       logMessage('warn', 'Invalid dropshipper ID', { dropshipperId });
@@ -463,7 +513,7 @@ export async function DELETE(req: NextRequest) {
     logMessage('debug', 'Delete Dropshipper Request:', { dropshipperId });
 
     // Extract admin ID and role from headers
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     // Validate admin ID
@@ -477,6 +527,29 @@ export async function DELETE(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+    }
+
+        const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaff) {
+      const options = {
+        panel: 'admin',
+        module: 'dropshipper',
+        action: 'soft-delete',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Validate dropshipper ID
