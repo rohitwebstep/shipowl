@@ -57,16 +57,9 @@ export async function GET(req: NextRequest) {
       ? await getProductsByFiltersAndStatus(type, filters, supplierId, status)
       : await getProductsByStatus(type, supplierId, status);
 
-    if (productsResult?.status) {
-      return NextResponse.json(
-        { status: true, products: productsResult.products, type },
-        { status: 200 }
-      );
-    }
-
     return NextResponse.json(
-      { status: false, error: 'No products found' },
-      { status: 404 }
+      { status: true, products: productsResult?.products, type },
+      { status: 200 }
     );
 
   } catch (error) {

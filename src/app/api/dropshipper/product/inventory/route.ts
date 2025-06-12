@@ -58,25 +58,17 @@ export async function GET(req: NextRequest) {
       ? await getProductsByFiltersAndStatus(type, filters, dropshipperId, status)
       : await getProductsByStatus(type, dropshipperId, status);
 
-    if (productsResult?.status) {
-
-      const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
-      if (!shopifyAppsResult.status) {
-        return NextResponse.json(
-          { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
-          { status: 400 }
-        );
-      }
-
+    const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+    if (!shopifyAppsResult.status) {
       return NextResponse.json(
-        { status: true, products: productsResult.products, shopifyStores: shopifyAppsResult.shopifyStores, type },
-        { status: 200 }
+        { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
+        { status: 400 }
       );
     }
 
     return NextResponse.json(
-      { status: false, error: 'No products found' },
-      { status: 404 }
+      { status: true, products: productsResult?.products, shopifyStores: shopifyAppsResult.shopifyStores, type },
+      { status: 200 }
     );
 
   } catch (error) {
