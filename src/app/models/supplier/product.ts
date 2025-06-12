@@ -339,7 +339,7 @@ export const getProductsByFiltersAndStatus = async (
             products = enrichedProducts;
         }
 
-        return { status: true, products };
+        return { status: true, products: serializeBigInt(products) };
     } catch (error) {
         console.error("Error fetching products:", error);
         return { status: false, message: "Error fetching products" };
