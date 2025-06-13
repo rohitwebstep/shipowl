@@ -5,6 +5,39 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByStatusForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
 import { getPermissions } from '@/app/models/supplier/order/permission';
+import { checkStaffPermissionStatus, getStaffPermissionsByStaffId } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
+type Permission = {
+    permission: {
+        module: string;
+        action: string;
+        // other fields inside permission
+    };
+    // other fields outside permission
+};
 
 export async function GET(req: NextRequest) {
     try {
@@ -19,10 +52,44 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ status: false, error: 'Invalid or missing supplier ID' }, { status: 400 });
         }
 
-        const userCheck = await isUserExist(supplierId, String(supplierRole));
+        const userCheck: UserCheckResult = await isUserExist(supplierId, String(supplierRole));
+
         if (!userCheck.status) {
             logMessage('warn', 'User not found', { supplierId, supplierRole });
             return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+        }
+
+        let mainSupplierId = supplierId;
+
+        const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(supplierRole));
+
+        let assignedPermissions: Permission[] = [];
+        let staffPermissionApplied = false;
+
+        if (isStaffUser) {
+            const supplierPermissionCheck = await checkStaffPermissionStatus({
+                panel: 'supplier',
+                module: 'order',
+                action: 'report',
+            }, supplierId);
+
+            logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
+
+            if (!supplierPermissionCheck.status) {
+                return NextResponse.json({
+                    status: false,
+                    message: supplierPermissionCheck.message || "You do not have permission to perform this action."
+                }, { status: 403 });
+            }
+
+            const orderVariablePermissionCheck = await getStaffPermissionsByStaffId({
+                panel: 'supplier',
+                module: 'order-variables'
+            }, supplierId);
+
+            mainSupplierId = userCheck.admin?.admin?.id ?? supplierId;
+            staffPermissionApplied = true;
+            assignedPermissions = orderVariablePermissionCheck?.assignedPermissions || [];
         }
 
         const searchParams = req.nextUrl.searchParams;
@@ -61,7 +128,7 @@ export async function GET(req: NextRequest) {
         const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
         const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
 
-        const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
+        const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', mainSupplierId, fromDate, toDate);
         const orders = ordersResult.orders;
 
         console.log(`ordersResult - `, ordersResult);
@@ -134,10 +201,10 @@ export async function GET(req: NextRequest) {
             }
         }
 
-        const suppliersResult = await getPermissions();
+        const supplierPermissionsResult = await getPermissions();
 
         console.log(`rtoDeliveredDate - `, orders[0].rtoDeliveredDate);
-        return NextResponse.json({ status: true, reportAnalytics, orders, permissions: suppliersResult.permissions }, { status: 200 });
+        return NextResponse.json({ status: true, reportAnalytics, orders, permissions: supplierPermissionsResult.permissions, staffPermissionApplied, assignedPermissions }, { status: 200 });
 
     } catch (error) {
         logMessage('error', 'Internal error occurred', { error });

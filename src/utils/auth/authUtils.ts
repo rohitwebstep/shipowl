@@ -49,7 +49,7 @@ export async function isUserExist(adminId: number, adminRole: string) {
                     id: true,
                     name: true,
                     email: true,
-                    password: true, // Hashed password stored in DB
+                    password: true,
                     role: true,
                 },
             });
@@ -62,7 +62,8 @@ export async function isUserExist(adminId: number, adminRole: string) {
                     email: true,
                     password: true, // Hashed password stored in DB
                     role: true,
-                },
+                    admin: true
+                }
             });
         }
 
