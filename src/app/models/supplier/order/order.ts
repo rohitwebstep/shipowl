@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { logMessage } from "@/utils/commonUtils";
 
 const serializeBigInt = <T>(obj: T): T => {
     if (typeof obj === "bigint") {
