@@ -129,11 +129,10 @@ export async function GET(req: NextRequest) {
         const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
 
         const ordersResult = await getOrdersByTypeForSupplierReporting('rtoCount', mainSupplierId, fromDate, toDate);
-        const orders = ordersResult.orders;
+        const orders = ordersResult.orders || [];
 
-        console.log(`ordersResult - `, ordersResult);
-        if (!ordersResult?.status || !orders?.length) {
-            return NextResponse.json({ status: false, error: 'No orders found' }, { status: 404 });
+        if (!ordersResult?.status) {
+            return NextResponse.json({ status: false, message: ordersResult.message }, { status: 404 });
         }
 
         const configResult = await getAppConfig();
@@ -166,38 +165,40 @@ export async function GET(req: NextRequest) {
             },
         };
 
-        for (const order of orders) {
-            const orderItems = order.items || [];
-            const isPostpaid = order.isPostpaid;
-            const orderType: 'prepaid' | 'postpaid' = isPostpaid ? 'postpaid' : 'prepaid';
+        if (orders.length !== 0) {
+            for (const order of orders) {
+                const orderItems = order.items || [];
+                const isPostpaid = order.isPostpaid;
+                const orderType: 'prepaid' | 'postpaid' = isPostpaid ? 'postpaid' : 'prepaid';
 
-            let shipOwlInOrder = false;
+                let shipOwlInOrder = false;
 
-            for (const item of orderItems) {
-                const quantity = Number(item.quantity) || 0;
-                const variant = item.dropshipperVariant?.supplierProductVariant;
+                for (const item of orderItems) {
+                    const quantity = Number(item.quantity) || 0;
+                    const variant = item.dropshipperVariant?.supplierProductVariant;
 
-                if (!variant) continue;
+                    if (!variant) continue;
 
-                const modal = variant.variant?.modal?.toLowerCase() || '';
+                    const modal = variant.variant?.modal?.toLowerCase() || '';
 
-                if (modal === 'shipowl') {
-                    shipOwlInOrder = true;
-                    if (order.delivered) {
-                        reportAnalytics.shipowl.deliveredOrder++;
-                        reportAnalytics.shipowl.totalProductCost += quantity * (variant.price || 0);
-                    } else if (order.rtoDelivered) {
-                        reportAnalytics.shipowl.rtoOrder++;
+                    if (modal === 'shipowl') {
+                        shipOwlInOrder = true;
+                        if (order.delivered) {
+                            reportAnalytics.shipowl.deliveredOrder++;
+                            reportAnalytics.shipowl.totalProductCost += quantity * (variant.price || 0);
+                        } else if (order.rtoDelivered) {
+                            reportAnalytics.shipowl.rtoOrder++;
+                        }
+                    } else if (modal === 'selfship') {
+                        const section = reportAnalytics.selfship[orderType];
+                        section.deliveredOrder++;
+                        section.totalProductCost += quantity * (variant.price || 0);
                     }
-                } else if (modal === 'selfship') {
-                    const section = reportAnalytics.selfship[orderType];
-                    section.deliveredOrder++;
-                    section.totalProductCost += quantity * (variant.price || 0);
                 }
-            }
 
-            if (shipOwlInOrder) {
-                reportAnalytics.shipowl.orderCount++;
+                if (shipOwlInOrder) {
+                    reportAnalytics.shipowl.orderCount++;
+                }
             }
         }
 
