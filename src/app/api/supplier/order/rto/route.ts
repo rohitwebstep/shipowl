@@ -5,9 +5,7 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByTypeForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
 import { getPermissions } from '@/app/models/supplier/order/permission';
-import { createWarehouseCollected } from '@/app/models/supplier/order/order';
 import { checkStaffPermissionStatus, getStaffPermissionsByStaffId } from '@/app/models/staffPermission';
-import { validateFormData } from '@/utils/validateFormData';
 
 interface MainAdmin {
     id: number;
