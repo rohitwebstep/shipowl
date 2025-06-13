@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     let assignedPermissions: Permission[] = [];
-    let arePermissionsApplied = false;
+    let staffPermissionApplied = false;
 
     if (isStaffUser) {
       const supplierPermissionCheck = await checkStaffPermissionStatus({
@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
         module: 'order-variables'
       }, adminId);
 
-      arePermissionsApplied = true;
+      staffPermissionApplied = true;
       assignedPermissions = orderVariablePermissionCheck?.assignedPermissions || [];
     }
 
@@ -170,7 +170,7 @@ export async function GET(req: NextRequest) {
       status: true,
       reportAnalytics: analytics,
       orders: orderData.orders,
-      arePermissionsApplied,
+      staffPermissionApplied,
       assignedPermissions,
     }, { status: 200 });
   } catch (error) {
