@@ -80,26 +80,26 @@ interface RTOInventory {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function generateOrderNumber(base: string = '') {
@@ -787,6 +787,105 @@ export const getOrdersByStatusForSupplierReporting = async (
         return { status: true, orders: serializeBigInt(orders) };
     } catch (error) {
         console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return { status: false, message: "Error fetching orders" };
+    }
+};
+
+export const getOrdersByTypeForSupplierReporting = async (
+    type: "warehouseCollected" | "rtoCount" | "needToRaise",
+    supplierId: number,
+    fromDate: string,
+    toDate: string
+) => {
+    try {
+        const baseWhere: Record<string, unknown> = {};
+
+        // Status/type-based conditions
+        switch (type) {
+            case "warehouseCollected":
+                baseWhere.collectedAtWarehouse = { not: null };
+                break;
+            case "rtoCount":
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = { not: null };
+                break;
+            case "needToRaise":
+                baseWhere.collectedAtWarehouse = null;
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = { not: null };
+                break;
+        }
+
+        // Prepare date range condition
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+
+        const andConditions: Record<string, unknown>[] = [];
+
+        if (isValidRange) {
+            if (type === "warehouseCollected") {
+                andConditions.push({
+                    collectedAtWarehouse: { gte: from, lte: to }
+                });
+            } else if (type === "rtoCount") {
+                andConditions.push({
+                    rtoDeliveredDate: { gte: from, lte: to }
+                });
+            }
+            // `needToRaise` has no date filter as per current logic
+        }
+
+        // Add supplier-specific condition
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        supplierId: supplierId
+                    }
+                }
+            }
+        });
+
+        // Merge AND conditions if any exist
+        if (andConditions.length > 0) {
+            baseWhere.AND = andConditions;
+        }
+
+        // Query orders
+        const orders = await prisma.order.findMany({
+            where: baseWhere,
+            orderBy: { id: "desc" },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+
+        console.log(`📦 Orders fetched for ${type}:`, orders.length);
+        return { status: true, orders: serializeBigInt(orders) };
+    } catch (error) {
+        console.error(`❌ Error fetching orders for ${type}:`, error);
         return { status: false, message: "Error fetching orders" };
     }
 };

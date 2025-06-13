@@ -962,6 +962,8 @@ model order {
   rtoDelivered            Boolean   @default(false)
   rtoDeliveredDate        DateTime?
   lastRefreshAt           DateTime?
+
+  collectedAtWarehouse    DateTime?
   createdAt               DateTime  @default(now())
   createdBy               Int?
   createdByRole           String?
