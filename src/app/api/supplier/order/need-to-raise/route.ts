@@ -130,7 +130,7 @@ export async function GET(req: NextRequest) {
         const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
         const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
 
-        const ordersResult = await getOrdersByTypeForSupplierReporting('warehouseCollected', mainSupplierId, fromDate, toDate);
+        const ordersResult = await getOrdersByTypeForSupplierReporting('needToRaise', mainSupplierId, fromDate, toDate);
         const orders = ordersResult.orders;
 
         console.log(`ordersResult - `, ordersResult);
@@ -208,81 +208,6 @@ export async function GET(req: NextRequest) {
         console.log(`rtoDeliveredDate - `, orders[0].rtoDeliveredDate);
         return NextResponse.json({ status: true, reportAnalytics, orders, permissions: supplierPermissionsResult.permissions, staffPermissionApplied, assignedPermissions }, { status: 200 });
 
-    } catch (error) {
-        logMessage('error', 'Internal error occurred', { error });
-        return NextResponse.json({ status: false, error: 'Failed to fetch orders due to an internal error' }, { status: 500 });
-    }
-}
-
-export async function POST(req: NextRequest) {
-    try {
-        const supplierIdHeader = req.headers.get('x-supplier-id');
-        const supplierRole = req.headers.get('x-supplier-role');
-
-        logMessage('info', 'Supplier headers received', { supplierIdHeader, supplierRole });
-
-        const supplierId = Number(supplierIdHeader);
-        if (!supplierIdHeader || isNaN(supplierId)) {
-            logMessage('warn', 'Invalid supplier ID', { supplierIdHeader });
-            return NextResponse.json({ status: false, error: 'Invalid or missing supplier ID' }, { status: 400 });
-        }
-
-        const userCheck: UserCheckResult = await isUserExist(supplierId, String(supplierRole));
-
-        if (!userCheck.status) {
-            logMessage('warn', 'User not found', { supplierId, supplierRole });
-            return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
-        }
-
-        // let mainSupplierId = supplierId;
-
-        const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(supplierRole));
-
-        if (isStaffUser) {
-            const supplierPermissionCheck = await checkStaffPermissionStatus({
-                panel: 'supplier',
-                module: 'order',
-                action: 'warehouse-collected',
-            }, supplierId);
-
-            logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
-
-            if (!supplierPermissionCheck.status) {
-                return NextResponse.json({
-                    status: false,
-                    message: supplierPermissionCheck.message || "You do not have permission to perform this action."
-                }, { status: 403 });
-            }
-        }
-
-        const requiredFields = ['orderNumber'];
-        const formData = await req.formData();
-        const validation = validateFormData(formData, {
-            requiredFields: requiredFields,
-            patternValidations: { orderNumber: 'string' },
-        });
-
-        if (!validation.isValid) {
-            logMessage('warn', 'Form validation failed', validation.error);
-            return NextResponse.json({ status: false, error: validation.error, message: validation.message }, { status: 400 });
-        }
-
-        const extractString = (key: string) => (formData.get(key) as string) || null;
-
-        const orderNumber = extractString('orderNumber');
-
-        if (!orderNumber) {
-            logMessage('warn', 'Order number is required', { orderNumber });
-            return NextResponse.json({ status: false, error: 'Order number is required' }, { status: 400 });
-        }
-
-        const orderResult = await createWarehouseCollected(orderNumber);
-        if (!orderResult.status || !orderResult.order) {
-            logMessage('warn', 'Failed to create warehouse collected', { orderResult });
-            return NextResponse.json({ status: false, error: orderResult.message || 'Failed to create warehouse collected' }, { status: 404 });
-        }
-
-        return NextResponse.json({ status: true, order: orderResult.order, message: 'Warehouse collected successfully' }, { status: 200 });
     } catch (error) {
         logMessage('error', 'Internal error occurred', { error });
         return NextResponse.json({ status: false, error: 'Failed to fetch orders due to an internal error' }, { status: 500 });
