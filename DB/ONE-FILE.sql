@@ -11,7 +11,7 @@ INSERT INTO `adminStaff` (`id`, `admin_id`, `name`, `email`, `password`, `role`,
 (2, 2, 'Rohit Dropshipper Staff', 'rohitwebstep-drop-staff@gmail.com', '$2b$10$vws6emtcbykca5VJkQIsu.o3mzNY5Qj/g/2659P/uHooVQ79VQg5q', 'dropshipper_staff', 'active', '2025-04-07 06:32:17.000', '2025-04-07 06:32:20.000', NULL, NULL, NULL),
 (3, 3, 'Rohit Supplier Staff', 'rohitwebstep-sup-staff@gmail.com', '$2b$10$vws6emtcbykca5VJkQIsu.o3mzNY5Qj/g/2659P/uHooVQ79VQg5q', 'supplier_staff', 'active', '2025-04-07 06:32:17.000', '2025-04-07 06:32:20.000', NULL, NULL, NULL);
 
-INSERT INTO `adminStaffPermission` (
+INSERT INTO `adminstaffpermission` (
   `panel`, `module`, `action`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`
 ) VALUES
 ('admin', 'dropshipper', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
@@ -28,6 +28,34 @@ INSERT INTO `adminStaffPermission` (
 ('admin', 'supplier', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'supplier', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'supplier-order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+
+('admin', 'order-variables', 'id', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'orderNumber', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'awbNumber', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'status', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'orderNote', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'subtotal', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'tax', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'discount', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'totalAmount', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'currency', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingName', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingPhone', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingEmail', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingAddress', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingZip', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingCountry', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingState', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'shippingCity', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingName', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingPhone', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingEmail', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingAddress', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingZip', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingCountry', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingState', , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'order-variables', 'billingCity' , 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),,
+
 ('supplier', 'product', 'create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('supplier', 'product', 'listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('supplier', 'product', 'view', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
@@ -42,36 +70,6 @@ INSERT INTO `adminStaffPermission` (
 ('dropshipper', 'product', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('dropshipper', 'product', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('dropshipper', 'order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL);
-
-INSERT INTO `adminStaffHasPermission` (`adminStaffId`, `adminStaffPermissionId`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
-(1, 1, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 2, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 3, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 4, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 5, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 6, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 7, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 8, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 9, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 10, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 11, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 12, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 13, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 14, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 15, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 16, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 17, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 18, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 19, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 20, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 21, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 22, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 23, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 24, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 25, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 26, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 27, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL),
-(1, 28, '2025-06-10 10:43:29.000', NULL, NULL, '2025-06-10 10:43:29.000', NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO `brand` (`id`, `name`, `slug`, `description`, `image`, `status`, `createdAt`, `createdBy`, `createdByRole`, `updatedAt`, `updatedBy`, `updatedByRole`, `deletedAt`, `deletedBy`, `deletedByRole`) VALUES
 (1, 'Apple', 'apple', 'Leading consumer electronics brand', '', 1, '2025-05-28 04:55:12', 1, 'admin', '2025-05-28 04:55:12', NULL, NULL, NULL, NULL, NULL),
