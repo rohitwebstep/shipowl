@@ -110,3 +110,78 @@ export const checkStaffPermissionStatus = async (filter: StaffPermissionFilter =
         };
     }
 };
+
+export const getStaffPermissionsByStaffId = async (filter: StaffPermissionFilter = {}, staffId: number) => {
+    try {
+        // Validate staff ID
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID",
+            };
+        }
+
+        // Validate panel if provided
+        if (filter.panel) {
+            const isValidPanel = ["admin", "supplier", "customer", "dropshipper"].includes(filter.panel);
+            if (!isValidPanel) {
+                return {
+                    status: false,
+                    message: "Invalid panel provided",
+                };
+            }
+        }
+
+        // Fetch permissions matching the filter
+        const matchingPermissions = await prisma.adminStaffPermission.findMany({
+            where: {
+                ...(filter.panel && { panel: filter.panel }),
+                ...(filter.module && { module: filter.module }),
+                ...(filter.action && { action: filter.action }),
+            },
+            orderBy: { id: 'desc' },
+        });
+
+        if (!matchingPermissions.length) {
+            return {
+                status: false,
+                message: "No matching permissions found for the given filter",
+            };
+        }
+
+        const permissionIds = matchingPermissions.map(p => p.id);
+
+        // Get all permissions assigned to the staff from filtered list
+        const assignedPermissions = await prisma.adminStaffHasPermission.findMany({
+            where: {
+                adminStaffPermissionId: {
+                    in: permissionIds,
+                },
+                adminStaffId: staffId,
+            },
+            include: {
+                permission: true, // optional: if you want full permission data from relation
+            },
+            orderBy: { id: 'desc' },
+        });
+
+        if (!assignedPermissions.length) {
+            return {
+                status: false,
+                message: "No permissions assigned to this staff for the given filter",
+            };
+        }
+
+        return {
+            status: true,
+            message: "Permissions retrieved successfully",
+            assignedPermissions,
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissionsByStaffId Error:", error);
+        return {
+            status: false,
+            message: "Error retrieving staff permissions",
+        };
+    }
+};

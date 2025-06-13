@@ -5,12 +5,21 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrdersByStatusForSupplierReporting } from '@/app/models/order/order';
 import { getAppConfig } from '@/app/models/app/appConfig';
 import { getSupplierById } from '@/app/models/supplier/supplier';
-import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+import { checkStaffPermissionStatus, getStaffPermissionsByStaffId } from '@/app/models/staffPermission';
+
+type Permission = {
+  permission: {
+    module: string;
+    action: string;
+    // other fields inside permission
+  };
+  // other fields outside permission
+};
 
 export async function GET(req: NextRequest) {
   try {
-    const parts = req.nextUrl.pathname.split('/');
-    const supplierIdRaw = parts[parts.length - 2];
+    const pathSegments = req.nextUrl.pathname.split('/');
+    const supplierIdRaw = pathSegments[pathSegments.length - 2];
     const supplierId = Number(supplierIdRaw);
 
     logMessage('debug', 'Supplier ID extracted from path', { supplierId });
@@ -26,33 +35,38 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: false, error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(adminId, String(adminRole));
-    if (!userCheck.status) {
+    const userValidation = await isUserExist(adminId, String(adminRole));
+    if (!userValidation.status) {
       logMessage('warn', 'User not found', { adminId, adminRole });
-      return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json({ status: false, error: `User Not Found: ${userValidation.message}` }, { status: 404 });
     }
 
-    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (isStaff) {
-      const options = {
+    let assignedPermissions: Permission[] = [];
+
+    if (isStaffUser) {
+      const supplierPermissionCheck = await checkStaffPermissionStatus({
         panel: 'admin',
         module: 'supplier',
-        action: 'payment-report',
-      };
+        action: 'orders',
+      }, adminId);
 
-      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
-      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+      logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
 
-      if (!staffPermissionsResult.status) {
-        return NextResponse.json(
-          {
-            status: false,
-            message: staffPermissionsResult.message || "You do not have permission to perform this action."
-          },
-          { status: 403 }
-        );
+      if (!supplierPermissionCheck.status) {
+        return NextResponse.json({
+          status: false,
+          message: supplierPermissionCheck.message || "You do not have permission to perform this action."
+        }, { status: 403 });
       }
+
+      const orderVariablePermissionCheck = await getStaffPermissionsByStaffId({
+        panel: 'admin',
+        module: 'order-variables'
+      }, adminId);
+
+      assignedPermissions = orderVariablePermissionCheck?.assignedPermissions || [];
     }
 
     if (isNaN(supplierId)) {
@@ -66,116 +80,96 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: false, error: 'Supplier not found' }, { status: 404 });
     }
 
-    const searchParams = req.nextUrl.searchParams;
-    const fromRaw = searchParams.get('from');
-    const toRaw = searchParams.get('to');
+    const { searchParams } = req.nextUrl;
+    const fromDateRaw = searchParams.get('from');
+    const toDateRaw = searchParams.get('to');
 
-    const parseDate = (value: string | null, outputFormat: string): string | null => {
-      if (!value) return null;
-
-      console.log(`outputFormat - `, outputFormat);
+    const parseDate = (dateStr: string | null): string | null => {
+      if (!dateStr) return null;
 
       const patterns = [
-        { regex: /^(\d{2})-(\d{2})-(\d{4})$/, order: ['year', 'month', 'day'] },  // DD-MM-YYYY
-        { regex: /^(\d{4})-(\d{2})-(\d{2})$/, order: ['year', 'month', 'day'] },  // YYYY-MM-DD
-        { regex: /^(\d{2})\/(\d{2})\/(\d{4})$/, order: ['year', 'month', 'day'] }, // DD/MM/YYYY
-        { regex: /^(\d{4})\/(\d{2})\/(\d{2})$/, order: ['year', 'month', 'day'] }, // YYYY/MM/DD
+        /^(\d{2})-(\d{2})-(\d{4})$/,
+        /^(\d{4})-(\d{2})-(\d{2})$/,
+        /^(\d{2})\/(\d{2})\/(\d{4})$/,
+        /^(\d{4})\/(\d{2})\/(\d{2})$/,
       ];
 
-      for (const { regex } of patterns) {
-        const match = value.match(regex);
+      for (const pattern of patterns) {
+        const match = dateStr.match(pattern);
         if (match) {
           const [, a, b, c] = match;
-          const [year, month, day] = regex === patterns[0].regex || regex === patterns[2].regex
-            ? [c, b, a] : [a, b, c];
-          const parsed = new Date(`${year}-${month}-${day}`);
-          if (!isNaN(parsed.getTime())) {
-            return parsed.toISOString().split('T')[0]; // YYYY-MM-DD
+          const [year, month, day] = pattern.source.startsWith('^\d{4}') ? [a, b, c] : [c, b, a];
+          const date = new Date(`${year}-${month}-${day}`);
+          if (!isNaN(date.getTime())) {
+            return date.toISOString().split('T')[0];
           }
         }
       }
 
-      logMessage('warn', 'Failed to parse date', { value });
+      logMessage('warn', 'Failed to parse date', { dateStr });
       return null;
     };
 
-    const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
-    const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
+    const fromDate = parseDate(fromDateRaw) || '';
+    const toDate = parseDate(toDateRaw) || '';
 
-    const ordersResult = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
-    const orders = ordersResult.orders;
+    const orderData = await getOrdersByStatusForSupplierReporting('deliveredOrRto', supplierId, fromDate, toDate);
 
-    if (!ordersResult?.status || !orders?.length) {
+    if (!orderData?.status || !orderData.orders?.length) {
       return NextResponse.json({ status: false, error: 'No orders found' }, { status: 404 });
     }
 
-    const configResult = await getAppConfig();
-    const appConfig = configResult.appConfig;
-
-    if (!configResult.status || !appConfig) {
+    const configData = await getAppConfig();
+    if (!configData.status || !configData.appConfig) {
       return NextResponse.json({ status: false, error: 'No app config found' }, { status: 404 });
     }
 
-    const reportAnalytics = {
-      shipowl: {
-        orderCount: 0,
-        totalProductCost: 0,
-        deliveredOrder: 0,
-        rtoOrder: 0
-      },
+    const analytics = {
+      shipowl: { orderCount: 0, totalProductCost: 0, deliveredOrder: 0, rtoOrder: 0 },
       selfship: {
-        prepaid: {
-          orderCount: 0,
-          totalProductCost: 0,
-          deliveredOrder: 0,
-          rtoOrder: 0
-        },
-        postpaid: {
-          orderCount: 0,
-          totalProductCost: 0,
-          deliveredOrder: 0,
-          rtoOrder: 0
-        },
+        prepaid: { orderCount: 0, totalProductCost: 0, deliveredOrder: 0, rtoOrder: 0 },
+        postpaid: { orderCount: 0, totalProductCost: 0, deliveredOrder: 0, rtoOrder: 0 },
       },
     };
 
-    for (const order of orders) {
-      const orderItems = order.items || [];
-      const isPostpaid = order.isPostpaid;
-      const orderType: 'prepaid' | 'postpaid' = isPostpaid ? 'postpaid' : 'prepaid';
+    for (const order of orderData.orders) {
+      const items = order.items || [];
+      const type: 'prepaid' | 'postpaid' = order.isPostpaid ? 'postpaid' : 'prepaid';
 
-      let shipOwlInOrder = false;
+      let isShipowl = false;
 
-      for (const item of orderItems) {
-        const quantity = Number(item.quantity) || 0;
+      for (const item of items) {
+        const qty = Number(item.quantity) || 0;
         const variant = item.dropshipperVariant?.supplierProductVariant;
 
         if (!variant) continue;
 
-        const modal = variant.variant?.modal?.toLowerCase() || '';
+        const shippingMethod = variant.variant?.modal?.toLowerCase() || '';
 
-        if (modal === 'shipowl') {
-          shipOwlInOrder = true;
+        if (shippingMethod === 'shipowl') {
+          isShipowl = true;
           if (order.delivered) {
-            reportAnalytics.shipowl.deliveredOrder++;
-            reportAnalytics.shipowl.totalProductCost += quantity * (variant.price || 0);
+            analytics.shipowl.deliveredOrder++;
+            analytics.shipowl.totalProductCost += qty * (variant.price || 0);
           } else if (order.rtoDelivered) {
-            reportAnalytics.shipowl.rtoOrder++;
+            analytics.shipowl.rtoOrder++;
           }
-        } else if (modal === 'selfship') {
-          const section = reportAnalytics.selfship[orderType];
+        } else if (shippingMethod === 'selfship') {
+          const section = analytics.selfship[type];
           section.deliveredOrder++;
-          section.totalProductCost += quantity * (variant.price || 0);
+          section.totalProductCost += qty * (variant.price || 0);
         }
       }
 
-      if (shipOwlInOrder) {
-        reportAnalytics.shipowl.orderCount++;
-      }
+      if (isShipowl) analytics.shipowl.orderCount++;
     }
 
-    return NextResponse.json({ status: true, reportAnalytics, orders }, { status: 200 });
-
+    return NextResponse.json({
+      status: true,
+      reportAnalytics: analytics,
+      orders: orderData.orders,
+      assignedPermissions,
+    }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Internal error occurred', { error });
     return NextResponse.json({ status: false, error: 'Failed to fetch orders due to an internal error' }, { status: 500 });
