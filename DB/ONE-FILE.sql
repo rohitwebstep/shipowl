@@ -1,4 +1,4 @@
-INSERT INTO `appconfig` (`id`, `shippingCost`, `status`) VALUES (NULL, '75', '1');
+INSERT INTO `appConfig` (`id`, `shippingCost`, `status`) VALUES (NULL, '75', '1');
 
 INSERT INTO `admin` (`id`, `name`, `uniqeId`, `username`, `email`, `password`, `role`, `status`, `createdAt`, `updatedAt`, `pr_token`, `pr_expires_at`, `pr_last_reset`) VALUES
 (1, 'Rohit Admin', 'ADMIN-12', 'rohit-admin', 'rohitwebstep-admin@gmail.com', '$2b$10$hW8vbhToemWerVuNQ5W4l.7RVppP2Y3a8hooIZTPidgugCkWMcOyC', 'admin', 'active', '2025-04-07 05:19:36.000', '2025-04-14 06:32:13.419', NULL, NULL, '2025-04-14 06:32:13.417'),
@@ -28,6 +28,14 @@ INSERT INTO `adminStaffPermission` (
 ('admin', 'supplier', 'trash-listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'supplier', 'update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'supplier', 'orders', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'create', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'view-listing', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'trash-listing', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'permanent-delete', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'update', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'restore', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'view', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'product', 'soft-delete', '1', '2025-06-09 17:44:14.000000', NULL, NULL, '2025-06-09 17:44:14.000000', NULL, NULL, NULL, NULL, NULL),
 
 ('admin', 'order-variables', 'orderNumber', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'order-variables', 'awbNumber', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),

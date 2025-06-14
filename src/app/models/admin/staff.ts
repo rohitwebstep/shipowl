@@ -311,24 +311,47 @@ export const updateAdminStaff = async (
             }
         }
 
-        const updateData = {
-            admin,
-            name,
-            email,
-            phoneNumber,
-            password,
-            role: 'admin_staff',
-            permanentAddress,
-            permanentPostalCode,
-            permanentCity,
-            permanentState,
-            permanentCountry,
-            status: statusString,
-            updatedBy,
-            updatedByRole,
-            updatedAt,
-            ...(profilePicture?.trim() ? { profilePicture: profilePicture.trim() } : {})
-        };
+        let updateData;
+        if (withPassword) {
+            updateData = {
+                admin,
+                name,
+                email,
+                phoneNumber,
+                password,
+                role: 'admin_staff',
+                permanentAddress,
+                permanentPostalCode,
+                permanentCity,
+                permanentState,
+                permanentCountry,
+                status: statusString,
+                updatedBy,
+                updatedByRole,
+                updatedAt,
+                ...(profilePicture?.trim() ? { profilePicture: profilePicture.trim() } : {})
+            };
+
+        } else {
+            updateData = {
+                admin,
+                name,
+                email,
+                phoneNumber,
+                role: 'admin_staff',
+                permanentAddress,
+                permanentPostalCode,
+                permanentCity,
+                permanentState,
+                permanentCountry,
+                status: statusString,
+                updatedBy,
+                updatedByRole,
+                updatedAt,
+                ...(profilePicture?.trim() ? { profilePicture: profilePicture.trim() } : {})
+            };
+
+        }
 
         const updatedAdminStaff = await prisma.adminStaff.update({
             where: { id: adminStaffId },
