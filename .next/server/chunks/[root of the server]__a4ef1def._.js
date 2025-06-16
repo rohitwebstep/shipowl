@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/dropshipper/auth/login/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/dropshipper/product/my-inventory/[dropshipperProductId]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -9450,6 +9450,158 @@ connectToDatabase().catch((error)=>{
 });
 const __TURBOPACK__default__export__ = prisma;
 }}),
+"[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "ActivityLog": (()=>ActivityLog),
+    "fetchLogInfo": (()=>fetchLogInfo),
+    "logMessage": (()=>logMessage)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/ua-parser-js/src/main/ua-parser.mjs [app-route] (ecmascript)");
+;
+;
+async function logMessage(type, message, item) {
+    try {
+        const isDev = process.env.DEBUG === 'true' || ("TURBOPACK compile-time value", "development") === 'development';
+        if ("TURBOPACK compile-time falsy", 0) {
+            "TURBOPACK unreachable";
+        }
+        const logWithMessage = (logFn, prefix = '')=>{
+            if (item !== undefined) {
+                logFn(`${prefix}${message}`, item);
+            } else {
+                logFn(`${prefix}${message}`);
+            }
+        };
+        switch(type.toLowerCase()){
+            case 'error':
+                logWithMessage(console.error, '❌ ');
+                break;
+            case 'warn':
+                logWithMessage(console.warn, '⚠️ ');
+                break;
+            case 'info':
+                logWithMessage(console.info, 'ℹ️ ');
+                break;
+            case 'debug':
+                logWithMessage(console.debug, '🔍 ');
+                break;
+            case 'log':
+                logWithMessage(console.log);
+                break;
+            case 'trace':
+                logWithMessage(console.trace, '🔍 ');
+                break;
+            case 'table':
+                if (item !== undefined) console.table(item);
+                break;
+            case 'group':
+                console.group(message);
+                break;
+            case 'groupend':
+                console.groupEnd();
+                break;
+            default:
+                logWithMessage(console.log, '📌 ');
+                break;
+        }
+    } catch (error) {
+        console.error('❌ Error in logMessage:', error);
+    }
+}
+async function ActivityLog(params) {
+    try {
+        const { adminId, adminRole, module, action, endpoint, method, payload, response, result, data, ipv4, ipv6, internetServiceProvider, clientInformation, userAgent } = params;
+        // Save the activity log to the database
+        const activityLog = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].activityLog.create({
+            data: {
+                adminId,
+                adminRole,
+                module,
+                action,
+                endpoint,
+                method,
+                payload: JSON.stringify(payload),
+                response: JSON.stringify(response),
+                result,
+                data: data ? JSON.stringify(data) : null,
+                ipv4,
+                ipv6,
+                internetServiceProvider,
+                clientInformation,
+                userAgent
+            }
+        });
+        console.info('Activity Log saved successfully:', activityLog);
+    } catch (error) {
+        console.error('❌ Error saving activity log:', error);
+    }
+}
+async function fetchLogInfo(module, action, req) {
+    try {
+        // Get the IP address from the 'x-forwarded-for' header or fallback to 'host' header
+        const forwardedFor = req.headers.get('x-forwarded-for');
+        const ipAddress = forwardedFor ? forwardedFor.split(',')[0] : req.headers.get('host');
+        // Construct the full URL
+        const protocol = req.headers.get('x-forwarded-proto') || 'http'; // Default to 'http' if missing
+        const host = req.headers.get('host'); // Get host from headers
+        const url = `${protocol}://${host}${req.nextUrl.pathname}${req.nextUrl.search || ''}`; // Build complete URL
+        // Get the HTTP method and the payload if applicable (POST, PUT, PATCH)
+        const method = req.method;
+        let payload = null;
+        if ([
+            'POST',
+            'PUT',
+            'PATCH'
+        ].includes(method)) {
+            try {
+                payload = await req.json(); // Parse JSON payload
+            } catch (error) {
+                console.error('❌ Error parsing request body:', error);
+            }
+        }
+        // Parse the User-Agent string for client details
+        const userAgent = req.headers.get('user-agent') || 'Unknown';
+        const parser = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UAParser"](userAgent);
+        const clientInfo = parser.getResult();
+        // Extract browser, OS, and device details
+        const { browser, os, device } = clientInfo;
+        const browserName = browser.name || 'Unknown Browser';
+        const browserVersion = browser.version || 'Unknown Version';
+        const osName = os.name || 'Unknown OS';
+        const osVersion = os.version || 'Unknown OS Version';
+        const deviceType = device.type || 'Unknown Device';
+        // Log the gathered information
+        const logInfo = {
+            module,
+            action,
+            url,
+            method,
+            payload,
+            response: true,
+            result: [],
+            data: [],
+            ipAddress,
+            clientInfo: {
+                browser: browserName,
+                browserVersion,
+                os: osName,
+                osVersion,
+                device: deviceType
+            },
+            userAgent
+        };
+        // Example of logging the activity info
+        logMessage('info', `Activity log Info:`, logInfo);
+    } catch (error) {
+        console.error('❌ Error saving activity log:', error);
+    }
+}
+}}),
 "[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9610,397 +9762,1348 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[project]/src/utils/hashUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "comparePassword": (()=>comparePassword),
-    "hashPassword": (()=>hashPassword)
+    "validateFormData": (()=>validateFormData)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
-;
-async function hashPassword(password) {
-    const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10);
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
+function toReadableFieldName(field) {
+    // Converts camelCase or snake_case to Title Case
+    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
 }
-async function comparePassword(password, hashedPassword) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, hashedPassword);
+function validateFormData(formData, { requiredFields = [], patternValidations = {}, fileExtensionValidations = {} }) {
+    const error = {};
+    // Required fields
+    for (const field of requiredFields){
+        const value = formData.get(field);
+        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
+            error[field] = `${toReadableFieldName(field)} is required`;
+        }
+    }
+    // Pattern validations
+    for (const [field, expectedType] of Object.entries(patternValidations)){
+        const value = formData.get(field);
+        if (value !== null) {
+            const val = typeof value === 'string' ? value.trim() : value;
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean = expectedType === 'boolean' && ![
+                'true',
+                'false',
+                '1',
+                '0',
+                true,
+                false,
+                1,
+                0,
+                'active',
+                'inactive'
+            ].includes(val.toString().toLowerCase());
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
+            }
+        }
+    }
+    // File extension validations
+    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations)){
+        const file = formData.get(field);
+        if (file instanceof File) {
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop() || '';
+            if (!allowedExtensions.map((ext)=>ext.toLowerCase()).includes(fileExtension)) {
+                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
+            }
+        } else if (file !== null) {
+            error[field] = `${toReadableFieldName(field)} must be a valid file`;
+        }
+    }
+    const errorCount = Object.keys(error).length;
+    return {
+        isValid: errorCount === 0,
+        ...errorCount > 0 && {
+            error
+        },
+        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
+    };
 }
 }}),
-"[project]/src/app/models/admin/emailConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "getEmailConfig": (()=>getEmailConfig)
+    "checkDropshipperProductForDropshipper": (()=>checkDropshipperProductForDropshipper),
+    "checkProductForDropshipper": (()=>checkProductForDropshipper),
+    "checkSupplierProductForDropshipper": (()=>checkSupplierProductForDropshipper),
+    "createDropshipperProduct": (()=>createDropshipperProduct),
+    "deleteDropshipperProduct": (()=>deleteDropshipperProduct),
+    "getDropshipperProductById": (()=>getDropshipperProductById),
+    "getDropshipperProductVariantById": (()=>getDropshipperProductVariantById),
+    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
+    "getProductsByStatus": (()=>getProductsByStatus),
+    "restoreDropshipperProduct": (()=>restoreDropshipperProduct),
+    "softDeleteDropshipperProduct": (()=>softDeleteDropshipperProduct),
+    "updateDropshipperProduct": (()=>updateDropshipperProduct)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+async function createDropshipperProduct(dropshipperId, dropshipperRole, product) {
+    try {
+        const { supplierProductId, variants, createdBy, createdByRole } = product;
+        // Step 1: Check if main product exists
+        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
+            where: {
+                id: supplierProductId
+            }
+        });
+        if (!existingProduct) {
+            return {
+                status: false,
+                message: "Product does not exist."
+            };
+        }
+        // Step 2: Validate each variant under this product
+        const variantIds = variants.map((v)=>v.variantId);
+        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findMany({
+            where: {
+                id: {
+                    in: variantIds
+                },
+                supplierProductId: supplierProductId
+            }
+        });
+        if (existingVariants.length !== variantIds.length) {
+            return {
+                status: false,
+                message: "One or more variants are invalid for this product."
+            };
+        }
+        // Step 3: Create dropshipperProduct
+        const newDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.create({
+            data: {
+                supplierProductId,
+                supplierId: existingProduct.supplierId,
+                productId: existingProduct.productId,
+                dropshipperId,
+                createdBy,
+                createdByRole,
+                createdAt: new Date()
+            }
+        });
+        // Step 4: Create dropshipperProductVariants
+        for (const variant of variants){
+            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
+                data: {
+                    dropshipperId,
+                    supplierProductId: newDropshipperProduct.supplierProductId,
+                    dropshipperProductId: newDropshipperProduct.id,
+                    productId: newDropshipperProduct.productId,
+                    supplierProductVariantId: variant.variantId,
+                    stock: variant.stock,
+                    price: variant.price,
+                    status: variant.status ?? true,
+                    createdBy,
+                    createdByRole,
+                    createdAt: new Date()
+                }
+            });
+        }
+        return {
+            status: true,
+            product: serializeBigInt(newDropshipperProduct)
+        };
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("error", "Error creating dropshipper product:", error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateDropshipperProduct = async (dropshipperId, dropshipperRole, dropshipperProductId, product)=>{
+    try {
+        const { variants, updatedBy, updatedByRole } = product;
+        // Step 1: Check if dropshipper product exists
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findUnique({
+            where: {
+                id: dropshipperProductId
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: false,
+                message: "Dropshipper product not found."
+            };
+        }
+        // Step 2: Update dropshipperProduct
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id: dropshipperProductId
+            },
+            data: {
+                updatedBy,
+                updatedByRole,
+                updatedAt: new Date()
+            }
+        });
+        // Step 3: Update or Create each variant
+        for (const variant of variants){
+            const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                where: {
+                    dropshipperProductId,
+                    supplierProductVariantId: variant.variantId
+                }
+            });
+            if (existing) {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.update({
+                    where: {
+                        id: existing.id
+                    },
+                    data: {
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date()
+                    }
+                });
+            } else {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
+                    data: {
+                        dropshipperId,
+                        supplierProductId: dropshipperProduct.supplierProductId,
+                        dropshipperProductId,
+                        productId: dropshipperProduct.productId,
+                        supplierProductVariantId: variant.variantId,
+                        stock: variant.stock,
+                        price: variant.price,
+                        status: variant.status ?? true,
+                        updatedBy,
+                        updatedByRole,
+                        updatedAt: new Date()
+                    }
+                });
+            }
+        }
+        return {
+            status: true,
+            message: "Dropshipper product updated successfully."
+        };
+    } catch (error) {
+        console.error("Update error:", error);
+        return {
+            status: false,
+            message: "Something went wrong."
+        };
+    }
+};
+const getProductsByFiltersAndStatus = async (type, filters, dropshipperId, status)=>{
+    try {
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
+            }
+        })();
+        let products;
+        if (type === "all") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    ...filters.categoryId ? {
+                        product: {
+                            categoryId: filters.categoryId
+                        }
+                    } : {},
+                    ...filters.brandId ? {
+                        product: {
+                            brandId: filters.brandId
+                        }
+                    } : {}
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true
+                        }
+                    }
+                }
+            });
+        }
+        if (type === "my") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    dropshipperId,
+                    ...filters.categoryId ? {
+                        product: {
+                            categoryId: filters.categoryId
+                        }
+                    } : {},
+                    ...filters.brandId ? {
+                        product: {
+                            brandId: filters.brandId
+                        }
+                    } : {}
+                },
+                include: {
+                    product: {
+                        include: {
+                            category: true,
+                            brand: true
+                        }
+                    },
+                    dropshipper: true,
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                }
+            });
+        }
+        if (type === "notmy") {
+            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    dropshipperId
+                },
+                include: {
+                    variants: true
+                }
+            }).then((data)=>data.map((d)=>d.supplierProductId));
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    id: {
+                        notIn: myProductIds.length ? myProductIds : [
+                            0
+                        ]
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    product: true,
+                    variants: {
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            price: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            console.dir(notMyProducts, {
+                depth: null,
+                colors: true
+            });
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
+                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                        where: {
+                            supplierProductVariantId: variant.id,
+                            dropshipperProduct: {
+                                dropshipperId: {
+                                    not: dropshipperId
+                                }
+                            }
+                        },
+                        orderBy: {
+                            price: "asc"
+                        },
+                        select: {
+                            price: true
+                        }
+                    });
+                    return {
+                        ...variant,
+                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
+                    };
+                }));
+                return {
+                    ...product,
+                    variants: enrichedVariants
+                };
+            }));
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+            for (const item of enrichedProducts){
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+            products = uniqueByProductId;
+        }
+        return {
+            status: true,
+            products: serializeBigInt(products)
+        };
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return {
+            status: false,
+            message: "Error fetching products"
+        };
+    }
+};
+const getProductsByStatus = async (type, dropshipperId, status)=>{
+    try {
+        console.log(`type - ${type} // dropshipperId - ${dropshipperId} // status - ${status}`);
+        const statusCondition = (()=>{
+            switch(status){
+                case "active":
+                    return {
+                        status: true,
+                        deletedAt: null
+                    };
+                case "inactive":
+                    return {
+                        status: false,
+                        deletedAt: null
+                    };
+                case "deleted":
+                    return {
+                        deletedAt: {
+                            not: null
+                        }
+                    };
+                case "notDeleted":
+                    return {
+                        deletedAt: null
+                    };
+                default:
+                    throw new Error("Invalid status");
+            }
+        })();
+        let products = [];
+        if (type === "all") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: statusCondition,
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    variants: {
+                        include: {
+                            variant: true
+                        }
+                    },
+                    product: true
+                }
+            });
+        } else if (type === "my") {
+            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    dropshipperId
+                },
+                include: {
+                    product: true,
+                    dropshipper: true,
+                    variants: {
+                        include: {
+                            supplierProductVariant: {
+                                include: {
+                                    variant: true
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                }
+            });
+        } else if (type === "notmy") {
+            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
+                where: {
+                    dropshipperId
+                },
+                include: {
+                    variants: true
+                }
+            }).then((data)=>data.map((d)=>d.supplierProductId));
+            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+                where: {
+                    ...statusCondition,
+                    id: {
+                        notIn: myProductIds.length ? myProductIds : [
+                            0
+                        ]
+                    }
+                },
+                orderBy: {
+                    id: "desc"
+                },
+                include: {
+                    product: true,
+                    variants: {
+                        select: {
+                            id: true,
+                            supplierId: true,
+                            productId: true,
+                            productVariantId: true,
+                            supplierProductId: true,
+                            price: true,
+                            variant: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    image: true,
+                                    color: true,
+                                    modal: true,
+                                    sku: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            console.dir(notMyProducts, {
+                depth: null,
+                colors: true
+            });
+            // Attach each variant's lowest suggested_price from other dropshippers
+            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
+                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
+                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
+                        where: {
+                            supplierProductVariantId: variant.id,
+                            dropshipperProduct: {
+                                dropshipperId: {
+                                    not: dropshipperId
+                                }
+                            }
+                        },
+                        orderBy: {
+                            price: "asc"
+                        },
+                        select: {
+                            price: true
+                        }
+                    });
+                    return {
+                        ...variant,
+                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
+                    };
+                }));
+                return {
+                    ...product,
+                    variants: enrichedVariants
+                };
+            }));
+            const uniqueByProductId = [];
+            const seenProductIds = new Set();
+            for (const item of enrichedProducts){
+                if (!seenProductIds.has(item.productId)) {
+                    seenProductIds.add(item.productId);
+                    uniqueByProductId.push(item);
+                }
+            }
+            products = uniqueByProductId;
+        } else {
+            return {
+                status: false,
+                message: "Invalid type parameter",
+                products: []
+            };
+        }
+        return {
+            status: true,
+            message: "Products fetched successfully",
+            products: serializeBigInt(products)
+        };
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return {
+            status: false,
+            message: "Error fetching products",
+            products: []
+        };
+    }
+};
+const checkProductForDropshipper = async (dropshipperId, supplierProductId)=>{
+    try {
+        // 1. Check if product exists
+        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
+            where: {
+                id: supplierProductId
+            },
+            include: {
+                variants: true,
+                product: true
+            }
+        });
+        if (!product) {
+            return {
+                status: false,
+                message: "Product not found",
+                existsInProduct: false,
+                existsInDropshipperProduct: false
+            };
+        }
+        // 2. Check if product exists for the given dropshipper
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                dropshipperId,
+                supplierProductId
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: true,
+                message: "Product exists but is not assigned to the dropshipper",
+                existsInProduct: true,
+                existsInDropshipperProduct: false,
+                product
+            };
+        }
+        return {
+            status: true,
+            message: "Product exists and is assigned to the dropshipper",
+            existsInProduct: true,
+            existsInDropshipperProduct: true,
+            product,
+            dropshipperProduct
+        };
+    } catch (error) {
+        console.error("Error checking product for dropshipper:", error);
+        return {
+            status: false,
+            message: "Internal server error",
+            existsInProduct: false,
+            existsInDropshipperProduct: false
+        };
+    }
+};
+const checkDropshipperProductForDropshipper = async (dropshipperId, dropshipperProductId)=>{
+    try {
+        // Check if the dropshipper product exists for the given dropshipper
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                id: dropshipperProductId,
+                dropshipperId
+            },
+            include: {
+                product: true,
+                dropshipper: true,
+                variants: {
+                    include: {
+                        supplierProductVariant: {
+                            include: {
+                                variant: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: true,
+                message: "Dropshipper product not found or not assigned to the dropshipper.",
+                existsInDropshipperProduct: false,
+                dropshipperProduct: null
+            };
+        }
+        return {
+            status: true,
+            message: "Dropshipper product exists and is assigned to the dropshipper.",
+            existsInDropshipperProduct: true,
+            dropshipperProduct: serializeBigInt(dropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ Error checking dropshipper product for dropshipper:", error);
+        return {
+            status: false,
+            message: "Internal server error while checking dropshipper product.",
+            existsInDropshipperProduct: false,
+            dropshipperProduct: null
+        };
+    }
+};
+const restoreDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
+    try {
+        const updatedAt = new Date();
+        // Step 1: Restore the dropshipper product
+        const restoredDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt
+            }
+        });
+        // Step 2: Restore all associated dropshipperProductVariants
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
+            where: {
+                dropshipperProductId: id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: dropshipperId,
+                updatedByRole: dropshipperRole,
+                updatedAt
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper product and variants restored successfully.",
+            restoredDropshipperProduct: serializeBigInt(restoredDropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ restoreDropshipperProduct Error:", error);
+        return {
+            status: false,
+            message: "Error restoring dropshipper product."
+        };
+    }
+};
+const softDeleteDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
+    try {
+        const deletedAt = new Date();
+        // Step 1: Soft delete dropshipperProduct
+        const updatedDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: dropshipperId,
+                deletedByRole: dropshipperRole,
+                deletedAt
+            }
+        });
+        // Step 2: Soft delete all related dropshipperProductVariants
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
+            where: {
+                dropshipperProductId: id
+            },
+            data: {
+                deletedBy: dropshipperId,
+                deletedByRole: dropshipperRole,
+                deletedAt
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper product and its variants soft deleted successfully.",
+            updatedDropshipperProduct
+        };
+    } catch (error) {
+        console.error("❌ softDeleteDropshipperProduct Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting dropshipper product."
+        };
+    }
+};
+const deleteDropshipperProduct = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Dropshipper Product deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteProduct Error:", error);
+        return {
+            status: false,
+            message: "Error deleting dropshipper product"
+        };
+    }
+};
+const getDropshipperProductById = async (id)=>{
+    try {
+        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
+            where: {
+                id
+            }
+        });
+        if (!dropshipperProduct) {
+            return {
+                status: false,
+                message: "Dropshipper product not found.",
+                product: null
+            };
+        }
+        return {
+            status: true,
+            message: "Dropshipper product ID fetched successfully.",
+            dropshipperProduct: serializeBigInt(dropshipperProduct)
+        };
+    } catch (error) {
+        console.error("❌ Error in getDropshipperProductById:", error);
+        return {
+            status: false,
+            message: "Internal server error.",
+            product: null
+        };
+    }
+};
+const getDropshipperProductVariantById = async (id)=>{
+    try {
+        const dropshipperProductVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!dropshipperProductVariant) return {
+            status: false,
+            message: "dropshipperProductVariant Variant not found"
+        };
+        const sanitizedDropshipperProductVariant = serializeBigInt(dropshipperProductVariant);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedDropshipperProductVariant);
+        return {
+            status: true,
+            variant: sanitizedDropshipperProductVariant
+        };
+    } catch (error) {
+        console.error("❌ getProductVariantById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching product variant"
+        };
+    }
+};
+const checkSupplierProductForDropshipper = async (dropshipperId, supplierProductId)=>{
+    try {
+        // 1. Find the supplier product
+        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
+            where: {
+                id: supplierProductId
+            },
+            include: {
+                product: true,
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
+                variants: {
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        if (!supplierProduct) {
+            return {
+                status: true,
+                message: "Supplier product not found or not assigned to the supplier.",
+                existsInSupplierProduct: false,
+                supplierProduct: null,
+                otherSuppliers: []
+            };
+        }
+        // 2. Find other suppliers listing the same product
+        const otherSuppliers = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
+            where: {
+                productId: supplierProduct.productId,
+                supplierId: {
+                    not: supplierProduct.supplierId
+                } // Exclude current supplier
+            },
+            include: {
+                supplier: {
+                    select: {
+                        id: true,
+                        uniqeId: true
+                    }
+                },
+                variants: {
+                    include: {
+                        variant: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                                color: true,
+                                modal: true,
+                                sku: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return {
+            status: true,
+            message: "Supplier product exists and is assigned to the supplier.",
+            existsInSupplierProduct: true,
+            supplierProduct: serializeBigInt(supplierProduct),
+            otherSuppliers: serializeBigInt(otherSuppliers)
+        };
+    } catch (error) {
+        console.error("❌ Error checking supplier product for supplier:", error);
+        return {
+            status: false,
+            message: "Internal server error while checking supplier product.",
+            existsInSupplierProduct: false,
+            supplierProduct: null,
+            otherSuppliers: []
+        };
+    }
+};
+}}),
+"[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createDropshipperShopifyStore": (()=>createDropshipperShopifyStore),
+    "deleteShopIfNotVerified": (()=>deleteShopIfNotVerified),
+    "getShopifyStoreByIdForDropshipper": (()=>getShopifyStoreByIdForDropshipper),
+    "getShopifyStoresByDropshipperId": (()=>getShopifyStoresByDropshipperId),
+    "isShopUsedAndVerified": (()=>isShopUsedAndVerified),
+    "verifyDropshipperShopifyStore": (()=>verifyDropshipperShopifyStore)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
 ;
-const getEmailConfig = async (panel, module, action, status = true // Default value is true
-)=>{
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+async function isShopUsedAndVerified(shop) {
     try {
-        console.log(`Fetching email configuration for panel: ${panel}, module: ${module}, action: ${action}, status: ${status}`);
-        // Fetching the email configuration from the database based on conditions
-        const emailConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].emailConfig.findFirst({
+        // Find the shop regardless of verification status
+        const existingStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findFirst({
             where: {
-                panel,
-                module,
-                action,
-                status
+                shop: shop
+            },
+            include: {
+                admin: true
+            }
+        });
+        if (existingStore) {
+            return {
+                status: true,
+                verified: !!existingStore.verificationStatus,
+                shopifyStore: existingStore,
+                message: existingStore.verificationStatus ? 'Shop is used and verified.' : 'Shop is used but not verified.'
+            };
+        } else {
+            return {
+                status: false,
+                verified: false,
+                shopifyStore: null,
+                message: 'Shop not found.'
+            };
+        }
+    } catch (error) {
+        console.error(`Error checking if shop is used and verified:`, error);
+        return {
+            status: false,
+            verified: false,
+            shopifyStore: null,
+            message: 'An error occurred while checking the shop.'
+        };
+    }
+}
+async function createDropshipperShopifyStore(dropshipperId, dropshipperRole, dropshipperShopifyStore) {
+    try {
+        const { admin, shop, apiKey, apiSecret, scopes, redirectUri, apiVersion, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
+        // 🚫 Check if the shop is already used and verified
+        const isAlreadyUsed = await isShopUsedAndVerified(shop);
+        if (isAlreadyUsed.status) {
+            return {
+                status: false,
+                message: "This Shopify store is already registered and verified."
+            };
+        }
+        const statusRaw = false;
+        const verificationStatusRaw = false;
+        // Convert statusRaw to a boolean using the includes check
+        const status = [
+            'true',
+            '1',
+            true,
+            1,
+            'active',
+            'yes'
+        ].includes(statusRaw);
+        const verificationStatus = [
+            'true',
+            '1',
+            true,
+            1,
+            'active',
+            'yes'
+        ].includes(verificationStatusRaw);
+        const newShopifyStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.create({
+            data: {
+                admin,
+                shop,
+                apiKey,
+                apiSecret,
+                scopes,
+                redirectUri,
+                apiVersion,
+                status,
+                verificationStatus,
+                createdAt,
+                createdBy,
+                createdByRole
+            }
+        });
+        return {
+            status: true,
+            dropshipperShopifyStore: serializeBigInt(newShopifyStore)
+        };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+async function verifyDropshipperShopifyStore(dropshipperId, dropshipperRole, dropshipperShopifyStore) {
+    try {
+        const { shop, accessToken, email, shopOwner, name, domain, myshopifyDomain, planName, countryName, province, city, phone, currency, moneyFormat, ianaTimezone, shopCreatedAt } = dropshipperShopifyStore;
+        const existing = await isShopUsedAndVerified(shop);
+        // 🚫 Stop if already verified
+        if (existing.status && existing.shopifyStore && existing.verified) {
+            return {
+                status: true,
+                message: "Shop already verified and connected."
+            };
+        }
+        if (!existing.shopifyStore) {
+            return {
+                status: false,
+                message: "Shopify store not found."
+            };
+        }
+        // ✅ Update the accessToken and mark verified
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.update({
+            where: {
+                id: Number(existing.shopifyStore.id)
+            },
+            data: {
+                accessToken,
+                email,
+                shopOwner,
+                name,
+                domain,
+                myshopifyDomain,
+                planName,
+                country: countryName,
+                province,
+                city,
+                phone,
+                currency,
+                moneyFormat,
+                timezone: ianaTimezone,
+                createdAtShop: shopCreatedAt
+            }
+        });
+        return {
+            status: true
+        };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+async function deleteShopIfNotVerified(shop) {
+    try {
+        // Find the shop record regardless of verification status
+        const existingStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findFirst({
+            where: {
+                shop: shop
+            }
+        });
+        if (!existingStore) {
+            return {
+                status: false,
+                message: 'Shop not found.'
+            };
+        }
+        // Check verification status
+        if (existingStore.verificationStatus) {
+            return {
+                status: false,
+                message: 'Shop is verified and will not be deleted.'
+            };
+        }
+        // Delete the shop because it is not verified
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.delete({
+            where: {
+                id: existingStore.id
+            }
+        });
+        return {
+            status: true,
+            message: 'Shop was found but not verified, so it was deleted.'
+        };
+    } catch (error) {
+        console.error(`Error deleting shop if not verified:`, error);
+        return {
+            status: false,
+            message: 'An error occurred while trying to delete the shop.'
+        };
+    }
+}
+async function getShopifyStoresByDropshipperId(dropshipperId) {
+    try {
+        const stores = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findMany({
+            where: {
+                createdBy: dropshipperId
+            },
+            include: {
+                admin: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        if (!stores || stores.length === 0) {
+            return {
+                status: false,
+                message: 'No Shopify stores found for this dropshipper.',
+                shopifyStores: []
+            };
+        }
+        return {
+            status: true,
+            shopifyStores: serializeBigInt(stores),
+            message: `${stores.length} store(s) found for this dropshipper.`
+        };
+    } catch (error) {
+        console.error(`Error fetching Shopify stores by dropshipperId:`, error);
+        return {
+            status: false,
+            shopifyStores: [],
+            message: 'Internal Server Error'
+        };
+    }
+}
+async function getShopifyStoreByIdForDropshipper(storeId, dropshipperId) {
+    try {
+        const store = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findUnique({
+            where: {
+                id: storeId,
+                adminId: dropshipperId
+            },
+            include: {
+                admin: true
+            }
+        });
+        if (!store) {
+            return {
+                status: false,
+                message: 'Shopify store not found.',
+                shopifyStore: null
+            };
+        }
+        return {
+            status: true,
+            shopifyStore: serializeBigInt(store),
+            message: 'Shopify store found.'
+        };
+    } catch (error) {
+        console.error(`Error fetching Shopify store by ID:`, error);
+        return {
+            status: false,
+            shopifyStore: null,
+            message: 'Internal Server Error'
+        };
+    }
+}
+}}),
+"[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "getAppConfig": (()=>getAppConfig)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getAppConfig = async ()=>{
+    try {
+        const appConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].appConfig.findFirst({
+            where: {
+                status: true
             },
             orderBy: {
                 id: "desc"
             }
         });
-        if (!emailConfig) {
+        if (!appConfig) {
             return {
                 status: false,
-                message: "Email configuration not found"
+                message: "AppConfig not found"
             };
         }
-        // Mapping the database result to the desired output format
-        const config = {
-            host: emailConfig.smtp_host,
-            port: emailConfig.smtp_port,
-            secure: emailConfig.smtp_secure,
-            username: emailConfig.smtp_username,
-            password: emailConfig.smtp_password,
-            from_email: emailConfig.from_email,
-            from_name: emailConfig.from_name
-        };
         return {
             status: true,
-            emailConfig: config,
-            htmlTemplate: emailConfig.html_template,
-            subject: emailConfig.subject
+            appConfig: serializeBigInt(appConfig)
         };
     } catch (error) {
-        console.error(`Error fetching email configuration for panel "${panel}", module "${module}", action "${action}":`, error);
+        console.error("❌ getAppConfig Error:", error);
         return {
             status: false,
-            message: "Error fetching email configuration"
+            message: "Error fetching AppConfig"
         };
     }
 };
 }}),
-"[externals]/events [external] (events, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("events", () => require("events"));
-
-module.exports = mod;
-}}),
-"[externals]/url [external] (url, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("url", () => require("url"));
-
-module.exports = mod;
-}}),
-"[externals]/http [external] (http, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("http", () => require("http"));
-
-module.exports = mod;
-}}),
-"[externals]/https [external] (https, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("https", () => require("https"));
-
-module.exports = mod;
-}}),
-"[externals]/zlib [external] (zlib, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("zlib", () => require("zlib"));
-
-module.exports = mod;
-}}),
-"[externals]/net [external] (net, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("net", () => require("net"));
-
-module.exports = mod;
-}}),
-"[externals]/dns [external] (dns, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("dns", () => require("dns"));
-
-module.exports = mod;
-}}),
-"[externals]/os [external] (os, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("os", () => require("os"));
-
-module.exports = mod;
-}}),
-"[externals]/tls [external] (tls, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tls", () => require("tls"));
-
-module.exports = mod;
-}}),
-"[externals]/child_process [external] (child_process, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("child_process", () => require("child_process"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/dropshipper/product/my-inventory/[dropshipperProductId]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "sendEmail": (()=>sendEmail)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/nodemailer/lib/nodemailer.js [app-route] (ecmascript)");
-;
-async function sendEmail(config, mailData) {
-    const { host, port, secure, username, password, from_email, from_name } = config;
-    const { recipient = [], cc = [], bcc = [], subject, htmlBody, attachments = [] } = mailData;
-    const formatAddressList = (list)=>Array.isArray(list) ? list.map(({ name, email })=>`${name} <${email}>`) : [];
-    const formatAttachments = (list)=>list.map(({ name, path })=>({
-                filename: name,
-                path: path
-            }));
-    try {
-        const transporter = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].createTransport({
-            host,
-            port: Number(port),
-            secure,
-            auth: {
-                user: username,
-                pass: password
-            }
-        });
-        const mailOptions = {
-            from: `${from_name} <${from_email}>`,
-            to: formatAddressList(recipient),
-            cc: formatAddressList(cc),
-            bcc: formatAddressList(bcc),
-            subject,
-            html: htmlBody,
-            attachments: formatAttachments(attachments)
-        };
-        const info = await transporter.sendMail(mailOptions);
-        console.log(`📤 Email sent to ${mailOptions.to.join(", ")} | ID: ${info.messageId}`);
-        return {
-            status: true,
-            messageId: info.messageId
-        };
-    } catch (error) {
-        // Specify a type other than 'any' for the error
-        if (error instanceof Error) {
-            console.error("❌ Email Error:", error.message);
-            return {
-                status: false,
-                error: error.message
-            };
-        } else {
-            console.error("❌ Unknown Error:", error);
-            return {
-                status: false,
-                error: "Unknown error occurred"
-            };
-        }
-    }
-}
-}}),
-"[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "ActivityLog": (()=>ActivityLog),
-    "fetchLogInfo": (()=>fetchLogInfo),
-    "logMessage": (()=>logMessage)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/ua-parser-js/src/main/ua-parser.mjs [app-route] (ecmascript)");
-;
-;
-async function logMessage(type, message, item) {
-    try {
-        const isDev = process.env.DEBUG === 'true' || ("TURBOPACK compile-time value", "development") === 'development';
-        if ("TURBOPACK compile-time falsy", 0) {
-            "TURBOPACK unreachable";
-        }
-        const logWithMessage = (logFn, prefix = '')=>{
-            if (item !== undefined) {
-                logFn(`${prefix}${message}`, item);
-            } else {
-                logFn(`${prefix}${message}`);
-            }
-        };
-        switch(type.toLowerCase()){
-            case 'error':
-                logWithMessage(console.error, '❌ ');
-                break;
-            case 'warn':
-                logWithMessage(console.warn, '⚠️ ');
-                break;
-            case 'info':
-                logWithMessage(console.info, 'ℹ️ ');
-                break;
-            case 'debug':
-                logWithMessage(console.debug, '🔍 ');
-                break;
-            case 'log':
-                logWithMessage(console.log);
-                break;
-            case 'trace':
-                logWithMessage(console.trace, '🔍 ');
-                break;
-            case 'table':
-                if (item !== undefined) console.table(item);
-                break;
-            case 'group':
-                console.group(message);
-                break;
-            case 'groupend':
-                console.groupEnd();
-                break;
-            default:
-                logWithMessage(console.log, '📌 ');
-                break;
-        }
-    } catch (error) {
-        console.error('❌ Error in logMessage:', error);
-    }
-}
-async function ActivityLog(params) {
-    try {
-        const { adminId, adminRole, module, action, endpoint, method, payload, response, result, data, ipv4, ipv6, internetServiceProvider, clientInformation, userAgent } = params;
-        // Save the activity log to the database
-        const activityLog = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].activityLog.create({
-            data: {
-                adminId,
-                adminRole,
-                module,
-                action,
-                endpoint,
-                method,
-                payload: JSON.stringify(payload),
-                response: JSON.stringify(response),
-                result,
-                data: data ? JSON.stringify(data) : null,
-                ipv4,
-                ipv6,
-                internetServiceProvider,
-                clientInformation,
-                userAgent
-            }
-        });
-        console.info('Activity Log saved successfully:', activityLog);
-    } catch (error) {
-        console.error('❌ Error saving activity log:', error);
-    }
-}
-async function fetchLogInfo(module, action, req) {
-    try {
-        // Get the IP address from the 'x-forwarded-for' header or fallback to 'host' header
-        const forwardedFor = req.headers.get('x-forwarded-for');
-        const ipAddress = forwardedFor ? forwardedFor.split(',')[0] : req.headers.get('host');
-        // Construct the full URL
-        const protocol = req.headers.get('x-forwarded-proto') || 'http'; // Default to 'http' if missing
-        const host = req.headers.get('host'); // Get host from headers
-        const url = `${protocol}://${host}${req.nextUrl.pathname}${req.nextUrl.search || ''}`; // Build complete URL
-        // Get the HTTP method and the payload if applicable (POST, PUT, PATCH)
-        const method = req.method;
-        let payload = null;
-        if ([
-            'POST',
-            'PUT',
-            'PATCH'
-        ].includes(method)) {
-            try {
-                payload = await req.json(); // Parse JSON payload
-            } catch (error) {
-                console.error('❌ Error parsing request body:', error);
-            }
-        }
-        // Parse the User-Agent string for client details
-        const userAgent = req.headers.get('user-agent') || 'Unknown';
-        const parser = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$ua$2d$parser$2d$js$2f$src$2f$main$2f$ua$2d$parser$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UAParser"](userAgent);
-        const clientInfo = parser.getResult();
-        // Extract browser, OS, and device details
-        const { browser, os, device } = clientInfo;
-        const browserName = browser.name || 'Unknown Browser';
-        const browserVersion = browser.version || 'Unknown Version';
-        const osName = os.name || 'Unknown OS';
-        const osVersion = os.version || 'Unknown OS Version';
-        const deviceType = device.type || 'Unknown Device';
-        // Log the gathered information
-        const logInfo = {
-            module,
-            action,
-            url,
-            method,
-            payload,
-            response: true,
-            result: [],
-            data: [],
-            ipAddress,
-            clientInfo: {
-                browser: browserName,
-                browserVersion,
-                os: osName,
-                osVersion,
-                device: deviceType
-            },
-            userAgent
-        };
-        // Example of logging the activity info
-        logMessage('info', `Activity log Info:`, logInfo);
-    } catch (error) {
-        console.error('❌ Error saving activity log:', error);
-    }
-}
-}}),
-"[project]/src/app/controllers/admin/authController.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "adminByToken": (()=>adminByToken),
-    "adminByUsernameRole": (()=>adminByUsernameRole),
-    "handleForgetPassword": (()=>handleForgetPassword),
-    "handleLogin": (()=>handleLogin),
-    "handleResetPassword": (()=>handleResetPassword),
-    "handleVerifyLogin": (()=>handleVerifyLogin),
-    "handleVerifyStatus": (()=>handleVerifyStatus)
+    "DELETE": (()=>DELETE),
+    "GET": (()=>GET),
+    "PATCH": (()=>PATCH),
+    "PUT": (()=>PUT)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/hashUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/admin/emailConfig.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -10008,604 +11111,419 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$
 ;
 ;
 ;
-;
-;
-async function handleLogin(req, adminRole, adminStaffRole) {
+async function GET(req) {
     try {
-        const { email, password } = await req.json();
-        // Hash the password using bcrypt
-        const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10); // Generates a salt with 10 rounds
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
-        // Fetch admin by email and role
-        let adminResponse = await adminByUsernameRole(email, adminRole);
-        if (!adminResponse.status || !adminResponse.admin) {
-            adminResponse = await adminByUsernameRole(email, adminStaffRole);
-            if (!adminResponse.status || !adminResponse.admin) {
+        // Extract supplierProductId directly from the URL path
+        const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+        const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
+            dropshipperId,
+            dropshipperRole
+        });
+        if (!dropshipperId || isNaN(dropshipperId)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Invalid or missing dropshipper ID'
+            }, {
+                status: 400
+            });
+        }
+        let mainDropshipperId = dropshipperId;
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const isStaffUser = ![
+            'admin',
+            'dropshipper',
+            'supplier'
+        ].includes(String(dropshipperRole));
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+        }
+        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkDropshipperProductForDropshipper"])(mainDropshipperId, dropshipperProductId);
+        console.log(`productResult - `, productResult);
+        if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+            const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkSupplierProductForDropshipper"])(mainDropshipperId, dropshipperProductId);
+            console.log(`productResult - `, productResult);
+            if (!productResult?.status || !productResult.existsInSupplierProduct) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: adminResponse.message || "Invalid email or password",
-                    status: false
+                    status: true,
+                    message: productResult.message
                 }, {
-                    status: 401
+                    status: 400
+                });
+            }
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product found:', productResult.supplierProduct);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: 'Product found',
+                supplierProduct: productResult.supplierProduct,
+                otherSuppliers: productResult.otherSuppliers,
+                type: 'notmy'
+            }, {
+                status: 200
+            });
+        }
+        const shopifyAppsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoresByDropshipperId"])(mainDropshipperId);
+        if (!shopifyAppsResult.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Unable to retrieve Shopify stores for the dropshipper.'
+            }, {
+                status: 400
+            });
+        }
+        const configResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getAppConfig"])();
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product found:', productResult.dropshipperProduct);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: true,
+            message: 'Product found',
+            dropshipperProduct: productResult.dropshipperProduct,
+            shopifyStores: shopifyAppsResult.shopifyStores,
+            type: 'my',
+            shippingCost: configResult?.appConfig?.shippingCost
+        }, {
+            status: 200
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching products', {
+            error
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Failed to fetch products due to an internal error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function PUT(req) {
+    try {
+        // Extract supplierProductId directly from the URL path
+        const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for product creation');
+        const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        const dropshipperId = Number(dropshipperIdHeader);
+        if (!dropshipperIdHeader || isNaN(dropshipperId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid dropshipperIdHeader: ${dropshipperIdHeader}`);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'User ID is missing or invalid in request'
+            }, {
+                status: 400
+            });
+        }
+        let mainDropshipperId = dropshipperId;
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const isStaffUser = ![
+            'admin',
+            'dropshipper',
+            'supplier'
+        ].includes(String(dropshipperRole));
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+        }
+        const checkDropshipperProductForDropshipperResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkDropshipperProductForDropshipper"])(mainDropshipperId, dropshipperProductId);
+        if (!checkDropshipperProductForDropshipperResult?.status || !checkDropshipperProductForDropshipperResult.existsInDropshipperProduct) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'checkDropshipperProductForDropshipperResult - ', checkDropshipperProductForDropshipperResult);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: checkDropshipperProductForDropshipperResult.message
+            }, {
+                status: 200
+            });
+        }
+        const requiredFields = [
+            'supplierProductId'
+        ];
+        const formData = await req.formData();
+        const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
+            requiredFields,
+            patternValidations: {
+                supplierProductId: 'number'
+            }
+        });
+        if (!validation.isValid) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Form validation failed', validation.error);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: validation.error,
+                message: validation.message
+            }, {
+                status: 400
+            });
+        }
+        const extractNumber = (key)=>Number(formData.get(key)) || 0;
+        const supplierProductId = extractNumber('supplierProductId');
+        const checkProductForDropshipperResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkProductForDropshipper"])(mainDropshipperId, supplierProductId);
+        if (!checkProductForDropshipperResult?.status || !checkProductForDropshipperResult.existsInDropshipperProduct) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: checkProductForDropshipperResult.message
+            }, {
+                status: 200
+            });
+        }
+        const dropshipperProduct = checkProductForDropshipperResult.dropshipperProduct;
+        // ✅ Validate required fields before continuing
+        if (!dropshipperProduct?.supplierProductId || isNaN(dropshipperProduct?.supplierProductId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Invalid dropshipperProduct: Missing supplierProductId or dropshipperProductId', dropshipperProduct);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'Invalid product or dropshipper mapping.'
+            }, {
+                status: 400
+            });
+        }
+        const rawVariants = formData.get('variants');
+        let parsedVariants = [];
+        if (rawVariants) {
+            try {
+                parsedVariants = JSON.parse(rawVariants);
+                if (!Array.isArray(parsedVariants)) {
+                    throw new Error('Variants must be an array');
+                }
+                // Validate and sanitize each variant
+                parsedVariants = parsedVariants.map((variant, index)=>{
+                    const errors = [];
+                    if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
+                    if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
+                    if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
+                    return {
+                        variantId: Number(variant.variantId),
+                        stock: Number(variant.stock),
+                        price: Number(variant.price),
+                        status: typeof variant.status === 'boolean' ? variant.status : true,
+                        errors,
+                        index
+                    };
+                });
+                const variantErrors = parsedVariants.filter((v)=>v.errors.length > 0);
+                if (variantErrors.length > 0) {
+                    const errorDetails = variantErrors.map((v)=>`Variant at index ${v.index}: ${v.errors.join(', ')}`).join('; ');
+                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                        status: false,
+                        message: 'Variant validation failed',
+                        error: errorDetails
+                    }, {
+                        status: 400
+                    });
+                }
+            } catch (error) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: 'Invalid variants JSON',
+                    error
+                }, {
+                    status: 400
                 });
             }
         }
-        const admin = adminResponse.admin;
-        console.log(`admin - `, admin);
-        // Correct usage of .toLowerCase() as a function
-        if (admin.status.toLowerCase() !== 'active') {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Admin account is not active",
-                status: false
-            }, {
-                status: 403
-            });
-        }
-        // Compare the provided password with the stored hash
-        const isPasswordValid = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["comparePassword"])(password, admin.password);
-        if (!isPasswordValid) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'Invalid email or password',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Generate authentication token
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generateToken"])(admin.id, admin.role);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Login successful",
-            token,
-            admin: {
-                id: admin.id,
-                name: admin.name,
-                email: admin.email,
-                role: admin.role
-            }
-        });
-    } catch (error) {
-        console.error(`Error during login:`, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleVerifyLogin(req, adminRole, adminStaffRole) {
-    try {
-        // Extract token from Authorization header
-        const token = req.headers.get('authorization')?.split(' ')[1];
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'No token provided',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Use adminByToken to verify token and fetch admin details
-        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: message || "Invalid email or password",
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Token is valid",
-            admin,
-            status: true
-        });
-    } catch (error) {
-        console.error(`error - `, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleForgetPassword(req, panel, adminRole, adminStaffRole) {
-    try {
-        const { email } = await req.json();
-        if (!email) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Email is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Attempt to fetch admin or adminStaff by email
-        let userResponse = await adminByUsernameRole(email, adminRole);
-        if (!userResponse.status || !userResponse.admin) {
-            userResponse = await adminByUsernameRole(email, adminStaffRole);
-            if (!userResponse.status || !userResponse.admin) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: "No account found with this email.",
-                    status: false
-                }, {
-                    status: 404
-                });
-            }
-        }
-        const admin = userResponse.admin;
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generatePasswordResetToken"])(admin.id, admin.role);
-        const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-        // Update token and expiry in database
-        const updateData = {
-            pr_token: token,
-            pr_expires_at: expiry
+        const productPayload = {
+            supplierProductId,
+            dropshipperId: mainDropshipperId,
+            variants: parsedVariants,
+            createdBy: mainDropshipperId,
+            createdByRole: dropshipperRole
         };
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        // Optional: Send email
-        // await sendPasswordResetEmail(admin.email, token);
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("admin", "auth", "forget-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product payload created:', productPayload);
+        const productCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["updateDropshipperProduct"])(mainDropshipperId, String(dropshipperRole), dropshipperProductId, productPayload);
+        if (productCreateResult?.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
+                status: true,
+                message: productCreateResult.message
             }, {
-                status: 500
+                status: 200
             });
         }
-        let urlPanel;
-        if (panel == 'dropshipper') {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
-        } else {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{resetUrl}}": urlPanel,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email
-                }
-            ],
-            cc: [],
-            bcc: [],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Reset token created but failed to send email. Please try again.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product creation failed:', productCreateResult?.message || 'Unknown error');
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset link has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Forgot password error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Something went wrong. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleResetPassword(req, adminRole, adminStaffRole) {
-    try {
-        const { token, password } = await req.json();
-        // Check if token is provided
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Token is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Verify token and fetch admin details using adminByToken function
-        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!tokenStatus || !admin) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: tokenMessage || "Invalid token or role."
-            }, {
-                status: 401
-            });
-        }
-        // Hash the password using bcrypt
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10));
-        // Prepare the update data
-        const updateData = {
-            pr_token: null,
-            pr_expires_at: null,
-            pr_last_reset: new Date(),
-            password: hashedPassword
-        };
-        // Update the admin or admin staff record based on the role
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("admin", "auth", "reset-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
-        // Replace placeholders in the HTML template
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email: admin.email
-                }
-            ],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        // Send email notification
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Password reset successful, but failed to send email notification.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        // Return success response
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset successful. A notification has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Password reset error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "An error occurred while resetting the password. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleVerifyStatus(req, adminRole, adminStaffRole) {
-    try {
-        const { token } = await req.json();
-        // Check if token is provided
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Token is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Verify token and fetch admin details using adminByToken function
-        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!tokenStatus || !admin) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: tokenMessage || "Invalid token or role."
-            }, {
-                status: 401
-            });
-        }
-        // Prepare the update data
-        const updateData = {
-            status: 'active'
-        };
-        // Update the admin or admin staff record based on the role
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])('dropshipper', 'auth', 'verify', true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{loginLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`,
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your account has been verified successfully.</p>";
-        // Replace placeholders in the HTML template
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email: admin.email
-                }
-            ],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        // Send email notification
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Account Verified successful, but failed to send email notification.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        // Return success response
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Account Verified successful. A notification has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Account Verified error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "An error occurred while verifing the account. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function adminByUsernameRole(username, role) {
-    try {
-        const adminRoleStr = String(role); // Ensure it's a string
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(adminRoleStr) ? "admin" : "adminStaff";
-        console.log(`adminRoleStr - `, adminRoleStr);
-        // Fetch admin details from database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findFirst({
-                where: {
-                    email: username,
-                    role
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true,
-                    status: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findFirst({
-                where: {
-                    email: username,
-                    role
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true,
-                    status: true
-                }
-            });
-        }
-        // If admin doesn't exist, return false with a message
-        if (!admin) {
-            return {
-                status: false,
-                message: "User with the provided ID does not exist"
-            };
-        }
-        return {
-            status: true,
-            admin
-        };
-    } catch (error) {
-        console.error(`Error fetching admin:`, error);
-        return {
             status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function adminByToken(token, adminRole, adminStaffRole) {
-    try {
-        // Verify token and extract admin details
-        const { payload, status, message } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        if (!status || !payload || typeof payload.adminId !== 'number') {
-            return {
-                status: false,
-                message: message || "Unauthorized access. Invalid token."
-            };
-        }
-        // Determine the admin model based on role
-        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-        if (![
-            adminRole,
-            adminStaffRole
-        ].includes(payloadAdminRole)) {
-            return {
-                status: false,
-                message: "Access denied. Invalid role."
-            };
-        }
-        // Set the correct admin model
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(payloadAdminRole) ? "admin" : "adminStaff";
-        // Fetch the admin from the database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        }
-        // If admin not found, return error
-        if (!admin) {
-            return {
-                status: false,
-                message: "Invalid admin credentials or account not found."
-            };
-        }
-        // Return success with admin details
-        return {
-            status: true,
-            message: "Token is valid",
-            admin
-        };
+            error: productCreateResult?.message || 'Product creation failed'
+        }, {
+            status: 500
+        });
     } catch (error) {
-        console.error("Error fetching admin:", error);
-        return {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            message: "Internal Server Error"
-        };
+            error
+        }, {
+            status: 500
+        });
     }
 }
-}}),
-"[project]/src/app/api/dropshipper/auth/login/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "POST": (()=>POST)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/controllers/admin/authController.ts [app-route] (ecmascript)");
-;
-async function POST(req) {
-    const adminRole = "dropshipper";
-    const adminStaffRole = "dropshipper_staff";
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["handleLogin"])(req, adminRole, adminStaffRole);
+async function PATCH(req) {
+    try {
+        // Extract supplierProductId directly from the URL path
+        const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+        const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
+            dropshipperId,
+            dropshipperRole
+        });
+        if (!dropshipperId || isNaN(dropshipperId)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Invalid or missing dropshipper ID'
+            }, {
+                status: 400
+            });
+        }
+        let mainDropshipperId = dropshipperId;
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const isStaffUser = ![
+            'admin',
+            'dropshipper',
+            'supplier'
+        ].includes(String(dropshipperRole));
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+        }
+        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkDropshipperProductForDropshipper"])(mainDropshipperId, dropshipperProductId);
+        if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: productResult.message
+            }, {
+                status: 200
+            });
+        }
+        // Restore the product (i.e., reset deletedAt, deletedBy, deletedByRole)
+        const restoreResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["restoreDropshipperProduct"])(mainDropshipperId, String(dropshipperRole), dropshipperProductId);
+        if (restoreResult?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Product restored successfully:', restoreResult.restoredDropshipperProduct);
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                product: restoreResult.restoredDropshipperProduct
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product restore failed');
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Product restore failed'
+        }, {
+            status: 500
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', '❌ Product restore error:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Server error'
+        }, {
+            status: 500
+        });
+    }
+}
+async function DELETE(req) {
+    try {
+        // Extract supplierProductId directly from the URL path
+        const dropshipperProductId = Number(req.nextUrl.pathname.split('/').pop());
+        const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
+            dropshipperId,
+            dropshipperRole
+        });
+        if (!dropshipperId || isNaN(dropshipperId)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Invalid or missing dropshipper ID'
+            }, {
+                status: 400
+            });
+        }
+        let mainDropshipperId = dropshipperId;
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${userCheck.message}`
+            }, {
+                status: 404
+            });
+        }
+        const isStaffUser = ![
+            'admin',
+            'dropshipper',
+            'supplier'
+        ].includes(String(dropshipperRole));
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+        }
+        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkDropshipperProductForDropshipper"])(mainDropshipperId, dropshipperProductId);
+        if (!productResult?.status || !productResult.existsInDropshipperProduct) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: productResult.message
+            }, {
+                status: 200
+            });
+        }
+        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["softDeleteDropshipperProduct"])(Number(mainDropshipperId), String(dropshipperRole), dropshipperProductId); // Assuming softDeleteProduct marks the product as deleted
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Soft delete request for product: ${dropshipperProductId}`, {
+            mainDropshipperId
+        });
+        if (result?.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Product soft deleted successfully: ${dropshipperProductId}`, {
+                mainDropshipperId
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: true,
+                message: `Product soft deleted successfully`
+            }, {
+                status: 200
+            });
+        }
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Product not found or could not be deleted: ${dropshipperProductId}`, {
+            mainDropshipperId
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            message: 'Product not found or deletion failed'
+        }, {
+            status: 404
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error during product deletion', {
+            error
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Internal server error'
+        }, {
+            status: 500
+        });
+    }
 }
 }}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__9f9b9cd8._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a4ef1def._.js.map

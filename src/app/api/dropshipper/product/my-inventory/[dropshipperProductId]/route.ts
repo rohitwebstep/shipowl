@@ -3,31 +3,31 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
-import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct, checkProductForDropshipper } from '@/app/models/dropshipper/product';
+import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct, checkProductForDropshipper, checkSupplierProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getAppConfig } from '@/app/models/app/appConfig';
 
 interface MainAdmin {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    // other optional properties if needed
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
 }
 
 interface SupplierStaff {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    role: string;
-    admin?: MainAdmin;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
 }
 
 interface UserCheckResult {
-    status: boolean;
-    message?: string;
-    admin?: SupplierStaff;
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
 }
 
 type Variant = {
@@ -74,7 +74,14 @@ export async function GET(req: NextRequest) {
     const productResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
     console.log(`productResult - `, productResult);
     if (!productResult?.status || !productResult.existsInDropshipperProduct) {
-      return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
+      const productResult = await checkSupplierProductForDropshipper(mainDropshipperId, dropshipperProductId);
+      console.log(`productResult - `, productResult);
+      if (!productResult?.status || !productResult.existsInSupplierProduct) {
+        return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
+      }
+
+      logMessage('info', 'Product found:', productResult.supplierProduct);
+      return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct, otherSuppliers: productResult.otherSuppliers, type: 'notmy' }, { status: 200 });
     }
 
     const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
