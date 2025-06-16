@@ -4,6 +4,29 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
     try {
         const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
@@ -18,15 +41,22 @@ export async function GET(req: NextRequest) {
             );
         }
 
-        const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-        if (!userExistence.status) {
+        let mainDropshipperId = dropshipperId;
+        const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+        if (!userCheck.status) {
             return NextResponse.json(
-                { status: false, error: `User Not Found: ${userExistence.message}` },
+                { status: false, error: `User Not Found: ${userCheck.message}` },
                 { status: 404 }
             );
         }
 
-        const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+        const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+        }
+
+        const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
         if (!shopifyAppsResult.status) {
             return NextResponse.json(
                 { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },

@@ -8,6 +8,29 @@ import {
     deleteShopIfNotVerified,
 } from '@/app/models/dropshipper/shopify';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function POST(req: NextRequest) {
     try {
         logMessage('debug', 'Received POST request to link Shopify store');
@@ -26,12 +49,19 @@ export async function POST(req: NextRequest) {
         logMessage(`debug`, `dropshipperId - ${dropshipperId} // dropshipperRole -- ${dropshipperRole}`);
 
         // Check if the user exists and is authorized
-        const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
+        let mainDropshipperId = dropshipperId;
+        const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
         if (!userCheck.status) {
             return NextResponse.json(
-                { error: `Unauthorized user: ${userCheck.message}` },
-                { status: 403 }
+                { status: false, error: `User Not Found: ${userCheck.message}` },
+                { status: 404 }
             );
+        }
+
+        const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+        if (isStaffUser) {
+            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
         }
 
         // Parse and validate form data
@@ -113,7 +143,7 @@ export async function POST(req: NextRequest) {
 
         // Prepare payload
         const payload = {
-            admin: { connect: { id: dropshipperId } },
+            admin: { connect: { id: mainDropshipperId } },
             shop,
             apiKey,
             apiSecret,
@@ -121,13 +151,13 @@ export async function POST(req: NextRequest) {
             redirectUri,
             apiVersion,
             createdAt: new Date(),
-            createdBy: dropshipperId,
+            createdBy: mainDropshipperId,
             createdByRole: dropshipperRole,
         };
 
         // Attempt to create the Shopify store record
         const result = await createDropshipperShopifyStore(
-            dropshipperId,
+            mainDropshipperId,
             String(dropshipperRole),
             payload
         );
