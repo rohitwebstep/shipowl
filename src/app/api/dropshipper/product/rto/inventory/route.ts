@@ -4,6 +4,29 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getRTOInventories } from "@/app/models/dropshipper/rtoInventory"; // <-- make sure this function exists
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
@@ -20,16 +43,23 @@ export async function GET(req: NextRequest) {
     }
 
     // Validate dropshipper existence
-    const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
     if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `Unauthorized: ${userCheck.message}` },
-        { status: 401 }
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
       );
     }
 
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
     // Fetch RTO Inventory
-    const inventoryResult = await getRTOInventories(dropshipperId);
+    const inventoryResult = await getRTOInventories(mainDropshipperId);
 
     if (inventoryResult?.status && inventoryResult.inventories?.length > 0) {
       return NextResponse.json(

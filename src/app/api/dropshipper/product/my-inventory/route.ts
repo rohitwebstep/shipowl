@@ -9,6 +9,29 @@ import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models
 import { getShopifyStoreByIdForDropshipper, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getSupplierProductVariantById } from '@/app/models/supplier/product';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type Variant = {
   variantId: number;
   stock: number;
@@ -55,12 +78,19 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-    if (!userExistence.status) {
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${userExistence.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
     }
 
     const filters: Record<string, number> = {};
@@ -68,10 +98,10 @@ export async function GET(req: NextRequest) {
     if (brandId) filters.brandId = Number(brandId);
 
     const productsResult = (categoryId || brandId)
-      ? await getProductsByFiltersAndStatus(type, filters, dropshipperId, status)
-      : await getProductsByStatus(type, dropshipperId, status);
+      ? await getProductsByFiltersAndStatus(type, filters, mainDropshipperId, status)
+      : await getProductsByStatus(type, mainDropshipperId, status);
 
-    const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+    const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
     if (!shopifyAppsResult.status) {
       return NextResponse.json(
         { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
@@ -108,13 +138,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json(
-        { error: `User not found: ${userCheck.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
     }
 
     const requiredFields = ['supplierProductId'];
@@ -136,7 +172,7 @@ export async function POST(req: NextRequest) {
     const extractNumber = (key: string) => Number(formData.get(key)) || 0;
     const supplierProductId = extractNumber('supplierProductId');
 
-    const productResult = await checkProductForDropshipper(dropshipperId, supplierProductId);
+    const productResult = await checkProductForDropshipper(mainDropshipperId, supplierProductId);
     if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
       return NextResponse.json(
         { status: false, message: productResult.message },
@@ -207,7 +243,7 @@ export async function POST(req: NextRequest) {
     let shopifyApp;
 
     if (shopifyAppId && !isNaN(shopifyAppId)) {
-      const shopifyAppResult = await getShopifyStoreByIdForDropshipper(shopifyAppId, dropshipperId);
+      const shopifyAppResult = await getShopifyStoreByIdForDropshipper(shopifyAppId, mainDropshipperId);
       if (!shopifyAppResult.status) {
         return NextResponse.json(
           { status: false, message: 'Invalid Shopify store ID. Store not found.' },
@@ -216,7 +252,7 @@ export async function POST(req: NextRequest) {
       }
       shopifyApp = shopifyAppResult.shopifyStore;
     } else {
-      const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+      const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
       if (!shopifyAppsResult.status) {
         return NextResponse.json(
           { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
@@ -243,16 +279,16 @@ export async function POST(req: NextRequest) {
 
     const productPayload = {
       supplierProductId,
-      dropshipperId,
+      dropshipperId: mainDropshipperId,
       variants: parsedVariants,
-      createdBy: dropshipperId,
+      createdBy: mainDropshipperId,
       createdByRole: dropshipperRole,
     };
 
     logMessage('info', 'Creating product with payload:', productPayload);
 
     const productCreateResult = await createDropshipperProduct(
-      dropshipperId,
+      mainDropshipperId,
       String(dropshipperRole),
       productPayload
     );

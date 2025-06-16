@@ -4,6 +4,29 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { checkDropshipperProductForDropshipper, restoreDropshipperProduct } from '@/app/models/dropshipper/product';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function PATCH(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
@@ -20,21 +43,28 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-    if (!userExistence.status) {
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${userExistence.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
+    const productResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
     if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
     // Restore the product (i.e., reset deletedAt, deletedBy, deletedByRole)
-    const restoreResult = await restoreDropshipperProduct(dropshipperId, String(dropshipperRole), dropshipperProductId);
+    const restoreResult = await restoreDropshipperProduct(mainDropshipperId, String(dropshipperRole), dropshipperProductId);
 
     if (restoreResult?.status) {
       logMessage('info', 'Product restored successfully:', restoreResult.restoredDropshipperProduct);

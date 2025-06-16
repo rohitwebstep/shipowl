@@ -7,6 +7,29 @@ import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDe
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getAppConfig } from '@/app/models/app/appConfig';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 type Variant = {
   variantId: number;
   stock: number;
@@ -33,21 +56,28 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-    if (!userExistence.status) {
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${userExistence.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
+    const productResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
     console.log(`productResult - `, productResult);
     if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
     }
 
-    const shopifyAppsResult = await getShopifyStoresByDropshipperId(dropshipperId);
+    const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
     if (!shopifyAppsResult.status) {
       return NextResponse.json(
         { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
@@ -84,13 +114,22 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(dropshipperId, String(dropshipperRole));
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
 
-    const checkDropshipperProductForDropshipperResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
+    const checkDropshipperProductForDropshipperResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
 
     if (!checkDropshipperProductForDropshipperResult?.status || !checkDropshipperProductForDropshipperResult.existsInDropshipperProduct) {
       logMessage('debug', 'checkDropshipperProductForDropshipperResult - ', checkDropshipperProductForDropshipperResult);
@@ -114,7 +153,7 @@ export async function PUT(req: NextRequest) {
     const extractNumber = (key: string) => Number(formData.get(key)) || 0;
     const supplierProductId = extractNumber('supplierProductId');
 
-    const checkProductForDropshipperResult = await checkProductForDropshipper(dropshipperId, supplierProductId);
+    const checkProductForDropshipperResult = await checkProductForDropshipper(mainDropshipperId, supplierProductId);
     if (!checkProductForDropshipperResult?.status || !checkProductForDropshipperResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: checkProductForDropshipperResult.message }, { status: 200 });
     }
@@ -169,15 +208,15 @@ export async function PUT(req: NextRequest) {
 
     const productPayload = {
       supplierProductId,
-      dropshipperId,
+      dropshipperId: mainDropshipperId,
       variants: parsedVariants,
-      createdBy: dropshipperId,
+      createdBy: mainDropshipperId,
       createdByRole: dropshipperRole,
     };
 
     logMessage('info', 'Product payload created:', productPayload);
 
-    const productCreateResult = await updateDropshipperProduct(dropshipperId, String(dropshipperRole), dropshipperProductId, productPayload);
+    const productCreateResult = await updateDropshipperProduct(mainDropshipperId, String(dropshipperRole), dropshipperProductId, productPayload);
 
     if (productCreateResult?.status) {
       return NextResponse.json({ status: true, message: productCreateResult.message }, { status: 200 });
@@ -210,21 +249,28 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-    if (!userExistence.status) {
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${userExistence.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
+    const productResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
     if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
     // Restore the product (i.e., reset deletedAt, deletedBy, deletedByRole)
-    const restoreResult = await restoreDropshipperProduct(dropshipperId, String(dropshipperRole), dropshipperProductId);
+    const restoreResult = await restoreDropshipperProduct(mainDropshipperId, String(dropshipperRole), dropshipperProductId);
 
     if (restoreResult?.status) {
       logMessage('info', 'Product restored successfully:', restoreResult.restoredDropshipperProduct);
@@ -256,28 +302,35 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const userExistence = await isUserExist(dropshipperId, String(dropshipperRole));
-    if (!userExistence.status) {
+    let mainDropshipperId = dropshipperId;
+    const userCheck: UserCheckResult = await isUserExist(dropshipperId, String(dropshipperRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${userExistence.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const productResult = await checkDropshipperProductForDropshipper(dropshipperId, dropshipperProductId);
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
+
+    if (isStaffUser) {
+      mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+    }
+
+    const productResult = await checkDropshipperProductForDropshipper(mainDropshipperId, dropshipperProductId);
     if (!productResult?.status || !productResult.existsInDropshipperProduct) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 200 });
     }
 
-    const result = await softDeleteDropshipperProduct(Number(dropshipperId), String(dropshipperRole), dropshipperProductId);  // Assuming softDeleteProduct marks the product as deleted
-    logMessage('info', `Soft delete request for product: ${dropshipperProductId}`, { dropshipperId });
+    const result = await softDeleteDropshipperProduct(Number(mainDropshipperId), String(dropshipperRole), dropshipperProductId);  // Assuming softDeleteProduct marks the product as deleted
+    logMessage('info', `Soft delete request for product: ${dropshipperProductId}`, { mainDropshipperId });
 
     if (result?.status) {
-      logMessage('info', `Product soft deleted successfully: ${dropshipperProductId}`, { dropshipperId });
+      logMessage('info', `Product soft deleted successfully: ${dropshipperProductId}`, { mainDropshipperId });
       return NextResponse.json({ status: true, message: `Product soft deleted successfully` }, { status: 200 });
     }
 
-    logMessage('info', `Product not found or could not be deleted: ${dropshipperProductId}`, { dropshipperId });
+    logMessage('info', `Product not found or could not be deleted: ${dropshipperProductId}`, { mainDropshipperId });
     return NextResponse.json({ status: false, message: 'Product not found or deletion failed' }, { status: 404 });
   } catch (error) {
     logMessage('error', 'Error during product deletion', { error });
