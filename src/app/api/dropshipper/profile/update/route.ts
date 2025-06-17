@@ -285,29 +285,6 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ status: false, error: dropshipperCompanyCreateResult?.message || 'Dropshipper company creation failed' }, { status: 500 });
     }
 
-    logMessage('debug', 'Dropshipper\'s bank accounts:', bankAccounts);
-
-    const dropshipperBankAccountPayload = {
-      admin: { connect: { id: dropshipperId } },
-      bankAccounts,
-      updatedAt: new Date(),
-      updatedBy: dropshipperId,
-      updatedByRole: dropshipperRole,
-    }
-
-    const dropshipperBankAccountCreateResult = await updateDropshipperBankAccount(dropshipperId, String(dropshipperRole), dropshipperId, dropshipperBankAccountPayload);
-    if (
-      !dropshipperBankAccountCreateResult ||
-      !dropshipperBankAccountCreateResult.status ||
-      !dropshipperBankAccountCreateResult.bankAccounts
-    ) {
-      logMessage('error', 'Dropshipper company creation failed', dropshipperBankAccountCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: dropshipperBankAccountCreateResult?.message || 'Dropshipper company creation failed'
-      }, { status: 500 });
-    }
-
     return NextResponse.json(
       { status: true, error: dropshipperCreateResult?.message || 'Dropshipper updated Successfuly' },
       { status: 200 }
