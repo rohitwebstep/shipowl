@@ -4,14 +4,14 @@ import { deleteFile } from '@/utils/saveFiles';
 import { logMessage } from "@/utils/commonUtils";
 
 interface Variant {
-  id?: number;
-  name?: string;
-  color?: string;
-  sku: string;
-  suggested_price?: number;
-  product_link: string;
-  images: string;
-  modal?: string;
+    id?: number;
+    name?: string;
+    color?: string;
+    sku: string;
+    suggested_price?: number;
+    product_link: string;
+    images: string;
+    modal?: string;
 }
 
 interface VariantSKUInput {
@@ -72,26 +72,26 @@ type ProductFilters = {
 };
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function checkMainSKUAvailability(main_sku: string) {
@@ -896,6 +896,24 @@ export const updateProduct = async (
 
         // Handle variants: update if id exists, else create new
         if (variants && variants.length > 0) {
+
+            // Get incoming IDs from variants
+            const incomingIds = variants
+                .filter(v => v.id)
+                .map(v => Number(v.id));
+
+            // Delete DB variants for this product that are not in incoming list
+            await prisma.productVariant.deleteMany({
+                where: {
+                    productId: productId,
+                    ...(incomingIds.length > 0 && {
+                        id: {
+                            notIn: incomingIds,
+                        },
+                    }),
+                },
+            });
+
             for (const variant of variants) {
 
                 // Get existing variant if ID exists
