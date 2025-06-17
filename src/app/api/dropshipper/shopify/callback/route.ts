@@ -67,11 +67,13 @@ export async function GET(req: NextRequest) {
         }
 
         // Safe to use non-null assertion here because we checked above
-        const apiKey = requiredEnvVars.SHOPIFY_API_KEY!;
-        const apiSecret = requiredEnvVars.SHOPIFY_API_SECRET!;
-        const scopes = requiredEnvVars.SHOPIFY_SCOPES!;
         const redirectUrl = requiredEnvVars.SHOPIFY_REDIRECT_URL!;
+        const apiSecret = requiredEnvVars.SHOPIFY_API_SECRET!;
+        const apiKey = requiredEnvVars.SHOPIFY_API_KEY!;
         const apiVersion = requiredEnvVars.SHOPIFY_API_VERSION!;
+        /*
+        const scopes = requiredEnvVars.SHOPIFY_SCOPES!;
+        */
 
         // ✅ Validate HMAC
         const params: Record<string, string> = {};
@@ -107,8 +109,8 @@ export async function GET(req: NextRequest) {
         const tokenRes = await axios.post(
             `https://${shop}/admin/oauth/access_token`,
             qs.stringify({
-                client_id: shopifyStore.apiKey,
-                client_secret: shopifyStore.apiSecret,
+                client_id: apiKey,
+                client_secret: apiSecret,
                 code
             }),
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
@@ -120,7 +122,7 @@ export async function GET(req: NextRequest) {
         // 🛒 Fetch shop data
         console.log('Step 19: Fetching shop data from Shopify API...');
         const shopInfoRes = await axios.get(
-            `https://${shop}/admin/api/${shopifyStore.apiVersion}/shop.json`,
+            `https://${shop}/admin/api/${apiVersion}/shop.json`,
             {
                 headers: {
                     'X-Shopify-Access-Token': accessToken
