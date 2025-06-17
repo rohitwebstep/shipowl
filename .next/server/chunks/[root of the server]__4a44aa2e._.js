@@ -9979,6 +9979,209 @@ async function fetchLogInfo(module, action, req) {
     }
 }
 }}),
+"[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkStaffPermissionStatus": (()=>checkStaffPermissionStatus),
+    "getStaffPermissions": (()=>getStaffPermissions),
+    "getStaffPermissionsByStaffId": (()=>getStaffPermissionsByStaffId)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") return obj.toString();
+    if (obj instanceof Date) return obj;
+    if (Array.isArray(obj)) return obj.map(serializeBigInt);
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getStaffPermissions = async (filter = {})=>{
+    try {
+        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
+            where: {
+                ...filter.panel && {
+                    panel: filter.panel
+                },
+                ...filter.module && {
+                    module: filter.module
+                },
+                ...filter.action && {
+                    action: filter.action
+                }
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            staffPermissions: serializeBigInt(staffPermissions)
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching staff permissions"
+        };
+    }
+};
+const checkStaffPermissionStatus = async (filter = {}, staffId)=>{
+    try {
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID"
+            };
+        }
+        // Fetch staff permissions based on the provided filter and staff ID
+        if (!filter.panel || !filter.module || !filter.action) {
+            return {
+                status: false,
+                message: "all of filter must be provided"
+            };
+        }
+        const isValidPanel = [
+            "admin",
+            "supplier",
+            "customer"
+        ].includes(filter.panel);
+        if (!isValidPanel) {
+            return {
+                status: false,
+                message: "Invalid panel provided"
+            };
+        }
+        const staffPermissionsExist = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findFirst({
+            where: {
+                panel: filter.panel,
+                module: filter.module,
+                action: filter.action
+            }
+        });
+        if (!staffPermissionsExist) {
+            return {
+                status: false,
+                message: "No permissions found for the given filter"
+            };
+        }
+        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findFirst({
+            where: {
+                adminStaffPermissionId: staffPermissionsExist.id,
+                adminStaffId: staffId
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        if (!staffPermissions) {
+            return {
+                status: false,
+                message: "Action Unauthorized"
+            };
+        }
+        return {
+            status: true,
+            message: "Action Authorized"
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching staff permissions"
+        };
+    }
+};
+const getStaffPermissionsByStaffId = async (filter = {}, staffId)=>{
+    try {
+        // Validate staff ID
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID"
+            };
+        }
+        // Validate panel if provided
+        if (filter.panel) {
+            const isValidPanel = [
+                "admin",
+                "supplier",
+                "customer",
+                "dropshipper"
+            ].includes(filter.panel);
+            if (!isValidPanel) {
+                return {
+                    status: false,
+                    message: "Invalid panel provided"
+                };
+            }
+        }
+        // Fetch permissions matching the filter
+        const matchingPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
+            where: {
+                ...filter.panel && {
+                    panel: filter.panel
+                },
+                ...filter.module && {
+                    module: filter.module
+                },
+                ...filter.action && {
+                    action: filter.action
+                }
+            },
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        if (!matchingPermissions.length) {
+            return {
+                status: false,
+                message: "No matching permissions found for the given filter"
+            };
+        }
+        const permissionIds = matchingPermissions.map((p)=>p.id);
+        // Get all permissions assigned to the staff from filtered list
+        const assignedPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findMany({
+            where: {
+                adminStaffPermissionId: {
+                    in: permissionIds
+                },
+                adminStaffId: staffId
+            },
+            include: {
+                permission: true
+            },
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        if (!assignedPermissions.length) {
+            return {
+                status: false,
+                message: "No permissions assigned to this staff for the given filter"
+            };
+        }
+        return {
+            status: true,
+            message: "Permissions retrieved successfully",
+            assignedPermissions
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissionsByStaffId Error:", error);
+        return {
+            status: false,
+            message: "Error retrieving staff permissions"
+        };
+    }
+};
+}}),
 "[project]/src/app/controllers/admin/authController.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -10001,6 +10204,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admi
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)");
+;
 ;
 ;
 ;
@@ -10059,8 +10264,15 @@ async function handleLogin(req, adminRole, adminStaffRole) {
             'supplier'
         ].includes(String(admin.role));
         let mainAdminId = admin.id;
+        let assignedPermissions;
         if (isStaffUser) {
             console.log(`AdminStaff`);
+            const options = {
+                panel: 'admin'
+            };
+            const assignedPermissionsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getStaffPermissionsByStaffId"])(options, admin.id);
+            console.log(`assignedPermissionsResult - `, assignedPermissionsResult);
+            assignedPermissions = assignedPermissionsResult.assignedPermissions;
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Login successful",
@@ -10070,7 +10282,8 @@ async function handleLogin(req, adminRole, adminStaffRole) {
                 name: admin.name,
                 email: admin.email,
                 role: admin.role
-            }
+            },
+            assignedPermissions
         });
     } catch (error) {
         console.error(`Error during login:`, error);
@@ -10618,4 +10831,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__43acd1aa._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__4a44aa2e._.js.map

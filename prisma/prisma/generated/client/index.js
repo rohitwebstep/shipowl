@@ -1384,7 +1384,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Webstep2\\shipping-owl\\prisma\\prisma\\generated\\client",
+      "value": "D:\\Webstep2\\New\\shipping-owl\\prisma\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -1398,7 +1398,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Webstep2\\shipping-owl\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\Webstep2\\New\\shipping-owl\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

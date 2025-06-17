@@ -7,6 +7,7 @@ import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
 import bcrypt from 'bcryptjs';
 import { logMessage } from '@/utils/commonUtils';
+import { getStaffPermissionsByStaffId } from '@/app/models/staffPermission';
 
 interface Admin {
     id: number;
@@ -56,6 +57,17 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         // Generate authentication token
         const token = generateToken(admin.id, admin.role);
 
+        const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(admin.role));
+        let assignedPermissions;
+        if (isStaffUser) {
+            console.log(`AdminStaff`);
+            const options = {
+                panel: 'admin'
+            };
+            const assignedPermissionsResult = await getStaffPermissionsByStaffId(options, admin.id);
+            assignedPermissions = assignedPermissionsResult.assignedPermissions;
+        }
+
         return NextResponse.json({
             message: "Login successful",
             token,
@@ -65,6 +77,7 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
                 email: admin.email,
                 role: admin.role,
             },
+            assignedPermissions
         });
     } catch (error) {
         console.error(`Error during login:`, error);
@@ -498,6 +511,7 @@ export async function adminByUsernameRole(username: string, role: string) {
                     password: true,
                     role: true,
                     status: true,
+                    admin: true
                 },
             });
         }
