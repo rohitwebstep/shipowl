@@ -8,7 +8,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getDropshipperById, checkEmailAvailabilityForUpdate, updateDropshipper, restoreDropshipper, softDeleteDropshipper } from '@/app/models/dropshipper/dropshipper';
 import { updateDropshipperCompany } from '@/app/models/dropshipper/company';
-import { updateDropshipperBankAccount } from '@/app/models/dropshipper/bankAccount';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 type UploadedFileInfo = {
@@ -18,17 +17,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
-interface BankAccount {
-  id?: number;
-  accountHolderName: string;
-  accountNumber: string;
-  bankName: string;
-  bankBranch: string;
-  accountType: string;
-  ifscCode: string;
-  paymentMethod: string;
-}
 
 export async function GET(req: NextRequest) {
   try {
@@ -225,15 +213,6 @@ export async function PUT(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawBankAccounts = extractJSON('bankAccounts');
-
-    console.log(`rawBankAccounts`, rawBankAccounts);
-    if (!Array.isArray(rawBankAccounts) || rawBankAccounts.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
     const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
