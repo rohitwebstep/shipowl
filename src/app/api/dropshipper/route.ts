@@ -9,7 +9,6 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createDropshipper, getDropshippersByStatus } from '@/app/models/dropshipper/dropshipper';
 import { createDropshipperCompany } from '@/app/models/dropshipper/company';
-import { createDropshipperBankAccount } from '@/app/models/dropshipper/bankAccount';
 
 type UploadedFileInfo = {
   originalName: string;
@@ -18,17 +17,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
-interface BankAccount {
-  id?: number;
-  accountHolderName: string;
-  accountNumber: string;
-  bankName: string;
-  bankBranch: string;
-  accountType: string;
-  ifscCode: string;
-  paymentMethod: string;
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -63,38 +51,6 @@ export async function POST(req: NextRequest) {
 
     const extractNumber = (key: string) => Number(formData.get(key)) || null;
     const extractString = (key: string) => (formData.get(key) as string) || null;
-    const extractJSON = (key: string): Record<string, unknown> | null => {
-
-      const value = extractString(key);
-      const cleanedValue = typeof value === 'string' ? value.replace(/[\/\\]/g, '') : value;
-
-      let parsedData;
-      if (typeof cleanedValue === 'string') {
-        try {
-          parsedData = JSON.parse(cleanedValue);
-          logMessage('info', "✅ Parsed value: 1", parsedData);
-          return parsedData;
-        } catch (error) {
-          logMessage('warn', 'Failed to parse JSON value:', error);
-        }
-
-        try {
-          parsedData = JSON.parse(cleanedValue);
-          logMessage('info', "✅ Parsed value: 2", parsedData);
-          return parsedData;
-        } catch (error) {
-          logMessage('warn', 'Failed to parse JSON value:', error);
-          return null;
-        }
-      }
-
-      if (typeof cleanedValue === 'object' && cleanedValue !== null) {
-        logMessage('info', "✅ Parsed value: 3", cleanedValue);
-        return cleanedValue;
-      }
-
-      return null;
-    };
 
     const statusRaw = formData.get('status')?.toString().toLowerCase();
     const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
@@ -120,15 +76,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    const rawBankAccounts = extractJSON('bankAccounts');
-
-    console.log(`rawBankAccounts`, rawBankAccounts);
-    if (!Array.isArray(rawBankAccounts) || rawBankAccounts.length === 0) {
-      logMessage('warn', 'Variants are not valid or empty');
-      return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
-    }
-    const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
 
     const password = extractString('password') || '';
     // Hash the password using bcrypt
@@ -290,31 +237,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: dropshipperCompanyCreateResult?.message || 'Dropshipper company creation failed' }, { status: 500 });
     }
 
-    logMessage('debug', 'Dropshipper\'s bank accounts:', bankAccounts);
-
-    const dropshipperBankAccountPayload = {
-      admin: { connect: { id: dropshipperCreateResult.dropshipper.id } },
-      bankAccounts,
-      createdAt: new Date(),
-      createdBy: adminId,
-      createdByRole: adminRole,
-    }
-
-    const dropshipperBankAccountCreateResult = await createDropshipperBankAccount(adminId, String(adminRole), dropshipperBankAccountPayload);
-    if (
-      !dropshipperBankAccountCreateResult ||
-      !dropshipperBankAccountCreateResult.status ||
-      !dropshipperBankAccountCreateResult.bankAccounts
-    ) {
-      logMessage('error', 'Dropshipper company creation failed', dropshipperBankAccountCreateResult?.message);
-      return NextResponse.json({
-        status: false,
-        error: dropshipperBankAccountCreateResult?.message || 'Dropshipper company creation failed'
-      }, { status: 500 });
-    }
-
     return NextResponse.json(
-      { status: true, error: dropshipperCreateResult?.message || 'Dropshipper created Successfuly' },
+      { status: true, error: dropshipperCreateResult?.message || 'Dropshipper updated Successfuly' },
       { status: 200 }
     );
   } catch (err: unknown) {
