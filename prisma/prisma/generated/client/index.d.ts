@@ -12605,7 +12605,7 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
-    supplier?: boolean | adminDefaultArgs<ExtArgs>
+    admin?: boolean | adminDefaultArgs<ExtArgs>
     bankAccount?: boolean | bankAccountChangeRequest$bankAccountArgs<ExtArgs>
   }, ExtArgs["result"]["bankAccountChangeRequest"]>
 
@@ -12638,14 +12638,14 @@ export namespace Prisma {
 
   export type bankAccountChangeRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "bankAccountId" | "accountHolderName" | "accountNumber" | "bankName" | "bankBranch" | "accountType" | "ifscCode" | "cancelledChequeImage" | "paymentMethod" | "status" | "remarks" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["bankAccountChangeRequest"]>
   export type bankAccountChangeRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    supplier?: boolean | adminDefaultArgs<ExtArgs>
+    admin?: boolean | adminDefaultArgs<ExtArgs>
     bankAccount?: boolean | bankAccountChangeRequest$bankAccountArgs<ExtArgs>
   }
 
   export type $bankAccountChangeRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "bankAccountChangeRequest"
     objects: {
-      supplier: Prisma.$adminPayload<ExtArgs>
+      admin: Prisma.$adminPayload<ExtArgs>
       bankAccount: Prisma.$bankAccountPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13011,7 +13011,7 @@ export namespace Prisma {
    */
   export interface Prisma__bankAccountChangeRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    supplier<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    admin<T extends adminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, adminDefaultArgs<ExtArgs>>): Prisma__adminClient<$Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     bankAccount<T extends bankAccountChangeRequest$bankAccountArgs<ExtArgs> = {}>(args?: Subset<T, bankAccountChangeRequest$bankAccountArgs<ExtArgs>>): Prisma__bankAccountClient<$Result.GetResult<Prisma.$bankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -50572,7 +50572,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"bankAccountChangeRequest"> | Date | string | null
     deletedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
     deletedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
-    supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
   }
 
@@ -50599,7 +50599,7 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
-    supplier?: adminOrderByWithRelationInput
+    admin?: adminOrderByWithRelationInput
     bankAccount?: bankAccountOrderByWithRelationInput
     _relevance?: bankAccountChangeRequestOrderByRelevanceInput
   }
@@ -50630,7 +50630,7 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"bankAccountChangeRequest"> | Date | string | null
     deletedBy?: IntNullableFilter<"bankAccountChangeRequest"> | number | null
     deletedByRole?: StringNullableFilter<"bankAccountChangeRequest"> | string | null
-    supplier?: XOR<AdminScalarRelationFilter, adminWhereInput>
+    admin?: XOR<AdminScalarRelationFilter, adminWhereInput>
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, bankAccountWhereInput> | null
   }, "id" | "adminId" | "bankAccountId">
 
@@ -54800,7 +54800,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -54849,7 +54849,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -54897,7 +54897,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -54946,7 +54946,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -55742,7 +55742,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    supplier: adminCreateNestedOneWithoutBankAccountChangeRequestInput
+    admin: adminCreateNestedOneWithoutBankAccountChangeRequestInput
     bankAccount?: bankAccountCreateNestedOneWithoutBankAccountChangeRequestInput
   }
 
@@ -55791,7 +55791,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    supplier?: adminUpdateOneRequiredWithoutBankAccountChangeRequestNestedInput
+    admin?: adminUpdateOneRequiredWithoutBankAccountChangeRequestNestedInput
     bankAccount?: bankAccountUpdateOneWithoutBankAccountChangeRequestNestedInput
   }
 
@@ -64405,9 +64405,9 @@ export namespace Prisma {
     connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
   }
 
-  export type bankAccountChangeRequestCreateNestedOneWithoutSupplierInput = {
-    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
-    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput
+  export type bankAccountChangeRequestCreateNestedOneWithoutAdminInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutAdminInput
     connect?: bankAccountChangeRequestWhereUniqueInput
   }
 
@@ -64500,9 +64500,9 @@ export namespace Prisma {
     connect?: dropshipperProductWhereUniqueInput | dropshipperProductWhereUniqueInput[]
   }
 
-  export type bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput = {
-    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
-    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput
+  export type bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutAdminInput
     connect?: bankAccountChangeRequestWhereUniqueInput
   }
 
@@ -64686,14 +64686,14 @@ export namespace Prisma {
     deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
   }
 
-  export type bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput = {
-    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
-    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput
-    upsert?: bankAccountChangeRequestUpsertWithoutSupplierInput
+  export type bankAccountChangeRequestUpdateOneWithoutAdminNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutAdminInput
+    upsert?: bankAccountChangeRequestUpsertWithoutAdminInput
     disconnect?: bankAccountChangeRequestWhereInput | boolean
     delete?: bankAccountChangeRequestWhereInput | boolean
     connect?: bankAccountChangeRequestWhereUniqueInput
-    update?: XOR<XOR<bankAccountChangeRequestUpdateToOneWithWhereWithoutSupplierInput, bankAccountChangeRequestUpdateWithoutSupplierInput>, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
+    update?: XOR<XOR<bankAccountChangeRequestUpdateToOneWithWhereWithoutAdminInput, bankAccountChangeRequestUpdateWithoutAdminInput>, bankAccountChangeRequestUncheckedUpdateWithoutAdminInput>
   }
 
   export type productSupplierVisibilityUpdateManyWithoutSupplierNestedInput = {
@@ -64878,14 +64878,14 @@ export namespace Prisma {
     deleteMany?: dropshipperProductScalarWhereInput | dropshipperProductScalarWhereInput[]
   }
 
-  export type bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput = {
-    create?: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
-    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutSupplierInput
-    upsert?: bankAccountChangeRequestUpsertWithoutSupplierInput
+  export type bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput = {
+    create?: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: bankAccountChangeRequestCreateOrConnectWithoutAdminInput
+    upsert?: bankAccountChangeRequestUpsertWithoutAdminInput
     disconnect?: bankAccountChangeRequestWhereInput | boolean
     delete?: bankAccountChangeRequestWhereInput | boolean
     connect?: bankAccountChangeRequestWhereUniqueInput
-    update?: XOR<XOR<bankAccountChangeRequestUpdateToOneWithWhereWithoutSupplierInput, bankAccountChangeRequestUpdateWithoutSupplierInput>, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
+    update?: XOR<XOR<bankAccountChangeRequestUpdateToOneWithWhereWithoutAdminInput, bankAccountChangeRequestUpdateWithoutAdminInput>, bankAccountChangeRequestUncheckedUpdateWithoutAdminInput>
   }
 
   export type productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput = {
@@ -69166,7 +69166,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type bankAccountChangeRequestCreateWithoutSupplierInput = {
+  export type bankAccountChangeRequestCreateWithoutAdminInput = {
     accountHolderName: string
     accountNumber: string
     bankName: string
@@ -69189,7 +69189,7 @@ export namespace Prisma {
     bankAccount?: bankAccountCreateNestedOneWithoutBankAccountChangeRequestInput
   }
 
-  export type bankAccountChangeRequestUncheckedCreateWithoutSupplierInput = {
+  export type bankAccountChangeRequestUncheckedCreateWithoutAdminInput = {
     id?: number
     bankAccountId?: number | null
     accountHolderName: string
@@ -69213,9 +69213,9 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
-  export type bankAccountChangeRequestCreateOrConnectWithoutSupplierInput = {
+  export type bankAccountChangeRequestCreateOrConnectWithoutAdminInput = {
     where: bankAccountChangeRequestWhereUniqueInput
-    create: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
+    create: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
   }
 
   export type productSupplierVisibilityCreateWithoutSupplierInput = {
@@ -69975,18 +69975,18 @@ export namespace Prisma {
     data: XOR<dropshipperProductUpdateManyMutationInput, dropshipperProductUncheckedUpdateManyWithoutSupplierInput>
   }
 
-  export type bankAccountChangeRequestUpsertWithoutSupplierInput = {
-    update: XOR<bankAccountChangeRequestUpdateWithoutSupplierInput, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
-    create: XOR<bankAccountChangeRequestCreateWithoutSupplierInput, bankAccountChangeRequestUncheckedCreateWithoutSupplierInput>
+  export type bankAccountChangeRequestUpsertWithoutAdminInput = {
+    update: XOR<bankAccountChangeRequestUpdateWithoutAdminInput, bankAccountChangeRequestUncheckedUpdateWithoutAdminInput>
+    create: XOR<bankAccountChangeRequestCreateWithoutAdminInput, bankAccountChangeRequestUncheckedCreateWithoutAdminInput>
     where?: bankAccountChangeRequestWhereInput
   }
 
-  export type bankAccountChangeRequestUpdateToOneWithWhereWithoutSupplierInput = {
+  export type bankAccountChangeRequestUpdateToOneWithWhereWithoutAdminInput = {
     where?: bankAccountChangeRequestWhereInput
-    data: XOR<bankAccountChangeRequestUpdateWithoutSupplierInput, bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput>
+    data: XOR<bankAccountChangeRequestUpdateWithoutAdminInput, bankAccountChangeRequestUncheckedUpdateWithoutAdminInput>
   }
 
-  export type bankAccountChangeRequestUpdateWithoutSupplierInput = {
+  export type bankAccountChangeRequestUpdateWithoutAdminInput = {
     accountHolderName?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     bankName?: StringFieldUpdateOperationsInput | string
@@ -70009,7 +70009,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUpdateOneWithoutBankAccountChangeRequestNestedInput
   }
 
-  export type bankAccountChangeRequestUncheckedUpdateWithoutSupplierInput = {
+  export type bankAccountChangeRequestUncheckedUpdateWithoutAdminInput = {
     id?: IntFieldUpdateOperationsInput | number
     bankAccountId?: NullableIntFieldUpdateOperationsInput | number | null
     accountHolderName?: StringFieldUpdateOperationsInput | string
@@ -70225,7 +70225,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -70273,7 +70273,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -70336,7 +70336,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -70384,7 +70384,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -70600,7 +70600,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -70648,7 +70648,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -70898,7 +70898,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -70946,7 +70946,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -70993,7 +70993,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -71041,7 +71041,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -71073,7 +71073,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     deletedBy?: number | null
     deletedByRole?: string | null
-    supplier: adminCreateNestedOneWithoutBankAccountChangeRequestInput
+    admin: adminCreateNestedOneWithoutBankAccountChangeRequestInput
   }
 
   export type bankAccountChangeRequestUncheckedCreateWithoutBankAccountInput = {
@@ -71156,7 +71156,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -71204,7 +71204,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -71242,7 +71242,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedBy?: NullableIntFieldUpdateOperationsInput | number | null
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
-    supplier?: adminUpdateOneRequiredWithoutBankAccountChangeRequestNestedInput
+    admin?: adminUpdateOneRequiredWithoutBankAccountChangeRequestNestedInput
   }
 
   export type bankAccountChangeRequestUncheckedUpdateWithoutBankAccountInput = {
@@ -71786,7 +71786,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -71834,7 +71834,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -72121,7 +72121,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -72169,7 +72169,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -72731,7 +72731,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -72779,7 +72779,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -74072,7 +74072,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -74120,7 +74120,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -74960,7 +74960,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -75008,7 +75008,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -77695,7 +77695,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
     rtoInventories?: rtoInventoryCreateNestedManyWithoutDropshipperInput
@@ -77743,7 +77743,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
     rtoInventories?: rtoInventoryUncheckedCreateNestedManyWithoutDropshipperInput
@@ -77914,7 +77914,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
     rtoInventories?: rtoInventoryUpdateManyWithoutDropshipperNestedInput
@@ -77962,7 +77962,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
     rtoInventories?: rtoInventoryUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -78407,7 +78407,7 @@ export namespace Prisma {
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -78455,7 +78455,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -78791,7 +78791,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -78839,7 +78839,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -79086,7 +79086,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
     rtoInventories?: rtoInventoryCreateNestedManyWithoutDropshipperInput
@@ -79134,7 +79134,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
     rtoInventories?: rtoInventoryUncheckedCreateNestedManyWithoutDropshipperInput
@@ -79456,7 +79456,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
     rtoInventories?: rtoInventoryUpdateManyWithoutDropshipperNestedInput
@@ -79504,7 +79504,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
     rtoInventories?: rtoInventoryUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -79774,7 +79774,7 @@ export namespace Prisma {
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -79822,7 +79822,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -79874,7 +79874,7 @@ export namespace Prisma {
     bankAccount?: bankAccountCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -79922,7 +79922,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedCreateNestedOneWithoutAdminInput
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -80272,7 +80272,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -80320,7 +80320,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -80378,7 +80378,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -80426,7 +80426,7 @@ export namespace Prisma {
     bankAccount?: bankAccountUncheckedUpdateOneWithoutAdminNestedInput
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -80678,7 +80678,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     rtoInventories?: rtoInventoryCreateNestedManyWithoutDropshipperInput
@@ -80726,7 +80726,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     rtoInventories?: rtoInventoryUncheckedCreateNestedManyWithoutDropshipperInput
@@ -81115,7 +81115,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     rtoInventories?: rtoInventoryUpdateManyWithoutDropshipperNestedInput
@@ -81163,7 +81163,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     rtoInventories?: rtoInventoryUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -82740,7 +82740,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -82788,7 +82788,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -82928,7 +82928,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -82976,7 +82976,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -83295,7 +83295,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -83343,7 +83343,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -83501,7 +83501,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -83549,7 +83549,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -83645,7 +83645,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantCreateNestedManyWithoutDropshipperInput
@@ -83693,7 +83693,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProducts?: dropshipperProductUncheckedCreateNestedManyWithoutDropshipperInput
     suppliedProducts?: dropshipperProductUncheckedCreateNestedManyWithoutSupplierInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutSupplierInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedCreateNestedOneWithoutAdminInput
     productVisibility?: productSupplierVisibilityUncheckedCreateNestedManyWithoutSupplierInput
     supplierProductVariants?: supplierProductVariantUncheckedCreateNestedManyWithoutSupplierInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedCreateNestedManyWithoutDropshipperInput
@@ -83990,7 +83990,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -84038,7 +84038,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -85957,7 +85957,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -86005,7 +86005,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -87274,7 +87274,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -87322,7 +87322,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput
@@ -88237,7 +88237,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUpdateManyWithoutDropshipperNestedInput
@@ -88285,7 +88285,7 @@ export namespace Prisma {
     supplierProducts?: supplierProductUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProducts?: dropshipperProductUncheckedUpdateManyWithoutDropshipperNestedInput
     suppliedProducts?: dropshipperProductUncheckedUpdateManyWithoutSupplierNestedInput
-    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutSupplierNestedInput
+    bankAccountChangeRequest?: bankAccountChangeRequestUncheckedUpdateOneWithoutAdminNestedInput
     productVisibility?: productSupplierVisibilityUncheckedUpdateManyWithoutSupplierNestedInput
     supplierProductVariants?: supplierProductVariantUncheckedUpdateManyWithoutSupplierNestedInput
     dropshipperProductVariants?: dropshipperProductVariantUncheckedUpdateManyWithoutDropshipperNestedInput

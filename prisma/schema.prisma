@@ -226,7 +226,7 @@ model bankAccountChangeRequest {
   deletedAt              DateTime?
   deletedBy              Int?
   deletedByRole          String?
-  supplier               admin     @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "AdminToBankAccountChangeRequest", map: "admin_bank_account_change_request_fkey")
+  admin               admin     @relation(fields: [adminId], references: [id], onDelete: Cascade, name: "AdminToBankAccountChangeRequest", map: "admin_bank_account_change_request_fkey")
   bankAccount            bankAccount? @relation(fields: [bankAccountId], references: [id], onDelete: SetNull)
   @@index([adminId])
   @@index([bankAccountId])

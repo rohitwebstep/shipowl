@@ -333,7 +333,7 @@ export const getAllBankAccountChangeRequests = async () => {
     try {
         const requests = await prisma.bankAccountChangeRequest.findMany({
             include: {
-                supplier: {
+                admin: {
                     include: {
                         bankAccount: true
                     }
