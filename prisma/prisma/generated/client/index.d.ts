@@ -6715,10 +6715,14 @@ export namespace Prisma {
     username: string | null
     website: string | null
     email: string | null
+    isEmailVerified: boolean | null
+    emailVerifiedAt: Date | null
     referralCode: string | null
     password: string | null
     role: string | null
     type: string | null
+    isVerified: boolean | null
+    verifiedAt: Date | null
     status: string | null
     dateOfBirth: Date | null
     phoneNumber: string | null
@@ -6750,10 +6754,14 @@ export namespace Prisma {
     username: string | null
     website: string | null
     email: string | null
+    isEmailVerified: boolean | null
+    emailVerifiedAt: Date | null
     referralCode: string | null
     password: string | null
     role: string | null
     type: string | null
+    isVerified: boolean | null
+    verifiedAt: Date | null
     status: string | null
     dateOfBirth: Date | null
     phoneNumber: string | null
@@ -6785,10 +6793,14 @@ export namespace Prisma {
     username: number
     website: number
     email: number
+    isEmailVerified: number
+    emailVerifiedAt: number
     referralCode: number
     password: number
     role: number
     type: number
+    isVerified: number
+    verifiedAt: number
     status: number
     dateOfBirth: number
     phoneNumber: number
@@ -6842,10 +6854,14 @@ export namespace Prisma {
     username?: true
     website?: true
     email?: true
+    isEmailVerified?: true
+    emailVerifiedAt?: true
     referralCode?: true
     password?: true
     role?: true
     type?: true
+    isVerified?: true
+    verifiedAt?: true
     status?: true
     dateOfBirth?: true
     phoneNumber?: true
@@ -6877,10 +6893,14 @@ export namespace Prisma {
     username?: true
     website?: true
     email?: true
+    isEmailVerified?: true
+    emailVerifiedAt?: true
     referralCode?: true
     password?: true
     role?: true
     type?: true
+    isVerified?: true
+    verifiedAt?: true
     status?: true
     dateOfBirth?: true
     phoneNumber?: true
@@ -6912,10 +6932,14 @@ export namespace Prisma {
     username?: true
     website?: true
     email?: true
+    isEmailVerified?: true
+    emailVerifiedAt?: true
     referralCode?: true
     password?: true
     role?: true
     type?: true
+    isVerified?: true
+    verifiedAt?: true
     status?: true
     dateOfBirth?: true
     phoneNumber?: true
@@ -7034,10 +7058,14 @@ export namespace Prisma {
     username: string | null
     website: string | null
     email: string
+    isEmailVerified: boolean | null
+    emailVerifiedAt: Date | null
     referralCode: string | null
     password: string
     role: string
     type: string
+    isVerified: boolean | null
+    verifiedAt: Date | null
     status: string
     dateOfBirth: Date | null
     phoneNumber: string | null
@@ -7088,10 +7116,14 @@ export namespace Prisma {
     username?: boolean
     website?: boolean
     email?: boolean
+    isEmailVerified?: boolean
+    emailVerifiedAt?: boolean
     referralCode?: boolean
     password?: boolean
     role?: boolean
     type?: boolean
+    isVerified?: boolean
+    verifiedAt?: boolean
     status?: boolean
     dateOfBirth?: boolean
     phoneNumber?: boolean
@@ -7143,10 +7175,14 @@ export namespace Prisma {
     username?: boolean
     website?: boolean
     email?: boolean
+    isEmailVerified?: boolean
+    emailVerifiedAt?: boolean
     referralCode?: boolean
     password?: boolean
     role?: boolean
     type?: boolean
+    isVerified?: boolean
+    verifiedAt?: boolean
     status?: boolean
     dateOfBirth?: boolean
     phoneNumber?: boolean
@@ -7170,7 +7206,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "uniqeId" | "username" | "website" | "email" | "referralCode" | "password" | "role" | "type" | "status" | "dateOfBirth" | "phoneNumber" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
+  export type adminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profilePicture" | "name" | "uniqeId" | "username" | "website" | "email" | "isEmailVerified" | "emailVerifiedAt" | "referralCode" | "password" | "role" | "type" | "isVerified" | "verifiedAt" | "status" | "dateOfBirth" | "phoneNumber" | "currentAddress" | "permanentAddress" | "permanentPostalCode" | "permanentCityId" | "permanentStateId" | "permanentCountryId" | "pr_token" | "pr_expires_at" | "pr_last_reset" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["admin"]>
   export type adminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permanentCity?: boolean | admin$permanentCityArgs<ExtArgs>
     permanentState?: boolean | admin$permanentStateArgs<ExtArgs>
@@ -7221,10 +7257,14 @@ export namespace Prisma {
       username: string | null
       website: string | null
       email: string
+      isEmailVerified: boolean | null
+      emailVerifiedAt: Date | null
       referralCode: string | null
       password: string
       role: string
       type: string
+      isVerified: boolean | null
+      verifiedAt: Date | null
       status: string
       dateOfBirth: Date | null
       phoneNumber: string | null
@@ -7639,10 +7679,14 @@ export namespace Prisma {
     readonly username: FieldRef<"admin", 'String'>
     readonly website: FieldRef<"admin", 'String'>
     readonly email: FieldRef<"admin", 'String'>
+    readonly isEmailVerified: FieldRef<"admin", 'Boolean'>
+    readonly emailVerifiedAt: FieldRef<"admin", 'DateTime'>
     readonly referralCode: FieldRef<"admin", 'String'>
     readonly password: FieldRef<"admin", 'String'>
     readonly role: FieldRef<"admin", 'String'>
     readonly type: FieldRef<"admin", 'String'>
+    readonly isVerified: FieldRef<"admin", 'Boolean'>
+    readonly verifiedAt: FieldRef<"admin", 'DateTime'>
     readonly status: FieldRef<"admin", 'String'>
     readonly dateOfBirth: FieldRef<"admin", 'DateTime'>
     readonly phoneNumber: FieldRef<"admin", 'String'>
@@ -48093,10 +48137,14 @@ export namespace Prisma {
     username: 'username',
     website: 'website',
     email: 'email',
+    isEmailVerified: 'isEmailVerified',
+    emailVerifiedAt: 'emailVerifiedAt',
     referralCode: 'referralCode',
     password: 'password',
     role: 'role',
     type: 'type',
+    isVerified: 'isVerified',
+    verifiedAt: 'verifiedAt',
     status: 'status',
     dateOfBirth: 'dateOfBirth',
     phoneNumber: 'phoneNumber',
@@ -49765,10 +49813,14 @@ export namespace Prisma {
     username?: StringNullableFilter<"admin"> | string | null
     website?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
+    isEmailVerified?: BoolNullableFilter<"admin"> | boolean | null
+    emailVerifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     type?: StringFilter<"admin"> | string
+    isVerified?: BoolNullableFilter<"admin"> | boolean | null
+    verifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
     phoneNumber?: StringNullableFilter<"admin"> | string | null
@@ -49817,10 +49869,14 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     email?: SortOrder
+    isEmailVerified?: SortOrderInput | SortOrder
+    emailVerifiedAt?: SortOrderInput | SortOrder
     referralCode?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     type?: SortOrder
+    isVerified?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
@@ -49873,10 +49929,14 @@ export namespace Prisma {
     name?: StringFilter<"admin"> | string
     website?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
+    isEmailVerified?: BoolNullableFilter<"admin"> | boolean | null
+    emailVerifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     type?: StringFilter<"admin"> | string
+    isVerified?: BoolNullableFilter<"admin"> | boolean | null
+    verifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
     phoneNumber?: StringNullableFilter<"admin"> | string | null
@@ -49925,10 +49985,14 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     email?: SortOrder
+    isEmailVerified?: SortOrderInput | SortOrder
+    emailVerifiedAt?: SortOrderInput | SortOrder
     referralCode?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     type?: SortOrder
+    isVerified?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
@@ -49968,10 +50032,14 @@ export namespace Prisma {
     username?: StringNullableWithAggregatesFilter<"admin"> | string | null
     website?: StringNullableWithAggregatesFilter<"admin"> | string | null
     email?: StringWithAggregatesFilter<"admin"> | string
+    isEmailVerified?: BoolNullableWithAggregatesFilter<"admin"> | boolean | null
+    emailVerifiedAt?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
     referralCode?: StringNullableWithAggregatesFilter<"admin"> | string | null
     password?: StringWithAggregatesFilter<"admin"> | string
     role?: StringWithAggregatesFilter<"admin"> | string
     type?: StringWithAggregatesFilter<"admin"> | string
+    isVerified?: BoolNullableWithAggregatesFilter<"admin"> | boolean | null
+    verifiedAt?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
     status?: StringWithAggregatesFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableWithAggregatesFilter<"admin"> | Date | string | null
     phoneNumber?: StringNullableWithAggregatesFilter<"admin"> | string | null
@@ -54766,10 +54834,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -54815,10 +54887,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -54863,10 +54939,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54912,10 +54992,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54961,10 +55045,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -54995,10 +55083,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55027,10 +55119,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60616,6 +60712,11 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -60772,10 +60873,14 @@ export namespace Prisma {
     username?: SortOrder
     website?: SortOrder
     email?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerifiedAt?: SortOrder
     referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     type?: SortOrder
+    isVerified?: SortOrder
+    verifiedAt?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
     phoneNumber?: SortOrder
@@ -60817,10 +60922,14 @@ export namespace Prisma {
     username?: SortOrder
     website?: SortOrder
     email?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerifiedAt?: SortOrder
     referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     type?: SortOrder
+    isVerified?: SortOrder
+    verifiedAt?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
     phoneNumber?: SortOrder
@@ -60852,10 +60961,14 @@ export namespace Prisma {
     username?: SortOrder
     website?: SortOrder
     email?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerifiedAt?: SortOrder
     referralCode?: SortOrder
     password?: SortOrder
     role?: SortOrder
     type?: SortOrder
+    isVerified?: SortOrder
+    verifiedAt?: SortOrder
     status?: SortOrder
     dateOfBirth?: SortOrder
     phoneNumber?: SortOrder
@@ -60887,6 +61000,14 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -64532,6 +64653,10 @@ export namespace Prisma {
     connectOrCreate?: rtoInventoryCreateOrConnectWithoutDropshipperInput | rtoInventoryCreateOrConnectWithoutDropshipperInput[]
     createMany?: rtoInventoryCreateManyDropshipperInputEnvelope
     connect?: rtoInventoryWhereUniqueInput | rtoInventoryWhereUniqueInput[]
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -68379,6 +68504,11 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -68399,6 +68529,14 @@ export namespace Prisma {
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -70192,10 +70330,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -70240,10 +70382,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -70303,10 +70449,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70351,10 +70501,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70567,10 +70721,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -70615,10 +70773,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -70865,10 +71027,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70913,10 +71079,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70960,10 +71130,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -71008,10 +71182,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -71123,10 +71301,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71171,10 +71353,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71276,10 +71462,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -71324,10 +71514,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -71435,10 +71629,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71483,10 +71681,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71753,10 +71955,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -71801,10 +72007,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -72088,10 +72298,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72136,10 +72350,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72698,10 +72916,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -72746,10 +72968,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -73551,10 +73777,14 @@ export namespace Prisma {
     username?: StringNullableFilter<"admin"> | string | null
     website?: StringNullableFilter<"admin"> | string | null
     email?: StringFilter<"admin"> | string
+    isEmailVerified?: BoolNullableFilter<"admin"> | boolean | null
+    emailVerifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     referralCode?: StringNullableFilter<"admin"> | string | null
     password?: StringFilter<"admin"> | string
     role?: StringFilter<"admin"> | string
     type?: StringFilter<"admin"> | string
+    isVerified?: BoolNullableFilter<"admin"> | boolean | null
+    verifiedAt?: DateTimeNullableFilter<"admin"> | Date | string | null
     status?: StringFilter<"admin"> | string
     dateOfBirth?: DateTimeNullableFilter<"admin"> | Date | string | null
     phoneNumber?: StringNullableFilter<"admin"> | string | null
@@ -74039,10 +74269,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -74087,10 +74321,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -74927,10 +75165,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -74975,10 +75217,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -77661,10 +77907,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -77709,10 +77959,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -77880,10 +78134,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77928,10 +78186,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78374,10 +78636,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -78422,10 +78688,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -78758,10 +79028,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78806,10 +79080,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79052,10 +79330,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -79100,10 +79382,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -79422,10 +79708,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79470,10 +79760,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79741,10 +80035,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -79789,10 +80087,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -79841,10 +80143,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -79889,10 +80195,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -80239,10 +80549,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80287,10 +80601,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80345,10 +80663,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80393,10 +80715,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80644,10 +80970,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -80692,10 +81022,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -81081,10 +81415,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -81129,10 +81467,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82707,10 +83049,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -82755,10 +83101,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -82895,10 +83245,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -82943,10 +83297,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -83262,10 +83620,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83310,10 +83672,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83468,10 +83834,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83516,10 +83886,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83611,10 +83985,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -83659,10 +84037,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -83956,10 +84338,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84004,10 +84390,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85403,10 +85793,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -85924,10 +86318,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85972,10 +86370,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86020,10 +86422,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86870,10 +87276,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -87241,10 +87651,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87289,10 +87703,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87337,10 +87755,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87892,10 +88314,14 @@ export namespace Prisma {
     username?: string | null
     website?: string | null
     email: string
+    isEmailVerified?: boolean | null
+    emailVerifiedAt?: Date | string | null
     referralCode?: string | null
     password: string
     role?: string
     type?: string
+    isVerified?: boolean | null
+    verifiedAt?: Date | string | null
     status?: string
     dateOfBirth?: Date | string | null
     phoneNumber?: string | null
@@ -88204,10 +88630,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88252,10 +88682,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88300,10 +88734,14 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     referralCode?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null

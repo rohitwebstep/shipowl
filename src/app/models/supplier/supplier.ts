@@ -36,26 +36,26 @@ interface Supplier {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function generateUniqueSupplierId() {
@@ -254,7 +254,7 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
 }
 
 export const getSuppliersByStatus = async (
-    status: "deleted" | "notDeleted" | "inactive" | "active" = "notDeleted",
+    status: "deleted" | "notDeleted" | "inactive" | "active" | "notVerified" | "verified" = "notDeleted",
     withPassword: boolean | string | number = false
 ) => {
     try {
@@ -272,6 +272,12 @@ export const getSuppliersByStatus = async (
                 break;
             case "active":
                 whereCondition = { role: 'supplier', status: 'active', deletedAt: null };
+                break;
+            case "notVerified":
+                whereCondition = { role: 'supplier', isVerified: false, deletedAt: null };
+                break;
+            case "verified":
+                whereCondition = { role: 'supplier', isVerified: true, deletedAt: null };
                 break;
             default:
                 throw new Error("Invalid status");
@@ -441,6 +447,41 @@ export const updateSupplierStatus = async (
 
         const updateData = {
             status: statusString,
+        };
+
+        const newDropshipper = await prisma.admin.update({
+            where: { id: supplierId },
+            data: updateData,
+        });
+
+        return { status: true, supplier: serializeBigInt(newDropshipper) };
+    } catch (error) {
+        console.error(`Error updating supplier:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+};
+
+export const updateSupplierVerifyStatus = async (
+    adminId: number,
+    adminRole: string,
+    supplierId: number,
+    statusRaw: string | boolean | number,
+) => {
+    try {
+
+        // Convert status to a boolean using the includes check
+        const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
+
+        // Fetch current supplier details, including password based on withPassword flag
+        const { status: supplierStatus, supplier: currentDropshipper, message } = await getSupplierById(supplierId);
+
+        if (!supplierStatus || !currentDropshipper) {
+            return { status: false, message: message || "Dropshipper not found." };
+        }
+
+        const updateData = {
+            isVerified: status,
+            verifiedAt: status ? new Date() : null
         };
 
         const newDropshipper = await prisma.admin.update({

@@ -445,8 +445,11 @@ export async function GET(req: NextRequest) {
       case "inactive":
         suppliersResult = await getSuppliersByStatus("inactive");
         break;
-      case "active":
-        suppliersResult = await getSuppliersByStatus("active");
+      case "notVerified":
+        suppliersResult = await getSuppliersByStatus("notVerified");
+        break;
+      case "verified":
+        suppliersResult = await getSuppliersByStatus("verified");
         break;
       default:
         suppliersResult = await getSuppliersByStatus("notDeleted");

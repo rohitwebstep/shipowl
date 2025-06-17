@@ -12,6 +12,7 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier } from '@/app/models/supplier/supplier';
 import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from "@/utils/email/sendEmail";
+import { generateRegistrationToken } from '@/utils/auth/authUtils';
 /*
 import { createSupplierCompany } from '@/app/models/supplier/company';
 import { createSupplierBankAccount } from '@/app/models/supplier/bankAccount';
@@ -451,17 +452,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const token = generateRegistrationToken(supplierCreateResult.supplier.id, 'supplier');
+
     // Use index signature to avoid TS error
     const replacements: Record<string, string> = {
       "{{name}}": supplierCreateResult.supplier.name,
       "{{email}}": supplierCreateResult.supplier.email,
       "{{year}}": new Date().getFullYear().toString(),
       "{{appName}}": "Shipping OWL",
+      "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/supplier/auth/register/verify?token=${token}`,
+      "{{password}}": password
     };
 
     let htmlBody = htmlTemplate?.trim()
       ? htmlTemplate
-      : "<p>Dear {{name}},</p><p>Click <a href='{{verificationLink}}'>here</a> to verify your email.</p>";
+      : `
+        <p>Dear {{name}},</p>
+        <p>Click the button below to verify your email and wait for admin approval to activate your account.</p>
+        <p><a href="{{verificationLink}}" style="display:inline-block;padding:10px 20px;background-color:#4CAF50;color:#fff;text-decoration:none;border-radius:5px;">Verify Email</a></p>
+        <p>Thank you,<br/>{{appName}} Team</p>
+      `;
 
     Object.keys(replacements).forEach((key) => {
       htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);

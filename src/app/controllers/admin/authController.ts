@@ -387,22 +387,56 @@ export async function handleVerifyStatus(
             );
         }
 
-        // Prepare the update data
-        const updateData = {
-            status: 'active'
-        };
+        let loginLink;
 
         // Update the admin or admin staff record based on the role
-        if (admin.role === adminRole) {
-            await prisma.admin.update({
-                where: { id: admin.id },
-                data: updateData,
-            });
+        if (adminRole == 'supplier') {
+            // Prepare the update data
+            const updateAdminData = {
+                isEmailVerified: true,
+                emailVerifiedAt: new Date()
+            };
+
+            const updateStaffData = {
+                status: 'active'
+            };
+
+            if (admin.role === adminRole) {
+                await prisma.admin.update({
+                    where: { id: admin.id },
+                    data: updateAdminData,
+                });
+            } else {
+                await prisma.adminStaff.update({
+                    where: { id: admin.id },
+                    data: updateStaffData,
+                });
+            }
+            loginLink = `https://shpping-owl-frontend.vercel.app/supplier/auth/login`;
+        } else if (adminRole == 'dropshipper') {
+            // Prepare the update data
+            const updateData = {
+                status: 'active'
+            };
+
+            if (admin.role === adminRole) {
+                await prisma.admin.update({
+                    where: { id: admin.id },
+                    data: updateData,
+                });
+            } else {
+                await prisma.adminStaff.update({
+                    where: { id: admin.id },
+                    data: updateData,
+                });
+            }
+            loginLink = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`;
+
         } else {
-            await prisma.adminStaff.update({
-                where: { id: admin.id },
-                data: updateData,
-            });
+            return NextResponse.json(
+                { status: false, message: "Role is not supproted for this action" },
+                { status: 500 }
+            );
         }
 
         const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('dropshipper', 'auth', 'verify', true);
@@ -419,7 +453,7 @@ export async function handleVerifyStatus(
         const replacements: Record<string, string> = {
             "{{name}}": admin.name,
             "{{year}}": new Date().getFullYear().toString(),
-            "{{loginLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`,
+            "{{loginLink}}": loginLink,
             "{{appName}}": "Shipping OWL",
         };
 

@@ -54,10 +54,14 @@ model admin {
   username            String?   @unique
   website             String?
   email               String
+  isEmailVerified     Boolean?
+  emailVerifiedAt     DateTime?
   referralCode        String?
   password            String
   role                String    @default("admin")
   type                String    @default("main")
+  isVerified          Boolean?
+  verifiedAt          DateTime?
   status              String    @default("active")
   dateOfBirth         DateTime?
   phoneNumber         String?
