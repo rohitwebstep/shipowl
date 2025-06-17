@@ -14,9 +14,10 @@ export async function GET(req: NextRequest) {
         const shop = url.searchParams.get('shop');
         const code = url.searchParams.get('code');
         const hmac = url.searchParams.get('hmac');
-        console.log(`Step 2: Extracted query params - shop: ${shop}, code: ${code}, hmac: ${hmac}`);
+        const host = url.searchParams.get('host');
+        console.log(`Step 2: Extracted query params - shop: ${shop}, code: ${code}, hmac: ${hmac}, host: ${host}`);
 
-        if (!shop || !code || !hmac) {
+        if (!shop || !code || !hmac || !host) {
             console.log('Step 3: Missing required parameters');
             return NextResponse.json({ error: 'Missing required parameters.' }, { status: 400 });
         }
@@ -35,17 +36,42 @@ export async function GET(req: NextRequest) {
         const dropshipper = shopifyStore.admin;
         console.log('Step 7: shopifyStore and dropshipper info:', { shopifyStore, dropshipper });
 
-        // ✅ Check for required shopifyStore fields
-        console.log(`Step 8: shopifyStore.apiSecret - ${shopifyStore.apiSecret}`);
-        console.log(`Step 9: shopifyStore.apiKey - ${shopifyStore.apiKey}`);
-        console.log(`Step 10: shopifyStore.apiVersion - ${shopifyStore.apiVersion}`);
+        // Required environment variables
+        const requiredEnvVars = {
+            SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY,
+            SHOPIFY_API_SECRET: process.env.SHOPIFY_API_SECRET,
+            SHOPIFY_SCOPES: process.env.SHOPIFY_SCOPES,
+            SHOPIFY_REDIRECT_URL: process.env.SHOPIFY_REDIRECT_URL,
+            SHOPIFY_API_VERSION: process.env.SHOPIFY_API_VERSION,
+        };
 
-        if (!shopifyStore.apiSecret || !shopifyStore.apiKey || !shopifyStore.apiVersion) {
-            console.log('Step 11: Incomplete Shopify store configuration');
-            return NextResponse.json({
-                error: 'Shopify store configuration is incomplete (missing apiKey, apiSecret, or apiVersion).',
-            }, { status: 500 });
+        // Identify missing or empty env variables
+        const missingVars = Object.entries(requiredEnvVars)
+            .filter(([key, val]) => {
+                const isMissing = !val || val.trim() === '';
+                if (isMissing) {
+                    console.log(`Missing env variable: ${key}`);
+                }
+                return isMissing;
+            })
+            .map(([key]) => key);
+
+        if (missingVars.length > 0) {
+            return NextResponse.json(
+                {
+                    error: 'Missing or empty required environment variables.',
+                    missing: missingVars,
+                },
+                { status: 400 }
+            );
         }
+
+        // Safe to use non-null assertion here because we checked above
+        const apiKey = requiredEnvVars.SHOPIFY_API_KEY!;
+        const apiSecret = requiredEnvVars.SHOPIFY_API_SECRET!;
+        const scopes = requiredEnvVars.SHOPIFY_SCOPES!;
+        const redirectUrl = requiredEnvVars.SHOPIFY_REDIRECT_URL!;
+        const apiVersion = requiredEnvVars.SHOPIFY_API_VERSION!;
 
         // ✅ Validate HMAC
         const params: Record<string, string> = {};
@@ -60,7 +86,7 @@ export async function GET(req: NextRequest) {
         console.log('Step 13: Message string for HMAC:', message);
 
         const generatedHash = crypto
-            .createHmac('sha256', shopifyStore.apiSecret)
+            .createHmac('sha256', apiSecret)
             .update(message)
             .digest('hex');
         console.log('Step 14: Generated HMAC hash:', generatedHash);
@@ -142,8 +168,11 @@ export async function GET(req: NextRequest) {
         console.log('Step 23: Result from verifyDropshipperShopifyStore:', result);
 
         if (result?.status) {
+
+            const shopifyAppRedirectUrl = `${redirectUrl}/apps/shipping-owl?host=${host}&shop=${shopData.myshopify_domain}`;
+
             console.log('Step 24: Store verified successfully, sending success response');
-            return NextResponse.json({ status: true }, { status: 200 });
+            return NextResponse.json({ status: true, redirectUrl: shopifyAppRedirectUrl }, { status: 200 });
         }
 
         logMessage('error', 'Failed to create store:', result?.message || 'Unknown error');
