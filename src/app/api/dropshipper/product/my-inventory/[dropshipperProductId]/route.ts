@@ -86,17 +86,11 @@ export async function GET(req: NextRequest) {
     }
 
     const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
-    if (!shopifyAppsResult.status) {
-      return NextResponse.json(
-        { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
-        { status: 400 }
-      );
-    }
 
     const configResult = await getAppConfig();
 
     logMessage('info', 'Product found:', productResult.dropshipperProduct);
-    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, shopifyStores: shopifyAppsResult.shopifyStores, type: 'my', shippingCost: configResult?.appConfig?.shippingCost }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', dropshipperProduct: productResult.dropshipperProduct, shopifyStores: shopifyAppsResult?.shopifyStores || [], type: 'my', shippingCost: configResult?.appConfig?.shippingCost }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(

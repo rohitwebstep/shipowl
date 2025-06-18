@@ -57,15 +57,9 @@ export async function GET(req: NextRequest) {
         }
 
         const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
-        if (!shopifyAppsResult.status) {
-            return NextResponse.json(
-                { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
-                { status: 400 }
-            );
-        }
 
         return NextResponse.json(
-            { status: true, shopifyStores: shopifyAppsResult.shopifyStores },
+            { status: true, shopifyStores: shopifyAppsResult?.shopifyStores || [] },
             { status: 200 }
         );
     } catch (error) {

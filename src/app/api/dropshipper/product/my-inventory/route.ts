@@ -104,19 +104,13 @@ export async function GET(req: NextRequest) {
       : await getProductsByStatus(type, mainDropshipperId, status);
 
     const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
-    if (!shopifyAppsResult.status) {
-      return NextResponse.json(
-        { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
-        { status: 400 }
-      );
-    }
 
     const appConfigResult = await getAppConfig();
     const appConfig = appConfigResult.appConfig;
     const shippingCost = appConfig ? appConfig.shippingCost || 0 : 0;
 
     return NextResponse.json(
-      { status: true, products: productsResult?.products, shopifyStores: shopifyAppsResult.shopifyStores, type, shippingCost },
+      { status: true, products: productsResult?.products, shopifyStores: shopifyAppsResult?.shopifyStores || [], type, shippingCost },
       { status: 200 }
     );
   } catch (error) {
@@ -270,18 +264,12 @@ export async function POST(req: NextRequest) {
       shopifyApp = shopifyAppResult.shopifyStore;
     } else {
       const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
-      if (!shopifyAppsResult.status) {
-        return NextResponse.json(
-          { status: false, message: 'Unable to retrieve Shopify stores for the dropshipper.' },
-          { status: 400 }
-        );
-      }
 
       return NextResponse.json(
         {
           status: false,
           message: 'Missing or invalid Shopify store ID. Using all stores instead.',
-          shopifyStores: shopifyAppsResult.shopifyStores,
+          shopifyStores: shopifyAppsResult.shopifyStores || [],
         },
         { status: 400 }
       );
