@@ -332,9 +332,31 @@ export async function POST(req: NextRequest) {
         console.log('shopifyProductPayload.product.images - ', shopifyProductPayload.product.images);
         console.log('shopifyProductPayload.product.variants - ', shopifyProductPayload.product.variants);
 
-        const shopifyResponse = await axios.post(
-          `https://${shopDomain}/admin/api/${SHOPIFY_API_VERSION}/products.json`,
-          shopifyProductPayload,
+        const graphqlEndpoint = `https://${shopDomain}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`;
+
+        // Step 1: Create Product
+        const productCreateMutation = `
+                                        mutation productCreate($input: ProductInput!) {
+                                          productCreate(input: $input) {
+                                            product { id }
+                                            userErrors { field message }
+                                          }
+                                        }
+                                      `;
+
+        const productCreateVariables = {
+          input: {
+            title: mainProduct.name,
+            descriptionHtml: mainProduct.description,
+            vendor: 'App Vendor',
+            productType: 'Dropship Product',
+            published: true,
+          },
+        };
+
+        const createResp = await axios.post(
+          graphqlEndpoint,
+          { query: productCreateMutation, variables: productCreateVariables },
           {
             headers: {
               'X-Shopify-Access-Token': accessToken,
@@ -343,10 +365,103 @@ export async function POST(req: NextRequest) {
           }
         );
 
-        console.log('Shopify API response:', shopifyResponse.data);
+        const productId = createResp.data?.data?.productCreate?.product?.id;
+        const createErrors = createResp.data?.data?.productCreate?.userErrors || [];
+        if (!productId || createErrors.length > 0) {
+          return NextResponse.json(
+            { status: false, message: 'Product creation failed', errors: createErrors },
+            { status: 400 }
+          );
+        }
+
+        // Step 2: Push Variants
+        const variantMutation = `
+                                mutation productVariantsBulkCreate($productId: ID!, $strategy: ProductVariantsBulkCreateStrategy, $variants: [ProductVariantsBulkInput!]!) {
+                                  productVariantsBulkCreate(productId: $productId, strategy: $strategy, variants: $variants) {
+                                    productVariants { id }
+                                    userErrors { field message }
+                                  }
+                                }
+                              `;
+
+        const variantInputs = parsedVariants.map(v => ({
+          price: v.price.toFixed(2),
+          inventoryItem: {
+            sku: `SKU-${v.variantId}`,
+            tracked: true,
+          },
+          barcode: null,
+        }));
+
+        const variantResp = await axios.post(
+          graphqlEndpoint,
+          {
+            query: variantMutation,
+            variables: {
+              productId,
+              strategy: 'REMOVE_STANDALONE_VARIANT',
+              variants: variantInputs,
+            },
+          },
+          {
+            headers: {
+              'X-Shopify-Access-Token': accessToken,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const variantErrors = variantResp.data?.data?.productVariantsBulkCreate?.userErrors || [];
+        if (variantErrors.length > 0) {
+          return NextResponse.json(
+            { status: false, message: 'Variant push failed', errors: variantErrors },
+            { status: 400 }
+          );
+        }
+
+        // Step 3: Upload Media (optional)
+        const imageSources = [
+          mainProduct.package_weight_image,
+          mainProduct.package_length_image,
+          mainProduct.package_width_image,
+          mainProduct.package_height_image,
+        ].filter(src => typeof src === 'string' && src.trim() !== '').map(src => APP_HOST + src);
+
+        if (imageSources.length > 0) {
+          const mediaMutation = `
+        mutation productCreateMedia($productId: ID!, $media: [CreateMediaInput!]!) {
+          productCreateMedia(productId: $productId, media: $media) {
+            mediaUserErrors { field message }
+          }
+        }
+      `;
+          const mediaVariables = {
+            productId,
+            media: imageSources.map(url => ({
+              originalSource: url,
+              mediaContentType: 'IMAGE',
+            })),
+          };
+
+          const mediaResp = await axios.post(
+            graphqlEndpoint,
+            { query: mediaMutation, variables: mediaVariables },
+            {
+              headers: {
+                'X-Shopify-Access-Token': accessToken,
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+
+          const mediaErrors = mediaResp.data?.data?.productCreateMedia?.mediaUserErrors || [];
+          if (mediaErrors.length > 0) {
+            console.error('[Media Upload Error]', mediaErrors);
+          }
+        }
 
         return NextResponse.json(
-          { status: true, product: productCreateResult.product },
+          { status: true, product: productCreateResult.product, message: 'Product pushed to Shopify' },
           { status: 200 }
         );
       } catch (error) {
@@ -377,4 +492,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ status: false, error }, { status: 500 });
   }
 }
-
