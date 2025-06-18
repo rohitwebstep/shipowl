@@ -4,6 +4,29 @@ import { getAllBankAccountChangeRequests } from '@/app/models/supplier/bankAccou
 import { isUserExist } from '@/utils/auth/authUtils';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
     try {
         logMessage('debug', 'GET request received for bank account change requests');
