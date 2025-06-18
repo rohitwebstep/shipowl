@@ -12,6 +12,29 @@ import { getCountryById } from '@/app/models/location/country'
 import { checkMainSKUAvailability, checkVariantSKUsAvailability, createProduct, assignProductVisibilityToSuppliers, getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/admin/product/product';
 import { getSupplierById } from '@/app/models/supplier/supplier';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
