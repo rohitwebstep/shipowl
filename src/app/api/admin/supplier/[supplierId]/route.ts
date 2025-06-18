@@ -10,6 +10,29 @@ import { getSupplierById, checkEmailAvailabilityForUpdate, checkUsernameAvailabi
 import { updateSupplierCompany } from '@/app/models/supplier/company';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
@@ -33,7 +56,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -45,6 +68,8 @@ export async function GET(req: NextRequest) {
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaff) {
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Supplier',

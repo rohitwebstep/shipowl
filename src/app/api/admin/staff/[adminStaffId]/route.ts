@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -65,7 +65,8 @@ export async function GET(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      
       const options = {
         panel: 'admin',
         module: 'Sub User',
@@ -124,7 +125,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -136,7 +137,8 @@ export async function PUT(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      
       const options = {
         panel: 'admin',
         module: 'Sub User',
@@ -322,7 +324,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Check if admin exists
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -334,7 +336,8 @@ export async function PATCH(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Sub User',
@@ -395,7 +398,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Check if the admin user exists
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -407,7 +410,8 @@ export async function DELETE(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Sub User',
