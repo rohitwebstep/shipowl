@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
 import { logMessage } from "@/utils/commonUtils";
-import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
+import { saveFilesFromFormData } from '@/utils/saveFiles';
 
 type UploadedFileInfo = {
     originalName: string;
