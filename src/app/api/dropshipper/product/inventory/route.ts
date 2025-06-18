@@ -4,6 +4,7 @@ import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/dropshipper/product';
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
+import { getAppConfig } from '@/app/models/app/appConfig';
 
 interface MainAdmin {
   id: number;
@@ -96,8 +97,12 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const appConfigResult = await getAppConfig();
+    const appConfig = appConfigResult.appConfig;
+    const shippingCost = appConfig ? appConfig.shippingCost || 0 : 0;
+
     return NextResponse.json(
-      { status: true, products: productsResult?.products, shopifyStores: shopifyAppsResult.shopifyStores, type },
+      { status: true, products: productsResult?.products, shopifyStores: shopifyAppsResult.shopifyStores, type, shippingCost },
       { status: 200 }
     );
 
