@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
 
 
     // Check if admin exists
-    let mainAdminId = adminId;
+    //  let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaff) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      //  mainAdminId = userCheck.admin?.admin?.id ?? adminId;
 
       const options = {
         panel: 'admin',

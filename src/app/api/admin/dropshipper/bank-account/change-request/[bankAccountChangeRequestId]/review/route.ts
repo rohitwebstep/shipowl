@@ -6,26 +6,26 @@ import { getBankAccountChangeRequestById, reviewBankAccountChangeRequest } from 
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
 interface MainAdmin {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    // other optional properties if needed
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
 }
 
 interface SupplierStaff {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    role: string;
-    admin?: MainAdmin;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
 }
 
 interface UserCheckResult {
-    status: boolean;
-    message?: string;
-    admin?: SupplierStaff;
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
 }
 
 export async function POST(req: NextRequest) {
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate admin
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
     const isStaff = !['admin', 'dropshipper', 'dropshipper'].includes(String(adminRole));
 
     if (isStaff) {
+      //  mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Dropshipper',
