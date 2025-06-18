@@ -8,6 +8,29 @@ import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { getAdminById, checkEmailAvailabilityForUpdate, updateAdmin, restoreAdmin, softDeleteAdmin } from '@/app/models/admin/admin';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
@@ -18,7 +41,7 @@ type UploadedFileInfo = {
 
 export async function GET(req: NextRequest) {
   try {
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -26,7 +49,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(

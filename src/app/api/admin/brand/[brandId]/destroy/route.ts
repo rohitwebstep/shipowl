@@ -58,6 +58,8 @@ export async function DELETE(req: NextRequest) {
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaff) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      
       const options = {
         panel: 'admin',
         module: 'Brand',
