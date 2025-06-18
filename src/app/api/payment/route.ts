@@ -5,6 +5,29 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { checkTransactionIdAvailability, createPayment, getPaymentsByStatus } from '@/app/models/payment';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function POST(req: NextRequest) {
   try {
     logMessage('debug', 'POST request received for payment creation');
