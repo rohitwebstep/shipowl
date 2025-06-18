@@ -7,6 +7,29 @@ import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';
 import { getBadPincodeByPincode } from '@/app/models/badPincode';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 interface ShippingApiResult {
   responsemsg: string;
   data?: unknown;
