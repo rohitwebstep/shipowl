@@ -6,6 +6,29 @@ import { getOrderById, updateShippingApiResultOfOrder } from '@/app/models/order
 import { placeOrderShipping } from '@/utils/order/placeOrderShipping';
 import { getHighRtoByPincode } from '@/app/models/highRto';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function POST(req: NextRequest) {
   try {
     // Extract orderIdId directly from the URL path
