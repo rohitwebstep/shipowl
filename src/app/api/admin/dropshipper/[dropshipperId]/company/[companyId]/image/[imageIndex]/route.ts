@@ -5,6 +5,29 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getCompanyDeailByDropshipperId, removeCompanyDetailImageByIndex } from '@/app/models/dropshipper/company';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type ImageType = "gstDocument" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentImage";
 
 export async function DELETE(req: NextRequest) {
