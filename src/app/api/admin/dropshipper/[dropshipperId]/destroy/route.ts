@@ -23,7 +23,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Check if the admin user exists
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });

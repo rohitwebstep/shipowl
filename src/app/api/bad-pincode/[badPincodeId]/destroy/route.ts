@@ -46,7 +46,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Check if the admin user exists
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -58,7 +58,8 @@ export async function DELETE(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Bad Pincode',

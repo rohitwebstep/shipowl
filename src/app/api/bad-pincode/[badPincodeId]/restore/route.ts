@@ -49,7 +49,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Check if admin exists
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -61,7 +61,8 @@ export async function PATCH(req: NextRequest) {
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
     if (isStaffUser) {
-      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      // mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+
       const options = {
         panel: 'admin',
         module: 'Bad Pincode',
@@ -96,7 +97,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Restore the badPincode (i.e., reset deletedAt, deletedBy, deletedByRole)
-    const restoreResult = await restoreBadPincode(mainAdminId, String(adminRole), badPincodeIdNum);
+    const restoreResult = await restoreBadPincode(adminId, String(adminRole), badPincodeIdNum);
 
     if (restoreResult?.status) {
       logMessage('info', 'BadPincode restored successfully:', restoreResult.restoredBadPincode);

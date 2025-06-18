@@ -26,7 +26,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: "Admin ID is missing or invalid" }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', 'Admin user not found', { adminId, adminRole });
       return NextResponse.json({ error: `Admin user not found: ${userCheck.message}` }, { status: 404 });

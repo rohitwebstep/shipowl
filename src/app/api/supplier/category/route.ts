@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if supplier exists
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });

@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate admin
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
       return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });

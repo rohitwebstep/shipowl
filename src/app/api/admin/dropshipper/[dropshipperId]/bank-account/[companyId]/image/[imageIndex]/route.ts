@@ -36,7 +36,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Authenticate admin user
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', 'Admin authentication failed', { adminId, adminRole });
       return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });

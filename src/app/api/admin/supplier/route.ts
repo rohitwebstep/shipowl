@@ -11,6 +11,29 @@ import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getS
 import { createSupplierCompany } from '@/app/models/supplier/company';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
@@ -32,7 +55,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
@@ -367,8 +390,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: false, error: supplierCompanyCreateResult?.message || 'Supplier company creation failed' }, { status: 500 });
     }
 
-
-
     return NextResponse.json(
       { status: true, error: supplierCreateResult?.message || 'Supplier created Successfuly' },
       { status: 200 }
@@ -402,10 +423,10 @@ export async function GET(req: NextRequest) {
 
     // Check if admin exists
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
