@@ -8483,11 +8483,6 @@ export namespace Prisma {
     name: string | null
     shop: string | null
     accessToken: string | null
-    apiKey: string | null
-    apiSecret: string | null
-    apiVersion: string | null
-    scopes: string | null
-    redirectUri: string | null
     email: string | null
     shopName: string | null
     planName: string | null
@@ -8522,11 +8517,6 @@ export namespace Prisma {
     name: string | null
     shop: string | null
     accessToken: string | null
-    apiKey: string | null
-    apiSecret: string | null
-    apiVersion: string | null
-    scopes: string | null
-    redirectUri: string | null
     email: string | null
     shopName: string | null
     planName: string | null
@@ -8561,11 +8551,6 @@ export namespace Prisma {
     name: number
     shop: number
     accessToken: number
-    apiKey: number
-    apiSecret: number
-    apiVersion: number
-    scopes: number
-    redirectUri: number
     email: number
     shopName: number
     planName: number
@@ -8620,11 +8605,6 @@ export namespace Prisma {
     name?: true
     shop?: true
     accessToken?: true
-    apiKey?: true
-    apiSecret?: true
-    apiVersion?: true
-    scopes?: true
-    redirectUri?: true
     email?: true
     shopName?: true
     planName?: true
@@ -8659,11 +8639,6 @@ export namespace Prisma {
     name?: true
     shop?: true
     accessToken?: true
-    apiKey?: true
-    apiSecret?: true
-    apiVersion?: true
-    scopes?: true
-    redirectUri?: true
     email?: true
     shopName?: true
     planName?: true
@@ -8698,11 +8673,6 @@ export namespace Prisma {
     name?: true
     shop?: true
     accessToken?: true
-    apiKey?: true
-    apiSecret?: true
-    apiVersion?: true
-    scopes?: true
-    redirectUri?: true
     email?: true
     shopName?: true
     planName?: true
@@ -8824,11 +8794,6 @@ export namespace Prisma {
     name: string | null
     shop: string
     accessToken: string | null
-    apiKey: string | null
-    apiSecret: string | null
-    apiVersion: string | null
-    scopes: string | null
-    redirectUri: string | null
     email: string | null
     shopName: string | null
     planName: string | null
@@ -8882,11 +8847,6 @@ export namespace Prisma {
     name?: boolean
     shop?: boolean
     accessToken?: boolean
-    apiKey?: boolean
-    apiSecret?: boolean
-    apiVersion?: boolean
-    scopes?: boolean
-    redirectUri?: boolean
     email?: boolean
     shopName?: boolean
     planName?: boolean
@@ -8924,11 +8884,6 @@ export namespace Prisma {
     name?: boolean
     shop?: boolean
     accessToken?: boolean
-    apiKey?: boolean
-    apiSecret?: boolean
-    apiVersion?: boolean
-    scopes?: boolean
-    redirectUri?: boolean
     email?: boolean
     shopName?: boolean
     planName?: boolean
@@ -8957,7 +8912,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type shopifyStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "name" | "shop" | "accessToken" | "apiKey" | "apiSecret" | "apiVersion" | "scopes" | "redirectUri" | "email" | "shopName" | "planName" | "country" | "shopOwner" | "domain" | "myshopifyDomain" | "province" | "city" | "phone" | "currency" | "moneyFormat" | "timezone" | "createdAtShop" | "userId" | "verificationStatus" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["shopifyStore"]>
+  export type shopifyStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "name" | "shop" | "accessToken" | "email" | "shopName" | "planName" | "country" | "shopOwner" | "domain" | "myshopifyDomain" | "province" | "city" | "phone" | "currency" | "moneyFormat" | "timezone" | "createdAtShop" | "userId" | "verificationStatus" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["shopifyStore"]>
   export type shopifyStoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }
@@ -8973,11 +8928,6 @@ export namespace Prisma {
       name: string | null
       shop: string
       accessToken: string | null
-      apiKey: string | null
-      apiSecret: string | null
-      apiVersion: string | null
-      scopes: string | null
-      redirectUri: string | null
       email: string | null
       shopName: string | null
       planName: string | null
@@ -9379,11 +9329,6 @@ export namespace Prisma {
     readonly name: FieldRef<"shopifyStore", 'String'>
     readonly shop: FieldRef<"shopifyStore", 'String'>
     readonly accessToken: FieldRef<"shopifyStore", 'String'>
-    readonly apiKey: FieldRef<"shopifyStore", 'String'>
-    readonly apiSecret: FieldRef<"shopifyStore", 'String'>
-    readonly apiVersion: FieldRef<"shopifyStore", 'String'>
-    readonly scopes: FieldRef<"shopifyStore", 'String'>
-    readonly redirectUri: FieldRef<"shopifyStore", 'String'>
     readonly email: FieldRef<"shopifyStore", 'String'>
     readonly shopName: FieldRef<"shopifyStore", 'String'>
     readonly planName: FieldRef<"shopifyStore", 'String'>
@@ -48177,11 +48122,6 @@ export namespace Prisma {
     name: 'name',
     shop: 'shop',
     accessToken: 'accessToken',
-    apiKey: 'apiKey',
-    apiSecret: 'apiSecret',
-    apiVersion: 'apiVersion',
-    scopes: 'scopes',
-    redirectUri: 'redirectUri',
     email: 'email',
     shopName: 'shopName',
     planName: 'planName',
@@ -49083,11 +49023,6 @@ export namespace Prisma {
     name: 'name',
     shop: 'shop',
     accessToken: 'accessToken',
-    apiKey: 'apiKey',
-    apiSecret: 'apiSecret',
-    apiVersion: 'apiVersion',
-    scopes: 'scopes',
-    redirectUri: 'redirectUri',
     email: 'email',
     shopName: 'shopName',
     planName: 'planName',
@@ -50072,11 +50007,6 @@ export namespace Prisma {
     name?: StringNullableFilter<"shopifyStore"> | string | null
     shop?: StringFilter<"shopifyStore"> | string
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
-    apiKey?: StringNullableFilter<"shopifyStore"> | string | null
-    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
-    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
-    scopes?: StringNullableFilter<"shopifyStore"> | string | null
-    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
     shopName?: StringNullableFilter<"shopifyStore"> | string | null
     planName?: StringNullableFilter<"shopifyStore"> | string | null
@@ -50112,11 +50042,6 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     shop?: SortOrder
     accessToken?: SortOrderInput | SortOrder
-    apiKey?: SortOrderInput | SortOrder
-    apiSecret?: SortOrderInput | SortOrder
-    apiVersion?: SortOrderInput | SortOrder
-    scopes?: SortOrderInput | SortOrder
-    redirectUri?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     shopName?: SortOrderInput | SortOrder
     planName?: SortOrderInput | SortOrder
@@ -50156,11 +50081,6 @@ export namespace Prisma {
     adminId?: IntFilter<"shopifyStore"> | number
     name?: StringNullableFilter<"shopifyStore"> | string | null
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
-    apiKey?: StringNullableFilter<"shopifyStore"> | string | null
-    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
-    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
-    scopes?: StringNullableFilter<"shopifyStore"> | string | null
-    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
     shopName?: StringNullableFilter<"shopifyStore"> | string | null
     planName?: StringNullableFilter<"shopifyStore"> | string | null
@@ -50196,11 +50116,6 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     shop?: SortOrder
     accessToken?: SortOrderInput | SortOrder
-    apiKey?: SortOrderInput | SortOrder
-    apiSecret?: SortOrderInput | SortOrder
-    apiVersion?: SortOrderInput | SortOrder
-    scopes?: SortOrderInput | SortOrder
-    redirectUri?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     shopName?: SortOrderInput | SortOrder
     planName?: SortOrderInput | SortOrder
@@ -50243,11 +50158,6 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     shop?: StringWithAggregatesFilter<"shopifyStore"> | string
     accessToken?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
-    apiKey?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
-    apiSecret?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
-    apiVersion?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
-    scopes?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
-    redirectUri?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     email?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     shopName?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     planName?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
@@ -55154,11 +55064,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -55194,11 +55099,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -55231,11 +55131,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55271,11 +55166,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55310,11 +55200,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -55347,11 +55232,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55386,11 +55266,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61057,11 +60932,6 @@ export namespace Prisma {
     name?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
-    apiKey?: SortOrder
-    apiSecret?: SortOrder
-    apiVersion?: SortOrder
-    scopes?: SortOrder
-    redirectUri?: SortOrder
     email?: SortOrder
     shopName?: SortOrder
     planName?: SortOrder
@@ -61105,11 +60975,6 @@ export namespace Prisma {
     name?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
-    apiKey?: SortOrder
-    apiSecret?: SortOrder
-    apiVersion?: SortOrder
-    scopes?: SortOrder
-    redirectUri?: SortOrder
     email?: SortOrder
     shopName?: SortOrder
     planName?: SortOrder
@@ -61144,11 +61009,6 @@ export namespace Prisma {
     name?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
-    apiKey?: SortOrder
-    apiSecret?: SortOrder
-    apiVersion?: SortOrder
-    scopes?: SortOrder
-    redirectUri?: SortOrder
     email?: SortOrder
     shopName?: SortOrder
     planName?: SortOrder
@@ -68883,11 +68743,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -68921,11 +68776,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -69808,11 +69658,6 @@ export namespace Prisma {
     name?: StringNullableFilter<"shopifyStore"> | string | null
     shop?: StringFilter<"shopifyStore"> | string
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
-    apiKey?: StringNullableFilter<"shopifyStore"> | string | null
-    apiSecret?: StringNullableFilter<"shopifyStore"> | string | null
-    apiVersion?: StringNullableFilter<"shopifyStore"> | string | null
-    scopes?: StringNullableFilter<"shopifyStore"> | string | null
-    redirectUri?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
     shopName?: StringNullableFilter<"shopifyStore"> | string | null
     planName?: StringNullableFilter<"shopifyStore"> | string | null
@@ -84729,11 +84574,6 @@ export namespace Prisma {
     name?: string | null
     shop: string
     accessToken?: string | null
-    apiKey?: string | null
-    apiSecret?: string | null
-    apiVersion?: string | null
-    scopes?: string | null
-    redirectUri?: string | null
     email?: string | null
     shopName?: string | null
     planName?: string | null
@@ -85016,11 +84856,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85054,11 +84889,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85092,11 +84922,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    apiKey?: NullableStringFieldUpdateOperationsInput | string | null
-    apiSecret?: NullableStringFieldUpdateOperationsInput | string | null
-    apiVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    scopes?: NullableStringFieldUpdateOperationsInput | string | null
-    redirectUri?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     shopName?: NullableStringFieldUpdateOperationsInput | string | null
     planName?: NullableStringFieldUpdateOperationsInput | string | null

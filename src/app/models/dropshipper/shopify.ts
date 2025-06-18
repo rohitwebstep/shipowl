@@ -17,16 +17,6 @@ interface ShopifyStore {
     shop: string;
     accessToken?: string;
 
-    // === Shopify App Configuration ===
-    apiKey?: string;        // Formerly SHOPIFY_API_KEY
-    apiSecret?: string;     // Formerly SHOPIFY_API_SECRET
-    scopes?: string;        // Formerly SHOPIFY_SCOPES (comma-separated)
-    redirectUri?: string;
-    apiVersion?: string;
-
-    // === Shopify API & Version (optional, add if needed) ===
-    // apiVersion?: string; 
-
     // === Store Metadata ===
     email?: string;
     name?: string;              // corresponds to shopName in Prisma
@@ -54,26 +44,26 @@ interface ShopifyStore {
 }
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function isShopUsedAndVerified(shop: string) {
@@ -119,7 +109,7 @@ export async function isShopUsedAndVerified(shop: string) {
 
 export async function createDropshipperShopifyStore(dropshipperId: number, dropshipperRole: string, dropshipperShopifyStore: ShopifyStore) {
     try {
-        const { admin, shop, apiKey, apiSecret, scopes, redirectUri, apiVersion, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
+        const { admin, shop, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
 
         // 🚫 Check if the shop is already used and verified
         const isAlreadyUsed = await isShopUsedAndVerified(shop);
@@ -138,11 +128,6 @@ export async function createDropshipperShopifyStore(dropshipperId: number, drops
             data: {
                 admin,
                 shop,
-                apiKey,
-                apiSecret,
-                scopes,
-                redirectUri,
-                apiVersion,
                 status,
                 verificationStatus,
                 createdAt,

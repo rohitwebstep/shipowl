@@ -110,11 +110,6 @@ model shopifyStore {
   name               String?
   shop               String    @unique
   accessToken        String?
-  apiKey             String?
-  apiSecret          String?
-  apiVersion         String?
-  scopes             String?
-  redirectUri        String?   @db.LongText
   email              String?
   shopName           String?
   planName           String?
