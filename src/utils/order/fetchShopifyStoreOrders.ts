@@ -1,13 +1,82 @@
 import axios from 'axios';
 import { logMessage } from '../commonUtils';
 
-const SHOPIFY_API_VERSION = '2024-04'; // Replace with the correct version
+const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION;
+
+interface Money {
+  amount: string;
+  currencyCode: string;
+}
+
+interface Address {
+  address1: string;
+  address2: string;
+  city: string;
+  province: string;
+  country: string;
+  zip: string;
+  phone: string;
+}
+
+interface Customer {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
+interface LineItem {
+  title: string;
+  sku: string;
+  quantity: number;
+  discountedTotalSet: {
+    shopMoney: Money;
+  };
+  originalTotalSet: {
+    shopMoney: Money;
+  };
+}
+
+interface ShopifyOrder {
+  id: string;
+  name: string;
+  createdAt: string;
+  currencyCode: string;
+  totalPriceSet: { shopMoney: Money };
+  subtotalPriceSet: { shopMoney: Money };
+  totalShippingPriceSet: { shopMoney: Money };
+  totalTaxSet: { shopMoney: Money };
+  displayFinancialStatus: string;
+  displayFulfillmentStatus: string;
+  customer: Customer;
+  billingAddress: Address;
+  shippingAddress: Address;
+  lineItems: {
+    edges: {
+      node: LineItem;
+    }[];
+  };
+}
 
 interface OrdersResult {
   status: boolean;
   message?: string;
-  orders?: any[]; // Replace `any` with your Order type if available
+  orders?: ShopifyOrder[];
   details?: unknown;
+}
+
+interface GraphQLEdge {
+  node: ShopifyOrder;
+}
+
+interface ShopifyGraphQLResponse {
+  data: {
+    orders: {
+      edges: GraphQLEdge[];
+    };
+  };
+  errors?: unknown;
 }
 
 export async function fetchShopifyStoreOrders(shop: string, access_token: string): Promise<OrdersResult> {
@@ -75,7 +144,7 @@ export async function fetchShopifyStoreOrders(shop: string, access_token: string
   }`;
 
   try {
-    const response = await axios.post(
+    const response = await axios.post<ShopifyGraphQLResponse>(
       `https://${shop}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`,
       { query: gql },
       {
@@ -95,7 +164,7 @@ export async function fetchShopifyStoreOrders(shop: string, access_token: string
       };
     }
 
-    const orders = response.data.data.orders.edges.map((edge: any) => edge.node);
+    const orders = response.data.data.orders.edges.map((edge) => edge.node);
 
     logMessage('info', 'Orders fetched successfully', { count: orders.length });
     return {
@@ -103,13 +172,12 @@ export async function fetchShopifyStoreOrders(shop: string, access_token: string
       message: 'Fetched orders successfully',
       orders,
     };
-  } catch (err: any) {
-    const errorMessage = err.response?.data || err.message || err;
-    logMessage('error', 'Fetch orders error', errorMessage);
+  } catch (error: unknown) {
+    logMessage('error', 'Fetch orders error', { error });
     return {
       status: false,
       message: 'Failed to fetch orders',
-      details: errorMessage,
+      details: error,
     };
   }
 }

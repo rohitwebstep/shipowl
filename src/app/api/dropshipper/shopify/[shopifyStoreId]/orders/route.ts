@@ -98,10 +98,10 @@ export async function GET(req: NextRequest) {
             { status: 200 }
         );
 
-    } catch (error: any) {
-        logMessage('error', 'Unhandled error while fetching Shopify orders', { error });
+    } catch (error) {
+        logMessage('error', 'Error while fetching products', { error });
         return NextResponse.json(
-            { status: false, error: 'Internal server error while fetching Shopify orders' },
+            { status: false, error: 'Failed to fetch products due to an internal error' },
             { status: 500 }
         );
     }
