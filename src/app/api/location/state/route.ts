@@ -6,6 +6,30 @@ import { validateFormData } from '@/utils/validateFormData';
 import { createState, getStatesByStatus } from '@/app/models/location/state';
 import { getCountryById } from '@/app/models/location/country';
 import { getCountriesByStatus } from '@/app/models/location/country';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,10 +49,37 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if admin exists
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      const options = {
+        panel: 'admin',
+        module: 'State',
+        action: 'Create',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const formData = await req.formData();

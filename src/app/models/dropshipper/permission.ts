@@ -26,7 +26,7 @@ const serializeBigInt = <T>(obj: T): T => {
 // 🔵 GET BY ID
 export const getDropshipperPermissionById = async (id: number) => {
     try {
-        const permission = await prisma.permission.findUnique({
+        const permission = await prisma.globalPermission.findUnique({
             where: { id },
         });
 
@@ -42,7 +42,7 @@ export const getDropshipperPermissionById = async (id: number) => {
 // 🟣 GET ALL
 export const getAllDropshipperStaffPermissions = async () => {
     try {
-        const permissions = await prisma.permission.findMany({
+        const permissions = await prisma.globalPermission.findMany({
             orderBy: { id: 'desc' },
         });
         return { status: true, permissions: serializeBigInt(permissions) };
@@ -75,7 +75,7 @@ export const getDropshipperStaffPermissionsByStatus = async (status: "active" | 
                 throw new Error("Invalid status");
         }
 
-        const permissions = await prisma.permission.findMany({
+        const permissions = await prisma.globalPermission.findMany({
             where: whereCondition,
             orderBy: { id: "desc" },
         });

@@ -4,6 +4,29 @@ import { getAllBankAccountChangeRequests } from '@/app/models/supplier/bankAccou
 import { isUserExist } from '@/utils/auth/authUtils';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
     try {
         logMessage('debug', 'GET request received for bank account change requests');
@@ -22,10 +45,13 @@ export async function GET(req: NextRequest) {
         }
 
         // Validate admin
-        const userCheck = await isUserExist(adminId, String(adminRole));
+        let mainAdminId = adminId;
+        const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
         if (!userCheck.status) {
-            logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
-            return NextResponse.json({ status: false, error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+            return NextResponse.json(
+                { status: false, error: `User Not Found: ${userCheck.message}` },
+                { status: 404 }
+            );
         }
 
         const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
@@ -33,8 +59,8 @@ export async function GET(req: NextRequest) {
         if (isStaff) {
             const options = {
                 panel: 'admin',
-                module: 'supplier',
-                action: 'bank-account-change-request-listing',
+                module: 'Dropshipper',
+                action: 'Bank Account Change Request View Listing',
             };
 
             const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

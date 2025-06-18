@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!result.status) {
       logMessage('warn', `User not found: ${result.message}`);
       return NextResponse.json(
@@ -37,8 +37,8 @@ export async function GET(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'dropshipper',
-        action: 'trash-listing',
+        module: 'Dropshipper',
+        action: 'Trash Listing',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

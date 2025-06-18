@@ -49,8 +49,8 @@ export async function DELETE(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'product',
-        action: 'update',
+        module: 'Product',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

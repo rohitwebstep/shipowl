@@ -8,6 +8,30 @@ import { saveFilesFromFormData, deleteFile } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, createAdminStaff, getAdminStaffsByStatus } from '@/app/models/admin/staff';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
 
 type UploadedFileInfo = {
   originalName: string;
@@ -16,7 +40,6 @@ type UploadedFileInfo = {
   type: string;
   url: string;
 };
-
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,10 +54,37 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'User ID is missing or invalid in request' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      const options = {
+        panel: 'admin',
+        module: 'Sub User',
+        action: 'Create',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const requiredFields = ['name', 'email', 'password'];
@@ -200,13 +250,37 @@ export async function GET(req: NextRequest) {
     }
 
     // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      const options = {
+        panel: 'admin',
+        module: 'Sub User',
+        action: 'View Listing',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Fetch all admins

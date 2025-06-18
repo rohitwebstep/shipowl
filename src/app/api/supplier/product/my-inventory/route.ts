@@ -5,6 +5,7 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { createSupplierProduct, checkProductForSupplier } from '@/app/models/supplier/product';
 import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models/supplier/product';
+import { getGlobalPermissionsByFilter } from '@/app/models/admin/globalPermission';
 
 type Variant = {
   variantId: number;
@@ -99,6 +100,17 @@ export async function POST(req: NextRequest) {
     if (!userCheck.status) {
       logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+    }
+
+    const globalOptions = {
+      panel: 'supplier',
+      module: 'Product',
+      action: 'Add to List',
+    };
+
+    const globalPermissionResult = await getGlobalPermissionsByFilter(globalOptions);
+    if (!globalPermissionResult.status) {
+      return NextResponse.json({ status: false, message: globalPermissionResult.message }, { status: 404 }); //unauthroized
     }
 
     const requiredFields = ['productId'];

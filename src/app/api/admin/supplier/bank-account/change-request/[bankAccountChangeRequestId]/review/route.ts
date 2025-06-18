@@ -43,8 +43,8 @@ export async function POST(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'supplier',
-        action: 'review-bank-account-change-request',
+        module: 'Supplier',
+        action: 'Bank Account Change Request Review',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

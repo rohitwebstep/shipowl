@@ -3,6 +3,30 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { getAdminStaffById, restoreAdminStaff } from '@/app/models/admin/staff';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
 
 export async function PATCH(req: NextRequest) {
   try {
@@ -12,12 +36,11 @@ export async function PATCH(req: NextRequest) {
     logMessage('debug', 'Delete Admin Request:', { adminStaffId });
 
     // Get headers
-    const adminIdHeader = req.headers.get("x-admin-id");
+    const adminId = Number(req.headers.get("x-admin-id"));
     const adminRole = req.headers.get("x-admin-role");
 
-    const adminIdHeaderNum = Number(adminIdHeader);
-    if (!adminIdHeader || isNaN(adminIdHeaderNum)) {
-      logMessage('warn', 'Invalid or missing admin ID header', { adminIdHeaderNum, adminRole });
+    if (!adminId || isNaN(adminId)) {
+      logMessage('warn', 'Invalid or missing admin ID header', { adminId, adminRole });
       return NextResponse.json(
         { error: "User ID is missing or invalid in request" },
         { status: 400 }
@@ -25,10 +48,37 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Check if admin exists
-    const userCheck = await isUserExist(adminIdHeaderNum, String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`, { adminIdHeaderNum, adminRole });
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      const options = {
+        panel: 'admin',
+        module: 'Sub User',
+        action: 'Restore',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const adminStaffResult = await getAdminStaffById(Number(adminStaffId));
@@ -38,7 +88,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Restore the admin (i.e., reset deletedAt, deletedBy, deletedByRole)
-    const restoreResult = await restoreAdminStaff(adminIdHeaderNum, String(adminRole), Number(adminStaffId));
+    const restoreResult = await restoreAdminStaff(adminId, String(adminRole), Number(adminStaffId));
 
     if (restoreResult?.status) {
       logMessage('info', 'Admin restored successfully:', restoreResult.restoredAdminStaff);

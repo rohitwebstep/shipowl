@@ -5,6 +5,29 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { getBrandById, deleteBrand } from '@/app/models/admin/brand';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function DELETE(req: NextRequest) {
   try {
     const parts = req.nextUrl.pathname.split('/');
@@ -23,10 +46,13 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Check if the admin user exists
-    const userCheck = await isUserExist(Number(adminId), String(adminRole));
+     let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `Admin not found: ${userCheck.message}`, { adminId, adminRole });
-      return NextResponse.json({ error: `Admin not found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
 
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
@@ -34,8 +60,8 @@ export async function DELETE(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'brand',
-        action: 'permanent-delete',
+        module: 'Brand',
+        action: 'Permanent Delete',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

@@ -3,28 +3,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { checkDropshipperProductForDropshipper, deleteDropshipperProduct } from '@/app/models/dropshipper/product';
+import { getGlobalPermissionsByFilter } from '@/app/models/admin/globalPermission';
 
 interface MainAdmin {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    // other optional properties if needed
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
 }
 
 interface SupplierStaff {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    role: string;
-    admin?: MainAdmin;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
 }
 
 interface UserCheckResult {
-    status: boolean;
-    message?: string;
-    admin?: SupplierStaff;
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
 }
 
 export async function DELETE(req: NextRequest) {
@@ -50,6 +51,17 @@ export async function DELETE(req: NextRequest) {
         { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const globalOptions = {
+      panel: 'Dropshipper',
+      module: 'Product',
+      action: 'Delete',
+    };
+
+    const globalPermissionResult = await getGlobalPermissionsByFilter(globalOptions);
+    if (!globalPermissionResult.status) {
+      return NextResponse.json({ status: false, message: globalPermissionResult.message }, { status: 404 }); //unauthroized
     }
 
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));

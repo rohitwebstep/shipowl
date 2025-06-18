@@ -31,10 +31,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    const userCheck = await isUserExist(Number(adminId), String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`, { adminId, adminRole });
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
 
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
@@ -42,8 +45,8 @@ export async function GET(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'category',
-        action: 'update',
+        module: 'Category',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
@@ -111,8 +114,8 @@ export async function PUT(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'category',
-        action: 'update',
+        module: 'Category',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
@@ -256,7 +259,7 @@ export async function PATCH(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'category',
+        module: 'Category',
         action: 'restore',
       };
 
@@ -333,8 +336,8 @@ export async function DELETE(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'category',
-        action: 'soft-delete',
+        module: 'Category',
+        action: 'Soft Delete',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

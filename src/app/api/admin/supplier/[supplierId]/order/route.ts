@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
         if (isStaff) {
             const options = {
                 panel: 'admin',
-                module: 'supplier',
+                module: 'Supplier',
                 action: 'order-report',
             };
 

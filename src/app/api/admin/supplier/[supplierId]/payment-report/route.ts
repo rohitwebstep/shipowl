@@ -49,8 +49,8 @@ export async function GET(req: NextRequest) {
     if (isStaffUser) {
       const supplierPermissionCheck = await checkStaffPermissionStatus({
         panel: 'admin',
-        module: 'supplier',
-        action: 'orders',
+        module: 'Supplier',
+        action: 'Orders',
       }, adminId);
 
       logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
 
       const orderVariablePermissionCheck = await getStaffPermissionsByStaffId({
         panel: 'admin',
-        module: 'order-variables'
+        module: 'Order Variables'
       }, adminId);
 
       staffPermissionApplied = true;

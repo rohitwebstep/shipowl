@@ -42,8 +42,8 @@ export async function GET(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'dropshipper',
-        action: 'view',
+        module: 'Dropshipper',
+        action: 'View',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

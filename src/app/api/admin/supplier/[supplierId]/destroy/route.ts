@@ -34,7 +34,7 @@ export async function DELETE(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'supplier',
+        module: 'Supplier',
         action: 'delete',
       };
 

@@ -33,8 +33,8 @@ export async function GET(req: NextRequest) {
         if (isStaff) {
             const options = {
                 panel: 'admin',
-                module: 'supplier',
-                action: 'bank-account-change-request-listing',
+                module: 'Supplier',
+                action: 'Bank Account Change Request View Listing',
             };
 
             const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

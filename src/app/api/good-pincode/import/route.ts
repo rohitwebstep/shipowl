@@ -5,6 +5,30 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { parseFilesFromFormData } from '@/utils/parseCsvExcel';
 import { importGoodPincodes } from '@/app/models/goodPincode';
+import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
 
 type PincodeRow = {
   pincode: string;
@@ -28,10 +52,37 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if admin exists
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
+    }
+
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
+      const options = {
+        panel: 'admin',
+        module: 'Good Pincode',
+        action: 'Import',
+      };
+
+      const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
+      logMessage('info', 'Fetched staff permissions:', staffPermissionsResult);
+
+      if (!staffPermissionsResult.status) {
+        return NextResponse.json(
+          {
+            status: false,
+            message: staffPermissionsResult.message || "You do not have permission to perform this action."
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const formData = await req.formData();

@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'category',
-        action: 'create',
+        module: 'Category',
+        action: 'Create',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

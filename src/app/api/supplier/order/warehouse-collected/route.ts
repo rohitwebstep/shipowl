@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
 
             const orderVariablePermissionCheck = await getStaffPermissionsByStaffId({
                 panel: 'supplier',
-                module: 'order-variables'
+                module: 'Order Variables'
             }, supplierId);
 
             mainSupplierId = userCheck.admin?.admin?.id ?? supplierId;

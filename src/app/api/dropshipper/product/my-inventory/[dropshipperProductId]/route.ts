@@ -6,6 +6,7 @@ import { validateFormData } from '@/utils/validateFormData';
 import { checkDropshipperProductForDropshipper, updateDropshipperProduct, softDeleteDropshipperProduct, restoreDropshipperProduct, checkProductForDropshipper, checkSupplierProductForDropshipper } from '@/app/models/dropshipper/product';
 import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getAppConfig } from '@/app/models/app/appConfig';
+import { getGlobalPermissionsByFilter } from '@/app/models/admin/globalPermission';
 
 interface MainAdmin {
   id: number;
@@ -128,6 +129,17 @@ export async function PUT(req: NextRequest) {
         { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const globalOptions = {
+      panel: 'Dropshipper',
+      module: 'Product',
+      action: 'Update',
+    };
+
+    const globalPermissionResult = await getGlobalPermissionsByFilter(globalOptions);
+    if (!globalPermissionResult.status) {
+      return NextResponse.json({ status: false, message: globalPermissionResult.message }, { status: 404 }); //unauthroized
     }
 
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));
@@ -316,6 +328,17 @@ export async function DELETE(req: NextRequest) {
         { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const globalOptions = {
+      panel: 'Dropshipper',
+      module: 'Product',
+      action: 'Delete',
+    };
+
+    const globalPermissionResult = await getGlobalPermissionsByFilter(globalOptions);
+    if (!globalPermissionResult.status) {
+      return NextResponse.json({ status: false, message: globalPermissionResult.message }, { status: 404 }); //unauthroized
     }
 
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));

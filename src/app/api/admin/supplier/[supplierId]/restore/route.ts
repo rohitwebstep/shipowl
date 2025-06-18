@@ -37,7 +37,7 @@ export async function PATCH(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'supplier',
+        module: 'Supplier',
         action: 'restore',
       };
 

@@ -5,6 +5,29 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { getBrandsByStatus } from '@/app/models/admin/brand';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
   try {
     logMessage('debug', 'GET request received for fetching brands');
@@ -23,11 +46,11 @@ export async function GET(req: NextRequest) {
     }
 
     // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
@@ -37,8 +60,8 @@ export async function GET(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'brand',
-        action: 'trash-listing',
+        module: 'Brand',
+        action: 'Trash Listing',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

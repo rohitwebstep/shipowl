@@ -317,7 +317,7 @@ model adminStaffHasPermission {
   @@index([deletedAt])
 }
 
-model permission {
+model globalPermission {
   id                              Int       @id @default(autoincrement())
   panel                           String
   module                          String

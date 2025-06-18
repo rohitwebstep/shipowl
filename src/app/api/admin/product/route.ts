@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'product',
-        action: 'create',
+        module: 'Product',
+        action: 'Create',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
@@ -420,8 +420,8 @@ export async function GET(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'product',
-        action: 'view-listing',
+        module: 'Product',
+        action: 'View Listing',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

@@ -37,7 +37,7 @@ export async function PATCH(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'dropshipper',
+        module: 'Dropshipper',
         action: 'restore',
       };
 

@@ -11,6 +11,29 @@ import { createBrand, getBrandsByStatus } from '@/app/models/admin/brand';
 import { fetchLogInfo } from '@/utils/commonUtils';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
@@ -38,10 +61,13 @@ export async function POST(req: NextRequest) {
 
 
     // Check if admin exists
-    const userCheck = await isUserExist(adminId, String(adminRole));
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
-      logMessage('warn', `User not found: ${userCheck.message}`);
-      return NextResponse.json({ error: `User Not Found: ${userCheck.message}` }, { status: 404 });
+      return NextResponse.json(
+        { status: false, error: `User Not Found: ${userCheck.message}` },
+        { status: 404 }
+      );
     }
 
     const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
@@ -49,8 +75,8 @@ export async function POST(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'brand',
-        action: 'create',
+        module: 'Brand',
+        action: 'Create',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

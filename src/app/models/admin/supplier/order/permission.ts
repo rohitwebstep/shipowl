@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-export const getPermissions = async () => {
+export const getSupplierOrderPermissions = async () => {
     try {
         const permissions = await prisma.supplierOrderPermission.findMany({
             orderBy: {
@@ -15,7 +15,7 @@ export const getPermissions = async () => {
     }
 };
 
-export const updatePermission = async (
+export const updateSupplierOrderPermission = async (
     adminId: number,
     adminRole: string,
     data: {

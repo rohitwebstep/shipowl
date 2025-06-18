@@ -37,8 +37,8 @@ export async function PATCH(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'supplier',
-        action: 'update',
+        module: 'Supplier',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

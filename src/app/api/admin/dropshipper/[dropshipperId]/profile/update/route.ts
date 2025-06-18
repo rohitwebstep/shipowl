@@ -46,8 +46,8 @@ export async function PUT(req: NextRequest) {
     if (isStaff) {
       const options = {
         panel: 'admin',
-        module: 'dropshipper',
-        action: 'update',
+        module: 'Dropshipper',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);

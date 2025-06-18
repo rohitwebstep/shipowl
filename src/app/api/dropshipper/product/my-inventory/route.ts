@@ -9,6 +9,7 @@ import { getProductsByFiltersAndStatus, getProductsByStatus } from '@/app/models
 import { getShopifyStoreByIdForDropshipper, getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
 import { getSupplierProductVariantById } from '@/app/models/supplier/product';
 import { getAppConfig } from '@/app/models/app/appConfig';
+import { getGlobalPermissionsByFilter } from '@/app/models/admin/globalPermission';
 
 interface MainAdmin {
   id: number;
@@ -150,6 +151,17 @@ export async function POST(req: NextRequest) {
         { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
+    }
+
+    const globalOptions = {
+      panel: 'Dropshipper',
+      module: 'Product',
+      action: 'Push to Shopify',
+    };
+
+    const globalPermissionResult = await getGlobalPermissionsByFilter(globalOptions);
+    if (!globalPermissionResult.status) {
+      return NextResponse.json({ status: false, message: globalPermissionResult.message }, { status: 404 }); //unauthroized
     }
 
     const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(dropshipperRole));

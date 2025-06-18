@@ -1,8 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
-import { getPermissions, updatePermission } from '@/app/models/admin/supplier/order/permission';
+import { getSupplierOrderPermissions, updateSupplierOrderPermission } from '@/app/models/admin/supplier/order/permission';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
+
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -22,22 +45,23 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (isStaff) {
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
       const options = {
         panel: 'admin',
-        module: 'supplier',
-        action: 'view',
+        module: 'Supplier Order Permission',
+        action: 'View',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
@@ -54,7 +78,7 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    const suppliersResult = await getPermissions();
+    const suppliersResult = await getSupplierOrderPermissions();
     if (suppliersResult?.status) {
       return NextResponse.json(
         { status: true, permissions: suppliersResult.permissions },
@@ -95,22 +119,23 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if admin exists
-    const result = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    let mainAdminId = adminId;
+    const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
+    if (!userCheck.status) {
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
 
-    const isStaff = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
+    const isStaffUser = !['admin', 'dropshipper', 'supplier'].includes(String(adminRole));
 
-    if (isStaff) {
+    if (isStaffUser) {
+      mainAdminId = userCheck.admin?.admin?.id ?? adminId;
       const options = {
         panel: 'admin',
-        module: 'supplier',
-        action: 'update',
+        module: 'Supplier Order Permission',
+        action: 'Update',
       };
 
       const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
@@ -172,9 +197,9 @@ export async function POST(req: NextRequest) {
 
     logMessage('info', 'Brand payload created:', permissionPayload);
 
-    const updatePermissionResult = await updatePermission(adminId, String(adminRole), permissionPayload);
+    const updateSupplierOrderPermissionResult = await updateSupplierOrderPermission(adminId, String(adminRole), permissionPayload);
 
-    if (updatePermissionResult?.status) {
+    if (updateSupplierOrderPermissionResult?.status) {
       return NextResponse.json({ status: true }, { status: 200 });
     }
 

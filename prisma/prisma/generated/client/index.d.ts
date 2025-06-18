@@ -64,10 +64,10 @@ export type adminStaffPermission = $Result.DefaultSelection<Prisma.$adminStaffPe
  */
 export type adminStaffHasPermission = $Result.DefaultSelection<Prisma.$adminStaffHasPermissionPayload>
 /**
- * Model permission
+ * Model globalPermission
  * 
  */
-export type permission = $Result.DefaultSelection<Prisma.$permissionPayload>
+export type globalPermission = $Result.DefaultSelection<Prisma.$globalPermissionPayload>
 /**
  * Model loginLog
  * 
@@ -420,14 +420,14 @@ export class PrismaClient<
   get adminStaffHasPermission(): Prisma.adminStaffHasPermissionDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.permission`: Exposes CRUD operations for the **permission** model.
+   * `prisma.globalPermission`: Exposes CRUD operations for the **globalPermission** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Permissions
-    * const permissions = await prisma.permission.findMany()
+    * // Fetch zero or more GlobalPermissions
+    * const globalPermissions = await prisma.globalPermission.findMany()
     * ```
     */
-  get permission(): Prisma.permissionDelegate<ExtArgs, ClientOptions>;
+  get globalPermission(): Prisma.globalPermissionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.loginLog`: Exposes CRUD operations for the **loginLog** model.
@@ -736,8 +736,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.9.0
-   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+   * Prisma Client JS version: 6.10.0
+   * Query Engine version: aee10d5a411e4360c6d3445ce4810ca65adbf3e8
    */
   export type PrismaVersion = {
     client: string
@@ -1128,7 +1128,7 @@ export namespace Prisma {
     adminStaff: 'adminStaff',
     adminStaffPermission: 'adminStaffPermission',
     adminStaffHasPermission: 'adminStaffHasPermission',
-    permission: 'permission',
+    globalPermission: 'globalPermission',
     loginLog: 'loginLog',
     activityLog: 'activityLog',
     country: 'country',
@@ -1172,7 +1172,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "adminStaffPermission" | "adminStaffHasPermission" | "permission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory" | "supplierOrderPermission"
+      modelProps: "appConfig" | "emailConfig" | "admin" | "shopifyStore" | "companyDetail" | "bankAccount" | "bankAccountChangeRequest" | "adminStaff" | "adminStaffPermission" | "adminStaffHasPermission" | "globalPermission" | "loginLog" | "activityLog" | "country" | "state" | "city" | "warehouse" | "category" | "brand" | "productRequest" | "product" | "productVariant" | "productSupplierVisibility" | "courierCompany" | "highRto" | "badPincode" | "goodPincode" | "supplierProduct" | "supplierProductVariant" | "dropshipperProduct" | "dropshipperProductVariant" | "payment" | "order" | "orderItem" | "rtoInventory" | "supplierOrderPermission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1836,69 +1836,69 @@ export namespace Prisma {
           }
         }
       }
-      permission: {
-        payload: Prisma.$permissionPayload<ExtArgs>
-        fields: Prisma.permissionFieldRefs
+      globalPermission: {
+        payload: Prisma.$globalPermissionPayload<ExtArgs>
+        fields: Prisma.globalPermissionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.permissionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload> | null
+            args: Prisma.globalPermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.permissionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           findFirst: {
-            args: Prisma.permissionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload> | null
+            args: Prisma.globalPermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.permissionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           findMany: {
-            args: Prisma.permissionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>[]
+            args: Prisma.globalPermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>[]
           }
           create: {
-            args: Prisma.permissionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           createMany: {
-            args: Prisma.permissionCreateManyArgs<ExtArgs>
+            args: Prisma.globalPermissionCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.permissionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           update: {
-            args: Prisma.permissionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           deleteMany: {
-            args: Prisma.permissionDeleteManyArgs<ExtArgs>
+            args: Prisma.globalPermissionDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.permissionUpdateManyArgs<ExtArgs>
+            args: Prisma.globalPermissionUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.permissionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permissionPayload>
+            args: Prisma.globalPermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$globalPermissionPayload>
           }
           aggregate: {
-            args: Prisma.PermissionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePermission>
+            args: Prisma.GlobalPermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlobalPermission>
           }
           groupBy: {
-            args: Prisma.permissionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PermissionGroupByOutputType>[]
+            args: Prisma.globalPermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlobalPermissionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.permissionCountArgs<ExtArgs>
-            result: $Utils.Optional<PermissionCountAggregateOutputType> | number
+            args: Prisma.globalPermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<GlobalPermissionCountAggregateOutputType> | number
           }
         }
       }
@@ -3646,7 +3646,7 @@ export namespace Prisma {
     adminStaff?: adminStaffOmit
     adminStaffPermission?: adminStaffPermissionOmit
     adminStaffHasPermission?: adminStaffHasPermissionOmit
-    permission?: permissionOmit
+    globalPermission?: globalPermissionOmit
     loginLog?: loginLogOmit
     activityLog?: activityLogOmit
     country?: countryOmit
@@ -16985,49 +16985,32 @@ export namespace Prisma {
 
 
   /**
-   * Model permission
+   * Model globalPermission
    */
 
-  export type AggregatePermission = {
-    _count: PermissionCountAggregateOutputType | null
-    _avg: PermissionAvgAggregateOutputType | null
-    _sum: PermissionSumAggregateOutputType | null
-    _min: PermissionMinAggregateOutputType | null
-    _max: PermissionMaxAggregateOutputType | null
+  export type AggregateGlobalPermission = {
+    _count: GlobalPermissionCountAggregateOutputType | null
+    _avg: GlobalPermissionAvgAggregateOutputType | null
+    _sum: GlobalPermissionSumAggregateOutputType | null
+    _min: GlobalPermissionMinAggregateOutputType | null
+    _max: GlobalPermissionMaxAggregateOutputType | null
   }
 
-  export type PermissionAvgAggregateOutputType = {
+  export type GlobalPermissionAvgAggregateOutputType = {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
   }
 
-  export type PermissionSumAggregateOutputType = {
+  export type GlobalPermissionSumAggregateOutputType = {
     id: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
   }
 
-  export type PermissionMinAggregateOutputType = {
-    id: number | null
-    panel: string | null
-    module: string | null
-    action: string | null
-    status: boolean | null
-    createdAt: Date | null
-    createdBy: number | null
-    createdByRole: string | null
-    updatedAt: Date | null
-    updatedBy: number | null
-    updatedByRole: string | null
-    deletedAt: Date | null
-    deletedBy: number | null
-    deletedByRole: string | null
-  }
-
-  export type PermissionMaxAggregateOutputType = {
+  export type GlobalPermissionMinAggregateOutputType = {
     id: number | null
     panel: string | null
     module: string | null
@@ -17044,7 +17027,24 @@ export namespace Prisma {
     deletedByRole: string | null
   }
 
-  export type PermissionCountAggregateOutputType = {
+  export type GlobalPermissionMaxAggregateOutputType = {
+    id: number | null
+    panel: string | null
+    module: string | null
+    action: string | null
+    status: boolean | null
+    createdAt: Date | null
+    createdBy: number | null
+    createdByRole: string | null
+    updatedAt: Date | null
+    updatedBy: number | null
+    updatedByRole: string | null
+    deletedAt: Date | null
+    deletedBy: number | null
+    deletedByRole: string | null
+  }
+
+  export type GlobalPermissionCountAggregateOutputType = {
     id: number
     panel: number
     module: number
@@ -17063,38 +17063,21 @@ export namespace Prisma {
   }
 
 
-  export type PermissionAvgAggregateInputType = {
+  export type GlobalPermissionAvgAggregateInputType = {
     id?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
   }
 
-  export type PermissionSumAggregateInputType = {
+  export type GlobalPermissionSumAggregateInputType = {
     id?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
   }
 
-  export type PermissionMinAggregateInputType = {
-    id?: true
-    panel?: true
-    module?: true
-    action?: true
-    status?: true
-    createdAt?: true
-    createdBy?: true
-    createdByRole?: true
-    updatedAt?: true
-    updatedBy?: true
-    updatedByRole?: true
-    deletedAt?: true
-    deletedBy?: true
-    deletedByRole?: true
-  }
-
-  export type PermissionMaxAggregateInputType = {
+  export type GlobalPermissionMinAggregateInputType = {
     id?: true
     panel?: true
     module?: true
@@ -17111,7 +17094,24 @@ export namespace Prisma {
     deletedByRole?: true
   }
 
-  export type PermissionCountAggregateInputType = {
+  export type GlobalPermissionMaxAggregateInputType = {
+    id?: true
+    panel?: true
+    module?: true
+    action?: true
+    status?: true
+    createdAt?: true
+    createdBy?: true
+    createdByRole?: true
+    updatedAt?: true
+    updatedBy?: true
+    updatedByRole?: true
+    deletedAt?: true
+    deletedBy?: true
+    deletedByRole?: true
+  }
+
+  export type GlobalPermissionCountAggregateInputType = {
     id?: true
     panel?: true
     module?: true
@@ -17129,93 +17129,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type PermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GlobalPermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which permission to aggregate.
+     * Filter which globalPermission to aggregate.
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of permissions to fetch.
+     * Determine the order of globalPermissions to fetch.
      */
-    orderBy?: permissionOrderByWithRelationInput | permissionOrderByWithRelationInput[]
+    orderBy?: globalPermissionOrderByWithRelationInput | globalPermissionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: permissionWhereUniqueInput
+    cursor?: globalPermissionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` permissions from the position of the cursor.
+     * Take `±n` globalPermissions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` permissions.
+     * Skip the first `n` globalPermissions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned permissions
+     * Count returned globalPermissions
     **/
-    _count?: true | PermissionCountAggregateInputType
+    _count?: true | GlobalPermissionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: PermissionAvgAggregateInputType
+    _avg?: GlobalPermissionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: PermissionSumAggregateInputType
+    _sum?: GlobalPermissionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PermissionMinAggregateInputType
+    _min?: GlobalPermissionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PermissionMaxAggregateInputType
+    _max?: GlobalPermissionMaxAggregateInputType
   }
 
-  export type GetPermissionAggregateType<T extends PermissionAggregateArgs> = {
-        [P in keyof T & keyof AggregatePermission]: P extends '_count' | 'count'
+  export type GetGlobalPermissionAggregateType<T extends GlobalPermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlobalPermission]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePermission[P]>
-      : GetScalarType<T[P], AggregatePermission[P]>
+        : GetScalarType<T[P], AggregateGlobalPermission[P]>
+      : GetScalarType<T[P], AggregateGlobalPermission[P]>
   }
 
 
 
 
-  export type permissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permissionWhereInput
-    orderBy?: permissionOrderByWithAggregationInput | permissionOrderByWithAggregationInput[]
-    by: PermissionScalarFieldEnum[] | PermissionScalarFieldEnum
-    having?: permissionScalarWhereWithAggregatesInput
+  export type globalPermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: globalPermissionWhereInput
+    orderBy?: globalPermissionOrderByWithAggregationInput | globalPermissionOrderByWithAggregationInput[]
+    by: GlobalPermissionScalarFieldEnum[] | GlobalPermissionScalarFieldEnum
+    having?: globalPermissionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PermissionCountAggregateInputType | true
-    _avg?: PermissionAvgAggregateInputType
-    _sum?: PermissionSumAggregateInputType
-    _min?: PermissionMinAggregateInputType
-    _max?: PermissionMaxAggregateInputType
+    _count?: GlobalPermissionCountAggregateInputType | true
+    _avg?: GlobalPermissionAvgAggregateInputType
+    _sum?: GlobalPermissionSumAggregateInputType
+    _min?: GlobalPermissionMinAggregateInputType
+    _max?: GlobalPermissionMaxAggregateInputType
   }
 
-  export type PermissionGroupByOutputType = {
+  export type GlobalPermissionGroupByOutputType = {
     id: number
     panel: string
     module: string
@@ -17230,28 +17230,28 @@ export namespace Prisma {
     deletedAt: Date | null
     deletedBy: number | null
     deletedByRole: string | null
-    _count: PermissionCountAggregateOutputType | null
-    _avg: PermissionAvgAggregateOutputType | null
-    _sum: PermissionSumAggregateOutputType | null
-    _min: PermissionMinAggregateOutputType | null
-    _max: PermissionMaxAggregateOutputType | null
+    _count: GlobalPermissionCountAggregateOutputType | null
+    _avg: GlobalPermissionAvgAggregateOutputType | null
+    _sum: GlobalPermissionSumAggregateOutputType | null
+    _min: GlobalPermissionMinAggregateOutputType | null
+    _max: GlobalPermissionMaxAggregateOutputType | null
   }
 
-  type GetPermissionGroupByPayload<T extends permissionGroupByArgs> = Prisma.PrismaPromise<
+  type GetGlobalPermissionGroupByPayload<T extends globalPermissionGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PermissionGroupByOutputType, T['by']> &
+      PickEnumerable<GlobalPermissionGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PermissionGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof GlobalPermissionGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PermissionGroupByOutputType[P]>
-            : GetScalarType<T[P], PermissionGroupByOutputType[P]>
+              : GetScalarType<T[P], GlobalPermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], GlobalPermissionGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type permissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type globalPermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     panel?: boolean
     module?: boolean
@@ -17266,11 +17266,11 @@ export namespace Prisma {
     deletedAt?: boolean
     deletedBy?: boolean
     deletedByRole?: boolean
-  }, ExtArgs["result"]["permission"]>
+  }, ExtArgs["result"]["globalPermission"]>
 
 
 
-  export type permissionSelectScalar = {
+  export type globalPermissionSelectScalar = {
     id?: boolean
     panel?: boolean
     module?: boolean
@@ -17287,10 +17287,10 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type permissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panel" | "module" | "action" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["permission"]>
+  export type globalPermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panel" | "module" | "action" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["globalPermission"]>
 
-  export type $permissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "permission"
+  export type $globalPermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "globalPermission"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -17307,143 +17307,143 @@ export namespace Prisma {
       deletedAt: Date | null
       deletedBy: number | null
       deletedByRole: string | null
-    }, ExtArgs["result"]["permission"]>
+    }, ExtArgs["result"]["globalPermission"]>
     composites: {}
   }
 
-  type permissionGetPayload<S extends boolean | null | undefined | permissionDefaultArgs> = $Result.GetResult<Prisma.$permissionPayload, S>
+  type globalPermissionGetPayload<S extends boolean | null | undefined | globalPermissionDefaultArgs> = $Result.GetResult<Prisma.$globalPermissionPayload, S>
 
-  type permissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<permissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PermissionCountAggregateInputType | true
+  type globalPermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<globalPermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlobalPermissionCountAggregateInputType | true
     }
 
-  export interface permissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['permission'], meta: { name: 'permission' } }
+  export interface globalPermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['globalPermission'], meta: { name: 'globalPermission' } }
     /**
-     * Find zero or one Permission that matches the filter.
-     * @param {permissionFindUniqueArgs} args - Arguments to find a Permission
+     * Find zero or one GlobalPermission that matches the filter.
+     * @param {globalPermissionFindUniqueArgs} args - Arguments to find a GlobalPermission
      * @example
-     * // Get one Permission
-     * const permission = await prisma.permission.findUnique({
+     * // Get one GlobalPermission
+     * const globalPermission = await prisma.globalPermission.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends permissionFindUniqueArgs>(args: SelectSubset<T, permissionFindUniqueArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends globalPermissionFindUniqueArgs>(args: SelectSubset<T, globalPermissionFindUniqueArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Permission that matches the filter or throw an error with `error.code='P2025'`
+     * Find one GlobalPermission that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {permissionFindUniqueOrThrowArgs} args - Arguments to find a Permission
+     * @param {globalPermissionFindUniqueOrThrowArgs} args - Arguments to find a GlobalPermission
      * @example
-     * // Get one Permission
-     * const permission = await prisma.permission.findUniqueOrThrow({
+     * // Get one GlobalPermission
+     * const globalPermission = await prisma.globalPermission.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends permissionFindUniqueOrThrowArgs>(args: SelectSubset<T, permissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends globalPermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, globalPermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Permission that matches the filter.
+     * Find the first GlobalPermission that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionFindFirstArgs} args - Arguments to find a Permission
+     * @param {globalPermissionFindFirstArgs} args - Arguments to find a GlobalPermission
      * @example
-     * // Get one Permission
-     * const permission = await prisma.permission.findFirst({
+     * // Get one GlobalPermission
+     * const globalPermission = await prisma.globalPermission.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends permissionFindFirstArgs>(args?: SelectSubset<T, permissionFindFirstArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends globalPermissionFindFirstArgs>(args?: SelectSubset<T, globalPermissionFindFirstArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Permission that matches the filter or
+     * Find the first GlobalPermission that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionFindFirstOrThrowArgs} args - Arguments to find a Permission
+     * @param {globalPermissionFindFirstOrThrowArgs} args - Arguments to find a GlobalPermission
      * @example
-     * // Get one Permission
-     * const permission = await prisma.permission.findFirstOrThrow({
+     * // Get one GlobalPermission
+     * const globalPermission = await prisma.globalPermission.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends permissionFindFirstOrThrowArgs>(args?: SelectSubset<T, permissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends globalPermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, globalPermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Permissions that matches the filter.
+     * Find zero or more GlobalPermissions that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {globalPermissionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Permissions
-     * const permissions = await prisma.permission.findMany()
+     * // Get all GlobalPermissions
+     * const globalPermissions = await prisma.globalPermission.findMany()
      * 
-     * // Get first 10 Permissions
-     * const permissions = await prisma.permission.findMany({ take: 10 })
+     * // Get first 10 GlobalPermissions
+     * const globalPermissions = await prisma.globalPermission.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const permissionWithIdOnly = await prisma.permission.findMany({ select: { id: true } })
+     * const globalPermissionWithIdOnly = await prisma.globalPermission.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends permissionFindManyArgs>(args?: SelectSubset<T, permissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends globalPermissionFindManyArgs>(args?: SelectSubset<T, globalPermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Permission.
-     * @param {permissionCreateArgs} args - Arguments to create a Permission.
+     * Create a GlobalPermission.
+     * @param {globalPermissionCreateArgs} args - Arguments to create a GlobalPermission.
      * @example
-     * // Create one Permission
-     * const Permission = await prisma.permission.create({
+     * // Create one GlobalPermission
+     * const GlobalPermission = await prisma.globalPermission.create({
      *   data: {
-     *     // ... data to create a Permission
+     *     // ... data to create a GlobalPermission
      *   }
      * })
      * 
      */
-    create<T extends permissionCreateArgs>(args: SelectSubset<T, permissionCreateArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends globalPermissionCreateArgs>(args: SelectSubset<T, globalPermissionCreateArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Permissions.
-     * @param {permissionCreateManyArgs} args - Arguments to create many Permissions.
+     * Create many GlobalPermissions.
+     * @param {globalPermissionCreateManyArgs} args - Arguments to create many GlobalPermissions.
      * @example
-     * // Create many Permissions
-     * const permission = await prisma.permission.createMany({
+     * // Create many GlobalPermissions
+     * const globalPermission = await prisma.globalPermission.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends permissionCreateManyArgs>(args?: SelectSubset<T, permissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends globalPermissionCreateManyArgs>(args?: SelectSubset<T, globalPermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Permission.
-     * @param {permissionDeleteArgs} args - Arguments to delete one Permission.
+     * Delete a GlobalPermission.
+     * @param {globalPermissionDeleteArgs} args - Arguments to delete one GlobalPermission.
      * @example
-     * // Delete one Permission
-     * const Permission = await prisma.permission.delete({
+     * // Delete one GlobalPermission
+     * const GlobalPermission = await prisma.globalPermission.delete({
      *   where: {
-     *     // ... filter to delete one Permission
+     *     // ... filter to delete one GlobalPermission
      *   }
      * })
      * 
      */
-    delete<T extends permissionDeleteArgs>(args: SelectSubset<T, permissionDeleteArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends globalPermissionDeleteArgs>(args: SelectSubset<T, globalPermissionDeleteArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Permission.
-     * @param {permissionUpdateArgs} args - Arguments to update one Permission.
+     * Update one GlobalPermission.
+     * @param {globalPermissionUpdateArgs} args - Arguments to update one GlobalPermission.
      * @example
-     * // Update one Permission
-     * const permission = await prisma.permission.update({
+     * // Update one GlobalPermission
+     * const globalPermission = await prisma.globalPermission.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -17453,30 +17453,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends permissionUpdateArgs>(args: SelectSubset<T, permissionUpdateArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends globalPermissionUpdateArgs>(args: SelectSubset<T, globalPermissionUpdateArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Permissions.
-     * @param {permissionDeleteManyArgs} args - Arguments to filter Permissions to delete.
+     * Delete zero or more GlobalPermissions.
+     * @param {globalPermissionDeleteManyArgs} args - Arguments to filter GlobalPermissions to delete.
      * @example
-     * // Delete a few Permissions
-     * const { count } = await prisma.permission.deleteMany({
+     * // Delete a few GlobalPermissions
+     * const { count } = await prisma.globalPermission.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends permissionDeleteManyArgs>(args?: SelectSubset<T, permissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends globalPermissionDeleteManyArgs>(args?: SelectSubset<T, globalPermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Permissions.
+     * Update zero or more GlobalPermissions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {globalPermissionUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Permissions
-     * const permission = await prisma.permission.updateMany({
+     * // Update many GlobalPermissions
+     * const globalPermission = await prisma.globalPermission.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -17486,56 +17486,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends permissionUpdateManyArgs>(args: SelectSubset<T, permissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends globalPermissionUpdateManyArgs>(args: SelectSubset<T, globalPermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Permission.
-     * @param {permissionUpsertArgs} args - Arguments to update or create a Permission.
+     * Create or update one GlobalPermission.
+     * @param {globalPermissionUpsertArgs} args - Arguments to update or create a GlobalPermission.
      * @example
-     * // Update or create a Permission
-     * const permission = await prisma.permission.upsert({
+     * // Update or create a GlobalPermission
+     * const globalPermission = await prisma.globalPermission.upsert({
      *   create: {
-     *     // ... data to create a Permission
+     *     // ... data to create a GlobalPermission
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Permission we want to update
+     *     // ... the filter for the GlobalPermission we want to update
      *   }
      * })
      */
-    upsert<T extends permissionUpsertArgs>(args: SelectSubset<T, permissionUpsertArgs<ExtArgs>>): Prisma__permissionClient<$Result.GetResult<Prisma.$permissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends globalPermissionUpsertArgs>(args: SelectSubset<T, globalPermissionUpsertArgs<ExtArgs>>): Prisma__globalPermissionClient<$Result.GetResult<Prisma.$globalPermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Permissions.
+     * Count the number of GlobalPermissions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionCountArgs} args - Arguments to filter Permissions to count.
+     * @param {globalPermissionCountArgs} args - Arguments to filter GlobalPermissions to count.
      * @example
-     * // Count the number of Permissions
-     * const count = await prisma.permission.count({
+     * // Count the number of GlobalPermissions
+     * const count = await prisma.globalPermission.count({
      *   where: {
-     *     // ... the filter for the Permissions we want to count
+     *     // ... the filter for the GlobalPermissions we want to count
      *   }
      * })
     **/
-    count<T extends permissionCountArgs>(
-      args?: Subset<T, permissionCountArgs>,
+    count<T extends globalPermissionCountArgs>(
+      args?: Subset<T, globalPermissionCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PermissionCountAggregateOutputType>
+          : GetScalarType<T['select'], GlobalPermissionCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Permission.
+     * Allows you to perform aggregations operations on a GlobalPermission.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {GlobalPermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -17555,13 +17555,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PermissionAggregateArgs>(args: Subset<T, PermissionAggregateArgs>): Prisma.PrismaPromise<GetPermissionAggregateType<T>>
+    aggregate<T extends GlobalPermissionAggregateArgs>(args: Subset<T, GlobalPermissionAggregateArgs>): Prisma.PrismaPromise<GetGlobalPermissionAggregateType<T>>
 
     /**
-     * Group by Permission.
+     * Group by GlobalPermission.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {permissionGroupByArgs} args - Group by arguments.
+     * @param {globalPermissionGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -17576,14 +17576,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends permissionGroupByArgs,
+      T extends globalPermissionGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: permissionGroupByArgs['orderBy'] }
-        : { orderBy?: permissionGroupByArgs['orderBy'] },
+        ? { orderBy: globalPermissionGroupByArgs['orderBy'] }
+        : { orderBy?: globalPermissionGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -17632,20 +17632,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, permissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, globalPermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlobalPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the permission model
+   * Fields of the globalPermission model
    */
-  readonly fields: permissionFieldRefs;
+  readonly fields: globalPermissionFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for permission.
+   * The delegate class that acts as a "Promise-like" for globalPermission.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__permissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__globalPermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17673,341 +17673,341 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the permission model
+   * Fields of the globalPermission model
    */
-  interface permissionFieldRefs {
-    readonly id: FieldRef<"permission", 'Int'>
-    readonly panel: FieldRef<"permission", 'String'>
-    readonly module: FieldRef<"permission", 'String'>
-    readonly action: FieldRef<"permission", 'String'>
-    readonly status: FieldRef<"permission", 'Boolean'>
-    readonly createdAt: FieldRef<"permission", 'DateTime'>
-    readonly createdBy: FieldRef<"permission", 'Int'>
-    readonly createdByRole: FieldRef<"permission", 'String'>
-    readonly updatedAt: FieldRef<"permission", 'DateTime'>
-    readonly updatedBy: FieldRef<"permission", 'Int'>
-    readonly updatedByRole: FieldRef<"permission", 'String'>
-    readonly deletedAt: FieldRef<"permission", 'DateTime'>
-    readonly deletedBy: FieldRef<"permission", 'Int'>
-    readonly deletedByRole: FieldRef<"permission", 'String'>
+  interface globalPermissionFieldRefs {
+    readonly id: FieldRef<"globalPermission", 'Int'>
+    readonly panel: FieldRef<"globalPermission", 'String'>
+    readonly module: FieldRef<"globalPermission", 'String'>
+    readonly action: FieldRef<"globalPermission", 'String'>
+    readonly status: FieldRef<"globalPermission", 'Boolean'>
+    readonly createdAt: FieldRef<"globalPermission", 'DateTime'>
+    readonly createdBy: FieldRef<"globalPermission", 'Int'>
+    readonly createdByRole: FieldRef<"globalPermission", 'String'>
+    readonly updatedAt: FieldRef<"globalPermission", 'DateTime'>
+    readonly updatedBy: FieldRef<"globalPermission", 'Int'>
+    readonly updatedByRole: FieldRef<"globalPermission", 'String'>
+    readonly deletedAt: FieldRef<"globalPermission", 'DateTime'>
+    readonly deletedBy: FieldRef<"globalPermission", 'Int'>
+    readonly deletedByRole: FieldRef<"globalPermission", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * permission findUnique
+   * globalPermission findUnique
    */
-  export type permissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter, which permission to fetch.
+     * Filter, which globalPermission to fetch.
      */
-    where: permissionWhereUniqueInput
+    where: globalPermissionWhereUniqueInput
   }
 
   /**
-   * permission findUniqueOrThrow
+   * globalPermission findUniqueOrThrow
    */
-  export type permissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter, which permission to fetch.
+     * Filter, which globalPermission to fetch.
      */
-    where: permissionWhereUniqueInput
+    where: globalPermissionWhereUniqueInput
   }
 
   /**
-   * permission findFirst
+   * globalPermission findFirst
    */
-  export type permissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter, which permission to fetch.
+     * Filter, which globalPermission to fetch.
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of permissions to fetch.
+     * Determine the order of globalPermissions to fetch.
      */
-    orderBy?: permissionOrderByWithRelationInput | permissionOrderByWithRelationInput[]
+    orderBy?: globalPermissionOrderByWithRelationInput | globalPermissionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for permissions.
+     * Sets the position for searching for globalPermissions.
      */
-    cursor?: permissionWhereUniqueInput
+    cursor?: globalPermissionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` permissions from the position of the cursor.
+     * Take `±n` globalPermissions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` permissions.
+     * Skip the first `n` globalPermissions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of permissions.
+     * Filter by unique combinations of globalPermissions.
      */
-    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+    distinct?: GlobalPermissionScalarFieldEnum | GlobalPermissionScalarFieldEnum[]
   }
 
   /**
-   * permission findFirstOrThrow
+   * globalPermission findFirstOrThrow
    */
-  export type permissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter, which permission to fetch.
+     * Filter, which globalPermission to fetch.
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of permissions to fetch.
+     * Determine the order of globalPermissions to fetch.
      */
-    orderBy?: permissionOrderByWithRelationInput | permissionOrderByWithRelationInput[]
+    orderBy?: globalPermissionOrderByWithRelationInput | globalPermissionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for permissions.
+     * Sets the position for searching for globalPermissions.
      */
-    cursor?: permissionWhereUniqueInput
+    cursor?: globalPermissionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` permissions from the position of the cursor.
+     * Take `±n` globalPermissions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` permissions.
+     * Skip the first `n` globalPermissions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of permissions.
+     * Filter by unique combinations of globalPermissions.
      */
-    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+    distinct?: GlobalPermissionScalarFieldEnum | GlobalPermissionScalarFieldEnum[]
   }
 
   /**
-   * permission findMany
+   * globalPermission findMany
    */
-  export type permissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter, which permissions to fetch.
+     * Filter, which globalPermissions to fetch.
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of permissions to fetch.
+     * Determine the order of globalPermissions to fetch.
      */
-    orderBy?: permissionOrderByWithRelationInput | permissionOrderByWithRelationInput[]
+    orderBy?: globalPermissionOrderByWithRelationInput | globalPermissionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing permissions.
+     * Sets the position for listing globalPermissions.
      */
-    cursor?: permissionWhereUniqueInput
+    cursor?: globalPermissionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` permissions from the position of the cursor.
+     * Take `±n` globalPermissions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` permissions.
+     * Skip the first `n` globalPermissions.
      */
     skip?: number
-    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+    distinct?: GlobalPermissionScalarFieldEnum | GlobalPermissionScalarFieldEnum[]
   }
 
   /**
-   * permission create
+   * globalPermission create
    */
-  export type permissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * The data needed to create a permission.
+     * The data needed to create a globalPermission.
      */
-    data: XOR<permissionCreateInput, permissionUncheckedCreateInput>
+    data: XOR<globalPermissionCreateInput, globalPermissionUncheckedCreateInput>
   }
 
   /**
-   * permission createMany
+   * globalPermission createMany
    */
-  export type permissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many permissions.
+     * The data used to create many globalPermissions.
      */
-    data: permissionCreateManyInput | permissionCreateManyInput[]
+    data: globalPermissionCreateManyInput | globalPermissionCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * permission update
+   * globalPermission update
    */
-  export type permissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * The data needed to update a permission.
+     * The data needed to update a globalPermission.
      */
-    data: XOR<permissionUpdateInput, permissionUncheckedUpdateInput>
+    data: XOR<globalPermissionUpdateInput, globalPermissionUncheckedUpdateInput>
     /**
-     * Choose, which permission to update.
+     * Choose, which globalPermission to update.
      */
-    where: permissionWhereUniqueInput
+    where: globalPermissionWhereUniqueInput
   }
 
   /**
-   * permission updateMany
+   * globalPermission updateMany
    */
-  export type permissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update permissions.
+     * The data used to update globalPermissions.
      */
-    data: XOR<permissionUpdateManyMutationInput, permissionUncheckedUpdateManyInput>
+    data: XOR<globalPermissionUpdateManyMutationInput, globalPermissionUncheckedUpdateManyInput>
     /**
-     * Filter which permissions to update
+     * Filter which globalPermissions to update
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
-     * Limit how many permissions to update.
+     * Limit how many globalPermissions to update.
      */
     limit?: number
   }
 
   /**
-   * permission upsert
+   * globalPermission upsert
    */
-  export type permissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * The filter to search for the permission to update in case it exists.
+     * The filter to search for the globalPermission to update in case it exists.
      */
-    where: permissionWhereUniqueInput
+    where: globalPermissionWhereUniqueInput
     /**
-     * In case the permission found by the `where` argument doesn't exist, create a new permission with this data.
+     * In case the globalPermission found by the `where` argument doesn't exist, create a new globalPermission with this data.
      */
-    create: XOR<permissionCreateInput, permissionUncheckedCreateInput>
+    create: XOR<globalPermissionCreateInput, globalPermissionUncheckedCreateInput>
     /**
-     * In case the permission was found with the provided `where` argument, update it with this data.
+     * In case the globalPermission was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<permissionUpdateInput, permissionUncheckedUpdateInput>
+    update: XOR<globalPermissionUpdateInput, globalPermissionUncheckedUpdateInput>
   }
 
   /**
-   * permission delete
+   * globalPermission delete
    */
-  export type permissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
     /**
-     * Filter which permission to delete.
+     * Filter which globalPermission to delete.
      */
-    where: permissionWhereUniqueInput
+    where: globalPermissionWhereUniqueInput
   }
 
   /**
-   * permission deleteMany
+   * globalPermission deleteMany
    */
-  export type permissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which permissions to delete
+     * Filter which globalPermissions to delete
      */
-    where?: permissionWhereInput
+    where?: globalPermissionWhereInput
     /**
-     * Limit how many permissions to delete.
+     * Limit how many globalPermissions to delete.
      */
     limit?: number
   }
 
   /**
-   * permission without action
+   * globalPermission without action
    */
-  export type permissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type globalPermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permission
+     * Select specific fields to fetch from the globalPermission
      */
-    select?: permissionSelect<ExtArgs> | null
+    select?: globalPermissionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permission
+     * Omit specific fields from the globalPermission
      */
-    omit?: permissionOmit<ExtArgs> | null
+    omit?: globalPermissionOmit<ExtArgs> | null
   }
 
 
@@ -48376,7 +48376,7 @@ export namespace Prisma {
   export type AdminStaffHasPermissionScalarFieldEnum = (typeof AdminStaffHasPermissionScalarFieldEnum)[keyof typeof AdminStaffHasPermissionScalarFieldEnum]
 
 
-  export const PermissionScalarFieldEnum: {
+  export const GlobalPermissionScalarFieldEnum: {
     id: 'id',
     panel: 'panel',
     module: 'module',
@@ -48393,7 +48393,7 @@ export namespace Prisma {
     deletedByRole: 'deletedByRole'
   };
 
-  export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+  export type GlobalPermissionScalarFieldEnum = (typeof GlobalPermissionScalarFieldEnum)[keyof typeof GlobalPermissionScalarFieldEnum]
 
 
   export const LoginLogScalarFieldEnum: {
@@ -49214,7 +49214,7 @@ export namespace Prisma {
   export type adminStaffHasPermissionOrderByRelevanceFieldEnum = (typeof adminStaffHasPermissionOrderByRelevanceFieldEnum)[keyof typeof adminStaffHasPermissionOrderByRelevanceFieldEnum]
 
 
-  export const permissionOrderByRelevanceFieldEnum: {
+  export const globalPermissionOrderByRelevanceFieldEnum: {
     panel: 'panel',
     module: 'module',
     action: 'action',
@@ -49223,7 +49223,7 @@ export namespace Prisma {
     deletedByRole: 'deletedByRole'
   };
 
-  export type permissionOrderByRelevanceFieldEnum = (typeof permissionOrderByRelevanceFieldEnum)[keyof typeof permissionOrderByRelevanceFieldEnum]
+  export type globalPermissionOrderByRelevanceFieldEnum = (typeof globalPermissionOrderByRelevanceFieldEnum)[keyof typeof globalPermissionOrderByRelevanceFieldEnum]
 
 
   export const loginLogOrderByRelevanceFieldEnum: {
@@ -51139,27 +51139,27 @@ export namespace Prisma {
     deletedByRole?: StringNullableWithAggregatesFilter<"adminStaffHasPermission"> | string | null
   }
 
-  export type permissionWhereInput = {
-    AND?: permissionWhereInput | permissionWhereInput[]
-    OR?: permissionWhereInput[]
-    NOT?: permissionWhereInput | permissionWhereInput[]
-    id?: IntFilter<"permission"> | number
-    panel?: StringFilter<"permission"> | string
-    module?: StringFilter<"permission"> | string
-    action?: StringFilter<"permission"> | string
-    status?: BoolFilter<"permission"> | boolean
-    createdAt?: DateTimeFilter<"permission"> | Date | string
-    createdBy?: IntNullableFilter<"permission"> | number | null
-    createdByRole?: StringNullableFilter<"permission"> | string | null
-    updatedAt?: DateTimeFilter<"permission"> | Date | string
-    updatedBy?: IntNullableFilter<"permission"> | number | null
-    updatedByRole?: StringNullableFilter<"permission"> | string | null
-    deletedAt?: DateTimeNullableFilter<"permission"> | Date | string | null
-    deletedBy?: IntNullableFilter<"permission"> | number | null
-    deletedByRole?: StringNullableFilter<"permission"> | string | null
+  export type globalPermissionWhereInput = {
+    AND?: globalPermissionWhereInput | globalPermissionWhereInput[]
+    OR?: globalPermissionWhereInput[]
+    NOT?: globalPermissionWhereInput | globalPermissionWhereInput[]
+    id?: IntFilter<"globalPermission"> | number
+    panel?: StringFilter<"globalPermission"> | string
+    module?: StringFilter<"globalPermission"> | string
+    action?: StringFilter<"globalPermission"> | string
+    status?: BoolFilter<"globalPermission"> | boolean
+    createdAt?: DateTimeFilter<"globalPermission"> | Date | string
+    createdBy?: IntNullableFilter<"globalPermission"> | number | null
+    createdByRole?: StringNullableFilter<"globalPermission"> | string | null
+    updatedAt?: DateTimeFilter<"globalPermission"> | Date | string
+    updatedBy?: IntNullableFilter<"globalPermission"> | number | null
+    updatedByRole?: StringNullableFilter<"globalPermission"> | string | null
+    deletedAt?: DateTimeNullableFilter<"globalPermission"> | Date | string | null
+    deletedBy?: IntNullableFilter<"globalPermission"> | number | null
+    deletedByRole?: StringNullableFilter<"globalPermission"> | string | null
   }
 
-  export type permissionOrderByWithRelationInput = {
+  export type globalPermissionOrderByWithRelationInput = {
     id?: SortOrder
     panel?: SortOrder
     module?: SortOrder
@@ -51174,30 +51174,30 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
-    _relevance?: permissionOrderByRelevanceInput
+    _relevance?: globalPermissionOrderByRelevanceInput
   }
 
-  export type permissionWhereUniqueInput = Prisma.AtLeast<{
+  export type globalPermissionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: permissionWhereInput | permissionWhereInput[]
-    OR?: permissionWhereInput[]
-    NOT?: permissionWhereInput | permissionWhereInput[]
-    panel?: StringFilter<"permission"> | string
-    module?: StringFilter<"permission"> | string
-    action?: StringFilter<"permission"> | string
-    status?: BoolFilter<"permission"> | boolean
-    createdAt?: DateTimeFilter<"permission"> | Date | string
-    createdBy?: IntNullableFilter<"permission"> | number | null
-    createdByRole?: StringNullableFilter<"permission"> | string | null
-    updatedAt?: DateTimeFilter<"permission"> | Date | string
-    updatedBy?: IntNullableFilter<"permission"> | number | null
-    updatedByRole?: StringNullableFilter<"permission"> | string | null
-    deletedAt?: DateTimeNullableFilter<"permission"> | Date | string | null
-    deletedBy?: IntNullableFilter<"permission"> | number | null
-    deletedByRole?: StringNullableFilter<"permission"> | string | null
+    AND?: globalPermissionWhereInput | globalPermissionWhereInput[]
+    OR?: globalPermissionWhereInput[]
+    NOT?: globalPermissionWhereInput | globalPermissionWhereInput[]
+    panel?: StringFilter<"globalPermission"> | string
+    module?: StringFilter<"globalPermission"> | string
+    action?: StringFilter<"globalPermission"> | string
+    status?: BoolFilter<"globalPermission"> | boolean
+    createdAt?: DateTimeFilter<"globalPermission"> | Date | string
+    createdBy?: IntNullableFilter<"globalPermission"> | number | null
+    createdByRole?: StringNullableFilter<"globalPermission"> | string | null
+    updatedAt?: DateTimeFilter<"globalPermission"> | Date | string
+    updatedBy?: IntNullableFilter<"globalPermission"> | number | null
+    updatedByRole?: StringNullableFilter<"globalPermission"> | string | null
+    deletedAt?: DateTimeNullableFilter<"globalPermission"> | Date | string | null
+    deletedBy?: IntNullableFilter<"globalPermission"> | number | null
+    deletedByRole?: StringNullableFilter<"globalPermission"> | string | null
   }, "id">
 
-  export type permissionOrderByWithAggregationInput = {
+  export type globalPermissionOrderByWithAggregationInput = {
     id?: SortOrder
     panel?: SortOrder
     module?: SortOrder
@@ -51212,31 +51212,31 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     deletedBy?: SortOrderInput | SortOrder
     deletedByRole?: SortOrderInput | SortOrder
-    _count?: permissionCountOrderByAggregateInput
-    _avg?: permissionAvgOrderByAggregateInput
-    _max?: permissionMaxOrderByAggregateInput
-    _min?: permissionMinOrderByAggregateInput
-    _sum?: permissionSumOrderByAggregateInput
+    _count?: globalPermissionCountOrderByAggregateInput
+    _avg?: globalPermissionAvgOrderByAggregateInput
+    _max?: globalPermissionMaxOrderByAggregateInput
+    _min?: globalPermissionMinOrderByAggregateInput
+    _sum?: globalPermissionSumOrderByAggregateInput
   }
 
-  export type permissionScalarWhereWithAggregatesInput = {
-    AND?: permissionScalarWhereWithAggregatesInput | permissionScalarWhereWithAggregatesInput[]
-    OR?: permissionScalarWhereWithAggregatesInput[]
-    NOT?: permissionScalarWhereWithAggregatesInput | permissionScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"permission"> | number
-    panel?: StringWithAggregatesFilter<"permission"> | string
-    module?: StringWithAggregatesFilter<"permission"> | string
-    action?: StringWithAggregatesFilter<"permission"> | string
-    status?: BoolWithAggregatesFilter<"permission"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"permission"> | Date | string
-    createdBy?: IntNullableWithAggregatesFilter<"permission"> | number | null
-    createdByRole?: StringNullableWithAggregatesFilter<"permission"> | string | null
-    updatedAt?: DateTimeWithAggregatesFilter<"permission"> | Date | string
-    updatedBy?: IntNullableWithAggregatesFilter<"permission"> | number | null
-    updatedByRole?: StringNullableWithAggregatesFilter<"permission"> | string | null
-    deletedAt?: DateTimeNullableWithAggregatesFilter<"permission"> | Date | string | null
-    deletedBy?: IntNullableWithAggregatesFilter<"permission"> | number | null
-    deletedByRole?: StringNullableWithAggregatesFilter<"permission"> | string | null
+  export type globalPermissionScalarWhereWithAggregatesInput = {
+    AND?: globalPermissionScalarWhereWithAggregatesInput | globalPermissionScalarWhereWithAggregatesInput[]
+    OR?: globalPermissionScalarWhereWithAggregatesInput[]
+    NOT?: globalPermissionScalarWhereWithAggregatesInput | globalPermissionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"globalPermission"> | number
+    panel?: StringWithAggregatesFilter<"globalPermission"> | string
+    module?: StringWithAggregatesFilter<"globalPermission"> | string
+    action?: StringWithAggregatesFilter<"globalPermission"> | string
+    status?: BoolWithAggregatesFilter<"globalPermission"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"globalPermission"> | Date | string
+    createdBy?: IntNullableWithAggregatesFilter<"globalPermission"> | number | null
+    createdByRole?: StringNullableWithAggregatesFilter<"globalPermission"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"globalPermission"> | Date | string
+    updatedBy?: IntNullableWithAggregatesFilter<"globalPermission"> | number | null
+    updatedByRole?: StringNullableWithAggregatesFilter<"globalPermission"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"globalPermission"> | Date | string | null
+    deletedBy?: IntNullableWithAggregatesFilter<"globalPermission"> | number | null
+    deletedByRole?: StringNullableWithAggregatesFilter<"globalPermission"> | string | null
   }
 
   export type loginLogWhereInput = {
@@ -56415,7 +56415,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type permissionCreateInput = {
+  export type globalPermissionCreateInput = {
     panel: string
     module: string
     action: string
@@ -56431,7 +56431,7 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
-  export type permissionUncheckedCreateInput = {
+  export type globalPermissionUncheckedCreateInput = {
     id?: number
     panel: string
     module: string
@@ -56448,7 +56448,7 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
-  export type permissionUpdateInput = {
+  export type globalPermissionUpdateInput = {
     panel?: StringFieldUpdateOperationsInput | string
     module?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
@@ -56464,7 +56464,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type permissionUncheckedUpdateInput = {
+  export type globalPermissionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     panel?: StringFieldUpdateOperationsInput | string
     module?: StringFieldUpdateOperationsInput | string
@@ -56481,7 +56481,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type permissionCreateManyInput = {
+  export type globalPermissionCreateManyInput = {
     id?: number
     panel: string
     module: string
@@ -56498,7 +56498,7 @@ export namespace Prisma {
     deletedByRole?: string | null
   }
 
-  export type permissionUpdateManyMutationInput = {
+  export type globalPermissionUpdateManyMutationInput = {
     panel?: StringFieldUpdateOperationsInput | string
     module?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
@@ -56514,7 +56514,7 @@ export namespace Prisma {
     deletedByRole?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type permissionUncheckedUpdateManyInput = {
+  export type globalPermissionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     panel?: StringFieldUpdateOperationsInput | string
     module?: StringFieldUpdateOperationsInput | string
@@ -61787,13 +61787,13 @@ export namespace Prisma {
     deletedBy?: SortOrder
   }
 
-  export type permissionOrderByRelevanceInput = {
-    fields: permissionOrderByRelevanceFieldEnum | permissionOrderByRelevanceFieldEnum[]
+  export type globalPermissionOrderByRelevanceInput = {
+    fields: globalPermissionOrderByRelevanceFieldEnum | globalPermissionOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type permissionCountOrderByAggregateInput = {
+  export type globalPermissionCountOrderByAggregateInput = {
     id?: SortOrder
     panel?: SortOrder
     module?: SortOrder
@@ -61810,31 +61810,14 @@ export namespace Prisma {
     deletedByRole?: SortOrder
   }
 
-  export type permissionAvgOrderByAggregateInput = {
+  export type globalPermissionAvgOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
   }
 
-  export type permissionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    panel?: SortOrder
-    module?: SortOrder
-    action?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    createdBy?: SortOrder
-    createdByRole?: SortOrder
-    updatedAt?: SortOrder
-    updatedBy?: SortOrder
-    updatedByRole?: SortOrder
-    deletedAt?: SortOrder
-    deletedBy?: SortOrder
-    deletedByRole?: SortOrder
-  }
-
-  export type permissionMinOrderByAggregateInput = {
+  export type globalPermissionMaxOrderByAggregateInput = {
     id?: SortOrder
     panel?: SortOrder
     module?: SortOrder
@@ -61851,7 +61834,24 @@ export namespace Prisma {
     deletedByRole?: SortOrder
   }
 
-  export type permissionSumOrderByAggregateInput = {
+  export type globalPermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    panel?: SortOrder
+    module?: SortOrder
+    action?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    createdByRole?: SortOrder
+    updatedAt?: SortOrder
+    updatedBy?: SortOrder
+    updatedByRole?: SortOrder
+    deletedAt?: SortOrder
+    deletedBy?: SortOrder
+    deletedByRole?: SortOrder
+  }
+
+  export type globalPermissionSumOrderByAggregateInput = {
     id?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder

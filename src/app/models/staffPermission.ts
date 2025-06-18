@@ -98,6 +98,7 @@ export const checkStaffPermissionStatus = async (filter: StaffPermissionFilter =
                 message: "Action Unauthorized",
             };
         }
+
         return {
             status: true,
             message: "Action Authorized",
