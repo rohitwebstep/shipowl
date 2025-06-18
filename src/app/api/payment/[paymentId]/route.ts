@@ -5,6 +5,29 @@ import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
 import { getPaymentById, checkTransactionIdAvailabilityForUpdate, updatePayment, softDeletePayment, restorePayment } from '@/app/models/payment';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
   try {
     // Extract paymentId directly from the URL path
@@ -12,7 +35,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Payment ID:', paymentId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -20,7 +43,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(
@@ -97,7 +120,7 @@ export async function PUT(req: NextRequest) {
         return isNaN(parsedDate.getTime()) ? null : parsedDate;
       }
       return null;
-    };    
+    };
 
     // Validate input
     const requiredFields = ['transactionId'];
