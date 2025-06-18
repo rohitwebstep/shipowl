@@ -6,6 +6,29 @@ import { validateFormData } from '@/utils/validateFormData';
 import { getWarehouseById, updateWarehouse, softDeleteWarehouse, restoreWarehouse } from '@/app/models/warehouse';
 import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 export async function GET(req: NextRequest) {
   try {
     // Extract warehouseId directly from the URL path
@@ -13,7 +36,7 @@ export async function GET(req: NextRequest) {
 
     logMessage('debug', 'Requested Warehouse ID:', warehouseId);
 
-    const adminId = req.headers.get('x-admin-id');
+    const adminId = Number(req.headers.get('x-admin-id'));
     const adminRole = req.headers.get('x-admin-role');
 
     if (!adminId || isNaN(Number(adminId))) {
@@ -21,7 +44,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid or missing admin ID' }, { status: 400 });
     }
 
-    let mainAdminId = adminId;
+    // let mainAdminId = adminId;
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
     if (!userCheck.status) {
       return NextResponse.json(

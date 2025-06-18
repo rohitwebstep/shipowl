@@ -10,6 +10,29 @@ import { isLocationHierarchyCorrect } from '@/app/models/location/city';
 import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getSuppliersByStatus } from '@/app/models/supplier/supplier';
 import { createSupplierCompany } from '@/app/models/supplier/company';
 
+interface MainAdmin {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    // other optional properties if needed
+}
+
+interface SupplierStaff {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+    status: boolean;
+    message?: string;
+    admin?: SupplierStaff;
+}
+
 type UploadedFileInfo = {
   originalName: string;
   savedAs: string;
@@ -378,10 +401,10 @@ export async function GET(req: NextRequest) {
 
     // Check if admin exists
     const userCheck: UserCheckResult = await isUserExist(adminId, String(adminRole));
-    if (!result.status) {
-      logMessage('warn', `User not found: ${result.message}`);
+    if (!userCheck.status) {
+      logMessage('warn', `User not found: ${userCheck.message}`);
       return NextResponse.json(
-        { status: false, error: `User Not Found: ${result.message}` },
+        { status: false, error: `User Not Found: ${userCheck.message}` },
         { status: 404 }
       );
     }
