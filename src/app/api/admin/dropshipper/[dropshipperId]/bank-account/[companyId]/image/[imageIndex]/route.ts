@@ -5,6 +5,29 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { getBankAccountById, removeBankAccountImageByIndex } from '@/app/models/dropshipper/bankAccount';
 import { checkStaffPermissionStatus } from '@/app/models/staffPermission';
 
+interface MainAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
+}
+
+interface SupplierStaff {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
+}
+
+interface UserCheckResult {
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
+}
+
 type ImageType = "cancelledChequeImage";
 
 export async function DELETE(req: NextRequest) {
