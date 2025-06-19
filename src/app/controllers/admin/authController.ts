@@ -439,7 +439,7 @@ export async function handleVerifyStatus(
             );
         }
 
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig('dropshipper', 'auth', 'verify', true);
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await getEmailConfig(adminRole, 'auth', 'verify', true);
         logMessage('debug', 'Email Config:', emailConfig);
 
         if (!emailStatus || !emailConfig) {
