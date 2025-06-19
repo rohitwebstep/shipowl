@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import mime from 'mime';
 
 export async function GET(
     req: NextRequest,
@@ -15,12 +16,21 @@ export async function GET(
 
     try {
         const fileBuffer = await fs.readFile(filePath);
-        const ext = path.extname(filePath).substring(1);
+
+        const mimeType = mime.getType(filePath) || 'application/octet-stream';
+
+        // Only allow image/* and video/*
+        if (!mimeType.startsWith('image/') && !mimeType.startsWith('video/')) {
+            return NextResponse.json(
+                { error: 'Unsupported file type' },
+                { status: 415 } // Unsupported Media Type
+            );
+        }
 
         return new NextResponse(fileBuffer, {
             status: 200,
             headers: {
-                'Content-Type': `image/${ext}`,
+                'Content-Type': mimeType,
             },
         });
     } catch (err) {
