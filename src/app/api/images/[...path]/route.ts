@@ -1,28 +1,28 @@
+// src/app/api/images/[...path]/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import mime from 'mime';
 import { logMessage } from '@/utils/commonUtils';
 
-const BASE_DIR = '/tmp/uploads'; // Change to your actual directory if needed
+const BASE_DIR = '/tmp/uploads';
 
 export async function GET(
     req: NextRequest,
-    context: { params: { path: string[] } }
+    { params }: { params: Record<string, string | string[]> }
 ) {
     try {
-        const { path: pathSegments } = context.params;
+        const pathSegments = params.path;
 
-        if (!pathSegments || pathSegments.length === 0) {
+        if (!pathSegments || !Array.isArray(pathSegments)) {
             return NextResponse.json({ error: 'Missing file path' }, { status: 400 });
         }
 
-        // Join requested path and sanitize
         const requestedPath = path.join(...pathSegments);
         const fullPath = path.join(BASE_DIR, requestedPath);
-
-        // Prevent directory traversal
         const normalizedPath = path.normalize(fullPath);
+
         if (!normalizedPath.startsWith(BASE_DIR)) {
             return NextResponse.json({ error: 'Unauthorized access' }, { status: 403 });
         }
