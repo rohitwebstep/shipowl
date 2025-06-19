@@ -7,16 +7,18 @@ import { logMessage } from '@/utils/commonUtils';
 
 const BASE_DIR = '/tmp/uploads'; // Adjust as needed
 
-export async function GET(req: NextRequest, context: { params: { path: string[] } }) {
+export async function GET(
+    req: NextRequest,
+    { params }: { params: { path: string[] } }
+) {
     try {
-        const { path: filePathParts } = context.params;
+        const filePathParts = params.path;
 
         if (!filePathParts?.length) {
             return NextResponse.json({ error: 'Missing file path' }, { status: 400 });
         }
 
         const requestedPath = path.join(...filePathParts);
-
         const fullPath = path.join(BASE_DIR, requestedPath);
 
         // Prevent directory traversal
@@ -31,7 +33,6 @@ export async function GET(req: NextRequest, context: { params: { path: string[] 
             status: 200,
             headers: { 'Content-Type': contentType },
         });
-
     } catch (error) {
         logMessage('error', 'Image fetch error:', error);
         return NextResponse.json(
