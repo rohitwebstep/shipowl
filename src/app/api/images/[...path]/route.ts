@@ -8,14 +8,21 @@ import { logMessage } from '@/utils/commonUtils';
 
 const BASE_DIR = '/tmp/uploads';
 
+// ✅ Define the interface for the route context
+interface RouteContext {
+    params: {
+        path: string[];
+    };
+}
+
 export async function GET(
     req: NextRequest,
-    { params }: { params: Record<string, string | string[]> }
+    context: RouteContext
 ) {
     try {
-        const pathSegments = params.path;
+        const { path: pathSegments } = context.params;
 
-        if (!pathSegments || !Array.isArray(pathSegments)) {
+        if (!Array.isArray(pathSegments)) {
             return NextResponse.json({ error: 'Missing file path' }, { status: 400 });
         }
 
@@ -36,7 +43,6 @@ export async function GET(
                 'Content-Type': contentType,
             },
         });
-
     } catch (error) {
         logMessage('error', 'Image fetch error:', error);
         return NextResponse.json(
