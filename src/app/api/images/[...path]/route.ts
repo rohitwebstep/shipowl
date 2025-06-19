@@ -1,5 +1,3 @@
-// src/app/api/images/[...path]/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
@@ -8,21 +6,14 @@ import { logMessage } from '@/utils/commonUtils';
 
 const BASE_DIR = '/tmp/uploads';
 
-// ✅ Define the interface for the route context
-interface RouteContext {
-    params: {
-        path: string[];
-    };
-}
-
 export async function GET(
     req: NextRequest,
-    context: RouteContext
+    context: { params: { path: string[] } } // ✅ This is valid in App Router
 ) {
     try {
-        const { path: pathSegments } = context.params;
+        const pathSegments = context.params.path;
 
-        if (!Array.isArray(pathSegments)) {
+        if (!Array.isArray(pathSegments) || pathSegments.length === 0) {
             return NextResponse.json({ error: 'Missing file path' }, { status: 400 });
         }
 
