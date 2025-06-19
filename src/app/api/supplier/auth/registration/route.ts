@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+    const supplierUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier');
     const supplierFileFields = [
       'profilePicture'
     ];
@@ -279,7 +279,7 @@ export async function POST(req: NextRequest) {
     }
 
     /*
-    const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
+    const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
     const supplierCompanyFileFields = [
       'gstDocument',
       'panCardImage',
@@ -375,7 +375,7 @@ export async function POST(req: NextRequest) {
       createdByRole: '',
     }
 
-    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
+    const bankAccountUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
     const supplierBankAccountUploadedFiles: Record<string, string> = {};
     if (Array.isArray(supplierBankAccountPayload.bankAccounts) && supplierBankAccountPayload.bankAccounts.length > 0) {
       for (let index = 0; index < supplierBankAccountPayload.bankAccounts.length; index++) {

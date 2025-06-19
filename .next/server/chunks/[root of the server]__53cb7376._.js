@@ -10174,7 +10174,7 @@ const updateSupplier = async (adminId, adminRole, supplierId, supplier, withPass
         if (profilePicture && profilePicture.trim() !== '' && currentSupplier?.profilePicture?.trim()) {
             try {
                 const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(currentSupplier.profilePicture.trim());
-                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'supplier');
+                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'supplier');
                 const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
                 if (!fileDeleted) {
                     console.warn(`Failed to delete old profile picture: ${imageFileName}`);
@@ -10546,7 +10546,7 @@ async function POST(req) {
         // Hash the password using bcrypt
         const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10); // Generates a salt with 10 rounds
         const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-        const supplierUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'supplier');
+        const supplierUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'supplier');
         const supplierFileFields = [
             'profilePicture'
         ];
@@ -10627,7 +10627,7 @@ async function POST(req) {
             });
         }
         /*
-    const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
+    const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
     const supplierCompanyFileFields = [
       'gstDocument',
       'panCardImage',
@@ -10723,7 +10723,7 @@ async function POST(req) {
       createdByRole: '',
     }
 
-    const bankAccountUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
+    const bankAccountUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'bank-aacount');
     const supplierBankAccountUploadedFiles: Record<string, string> = {};
     if (Array.isArray(supplierBankAccountPayload.bankAccounts) && supplierBankAccountPayload.bankAccounts.length > 0) {
       for (let index = 0; index < supplierBankAccountPayload.bankAccounts.length; index++) {

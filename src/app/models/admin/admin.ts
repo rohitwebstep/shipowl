@@ -289,7 +289,7 @@ export const updateAdmin = async (
         if (profilePicture && profilePicture.trim() !== '' && currentAdmin?.profilePicture?.trim()) {
             try {
                 const imageFileName = path.basename(currentAdmin.profilePicture.trim());
-                const filePath = path.join(process.cwd(), 'public', 'uploads', 'admin');
+                const filePath = path.join(process.cwd(), 'tmp', 'uploads', 'admin');
 
                 const fileDeleted = await deleteFile(filePath);
 

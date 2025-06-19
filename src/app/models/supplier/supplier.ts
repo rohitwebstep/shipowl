@@ -379,7 +379,7 @@ export const updateSupplier = async (
         if (profilePicture && profilePicture.trim() !== '' && currentSupplier?.profilePicture?.trim()) {
             try {
                 const imageFileName = path.basename(currentSupplier.profilePicture.trim());
-                const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+                const filePath = path.join(process.cwd(), 'tmp', 'uploads', 'supplier');
 
                 const fileDeleted = await deleteFile(filePath);
 

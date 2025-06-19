@@ -175,7 +175,7 @@ export async function PUT(req: NextRequest) {
     }
 
     // File upload
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'productRequest');
+    const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'productRequest');
     const fileData = await saveFilesFromFormData(formData, 'image', {
       dir: uploadDir,
       pattern: 'slug-unique',

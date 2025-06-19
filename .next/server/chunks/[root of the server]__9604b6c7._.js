@@ -10090,7 +10090,7 @@ const updateDropshipper = async (adminId, adminRole, dropshipperId, dropshipper,
         if (profilePicture && profilePicture.trim() !== '' && currentDropshipper?.profilePicture?.trim()) {
             try {
                 const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(currentDropshipper.profilePicture.trim());
-                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper');
+                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
                 const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
                 if (!fileDeleted) {
                     console.warn(`Failed to delete old profile picture: ${imageFileName}`);
@@ -10744,7 +10744,7 @@ async function POST(req) {
       return NextResponse.json({ status: false, error: 'Variants are not valid or empty' }, { status: 400 });
     }
     const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
-    */ const dropshipperUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper');
+    */ const dropshipperUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
         const dropshipperFileFields = [
             'profilePicture'
         ];
@@ -10825,7 +10825,7 @@ async function POST(req) {
             });
         }
         /*
-        const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper', `${dropshipperCreateResult.dropshipper.id}`, 'company');
+        const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${dropshipperCreateResult.dropshipper.id}`, 'company');
         const dropshipperCompanyFileFields = [
           'gstDocument',
           'panCardImage',

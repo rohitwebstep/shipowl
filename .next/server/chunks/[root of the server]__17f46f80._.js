@@ -9936,7 +9936,7 @@ const updateDropshipper = async (adminId, adminRole, dropshipperId, dropshipper)
         if (profilePicture && profilePicture.trim() !== '' && currentDropshipper?.profilePicture?.trim()) {
             try {
                 const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(currentDropshipper.profilePicture.trim());
-                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper');
+                const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
                 const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
                 if (!fileDeleted) {
                     console.warn(`Failed to delete old profile picture: ${imageFileName}`);
@@ -10238,7 +10238,7 @@ const removeCompanyDetailImageByIndex = async (companyDetailId, dropshipperId, i
         });
         // 🔥 Attempt to delete the image file from storage
         const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
-        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper', `${dropshipperId}`, 'company', imageFileName);
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${dropshipperId}`, 'company', imageFileName);
         const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
         return {
             status: true,
@@ -10438,7 +10438,7 @@ const removeBankAccountImageByIndex = async (bankAccountId, dropshipperId, image
         });
         // 🔥 Attempt to delete the image file from storage
         const imageFileName = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(removedImage.trim());
-        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper', `${dropshipperId}`, 'company', imageFileName);
+        const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${dropshipperId}`, 'company', imageFileName);
         const fileDeleted = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(filePath);
         return {
             status: true,
@@ -10662,7 +10662,7 @@ async function PUT(req) {
             });
         }
         const bankAccounts = Array.isArray(rawBankAccounts) ? rawBankAccounts : [];
-        const dropshipperUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper');
+        const dropshipperUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
         const dropshipperFileFields = [
             'profilePicture'
         ];
@@ -10742,7 +10742,7 @@ async function PUT(req) {
                 status: 500
             });
         }
-        const companyUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'dropshipper', `${dropshipperId}`, 'company');
+        const companyUploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${dropshipperId}`, 'company');
         const dropshipperCompanyFileFields = [
             'gstDocument',
             'panCardImage',

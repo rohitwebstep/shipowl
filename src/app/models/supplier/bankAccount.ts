@@ -192,7 +192,7 @@ export const removeBankAccountImageByIndex = async (bankAccountId: number, suppl
 
         // 🔥 Attempt to delete the image file from storage
         const imageFileName = path.basename(removedImage.trim());
-        const filePath = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
+        const filePath = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierId}`, 'company', imageFileName);
 
         const fileDeleted = await deleteFile(filePath);
 

@@ -94,7 +94,10 @@ export async function saveFilesFromFormData(
 
         await writeFile(fullPath, buffer);
 
-        const fileUrl = fullPath.split('public')[1].replace(/\\/g, '/');
+        const publicIndex = fullPath.indexOf('public');
+        const fileUrl = publicIndex !== -1
+            ? fullPath.split('public')[1].replace(/\\/g, '/')
+            : fullPath;
 
         const info: UploadedFileInfo = {
             originalName: file.name,

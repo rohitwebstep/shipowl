@@ -11970,7 +11970,7 @@ async function POST(req) {
             });
         }
         const order = orderCreateResult.order;
-        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', 'order', 'bar-code');
+        const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'order', 'bar-code');
         // Generate a barcode based on brand name
         const barcodeFileName = `barcode-${Date.now()}.png`;
         const barcodePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, barcodeFileName);

@@ -339,7 +339,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ status: false, message: 'Shipping Country not found' }, { status: 404 });
     }
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'product');
+    const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'product');
     const fileFields = [
       'package_weight_image',
       'package_length_image',

@@ -288,7 +288,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+    const supplierUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier');
     const supplierFileFields = [
       'profilePicture'
     ];
@@ -372,7 +372,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ status: false, error: supplierCreateResult?.message || 'Supplier creation failed' }, { status: 500 });
     }
 
-    const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
+    const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
     const supplierCompanyFileFields = [
       'gstDocument',
       'panCardImage',

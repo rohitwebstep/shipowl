@@ -243,7 +243,7 @@ export async function POST(req: NextRequest) {
 
     const order = orderCreateResult.order;
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'order', 'bar-code');
+    const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'order', 'bar-code');
 
     // Generate a barcode based on brand name
     const barcodeFileName = `barcode-${Date.now()}.png`;

@@ -285,7 +285,7 @@ export const updateDropshipperStaff = async (
         if (profilePicture && profilePicture.trim() !== '' && currentDropshipperStaff?.profilePicture?.trim()) {
             try {
                 const imageFileName = path.basename(currentDropshipperStaff.profilePicture.trim());
-                const filePath = path.join(process.cwd(), 'public', 'uploads', 'dropshipperStaff');
+                const filePath = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipperStaff');
 
                 const fileDeleted = await deleteFile(filePath);
 

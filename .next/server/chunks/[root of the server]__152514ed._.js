@@ -285,7 +285,7 @@ async function POST(req) {
             if (value instanceof File && value.name) {
                 const bytes = await value.arrayBuffer();
                 const buffer = Buffer.from(bytes);
-                const uploadPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', value.name);
+                const uploadPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', value.name);
                 await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(uploadPath, buffer);
                 console.log(`✅ Saved file ${value.name} at ${uploadPath}`);
                 const fileInfo = {

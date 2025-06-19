@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
         const extractString = (key: string) => (formData.get(key) as string) || null;
 
         // Define file upload directory and fields
-        const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper', `${mainDropshipperId}`, 'company');
+        const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${mainDropshipperId}`, 'company');
         const dropshipperBankAccountFileFields = ['cancelledChequeImage'];
 
         // Handle file uploads

@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
     const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
     // File upload
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'category');
+    const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'category');
     const fileData = await saveFilesFromFormData(formData, 'image', {
       dir: uploadDir,
       pattern: 'slug-unique',

@@ -111,13 +111,13 @@ export async function POST(req: NextRequest) {
             const formData = await req.formData();
 
             const packingFiles = await saveFilesFromFormData(formData, 'packingGallery', {
-                dir: path.join(process.cwd(), 'public', 'uploads', 'returns'),
+                dir: path.join(process.cwd(), 'tmp', 'uploads', 'returns'),
                 pattern: 'slug-unique',
                 multiple: true,
             });
 
             const unboxingFiles = await saveFilesFromFormData(formData, 'unboxingGallery', {
-                dir: path.join(process.cwd(), 'public', 'uploads', 'returns'),
+                dir: path.join(process.cwd(), 'tmp', 'uploads', 'returns'),
                 pattern: 'slug-unique',
                 multiple: true,
             });

@@ -137,7 +137,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const adminUploadDir = path.join(process.cwd(), 'public', 'uploads', 'admin');
+    const adminUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'admin');
     const adminFileFields = [
       'profilePicture'
     ];

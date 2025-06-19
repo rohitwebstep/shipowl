@@ -125,7 +125,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const supplierUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier');
+    const supplierUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier');
     const supplierFileFields = [
       'profilePicture'
     ];

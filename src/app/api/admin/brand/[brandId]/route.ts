@@ -199,7 +199,7 @@ export async function PUT(req: NextRequest) {
     const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
     // File upload
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'brand');
+    const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'brand');
     const fileData = await saveFilesFromFormData(formData, 'image', {
       dir: uploadDir,
       pattern: 'slug-unique',

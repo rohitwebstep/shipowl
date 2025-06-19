@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
     const bankAccounts: BankAccount[] = Array.isArray(rawBankAccounts) ? rawBankAccounts as BankAccount[] : [];
     */
 
-    const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
+    const dropshipperUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
       'profilePicture'
     ];
@@ -207,7 +207,7 @@ export async function POST(req: NextRequest) {
     }
 
     /*
-        const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper', `${dropshipperCreateResult.dropshipper.id}`, 'company');
+        const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper', `${dropshipperCreateResult.dropshipper.id}`, 'company');
         const dropshipperCompanyFileFields = [
           'gstDocument',
           'panCardImage',

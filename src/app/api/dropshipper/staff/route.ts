@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     const salt = await bcrypt.genSalt(10); // Generates a salt with 10 rounds
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
+    const dropshipperUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
       'profilePicture'
     ];

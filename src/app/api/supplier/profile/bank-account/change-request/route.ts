@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         const extractString = (key: string) => (formData.get(key) as string) || null;
 
         // Define file upload directory and fields
-        const companyUploadDir = path.join(process.cwd(), 'public', 'uploads', 'supplier', `${supplierId}`, 'company');
+        const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierId}`, 'company');
         const supplierBankAccountFileFields = ['cancelledChequeImage'];
 
         // Handle file uploads

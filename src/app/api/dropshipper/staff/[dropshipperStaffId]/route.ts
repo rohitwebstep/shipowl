@@ -125,7 +125,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const dropshipperUploadDir = path.join(process.cwd(), 'public', 'uploads', 'dropshipper');
+    const dropshipperUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'dropshipper');
     const dropshipperFileFields = [
       'profilePicture'
     ];
