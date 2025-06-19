@@ -5,6 +5,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import mime from 'mime';
 
+import { logMessage } from "@/utils/commonUtils";
+
 const BASE_DIR = '/tmp/uploads'; // Change as needed
 
 export async function GET(
@@ -40,8 +42,11 @@ export async function GET(
         //   headers: { 'Content-Type': contentType },
         // });
 
-    } catch (err: any) {
-        console.error('Image fetch error:', err.message);
-        return NextResponse.json({ error: 'File not found or inaccessible' }, { status: 404 });
-    }
+    } catch (error) {
+        logMessage('error', 'Image fetch error:', error);
+        return NextResponse.json(
+          { status: false, message: "File not found or inaccessible" },
+          { status: 500 }
+        );
+      }
 }
