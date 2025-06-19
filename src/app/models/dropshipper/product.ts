@@ -31,26 +31,26 @@ type ProductType = "all" | "my" | "notmy";
 type ProductStatus = "active" | "inactive" | "deleted" | "notDeleted";
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function createDropshipperProduct(
@@ -150,7 +150,16 @@ export const updateDropshipperProduct = async (
             },
         });
 
-        // Step 3: Update or Create each variant
+        const incomingVariantIds = variants.map(v => v.variantId);
+        await prisma.dropshipperProductVariant.deleteMany({
+            where: {
+                dropshipperProductId,
+                supplierProductVariantId: {
+                    notIn: incomingVariantIds,
+                },
+            },
+        });
+
         for (const variant of variants) {
             const existing = await prisma.dropshipperProductVariant.findFirst({
                 where: {

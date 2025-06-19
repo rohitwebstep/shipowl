@@ -31,26 +31,26 @@ type ProductType = "all" | "my" | "notmy";
 type ProductStatus = "active" | "inactive" | "deleted" | "notDeleted";
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export async function createSupplierProduct(
@@ -161,6 +161,16 @@ export const updateSupplierProduct = async (
                 updatedBy,
                 updatedByRole,
                 updatedAt: new Date(),
+            },
+        });
+
+        const incomingVariantIds = variants.map(v => v.variantId);
+        await prisma.supplierProductVariant.deleteMany({
+            where: {
+                supplierProductId,
+                id: {
+                    notIn: incomingVariantIds,
+                },
             },
         });
 
