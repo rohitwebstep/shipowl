@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
         const formData = await req.formData();
 
         // File upload
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'test', 'image');
+        const uploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'test', 'image');
         const fileData = await saveFilesFromFormData(formData, 'image', {
             dir: uploadDir,
             pattern: 'slug-unique',
