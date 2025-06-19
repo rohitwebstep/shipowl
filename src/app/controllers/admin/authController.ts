@@ -196,9 +196,9 @@ export async function handleForgetPassword(
 
         let urlPanel;
         if (panel == 'dropshipper') {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/dropshipping/auth/password/reset?token=${token}`;
         } else {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/${panel}/auth/password/reset?token=${token}`;
         }
 
         // Use index signature to avoid TS error
@@ -440,7 +440,7 @@ export async function handleVerifyStatus(
                     data: updateStaffData,
                 });
             }
-            loginLink = `https://shpping-owl-frontend.vercel.app/supplier/auth/login`;
+            loginLink = `https://shipowl.io/supplier/auth/login`;
         } else if (adminRole == 'dropshipper') {
             // Prepare the update data
             const updateData = {
@@ -458,7 +458,7 @@ export async function handleVerifyStatus(
                     data: updateData,
                 });
             }
-            loginLink = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`;
+            loginLink = `https://shipowl.io/dropshipping/auth/login`;
 
         } else {
             return NextResponse.json(

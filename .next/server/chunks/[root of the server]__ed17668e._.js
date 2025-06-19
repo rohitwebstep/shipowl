@@ -10425,9 +10425,9 @@ async function handleForgetPassword(req, panel, adminRole, adminStaffRole) {
         }
         let urlPanel;
         if (panel == 'dropshipper') {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/dropshipping/auth/password/reset?token=${token}`;
         } else {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/${panel}/auth/password/reset?token=${token}`;
         }
         // Use index signature to avoid TS error
         const replacements = {
@@ -10644,7 +10644,7 @@ async function handleVerifyStatus(req, adminRole, adminStaffRole) {
                     data: updateStaffData
                 });
             }
-            loginLink = `https://shpping-owl-frontend.vercel.app/supplier/auth/login`;
+            loginLink = `https://shipowl.io/supplier/auth/login`;
         } else if (adminRole == 'dropshipper') {
             // Prepare the update data
             const updateData = {
@@ -10665,7 +10665,7 @@ async function handleVerifyStatus(req, adminRole, adminStaffRole) {
                     data: updateData
                 });
             }
-            loginLink = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/login`;
+            loginLink = `https://shipowl.io/dropshipping/auth/login`;
         } else {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,

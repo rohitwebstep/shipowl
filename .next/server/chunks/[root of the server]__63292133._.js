@@ -11335,7 +11335,7 @@ async function POST(req) {
         // Use index signature to avoid TS error
         const replacements = {
             "{{name}}": dropshipperCreateResult.dropshipper.name,
-            "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/dropshipping/auth/register/verify?token=${token}`,
+            "{{verificationLink}}": `https://shipowl.io/dropshipping/auth/register/verify?token=${token}`,
             "{{year}}": new Date().getFullYear().toString(),
             "{{appName}}": "Shipping OWL"
         };

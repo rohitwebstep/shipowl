@@ -460,7 +460,7 @@ export async function POST(req: NextRequest) {
       "{{email}}": supplierCreateResult.supplier.email,
       "{{year}}": new Date().getFullYear().toString(),
       "{{appName}}": "Shipping OWL",
-      "{{verificationLink}}": `https://shpping-owl-frontend.vercel.app/supplier/auth/register/verify?token=${token}`,
+      "{{verificationLink}}": `https://shipowl.io/supplier/auth/register/verify?token=${token}`,
       "{{password}}": password
     };
 

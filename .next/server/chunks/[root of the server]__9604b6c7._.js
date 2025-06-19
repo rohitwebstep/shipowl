@@ -10930,7 +10930,7 @@ async function POST(req) {
             });
         }
         const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generateRegistrationToken"])(dropshipperCreateResult.dropshipper.id, 'dropshipper');
-        let verificationLink = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/regist/reset?token=${token}`;
+        let verificationLink = `https://shipowl.io/dropshipping/auth/regist/reset?token=${token}`;
         // Use index signature to avoid TS error
         const replacements = {
             "{{name}}": dropshipperCreateResult.dropshipper.name,

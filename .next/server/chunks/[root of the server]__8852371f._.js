@@ -9566,9 +9566,9 @@ async function handleForgetPassword(req, panel, adminRole, adminStaffRole) {
         }
         let urlPanel;
         if (panel == 'dropshipper') {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/dropshipping/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/dropshipping/auth/password/reset?token=${token}`;
         } else {
-            urlPanel = `https://shpping-owl-frontend.vercel.app/${panel}/auth/password/reset?token=${token}`;
+            urlPanel = `https://shipowl.io/${panel}/auth/password/reset?token=${token}`;
         }
         // Use index signature to avoid TS error
         const replacements = {
