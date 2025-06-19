@@ -74,7 +74,6 @@ module.exports = mod;
 
 var { g: global, __dirname } = __turbopack_context__;
 {
-// app/api/images/[...path]/route.ts
 __turbopack_context__.s({
     "GET": (()=>GET)
 });
@@ -84,11 +83,13 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$2
 ;
 ;
 ;
-async function GET(req, { params }) {
-    console.log(`params - `, params);
-    console.log(`params.path - `, params.path);
-    const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(...params.path);
-    console.log(`filePath - `, filePath);
+async function GET(req, { params } // 👈 params is now a Promise
+) {
+    // Await the params before using them
+    const resolvedParams = await params;
+    console.log('params:', resolvedParams);
+    const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(...resolvedParams.path);
+    console.log('filePath:', filePath);
     try {
         const fileBuffer = await __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["default"].readFile(filePath);
         const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(filePath).substring(1);
@@ -99,6 +100,7 @@ async function GET(req, { params }) {
             }
         });
     } catch (err) {
+        console.error('File read error:', err);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'File not found'
         }, {
