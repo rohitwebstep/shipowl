@@ -28,9 +28,11 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
 
         // Fetch admin by email and role
+        let type = 'main';
         let adminResponse = await adminByUsernameRole(email, adminRole);
         if (!adminResponse.status || !adminResponse.admin) {
             adminResponse = await adminByUsernameRole(email, adminStaffRole);
+            type = 'sub';
             if (!adminResponse.status || !adminResponse.admin) {
                 return NextResponse.json({ message: adminResponse.message || "Invalid email or password", status: false }, { status: 401 });
             }
@@ -52,6 +54,32 @@ export async function handleLogin(req: NextRequest, adminRole: string, adminStaf
         const isPasswordValid = await comparePassword(password, admin.password);
         if (!isPasswordValid) {
             return NextResponse.json({ message: 'Invalid email or password', status: false }, { status: 401 });
+        }
+
+        // Email & account verification checks for supplier
+        if (type === 'main' && admin.role === 'supplier') {
+            if ('isEmailVerified' in admin && !admin?.isEmailVerified) {
+                return NextResponse.json(
+                    { status: false, message: "Email is not verified yet" },
+                    { status: 403 }
+                );
+            }
+
+            if ('isVerified' in admin && !admin?.isVerified) {
+                return NextResponse.json(
+                    { status: false, message: "Your account has not been verified by admin" },
+                    { status: 403 }
+                );
+            }
+        }
+
+        if (type === 'sub' && 'admin' in admin && admin.admin?.role === 'supplier') {
+            if ('admin' in admin && !admin.admin.isEmailVerified) {
+                return NextResponse.json({ status: false, message: "Main account's email is not verified yet" }, { status: 403 });
+            }
+            if ('admin' in admin && !admin.admin.isVerified) {
+                return NextResponse.json({ status: false, message: "Main account is not yet verified by admin" }, { status: 403 });
+            }
         }
 
         // Generate authentication token
@@ -530,9 +558,11 @@ export async function adminByUsernameRole(username: string, role: string) {
                     id: true,
                     name: true,
                     email: true,
-                    password: true, // Hashed password stored in DB
+                    password: true,
                     role: true,
                     status: true,
+                    isVerified: true,
+                    isEmailVerified: true,
                 },
             });
         } else {

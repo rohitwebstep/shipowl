@@ -23,6 +23,10 @@ interface Supplier {
     permanentCountry: {
         connect: { id: number }; // Country ID for permanent country (connected to a country record)
     };
+    isEmailVerified?: boolean,
+    emailVerifiedAt?: Date,
+    isVerified?: boolean,
+    verifiedAt?: Date,
     status: boolean; // Status of the supplier (active, inactive, etc.)
     createdAt?: Date; // Timestamp of when the supplier was created
     updatedAt?: Date; // Timestamp of when the supplier was last updated
@@ -215,7 +219,7 @@ export async function checkUsernameAvailabilityForUpdate(username: string, suppl
 
 export async function createSupplier(adminId: number, adminRole: string, supplier: Supplier) {
     try {
-        const { name, profilePicture, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
+        const { name, profilePicture, username, email, password, dateOfBirth, currentAddress, permanentAddress, permanentPostalCode, permanentCity, permanentState, permanentCountry, isEmailVerified, emailVerifiedAt, isVerified, verifiedAt, status: statusRaw, createdAt, createdBy, createdByRole } = supplier;
 
         // Convert statusRaw to a boolean using the includes check
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
@@ -240,6 +244,10 @@ export async function createSupplier(adminId: number, adminRole: string, supplie
                 permanentState,
                 permanentCountry,
                 status: statusString,
+                isEmailVerified,
+                emailVerifiedAt,
+                isVerified,
+                verifiedAt,
                 createdAt,
                 createdBy,
                 createdByRole
