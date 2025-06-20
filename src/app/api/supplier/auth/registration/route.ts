@@ -243,6 +243,8 @@ export async function POST(req: NextRequest) {
         },
       },
       status: false,
+      isVerified: true,
+      verifiedAt: new Date(),
       createdAt: new Date(),
       createdBy: 0,
       createdByRole: '',
