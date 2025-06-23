@@ -149,7 +149,7 @@ export async function placeOrderShipping(orderId: number): Promise<Result> {
 
         logMessage("debug", "shipping result:", result);
         if (result?.status) {
-            console.log("Order created successfully:", result);
+            logMessage(`log`, "Order created successfully:", result);
             return {
                 status: true,
                 message: result?.message,

@@ -89,70 +89,65 @@ export async function fetchShopifyStoreOrders(shop: string, access_token: string
   }
 
   const gql = `{
-    orders(first: 10, sortKey: CREATED_AT, reverse: true) {
-      edges {
-        node {
-          id
-          name
-          createdAt
-          currencyCode
-          totalPriceSet { shopMoney { amount currencyCode } }
-          subtotalPriceSet { shopMoney { amount currencyCode } }
-          totalShippingPriceSet { shopMoney { amount currencyCode } }
-          totalTaxSet { shopMoney { amount currencyCode } }
-          displayFinancialStatus
-          displayFulfillmentStatus
-          customer {
+      orders(first: 10, sortKey: CREATED_AT, reverse: true) {
+        edges {
+          node {
             id
-            email
-            firstName
-            lastName
-            phone
-          }
-          billingAddress {
-            address1
-            address2
-            city
-            province
-            country
-            zip
-            phone
-          }
-          shippingAddress {
-            address1
-            address2
-            city
-            province
-            country
-            zip
-            phone
-          }
-          lineItems(first: 50) {
-            edges {
-              node {
-                title
-                sku
-                quantity
-                discountedTotalSet { shopMoney { amount currencyCode } }
-                originalTotalSet { shopMoney { amount currencyCode } }
+            name
+            createdAt
+            currencyCode
+            totalPriceSet { shopMoney { amount currencyCode } }
+            subtotalPriceSet { shopMoney { amount currencyCode } }
+            totalShippingPriceSet { shopMoney { amount currencyCode } }
+            totalTaxSet { shopMoney { amount currencyCode } }
+            displayFinancialStatus
+            displayFulfillmentStatus
+            customer {
+              id
+              email
+              firstName
+              lastName
+              phone
+            }
+            billingAddress {
+              address1
+              address2
+              city
+              province
+              country
+              zip
+              phone
+            }
+            shippingAddress {
+              address1
+              address2
+              city
+              province
+              country
+              zip
+              phone
+            }
+            lineItems(first: 50) {
+              edges {
+                node {
+                  title
+                  sku
+                  quantity
+                  discountedTotalSet { shopMoney { amount currencyCode } }
+                  originalTotalSet { shopMoney { amount currencyCode } }
+                }
               }
             }
           }
         }
       }
-    }
-  }`;
+    }`;
 
   try {
     const response = await axios.post<ShopifyGraphQLResponse>(
       `https://${shop}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`,
       { query: gql },
-      {
-        headers: {
-          'X-Shopify-Access-Token': access_token,
-          'Content-Type': 'application/json',
-        },
-      }
+      { headers: { 'X-Shopify-Access-Token': access_token } }
     );
 
     if (response.data.errors) {
@@ -165,7 +160,6 @@ export async function fetchShopifyStoreOrders(shop: string, access_token: string
     }
 
     const orders = response.data.data.orders.edges.map((edge) => edge.node);
-
     logMessage('info', 'Orders fetched successfully', { count: orders.length });
     return {
       status: true,

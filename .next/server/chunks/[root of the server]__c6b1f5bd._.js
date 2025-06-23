@@ -10149,66 +10149,65 @@ async function fetchShopifyStoreOrders(shop, access_token) {
         };
     }
     const gql = `{
-    orders(first: 10, sortKey: CREATED_AT, reverse: true) {
-      edges {
-        node {
-          id
-          name
-          createdAt
-          currencyCode
-          totalPriceSet { shopMoney { amount currencyCode } }
-          subtotalPriceSet { shopMoney { amount currencyCode } }
-          totalShippingPriceSet { shopMoney { amount currencyCode } }
-          totalTaxSet { shopMoney { amount currencyCode } }
-          displayFinancialStatus
-          displayFulfillmentStatus
-          customer {
+      orders(first: 10, sortKey: CREATED_AT, reverse: true) {
+        edges {
+          node {
             id
-            email
-            firstName
-            lastName
-            phone
-          }
-          billingAddress {
-            address1
-            address2
-            city
-            province
-            country
-            zip
-            phone
-          }
-          shippingAddress {
-            address1
-            address2
-            city
-            province
-            country
-            zip
-            phone
-          }
-          lineItems(first: 50) {
-            edges {
-              node {
-                title
-                sku
-                quantity
-                discountedTotalSet { shopMoney { amount currencyCode } }
-                originalTotalSet { shopMoney { amount currencyCode } }
+            name
+            createdAt
+            currencyCode
+            totalPriceSet { shopMoney { amount currencyCode } }
+            subtotalPriceSet { shopMoney { amount currencyCode } }
+            totalShippingPriceSet { shopMoney { amount currencyCode } }
+            totalTaxSet { shopMoney { amount currencyCode } }
+            displayFinancialStatus
+            displayFulfillmentStatus
+            customer {
+              id
+              email
+              firstName
+              lastName
+              phone
+            }
+            billingAddress {
+              address1
+              address2
+              city
+              province
+              country
+              zip
+              phone
+            }
+            shippingAddress {
+              address1
+              address2
+              city
+              province
+              country
+              zip
+              phone
+            }
+            lineItems(first: 50) {
+              edges {
+                node {
+                  title
+                  sku
+                  quantity
+                  discountedTotalSet { shopMoney { amount currencyCode } }
+                  originalTotalSet { shopMoney { amount currencyCode } }
+                }
               }
             }
           }
         }
       }
-    }
-  }`;
+    }`;
     try {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].post(`https://${shop}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`, {
             query: gql
         }, {
             headers: {
-                'X-Shopify-Access-Token': access_token,
-                'Content-Type': 'application/json'
+                'X-Shopify-Access-Token': access_token
             }
         });
         if (response.data.errors) {
@@ -10220,6 +10219,7 @@ async function fetchShopifyStoreOrders(shop, access_token) {
             };
         }
         const orders = response.data.data.orders.edges.map((edge)=>edge.node);
+        console.log(`orders - `, orders);
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Orders fetched successfully', {
             count: orders.length
         });
@@ -10307,7 +10307,6 @@ async function GET(req) {
         const mainDropshipperId = isStaffUser ? userCheck.admin?.admin?.id ?? dropshipperId : dropshipperId;
         // Get Shopify store details
         const storeResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoreByIdForDropshipper"])(shopifyStoreId, mainDropshipperId);
-        console.log(`storeResult - `, storeResult);
         if (!storeResult.status || !storeResult.shopifyStore) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
@@ -10347,7 +10346,6 @@ async function GET(req) {
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: true,
-            shopifyStores: storesResult.shopifyStores,
             fetchedOrders: ordersResult.orders || []
         }, {
             status: 200

@@ -92,7 +92,6 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(
             {
                 status: true,
-                shopifyStores: storesResult.shopifyStores,
                 fetchedOrders: ordersResult.orders || [], // Optional: attach orders
             },
             { status: 200 }
