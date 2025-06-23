@@ -301,20 +301,25 @@ export async function getShopifyStoreByIdForDropshipper(storeId: number, dropshi
         console.log(`storeId - `, storeId);
         console.log(`dropshipperId - `, dropshipperId);
 
+        // First, check if the store exists
         const store = await prisma.shopifyStore.findUnique({
-            where: {
-                id: storeId,
-                adminId: dropshipperId
-            },
-            include: {
-                admin: true
-            }
+            where: { id: storeId },
+            include: { admin: true }
         });
 
         if (!store) {
             return {
                 status: false,
                 message: 'Shopify store not found.',
+                shopifyStore: null
+            };
+        }
+
+        // Check if the store belongs to the given dropshipper
+        if (store.adminId !== dropshipperId) {
+            return {
+                status: false,
+                message: 'This Shopify store is already linked to another user.',
                 shopifyStore: null
             };
         }
