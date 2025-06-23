@@ -180,6 +180,7 @@ export async function verifyDropshipperShopifyStore(dropshipperId: number, drops
             where: { id: Number(existing.shopifyStore.id) },
             data: {
                 accessToken,
+                verificationStatus: true,
                 email,
                 shopOwner,
                 name,
