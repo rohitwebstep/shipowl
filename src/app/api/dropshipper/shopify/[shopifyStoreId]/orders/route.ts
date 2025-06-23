@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
         const storeResult = await getShopifyStoreByIdForDropshipper(shopifyStoreId, mainDropshipperId);
         if (!storeResult.status || !storeResult.shopifyStore) {
             return NextResponse.json(
-                { status: false, error: 'Shopify store not found or unauthorized access' },
+                { status: false, message: storeResult.message },
                 { status: 400 }
             );
         }
