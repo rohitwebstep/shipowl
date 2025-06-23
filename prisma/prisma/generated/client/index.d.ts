@@ -40479,7 +40479,6 @@ export namespace Prisma {
     dropshipperProductId: number | null
     supplierProductVariantId: number | null
     price: number | null
-    stock: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -40493,7 +40492,6 @@ export namespace Prisma {
     dropshipperProductId: number | null
     supplierProductVariantId: number | null
     price: number | null
-    stock: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -40507,7 +40505,6 @@ export namespace Prisma {
     dropshipperProductId: number | null
     supplierProductVariantId: number | null
     price: number | null
-    stock: number | null
     status: boolean | null
     createdAt: Date | null
     createdBy: number | null
@@ -40528,7 +40525,6 @@ export namespace Prisma {
     dropshipperProductId: number | null
     supplierProductVariantId: number | null
     price: number | null
-    stock: number | null
     status: boolean | null
     createdAt: Date | null
     createdBy: number | null
@@ -40549,7 +40545,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status: number
     createdAt: number
     createdBy: number
@@ -40572,7 +40567,6 @@ export namespace Prisma {
     dropshipperProductId?: true
     supplierProductVariantId?: true
     price?: true
-    stock?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -40586,7 +40580,6 @@ export namespace Prisma {
     dropshipperProductId?: true
     supplierProductVariantId?: true
     price?: true
-    stock?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -40600,7 +40593,6 @@ export namespace Prisma {
     dropshipperProductId?: true
     supplierProductVariantId?: true
     price?: true
-    stock?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -40621,7 +40613,6 @@ export namespace Prisma {
     dropshipperProductId?: true
     supplierProductVariantId?: true
     price?: true
-    stock?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -40642,7 +40633,6 @@ export namespace Prisma {
     dropshipperProductId?: true
     supplierProductVariantId?: true
     price?: true
-    stock?: true
     status?: true
     createdAt?: true
     createdBy?: true
@@ -40750,7 +40740,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status: boolean
     createdAt: Date
     createdBy: number | null
@@ -40790,7 +40779,6 @@ export namespace Prisma {
     dropshipperProductId?: boolean
     supplierProductVariantId?: boolean
     price?: boolean
-    stock?: boolean
     status?: boolean
     createdAt?: boolean
     createdBy?: boolean
@@ -40821,7 +40809,6 @@ export namespace Prisma {
     dropshipperProductId?: boolean
     supplierProductVariantId?: boolean
     price?: boolean
-    stock?: boolean
     status?: boolean
     createdAt?: boolean
     createdBy?: boolean
@@ -40834,7 +40821,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type dropshipperProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dropshipperId" | "productId" | "supplierProductId" | "dropshipperProductId" | "supplierProductVariantId" | "price" | "stock" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProductVariant"]>
+  export type dropshipperProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dropshipperId" | "productId" | "supplierProductId" | "dropshipperProductId" | "supplierProductVariantId" | "price" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["dropshipperProductVariant"]>
   export type dropshipperProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dropshipper?: boolean | adminDefaultArgs<ExtArgs>
     product?: boolean | productDefaultArgs<ExtArgs>
@@ -40865,7 +40852,6 @@ export namespace Prisma {
       dropshipperProductId: number
       supplierProductVariantId: number
       price: number
-      stock: number
       status: boolean
       createdAt: Date
       createdBy: number | null
@@ -41259,7 +41245,6 @@ export namespace Prisma {
     readonly dropshipperProductId: FieldRef<"dropshipperProductVariant", 'Int'>
     readonly supplierProductVariantId: FieldRef<"dropshipperProductVariant", 'Int'>
     readonly price: FieldRef<"dropshipperProductVariant", 'Float'>
-    readonly stock: FieldRef<"dropshipperProductVariant", 'Int'>
     readonly status: FieldRef<"dropshipperProductVariant", 'Boolean'>
     readonly createdAt: FieldRef<"dropshipperProductVariant", 'DateTime'>
     readonly createdBy: FieldRef<"dropshipperProductVariant", 'Int'>
@@ -48789,7 +48774,6 @@ export namespace Prisma {
     dropshipperProductId: 'dropshipperProductId',
     supplierProductVariantId: 'supplierProductVariantId',
     price: 'price',
-    stock: 'stock',
     status: 'status',
     createdAt: 'createdAt',
     createdBy: 'createdBy',
@@ -53601,7 +53585,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFilter<"dropshipperProductVariant"> | number
     supplierProductVariantId?: IntFilter<"dropshipperProductVariant"> | number
     price?: FloatFilter<"dropshipperProductVariant"> | number
-    stock?: IntFilter<"dropshipperProductVariant"> | number
     status?: BoolFilter<"dropshipperProductVariant"> | boolean
     createdAt?: DateTimeFilter<"dropshipperProductVariant"> | Date | string
     createdBy?: IntNullableFilter<"dropshipperProductVariant"> | number | null
@@ -53629,7 +53612,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -53661,7 +53643,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFilter<"dropshipperProductVariant"> | number
     supplierProductVariantId?: IntFilter<"dropshipperProductVariant"> | number
     price?: FloatFilter<"dropshipperProductVariant"> | number
-    stock?: IntFilter<"dropshipperProductVariant"> | number
     status?: BoolFilter<"dropshipperProductVariant"> | boolean
     createdAt?: DateTimeFilter<"dropshipperProductVariant"> | Date | string
     createdBy?: IntNullableFilter<"dropshipperProductVariant"> | number | null
@@ -53689,7 +53670,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -53718,7 +53698,6 @@ export namespace Prisma {
     dropshipperProductId?: IntWithAggregatesFilter<"dropshipperProductVariant"> | number
     supplierProductVariantId?: IntWithAggregatesFilter<"dropshipperProductVariant"> | number
     price?: FloatWithAggregatesFilter<"dropshipperProductVariant"> | number
-    stock?: IntWithAggregatesFilter<"dropshipperProductVariant"> | number
     status?: BoolWithAggregatesFilter<"dropshipperProductVariant"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"dropshipperProductVariant"> | Date | string
     createdBy?: IntNullableWithAggregatesFilter<"dropshipperProductVariant"> | number | null
@@ -59229,7 +59208,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -59257,7 +59235,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -59274,7 +59251,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -59302,7 +59278,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -59325,7 +59300,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -59340,7 +59314,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateManyMutationInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -59361,7 +59334,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63600,7 +63572,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -63621,7 +63592,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -63635,7 +63605,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -63656,7 +63625,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     createdBy?: SortOrder
@@ -63677,7 +63645,6 @@ export namespace Prisma {
     dropshipperProductId?: SortOrder
     supplierProductVariantId?: SortOrder
     price?: SortOrder
-    stock?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -69296,7 +69263,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutDropshipperInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -69322,7 +69288,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -70116,7 +70081,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFilter<"dropshipperProductVariant"> | number
     supplierProductVariantId?: IntFilter<"dropshipperProductVariant"> | number
     price?: FloatFilter<"dropshipperProductVariant"> | number
-    stock?: IntFilter<"dropshipperProductVariant"> | number
     status?: BoolFilter<"dropshipperProductVariant"> | boolean
     createdAt?: DateTimeFilter<"dropshipperProductVariant"> | Date | string
     createdBy?: IntNullableFilter<"dropshipperProductVariant"> | number | null
@@ -76955,7 +76919,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutProductInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -76981,7 +76944,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -78788,7 +78750,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutSupplierProductInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -78814,7 +78775,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -79468,7 +79428,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutSupplierProductVariantInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -79494,7 +79453,6 @@ export namespace Prisma {
     supplierProductId: number
     dropshipperProductId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -80235,7 +80193,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutDropshipperProductInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -80261,7 +80218,6 @@ export namespace Prisma {
     supplierProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -82841,7 +82797,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutOrderItemsInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -82868,7 +82823,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -83406,7 +83360,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutOrderItemsInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -83433,7 +83386,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -84119,7 +84071,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantCreateWithoutRtoInventoriesInput = {
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -84146,7 +84097,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -84496,7 +84446,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutRtoInventoriesInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -84523,7 +84472,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -84722,7 +84670,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -85311,7 +85258,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutDropshipperInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -85337,7 +85283,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -85359,7 +85304,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -89603,7 +89547,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -89891,7 +89834,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutProductInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -89917,7 +89859,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -89939,7 +89880,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90091,7 +90031,6 @@ export namespace Prisma {
     dropshipperProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -90274,7 +90213,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutSupplierProductInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90300,7 +90238,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90322,7 +90259,6 @@ export namespace Prisma {
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90358,7 +90294,6 @@ export namespace Prisma {
     supplierProductId: number
     dropshipperProductId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -90422,7 +90357,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutSupplierProductVariantInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90448,7 +90382,6 @@ export namespace Prisma {
     supplierProductId?: IntFieldUpdateOperationsInput | number
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90470,7 +90403,6 @@ export namespace Prisma {
     supplierProductId?: IntFieldUpdateOperationsInput | number
     dropshipperProductId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90490,7 +90422,6 @@ export namespace Prisma {
     supplierProductId: number
     supplierProductVariantId: number
     price: number
-    stock: number
     status?: boolean
     createdAt?: Date | string
     createdBy?: number | null
@@ -90540,7 +90471,6 @@ export namespace Prisma {
 
   export type dropshipperProductVariantUpdateWithoutDropshipperProductInput = {
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90566,7 +90496,6 @@ export namespace Prisma {
     supplierProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null
@@ -90588,7 +90517,6 @@ export namespace Prisma {
     supplierProductId?: IntFieldUpdateOperationsInput | number
     supplierProductVariantId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    stock?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: NullableIntFieldUpdateOperationsInput | number | null

@@ -36,7 +36,6 @@ interface UserCheckResult {
 
 type Variant = {
   variantId: number;
-  stock: number;
   price: number;
   status?: boolean;
   errors: string[];
@@ -209,7 +208,6 @@ export async function POST(req: NextRequest) {
             const errors: string[] = [];
 
             if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
-            if (!variant.stock || isNaN(variant.stock)) errors.push('stock must be a number');
             if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
 
             const variantResult = await getSupplierProductVariantById(variant.variantId);
@@ -220,7 +218,6 @@ export async function POST(req: NextRequest) {
 
             return {
               variantId: Number(variant.variantId),
-              stock: Number(variant.stock),
               price: Number(variant.price),
               status: typeof variant.status === 'boolean' ? variant.status : true,
               errors,
@@ -322,7 +319,6 @@ export async function POST(req: NextRequest) {
             images: shopifyImages,
             variants: parsedVariants.map(v => ({
               price: v.price.toFixed(2),
-              inventory_quantity: v.stock,
               option1: `Variant ${v.variantId}`,
             }))
           }

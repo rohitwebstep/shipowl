@@ -890,7 +890,6 @@ model dropshipperProductVariant {
   dropshipperProductId     Int
   supplierProductVariantId Int
   price                    Float
-  stock                    Int
   status                   Boolean                @default(true)
   createdAt                DateTime               @default(now())
   createdBy                Int?

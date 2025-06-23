@@ -853,7 +853,6 @@ CREATE TABLE `dropshipperProductVariant` (
     `dropshipperProductId` INTEGER NOT NULL,
     `supplierProductVariantId` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
-    `stock` INTEGER NOT NULL,
     `status` BOOLEAN NOT NULL DEFAULT true,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `createdBy` INTEGER NULL,

@@ -3,7 +3,6 @@ import { logMessage } from "@/utils/commonUtils";
 
 interface Variant {
     variantId: number;
-    stock: number;
     price: number;
     status?: boolean;
 }
@@ -111,7 +110,6 @@ export async function createDropshipperProduct(
                     dropshipperProductId: newDropshipperProduct.id,
                     productId: newDropshipperProduct.productId,
                     supplierProductVariantId: variant.variantId,
-                    stock: variant.stock,
                     price: variant.price,
                     status: variant.status ?? true,
                     createdBy,
@@ -179,7 +177,6 @@ export const updateDropshipperProduct = async (
                 await prisma.dropshipperProductVariant.update({
                     where: { id: existing.id },
                     data: {
-                        stock: variant.stock,
                         price: variant.price,
                         status: variant.status ?? true,
                         updatedBy,
@@ -195,7 +192,6 @@ export const updateDropshipperProduct = async (
                         dropshipperProductId,
                         productId: dropshipperProduct.productId,
                         supplierProductVariantId: variant.variantId,
-                        stock: variant.stock,
                         price: variant.price,
                         status: variant.status ?? true,
                         updatedBy,
