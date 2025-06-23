@@ -1,6 +1,6 @@
 const CHUNK_PUBLIC_PATH = "server/app/api/dropshipper/product/my-inventory/route.js";
 const runtime = require("../../../../../chunks/[turbopack]_runtime.js");
-runtime.loadChunk("server/chunks/[root of the server]__0035db5c._.js");
+runtime.loadChunk("server/chunks/[root of the server]__cad5793b._.js");
 runtime.loadChunk("server/chunks/node_modules_next_49b8cf41._.js");
 runtime.loadChunk("server/chunks/node_modules_axios_lib_c4a55de8._.js");
 runtime.loadChunk("server/chunks/node_modules_mime-db_9ebaabbe._.js");

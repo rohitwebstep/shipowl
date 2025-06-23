@@ -361,6 +361,8 @@ export async function POST(req: NextRequest) {
           }
         );
 
+        console.log('[Shopify] Product Create Response:', JSON.stringify(createResp.data, null, 2));
+
         const productId = createResp.data?.data?.productCreate?.product?.id;
         const createErrors = createResp.data?.data?.productCreate?.userErrors || [];
         if (!productId || createErrors.length > 0) {
@@ -382,8 +384,8 @@ export async function POST(req: NextRequest) {
 
         const variantInputs = parsedVariants.map(v => ({
           price: v.price.toFixed(2),
+          sku: `SKU-${v.variantId}`,
           inventoryItem: {
-            sku: `SKU-${v.variantId}`,
             tracked: true,
           },
           barcode: null,
@@ -406,6 +408,7 @@ export async function POST(req: NextRequest) {
             },
           }
         );
+        console.log('[Shopify] Variant Create Response:', JSON.stringify(variantResp.data, null, 2));
 
         const variantErrors = variantResp.data?.data?.productVariantsBulkCreate?.userErrors || [];
         if (variantErrors.length > 0) {
@@ -425,12 +428,12 @@ export async function POST(req: NextRequest) {
 
         if (imageSources.length > 0) {
           const mediaMutation = `
-        mutation productCreateMedia($productId: ID!, $media: [CreateMediaInput!]!) {
-          productCreateMedia(productId: $productId, media: $media) {
-            mediaUserErrors { field message }
-          }
-        }
-      `;
+                                mutation productCreateMedia($productId: ID!, $media: [CreateMediaInput!]!) {
+                                  productCreateMedia(productId: $productId, media: $media) {
+                                    mediaUserErrors { field message }
+                                  }
+                                }
+                              `;
           const mediaVariables = {
             productId,
             media: imageSources.map(url => ({
@@ -449,6 +452,7 @@ export async function POST(req: NextRequest) {
               },
             }
           );
+          console.log('[Shopify] Media Upload Response:', JSON.stringify(mediaResp.data, null, 2));
 
           const mediaErrors = mediaResp.data?.data?.productCreateMedia?.mediaUserErrors || [];
           if (mediaErrors.length > 0) {
