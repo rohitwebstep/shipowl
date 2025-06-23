@@ -1,3 +1,4 @@
 {
-  "/api/dropshipper/product/my-inventory/route": "app/api/dropshipper/product/my-inventory/route.js"
+  "/api/dropshipper/shopify/callback/route": "app/api/dropshipper/shopify/callback/route.js",
+  "/api/dropshipper/shopify/connect/route": "app/api/dropshipper/shopify/connect/route.js"
 }

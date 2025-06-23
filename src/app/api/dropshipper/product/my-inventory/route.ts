@@ -254,7 +254,7 @@ export async function POST(req: NextRequest) {
       const shopifyAppResult = await getShopifyStoreByIdForDropshipper(shopifyAppId, mainDropshipperId);
       if (!shopifyAppResult.status) {
         return NextResponse.json(
-          { status: false, message: 'Invalid Shopify store ID. Store not found.' },
+          { status: false, message: shopifyAppResult.message },
           { status: 400 }
         );
       }
