@@ -79,8 +79,14 @@ export async function createDropshipperProduct(
             },
         });
 
-        if (existingVariants.length !== variantIds.length) {
-            return { status: false, message: "One or more variants are invalid for this product." };
+        const existingVariantIds = new Set(existingVariants.map(v => v.id));
+        const invalidVariantIds = variantIds.filter(id => !existingVariantIds.has(id));
+
+        if (invalidVariantIds.length > 0) {
+            return {
+                status: false,
+                message: `Invalid variants for this product: [${invalidVariantIds.join(", ")}]`,
+            };
         }
 
         // Step 3: Create dropshipperProduct
@@ -100,8 +106,8 @@ export async function createDropshipperProduct(
         for (const variant of variants) {
             await prisma.dropshipperProductVariant.create({
                 data: {
-                    dropshipperId, // Add this
-                    supplierProductId: newDropshipperProduct.supplierProductId, // Add this
+                    dropshipperId,
+                    supplierProductId: newDropshipperProduct.supplierProductId,
                     dropshipperProductId: newDropshipperProduct.id,
                     productId: newDropshipperProduct.productId,
                     supplierProductVariantId: variant.variantId,
@@ -121,6 +127,7 @@ export async function createDropshipperProduct(
         return { status: false, message: "Internal Server Error" };
     }
 }
+
 
 export const updateDropshipperProduct = async (
     dropshipperId: number,
