@@ -11072,6 +11072,8 @@ async function getShopifyStoresByDropshipperId(dropshipperId, status = 'verified
 }
 async function getShopifyStoreByIdForDropshipper(storeId, dropshipperId) {
     try {
+        console.log(`storeId - `, storeId);
+        console.log(`dropshipperId - `, dropshipperId);
         const store = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findUnique({
             where: {
                 id: storeId,
@@ -12470,7 +12472,7 @@ async function POST(req) {
             if (!shopifyAppResult.status) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                     status: false,
-                    message: 'Invalid Shopify store ID. Store not found.'
+                    message: shopifyAppResult.message
                 }, {
                     status: 400
                 });

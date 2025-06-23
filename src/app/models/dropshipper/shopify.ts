@@ -298,6 +298,9 @@ export async function getShopifyStoresByDropshipperId(dropshipperId: number, sta
 
 export async function getShopifyStoreByIdForDropshipper(storeId: number, dropshipperId: number) {
     try {
+        console.log(`storeId - `, storeId);
+        console.log(`dropshipperId - `, dropshipperId);
+
         const store = await prisma.shopifyStore.findUnique({
             where: {
                 id: storeId,
