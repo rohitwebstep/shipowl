@@ -183,7 +183,9 @@ export async function POST(req: NextRequest) {
     const supplierProductId = extractNumber('supplierProductId');
 
     const productResult = await checkProductForDropshipper(mainDropshipperId, supplierProductId);
-    if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
+
+    // if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
+    if (!productResult?.status || !productResult.product?.product) {
       return NextResponse.json(
         { status: false, message: productResult.message },
         { status: 404 }
