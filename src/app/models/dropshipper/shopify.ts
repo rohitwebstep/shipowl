@@ -319,7 +319,7 @@ export async function getShopifyStoreByIdForDropshipper(storeId: number, dropshi
         if (store.adminId !== dropshipperId) {
             return {
                 status: false,
-                message: 'This Shopify store is already linked to another user.',
+                message: 'This Shopify store is linked to another user.',
                 shopifyStore: null
             };
         }
