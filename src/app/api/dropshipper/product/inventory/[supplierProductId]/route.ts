@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { checkSupplierProductForDropshipper } from '@/app/models/dropshipper/product';
+import { getShopifyStoresByDropshipperId } from '@/app/models/dropshipper/shopify';
+import { getAppConfig } from '@/app/models/app/appConfig';
 
 interface MainAdmin {
   id: number;
@@ -65,8 +67,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: true, message: productResult.message }, { status: 400 });
     }
 
+    const shopifyAppsResult = await getShopifyStoresByDropshipperId(mainDropshipperId);
+
+    const appConfigResult = await getAppConfig();
+    const appConfig = appConfigResult.appConfig;
+    const shippingCost = appConfig ? appConfig.shippingCost || 0 : 0;
+
+
     logMessage('info', 'Product found:', productResult.supplierProduct);
-    return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct, otherSuppliers: productResult.otherSuppliers, type: 'notmy' }, { status: 200 });
+    return NextResponse.json({ status: true, message: 'Product found', supplierProduct: productResult.supplierProduct, otherSuppliers: productResult.otherSuppliers, shopifyStores: shopifyAppsResult?.shopifyStores || [], type: 'notmy', shippingCost }, { status: 200 });
   } catch (error) {
     logMessage('error', 'Error while fetching products', { error });
     return NextResponse.json(

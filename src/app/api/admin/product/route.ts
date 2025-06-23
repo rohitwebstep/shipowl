@@ -51,7 +51,7 @@ interface Variant {
   suggested_price?: number;
   product_link: string;
   images: string;
-  modal: string;
+  model: string;
 }
 
 export async function POST(req: NextRequest) {

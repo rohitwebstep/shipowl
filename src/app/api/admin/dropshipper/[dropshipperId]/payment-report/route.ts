@@ -199,13 +199,13 @@ export async function GET(req: NextRequest) {
 
         const supplierVariant = dropshipperVariant.supplierProductVariant;
         const productVariant = supplierVariant.variant;
-        const productModal = productVariant?.modal || '';
+        const productModel = productVariant?.model || '';
 
         const totalShippingCost = (Number(shippingCost) || 0);
 
-        const modal = productModal.toLowerCase();
+        const model = productModel.toLowerCase();
 
-        if (modal === 'shipowl') {
+        if (model === 'shipowl') {
           hasShipOwlProduct = true;
 
           if (order.delivered) {
@@ -222,7 +222,7 @@ export async function GET(req: NextRequest) {
             (orderItemQty * Number(dropshipperVariant.price || 0)) -
             ((orderItemQty * Number(supplierVariant.price || 0)) + totalShippingCost);
 
-        } else if (modal === 'selfship') {
+        } else if (model === 'selfship') {
           const section = reportAnalytics.selfship[orderType];
 
           if (order.delivered) {

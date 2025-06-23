@@ -244,12 +244,25 @@ export async function deleteShopIfNotVerified(shop: string) {
     }
 }
 
-export async function getShopifyStoresByDropshipperId(dropshipperId: number) {
+export async function getShopifyStoresByDropshipperId(dropshipperId: number, status: string = 'verified') {
     try {
+        let whereCondition = {};
+
+        switch (status) {
+            case "verified":
+                whereCondition = { verificationStatus: true };
+                break;
+            case "unverified":
+                whereCondition = { verificationStatus: false };
+                break;
+            case "all":
+                break;
+            default:
+                break;
+        }
+
         const stores = await prisma.shopifyStore.findMany({
-            where: {
-                createdBy: dropshipperId
-            },
+            where: whereCondition,
             include: {
                 admin: true
             },
@@ -273,7 +286,7 @@ export async function getShopifyStoresByDropshipperId(dropshipperId: number) {
         };
 
     } catch (error) {
-        console.error(`Error fetching Shopify stores by dropshipperId:`, error);
+        console.error('Error fetching Shopify stores by dropshipperId:', error);
         return {
             status: false,
             shopifyStores: [],

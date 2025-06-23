@@ -312,7 +312,7 @@ export const getProductsByFiltersAndStatus = async (
                                     name: true,
                                     image: true,
                                     color: true,
-                                    modal: true,
+                                    model: true,
                                     sku: true
                                 }
                             }
@@ -457,7 +457,7 @@ export const getProductsByStatus = async (
                                     name: true,
                                     image: true,
                                     color: true,
-                                    modal: true,
+                                    model: true,
                                     sku: true
                                 }
                             }
@@ -798,7 +798,7 @@ export const checkSupplierProductForDropshipper = async (
                                 name: true,
                                 image: true,
                                 color: true,
-                                modal: true,
+                                model: true,
                                 sku: true
                             }
                         }
@@ -838,7 +838,7 @@ export const checkSupplierProductForDropshipper = async (
                                 name: true,
                                 image: true,
                                 color: true,
-                                modal: true,
+                                model: true,
                                 sku: true
                             }
                         }

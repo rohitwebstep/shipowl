@@ -84,7 +84,7 @@ export async function GET(req: NextRequest) {
                 }
 
                 const selfShipItems = order.items.filter(
-                    item => item?.dropshipperVariant?.supplierProductVariant?.variant?.modal === 'selfship'
+                    item => item?.dropshipperVariant?.supplierProductVariant?.variant?.model === 'selfship'
                 );
 
                 if (selfShipItems.length) {

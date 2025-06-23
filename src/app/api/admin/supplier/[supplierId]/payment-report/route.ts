@@ -146,7 +146,7 @@ export async function GET(req: NextRequest) {
 
         if (!variant) continue;
 
-        const shippingMethod = variant.variant?.modal?.toLowerCase() || '';
+        const shippingMethod = variant.variant?.model?.toLowerCase() || '';
 
         if (shippingMethod === 'shipowl') {
           isShipowl = true;

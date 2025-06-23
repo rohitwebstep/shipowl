@@ -181,9 +181,9 @@ export async function GET(req: NextRequest) {
 
                     if (!variant) continue;
 
-                    const modal = variant.variant?.modal?.toLowerCase() || '';
+                    const model = variant.variant?.model?.toLowerCase() || '';
 
-                    if (modal === 'shipowl') {
+                    if (model === 'shipowl') {
                         shipOwlInOrder = true;
                         if (order.delivered) {
                             reportAnalytics.shipowl.deliveredOrder++;
@@ -191,7 +191,7 @@ export async function GET(req: NextRequest) {
                         } else if (order.rtoDelivered) {
                             reportAnalytics.shipowl.rtoOrder++;
                         }
-                    } else if (modal === 'selfship') {
+                    } else if (model === 'selfship') {
                         const section = reportAnalytics.selfship[orderType];
                         section.deliveredOrder++;
                         section.totalProductCost += quantity * (variant.price || 0);

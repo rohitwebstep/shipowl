@@ -11,7 +11,7 @@ interface Variant {
     suggested_price?: number;
     product_link: string;
     images: string;
-    modal?: string;
+    model?: string;
 }
 
 interface VariantSKUInput {
@@ -378,7 +378,7 @@ export async function createProduct(adminId: number, adminRole: string, product:
                 image: variant.images ?? '',
                 product_link: variant.product_link ?? '',
                 productId: productWithStringBigInts.id,
-                modal: variant.modal ?? '',
+                model: variant.model ?? '',
             }));
 
             // Create variants in the database
@@ -952,7 +952,7 @@ export const updateProduct = async (
                     suggested_price: variant.suggested_price ?? 0,
                     product_link: variant.product_link ?? '',
                     image: mergedVariantImages ?? '',
-                    modal: variant.modal ?? '',
+                    model: variant.model ?? '',
                     updatedBy: adminId ?? 0,
                     updatedByRole: adminRole ?? '',
                     updatedAt: new Date(),
