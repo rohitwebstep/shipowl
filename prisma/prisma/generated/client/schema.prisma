@@ -158,6 +158,8 @@ model companyDetail {
   clientEntryType          String?
   gstNumber                String?
   companyPanNumber         String?
+  companyPanCardName       String?   @db.LongText
+  companyPanCardImage      String?   @db.LongText
   aadharNumber             String?
   gstDocument              String?
   panCardHolderName        String?

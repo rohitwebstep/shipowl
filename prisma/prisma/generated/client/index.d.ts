@@ -9776,6 +9776,8 @@ export namespace Prisma {
     clientEntryType: string | null
     gstNumber: string | null
     companyPanNumber: string | null
+    companyPanCardName: string | null
+    companyPanCardImage: string | null
     aadharNumber: string | null
     gstDocument: string | null
     panCardHolderName: string | null
@@ -9812,6 +9814,8 @@ export namespace Prisma {
     clientEntryType: string | null
     gstNumber: string | null
     companyPanNumber: string | null
+    companyPanCardName: string | null
+    companyPanCardImage: string | null
     aadharNumber: string | null
     gstDocument: string | null
     panCardHolderName: string | null
@@ -9848,6 +9852,8 @@ export namespace Prisma {
     clientEntryType: number
     gstNumber: number
     companyPanNumber: number
+    companyPanCardName: number
+    companyPanCardImage: number
     aadharNumber: number
     gstDocument: number
     panCardHolderName: number
@@ -9908,6 +9914,8 @@ export namespace Prisma {
     clientEntryType?: true
     gstNumber?: true
     companyPanNumber?: true
+    companyPanCardName?: true
+    companyPanCardImage?: true
     aadharNumber?: true
     gstDocument?: true
     panCardHolderName?: true
@@ -9944,6 +9952,8 @@ export namespace Prisma {
     clientEntryType?: true
     gstNumber?: true
     companyPanNumber?: true
+    companyPanCardName?: true
+    companyPanCardImage?: true
     aadharNumber?: true
     gstDocument?: true
     panCardHolderName?: true
@@ -9980,6 +9990,8 @@ export namespace Prisma {
     clientEntryType?: true
     gstNumber?: true
     companyPanNumber?: true
+    companyPanCardName?: true
+    companyPanCardImage?: true
     aadharNumber?: true
     gstDocument?: true
     panCardHolderName?: true
@@ -10103,6 +10115,8 @@ export namespace Prisma {
     clientEntryType: string | null
     gstNumber: string | null
     companyPanNumber: string | null
+    companyPanCardName: string | null
+    companyPanCardImage: string | null
     aadharNumber: string | null
     gstDocument: string | null
     panCardHolderName: string | null
@@ -10158,6 +10172,8 @@ export namespace Prisma {
     clientEntryType?: boolean
     gstNumber?: boolean
     companyPanNumber?: boolean
+    companyPanCardName?: boolean
+    companyPanCardImage?: boolean
     aadharNumber?: boolean
     gstDocument?: boolean
     panCardHolderName?: boolean
@@ -10200,6 +10216,8 @@ export namespace Prisma {
     clientEntryType?: boolean
     gstNumber?: boolean
     companyPanNumber?: boolean
+    companyPanCardName?: boolean
+    companyPanCardImage?: boolean
     aadharNumber?: boolean
     gstDocument?: boolean
     panCardHolderName?: boolean
@@ -10221,7 +10239,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type companyDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "companyName" | "brandName" | "brandShortName" | "billingAddress" | "billingPincode" | "billingCountryId" | "billingStateId" | "billingCityId" | "businessType" | "clientEntryType" | "gstNumber" | "companyPanNumber" | "aadharNumber" | "gstDocument" | "panCardHolderName" | "aadharCardHolderName" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentId" | "documentName" | "documentImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["companyDetail"]>
+  export type companyDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "companyName" | "brandName" | "brandShortName" | "billingAddress" | "billingPincode" | "billingCountryId" | "billingStateId" | "billingCityId" | "businessType" | "clientEntryType" | "gstNumber" | "companyPanNumber" | "companyPanCardName" | "companyPanCardImage" | "aadharNumber" | "gstDocument" | "panCardHolderName" | "aadharCardHolderName" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentId" | "documentName" | "documentImage" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["companyDetail"]>
   export type companyDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     billingCountry?: boolean | companyDetail$billingCountryArgs<ExtArgs>
     billingState?: boolean | companyDetail$billingStateArgs<ExtArgs>
@@ -10252,6 +10270,8 @@ export namespace Prisma {
       clientEntryType: string | null
       gstNumber: string | null
       companyPanNumber: string | null
+      companyPanCardName: string | null
+      companyPanCardImage: string | null
       aadharNumber: string | null
       gstDocument: string | null
       panCardHolderName: string | null
@@ -10658,6 +10678,8 @@ export namespace Prisma {
     readonly clientEntryType: FieldRef<"companyDetail", 'String'>
     readonly gstNumber: FieldRef<"companyDetail", 'String'>
     readonly companyPanNumber: FieldRef<"companyDetail", 'String'>
+    readonly companyPanCardName: FieldRef<"companyDetail", 'String'>
+    readonly companyPanCardImage: FieldRef<"companyDetail", 'String'>
     readonly aadharNumber: FieldRef<"companyDetail", 'String'>
     readonly gstDocument: FieldRef<"companyDetail", 'String'>
     readonly panCardHolderName: FieldRef<"companyDetail", 'String'>
@@ -48180,6 +48202,8 @@ export namespace Prisma {
     clientEntryType: 'clientEntryType',
     gstNumber: 'gstNumber',
     companyPanNumber: 'companyPanNumber',
+    companyPanCardName: 'companyPanCardName',
+    companyPanCardImage: 'companyPanCardImage',
     aadharNumber: 'aadharNumber',
     gstDocument: 'gstDocument',
     panCardHolderName: 'panCardHolderName',
@@ -49067,6 +49091,8 @@ export namespace Prisma {
     clientEntryType: 'clientEntryType',
     gstNumber: 'gstNumber',
     companyPanNumber: 'companyPanNumber',
+    companyPanCardName: 'companyPanCardName',
+    companyPanCardImage: 'companyPanCardImage',
     aadharNumber: 'aadharNumber',
     gstDocument: 'gstDocument',
     panCardHolderName: 'panCardHolderName',
@@ -50216,6 +50242,8 @@ export namespace Prisma {
     clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableFilter<"companyDetail"> | string | null
     companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardName?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardImage?: StringNullableFilter<"companyDetail"> | string | null
     aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
     gstDocument?: StringNullableFilter<"companyDetail"> | string | null
     panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
@@ -50256,6 +50284,8 @@ export namespace Prisma {
     clientEntryType?: SortOrderInput | SortOrder
     gstNumber?: SortOrderInput | SortOrder
     companyPanNumber?: SortOrderInput | SortOrder
+    companyPanCardName?: SortOrderInput | SortOrder
+    companyPanCardImage?: SortOrderInput | SortOrder
     aadharNumber?: SortOrderInput | SortOrder
     gstDocument?: SortOrderInput | SortOrder
     panCardHolderName?: SortOrderInput | SortOrder
@@ -50300,6 +50330,8 @@ export namespace Prisma {
     clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableFilter<"companyDetail"> | string | null
     companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardName?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardImage?: StringNullableFilter<"companyDetail"> | string | null
     aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
     gstDocument?: StringNullableFilter<"companyDetail"> | string | null
     panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
@@ -50340,6 +50372,8 @@ export namespace Prisma {
     clientEntryType?: SortOrderInput | SortOrder
     gstNumber?: SortOrderInput | SortOrder
     companyPanNumber?: SortOrderInput | SortOrder
+    companyPanCardName?: SortOrderInput | SortOrder
+    companyPanCardImage?: SortOrderInput | SortOrder
     aadharNumber?: SortOrderInput | SortOrder
     gstDocument?: SortOrderInput | SortOrder
     panCardHolderName?: SortOrderInput | SortOrder
@@ -50384,6 +50418,8 @@ export namespace Prisma {
     clientEntryType?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     companyPanNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    companyPanCardName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
+    companyPanCardImage?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     aadharNumber?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     gstDocument?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
     panCardHolderName?: StringNullableWithAggregatesFilter<"companyDetail"> | string | null
@@ -55322,6 +55358,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -55362,6 +55400,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -55393,6 +55433,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55433,6 +55475,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55469,6 +55513,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -55500,6 +55546,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55536,6 +55584,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61088,6 +61138,8 @@ export namespace Prisma {
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
     companyPanNumber?: SortOrder
+    companyPanCardName?: SortOrder
+    companyPanCardImage?: SortOrder
     aadharNumber?: SortOrder
     gstDocument?: SortOrder
     panCardHolderName?: SortOrder
@@ -61135,6 +61187,8 @@ export namespace Prisma {
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
     companyPanNumber?: SortOrder
+    companyPanCardName?: SortOrder
+    companyPanCardImage?: SortOrder
     aadharNumber?: SortOrder
     gstDocument?: SortOrder
     panCardHolderName?: SortOrder
@@ -61171,6 +61225,8 @@ export namespace Prisma {
     clientEntryType?: SortOrder
     gstNumber?: SortOrder
     companyPanNumber?: SortOrder
+    companyPanCardName?: SortOrder
+    companyPanCardImage?: SortOrder
     aadharNumber?: SortOrder
     gstDocument?: SortOrder
     panCardHolderName?: SortOrder
@@ -68898,6 +68954,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -68936,6 +68994,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -69757,6 +69817,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69795,6 +69857,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73390,6 +73454,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -73428,6 +73494,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -73885,6 +73953,8 @@ export namespace Prisma {
     clientEntryType?: StringNullableFilter<"companyDetail"> | string | null
     gstNumber?: StringNullableFilter<"companyDetail"> | string | null
     companyPanNumber?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardName?: StringNullableFilter<"companyDetail"> | string | null
+    companyPanCardImage?: StringNullableFilter<"companyDetail"> | string | null
     aadharNumber?: StringNullableFilter<"companyDetail"> | string | null
     gstDocument?: StringNullableFilter<"companyDetail"> | string | null
     panCardHolderName?: StringNullableFilter<"companyDetail"> | string | null
@@ -74549,6 +74619,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -74587,6 +74659,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -75461,6 +75535,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -75499,6 +75575,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -85889,6 +85967,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -86985,6 +87065,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87023,6 +87105,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87058,6 +87142,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87318,6 +87404,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -88070,6 +88158,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88108,6 +88198,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88143,6 +88235,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88388,6 +88482,8 @@ export namespace Prisma {
     clientEntryType?: string | null
     gstNumber?: string | null
     companyPanNumber?: string | null
+    companyPanCardName?: string | null
+    companyPanCardImage?: string | null
     aadharNumber?: string | null
     gstDocument?: string | null
     panCardHolderName?: string | null
@@ -89081,6 +89177,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -89119,6 +89217,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -89154,6 +89254,8 @@ export namespace Prisma {
     clientEntryType?: NullableStringFieldUpdateOperationsInput | string | null
     gstNumber?: NullableStringFieldUpdateOperationsInput | string | null
     companyPanNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPanCardImage?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
     gstDocument?: NullableStringFieldUpdateOperationsInput | string | null
     panCardHolderName?: NullableStringFieldUpdateOperationsInput | string | null

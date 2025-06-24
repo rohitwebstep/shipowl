@@ -134,6 +134,8 @@ CREATE TABLE `companyDetail` (
     `clientEntryType` VARCHAR(191) NULL,
     `gstNumber` VARCHAR(191) NULL,
     `companyPanNumber` VARCHAR(191) NULL,
+    `companyPanCardName` LONGTEXT NULL,
+    `companyPanCardImage` LONGTEXT NULL,
     `aadharNumber` VARCHAR(191) NULL,
     `gstDocument` VARCHAR(191) NULL,
     `panCardHolderName` VARCHAR(191) NULL,

@@ -25,6 +25,8 @@ interface SupplierCompany {
     clientEntryType: string;
     gstNumber: string;
     companyPanNumber: string;
+    companyPanCardName?: string,
+    companyPanCardImage?: string,
     aadharNumber: string;
     gstDocument: string;
     panCardHolderName: string;
@@ -49,26 +51,26 @@ interface SupplierCompany {
 type ImageType = "gstDocument" | "panCardImage" | "aadharCardImage" | "additionalDocumentUpload" | "documentImage";
 
 const serializeBigInt = <T>(obj: T): T => {
-  if (typeof obj === "bigint") {
-    return obj.toString() as unknown as T;
-  }
+    if (typeof obj === "bigint") {
+        return obj.toString() as unknown as T;
+    }
 
-  if (obj instanceof Date) {
-    // Return Date object unchanged, no conversion
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt) as unknown as T;
+    }
+
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
+        ) as T;
+    }
+
     return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(serializeBigInt) as unknown as T;
-  }
-
-  if (obj && typeof obj === "object") {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, serializeBigInt(value)])
-    ) as T;
-  }
-
-  return obj;
 };
 
 export const getCompanyDeailBySupplierId = async (supplierId: number) => {
@@ -102,6 +104,8 @@ export async function createSupplierCompany(adminId: number, adminRole: string, 
             clientEntryType,
             gstNumber,
             companyPanNumber,
+            companyPanCardName,
+            companyPanCardImage,
             aadharNumber,
             gstDocument,
             panCardHolderName,
@@ -132,6 +136,8 @@ export async function createSupplierCompany(adminId: number, adminRole: string, 
                 clientEntryType,
                 gstNumber,
                 companyPanNumber,
+                companyPanCardName,
+                companyPanCardImage,
                 aadharNumber,
                 gstDocument,
                 panCardHolderName,
@@ -214,7 +220,7 @@ export async function updateSupplierCompany(
     try {
         const { companyDetail: currentCompanyDetail } = await getCompanyDeailBySupplierId(supplierId);
 
-        const fields = ['gstDocument', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
+        const fields = ['gstDocument', 'companyPanCardImage', 'panCardImage', 'aadharCardImage', 'additionalDocumentUpload', 'documentImage'] as const;
         const mergedImages: Partial<Record<typeof fields[number], string>> = {};
 
         for (const field of fields) {
@@ -243,6 +249,7 @@ export async function updateSupplierCompany(
             clientEntryType: supplierCompany.clientEntryType,
             gstNumber: supplierCompany.gstNumber,
             companyPanNumber: supplierCompany.companyPanNumber,
+            companyPanCardName: supplierCompany.companyPanCardName,
             aadharNumber: supplierCompany.aadharNumber,
             panCardHolderName: supplierCompany.panCardHolderName,
             aadharCardHolderName: supplierCompany.aadharCardHolderName,
@@ -252,6 +259,7 @@ export async function updateSupplierCompany(
             updatedByRole: supplierCompany.updatedByRole,
             updatedAt: supplierCompany.updatedAt,
             gstDocument: mergedImages.gstDocument,
+            companyPanCardImage: mergedImages.companyPanCardImage,
             panCardImage: mergedImages.panCardImage,
             aadharCardImage: mergedImages.aadharCardImage,
             additionalDocumentUpload: mergedImages.additionalDocumentUpload,
