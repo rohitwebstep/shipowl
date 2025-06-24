@@ -1,6 +1,6 @@
 const CHUNK_PUBLIC_PATH = "server/app/api/supplier/auth/verify/route.js";
 const runtime = require("../../../../../chunks/[turbopack]_runtime.js");
-runtime.loadChunk("server/chunks/[root of the server]__d65e5fa4._.js");
+runtime.loadChunk("server/chunks/[root of the server]__16957a8e._.js");
 runtime.loadChunk("server/chunks/node_modules_next_f453793a._.js");
 runtime.loadChunk("server/chunks/node_modules_nodemailer_a9f338b9._.js");
 runtime.loadChunk("server/chunks/node_modules_5e078c28._.js");

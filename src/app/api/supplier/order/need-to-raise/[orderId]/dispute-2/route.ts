@@ -4,6 +4,7 @@ import path from 'path';
 import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { saveFilesFromFormData } from '@/utils/saveFiles';
+import { validateFormData } from '@/utils/validateFormData';
 import { getOrderById } from '@/app/models/order/order';
 import { orderDisputeLevelTwo } from '@/app/models/order/item';
 
@@ -69,9 +70,24 @@ export async function POST(req: NextRequest) {
             }
         */
 
-        // Validate status query parameter
-        const urlParams = req.nextUrl.searchParams;
-        const status = decodeURIComponent(urlParams.get('status') || '');
+        // Validate input
+        const formData = await req.formData();
+        const validation = validateFormData(formData, {
+            requiredFields: ['status'],
+            patternValidations: {
+                status: 'string',
+            },
+        });
+
+        if (!validation.isValid) {
+            logMessage('warn', 'Form validation failed', validation.error);
+            return NextResponse.json(
+                { status: false, error: validation.error, message: validation.message },
+                { status: 400 }
+            );
+        }
+
+        const status = formData.get('status') as string;
 
         const allowedStatuses = ['received', 'not received', 'wrong item received'];
 
@@ -89,7 +105,6 @@ export async function POST(req: NextRequest) {
         let uploadedMedia: Record<string, string> = {};
 
         if (status.toLowerCase() === 'wrong item received') {
-            const formData = await req.formData();
 
             const packingFiles = await saveFilesFromFormData(formData, 'packingGallery', {
                 dir: path.join(process.cwd(), 'tmp', 'uploads', 'returns'),

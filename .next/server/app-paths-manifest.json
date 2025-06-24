@@ -1,4 +1,3 @@
 {
-  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
-  "/api/dropshipper/product/my-inventory/route": "app/api/dropshipper/product/my-inventory/route.js"
+  "/api/supplier/auth/verify/route": "app/api/supplier/auth/verify/route.js"
 }
