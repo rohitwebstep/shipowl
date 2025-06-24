@@ -846,6 +846,10 @@ exports.Prisma.OrderScalarFieldEnum = {
   rtoDelivered: 'rtoDelivered',
   rtoDeliveredDate: 'rtoDeliveredDate',
   lastRefreshAt: 'lastRefreshAt',
+  disputeLevel: 'disputeLevel',
+  supplierRTOResponse: 'supplierRTOResponse',
+  packingGallery: 'packingGallery',
+  unboxingGallery: 'unboxingGallery',
   collectedAtWarehouse: 'collectedAtWarehouse',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
@@ -869,10 +873,7 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   supplierId: 'supplierId',
   quantity: 'quantity',
   price: 'price',
-  total: 'total',
-  supplierRTOResponse: 'supplierRTOResponse',
-  packingGallery: 'packingGallery',
-  unboxingGallery: 'unboxingGallery'
+  total: 'total'
 };
 
 exports.Prisma.RtoInventoryScalarFieldEnum = {
@@ -1337,15 +1338,12 @@ exports.Prisma.orderOrderByRelevanceFieldEnum = {
   billingAddress: 'billingAddress',
   billingZip: 'billingZip',
   barcodeImage: 'barcodeImage',
+  supplierRTOResponse: 'supplierRTOResponse',
+  packingGallery: 'packingGallery',
+  unboxingGallery: 'unboxingGallery',
   createdByRole: 'createdByRole',
   updatedByRole: 'updatedByRole',
   deletedByRole: 'deletedByRole'
-};
-
-exports.Prisma.orderItemOrderByRelevanceFieldEnum = {
-  supplierRTOResponse: 'supplierRTOResponse',
-  packingGallery: 'packingGallery',
-  unboxingGallery: 'unboxingGallery'
 };
 
 exports.Prisma.rtoInventoryOrderByRelevanceFieldEnum = {

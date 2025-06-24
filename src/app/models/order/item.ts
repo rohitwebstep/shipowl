@@ -11,7 +11,6 @@ interface Item {
 
 interface UpdateRTOInfoInput {
   orderId: number;
-  orderItemId: number;
   status: string;
   uploadedMedia?: {
     packingGallery?: string[];
@@ -23,6 +22,7 @@ interface UpdateData {
   supplierRTOResponse: string;
   packingGallery: string | null;
   unboxingGallery: string | null;
+  disputeLevel?: number;
 }
 
 export async function createOrderItem(items: Item[]) {
@@ -60,9 +60,8 @@ export async function getOrderItem(orderId: number, orderItemId: number) {
   }
 }
 
-export async function updateOrderItemRTOInfo({
+export async function orderDisputeLevelTwo({
   orderId,
-  orderItemId,
   status,
   uploadedMedia = {},
 }: UpdateRTOInfoInput) {
@@ -75,15 +74,15 @@ export async function updateOrderItemRTOInfo({
     }
 
     // Fetch order item
-    const orderItem = await prisma.orderItem.findUnique({
-      where: { id: orderItemId },
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
     });
 
-    if (!orderItem) {
+    if (!order) {
       return { status: false, message: "Order item not found." };
     }
 
-    if (orderItem.orderId !== orderId) {
+    if (order.id !== orderId) {
       return { status: false, message: "Order ID does not match the order item." };
     }
 
@@ -114,12 +113,58 @@ export async function updateOrderItemRTOInfo({
     }
 
     // Update orderItem record
-    const updatedOrderItem = await prisma.orderItem.update({
-      where: { id: orderItemId },
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
       data: updateData,
     });
 
-    return { status: true, message: "Order item RTO info updated successfully.", orderItem: updatedOrderItem };
+    return { status: true, message: "Order item RTO info updated successfully.", orderItem: updatedOrder };
+  } catch (error) {
+    console.error("Error updating order item RTO info:", error);
+    return { status: false, message: "Internal Server Error" };
+  }
+}
+
+export async function orderDisputeLevelOne({
+  orderId,
+  status,
+}: UpdateRTOInfoInput) {
+  const allowedStatuses = ['not received'];
+
+  try {
+    // Validate status
+    if (!allowedStatuses.includes(status.toLowerCase())) {
+      return { status: false, message: `Invalid status. Allowed values: ${allowedStatuses.join(', ')}` };
+    }
+
+    // Fetch order item
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+    });
+
+    if (!order) {
+      return { status: false, message: "Order item not found." };
+    }
+
+    if (order.id !== orderId) {
+      return { status: false, message: "Order ID does not match the order item." };
+    }
+
+    // Prepare update data
+    const updateData: UpdateData = {
+      supplierRTOResponse: status,
+      packingGallery: null,
+      unboxingGallery: null,
+      disputeLevel: 1,
+    };
+
+    // Update orderItem record
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
+      data: updateData,
+    });
+
+    return { status: true, message: "Order item RTO info updated successfully.", orderItem: updatedOrder };
   } catch (error) {
     console.error("Error updating order item RTO info:", error);
     return { status: false, message: "Internal Server Error" };

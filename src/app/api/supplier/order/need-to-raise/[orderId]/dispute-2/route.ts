@@ -5,7 +5,7 @@ import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { getOrderById } from '@/app/models/order/order';
-import { getOrderItem, updateOrderItemRTOInfo } from '@/app/models/order/item';
+import { getOrderItem, orderDisputeLevelTwo } from '@/app/models/order/item';
 
 interface UploadedFile {
     url: string;
@@ -38,12 +38,10 @@ export async function POST(req: NextRequest) {
 
         // TODO: Replace hardcoded IDs with dynamic values as needed
         const parts = req.nextUrl.pathname.split('/');
-        const orderId = Number(parts[parts.length - 4]);
-        const orderItemId = Number(parts[parts.length - 2]);
+        const orderId = Number(parts[parts.length - 2]);
 
         // Fetch order and order itemW
         const orderResult = await getOrderById(orderId);
-        const orderItemResult = await getOrderItem(orderId, orderItemId);
 
         if (!orderResult.status || !orderResult.order) {
             logMessage('warn', `Order not found or inaccessible. Order ID: ${orderId}`);
@@ -53,40 +51,23 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        if (!orderItemResult.status || !orderItemResult.orderItem) {
-            logMessage('warn', `Order item not found or does not belong to order. Order Item ID: ${orderItemId}`);
-            return NextResponse.json(
-                { status: false, message: 'Order item not found or does not belong to the specified order.' },
-                { status: 404 }
-            );
-        }
+        /*
+            const order = orderResult.order;
+            const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-        const order = orderResult.order;
-        const orderItem = orderItemResult.orderItem;
+            if (order.rtoDelivered && order.rtoDeliveredDate) {
+                const rtoDeliveredTime = new Date(order.rtoDeliveredDate).getTime();
+                const now = Date.now();
 
-        const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-        if (order.rtoDelivered && order.rtoDeliveredDate) {
-            const rtoDeliveredTime = new Date(order.rtoDeliveredDate).getTime();
-            const now = Date.now();
-
-            if (now - rtoDeliveredTime > ONE_DAY_MS) {
-                logMessage('warn', `Dispute period expired for order item ID: ${orderItemId}`);
-                return NextResponse.json(
-                    { status: false, message: 'Dispute period of 24 hours has expired; you cannot dispute now.' },
-                    { status: 400 }
-                );
+                if (now - rtoDeliveredTime > ONE_DAY_MS) {
+                    logMessage('warn', `Dispute period expired for order item ID: ${orderId}`);
+                    return NextResponse.json(
+                        { status: false, message: 'Dispute period of 24 hours has expired; you cannot dispute now.' },
+                        { status: 400 }
+                    );
+                }
             }
-        }
-
-        // Check if RTO Response already submitted
-        if (orderItem.supplierRTOResponse) {
-            logMessage('warn', `RTO response already submitted for order item ID: ${orderItemId}`);
-            return NextResponse.json(
-                { status: false, message: 'RTO response has already been submitted for this order item.' },
-                { status: 409 } // Conflict
-            );
-        }
+        */
 
         // Validate status query parameter
         const urlParams = req.nextUrl.searchParams;
@@ -149,12 +130,11 @@ export async function POST(req: NextRequest) {
         // Prepare payload for update
         const orderItemRTOPayload = {
             orderId,
-            orderItemId,
             status,
             uploadedMedia,
         };
 
-        const result = await updateOrderItemRTOInfo(orderItemRTOPayload);
+        const result = await orderDisputeLevelTwo(orderItemRTOPayload);
 
         if (!result.status) {
             logMessage('error', `Failed to update order item status: ${result.message}`);
@@ -164,7 +144,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        logMessage('info', `Order item status updated successfully for orderItemId: ${orderItemId}`);
+        logMessage('info', `Order status updated successfully for orderId: ${orderId}`);
 
         return NextResponse.json(
             {
