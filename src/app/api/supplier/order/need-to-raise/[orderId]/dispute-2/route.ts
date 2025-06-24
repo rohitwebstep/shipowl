@@ -168,11 +168,10 @@ export async function POST(req: NextRequest) {
             },
             { status: 200 }
         );
-    } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
-        logMessage('error', `Error updating order item status: ${errorMessage}`);
+    } catch (error) {
+        logMessage('error', `Error updating order item status: ${error}`);
         return NextResponse.json(
-            { status: false, error: 'An unexpected error occurred while processing your request. Please try again later.' },
+            { status: false, message : error || 'An unexpected error occurred while processing your request. Please try again later.' },
             { status: 500 }
         );
     }
