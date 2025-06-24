@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
             const supplierPermissionCheck = await checkStaffPermissionStatus({
                 panel: 'supplier',
                 module: 'order',
-                action: 'warehouse-collected',
+                action: 'Need to Raise',
             }, supplierId);
 
             logMessage('info', 'Supplier permissions result', supplierPermissionCheck);

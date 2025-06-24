@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
             const supplierPermissionCheck = await checkStaffPermissionStatus({
                 panel: 'supplier',
                 module: 'order',
-                action: 'warehouse-collected',
+                action: 'Warehouse Collected',
             }, supplierId);
 
             logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
@@ -241,7 +241,7 @@ export async function POST(req: NextRequest) {
             const supplierPermissionCheck = await checkStaffPermissionStatus({
                 panel: 'supplier',
                 module: 'order',
-                action: 'warehouse-collected',
+                action: 'Warehouse Collected',
             }, supplierId);
 
             logMessage('info', 'Supplier permissions result', supplierPermissionCheck);
