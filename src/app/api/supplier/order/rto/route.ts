@@ -204,7 +204,6 @@ export async function GET(req: NextRequest) {
 
         const supplierPermissionsResult = await getPermissions();
 
-        console.log(`rtoDeliveredDate - `, orders[0].rtoDeliveredDate);
         return NextResponse.json({ status: true, reportAnalytics, orders, permissions: supplierPermissionsResult.permissions, staffPermissionApplied, assignedPermissions }, { status: 200 });
 
     } catch (error) {
