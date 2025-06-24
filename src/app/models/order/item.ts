@@ -100,6 +100,7 @@ export async function orderDisputeLevelTwo({
     // Prepare update data
     const updateData: UpdateData = {
       supplierRTOResponse: status,
+      disputeLevel: 2,
       packingGallery: null,
       unboxingGallery: null,
     };
