@@ -19,6 +19,7 @@ interface ShopifyStore {
 
     // === Store Metadata ===
     email?: string;
+    logo?: string,
     name?: string;              // corresponds to shopName in Prisma
     planName?: string;
     countryName?: string;       // corresponds to country in Prisma
@@ -199,6 +200,43 @@ export async function verifyDropshipperShopifyStore(dropshipperId: number, drops
         });
 
         return { status: true };
+    } catch (error) {
+        console.error(`Error creating city:`, error);
+        return { status: false, message: "Internal Server Error" };
+    }
+}
+
+export async function updateDropshipperShopifyStore(dropshipperId: number, dropshipperRole: string, shopifyStoreId: number, dropshipperShopifyStore: {
+    name: string;
+    logo: string;
+    updatedBy?: number | null;
+    updatedAt?: Date;
+    updatedByRole?: string | null;
+}) {
+    try {
+        const {
+            name,
+            logo
+        } = dropshipperShopifyStore;
+
+        const shopifyStoreResult = await getShopifyStoreByIdForDropshipper(shopifyStoreId, dropshipperId);
+        if (!shopifyStoreResult?.status || !shopifyStoreResult.shopifyStore) {
+            return {
+                status: false,
+                message: shopifyStoreResult.message
+            };
+        }
+
+        // ✅ Update the accessToken and mark verified
+        const shopifyStore = await prisma.shopifyStore.update({
+            where: { id: Number(shopifyStoreResult.shopifyStore.id) },
+            data: {
+                name,
+                logo
+            }
+        });
+
+        return { status: true, message: 'updated', shopifyStore };
     } catch (error) {
         console.error(`Error creating city:`, error);
         return { status: false, message: "Internal Server Error" };

@@ -192,6 +192,7 @@ exports.Prisma.ShopifyStoreScalarFieldEnum = {
   id: 'id',
   adminId: 'adminId',
   name: 'name',
+  logo: 'logo',
   shop: 'shop',
   accessToken: 'accessToken',
   email: 'email',
@@ -979,6 +980,7 @@ exports.Prisma.adminOrderByRelevanceFieldEnum = {
 
 exports.Prisma.shopifyStoreOrderByRelevanceFieldEnum = {
   name: 'name',
+  logo: 'logo',
   shop: 'shop',
   accessToken: 'accessToken',
   email: 'email',

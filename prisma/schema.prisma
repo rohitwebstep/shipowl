@@ -107,6 +107,7 @@ model shopifyStore {
   id              Int      @id @default(autoincrement())
   adminId         Int
   name            String?
+  logo            String?  @db.LongText
   shop            String   @unique
   accessToken     String?
   email           String?

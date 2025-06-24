@@ -8481,6 +8481,7 @@ export namespace Prisma {
     id: number | null
     adminId: number | null
     name: string | null
+    logo: string | null
     shop: string | null
     accessToken: string | null
     email: string | null
@@ -8515,6 +8516,7 @@ export namespace Prisma {
     id: number | null
     adminId: number | null
     name: string | null
+    logo: string | null
     shop: string | null
     accessToken: string | null
     email: string | null
@@ -8549,6 +8551,7 @@ export namespace Prisma {
     id: number
     adminId: number
     name: number
+    logo: number
     shop: number
     accessToken: number
     email: number
@@ -8603,6 +8606,7 @@ export namespace Prisma {
     id?: true
     adminId?: true
     name?: true
+    logo?: true
     shop?: true
     accessToken?: true
     email?: true
@@ -8637,6 +8641,7 @@ export namespace Prisma {
     id?: true
     adminId?: true
     name?: true
+    logo?: true
     shop?: true
     accessToken?: true
     email?: true
@@ -8671,6 +8676,7 @@ export namespace Prisma {
     id?: true
     adminId?: true
     name?: true
+    logo?: true
     shop?: true
     accessToken?: true
     email?: true
@@ -8792,6 +8798,7 @@ export namespace Prisma {
     id: number
     adminId: number
     name: string | null
+    logo: string | null
     shop: string
     accessToken: string | null
     email: string | null
@@ -8845,6 +8852,7 @@ export namespace Prisma {
     id?: boolean
     adminId?: boolean
     name?: boolean
+    logo?: boolean
     shop?: boolean
     accessToken?: boolean
     email?: boolean
@@ -8882,6 +8890,7 @@ export namespace Prisma {
     id?: boolean
     adminId?: boolean
     name?: boolean
+    logo?: boolean
     shop?: boolean
     accessToken?: boolean
     email?: boolean
@@ -8912,7 +8921,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type shopifyStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "name" | "shop" | "accessToken" | "email" | "shopName" | "planName" | "country" | "shopOwner" | "domain" | "myshopifyDomain" | "province" | "city" | "phone" | "currency" | "moneyFormat" | "timezone" | "createdAtShop" | "userId" | "verificationStatus" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["shopifyStore"]>
+  export type shopifyStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "name" | "logo" | "shop" | "accessToken" | "email" | "shopName" | "planName" | "country" | "shopOwner" | "domain" | "myshopifyDomain" | "province" | "city" | "phone" | "currency" | "moneyFormat" | "timezone" | "createdAtShop" | "userId" | "verificationStatus" | "status" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["shopifyStore"]>
   export type shopifyStoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | adminDefaultArgs<ExtArgs>
   }
@@ -8926,6 +8935,7 @@ export namespace Prisma {
       id: number
       adminId: number
       name: string | null
+      logo: string | null
       shop: string
       accessToken: string | null
       email: string | null
@@ -9327,6 +9337,7 @@ export namespace Prisma {
     readonly id: FieldRef<"shopifyStore", 'Int'>
     readonly adminId: FieldRef<"shopifyStore", 'Int'>
     readonly name: FieldRef<"shopifyStore", 'String'>
+    readonly logo: FieldRef<"shopifyStore", 'String'>
     readonly shop: FieldRef<"shopifyStore", 'String'>
     readonly accessToken: FieldRef<"shopifyStore", 'String'>
     readonly email: FieldRef<"shopifyStore", 'String'>
@@ -48120,6 +48131,7 @@ export namespace Prisma {
     id: 'id',
     adminId: 'adminId',
     name: 'name',
+    logo: 'logo',
     shop: 'shop',
     accessToken: 'accessToken',
     email: 'email',
@@ -49021,6 +49033,7 @@ export namespace Prisma {
 
   export const shopifyStoreOrderByRelevanceFieldEnum: {
     name: 'name',
+    logo: 'logo',
     shop: 'shop',
     accessToken: 'accessToken',
     email: 'email',
@@ -49999,6 +50012,7 @@ export namespace Prisma {
     id?: IntFilter<"shopifyStore"> | number
     adminId?: IntFilter<"shopifyStore"> | number
     name?: StringNullableFilter<"shopifyStore"> | string | null
+    logo?: StringNullableFilter<"shopifyStore"> | string | null
     shop?: StringFilter<"shopifyStore"> | string
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
@@ -50034,6 +50048,7 @@ export namespace Prisma {
     id?: SortOrder
     adminId?: SortOrder
     name?: SortOrderInput | SortOrder
+    logo?: SortOrderInput | SortOrder
     shop?: SortOrder
     accessToken?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -50074,6 +50089,7 @@ export namespace Prisma {
     NOT?: shopifyStoreWhereInput | shopifyStoreWhereInput[]
     adminId?: IntFilter<"shopifyStore"> | number
     name?: StringNullableFilter<"shopifyStore"> | string | null
+    logo?: StringNullableFilter<"shopifyStore"> | string | null
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
     shopName?: StringNullableFilter<"shopifyStore"> | string | null
@@ -50108,6 +50124,7 @@ export namespace Prisma {
     id?: SortOrder
     adminId?: SortOrder
     name?: SortOrderInput | SortOrder
+    logo?: SortOrderInput | SortOrder
     shop?: SortOrder
     accessToken?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -50150,6 +50167,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"shopifyStore"> | number
     adminId?: IntWithAggregatesFilter<"shopifyStore"> | number
     name?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
+    logo?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     shop?: StringWithAggregatesFilter<"shopifyStore"> | string
     accessToken?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
     email?: StringNullableWithAggregatesFilter<"shopifyStore"> | string | null
@@ -55055,6 +55073,7 @@ export namespace Prisma {
 
   export type shopifyStoreCreateInput = {
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -55090,6 +55109,7 @@ export namespace Prisma {
     id?: number
     adminId: number
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -55122,6 +55142,7 @@ export namespace Prisma {
 
   export type shopifyStoreUpdateInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55157,6 +55178,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     adminId?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55191,6 +55213,7 @@ export namespace Prisma {
     id?: number
     adminId: number
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -55223,6 +55246,7 @@ export namespace Prisma {
 
   export type shopifyStoreUpdateManyMutationInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55257,6 +55281,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     adminId?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60923,6 +60948,7 @@ export namespace Prisma {
     id?: SortOrder
     adminId?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
     email?: SortOrder
@@ -60966,6 +60992,7 @@ export namespace Prisma {
     id?: SortOrder
     adminId?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
     email?: SortOrder
@@ -61000,6 +61027,7 @@ export namespace Prisma {
     id?: SortOrder
     adminId?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     shop?: SortOrder
     accessToken?: SortOrder
     email?: SortOrder
@@ -68716,6 +68744,7 @@ export namespace Prisma {
 
   export type shopifyStoreCreateWithoutAdminInput = {
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -68749,6 +68778,7 @@ export namespace Prisma {
   export type shopifyStoreUncheckedCreateWithoutAdminInput = {
     id?: number
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -69626,6 +69656,7 @@ export namespace Prisma {
     id?: IntFilter<"shopifyStore"> | number
     adminId?: IntFilter<"shopifyStore"> | number
     name?: StringNullableFilter<"shopifyStore"> | string | null
+    logo?: StringNullableFilter<"shopifyStore"> | string | null
     shop?: StringFilter<"shopifyStore"> | string
     accessToken?: StringNullableFilter<"shopifyStore"> | string | null
     email?: StringNullableFilter<"shopifyStore"> | string | null
@@ -84569,6 +84600,7 @@ export namespace Prisma {
   export type shopifyStoreCreateManyAdminInput = {
     id?: number
     name?: string | null
+    logo?: string | null
     shop: string
     accessToken?: string | null
     email?: string | null
@@ -84832,6 +84864,7 @@ export namespace Prisma {
 
   export type shopifyStoreUpdateWithoutAdminInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84865,6 +84898,7 @@ export namespace Prisma {
   export type shopifyStoreUncheckedUpdateWithoutAdminInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84898,6 +84932,7 @@ export namespace Prisma {
   export type shopifyStoreUncheckedUpdateManyWithoutAdminInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     shop?: StringFieldUpdateOperationsInput | string
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
