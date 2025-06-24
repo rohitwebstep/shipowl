@@ -1,4 +1,4 @@
 {
-  "/api/supplier/auth/login/route": "app/api/supplier/auth/login/route.js",
-  "/api/supplier/order/need-to-raise/route": "app/api/supplier/order/need-to-raise/route.js"
+  "/api/dropshipper/auth/login/route": "app/api/dropshipper/auth/login/route.js",
+  "/api/dropshipper/product/my-inventory/route": "app/api/dropshipper/product/my-inventory/route.js"
 }

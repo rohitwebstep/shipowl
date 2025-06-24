@@ -387,6 +387,7 @@ export async function POST(req: NextRequest) {
         const variantInputs = parsedVariants.map(v => ({
           price: v.price.toFixed(2),
           sku: `SKU-${v.variantId}`,
+          option1: `Variant ${v.variantId}`,
           inventoryItem: {
             tracked: true,
           },

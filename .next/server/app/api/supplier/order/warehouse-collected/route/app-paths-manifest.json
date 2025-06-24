@@ -1,0 +1,3 @@
+{
+  "/api/supplier/order/warehouse-collected/route": "app/api/supplier/order/warehouse-collected/route.js"
+}

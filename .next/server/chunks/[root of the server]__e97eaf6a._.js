@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/dropshipper/product/my-inventory/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/supplier/order/warehouse-collected/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,110 +50,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("util", () => require("util"));
-
-module.exports = mod;
-}}),
-"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
-
-module.exports = mod;
-}}),
-"[externals]/http [external] (http, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("http", () => require("http"));
-
-module.exports = mod;
-}}),
-"[externals]/https [external] (https, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("https", () => require("https"));
-
-module.exports = mod;
-}}),
-"[externals]/url [external] (url, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("url", () => require("url"));
-
-module.exports = mod;
-}}),
-"[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("fs", () => require("fs"));
-
-module.exports = mod;
-}}),
-"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("crypto", () => require("crypto"));
-
-module.exports = mod;
-}}),
-"[externals]/assert [external] (assert, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("assert", () => require("assert"));
-
-module.exports = mod;
-}}),
-"[externals]/tty [external] (tty, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tty", () => require("tty"));
-
-module.exports = mod;
-}}),
-"[externals]/os [external] (os, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("os", () => require("os"));
-
-module.exports = mod;
-}}),
-"[externals]/zlib [external] (zlib, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("zlib", () => require("zlib"));
-
-module.exports = mod;
-}}),
-"[externals]/events [external] (events, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("events", () => require("events"));
 
 module.exports = mod;
 }}),
@@ -8166,6 +8062,22 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
+"[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("fs", () => require("fs"));
+
+module.exports = mod;
+}}),
 "[project]/prisma/prisma/generated/client/index.js [app-route] (ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9692,6 +9604,30 @@ const mod = __turbopack_context__.x("buffer", () => require("buffer"));
 
 module.exports = mod;
 }}),
+"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}}),
+"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}}),
+"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}}),
 "[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9820,6 +9756,1477 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
+"[project]/src/app/models/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkPaymentIdAvailability": (()=>checkPaymentIdAvailability),
+    "createOrder": (()=>createOrder),
+    "createRTOInventory": (()=>createRTOInventory),
+    "deleteOrder": (()=>deleteOrder),
+    "generateOrderNumber": (()=>generateOrderNumber),
+    "getAllOrders": (()=>getAllOrders),
+    "getOrderById": (()=>getOrderById),
+    "getOrdersByStatus": (()=>getOrdersByStatus),
+    "getOrdersByStatusForDropshipperReporting": (()=>getOrdersByStatusForDropshipperReporting),
+    "getOrdersByStatusForSupplierReporting": (()=>getOrdersByStatusForSupplierReporting),
+    "getOrdersByTypeForSupplierReporting": (()=>getOrdersByTypeForSupplierReporting),
+    "refreshPendingOrdersShippingStatus": (()=>refreshPendingOrdersShippingStatus),
+    "refreshShippingApiResultOfOrder": (()=>refreshShippingApiResultOfOrder),
+    "restoreOrder": (()=>restoreOrder),
+    "softDeleteOrder": (()=>softDeleteOrder),
+    "updateAWBNuberOfOrder": (()=>updateAWBNuberOfOrder),
+    "updateBarcodeOfOrder": (()=>updateBarcodeOfOrder),
+    "updateDeliveredStatusOfOrder": (()=>updateDeliveredStatusOfOrder),
+    "updateOrder": (()=>updateOrder),
+    "updateRTODeliveredStatusOfOrder": (()=>updateRTODeliveredStatusOfOrder),
+    "updateShippingApiResultOfOrder": (()=>updateShippingApiResultOfOrder)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+;
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+async function generateOrderNumber(base = '') {
+    const cleanBase = base ? base.toUpperCase().replace(/[^A-Z0-9]/g, '') : Array.from({
+        length: 8
+    }, ()=>'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 36)]).join('');
+    let orderNumber = cleanBase;
+    let isTaken = true;
+    let suffix = 0;
+    while(isTaken){
+        const existingOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                orderNumber
+            }
+        });
+        if (existingOrder) {
+            suffix++;
+            orderNumber = `${cleanBase}-${suffix}`;
+        } else {
+            isTaken = false;
+        }
+    }
+    return orderNumber;
+}
+async function checkPaymentIdAvailability(paymentId) {
+    try {
+        // Check if the payment exists
+        const existingPayment = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].payment.findUnique({
+            where: {
+                id: paymentId
+            }
+        });
+        if (!existingPayment) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" does not exist.`
+            };
+        }
+        // Check if the payment ID is already linked to an order
+        const usedInOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findFirst({
+            where: {
+                paymentId: paymentId
+            }
+        });
+        if (usedInOrder) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" is already assigned to an order.`
+            };
+        }
+        return {
+            status: true,
+            message: `Payment ID "${paymentId}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking Payment ID:", error);
+        return {
+            status: false,
+            message: "Error while checking Payment ID availability."
+        };
+    }
+}
+async function createOrder(order) {
+    try {
+        // Generate a unique orderNumber for the order
+        const orderNumber = await generateOrderNumber();
+        const { status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment } = order;
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.create({
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(newOrder)
+        };
+    } catch (error) {
+        console.error(`Error creating order:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment, updatedBy, updatedByRole } = data;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateBarcodeOfOrder = async (orderId, barcodeImage)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                barcodeImage,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateBarcodeOfOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order barcode"
+        };
+    }
+};
+const updateShippingApiResultOfOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { updatedBy, updatedByRole, shippingApiJson } = data;
+        const shippingApiObj = typeof shippingApiJson === 'string' ? JSON.parse(shippingApiJson) : shippingApiJson;
+        const awbNumber = shippingApiObj?.data?.awb_number || null;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                awbNumber: awbNumber,
+                shippingApiResult: shippingApiJson,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const refreshShippingApiResultOfOrder = async (orderId, data)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                shippingApiResult: data
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateRTODeliveredStatusOfOrder = async (orderId, status)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id: orderId
+            }
+        });
+        if (!order) {
+            return {
+                status: false,
+                message: "Order not found"
+            };
+        }
+        if (order.rtoDelivered && order.rtoDeliveredDate) {
+            return {
+                status: false,
+                message: "rtoDeliveredDate already set"
+            };
+        }
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                rtoDelivered: status,
+                rtoDeliveredDate: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateDeliveredStatusOfOrder = async (orderId, status)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id: orderId
+            }
+        });
+        if (!order) {
+            return {
+                status: false,
+                message: "Order not found"
+            };
+        }
+        if (order.delivered && order.deliveredDate) {
+            return {
+                status: false,
+                message: "deliveredDate already set"
+            };
+        }
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                delivered: status,
+                deliveredDate: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateAWBNuberOfOrder = async (orderId, awbNumber)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                awbNumber
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const getOrderById = async (id)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id
+            },
+            include: {
+                items: true
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ getOrderById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const getAllOrders = async ()=>{
+    try {
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error("❌ getAllOrders Error:", error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatusForDropshipperReporting = async (status, dropshipperId, fromDate, toDate)=>{
+    try {
+        const baseWhere = {};
+        // Base status logic
+        switch(status){
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = {
+                    not: null
+                };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [
+                    {
+                        delivered: true
+                    },
+                    {
+                        rtoDelivered: true
+                    }
+                ];
+                break;
+        }
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        const andConditions = [];
+        if (isValidRange) {
+            if (status === "delivered") {
+                andConditions.push({
+                    deliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "RTO") {
+                andConditions.push({
+                    rtoDeliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "deliveredOrRto") {
+                andConditions.push({
+                    OR: [
+                        {
+                            deliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        },
+                        {
+                            rtoDeliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        }
+                    ]
+                });
+            }
+        }
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        dropshipperId
+                    }
+                }
+            }
+        });
+        if (andConditions.length > 0) {
+            Object.assign(baseWhere, {
+                AND: andConditions
+            });
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatusForSupplierReporting = async (status, supplierId, fromDate, toDate)=>{
+    try {
+        const baseWhere = {};
+        // Base status logic
+        switch(status){
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = {
+                    not: null
+                };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [
+                    {
+                        delivered: true
+                    },
+                    {
+                        rtoDelivered: true
+                    }
+                ];
+                break;
+        }
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        const andConditions = [];
+        if (isValidRange) {
+            if (status === "delivered") {
+                andConditions.push({
+                    deliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "RTO") {
+                andConditions.push({
+                    rtoDeliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "deliveredOrRto") {
+                andConditions.push({
+                    OR: [
+                        {
+                            deliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        },
+                        {
+                            rtoDeliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        }
+                    ]
+                });
+            }
+        }
+        // Supplier condition
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        supplierId: supplierId
+                    }
+                }
+            }
+        });
+        if (andConditions.length > 0) {
+            baseWhere.AND = andConditions;
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        console.log(`orders - `, orders);
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByTypeForSupplierReporting = async (type, supplierId, fromDate, toDate)=>{
+    try {
+        console.log(`🚀 Fetching orders for type: ${type}, supplierId: ${supplierId}`);
+        const baseWhere = {};
+        // Status/type-based conditions
+        switch(type){
+            case "warehouseCollected":
+                baseWhere.collectedAtWarehouse = {
+                    not: null
+                };
+                console.log("🔍 Condition: collectedAtWarehouse is not null");
+                break;
+            case "rtoCount":
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = {
+                    not: null
+                };
+                console.log("🔍 Condition: rtoDelivered true and rtoDeliveredDate is not null");
+                break;
+            case "needToRaise":
+                baseWhere.collectedAtWarehouse = null;
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = {
+                    not: null
+                };
+                console.log("🔍 Condition: collectedAtWarehouse null, rtoDelivered true, rtoDeliveredDate not null");
+                break;
+        }
+        // Prepare date range condition
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        console.log(`📅 Parsed date range - From: ${from.toISOString()} | To: ${to.toISOString()} | Valid: ${isValidRange}`);
+        const andConditions = [];
+        if (isValidRange) {
+            if (type === "warehouseCollected") {
+                const condition = {
+                    collectedAtWarehouse: {
+                        gte: from,
+                        lte: to
+                    }
+                };
+                andConditions.push(condition);
+                console.log("📌 Added date filter for warehouseCollected:", condition);
+            } else if (type === "rtoCount") {
+                const condition = {
+                    rtoDeliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                };
+                andConditions.push(condition);
+                console.log("📌 Added date filter for rtoCount:", condition);
+            } else {
+                console.log("⚠️ No date filter applied for needToRaise");
+            }
+        }
+        const supplierCondition = {
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        supplierId: supplierId
+                    }
+                }
+            }
+        };
+        andConditions.push(supplierCondition);
+        console.log("🏷️ Added supplier condition:", supplierCondition);
+        // Merge AND conditions
+        if (andConditions.length > 0) {
+            baseWhere.AND = andConditions;
+            console.log("🔗 Final baseWhere.AND conditions:", andConditions);
+        }
+        console.log("📤 Sending Prisma query with where:", baseWhere);
+        // Query orders
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        console.log(`✅ Prisma query executed. Orders fetched: ${orders.length}`);
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders for ${type}:`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const softDeleteOrder = async (adminId, adminRole, id)=>{
+    try {
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Order soft deleted successfully",
+            updatedOrder: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ softDeleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting order"
+        };
+    }
+};
+const restoreOrder = async (adminId, adminRole, id)=>{
+    try {
+        const restoredOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "Order restored successfully",
+            restoredOrder: serializeBigInt(restoredOrder)
+        };
+    } catch (error) {
+        console.error("❌ restoreOrder Error:", error);
+        return {
+            status: false,
+            message: "Error restoring order"
+        };
+    }
+};
+const deleteOrder = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Order deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error deleting order"
+        };
+    }
+};
+async function refreshPendingOrdersShippingStatus() {
+    try {
+        // Calculate the cutoff date/time (1 hour ago)
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+        // Fetch orders with delivered = false and lastRefreshAt <= oneHourAgo or null
+        const ordersToRefresh = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: {
+                delivered: false,
+                OR: [
+                    {
+                        lastRefreshAt: null
+                    },
+                    {
+                        lastRefreshAt: {
+                            lt: oneHourAgo
+                        }
+                    }
+                ]
+            },
+            orderBy: {
+                lastRefreshAt: 'asc'
+            },
+            take: 100,
+            // select: {
+            //     id: true,
+            //     orderNumber: true,
+            //     lastRefreshAt: true,
+            //     shippingApiResult: true,
+            // },
+            include: {
+                items: {
+                    include: {
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        },
+                        dropshipperProduct: true
+                    }
+                }
+            }
+        });
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Found ${ordersToRefresh.length} orders to refresh shipping status`);
+        return {
+            status: true,
+            message: `Fetched ${ordersToRefresh.length} orders for shipping status refresh`,
+            orders: ordersToRefresh
+        };
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching orders for shipping status refresh', {
+            error
+        });
+        return {
+            status: false,
+            message: 'Failed to fetch orders for shipping status refresh',
+            error: error instanceof Error ? error.message : 'Unknown error'
+        };
+    }
+}
+async function createRTOInventory(RTOInventory) {
+    try {
+        const { order, orderItem, dropshipper, dropshipperProduct, dropshipperProductVariant, quantity, price } = RTOInventory;
+        // Check for existing RTO Inventory using unique orderItem ID
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].rtoInventory.findFirst({
+            where: {
+                orderItemId: orderItem.connect.id
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: 'RTO Inventory already exists for this order item.',
+                existing: serializeBigInt(existing)
+            };
+        }
+        // Create new RTO Inventory
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].rtoInventory.create({
+            data: {
+                order,
+                orderItem,
+                dropshipper,
+                dropshipperProduct,
+                dropshipperProductVariant,
+                quantity,
+                price,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(newOrder)
+        };
+    } catch (error) {
+        console.error(`Error creating RTO Inventory:`, error);
+        return {
+            status: false,
+            message: 'Internal Server Error'
+        };
+    }
+}
+}}),
+"[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "getAppConfig": (()=>getAppConfig)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getAppConfig = async ()=>{
+    try {
+        const appConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].appConfig.findFirst({
+            where: {
+                status: true
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        if (!appConfig) {
+            return {
+                status: false,
+                message: "AppConfig not found"
+            };
+        }
+        return {
+            status: true,
+            appConfig: serializeBigInt(appConfig)
+        };
+    } catch (error) {
+        console.error("❌ getAppConfig Error:", error);
+        return {
+            status: false,
+            message: "Error fetching AppConfig"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/supplier/order/permission.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "getPermissions": (()=>getPermissions)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const getPermissions = async ()=>{
+    try {
+        const permissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierOrderPermission.findMany({
+            orderBy: {
+                id: 'asc'
+            }
+        });
+        return {
+            status: true,
+            permissions
+        };
+    } catch (error) {
+        console.error("❌ getPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching permissions"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/supplier/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "createWarehouseCollected": (()=>createWarehouseCollected),
+    "getOrderById": (()=>getOrderById),
+    "getOrderByOrderNumber": (()=>getOrderByOrderNumber)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getOrderById = async (id)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id
+            },
+            include: {
+                items: true
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ getOrderById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const getOrderByOrderNumber = async (orderNumber)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                orderNumber
+            },
+            include: {
+                items: true
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ getOrderByOrderNumber Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const createWarehouseCollected = async (orderNumber)=>{
+    try {
+        const result = await getOrderByOrderNumber(orderNumber);
+        if (!result.status || !result.order?.id) {
+            return {
+                status: false,
+                message: result.message || "Order not found or missing ID"
+            };
+        }
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: result.order.id
+            },
+            data: {
+                collectedAtWarehouse: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ createWarehouseCollected Error:", error);
+        return {
+            status: false,
+            message: "An error occurred while updating the order"
+        };
+    }
+};
+}}),
+"[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "checkStaffPermissionStatus": (()=>checkStaffPermissionStatus),
+    "getStaffPermissions": (()=>getStaffPermissions),
+    "getStaffPermissionsByStaffId": (()=>getStaffPermissionsByStaffId)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") return obj.toString();
+    if (obj instanceof Date) return obj;
+    if (Array.isArray(obj)) return obj.map(serializeBigInt);
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getStaffPermissions = async (filter = {})=>{
+    try {
+        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
+            where: {
+                ...filter.panel && {
+                    panel: filter.panel
+                },
+                ...filter.module && {
+                    module: filter.module
+                },
+                ...filter.action && {
+                    action: filter.action
+                }
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        return {
+            status: true,
+            staffPermissions: serializeBigInt(staffPermissions)
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching staff permissions"
+        };
+    }
+};
+const checkStaffPermissionStatus = async (filter = {}, staffId)=>{
+    try {
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID"
+            };
+        }
+        // Fetch staff permissions based on the provided filter and staff ID
+        if (!filter.panel || !filter.module || !filter.action) {
+            return {
+                status: false,
+                message: "all of filter must be provided"
+            };
+        }
+        const isValidPanel = [
+            "admin",
+            "supplier",
+            "customer"
+        ].includes(filter.panel);
+        if (!isValidPanel) {
+            return {
+                status: false,
+                message: "Invalid panel provided"
+            };
+        }
+        const staffPermissionsExist = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findFirst({
+            where: {
+                panel: filter.panel,
+                module: filter.module,
+                action: filter.action
+            }
+        });
+        if (!staffPermissionsExist) {
+            return {
+                status: false,
+                message: "No permissions found for the given filter"
+            };
+        }
+        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findFirst({
+            where: {
+                adminStaffPermissionId: staffPermissionsExist.id,
+                adminStaffId: staffId
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        if (!staffPermissions) {
+            return {
+                status: false,
+                message: "Action Unauthorized"
+            };
+        }
+        return {
+            status: true,
+            message: "Action Authorized"
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissions Error:", error);
+        return {
+            status: false,
+            message: "Error fetching staff permissions"
+        };
+    }
+};
+const getStaffPermissionsByStaffId = async (filter = {}, staffId)=>{
+    try {
+        // Validate staff ID
+        if (!staffId || isNaN(staffId)) {
+            return {
+                status: false,
+                message: "Invalid staff ID"
+            };
+        }
+        // Validate panel if provided
+        if (filter.panel) {
+            const isValidPanel = [
+                "admin",
+                "supplier",
+                "customer",
+                "dropshipper"
+            ].includes(filter.panel);
+            if (!isValidPanel) {
+                return {
+                    status: false,
+                    message: "Invalid panel provided"
+                };
+            }
+        }
+        // Fetch permissions matching the filter
+        const matchingPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
+            where: {
+                ...filter.panel && {
+                    panel: filter.panel
+                },
+                ...filter.module && {
+                    module: filter.module
+                },
+                ...filter.action && {
+                    action: filter.action
+                }
+            },
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        if (!matchingPermissions.length) {
+            return {
+                status: false,
+                message: "No matching permissions found for the given filter"
+            };
+        }
+        const permissionIds = matchingPermissions.map((p)=>p.id);
+        // Get all permissions assigned to the staff from filtered list
+        const assignedPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findMany({
+            where: {
+                adminStaffPermissionId: {
+                    in: permissionIds
+                },
+                adminStaffId: staffId
+            },
+            include: {
+                permission: true
+            },
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        if (!assignedPermissions.length) {
+            return {
+                status: false,
+                message: "No permissions assigned to this staff for the given filter"
+            };
+        }
+        return {
+            status: true,
+            message: "Permissions retrieved successfully",
+            assignedPermissions
+        };
+    } catch (error) {
+        console.error("❌ getStaffPermissionsByStaffId Error:", error);
+        return {
+            status: false,
+            message: "Error retrieving staff permissions"
+        };
+    }
+};
+}}),
 "[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -9887,2391 +11294,7 @@ function validateFormData(formData, { requiredFields = [], patternValidations = 
     };
 }
 }}),
-"[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "checkDropshipperProductForDropshipper": (()=>checkDropshipperProductForDropshipper),
-    "checkProductForDropshipper": (()=>checkProductForDropshipper),
-    "checkSupplierProductForDropshipper": (()=>checkSupplierProductForDropshipper),
-    "createDropshipperProduct": (()=>createDropshipperProduct),
-    "deleteDropshipperProduct": (()=>deleteDropshipperProduct),
-    "getDropshipperProductById": (()=>getDropshipperProductById),
-    "getDropshipperProductVariantById": (()=>getDropshipperProductVariantById),
-    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
-    "getProductsByStatus": (()=>getProductsByStatus),
-    "restoreDropshipperProduct": (()=>restoreDropshipperProduct),
-    "softDeleteDropshipperProduct": (()=>softDeleteDropshipperProduct),
-    "updateDropshipperProduct": (()=>updateDropshipperProduct)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
-;
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") {
-        return obj.toString();
-    }
-    if (obj instanceof Date) {
-        // Return Date object unchanged, no conversion
-        return obj;
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
-    }
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-async function createDropshipperProduct(dropshipperId, dropshipperRole, product) {
-    try {
-        const { supplierProductId, variants, createdBy, createdByRole } = product;
-        // Step 1: Check if main product exists
-        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
-            where: {
-                id: supplierProductId
-            }
-        });
-        if (!existingProduct) {
-            return {
-                status: false,
-                message: "Product does not exist."
-            };
-        }
-        // Step 2: Validate each variant under this product
-        const variantIds = variants.map((v)=>v.variantId);
-        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findMany({
-            where: {
-                id: {
-                    in: variantIds
-                },
-                supplierProductId: supplierProductId
-            }
-        });
-        const existingVariantIds = new Set(existingVariants.map((v)=>v.id));
-        const invalidVariantIds = variantIds.filter((id)=>!existingVariantIds.has(id));
-        if (invalidVariantIds.length > 0) {
-            return {
-                status: false,
-                message: `Invalid variants for this product: [${invalidVariantIds.join(", ")}]`
-            };
-        }
-        // Step 3: Create dropshipperProduct
-        const newDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.create({
-            data: {
-                supplierProductId,
-                supplierId: existingProduct.supplierId,
-                productId: existingProduct.productId,
-                dropshipperId,
-                createdBy,
-                createdByRole,
-                createdAt: new Date()
-            }
-        });
-        // Step 4: Create dropshipperProductVariants
-        for (const variant of variants){
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
-                data: {
-                    dropshipperId,
-                    supplierProductId: newDropshipperProduct.supplierProductId,
-                    dropshipperProductId: newDropshipperProduct.id,
-                    productId: newDropshipperProduct.productId,
-                    supplierProductVariantId: variant.variantId,
-                    price: variant.price,
-                    status: variant.status ?? true,
-                    createdBy,
-                    createdByRole,
-                    createdAt: new Date()
-                }
-            });
-        }
-        return {
-            status: true,
-            product: serializeBigInt(newDropshipperProduct)
-        };
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("error", "Error creating dropshipper product:", error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-const updateDropshipperProduct = async (dropshipperId, dropshipperRole, dropshipperProductId, product)=>{
-    try {
-        const { variants, updatedBy, updatedByRole } = product;
-        // Step 1: Check if dropshipper product exists
-        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findUnique({
-            where: {
-                id: dropshipperProductId
-            }
-        });
-        if (!dropshipperProduct) {
-            return {
-                status: false,
-                message: "Dropshipper product not found."
-            };
-        }
-        // Step 2: Update dropshipperProduct
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
-            where: {
-                id: dropshipperProductId
-            },
-            data: {
-                updatedBy,
-                updatedByRole,
-                updatedAt: new Date()
-            }
-        });
-        const incomingVariantIds = variants.map((v)=>v.variantId);
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.deleteMany({
-            where: {
-                dropshipperProductId,
-                supplierProductVariantId: {
-                    notIn: incomingVariantIds
-                }
-            }
-        });
-        for (const variant of variants){
-            const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
-                where: {
-                    dropshipperProductId,
-                    supplierProductVariantId: variant.variantId
-                }
-            });
-            if (existing) {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.update({
-                    where: {
-                        id: existing.id
-                    },
-                    data: {
-                        price: variant.price,
-                        status: variant.status ?? true,
-                        updatedBy,
-                        updatedByRole,
-                        updatedAt: new Date()
-                    }
-                });
-            } else {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.create({
-                    data: {
-                        dropshipperId,
-                        supplierProductId: dropshipperProduct.supplierProductId,
-                        dropshipperProductId,
-                        productId: dropshipperProduct.productId,
-                        supplierProductVariantId: variant.variantId,
-                        price: variant.price,
-                        status: variant.status ?? true,
-                        updatedBy,
-                        updatedByRole,
-                        updatedAt: new Date()
-                    }
-                });
-            }
-        }
-        return {
-            status: true,
-            message: "Dropshipper product updated successfully."
-        };
-    } catch (error) {
-        console.error("Update error:", error);
-        return {
-            status: false,
-            message: "Something went wrong."
-        };
-    }
-};
-const getProductsByFiltersAndStatus = async (type, filters, dropshipperId, status)=>{
-    try {
-        const statusCondition = (()=>{
-            switch(status){
-                case "active":
-                    return {
-                        status: true,
-                        deletedAt: null
-                    };
-                case "inactive":
-                    return {
-                        status: false,
-                        deletedAt: null
-                    };
-                case "deleted":
-                    return {
-                        deletedAt: {
-                            not: null
-                        }
-                    };
-                case "notDeleted":
-                    return {
-                        deletedAt: null
-                    };
-                default:
-                    throw new Error("Invalid status");
-            }
-        })();
-        let products;
-        if (type === "all") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    ...filters.categoryId ? {
-                        product: {
-                            categoryId: filters.categoryId
-                        }
-                    } : {},
-                    ...filters.brandId ? {
-                        product: {
-                            brandId: filters.brandId
-                        }
-                    } : {}
-                },
-                orderBy: {
-                    id: "desc"
-                },
-                include: {
-                    variants: {
-                        include: {
-                            variant: true
-                        }
-                    },
-                    product: {
-                        include: {
-                            category: true,
-                            brand: true
-                        }
-                    }
-                }
-            });
-        }
-        if (type === "my") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    dropshipperId,
-                    ...filters.categoryId ? {
-                        product: {
-                            categoryId: filters.categoryId
-                        }
-                    } : {},
-                    ...filters.brandId ? {
-                        product: {
-                            brandId: filters.brandId
-                        }
-                    } : {}
-                },
-                include: {
-                    product: {
-                        include: {
-                            category: true,
-                            brand: true
-                        }
-                    },
-                    dropshipper: true,
-                    variants: {
-                        include: {
-                            supplierProductVariant: {
-                                include: {
-                                    variant: true
-                                }
-                            }
-                        }
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                }
-            });
-        }
-        if (type === "notmy") {
-            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
-                where: {
-                    dropshipperId
-                },
-                include: {
-                    variants: true
-                }
-            }).then((data)=>data.map((d)=>d.supplierProductId));
-            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    id: {
-                        notIn: myProductIds.length ? myProductIds : [
-                            0
-                        ]
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                },
-                include: {
-                    product: true,
-                    variants: {
-                        select: {
-                            id: true,
-                            supplierId: true,
-                            productId: true,
-                            productVariantId: true,
-                            supplierProductId: true,
-                            price: true,
-                            variant: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                    image: true,
-                                    color: true,
-                                    model: true,
-                                    sku: true
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            console.dir(notMyProducts, {
-                depth: null,
-                colors: true
-            });
-            // Attach each variant's lowest suggested_price from other dropshippers
-            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
-                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
-                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
-                        where: {
-                            supplierProductVariantId: variant.id,
-                            dropshipperProduct: {
-                                dropshipperId: {
-                                    not: dropshipperId
-                                }
-                            }
-                        },
-                        orderBy: {
-                            price: "asc"
-                        },
-                        select: {
-                            price: true
-                        }
-                    });
-                    return {
-                        ...variant,
-                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
-                    };
-                }));
-                return {
-                    ...product,
-                    variants: enrichedVariants
-                };
-            }));
-            const uniqueByProductId = [];
-            const seenProductIds = new Set();
-            for (const item of enrichedProducts){
-                if (!seenProductIds.has(item.productId)) {
-                    seenProductIds.add(item.productId);
-                    uniqueByProductId.push(item);
-                }
-            }
-            products = uniqueByProductId;
-        }
-        return {
-            status: true,
-            products: serializeBigInt(products)
-        };
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return {
-            status: false,
-            message: "Error fetching products"
-        };
-    }
-};
-const getProductsByStatus = async (type, dropshipperId, status)=>{
-    try {
-        console.log(`type - ${type} // dropshipperId - ${dropshipperId} // status - ${status}`);
-        const statusCondition = (()=>{
-            switch(status){
-                case "active":
-                    return {
-                        status: true,
-                        deletedAt: null
-                    };
-                case "inactive":
-                    return {
-                        status: false,
-                        deletedAt: null
-                    };
-                case "deleted":
-                    return {
-                        deletedAt: {
-                            not: null
-                        }
-                    };
-                case "notDeleted":
-                    return {
-                        deletedAt: null
-                    };
-                default:
-                    throw new Error("Invalid status");
-            }
-        })();
-        let products = [];
-        if (type === "all") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: statusCondition,
-                orderBy: {
-                    id: "desc"
-                },
-                include: {
-                    variants: {
-                        include: {
-                            variant: true
-                        }
-                    },
-                    product: true
-                }
-            });
-        } else if (type === "my") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    dropshipperId
-                },
-                include: {
-                    product: true,
-                    dropshipper: true,
-                    variants: {
-                        include: {
-                            supplierProductVariant: {
-                                include: {
-                                    variant: true
-                                }
-                            }
-                        }
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                }
-            });
-        } else if (type === "notmy") {
-            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findMany({
-                where: {
-                    dropshipperId
-                },
-                include: {
-                    variants: true
-                }
-            }).then((data)=>data.map((d)=>d.supplierProductId));
-            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    id: {
-                        notIn: myProductIds.length ? myProductIds : [
-                            0
-                        ]
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                },
-                include: {
-                    product: true,
-                    variants: {
-                        select: {
-                            id: true,
-                            supplierId: true,
-                            productId: true,
-                            productVariantId: true,
-                            supplierProductId: true,
-                            price: true,
-                            variant: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                    image: true,
-                                    color: true,
-                                    model: true,
-                                    sku: true
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            console.dir(notMyProducts, {
-                depth: null,
-                colors: true
-            });
-            // Attach each variant's lowest suggested_price from other dropshippers
-            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
-                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
-                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findFirst({
-                        where: {
-                            supplierProductVariantId: variant.id,
-                            dropshipperProduct: {
-                                dropshipperId: {
-                                    not: dropshipperId
-                                }
-                            }
-                        },
-                        orderBy: {
-                            price: "asc"
-                        },
-                        select: {
-                            price: true
-                        }
-                    });
-                    return {
-                        ...variant,
-                        lowestOtherDropshipperSuggestedPrice: priceData?.price ?? null
-                    };
-                }));
-                return {
-                    ...product,
-                    variants: enrichedVariants
-                };
-            }));
-            const uniqueByProductId = [];
-            const seenProductIds = new Set();
-            for (const item of enrichedProducts){
-                if (!seenProductIds.has(item.productId)) {
-                    seenProductIds.add(item.productId);
-                    uniqueByProductId.push(item);
-                }
-            }
-            products = uniqueByProductId;
-        } else {
-            return {
-                status: false,
-                message: "Invalid type parameter",
-                products: []
-            };
-        }
-        return {
-            status: true,
-            message: "Products fetched successfully",
-            products: serializeBigInt(products)
-        };
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return {
-            status: false,
-            message: "Error fetching products",
-            products: []
-        };
-    }
-};
-const checkProductForDropshipper = async (dropshipperId, supplierProductId)=>{
-    try {
-        // 1. Check if product exists
-        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
-            where: {
-                id: supplierProductId
-            },
-            include: {
-                variants: true,
-                product: true
-            }
-        });
-        if (!product) {
-            return {
-                status: false,
-                message: "Product not found",
-                existsInProduct: false,
-                existsInDropshipperProduct: false
-            };
-        }
-        // 2. Check if product exists for the given dropshipper
-        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
-            where: {
-                dropshipperId,
-                supplierProductId
-            }
-        });
-        if (!dropshipperProduct) {
-            return {
-                status: true,
-                message: "Product exists but is not assigned to the dropshipper",
-                existsInProduct: true,
-                existsInDropshipperProduct: false,
-                product
-            };
-        }
-        return {
-            status: true,
-            message: "Product exists and is assigned to the dropshipper",
-            existsInProduct: true,
-            existsInDropshipperProduct: true,
-            product,
-            dropshipperProduct
-        };
-    } catch (error) {
-        console.error("Error checking product for dropshipper:", error);
-        return {
-            status: false,
-            message: "Internal server error",
-            existsInProduct: false,
-            existsInDropshipperProduct: false
-        };
-    }
-};
-const checkDropshipperProductForDropshipper = async (dropshipperId, dropshipperProductId)=>{
-    try {
-        // Check if the dropshipper product exists for the given dropshipper
-        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
-            where: {
-                id: dropshipperProductId,
-                dropshipperId
-            },
-            include: {
-                product: true,
-                dropshipper: true,
-                variants: {
-                    include: {
-                        supplierProductVariant: {
-                            include: {
-                                variant: true
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        if (!dropshipperProduct) {
-            return {
-                status: true,
-                message: "Dropshipper product not found or not assigned to the dropshipper.",
-                existsInDropshipperProduct: false,
-                dropshipperProduct: null
-            };
-        }
-        return {
-            status: true,
-            message: "Dropshipper product exists and is assigned to the dropshipper.",
-            existsInDropshipperProduct: true,
-            dropshipperProduct: serializeBigInt(dropshipperProduct)
-        };
-    } catch (error) {
-        console.error("❌ Error checking dropshipper product for dropshipper:", error);
-        return {
-            status: false,
-            message: "Internal server error while checking dropshipper product.",
-            existsInDropshipperProduct: false,
-            dropshipperProduct: null
-        };
-    }
-};
-const restoreDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
-    try {
-        const updatedAt = new Date();
-        // Step 1: Restore the dropshipper product
-        const restoredDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
-            where: {
-                id
-            },
-            data: {
-                deletedBy: null,
-                deletedAt: null,
-                deletedByRole: null,
-                updatedBy: dropshipperId,
-                updatedByRole: dropshipperRole,
-                updatedAt
-            }
-        });
-        // Step 2: Restore all associated dropshipperProductVariants
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
-            where: {
-                dropshipperProductId: id
-            },
-            data: {
-                deletedBy: null,
-                deletedAt: null,
-                deletedByRole: null,
-                updatedBy: dropshipperId,
-                updatedByRole: dropshipperRole,
-                updatedAt
-            }
-        });
-        return {
-            status: true,
-            message: "Dropshipper product and variants restored successfully.",
-            restoredDropshipperProduct: serializeBigInt(restoredDropshipperProduct)
-        };
-    } catch (error) {
-        console.error("❌ restoreDropshipperProduct Error:", error);
-        return {
-            status: false,
-            message: "Error restoring dropshipper product."
-        };
-    }
-};
-const softDeleteDropshipperProduct = async (dropshipperId, dropshipperRole, id)=>{
-    try {
-        const deletedAt = new Date();
-        // Step 1: Soft delete dropshipperProduct
-        const updatedDropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.update({
-            where: {
-                id
-            },
-            data: {
-                deletedBy: dropshipperId,
-                deletedByRole: dropshipperRole,
-                deletedAt
-            }
-        });
-        // Step 2: Soft delete all related dropshipperProductVariants
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.updateMany({
-            where: {
-                dropshipperProductId: id
-            },
-            data: {
-                deletedBy: dropshipperId,
-                deletedByRole: dropshipperRole,
-                deletedAt
-            }
-        });
-        return {
-            status: true,
-            message: "Dropshipper product and its variants soft deleted successfully.",
-            updatedDropshipperProduct
-        };
-    } catch (error) {
-        console.error("❌ softDeleteDropshipperProduct Error:", error);
-        return {
-            status: false,
-            message: "Error soft deleting dropshipper product."
-        };
-    }
-};
-const deleteDropshipperProduct = async (id)=>{
-    try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.delete({
-            where: {
-                id
-            }
-        });
-        return {
-            status: true,
-            message: "Dropshipper Product deleted successfully"
-        };
-    } catch (error) {
-        console.error("❌ deleteProduct Error:", error);
-        return {
-            status: false,
-            message: "Error deleting dropshipper product"
-        };
-    }
-};
-const getDropshipperProductById = async (id)=>{
-    try {
-        const dropshipperProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProduct.findFirst({
-            where: {
-                id
-            }
-        });
-        if (!dropshipperProduct) {
-            return {
-                status: false,
-                message: "Dropshipper product not found.",
-                product: null
-            };
-        }
-        return {
-            status: true,
-            message: "Dropshipper product ID fetched successfully.",
-            dropshipperProduct: serializeBigInt(dropshipperProduct)
-        };
-    } catch (error) {
-        console.error("❌ Error in getDropshipperProductById:", error);
-        return {
-            status: false,
-            message: "Internal server error.",
-            product: null
-        };
-    }
-};
-const getDropshipperProductVariantById = async (id)=>{
-    try {
-        const dropshipperProductVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].dropshipperProductVariant.findUnique({
-            where: {
-                id
-            }
-        });
-        if (!dropshipperProductVariant) return {
-            status: false,
-            message: "dropshipperProductVariant Variant not found"
-        };
-        const sanitizedDropshipperProductVariant = serializeBigInt(dropshipperProductVariant);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'fetched product variants :', sanitizedDropshipperProductVariant);
-        return {
-            status: true,
-            variant: sanitizedDropshipperProductVariant
-        };
-    } catch (error) {
-        console.error("❌ getProductVariantById Error:", error);
-        return {
-            status: false,
-            message: "Error fetching product variant"
-        };
-    }
-};
-const checkSupplierProductForDropshipper = async (dropshipperId, supplierProductId)=>{
-    try {
-        // 1. Find the supplier product
-        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
-            where: {
-                id: supplierProductId
-            },
-            include: {
-                product: true,
-                supplier: {
-                    select: {
-                        id: true,
-                        uniqeId: true
-                    }
-                },
-                variants: {
-                    include: {
-                        variant: {
-                            select: {
-                                id: true,
-                                name: true,
-                                image: true,
-                                color: true,
-                                model: true,
-                                sku: true
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        if (!supplierProduct) {
-            return {
-                status: true,
-                message: "Supplier product not found or not assigned to the supplier.",
-                existsInSupplierProduct: false,
-                supplierProduct: null,
-                otherSuppliers: []
-            };
-        }
-        // 2. Find other suppliers listing the same product
-        const otherSuppliers = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-            where: {
-                productId: supplierProduct.productId,
-                supplierId: {
-                    not: supplierProduct.supplierId
-                } // Exclude current supplier
-            },
-            include: {
-                supplier: {
-                    select: {
-                        id: true,
-                        uniqeId: true
-                    }
-                },
-                variants: {
-                    include: {
-                        variant: {
-                            select: {
-                                id: true,
-                                name: true,
-                                image: true,
-                                color: true,
-                                model: true,
-                                sku: true
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        return {
-            status: true,
-            message: "Supplier product exists and is assigned to the supplier.",
-            existsInSupplierProduct: true,
-            supplierProduct: serializeBigInt(supplierProduct),
-            otherSuppliers: serializeBigInt(otherSuppliers)
-        };
-    } catch (error) {
-        console.error("❌ Error checking supplier product for supplier:", error);
-        return {
-            status: false,
-            message: "Internal server error while checking supplier product.",
-            existsInSupplierProduct: false,
-            supplierProduct: null,
-            otherSuppliers: []
-        };
-    }
-};
-}}),
-"[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "createDropshipperShopifyStore": (()=>createDropshipperShopifyStore),
-    "deleteShopIfNotVerified": (()=>deleteShopIfNotVerified),
-    "getShopifyStoreByIdForDropshipper": (()=>getShopifyStoreByIdForDropshipper),
-    "getShopifyStoresByDropshipperId": (()=>getShopifyStoresByDropshipperId),
-    "isShopUsedAndVerified": (()=>isShopUsedAndVerified),
-    "updateDropshipperShopifyStore": (()=>updateDropshipperShopifyStore),
-    "verifyDropshipperShopifyStore": (()=>verifyDropshipperShopifyStore)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") {
-        return obj.toString();
-    }
-    if (obj instanceof Date) {
-        // Return Date object unchanged, no conversion
-        return obj;
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
-    }
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-async function isShopUsedAndVerified(shop) {
-    try {
-        // Find the shop regardless of verification status
-        const existingStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findFirst({
-            where: {
-                shop: shop
-            },
-            include: {
-                admin: true
-            }
-        });
-        if (existingStore) {
-            return {
-                status: true,
-                verified: !!existingStore.verificationStatus,
-                shopifyStore: existingStore,
-                message: existingStore.verificationStatus ? 'Shop is used and verified.' : 'Shop is used but not verified.'
-            };
-        } else {
-            return {
-                status: false,
-                verified: false,
-                shopifyStore: null,
-                message: 'Shop not found.'
-            };
-        }
-    } catch (error) {
-        console.error(`Error checking if shop is used and verified:`, error);
-        return {
-            status: false,
-            verified: false,
-            shopifyStore: null,
-            message: 'An error occurred while checking the shop.'
-        };
-    }
-}
-async function createDropshipperShopifyStore(dropshipperId, dropshipperRole, dropshipperShopifyStore) {
-    try {
-        const { admin, shop, createdAt, createdBy, createdByRole } = dropshipperShopifyStore;
-        // 🚫 Check if the shop is already used and verified
-        const isAlreadyUsed = await isShopUsedAndVerified(shop);
-        if (isAlreadyUsed.status) {
-            return {
-                status: false,
-                message: "This Shopify store is already registered and verified."
-            };
-        }
-        const statusRaw = false;
-        const verificationStatusRaw = false;
-        // Convert statusRaw to a boolean using the includes check
-        const status = [
-            'true',
-            '1',
-            true,
-            1,
-            'active',
-            'yes'
-        ].includes(statusRaw);
-        const verificationStatus = [
-            'true',
-            '1',
-            true,
-            1,
-            'active',
-            'yes'
-        ].includes(verificationStatusRaw);
-        const newShopifyStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.create({
-            data: {
-                admin,
-                shop,
-                status,
-                verificationStatus,
-                createdAt,
-                createdBy,
-                createdByRole
-            }
-        });
-        return {
-            status: true,
-            dropshipperShopifyStore: serializeBigInt(newShopifyStore)
-        };
-    } catch (error) {
-        console.error(`Error creating city:`, error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function verifyDropshipperShopifyStore(dropshipperId, dropshipperRole, dropshipperShopifyStore) {
-    try {
-        const { shop, accessToken, email, shopOwner, name, domain, myshopifyDomain, planName, countryName, province, city, phone, currency, moneyFormat, ianaTimezone, shopCreatedAt } = dropshipperShopifyStore;
-        const existing = await isShopUsedAndVerified(shop);
-        // 🚫 Stop if already verified
-        if (existing.status && existing.shopifyStore && existing.verified) {
-            return {
-                status: true,
-                message: "Shop already verified and connected."
-            };
-        }
-        if (!existing.shopifyStore) {
-            return {
-                status: false,
-                message: "Shopify store not found."
-            };
-        }
-        // ✅ Update the accessToken and mark verified
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.update({
-            where: {
-                id: Number(existing.shopifyStore.id)
-            },
-            data: {
-                accessToken,
-                verificationStatus: true,
-                email,
-                shopOwner,
-                name,
-                domain,
-                myshopifyDomain,
-                planName,
-                country: countryName,
-                province,
-                city,
-                phone,
-                currency,
-                moneyFormat,
-                timezone: ianaTimezone,
-                createdAtShop: shopCreatedAt
-            }
-        });
-        return {
-            status: true
-        };
-    } catch (error) {
-        console.error(`Error creating city:`, error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function updateDropshipperShopifyStore(dropshipperId, dropshipperRole, shopifyStoreId, dropshipperShopifyStore) {
-    try {
-        const { name, logo } = dropshipperShopifyStore;
-        const shopifyStoreResult = await getShopifyStoreByIdForDropshipper(shopifyStoreId, dropshipperId);
-        if (!shopifyStoreResult?.status || !shopifyStoreResult.shopifyStore) {
-            return {
-                status: false,
-                message: shopifyStoreResult.message
-            };
-        }
-        // ✅ Update the accessToken and mark verified
-        const shopifyStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.update({
-            where: {
-                id: Number(shopifyStoreResult.shopifyStore.id)
-            },
-            data: {
-                name,
-                logo
-            }
-        });
-        return {
-            status: true,
-            message: 'updated',
-            shopifyStore
-        };
-    } catch (error) {
-        console.error(`Error creating city:`, error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function deleteShopIfNotVerified(shop) {
-    try {
-        // Find the shop record regardless of verification status
-        const existingStore = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findFirst({
-            where: {
-                shop: shop
-            }
-        });
-        if (!existingStore) {
-            return {
-                status: false,
-                message: 'Shop not found.'
-            };
-        }
-        // Check verification status
-        if (existingStore.verificationStatus) {
-            return {
-                status: false,
-                message: 'Shop is verified and will not be deleted.'
-            };
-        }
-        // Delete the shop because it is not verified
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.delete({
-            where: {
-                id: existingStore.id
-            }
-        });
-        return {
-            status: true,
-            message: 'Shop was found but not verified, so it was deleted.'
-        };
-    } catch (error) {
-        console.error(`Error deleting shop if not verified:`, error);
-        return {
-            status: false,
-            message: 'An error occurred while trying to delete the shop.'
-        };
-    }
-}
-async function getShopifyStoresByDropshipperId(dropshipperId, status = 'verified') {
-    try {
-        let whereCondition = {};
-        switch(status){
-            case "verified":
-                whereCondition = {
-                    verificationStatus: true
-                };
-                break;
-            case "unverified":
-                whereCondition = {
-                    verificationStatus: false
-                };
-                break;
-            case "all":
-                break;
-            default:
-                break;
-        }
-        const stores = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findMany({
-            where: whereCondition,
-            include: {
-                admin: true
-            },
-            orderBy: {
-                createdAt: 'desc'
-            }
-        });
-        if (!stores || stores.length === 0) {
-            return {
-                status: false,
-                message: 'No Shopify stores found for this dropshipper.',
-                shopifyStores: []
-            };
-        }
-        return {
-            status: true,
-            shopifyStores: serializeBigInt(stores),
-            message: `${stores.length} store(s) found for this dropshipper.`
-        };
-    } catch (error) {
-        console.error('Error fetching Shopify stores by dropshipperId:', error);
-        return {
-            status: false,
-            shopifyStores: [],
-            message: 'Internal Server Error'
-        };
-    }
-}
-async function getShopifyStoreByIdForDropshipper(storeId, dropshipperId) {
-    try {
-        console.log(`storeId - `, storeId);
-        console.log(`dropshipperId - `, dropshipperId);
-        // First, check if the store exists
-        const store = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].shopifyStore.findUnique({
-            where: {
-                id: storeId
-            },
-            include: {
-                admin: true
-            }
-        });
-        if (!store) {
-            return {
-                status: false,
-                message: 'Shopify store not found.',
-                shopifyStore: null
-            };
-        }
-        // Check if the store belongs to the given dropshipper
-        if (store.adminId !== dropshipperId) {
-            return {
-                status: false,
-                message: 'This Shopify store is linked to another user.',
-                shopifyStore: null
-            };
-        }
-        return {
-            status: true,
-            shopifyStore: serializeBigInt(store),
-            message: 'Shopify store found.'
-        };
-    } catch (error) {
-        console.error(`Error fetching Shopify store by ID:`, error);
-        return {
-            status: false,
-            shopifyStore: null,
-            message: 'Internal Server Error'
-        };
-    }
-}
-}}),
-"[project]/src/app/models/supplier/product.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "checkProductForSupplier": (()=>checkProductForSupplier),
-    "checkSupplierProductForSupplier": (()=>checkSupplierProductForSupplier),
-    "createSupplierProduct": (()=>createSupplierProduct),
-    "deleteSupplierProduct": (()=>deleteSupplierProduct),
-    "getProductsByFiltersAndStatus": (()=>getProductsByFiltersAndStatus),
-    "getProductsByStatus": (()=>getProductsByStatus),
-    "getSupplierProductById": (()=>getSupplierProductById),
-    "getSupplierProductVariantById": (()=>getSupplierProductVariantById),
-    "restoreSupplierProduct": (()=>restoreSupplierProduct),
-    "softDeleteSupplierProduct": (()=>softDeleteSupplierProduct),
-    "updateSupplierProduct": (()=>updateSupplierProduct)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
-;
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") {
-        return obj.toString();
-    }
-    if (obj instanceof Date) {
-        // Return Date object unchanged, no conversion
-        return obj;
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
-    }
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-async function createSupplierProduct(supplierId, supplierRole, product) {
-    try {
-        const { productId, variants, createdBy, createdByRole } = product;
-        // Step 1: Check if main product exists
-        const existingProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findFirst({
-            where: {
-                id: productId,
-                OR: [
-                    {
-                        isVisibleToAll: true
-                    },
-                    {
-                        supplierVisibility: {
-                            some: {
-                                supplierId: supplierId,
-                                deletedAt: null
-                            }
-                        }
-                    }
-                ]
-            },
-            include: {
-                variants: true,
-                supplierVisibility: true
-            }
-        });
-        if (!existingProduct) {
-            return {
-                status: false,
-                message: "Product does not exist."
-            };
-        }
-        // Step 2: Validate each variant under this product
-        const variantIds = variants.map((v)=>v.variantId);
-        const existingVariants = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].productVariant.findMany({
-            where: {
-                id: {
-                    in: variantIds
-                },
-                productId: productId
-            }
-        });
-        if (existingVariants.length !== variantIds.length) {
-            return {
-                status: false,
-                message: "One or more variants are invalid for this product."
-            };
-        }
-        // Step 3: Create supplierProduct
-        const newSupplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.create({
-            data: {
-                productId,
-                supplierId,
-                createdBy,
-                createdByRole,
-                createdAt: new Date()
-            }
-        });
-        // Step 4: Create supplierProductVariants
-        for (const variant of variants){
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.create({
-                data: {
-                    supplierId,
-                    productId: newSupplierProduct.productId,
-                    supplierProductId: newSupplierProduct.id,
-                    productVariantId: variant.variantId,
-                    stock: variant.stock,
-                    price: variant.price,
-                    status: variant.status ?? true,
-                    createdBy,
-                    createdByRole,
-                    createdAt: new Date()
-                }
-            });
-        }
-        return {
-            status: true,
-            product: serializeBigInt(newSupplierProduct)
-        };
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("error", "Error creating supplier product:", error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-const updateSupplierProduct = async (supplierId, supplierRole, supplierProductId, product)=>{
-    try {
-        const { variants, updatedBy, updatedByRole } = product;
-        // Step 1: Check if supplier product exists
-        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findUnique({
-            where: {
-                id: supplierProductId
-            }
-        });
-        if (!supplierProduct) {
-            return {
-                status: false,
-                message: "Supplier product not found."
-            };
-        }
-        // Step 2: Update supplierProduct
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.update({
-            where: {
-                id: supplierProductId
-            },
-            data: {
-                updatedBy,
-                updatedByRole,
-                updatedAt: new Date()
-            }
-        });
-        const incomingVariantIds = variants.map((v)=>v.variantId);
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.deleteMany({
-            where: {
-                supplierProductId,
-                id: {
-                    notIn: incomingVariantIds
-                }
-            }
-        });
-        // Step 3: Update or Create each variant
-        for (const variant of variants){
-            const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findFirst({
-                where: {
-                    supplierProductId,
-                    id: variant.variantId
-                }
-            });
-            if (existing) {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.update({
-                    where: {
-                        id: existing.id
-                    },
-                    data: {
-                        stock: variant.stock,
-                        price: variant.price,
-                        status: variant.status ?? true,
-                        updatedBy,
-                        updatedByRole,
-                        updatedAt: new Date()
-                    }
-                });
-            } else {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.create({
-                    data: {
-                        supplierId,
-                        productId: supplierProduct.productId,
-                        supplierProductId,
-                        productVariantId: variant.variantId,
-                        stock: variant.stock,
-                        price: variant.price,
-                        status: variant.status ?? true,
-                        updatedBy,
-                        updatedByRole,
-                        updatedAt: new Date()
-                    }
-                });
-            }
-        }
-        return {
-            status: true,
-            message: "Supplier product updated successfully."
-        };
-    } catch (error) {
-        console.error("Update error:", error);
-        return {
-            status: false,
-            message: "Something went wrong."
-        };
-    }
-};
-const getProductsByFiltersAndStatus = async (type, filters, supplierId, status)=>{
-    try {
-        const statusCondition = (()=>{
-            switch(status){
-                case "active":
-                    return {
-                        status: true,
-                        deletedAt: null
-                    };
-                case "inactive":
-                    return {
-                        status: false,
-                        deletedAt: null
-                    };
-                case "deleted":
-                    return {
-                        deletedAt: {
-                            not: null
-                        }
-                    };
-                case "notDeleted":
-                    return {
-                        deletedAt: null
-                    };
-                default:
-                    throw new Error("Invalid status");
-            }
-        })();
-        const baseFilters = {
-            ...statusCondition,
-            ...filters.categoryId && {
-                categoryId: filters.categoryId
-            },
-            ...filters.brandId && {
-                brandId: filters.brandId
-            }
-        };
-        let products;
-        if (type === "all") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: {
-                    ...baseFilters,
-                    OR: [
-                        {
-                            isVisibleToAll: true
-                        },
-                        {
-                            supplierVisibility: {
-                                some: {
-                                    supplierId: supplierId,
-                                    deletedAt: null
-                                }
-                            }
-                        }
-                    ]
-                },
-                include: {
-                    variants: true,
-                    supplierVisibility: true
-                }
-            });
-        }
-        if (type === "my") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    ...baseFilters,
-                    supplierId
-                },
-                include: {
-                    product: true,
-                    supplier: true,
-                    variants: {
-                        include: {
-                            variant: true
-                        }
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                }
-            });
-        }
-        if (type === "notmy") {
-            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    supplierId
-                },
-                include: {
-                    variants: true
-                }
-            }).then((data)=>data.map((d)=>d.productId));
-            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: {
-                    ...baseFilters,
-                    id: {
-                        notIn: myProductIds.length ? myProductIds : [
-                            0
-                        ]
-                    },
-                    OR: [
-                        {
-                            isVisibleToAll: true
-                        },
-                        {
-                            supplierVisibility: {
-                                some: {
-                                    supplierId: supplierId,
-                                    deletedAt: null
-                                }
-                            }
-                        }
-                    ]
-                },
-                include: {
-                    variants: true,
-                    supplierVisibility: true
-                }
-            });
-            console.dir(notMyProducts, {
-                depth: null,
-                colors: true
-            });
-            // Attach each variant's lowest suggested_price from other suppliers
-            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
-                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
-                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findFirst({
-                        where: {
-                            productVariantId: variant.id,
-                            supplierProduct: {
-                                supplierId: {
-                                    not: supplierId
-                                }
-                            }
-                        },
-                        orderBy: {
-                            price: "asc"
-                        },
-                        select: {
-                            price: true
-                        }
-                    });
-                    return {
-                        ...variant,
-                        lowestOtherSupplierSuggestedPrice: priceData?.price ?? null
-                    };
-                }));
-                return {
-                    ...product,
-                    variants: enrichedVariants
-                };
-            }));
-            products = enrichedProducts;
-        }
-        return {
-            status: true,
-            products: serializeBigInt(products)
-        };
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return {
-            status: false,
-            message: "Error fetching products"
-        };
-    }
-};
-const getProductsByStatus = async (type, supplierId, status)=>{
-    try {
-        console.log(`type - ${type} // supplierId - ${supplierId} // status - ${status}`);
-        const statusCondition = (()=>{
-            switch(status){
-                case "active":
-                    return {
-                        status: true,
-                        deletedAt: null
-                    };
-                case "inactive":
-                    return {
-                        status: false,
-                        deletedAt: null
-                    };
-                case "deleted":
-                    return {
-                        deletedAt: {
-                            not: null
-                        }
-                    };
-                case "notDeleted":
-                    return {
-                        deletedAt: null
-                    };
-                default:
-                    throw new Error("Invalid status");
-            }
-        })();
-        let products = [];
-        if (type === "all") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: {
-                    ...statusCondition,
-                    OR: [
-                        {
-                            isVisibleToAll: true
-                        },
-                        {
-                            supplierVisibility: {
-                                some: {
-                                    supplierId: supplierId,
-                                    deletedAt: null
-                                }
-                            }
-                        }
-                    ]
-                },
-                include: {
-                    variants: true,
-                    supplierVisibility: true
-                }
-            });
-        } else if (type === "my") {
-            products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    ...statusCondition,
-                    supplierId
-                },
-                include: {
-                    product: true,
-                    supplier: true,
-                    variants: {
-                        include: {
-                            variant: true
-                        }
-                    }
-                },
-                orderBy: {
-                    id: "desc"
-                }
-            });
-        } else if (type === "notmy") {
-            const myProductIds = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findMany({
-                where: {
-                    supplierId
-                },
-                include: {
-                    variants: true
-                }
-            }).then((data)=>data.map((d)=>d.productId));
-            const notMyProducts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-                where: {
-                    ...statusCondition,
-                    id: {
-                        notIn: myProductIds.length ? myProductIds : [
-                            0
-                        ]
-                    },
-                    OR: [
-                        {
-                            isVisibleToAll: true
-                        },
-                        {
-                            supplierVisibility: {
-                                some: {
-                                    supplierId: supplierId,
-                                    deletedAt: null
-                                }
-                            }
-                        }
-                    ]
-                },
-                include: {
-                    variants: true,
-                    supplierVisibility: true
-                }
-            });
-            console.dir(notMyProducts, {
-                depth: null,
-                colors: true
-            });
-            // Attach each variant's lowest suggested_price from other suppliers
-            const enrichedProducts = await Promise.all(notMyProducts.map(async (product)=>{
-                const enrichedVariants = await Promise.all(product.variants.map(async (variant)=>{
-                    const priceData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findFirst({
-                        where: {
-                            productVariantId: variant.id,
-                            supplierProduct: {
-                                supplierId: {
-                                    not: supplierId
-                                }
-                            }
-                        },
-                        orderBy: {
-                            price: "asc"
-                        },
-                        select: {
-                            price: true
-                        }
-                    });
-                    return {
-                        ...variant,
-                        lowestOtherSupplierSuggestedPrice: priceData?.price ?? null
-                    };
-                }));
-                return {
-                    ...product,
-                    variants: enrichedVariants
-                };
-            }));
-            products = enrichedProducts;
-        } else {
-            return {
-                status: false,
-                message: "Invalid type parameter",
-                products: []
-            };
-        }
-        return {
-            status: true,
-            message: "Products fetched successfully",
-            products: serializeBigInt(products)
-        };
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return {
-            status: false,
-            message: "Error fetching products",
-            products: []
-        };
-    }
-};
-const checkProductForSupplier = async (supplierId, productId)=>{
-    try {
-        const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].product.findMany({
-            where: {
-                id: productId,
-                OR: [
-                    {
-                        isVisibleToAll: true
-                    },
-                    {
-                        supplierVisibility: {
-                            some: {
-                                supplierId: supplierId,
-                                deletedAt: null
-                            }
-                        }
-                    }
-                ]
-            },
-            include: {
-                variants: true,
-                supplierVisibility: true
-            }
-        });
-        if (!product) {
-            return {
-                status: false,
-                message: "Product not found",
-                existsInProduct: false,
-                existsInSupplierProduct: false
-            };
-        }
-        // 2. Check if product exists for the given supplier
-        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
-            where: {
-                supplierId,
-                productId
-            }
-        });
-        if (!supplierProduct) {
-            return {
-                status: true,
-                message: "Product exists but is not assigned to the supplier",
-                existsInProduct: true,
-                existsInSupplierProduct: false,
-                product
-            };
-        }
-        return {
-            status: true,
-            message: "Product exists and is assigned to the supplier",
-            existsInProduct: true,
-            existsInSupplierProduct: true,
-            product,
-            supplierProduct
-        };
-    } catch (error) {
-        console.error("Error checking product for supplier:", error);
-        return {
-            status: false,
-            message: "Internal server error",
-            existsInProduct: false,
-            existsInSupplierProduct: false
-        };
-    }
-};
-const checkSupplierProductForSupplier = async (supplierId, supplierProductId)=>{
-    try {
-        // Check if the supplier product exists for the given supplier
-        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
-            where: {
-                id: supplierProductId,
-                supplierId
-            },
-            include: {
-                product: true,
-                supplier: true,
-                variants: {
-                    include: {
-                        variant: true
-                    }
-                }
-            }
-        });
-        if (!supplierProduct) {
-            return {
-                status: true,
-                message: "Supplier product not found or not assigned to the supplier.",
-                existsInSupplierProduct: false,
-                supplierProduct: null
-            };
-        }
-        return {
-            status: true,
-            message: "Supplier product exists and is assigned to the supplier.",
-            existsInSupplierProduct: true,
-            supplierProduct: serializeBigInt(supplierProduct)
-        };
-    } catch (error) {
-        console.error("❌ Error checking supplier product for supplier:", error);
-        return {
-            status: false,
-            message: "Internal server error while checking supplier product.",
-            existsInSupplierProduct: false,
-            supplierProduct: null
-        };
-    }
-};
-const restoreSupplierProduct = async (supplierId, supplierRole, id)=>{
-    try {
-        const updatedAt = new Date();
-        // Step 1: Restore the supplier product
-        const restoredSupplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.update({
-            where: {
-                id
-            },
-            data: {
-                deletedBy: null,
-                deletedAt: null,
-                deletedByRole: null,
-                updatedBy: supplierId,
-                updatedByRole: supplierRole,
-                updatedAt
-            }
-        });
-        // Step 2: Restore all associated supplierProductVariants
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.updateMany({
-            where: {
-                supplierProductId: id
-            },
-            data: {
-                deletedBy: null,
-                deletedAt: null,
-                deletedByRole: null,
-                updatedBy: supplierId,
-                updatedByRole: supplierRole,
-                updatedAt
-            }
-        });
-        return {
-            status: true,
-            message: "Supplier product and variants restored successfully.",
-            restoredSupplierProduct: serializeBigInt(restoredSupplierProduct)
-        };
-    } catch (error) {
-        console.error("❌ restoreSupplierProduct Error:", error);
-        return {
-            status: false,
-            message: "Error restoring supplier product."
-        };
-    }
-};
-const softDeleteSupplierProduct = async (supplierId, supplierRole, id)=>{
-    try {
-        const deletedAt = new Date();
-        // Step 1: Soft delete supplierProduct
-        const updatedSupplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.update({
-            where: {
-                id
-            },
-            data: {
-                deletedBy: supplierId,
-                deletedByRole: supplierRole,
-                deletedAt
-            }
-        });
-        // Step 2: Soft delete all related supplierProductVariants
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.updateMany({
-            where: {
-                supplierProductId: id
-            },
-            data: {
-                deletedBy: supplierId,
-                deletedByRole: supplierRole,
-                deletedAt
-            }
-        });
-        return {
-            status: true,
-            message: "Supplier product and its variants soft deleted successfully.",
-            updatedSupplierProduct
-        };
-    } catch (error) {
-        console.error("❌ softDeleteSupplierProduct Error:", error);
-        return {
-            status: false,
-            message: "Error soft deleting supplier product."
-        };
-    }
-};
-const deleteSupplierProduct = async (id)=>{
-    try {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.delete({
-            where: {
-                id
-            }
-        });
-        return {
-            status: true,
-            message: "Supplier Product deleted successfully"
-        };
-    } catch (error) {
-        console.error("❌ deleteProduct Error:", error);
-        return {
-            status: false,
-            message: "Error deleting supplier product"
-        };
-    }
-};
-const getSupplierProductById = async (id)=>{
-    try {
-        const supplierProduct = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProduct.findFirst({
-            where: {
-                id
-            },
-            select: {
-                id: true
-            }
-        });
-        if (!supplierProduct) {
-            return {
-                status: false,
-                message: "Supplier product not found.",
-                product: null
-            };
-        }
-        return {
-            status: true,
-            message: "Supplier product ID fetched successfully.",
-            supplierProduct: serializeBigInt(supplierProduct)
-        };
-    } catch (error) {
-        console.error("❌ Error in getSupplierProductById:", error);
-        return {
-            status: false,
-            message: "Internal server error.",
-            product: null
-        };
-    }
-};
-const getSupplierProductVariantById = async (id)=>{
-    try {
-        const supplierProductVariant = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].supplierProductVariant.findFirst({
-            where: {
-                id
-            },
-            select: {
-                id: true
-            }
-        });
-        if (!supplierProductVariant) {
-            return {
-                status: false,
-                message: "Supplier product variant not found.",
-                supplierProductVariant: null
-            };
-        }
-        return {
-            status: true,
-            message: "Supplier product variant ID fetched successfully.",
-            supplierProductVariant: serializeBigInt(supplierProductVariant)
-        };
-    } catch (error) {
-        console.error("❌ Error in getSupplierProductVariantById:", error);
-        return {
-            status: false,
-            message: "Internal server error.",
-            product: null
-        };
-    }
-};
-}}),
-"[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "getAppConfig": (()=>getAppConfig)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") {
-        return obj.toString();
-    }
-    if (obj instanceof Date) {
-        // Return Date object unchanged, no conversion
-        return obj;
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
-    }
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-const getAppConfig = async ()=>{
-    try {
-        const appConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].appConfig.findFirst({
-            where: {
-                status: true
-            },
-            orderBy: {
-                id: "desc"
-            }
-        });
-        if (!appConfig) {
-            return {
-                status: false,
-                message: "AppConfig not found"
-            };
-        }
-        return {
-            status: true,
-            appConfig: serializeBigInt(appConfig)
-        };
-    } catch (error) {
-        console.error("❌ getAppConfig Error:", error);
-        return {
-            status: false,
-            message: "Error fetching AppConfig"
-        };
-    }
-};
-}}),
-"[project]/src/app/models/admin/globalPermission.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "getAllGlobalPermissions": (()=>getAllGlobalPermissions),
-    "getAllGlobalPermissionsByStatus": (()=>getAllGlobalPermissionsByStatus),
-    "getGlobalPermissionById": (()=>getGlobalPermissionById),
-    "getGlobalPermissionsByFilter": (()=>getGlobalPermissionsByFilter),
-    "getGlobalPermissionsByStatus": (()=>getGlobalPermissionsByStatus),
-    "updateGlobalPermissions": (()=>updateGlobalPermissions)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
-;
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") {
-        return obj.toString();
-    }
-    if (obj instanceof Date) {
-        // Return Date object unchanged, no conversion
-        return obj;
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(serializeBigInt);
-    }
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-const getGlobalPermissionById = async (id)=>{
-    try {
-        const permission = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.findUnique({
-            where: {
-                id
-            }
-        });
-        if (!permission) return {
-            status: false,
-            message: "Permission not found"
-        };
-        return {
-            status: true,
-            permission: serializeBigInt(permission)
-        };
-    } catch (error) {
-        console.error("❌ getPermissionById Error:", error);
-        return {
-            status: false,
-            message: "Error fetching permission"
-        };
-    }
-};
-const getAllGlobalPermissions = async ()=>{
-    try {
-        const permissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.findMany({
-            orderBy: {
-                id: 'desc'
-            }
-        });
-        return {
-            status: true,
-            permissions: serializeBigInt(permissions)
-        };
-    } catch (error) {
-        console.error("❌ getAllPermissions Error:", error);
-        return {
-            status: false,
-            message: "Error fetching permissions"
-        };
-    }
-};
-const getGlobalPermissionsByFilter = async (filter = {})=>{
-    try {
-        const permission = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.findFirst({
-            where: {
-                ...filter.panel ? {
-                    panel: filter.panel
-                } : {},
-                ...filter.module ? {
-                    module: filter.module
-                } : {},
-                ...filter.action ? {
-                    action: filter.action
-                } : {}
-            },
-            orderBy: {
-                id: 'desc'
-            }
-        });
-        if (!permission) {
-            return {
-                status: false,
-                message: 'Permission not found'
-            };
-        }
-        if (!permission.status) {
-            return {
-                status: false,
-                message: 'Access Denied'
-            };
-        }
-        return {
-            status: true,
-            permission: serializeBigInt(permission)
-        };
-    } catch (error) {
-        console.error('❌ getGlobalPermissionsByFilter Error:', error);
-        return {
-            status: false,
-            message: 'Error fetching global permission'
-        };
-    }
-};
-const getAllGlobalPermissionsByStatus = async (status)=>{
-    try {
-        let whereCondition;
-        switch(status){
-            case "active":
-                whereCondition = {
-                    status: true,
-                    deletedAt: null
-                };
-                break;
-            case "inactive":
-                whereCondition = {
-                    status: false,
-                    deletedAt: null
-                };
-                break;
-            case "deleted":
-                whereCondition = {
-                    deletedAt: {
-                        not: null
-                    }
-                };
-                break;
-            case "notDeleted":
-                whereCondition = {
-                    deletedAt: null
-                };
-                break;
-            default:
-                throw new Error("Invalid status");
-        }
-        const permissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.findMany({
-            where: whereCondition,
-            orderBy: {
-                id: "desc"
-            }
-        });
-        return {
-            status: true,
-            permissions: serializeBigInt(permissions)
-        };
-    } catch (error) {
-        console.error(`Error fetching permissions by status (${status}):`, error);
-        return {
-            status: false,
-            message: "Error fetching permissions"
-        };
-    }
-};
-const getGlobalPermissionsByStatus = async (status)=>{
-    try {
-        let whereCondition = {
-            panel: "admin"
-        };
-        switch(status){
-            case "active":
-                whereCondition = {
-                    ...whereCondition,
-                    status: true,
-                    deletedAt: null
-                };
-                break;
-            case "inactive":
-                whereCondition = {
-                    ...whereCondition,
-                    status: false,
-                    deletedAt: null
-                };
-                break;
-            case "deleted":
-                whereCondition = {
-                    ...whereCondition,
-                    deletedAt: {
-                        not: null
-                    }
-                };
-                break;
-            case "notDeleted":
-                whereCondition = {
-                    ...whereCondition,
-                    deletedAt: null
-                };
-                break;
-            default:
-                throw new Error("Invalid status");
-        }
-        const permissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.findMany({
-            where: whereCondition,
-            orderBy: {
-                id: "desc"
-            }
-        });
-        return {
-            status: true,
-            permissions: serializeBigInt(permissions)
-        };
-    } catch (error) {
-        console.error(`Error fetching permissions by status (${status}):`, error);
-        return {
-            status: false,
-            message: "Error fetching permissions"
-        };
-    }
-};
-const updateGlobalPermissions = async (adminId, adminRole, payload)=>{
-    try {
-        const updates = payload.permissions.map(({ permissionId, status })=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].globalPermission.update({
-                where: {
-                    id: permissionId
-                },
-                data: {
-                    status,
-                    updatedAt: payload.updatedAt,
-                    updatedBy: payload.updatedBy,
-                    updatedByRole: payload.updatedByRole
-                }
-            }));
-        const result = await Promise.all(updates);
-        return {
-            status: true,
-            updatedPermissions: serializeBigInt(result)
-        };
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])("error", "Failed to update permissions", error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-};
-}}),
-"[project]/src/app/api/dropshipper/product/my-inventory/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/supplier/order/warehouse-collected/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -12281,17 +11304,14 @@ __turbopack_context__.s({
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/product.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/dropshipper/shopify.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/supplier/product.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/order.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$globalPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/admin/globalPermission.ts [app-route] (ecmascript)");
-;
-;
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$order$2f$permission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/supplier/order/permission.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/supplier/order/order.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -12303,41 +11323,30 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admi
 ;
 async function GET(req) {
     try {
-        const urlParams = req.nextUrl.searchParams;
-        const categoryId = urlParams.get('category');
-        const brandId = urlParams.get('brand');
-        const rawStatus = (urlParams.get('status') ?? '').trim().toLowerCase();
-        const rawType = (urlParams.get('type') ?? '').trim().toLowerCase();
-        const statusMap = {
-            active: 'active',
-            inactive: 'inactive',
-            deleted: 'deleted',
-            notdeleted: 'notDeleted'
-        };
-        const validTypes = [
-            'all',
-            'my',
-            'notmy'
-        ];
-        const status = statusMap[rawStatus] ?? 'notDeleted';
-        const type = validTypes.includes(rawType) ? rawType : 'all';
-        const dropshipperId = Number(req.headers.get('x-dropshipper-id'));
-        const dropshipperRole = req.headers.get('x-dropshipper-role');
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
-            dropshipperId,
-            dropshipperRole
+        const supplierIdHeader = req.headers.get('x-supplier-id');
+        const supplierRole = req.headers.get('x-supplier-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier headers received', {
+            supplierIdHeader,
+            supplierRole
         });
-        if (!dropshipperId || isNaN(dropshipperId)) {
+        const supplierId = Number(supplierIdHeader);
+        if (!supplierIdHeader || isNaN(supplierId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID', {
+                supplierIdHeader
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                error: 'Invalid or missing dropshipper ID'
+                error: 'Invalid or missing supplier ID'
             }, {
                 status: 400
             });
         }
-        let mainDropshipperId = dropshipperId;
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(supplierId, String(supplierRole));
         if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'User not found', {
+                supplierId,
+                supplierRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
                 error: `User Not Found: ${userCheck.message}`
@@ -12345,38 +11354,193 @@ async function GET(req) {
                 status: 404
             });
         }
+        let mainSupplierId = supplierId;
         const isStaffUser = ![
             'admin',
             'dropshipper',
             'supplier'
-        ].includes(String(dropshipperRole));
+        ].includes(String(supplierRole));
+        let assignedPermissions = [];
+        let staffPermissionApplied = false;
         if (isStaffUser) {
-            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+            const supplierPermissionCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkStaffPermissionStatus"])({
+                panel: 'supplier',
+                module: 'order',
+                action: 'Warehouse Collected'
+            }, supplierId);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier permissions result', supplierPermissionCheck);
+            if (!supplierPermissionCheck.status) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: supplierPermissionCheck.message || "You do not have permission to perform this action."
+                }, {
+                    status: 403
+                });
+            }
+            const orderVariablePermissionCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getStaffPermissionsByStaffId"])({
+                panel: 'supplier',
+                module: 'Order Variables'
+            }, supplierId);
+            mainSupplierId = userCheck.admin?.admin?.id ?? supplierId;
+            staffPermissionApplied = true;
+            assignedPermissions = orderVariablePermissionCheck?.assignedPermissions || [];
         }
-        const filters = {};
-        if (categoryId) filters.categoryId = Number(categoryId);
-        if (brandId) filters.brandId = Number(brandId);
-        const productsResult = categoryId || brandId ? await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByFiltersAndStatus"])(type, filters, mainDropshipperId, status) : await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getProductsByStatus"])(type, mainDropshipperId, status);
-        const shopifyAppsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoresByDropshipperId"])(mainDropshipperId);
-        const appConfigResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getAppConfig"])();
-        const appConfig = appConfigResult.appConfig;
-        const shippingCost = appConfig ? appConfig.shippingCost || 0 : 0;
+        const searchParams = req.nextUrl.searchParams;
+        const fromRaw = searchParams.get('from');
+        const toRaw = searchParams.get('to');
+        const parseDate = (value, outputFormat)=>{
+            if (!value) return null;
+            console.log(`outputFormat - `, outputFormat);
+            const patterns = [
+                {
+                    regex: /^(\d{2})-(\d{2})-(\d{4})$/,
+                    order: [
+                        'year',
+                        'month',
+                        'day'
+                    ]
+                },
+                {
+                    regex: /^(\d{4})-(\d{2})-(\d{2})$/,
+                    order: [
+                        'year',
+                        'month',
+                        'day'
+                    ]
+                },
+                {
+                    regex: /^(\d{2})\/(\d{2})\/(\d{4})$/,
+                    order: [
+                        'year',
+                        'month',
+                        'day'
+                    ]
+                },
+                {
+                    regex: /^(\d{4})\/(\d{2})\/(\d{2})$/,
+                    order: [
+                        'year',
+                        'month',
+                        'day'
+                    ]
+                }
+            ];
+            for (const { regex } of patterns){
+                const match = value.match(regex);
+                if (match) {
+                    const [, a, b, c] = match;
+                    const [year, month, day] = regex === patterns[0].regex || regex === patterns[2].regex ? [
+                        c,
+                        b,
+                        a
+                    ] : [
+                        a,
+                        b,
+                        c
+                    ];
+                    const parsed = new Date(`${year}-${month}-${day}`);
+                    if (!isNaN(parsed.getTime())) {
+                        return parsed.toISOString().split('T')[0]; // YYYY-MM-DD
+                    }
+                }
+            }
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to parse date', {
+                value
+            });
+            return null;
+        };
+        const fromDate = parseDate(fromRaw, 'YYYY-MM-DD') || '';
+        const toDate = parseDate(toRaw, 'YYYY-MM-DD') || '';
+        const ordersResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrdersByTypeForSupplierReporting"])('warehouseCollected', mainSupplierId, fromDate, toDate);
+        const orders = ordersResult.orders || [];
+        if (!ordersResult?.status) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: ordersResult.message
+            }, {
+                status: 404
+            });
+        }
+        const configResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getAppConfig"])();
+        const appConfig = configResult.appConfig;
+        if (!configResult.status || !appConfig) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'No app config found'
+            }, {
+                status: 404
+            });
+        }
+        const reportAnalytics = {
+            shipowl: {
+                orderCount: 0,
+                totalProductCost: 0,
+                deliveredOrder: 0,
+                rtoOrder: 0
+            },
+            selfship: {
+                prepaid: {
+                    orderCount: 0,
+                    totalProductCost: 0,
+                    deliveredOrder: 0,
+                    rtoOrder: 0
+                },
+                postpaid: {
+                    orderCount: 0,
+                    totalProductCost: 0,
+                    deliveredOrder: 0,
+                    rtoOrder: 0
+                }
+            }
+        };
+        if (orders.length !== 0) {
+            for (const order of orders){
+                const orderItems = order.items || [];
+                const isPostpaid = order.isPostpaid;
+                const orderType = isPostpaid ? 'postpaid' : 'prepaid';
+                let shipOwlInOrder = false;
+                for (const item of orderItems){
+                    const quantity = Number(item.quantity) || 0;
+                    const variant = item.dropshipperVariant?.supplierProductVariant;
+                    if (!variant) continue;
+                    const model = variant.variant?.model?.toLowerCase() || '';
+                    if (model === 'shipowl') {
+                        shipOwlInOrder = true;
+                        if (order.delivered) {
+                            reportAnalytics.shipowl.deliveredOrder++;
+                            reportAnalytics.shipowl.totalProductCost += quantity * (variant.price || 0);
+                        } else if (order.rtoDelivered) {
+                            reportAnalytics.shipowl.rtoOrder++;
+                        }
+                    } else if (model === 'selfship') {
+                        const section = reportAnalytics.selfship[orderType];
+                        section.deliveredOrder++;
+                        section.totalProductCost += quantity * (variant.price || 0);
+                    }
+                }
+                if (shipOwlInOrder) {
+                    reportAnalytics.shipowl.orderCount++;
+                }
+            }
+        }
+        const supplierPermissionsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$order$2f$permission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getPermissions"])();
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: true,
-            products: productsResult?.products,
-            shopifyStores: shopifyAppsResult?.shopifyStores || [],
-            type,
-            shippingCost
+            reportAnalytics,
+            orders,
+            permissions: supplierPermissionsResult.permissions,
+            staffPermissionApplied,
+            assignedPermissions
         }, {
             status: 200
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching products', {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Internal error occurred', {
             error
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error: 'Failed to fetch products due to an internal error'
+            error: 'Failed to fetch orders due to an internal error'
         }, {
             status: 500
         });
@@ -12384,21 +11548,30 @@ async function GET(req) {
 }
 async function POST(req) {
     try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'POST request received for product creation');
-        const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
-        const dropshipperRole = req.headers.get('x-dropshipper-role');
-        const dropshipperId = Number(dropshipperIdHeader);
-        if (!dropshipperIdHeader || isNaN(dropshipperId)) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid dropshipper ID: ${dropshipperIdHeader}`);
+        const supplierIdHeader = req.headers.get('x-supplier-id');
+        const supplierRole = req.headers.get('x-supplier-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier headers received', {
+            supplierIdHeader,
+            supplierRole
+        });
+        const supplierId = Number(supplierIdHeader);
+        if (!supplierIdHeader || isNaN(supplierId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid supplier ID', {
+                supplierIdHeader
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Missing or invalid dropshipper ID in request.'
+                status: false,
+                error: 'Invalid or missing supplier ID'
             }, {
                 status: 400
             });
         }
-        let mainDropshipperId = dropshipperId;
-        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(supplierId, String(supplierRole));
         if (!userCheck.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'User not found', {
+                supplierId,
+                supplierRole
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
                 error: `User Not Found: ${userCheck.message}`
@@ -12406,36 +11579,36 @@ async function POST(req) {
                 status: 404
             });
         }
-        const globalOptions = {
-            panel: 'Dropshipper',
-            module: 'Product',
-            action: 'Push to Shopify'
-        };
-        const globalPermissionResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$globalPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getGlobalPermissionsByFilter"])(globalOptions);
-        if (!globalPermissionResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: globalPermissionResult.message
-            }, {
-                status: 404
-            }); //unauthroized
-        }
+        // let mainSupplierId = supplierId;
         const isStaffUser = ![
             'admin',
             'dropshipper',
             'supplier'
-        ].includes(String(dropshipperRole));
+        ].includes(String(supplierRole));
         if (isStaffUser) {
-            mainDropshipperId = userCheck.admin?.admin?.id ?? dropshipperId;
+            const supplierPermissionCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkStaffPermissionStatus"])({
+                panel: 'supplier',
+                module: 'order',
+                action: 'Warehouse Collected'
+            }, supplierId);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier permissions result', supplierPermissionCheck);
+            if (!supplierPermissionCheck.status) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    status: false,
+                    message: supplierPermissionCheck.message || "You do not have permission to perform this action."
+                }, {
+                    status: 403
+                });
+            }
         }
         const requiredFields = [
-            'supplierProductId'
+            'orderNumber'
         ];
         const formData = await req.formData();
         const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
-            requiredFields,
+            requiredFields: requiredFields,
             patternValidations: {
-                supplierProductId: 'number'
+                orderNumber: 'string'
             }
         });
         if (!validation.isValid) {
@@ -12448,286 +11621,45 @@ async function POST(req) {
                 status: 400
             });
         }
-        const extractNumber = (key)=>Number(formData.get(key)) || 0;
-        const supplierProductId = extractNumber('supplierProductId');
-        const productResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkProductForDropshipper"])(mainDropshipperId, supplierProductId);
-        // if (!productResult?.status || productResult.existsInDropshipperProduct || !productResult.product?.product) {
-        if (!productResult?.status || !productResult.product?.product) {
+        const extractString = (key)=>formData.get(key) || null;
+        const orderNumber = extractString('orderNumber');
+        if (!orderNumber) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Order number is required', {
+                orderNumber
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 status: false,
-                message: productResult.message
+                error: 'Order number is required'
+            }, {
+                status: 400
+            });
+        }
+        const orderResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createWarehouseCollected"])(orderNumber);
+        if (!orderResult.status || !orderResult.order) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Failed to create warehouse collected', {
+                orderResult
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: orderResult.message || 'Failed to create warehouse collected'
             }, {
                 status: 404
             });
         }
-        const mainProduct = productResult.product?.product;
-        const rawVariants = formData.get('variants');
-        let parsedVariants = [];
-        if (rawVariants) {
-            try {
-                parsedVariants = JSON.parse(rawVariants);
-                if (!Array.isArray(parsedVariants)) {
-                    throw new Error('Variants must be an array.');
-                }
-                const variantsWithStatus = await Promise.all(parsedVariants.map(async (variant, index)=>{
-                    const errors = [];
-                    if (!variant.variantId || isNaN(variant.variantId)) errors.push('variantId must be a number');
-                    if (!variant.price || isNaN(variant.price)) errors.push('price must be a number');
-                    const variantResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$supplier$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getSupplierProductVariantById"])(variant.variantId);
-                    if (!variantResult.status) {
-                        // Skip this variant by returning null or undefined
-                        return null;
-                    }
-                    return {
-                        variantId: Number(variant.variantId),
-                        price: Number(variant.price),
-                        status: typeof variant.status === 'boolean' ? variant.status : true,
-                        errors,
-                        index
-                    };
-                }));
-                // Filter out any null (invalid) variants
-                parsedVariants = variantsWithStatus.filter((v)=>v !== null);
-                const variantErrors = parsedVariants.filter((v)=>v.errors.length > 0);
-                if (variantErrors.length > 0) {
-                    const errorDetails = variantErrors.map((v)=>`Variant at index ${v.index}: ${v.errors.join(', ')}`).join('; ');
-                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                        status: false,
-                        message: 'Variant validation failed',
-                        error: errorDetails
-                    }, {
-                        status: 400
-                    });
-                }
-            } catch (error) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: 'Invalid variants JSON format.',
-                    error
-                }, {
-                    status: 400
-                });
-            }
-        }
-        const shopifyAppId = extractNumber('shopifyApp');
-        let shopifyApp;
-        if (shopifyAppId && !isNaN(shopifyAppId)) {
-            const shopifyAppResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoreByIdForDropshipper"])(shopifyAppId, mainDropshipperId);
-            if (!shopifyAppResult.status) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: shopifyAppResult.message
-                }, {
-                    status: 400
-                });
-            }
-            shopifyApp = shopifyAppResult.shopifyStore;
-        } else {
-            const shopifyAppsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$shopify$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getShopifyStoresByDropshipperId"])(mainDropshipperId);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: 'Missing or invalid Shopify store ID. Using all stores instead.',
-                shopifyStores: shopifyAppsResult.shopifyStores || []
-            }, {
-                status: 400
-            });
-        }
-        if (!shopifyApp) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: 'Shopify store data is unavailable. Please verify the input.'
-            }, {
-                status: 400
-            });
-        }
-        const productPayload = {
-            supplierProductId,
-            dropshipperId: mainDropshipperId,
-            variants: parsedVariants,
-            createdBy: mainDropshipperId,
-            createdByRole: dropshipperRole
-        };
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Creating product with payload:', productPayload);
-        const productCreateResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$dropshipper$2f$product$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createDropshipperProduct"])(mainDropshipperId, String(dropshipperRole), productPayload);
-        if (productCreateResult?.status) {
-            const shopDomain = shopifyApp.shop;
-            const accessToken = shopifyApp.accessToken;
-            const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION;
-            const APP_HOST = process.env.URL || '';
-            try {
-                const shopifyImages = [
-                    mainProduct.package_weight_image,
-                    mainProduct.package_length_image,
-                    mainProduct.package_width_image,
-                    mainProduct.package_height_image
-                ].filter((src)=>typeof src === 'string' && src.trim() !== '').map((src)=>({
-                        src: APP_HOST + src
-                    }));
-                const shopifyProductPayload = {
-                    product: {
-                        title: mainProduct?.name,
-                        body_html: mainProduct?.description,
-                        images: shopifyImages,
-                        variants: parsedVariants.map((v)=>({
-                                price: v.price.toFixed(2),
-                                option1: `Variant ${v.variantId}`
-                            }))
-                    }
-                };
-                console.log('shopifyProductPayload - ', shopifyProductPayload);
-                console.log('shopifyProductPayload.product.images - ', shopifyProductPayload.product.images);
-                console.log('shopifyProductPayload.product.variants - ', shopifyProductPayload.product.variants);
-                const graphqlEndpoint = `https://${shopDomain}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`;
-                // Step 1: Create Product
-                const productCreateMutation = `
-                                        mutation productCreate($input: ProductInput!) {
-                                          productCreate(input: $input) {
-                                            product { id }
-                                            userErrors { field message }
-                                          }
-                                        }
-                                      `;
-                const productCreateVariables = {
-                    input: {
-                        title: mainProduct.name,
-                        descriptionHtml: mainProduct.description,
-                        vendor: 'App Vendor',
-                        productType: 'Dropship Product',
-                        published: true
-                    }
-                };
-                const createResp = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].post(graphqlEndpoint, {
-                    query: productCreateMutation,
-                    variables: productCreateVariables
-                }, {
-                    headers: {
-                        'X-Shopify-Access-Token': accessToken,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                console.log('[Shopify] Product Create Response:', JSON.stringify(createResp.data, null, 2));
-                const productId = createResp.data?.data?.productCreate?.product?.id;
-                const createErrors = createResp.data?.data?.productCreate?.userErrors || [];
-                if (!productId || createErrors.length > 0) {
-                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                        status: false,
-                        message: 'Product creation failed',
-                        errors: createErrors
-                    }, {
-                        status: 400
-                    });
-                }
-                // Step 2: Push Variants
-                const variantMutation = `
-                                mutation productVariantsBulkCreate($productId: ID!, $strategy: ProductVariantsBulkCreateStrategy, $variants: [ProductVariantsBulkInput!]!) {
-                                  productVariantsBulkCreate(productId: $productId, strategy: $strategy, variants: $variants) {
-                                    productVariants { id }
-                                    userErrors { field message }
-                                  }
-                                }
-                              `;
-                const variantInputs = parsedVariants.map((v)=>({
-                        price: v.price.toFixed(2),
-                        sku: `SKU-${v.variantId}`,
-                        option1: 'Default Title',
-                        inventoryItem: {
-                            tracked: true
-                        },
-                        barcode: null
-                    }));
-                const variantResp = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].post(graphqlEndpoint, {
-                    query: variantMutation,
-                    variables: {
-                        productId,
-                        strategy: 'REMOVE_STANDALONE_VARIANT',
-                        variants: variantInputs
-                    }
-                }, {
-                    headers: {
-                        'X-Shopify-Access-Token': accessToken,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                console.log('[Shopify] Variant Create Response:', JSON.stringify(variantResp.data, null, 2));
-                const variantErrors = variantResp.data?.data?.productVariantsBulkCreate?.userErrors || [];
-                if (variantErrors.length > 0) {
-                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                        status: false,
-                        message: 'Variant push failed',
-                        errors: variantErrors
-                    }, {
-                        status: 400
-                    });
-                }
-                // Step 3: Upload Media (optional)
-                const imageSources = [
-                    mainProduct.package_weight_image,
-                    mainProduct.package_length_image,
-                    mainProduct.package_width_image,
-                    mainProduct.package_height_image
-                ].filter((src)=>typeof src === 'string' && src.trim() !== '').map((src)=>APP_HOST + src);
-                if (imageSources.length > 0) {
-                    const mediaMutation = `
-                                mutation productCreateMedia($productId: ID!, $media: [CreateMediaInput!]!) {
-                                  productCreateMedia(productId: $productId, media: $media) {
-                                    mediaUserErrors { field message }
-                                  }
-                                }
-                              `;
-                    const mediaVariables = {
-                        productId,
-                        media: imageSources.map((url)=>({
-                                originalSource: url,
-                                mediaContentType: 'IMAGE'
-                            }))
-                    };
-                    const mediaResp = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].post(graphqlEndpoint, {
-                        query: mediaMutation,
-                        variables: mediaVariables
-                    }, {
-                        headers: {
-                            'X-Shopify-Access-Token': accessToken,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    console.log('[Shopify] Media Upload Response:', JSON.stringify(mediaResp.data, null, 2));
-                    const mediaErrors = mediaResp.data?.data?.productCreateMedia?.mediaUserErrors || [];
-                    if (mediaErrors.length > 0) {
-                        console.error('[Media Upload Error]', mediaErrors);
-                    }
-                }
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: true,
-                    product: productCreateResult.product,
-                    message: 'Product pushed to Shopify'
-                }, {
-                    status: 200
-                });
-            } catch (error) {
-                // Log the error if you have a logger or console
-                console.error('Shopify API error:', error);
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: 'Failed to create product on Shopify',
-                    error: error instanceof Error ? error.message : 'Unknown error'
-                }, {
-                    status: 500
-                });
-            }
-        } else {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: productCreateResult?.message || 'Failed to create product'
-            }, {
-                status: 400
-            });
-        }
-    } catch (err) {
-        const error = err instanceof Error ? err.message : 'Internal Server Error';
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Product Creation Exception:', error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: true,
+            order: orderResult.order,
+            message: 'Warehouse collected successfully'
+        }, {
+            status: 200
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Internal error occurred', {
+            error
+        });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            error
+            error: 'Failed to fetch orders due to an internal error'
         }, {
             status: 500
         });
@@ -12737,4 +11669,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__cad5793b._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__e97eaf6a._.js.map
