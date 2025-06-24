@@ -5,7 +5,7 @@ import { logMessage } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { getOrderById } from '@/app/models/order/order';
-import { getOrderItem, orderDisputeLevelTwo } from '@/app/models/order/item';
+import { orderDisputeLevelTwo } from '@/app/models/order/item';
 
 interface UploadedFile {
     url: string;

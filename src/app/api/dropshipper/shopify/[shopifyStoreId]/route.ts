@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
-import fs from 'fs/promises';
 import { logMessage } from "@/utils/commonUtils";
 import { isUserExist } from "@/utils/auth/authUtils";
 import { validateFormData } from '@/utils/validateFormData';
