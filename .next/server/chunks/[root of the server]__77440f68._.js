@@ -11168,7 +11168,7 @@ async function GET(req) {
             const supplierPermissionCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["checkStaffPermissionStatus"])({
                 panel: 'supplier',
                 module: 'order',
-                action: 'warehouse-collected'
+                action: 'Need to Raise'
             }, supplierId);
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Supplier permissions result', supplierPermissionCheck);
             if (!supplierPermissionCheck.status) {

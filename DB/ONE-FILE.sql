@@ -200,6 +200,8 @@ INSERT INTO `adminStaffPermission` (`panel`, `module`, `action`, `status`, `Crea
 
 ('supplier', 'Order', 'report', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('supplier', 'Order', 'Warehouse Collected', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'Order', 'Need to Raise', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('supplier', 'Order', 'RTO', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 
 ('supplier', 'Order Variables', 'orderNumber', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('supplier', 'Order Variables', 'awbNumber', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
@@ -230,6 +232,7 @@ INSERT INTO `adminStaffPermission` (`panel`, `module`, `action`, `status`, `Crea
 ('Dropshipper', 'Report', 'View', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('Dropshipper', 'Shopify', 'View', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('Dropshipper', 'Shopify', 'Add', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('Dropshipper', 'Shopify', 'Update', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 
 ('Dropshipper', 'Payment', 'Create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('Dropshipper', 'Payment', 'View', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
