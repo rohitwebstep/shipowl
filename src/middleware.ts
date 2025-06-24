@@ -114,6 +114,7 @@ export function middleware(req: NextRequest) {
         {
             routes: [
                 "/api/supplier",
+                "/api/supplier/",
                 "/api/supplier/list",
                 "/api/supplier/auth/verify",
                 "/api/supplier/profile",
