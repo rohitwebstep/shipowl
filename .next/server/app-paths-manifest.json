@@ -1,4 +1,3 @@
 {
-  "/api/supplier/auth/verify/route": "app/api/supplier/auth/verify/route.js",
-  "/api/supplier/order/need-to-raise/[orderId]/dispute-2/route": "app/api/supplier/order/need-to-raise/[orderId]/dispute-2/route.js"
+  "/api/admin/brand/route": "app/api/admin/brand/route.js"
 }
