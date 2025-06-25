@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/supplier/order/need-to-raise/[orderId]/dispute-2/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/supplier/order/need-to-raise/dispute-1/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -50,14 +50,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("path", () => require("path"));
 
 module.exports = mod;
 }}),
@@ -8070,6 +8062,14 @@ decimal.js/decimal.mjs:
    *)
 */  //# sourceMappingURL=library.js.map
 }}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -9808,285 +9808,6 @@ async function isUserExist(adminId, adminRole) {
     }
 }
 }}),
-"[externals]/fs/promises [external] (fs/promises, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
-
-module.exports = mod;
-}}),
-"[externals]/tls [external] (tls, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tls", () => require("tls"));
-
-module.exports = mod;
-}}),
-"[externals]/net [external] (net, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("net", () => require("net"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/saveFiles.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "deleteFile": (()=>deleteFile),
-    "saveFilesFromFormData": (()=>saveFilesFromFormData)
-});
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs [external] (fs, cjs)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$basic$2d$ftp$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/basic-ftp/dist/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
-;
-;
-;
-;
-;
-// Load from env or replace with your actual values
-const ftpConfig = {
-    host: process.env.FTP_HOST || 'ftp.example.com',
-    user: process.env.FTP_USER || 'ftpuser',
-    password: process.env.FTP_PASSWORD || 'ftppassword',
-    secure: false,
-    remoteDir: '',
-    publicUrlBase: process.env.FTP_FILE_HOST || 'https://cdn.example.com/uploads'
-};
-// Helper: ensure directory exists
-async function ensureDir(dirPath) {
-    if (!__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(dirPath)) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📁 Directory not found. Creating:', dirPath);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(dirPath, {
-            recursive: true
-        });
-    } else {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '✅ Directory already exists:', dirPath);
-    }
-}
-// Helper: generate file name
-function generateFileName(originalName, pattern, customName) {
-    const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(originalName);
-    const base = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(originalName, ext);
-    switch(pattern){
-        case 'original':
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📝 Using original filename:', originalName);
-            return originalName;
-        case 'custom':
-            const name = `${customName}${ext}`;
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📝 Using custom filename:', name);
-            return name;
-        case 'slug':
-            const slug = base.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const slugName = `${slug}${ext}`;
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📝 Using slug filename:', slugName);
-            return slugName;
-        case 'slug-unique':
-            const unique = `${base.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
-            const slugUniqueName = `${unique}${ext}`;
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📝 Using slug-unique filename:', slugUniqueName);
-            return slugUniqueName;
-        default:
-            return originalName;
-    }
-}
-// Upload file to FTP
-async function uploadToFTP(localPath, remoteFileName) {
-    const client = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$basic$2d$ftp$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["Client"]();
-    try {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '🚀 Connecting to FTP...');
-        await client.access({
-            host: ftpConfig.host,
-            user: ftpConfig.user,
-            password: ftpConfig.password,
-            secure: ftpConfig.secure || false
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '✅ FTP connection established');
-        const relativePath = localPath.split(/uploads[\\/]/)[1]?.replace(/\\/g, '/') || '';
-        const dirPath = relativePath.replace(new RegExp(`${remoteFileName}$`), '').replace(/\/+$/, '');
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📦 Local file path:', localPath);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', `📁 Relative path after 'uploads':`, relativePath);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📂 Nested FTP directory to ensure:', dirPath);
-        // Go to root
-        await client.cd('/');
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', "📍 Changed to FTP root '/'");
-        // If remoteDir is set, change to it or create it
-        if (ftpConfig.remoteDir) {
-            const baseFolders = ftpConfig.remoteDir.split('/').filter(Boolean);
-            for (const folder of baseFolders){
-                try {
-                    await client.cd(folder);
-                } catch  {
-                    await client.send(`MKD ${folder}`);
-                    await client.cd(folder);
-                }
-            }
-        }
-        // Manually create nested directories
-        const dirParts = dirPath.split('/').filter(Boolean);
-        for (const folder of dirParts){
-            try {
-                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '➡️ Ensuring nested folder:', folder);
-                await client.cd(folder); // Try to enter
-            } catch  {
-                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📁 Creating missing folder:', folder);
-                await client.send(`MKD ${folder}`);
-                await client.cd(folder);
-            }
-        }
-        // Upload the file
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📤 Uploading file:', remoteFileName);
-        await client.uploadFrom(localPath, remoteFileName);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '✅ Successfully uploaded:', remoteFileName);
-        await client.close();
-        const publicUrl = `${ftpConfig.publicUrlBase}/${dirPath ? dirPath + '/' : ''}${remoteFileName}`;
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '🔗 Public file URL:', publicUrl);
-        return publicUrl;
-    } catch (err) {
-        console.error(`❌ FTP upload failed:`, err);
-        await client.close();
-        return null;
-    }
-}
-async function saveFilesFromFormData(formData, fieldName, options) {
-    const { dir, pattern, customName, multiple = false } = options;
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '🚀 Starting file save from field: ', fieldName);
-    await ensureDir(dir);
-    let result = multiple ? [] : null;
-    const files = formData.getAll(fieldName).filter((item)=>item instanceof File && item.name.length > 0);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', '📦 Total files to process: ', files.length);
-    for(let index = 0; index < files.length; index++){
-        const file = files[index];
-        const nameToUse = pattern === 'custom' && multiple ? `${customName}-${index + 1}` : pattern === 'custom' ? customName : file.name;
-        const finalFileName = generateFileName(nameToUse, pattern, nameToUse);
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const fullPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(dir, finalFileName);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(fullPath, buffer);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('log', 'fullPath - ', fullPath);
-        // Upload to FTP
-        const ftpUrl = await uploadToFTP(fullPath, finalFileName);
-        const info = {
-            originalName: file.name,
-            savedAs: finalFileName,
-            size: file.size,
-            type: file.type,
-            url: ftpUrl || `/uploads/fallback/${finalFileName}`
-        };
-        if (multiple && Array.isArray(result)) {
-            result.push(info);
-        } else {
-            result = info;
-        }
-    // Optional: delete local file after FTP upload
-    // await unlink(fullPath);
-    /*
-            const publicIndex = fullPath.indexOf('public');
-            const fileUrl = publicIndex !== -1
-                ? fullPath.split('public')[1].replace(/\\/g, '/')
-                : fullPath;
-
-            const info: UploadedFileInfo = {
-                originalName: file.name,
-                savedAs: finalFileName,
-                size: file.size,
-                type: file.type,
-                url: `${fileUrl}`,
-            };
-
-            if (multiple && Array.isArray(result)) {
-                result.push(info);
-            } else {
-                result = info;
-            }
-        */ }
-    return result;
-}
-async function deleteFile(filePath) {
-    try {
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["stat"])(filePath); // Throws if file doesn't exist
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
-        return true;
-    } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', `File not found or couldn't be deleted: ${filePath}`, error);
-        return false;
-    }
-}
-}}),
-"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "validateFormData": (()=>validateFormData)
-});
-function toReadableFieldName(field) {
-    // Converts camelCase or snake_case to Title Case
-    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
-}
-function validateFormData(formData, { requiredFields = [], patternValidations = {}, fileExtensionValidations = {} }) {
-    const error = {};
-    // Required fields
-    for (const field of requiredFields){
-        const value = formData.get(field);
-        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
-            error[field] = `${toReadableFieldName(field)} is required`;
-        }
-    }
-    // Pattern validations
-    for (const [field, expectedType] of Object.entries(patternValidations)){
-        const value = formData.get(field);
-        if (value !== null) {
-            const val = typeof value === 'string' ? value.trim() : value;
-            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
-            const isInvalidBoolean = expectedType === 'boolean' && ![
-                'true',
-                'false',
-                '1',
-                '0',
-                true,
-                false,
-                1,
-                0,
-                'active',
-                'inactive'
-            ].includes(val.toString().toLowerCase());
-            if (isInvalidNumber || isInvalidBoolean) {
-                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
-            }
-        }
-    }
-    // File extension validations
-    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations)){
-        const file = formData.get(field);
-        if (file instanceof File) {
-            const fileName = file.name.toLowerCase();
-            const fileExtension = fileName.split('.').pop() || '';
-            if (!allowedExtensions.map((ext)=>ext.toLowerCase()).includes(fileExtension)) {
-                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
-            }
-        } else if (file !== null) {
-            error[field] = `${toReadableFieldName(field)} must be a valid file`;
-        }
-    }
-    const errorCount = Object.keys(error).length;
-    return {
-        isValid: errorCount === 0,
-        ...errorCount > 0 && {
-            error
-        },
-        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
-    };
-}
-}}),
 "[project]/src/app/models/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -11502,6 +11223,14 @@ const mod = __turbopack_context__.x("zlib", () => require("zlib"));
 
 module.exports = mod;
 }}),
+"[externals]/net [external] (net, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("net", () => require("net"));
+
+module.exports = mod;
+}}),
 "[externals]/dns [external] (dns, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
@@ -11515,6 +11244,14 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("os", () => require("os"));
+
+module.exports = mod;
+}}),
+"[externals]/tls [external] (tls, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("tls", () => require("tls"));
 
 module.exports = mod;
 }}),
@@ -11587,7 +11324,74 @@ async function sendEmail(config, mailData) {
     }
 }
 }}),
-"[project]/src/app/api/supplier/order/need-to-raise/[orderId]/dispute-2/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/utils/validateFormData.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "validateFormData": (()=>validateFormData)
+});
+function toReadableFieldName(field) {
+    // Converts camelCase or snake_case to Title Case
+    return field.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (char)=>char.toUpperCase());
+}
+function validateFormData(formData, { requiredFields = [], patternValidations = {}, fileExtensionValidations = {} }) {
+    const error = {};
+    // Required fields
+    for (const field of requiredFields){
+        const value = formData.get(field);
+        if (value === null || value === '' || typeof value === 'string' && value.trim() === '') {
+            error[field] = `${toReadableFieldName(field)} is required`;
+        }
+    }
+    // Pattern validations
+    for (const [field, expectedType] of Object.entries(patternValidations)){
+        const value = formData.get(field);
+        if (value !== null) {
+            const val = typeof value === 'string' ? value.trim() : value;
+            const isInvalidNumber = expectedType === 'number' && isNaN(Number(val));
+            const isInvalidBoolean = expectedType === 'boolean' && ![
+                'true',
+                'false',
+                '1',
+                '0',
+                true,
+                false,
+                1,
+                0,
+                'active',
+                'inactive'
+            ].includes(val.toString().toLowerCase());
+            if (isInvalidNumber || isInvalidBoolean) {
+                error[field] = `${toReadableFieldName(field)} must be a valid ${expectedType}`;
+            }
+        }
+    }
+    // File extension validations
+    for (const [field, allowedExtensions] of Object.entries(fileExtensionValidations)){
+        const file = formData.get(field);
+        if (file instanceof File) {
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop() || '';
+            if (!allowedExtensions.map((ext)=>ext.toLowerCase()).includes(fileExtension)) {
+                error[field] = `${toReadableFieldName(field)} must be one of the following file types: ${allowedExtensions.join(', ')}`;
+            }
+        } else if (file !== null) {
+            error[field] = `${toReadableFieldName(field)} must be a valid file`;
+        }
+    }
+    const errorCount = Object.keys(error).length;
+    return {
+        isValid: errorCount === 0,
+        ...errorCount > 0 && {
+            error
+        },
+        message: errorCount === 0 ? 'Form submitted successfully.' : `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please correct and try again.`
+    };
+}
+}}),
+"[project]/src/app/api/supplier/order/need-to-raise/dispute-1/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -11596,17 +11400,13 @@ __turbopack_context__.s({
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/saveFiles.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/order.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/item.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/admin/emailConfig.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)");
-;
-;
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/validateFormData.ts [app-route] (ecmascript)");
 ;
 ;
 ;
@@ -11617,7 +11417,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sen
 ;
 async function POST(req) {
     try {
-        // Extract and validate supplier ID and role headers
         const supplierIdHeader = req.headers.get('x-supplier-id');
         const supplierRole = req.headers.get('x-supplier-role');
         const supplierId = Number(supplierIdHeader);
@@ -11629,7 +11428,6 @@ async function POST(req) {
                 status: 400
             });
         }
-        // Verify user existence
         const userCheck = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(supplierId, String(supplierRole));
         if (!userCheck.status) {
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `User verification failed: ${userCheck.message}`);
@@ -11639,44 +11437,13 @@ async function POST(req) {
                 status: 404
             });
         }
-        // TODO: Replace hardcoded IDs with dynamic values as needed
-        const parts = req.nextUrl.pathname.split('/');
-        const orderId = Number(parts[parts.length - 2]);
-        // Fetch order and order itemW
-        const orderResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrderById"])(orderId);
-        if (!orderResult.status || !orderResult.order) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Order not found or inaccessible. Order ID: ${orderId}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: 'Order not found or you do not have permission to access it.'
-            }, {
-                status: 404
-            });
-        }
-        /*
-            const order = orderResult.order;
-            const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-            if (order.rtoDelivered && order.rtoDeliveredDate) {
-                const rtoDeliveredTime = new Date(order.rtoDeliveredDate).getTime();
-                const now = Date.now();
-
-                if (now - rtoDeliveredTime > ONE_DAY_MS) {
-                    logMessage('warn', `Dispute period expired for order item ID: ${orderId}`);
-                    return NextResponse.json(
-                        { status: false, message: 'Dispute period of 24 hours has expired; you cannot dispute now.' },
-                        { status: 400 }
-                    );
-                }
-            }
-        */ // Validate input
         const formData = await req.formData();
         const validation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$validateFormData$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validateFormData"])(formData, {
             requiredFields: [
-                'status'
+                'orders'
             ],
             patternValidations: {
-                status: 'string'
+                orders: 'string'
             }
         });
         if (!validation.isValid) {
@@ -11689,155 +11456,136 @@ async function POST(req) {
                 status: 400
             });
         }
-        const status = formData.get('status');
+        const rawOrderIds = formData.get('orders');
+        const validOrderIds = rawOrderIds.split(',').map((id)=>id.trim()).filter((id)=>id !== '' && !isNaN(Number(id))).map(Number);
+        if (validOrderIds.length === 0) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'No valid order IDs found after validation.'
+            }, {
+                status: 400
+            });
+        }
+        const finalOrders = [];
+        const failedOrders = [];
+        const urlParams = req.nextUrl.searchParams;
+        const status = decodeURIComponent(urlParams.get('status') || 'not received');
         const allowedStatuses = [
-            'received',
-            'not received',
-            'wrong item received'
+            'not received'
         ];
-        if (!status || !allowedStatuses.includes(status.toLowerCase())) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Invalid status received: ${status}`);
+        if (!allowedStatuses.includes(status.toLowerCase())) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `Invalid status value. Allowed values are: ${allowedStatuses.join(', ')}.`
+                error: `Invalid status value. Allowed values are: ${allowedStatuses.join(', ')}`
             }, {
                 status: 400
             });
         }
-        // Handle media uploads if status is "wrong item received"
-        let uploadedMedia = {};
-        if (status.toLowerCase() === 'wrong item received') {
-            const packingFiles = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'packingGallery', {
-                dir: __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'order', orderResult.order.orderNumber, 'packing-gallery'),
-                pattern: 'slug-unique',
-                multiple: true
-            });
-            const unboxingFiles = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$saveFiles$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveFilesFromFormData"])(formData, 'unboxingGallery', {
-                dir: __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'tmp', 'uploads', 'order', orderResult.order.orderNumber, 'unboxing-gallery'),
-                pattern: 'slug-unique',
-                multiple: true
-            });
-            if (!Array.isArray(packingFiles) || !Array.isArray(unboxingFiles) || Array.isArray(packingFiles) && packingFiles.length === 0 || Array.isArray(unboxingFiles) && unboxingFiles.length === 0) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    error: 'Media upload required.',
-                    message: 'Please upload files for both packingGallery and unboxingGallery when status is "wrong item received".'
-                }, {
-                    status: 400
+        for (const orderId of validOrderIds){
+            const orderResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrderById"])(orderId);
+            if (!orderResult.status || !orderResult.order) {
+                const reason = 'Order not found or inaccessible.';
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `${reason} Order ID: ${orderId}`);
+                failedOrders.push({
+                    orderId,
+                    reason
                 });
+                continue;
             }
-            uploadedMedia = {
-                packingGallery: packingFiles.map((file)=>file.url).join(','),
-                unboxingGallery: unboxingFiles.map((file)=>file.url).join(',')
+            const payload = {
+                orderId,
+                status: 'not received',
+                disputeCase: 1
             };
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Packing and unboxing media URLs recorded successfully.');
-        }
-        // Prepare payload for update
-        const orderItemRTOPayload = {
-            orderId,
-            status,
-            uploadedMedia
-        };
-        const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["orderDisputeCaseTwo"])(orderItemRTOPayload);
-        if (!result.status) {
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', `Failed to update order item status: ${result.message}`);
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: `Failed to update order item status: ${result.message}`
-            }, {
-                status: 400
-            });
-        }
-        // Finalized dispute data
-        const finalOrders = [
-            {
+            const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$item$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["orderDisputeCaseOne"])(payload);
+            if (!result.status) {
+                const reason = result.message || 'Unknown error while updating dispute.';
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', `❌ Failed to update order item status: ${reason}`);
+                failedOrders.push({
+                    orderId,
+                    reason
+                });
+                continue;
+            }
+            finalOrders.push({
                 orderNumber: orderResult.order.orderNumber,
                 awbNumber: orderResult.order.awbNumber,
-                rtoDeliveredDate: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["formatDate"])(orderResult.order.rtoDeliveredDate, "DD-MM-YYYY"),
-                disputeDate: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["formatDate"])(new Date().toISOString().slice(0, 10), "DD-MM-YYYY")
-            }
-        ];
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("supplier", "need to raise", "dispute-2", true);
+                rtoDeliveredDate: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["formatDate"])(orderResult.order.rtoDeliveredDate, 'DD-MM-YYYY'),
+                disputeDate: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["formatDate"])(new Date(), 'DD-MM-YYYY')
+            });
+        }
+        if (finalOrders.length === 0) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                message: 'None of the disputes could be processed.',
+                failedOrders
+            }, {
+                status: 400
+            });
+        }
+        // Prepare email
+        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])('supplier', 'need to raise', 'dispute-1', true);
         if (!emailStatus || !emailConfig) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
+                status: false,
+                message: emailMessage || 'Failed to fetch email configuration.'
             }, {
                 status: 500
             });
         }
-        // Generate HTML table rows
-        const orderTableRows = finalOrders.map((order)=>{
-            return `<tr>
-                        <td>${order.orderNumber}</td>
-                        <td>${order.awbNumber}</td>
-                        <td>${order.rtoDeliveredDate || '-'}</td>
-                        <td>${order.disputeDate}</td>
-                    </tr>`;
-        }).join('');
+        const orderTableRows = finalOrders.map((order)=>`<tr>
+          <td>${order.orderNumber}</td>
+          <td>${order.awbNumber}</td>
+          <td>${order.rtoDeliveredDate || '-'}</td>
+          <td>${order.disputeDate}</td>
+        </tr>`).join('');
         const replacements = {
-            "{{orderTableRows}}": orderTableRows,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
+            '{{orderTableRows}}': orderTableRows,
+            '{{year}}': new Date().getFullYear().toString(),
+            '{{appName}}': 'Shipping OWL'
         };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear Supplier,</p><p>Your dispute has been registered successfully.</p>";
+        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : '<p>Dear Supplier,</p><p>Your dispute has been registered successfully.</p>';
         let subject = emailSubject;
         Object.entries(replacements).forEach(([key, value])=>{
             htmlBody = htmlBody.replace(new RegExp(key, 'g'), value);
             subject = subject.replace(new RegExp(key, 'g'), value);
         });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])(`table`, `uploadedMedia: `, uploadedMedia);
-        // 1. Create packaging attachments
-        const packagingAttachments = (uploadedMedia.packingGallery || '').split(',').map((path)=>path.trim()).filter((path)=>!!path).map((filePath, index)=>{
-            const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(filePath); // crude but works
-            return {
-                name: `Packaging Gallery ${index + 1}.${ext}`,
-                path: filePath
-            };
-        });
-        // 2. Create unboxing attachments
-        const unboxingAttachments = (uploadedMedia.unboxingGallery || '').split(',').map((path)=>path.trim()).filter((path)=>!!path).map((filePath, index)=>{
-            const ext = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].extname(filePath); // crude but works
-            return {
-                name: `Unboxing Gallery ${index + 1}.${ext}`,
-                path: filePath
-            };
-        });
-        // 3. Combine all valid attachments
-        const allAttachments = [
-            ...packagingAttachments,
-            ...unboxingAttachments
-        ];
         const mailData = {
             recipient: [
                 {
-                    name: `Rohit Webstep`,
-                    email: `rohitwebstep@gmail.com`
+                    name: 'Rohit Webstep',
+                    email: 'rohitwebstep@gmail.com'
                 }
             ],
             subject,
             htmlBody,
-            attachments: allAttachments
+            attachments: []
         };
         const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
         if (!emailResult.status) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Dispute raised but email notification failed.",
                 status: false,
+                message: 'Dispute raised but email notification failed.',
                 emailError: emailResult.error
             }, {
                 status: 500
             });
         }
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Order status updated successfully for orderId: ${orderId}`);
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `✅ Disputes processed: ${finalOrders.length}, ❌ Failed: ${failedOrders.length}`);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: true,
-            message: 'Order item status updated successfully.'
+            message: 'Some or all disputes processed successfully.',
+            processed: finalOrders.length,
+            failed: failedOrders.length,
+            failedOrders
         }, {
             status: 200
         });
     } catch (error) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', `Error updating order item status: ${error}`);
+        const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', `Error in dispute handling: ${errorMessage}`);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             status: false,
-            message: error || 'An unexpected error occurred while processing your request. Please try again later.'
+            error: 'An unexpected error occurred. Please try again later.'
         }, {
             status: 500
         });
@@ -11847,4 +11595,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__d4e84729._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__092fd3f3._.js.map
