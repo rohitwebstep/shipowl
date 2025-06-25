@@ -480,10 +480,18 @@ export const updateSupplierVerifyStatus = async (
         const status = ['true', '1', true, 1, 'active', 'yes'].includes(statusRaw as string | number | boolean);
 
         // Fetch current supplier details, including password based on withPassword flag
-        const { status: supplierStatus, supplier: currentDropshipper, message } = await getSupplierById(supplierId);
+        const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId);
 
-        if (!supplierStatus || !currentDropshipper) {
-            return { status: false, message: message || "Dropshipper not found." };
+        if (!supplierStatus || !currentSupplier) {
+            return { status: false, message: message || "Supplier not found." };
+        }
+
+        // Ensure email is verified before allowing onboarding
+        if (!currentSupplier.isEmailVerified || !currentSupplier.emailVerifiedAt) {
+            return {
+                status: false,
+                message: "Supplier cannot be onboarded as their email address is not verified.",
+            };
         }
 
         const updateData = {
@@ -491,12 +499,12 @@ export const updateSupplierVerifyStatus = async (
             verifiedAt: status ? new Date() : null
         };
 
-        const newDropshipper = await prisma.admin.update({
+        const newSupplier = await prisma.admin.update({
             where: { id: supplierId },
             data: updateData,
         });
 
-        return { status: true, supplier: serializeBigInt(newDropshipper) };
+        return { status: true, supplier: serializeBigInt(newSupplier) };
     } catch (error) {
         console.error(`Error updating supplier:`, error);
         return { status: false, message: "Internal Server Error" };
