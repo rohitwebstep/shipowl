@@ -6,7 +6,7 @@ import { isUserExist } from '@/utils/auth/authUtils';
 import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getOrderById } from '@/app/models/order/order';
-import { orderDisputeLevelTwo } from '@/app/models/order/item';
+import { orderDisputeCaseTwo } from '@/app/models/order/item';
 import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from '@/utils/email/sendEmail';
 
@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
             uploadedMedia,
         };
 
-        const result = await orderDisputeLevelTwo(orderItemRTOPayload);
+        const result = await orderDisputeCaseTwo(orderItemRTOPayload);
 
         if (!result.status) {
             logMessage('error', `Failed to update order item status: ${result.message}`);

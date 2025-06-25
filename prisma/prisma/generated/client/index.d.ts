@@ -42837,7 +42837,7 @@ export namespace Prisma {
     billingStateId: number | null
     billingCityId: number | null
     paymentId: number | null
-    disputeLevel: number | null
+    disputeCase: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -42856,7 +42856,7 @@ export namespace Prisma {
     billingStateId: bigint | null
     billingCityId: bigint | null
     paymentId: number | null
-    disputeLevel: number | null
+    disputeCase: number | null
     createdBy: number | null
     updatedBy: number | null
     deletedBy: number | null
@@ -42897,7 +42897,7 @@ export namespace Prisma {
     rtoDelivered: boolean | null
     rtoDeliveredDate: Date | null
     lastRefreshAt: Date | null
-    disputeLevel: number | null
+    disputeCase: number | null
     supplierRTOResponse: string | null
     packingGallery: string | null
     unboxingGallery: string | null
@@ -42948,7 +42948,7 @@ export namespace Prisma {
     rtoDelivered: boolean | null
     rtoDeliveredDate: Date | null
     lastRefreshAt: Date | null
-    disputeLevel: number | null
+    disputeCase: number | null
     supplierRTOResponse: string | null
     packingGallery: string | null
     unboxingGallery: string | null
@@ -43000,7 +43000,7 @@ export namespace Prisma {
     rtoDelivered: number
     rtoDeliveredDate: number
     lastRefreshAt: number
-    disputeLevel: number
+    disputeCase: number
     supplierRTOResponse: number
     packingGallery: number
     unboxingGallery: number
@@ -43031,7 +43031,7 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
-    disputeLevel?: true
+    disputeCase?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -43050,7 +43050,7 @@ export namespace Prisma {
     billingStateId?: true
     billingCityId?: true
     paymentId?: true
-    disputeLevel?: true
+    disputeCase?: true
     createdBy?: true
     updatedBy?: true
     deletedBy?: true
@@ -43091,7 +43091,7 @@ export namespace Prisma {
     rtoDelivered?: true
     rtoDeliveredDate?: true
     lastRefreshAt?: true
-    disputeLevel?: true
+    disputeCase?: true
     supplierRTOResponse?: true
     packingGallery?: true
     unboxingGallery?: true
@@ -43142,7 +43142,7 @@ export namespace Prisma {
     rtoDelivered?: true
     rtoDeliveredDate?: true
     lastRefreshAt?: true
-    disputeLevel?: true
+    disputeCase?: true
     supplierRTOResponse?: true
     packingGallery?: true
     unboxingGallery?: true
@@ -43194,7 +43194,7 @@ export namespace Prisma {
     rtoDelivered?: true
     rtoDeliveredDate?: true
     lastRefreshAt?: true
-    disputeLevel?: true
+    disputeCase?: true
     supplierRTOResponse?: true
     packingGallery?: true
     unboxingGallery?: true
@@ -43333,7 +43333,7 @@ export namespace Prisma {
     rtoDelivered: boolean
     rtoDeliveredDate: Date | null
     lastRefreshAt: Date | null
-    disputeLevel: number | null
+    disputeCase: number | null
     supplierRTOResponse: string | null
     packingGallery: string | null
     unboxingGallery: string | null
@@ -43404,7 +43404,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: boolean
     lastRefreshAt?: boolean
-    disputeLevel?: boolean
+    disputeCase?: boolean
     supplierRTOResponse?: boolean
     packingGallery?: boolean
     unboxingGallery?: boolean
@@ -43468,7 +43468,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: boolean
     lastRefreshAt?: boolean
-    disputeLevel?: boolean
+    disputeCase?: boolean
     supplierRTOResponse?: boolean
     packingGallery?: boolean
     unboxingGallery?: boolean
@@ -43484,7 +43484,7 @@ export namespace Prisma {
     deletedByRole?: boolean
   }
 
-  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "isPostpaid" | "paymentId" | "shippingApiResult" | "barcodeImage" | "delivered" | "deliveredDate" | "rtoDelivered" | "rtoDeliveredDate" | "lastRefreshAt" | "disputeLevel" | "supplierRTOResponse" | "packingGallery" | "unboxingGallery" | "collectedAtWarehouse" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
+  export type orderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderNumber" | "awbNumber" | "status" | "orderNote" | "subtotal" | "tax" | "discount" | "totalAmount" | "currency" | "shippingName" | "shippingPhone" | "shippingEmail" | "shippingAddress" | "shippingZip" | "shippingCountryId" | "shippingStateId" | "shippingCityId" | "billingName" | "billingPhone" | "billingEmail" | "billingAddress" | "billingZip" | "billingCountryId" | "billingStateId" | "billingCityId" | "isPostpaid" | "paymentId" | "shippingApiResult" | "barcodeImage" | "delivered" | "deliveredDate" | "rtoDelivered" | "rtoDeliveredDate" | "lastRefreshAt" | "disputeCase" | "supplierRTOResponse" | "packingGallery" | "unboxingGallery" | "collectedAtWarehouse" | "createdAt" | "createdBy" | "createdByRole" | "updatedAt" | "updatedBy" | "updatedByRole" | "deletedAt" | "deletedBy" | "deletedByRole", ExtArgs["result"]["order"]>
   export type orderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shippingCountry?: boolean | order$shippingCountryArgs<ExtArgs>
     shippingState?: boolean | order$shippingStateArgs<ExtArgs>
@@ -43547,7 +43547,7 @@ export namespace Prisma {
       rtoDelivered: boolean
       rtoDeliveredDate: Date | null
       lastRefreshAt: Date | null
-      disputeLevel: number | null
+      disputeCase: number | null
       supplierRTOResponse: string | null
       packingGallery: string | null
       unboxingGallery: string | null
@@ -43974,7 +43974,7 @@ export namespace Prisma {
     readonly rtoDelivered: FieldRef<"order", 'Boolean'>
     readonly rtoDeliveredDate: FieldRef<"order", 'DateTime'>
     readonly lastRefreshAt: FieldRef<"order", 'DateTime'>
-    readonly disputeLevel: FieldRef<"order", 'Int'>
+    readonly disputeCase: FieldRef<"order", 'Int'>
     readonly supplierRTOResponse: FieldRef<"order", 'String'>
     readonly packingGallery: FieldRef<"order", 'String'>
     readonly unboxingGallery: FieldRef<"order", 'String'>
@@ -48897,7 +48897,7 @@ export namespace Prisma {
     rtoDelivered: 'rtoDelivered',
     rtoDeliveredDate: 'rtoDeliveredDate',
     lastRefreshAt: 'lastRefreshAt',
-    disputeLevel: 'disputeLevel',
+    disputeCase: 'disputeCase',
     supplierRTOResponse: 'supplierRTOResponse',
     packingGallery: 'packingGallery',
     unboxingGallery: 'unboxingGallery',
@@ -53921,7 +53921,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFilter<"order"> | boolean
     rtoDeliveredDate?: DateTimeNullableFilter<"order"> | Date | string | null
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
-    disputeLevel?: IntNullableFilter<"order"> | number | null
+    disputeCase?: IntNullableFilter<"order"> | number | null
     supplierRTOResponse?: StringNullableFilter<"order"> | string | null
     packingGallery?: StringNullableFilter<"order"> | string | null
     unboxingGallery?: StringNullableFilter<"order"> | string | null
@@ -53982,7 +53982,7 @@ export namespace Prisma {
     rtoDelivered?: SortOrder
     rtoDeliveredDate?: SortOrderInput | SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
-    disputeLevel?: SortOrderInput | SortOrder
+    disputeCase?: SortOrderInput | SortOrder
     supplierRTOResponse?: SortOrderInput | SortOrder
     packingGallery?: SortOrderInput | SortOrder
     unboxingGallery?: SortOrderInput | SortOrder
@@ -54047,7 +54047,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFilter<"order"> | boolean
     rtoDeliveredDate?: DateTimeNullableFilter<"order"> | Date | string | null
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
-    disputeLevel?: IntNullableFilter<"order"> | number | null
+    disputeCase?: IntNullableFilter<"order"> | number | null
     supplierRTOResponse?: StringNullableFilter<"order"> | string | null
     packingGallery?: StringNullableFilter<"order"> | string | null
     unboxingGallery?: StringNullableFilter<"order"> | string | null
@@ -54108,7 +54108,7 @@ export namespace Prisma {
     rtoDelivered?: SortOrder
     rtoDeliveredDate?: SortOrderInput | SortOrder
     lastRefreshAt?: SortOrderInput | SortOrder
-    disputeLevel?: SortOrderInput | SortOrder
+    disputeCase?: SortOrderInput | SortOrder
     supplierRTOResponse?: SortOrderInput | SortOrder
     packingGallery?: SortOrderInput | SortOrder
     unboxingGallery?: SortOrderInput | SortOrder
@@ -54168,7 +54168,7 @@ export namespace Prisma {
     rtoDelivered?: BoolWithAggregatesFilter<"order"> | boolean
     rtoDeliveredDate?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
     lastRefreshAt?: DateTimeNullableWithAggregatesFilter<"order"> | Date | string | null
-    disputeLevel?: IntNullableWithAggregatesFilter<"order"> | number | null
+    disputeCase?: IntNullableWithAggregatesFilter<"order"> | number | null
     supplierRTOResponse?: StringNullableWithAggregatesFilter<"order"> | string | null
     packingGallery?: StringNullableWithAggregatesFilter<"order"> | string | null
     unboxingGallery?: StringNullableWithAggregatesFilter<"order"> | string | null
@@ -59590,7 +59590,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -59651,7 +59651,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -59697,7 +59697,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59758,7 +59758,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59812,7 +59812,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -59856,7 +59856,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -59908,7 +59908,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63878,7 +63878,7 @@ export namespace Prisma {
     rtoDelivered?: SortOrder
     rtoDeliveredDate?: SortOrder
     lastRefreshAt?: SortOrder
-    disputeLevel?: SortOrder
+    disputeCase?: SortOrder
     supplierRTOResponse?: SortOrder
     packingGallery?: SortOrder
     unboxingGallery?: SortOrder
@@ -63907,7 +63907,7 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
-    disputeLevel?: SortOrder
+    disputeCase?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -63948,7 +63948,7 @@ export namespace Prisma {
     rtoDelivered?: SortOrder
     rtoDeliveredDate?: SortOrder
     lastRefreshAt?: SortOrder
-    disputeLevel?: SortOrder
+    disputeCase?: SortOrder
     supplierRTOResponse?: SortOrder
     packingGallery?: SortOrder
     unboxingGallery?: SortOrder
@@ -63999,7 +63999,7 @@ export namespace Prisma {
     rtoDelivered?: SortOrder
     rtoDeliveredDate?: SortOrder
     lastRefreshAt?: SortOrder
-    disputeLevel?: SortOrder
+    disputeCase?: SortOrder
     supplierRTOResponse?: SortOrder
     packingGallery?: SortOrder
     unboxingGallery?: SortOrder
@@ -64028,7 +64028,7 @@ export namespace Prisma {
     billingStateId?: SortOrder
     billingCityId?: SortOrder
     paymentId?: SortOrder
-    disputeLevel?: SortOrder
+    disputeCase?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
     deletedBy?: SortOrder
@@ -73242,7 +73242,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -73301,7 +73301,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -73357,7 +73357,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -73416,7 +73416,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -73887,7 +73887,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFilter<"order"> | boolean
     rtoDeliveredDate?: DateTimeNullableFilter<"order"> | Date | string | null
     lastRefreshAt?: DateTimeNullableFilter<"order"> | Date | string | null
-    disputeLevel?: IntNullableFilter<"order"> | number | null
+    disputeCase?: IntNullableFilter<"order"> | number | null
     supplierRTOResponse?: StringNullableFilter<"order"> | string | null
     packingGallery?: StringNullableFilter<"order"> | string | null
     unboxingGallery?: StringNullableFilter<"order"> | string | null
@@ -74407,7 +74407,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -74466,7 +74466,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -74522,7 +74522,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -74581,7 +74581,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -75323,7 +75323,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -75382,7 +75382,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -75438,7 +75438,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -75497,7 +75497,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -81774,7 +81774,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -81833,7 +81833,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -82819,7 +82819,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -82879,7 +82879,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -83378,7 +83378,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83438,7 +83438,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84071,7 +84071,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -84131,7 +84131,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -84430,7 +84430,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84490,7 +84490,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85886,7 +85886,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -85937,7 +85937,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -86771,7 +86771,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86830,7 +86830,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86883,7 +86883,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86927,7 +86927,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86986,7 +86986,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87039,7 +87039,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87323,7 +87323,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -87374,7 +87374,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -87864,7 +87864,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87923,7 +87923,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -87976,7 +87976,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88020,7 +88020,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88079,7 +88079,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88132,7 +88132,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88401,7 +88401,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -88452,7 +88452,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -88883,7 +88883,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88942,7 +88942,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -88995,7 +88995,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -89039,7 +89039,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -89098,7 +89098,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -89151,7 +89151,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -91025,7 +91025,7 @@ export namespace Prisma {
     rtoDelivered?: boolean
     rtoDeliveredDate?: Date | string | null
     lastRefreshAt?: Date | string | null
-    disputeLevel?: number | null
+    disputeCase?: number | null
     supplierRTOResponse?: string | null
     packingGallery?: string | null
     unboxingGallery?: string | null
@@ -91069,7 +91069,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -91128,7 +91128,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null
@@ -91181,7 +91181,7 @@ export namespace Prisma {
     rtoDelivered?: BoolFieldUpdateOperationsInput | boolean
     rtoDeliveredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastRefreshAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    disputeLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    disputeCase?: NullableIntFieldUpdateOperationsInput | number | null
     supplierRTOResponse?: NullableStringFieldUpdateOperationsInput | string | null
     packingGallery?: NullableStringFieldUpdateOperationsInput | string | null
     unboxingGallery?: NullableStringFieldUpdateOperationsInput | string | null

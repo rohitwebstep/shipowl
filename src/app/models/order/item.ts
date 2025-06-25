@@ -22,7 +22,7 @@ interface UpdateData {
   supplierRTOResponse: string;
   packingGallery: string | null;
   unboxingGallery: string | null;
-  disputeLevel?: number;
+  disputeCase?: number;
 }
 
 export async function createOrderItem(items: Item[]) {
@@ -60,7 +60,7 @@ export async function getOrderItem(orderId: number, orderItemId: number) {
   }
 }
 
-export async function orderDisputeLevelTwo({
+export async function orderDisputeCaseTwo({
   orderId,
   status,
   uploadedMedia = {},
@@ -109,19 +109,21 @@ export async function orderDisputeLevelTwo({
       };
     }
 
-    if (order.disputeLevel === 2) {
+    if (order.disputeCase === 2) {
       return {
         status: false,
-        message: "Dispute Level 2 already applied for this order.",
+        message: "Dispute Case 2 already applied for this order.",
       };
     }
 
-    if (order.disputeLevel !== 1) {
-      return {
-        status: false,
-        message: "First apply dispute level 1 before raising level 2.",
-      };
-    }
+    /*
+      if (order.disputeCase !== 1) {
+        return {
+          status: false,
+          message: "First apply dispute case 1 before raising level 2.",
+        };
+      }
+    */
 
     // If status is 'wrong item received', validate uploadedMedia
     if (status.toLowerCase() === 'wrong item received') {
@@ -137,7 +139,7 @@ export async function orderDisputeLevelTwo({
     // Prepare update data
     const updateData: UpdateData = {
       supplierRTOResponse: status,
-      disputeLevel: 2,
+      disputeCase: 2,
       packingGallery: null,
       unboxingGallery: null,
     };
@@ -163,7 +165,7 @@ export async function orderDisputeLevelTwo({
   }
 }
 
-export async function orderDisputeLevelOne({
+export async function orderDisputeCaseOne({
   orderId,
   status,
 }: UpdateRTOInfoInput) {
@@ -211,17 +213,17 @@ export async function orderDisputeLevelOne({
       };
     }
 
-    if (order.disputeLevel === 2) {
+    if (order.disputeCase === 2) {
       return {
         status: false,
-        message: "Dispute Level 2 already applied. You cannot apply Level 1 now.",
+        message: "Dispute Case 2 already applied. You cannot apply Level 1 now.",
       };
     }
 
-    if (order.disputeLevel === 1) {
+    if (order.disputeCase === 1) {
       return {
         status: false,
-        message: "Dispute Level 1 already raised for this order.",
+        message: "Dispute Case 1 already raised for this order.",
       };
     }
 
@@ -230,7 +232,7 @@ export async function orderDisputeLevelOne({
       supplierRTOResponse: status,
       packingGallery: null,
       unboxingGallery: null,
-      disputeLevel: 1,
+      disputeCase: 1,
     };
 
     // Update orderItem record

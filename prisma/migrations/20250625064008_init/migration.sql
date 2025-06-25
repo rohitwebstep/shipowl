@@ -939,7 +939,7 @@ CREATE TABLE `order` (
     `rtoDelivered` BOOLEAN NOT NULL DEFAULT false,
     `rtoDeliveredDate` DATETIME(3) NULL,
     `lastRefreshAt` DATETIME(3) NULL,
-    `disputeLevel` INTEGER NULL,
+    `disputeCase` INTEGER NULL,
     `supplierRTOResponse` VARCHAR(191) NULL,
     `packingGallery` LONGTEXT NULL,
     `unboxingGallery` LONGTEXT NULL,

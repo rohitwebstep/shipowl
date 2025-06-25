@@ -987,7 +987,7 @@ model order {
   rtoDeliveredDate  DateTime?
   lastRefreshAt     DateTime?
 
-  disputeLevel        Int?
+  disputeCase         Int?
   supplierRTOResponse String?
   packingGallery      String? @db.LongText
   unboxingGallery     String? @db.LongText

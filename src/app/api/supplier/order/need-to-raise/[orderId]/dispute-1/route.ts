@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logMessage, formatDate } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrderById } from '@/app/models/order/order';
-import { orderDisputeLevelOne } from '@/app/models/order/item';
+import { orderDisputeCaseOne } from '@/app/models/order/item';
 import { getEmailConfig } from '@/app/models/admin/emailConfig';
 import { sendEmail } from '@/utils/email/sendEmail';
 
@@ -62,10 +62,10 @@ export async function POST(req: NextRequest) {
         const orderItemRTOPayload = {
             orderId,
             status: 'not received',
-            disputeLevel: 1
+            disputeCase: 1
         };
 
-        const result = await orderDisputeLevelOne(orderItemRTOPayload);
+        const result = await orderDisputeCaseOne(orderItemRTOPayload);
         if (!result.status) {
             logMessage('error', `Failed to update order item status: ${result.message}`);
             return NextResponse.json(

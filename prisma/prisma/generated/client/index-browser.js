@@ -849,7 +849,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   rtoDelivered: 'rtoDelivered',
   rtoDeliveredDate: 'rtoDeliveredDate',
   lastRefreshAt: 'lastRefreshAt',
-  disputeLevel: 'disputeLevel',
+  disputeCase: 'disputeCase',
   supplierRTOResponse: 'supplierRTOResponse',
   packingGallery: 'packingGallery',
   unboxingGallery: 'unboxingGallery',
