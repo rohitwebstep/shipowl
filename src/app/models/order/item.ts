@@ -86,6 +86,36 @@ export async function orderDisputeLevelTwo({
       return { status: false, message: "Order ID does not match the order item." };
     }
 
+    // Validation conditions
+    if (!order.rtoDelivered) {
+      return {
+        status: false,
+        message: "Cannot raise dispute. Order is not marked as RTO Delivered.",
+      };
+    }
+
+    if (!order.rtoDeliveredDate) {
+      return {
+        status: false,
+        message: "Cannot raise dispute. RTO Delivered Date is missing.",
+      };
+    }
+
+    if (order.collectedAtWarehouse) {
+      return {
+        status: false,
+        message:
+          "Dispute cannot be raised. Order has already been marked as collected at warehouse.",
+      };
+    }
+
+    if (order.disputeLevel !== 1) {
+      return {
+        status: false,
+        message: "First apply dispute level 1 before raising further disputes.",
+      };
+    }
+
     // If status is 'wrong item received', validate uploadedMedia
     if (status.toLowerCase() === 'wrong item received') {
       const { packingGallery, unboxingGallery } = uploadedMedia;
@@ -149,6 +179,29 @@ export async function orderDisputeLevelOne({
 
     if (order.id !== orderId) {
       return { status: false, message: "Order ID does not match the order item." };
+    }
+
+    // Validation conditions
+    if (!order.rtoDelivered) {
+      return {
+        status: false,
+        message: "Cannot raise dispute. Order is not marked as RTO Delivered.",
+      };
+    }
+
+    if (!order.rtoDeliveredDate) {
+      return {
+        status: false,
+        message: "Cannot raise dispute. RTO Delivered Date is missing.",
+      };
+    }
+
+    if (order.collectedAtWarehouse) {
+      return {
+        status: false,
+        message:
+          "Dispute cannot be raised. Order has already been marked as collected at warehouse.",
+      };
     }
 
     // Prepare update data

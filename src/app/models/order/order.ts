@@ -803,6 +803,8 @@ export const getOrdersByTypeForSupplierReporting = async (
         // Status/type-based conditions
         switch (type) {
             case "warehouseCollected":
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = { not: null };
                 baseWhere.collectedAtWarehouse = { not: null };
                 break;
             case "rtoCount":

@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
         if (!result.status) {
             logMessage('error', `Failed to update order item status: ${result.message}`);
             return NextResponse.json(
-                { error: `Failed to update order item status: ${result.message}` },
+                { message: result.message || `Failed to update order item status: ${result.message}` },
                 { status: 400 }
             );
         }

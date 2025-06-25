@@ -53,9 +53,7 @@ export const getOrderByOrderNumber = async (orderNumber: string) => {
     }
 };
 
-export const createWarehouseCollected = async (
-    orderNumber: string
-) => {
+export const createWarehouseCollected = async (orderNumber: string) => {
     try {
         const result = await getOrderByOrderNumber(orderNumber);
 
@@ -66,8 +64,33 @@ export const createWarehouseCollected = async (
             };
         }
 
+        const order = result.order;
+
+        // Validation checks
+        if (!order.rtoDelivered) {
+            return {
+                status: false,
+                message: "Order is not marked as RTO Delivered."
+            };
+        }
+
+        if (!order.rtoDeliveredDate) {
+            return {
+                status: false,
+                message: "RTO Delivered Date is missing."
+            };
+        }
+
+        if (order.collectedAtWarehouse) {
+            return {
+                status: false,
+                message: "Order has already been marked as collected at the warehouse."
+            };
+        }
+
+        // Proceed with update
         const updatedOrder = await prisma.order.update({
-            where: { id: result.order.id },
+            where: { id: order.id },
             data: {
                 collectedAtWarehouse: new Date()
             },
@@ -86,3 +109,4 @@ export const createWarehouseCollected = async (
         };
     }
 };
+
