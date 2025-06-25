@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/dropshipper/auth/login/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/dropshipper/order/report/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -9448,383 +9448,6 @@ connectToDatabase().catch((error)=>{
 });
 const __TURBOPACK__default__export__ = prisma;
 }}),
-"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("buffer", () => require("buffer"));
-
-module.exports = mod;
-}}),
-"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}}),
-"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("util", () => require("util"));
-
-module.exports = mod;
-}}),
-"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("crypto", () => require("crypto"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "generatePasswordResetToken": (()=>generatePasswordResetToken),
-    "generateRegistrationToken": (()=>generateRegistrationToken),
-    "generateToken": (()=>generateToken),
-    "isUserExist": (()=>isUserExist),
-    "verifyToken": (()=>verifyToken)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-;
-;
-const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
-function generateToken(adminId, adminRole) {
-    console.log(`adminId: ${adminId}, adminRole: ${adminRole}`);
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId,
-        adminRole
-    }, SECRET_KEY, {
-        expiresIn: '3h'
-    });
-}
-function generatePasswordResetToken(adminId, adminRole) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId,
-        adminRole
-    }, SECRET_KEY, {
-        expiresIn: '1h'
-    });
-}
-function generateRegistrationToken(adminId, adminRole) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
-        adminId,
-        adminRole
-    }, SECRET_KEY, {
-        expiresIn: '1h'
-    });
-}
-async function verifyToken(token) {
-    try {
-        const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
-        return {
-            payload,
-            status: true,
-            message: "Token is valid"
-        };
-    } catch (error) {
-        let message = "Authentication failed. Please try again.";
-        if (typeof error === "object" && error !== null && "code" in error) {
-            const err = error;
-            if (err.code === 'ERR_JWT_EXPIRED') {
-                message = "Session expired. Please log in again.";
-            }
-        }
-        return {
-            payload: null,
-            status: false,
-            message
-        };
-    }
-}
-async function isUserExist(adminId, adminRole) {
-    try {
-        const adminRoleStr = String(adminRole); // Ensure it's a string
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(adminRoleStr) ? "admin" : "adminStaff";
-        // Fetch admin details from database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
-                where: {
-                    id: adminId,
-                    role: adminRoleStr
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
-                where: {
-                    id: adminId,
-                    role: adminRoleStr
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    role: true,
-                    admin: true
-                }
-            });
-        }
-        // If admin doesn't exist, return false with a message
-        if (!admin) {
-            return {
-                status: false,
-                message: "User with the provided ID does not exist"
-            };
-        }
-        // Return admin details if found
-        return {
-            status: true,
-            admin
-        };
-    } catch (error) {
-        console.error("Error fetching admin by ID:", error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-}}),
-"[project]/src/utils/hashUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "comparePassword": (()=>comparePassword),
-    "hashPassword": (()=>hashPassword)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
-;
-async function hashPassword(password) {
-    const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10);
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-}
-async function comparePassword(password, hashedPassword) {
-    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, hashedPassword);
-}
-}}),
-"[project]/src/app/models/admin/emailConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "getEmailConfig": (()=>getEmailConfig)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-const getEmailConfig = async (panel, module, action, status = true // Default value is true
-)=>{
-    try {
-        console.log(`Fetching email configuration for panel: ${panel}, module: ${module}, action: ${action}, status: ${status}`);
-        // Fetching the email configuration from the database based on conditions
-        const emailConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].emailConfig.findFirst({
-            where: {
-                panel,
-                module,
-                action,
-                status
-            },
-            orderBy: {
-                id: "desc"
-            }
-        });
-        if (!emailConfig) {
-            return {
-                status: false,
-                message: "Email configuration not found"
-            };
-        }
-        // Mapping the database result to the desired output format
-        const config = {
-            host: emailConfig.smtp_host,
-            port: emailConfig.smtp_port,
-            secure: emailConfig.smtp_secure,
-            username: emailConfig.smtp_username,
-            password: emailConfig.smtp_password,
-            from_email: emailConfig.from_email,
-            from_name: emailConfig.from_name
-        };
-        return {
-            status: true,
-            emailConfig: config,
-            htmlTemplate: emailConfig.html_template,
-            subject: emailConfig.subject
-        };
-    } catch (error) {
-        console.error(`Error fetching email configuration for panel "${panel}", module "${module}", action "${action}":`, error);
-        return {
-            status: false,
-            message: "Error fetching email configuration"
-        };
-    }
-};
-}}),
-"[externals]/events [external] (events, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("events", () => require("events"));
-
-module.exports = mod;
-}}),
-"[externals]/url [external] (url, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("url", () => require("url"));
-
-module.exports = mod;
-}}),
-"[externals]/http [external] (http, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("http", () => require("http"));
-
-module.exports = mod;
-}}),
-"[externals]/https [external] (https, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("https", () => require("https"));
-
-module.exports = mod;
-}}),
-"[externals]/zlib [external] (zlib, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("zlib", () => require("zlib"));
-
-module.exports = mod;
-}}),
-"[externals]/net [external] (net, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("net", () => require("net"));
-
-module.exports = mod;
-}}),
-"[externals]/dns [external] (dns, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("dns", () => require("dns"));
-
-module.exports = mod;
-}}),
-"[externals]/os [external] (os, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("os", () => require("os"));
-
-module.exports = mod;
-}}),
-"[externals]/tls [external] (tls, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("tls", () => require("tls"));
-
-module.exports = mod;
-}}),
-"[externals]/child_process [external] (child_process, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("child_process", () => require("child_process"));
-
-module.exports = mod;
-}}),
-"[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { g: global, __dirname } = __turbopack_context__;
-{
-__turbopack_context__.s({
-    "sendEmail": (()=>sendEmail)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/nodemailer/lib/nodemailer.js [app-route] (ecmascript)");
-;
-async function sendEmail(config, mailData) {
-    const { host, port, secure, username, password, from_email, from_name } = config;
-    const { recipient = [], cc = [], bcc = [], subject, htmlBody, attachments = [] } = mailData;
-    const formatAddressList = (list)=>Array.isArray(list) ? list.map(({ name, email })=>`${name} <${email}>`) : [];
-    const formatAttachments = (list)=>list.map(({ name, path })=>({
-                filename: name,
-                path: path
-            }));
-    try {
-        const transporter = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].createTransport({
-            host,
-            port: Number(port),
-            secure,
-            auth: {
-                user: username,
-                pass: password
-            }
-        });
-        const mailOptions = {
-            from: `${from_name} <${from_email}>`,
-            to: formatAddressList(recipient),
-            cc: formatAddressList(cc),
-            bcc: formatAddressList(bcc),
-            subject,
-            html: htmlBody,
-            attachments: formatAttachments(attachments)
-        };
-        const info = await transporter.sendMail(mailOptions);
-        console.log(`📤 Email sent to ${mailOptions.to.join(", ")} | ID: ${info.messageId}`);
-        return {
-            status: true,
-            messageId: info.messageId
-        };
-    } catch (error) {
-        // Specify a type other than 'any' for the error
-        if (error instanceof Error) {
-            console.error("❌ Email Error:", error.message);
-            return {
-                status: false,
-                error: error.message
-            };
-        } else {
-            console.error("❌ Unknown Error:", error);
-            return {
-                status: false,
-                error: "Unknown error occurred"
-            };
-        }
-    }
-}
-}}),
 "[project]/src/utils/commonUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -10025,805 +9648,134 @@ function formatDate(input, format = "DD-MM-YYYY") {
     return format.replace(/DD/g, dayStr).replace(/D/g, String(day)).replace(/MMMM/g, MONTH_NAMES_FULL[month]).replace(/MMM/g, MONTH_NAMES_SHORT[month]).replace(/MM/g, monthStr).replace(/M/g, String(month + 1)).replace(/YYYY/g, String(year)).replace(/HH/g, hourStr).replace(/mm/g, minuteStr).replace(/ss/g, secondStr);
 }
 }}),
-"[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
+"[externals]/buffer [external] (buffer, cjs)": (function(__turbopack_context__) {
 
-var { g: global, __dirname } = __turbopack_context__;
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
-__turbopack_context__.s({
-    "checkStaffPermissionStatus": (()=>checkStaffPermissionStatus),
-    "getStaffPermissions": (()=>getStaffPermissions),
-    "getStaffPermissionsByStaffId": (()=>getStaffPermissionsByStaffId)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-;
-const serializeBigInt = (obj)=>{
-    if (typeof obj === "bigint") return obj.toString();
-    if (obj instanceof Date) return obj;
-    if (Array.isArray(obj)) return obj.map(serializeBigInt);
-    if (obj && typeof obj === "object") {
-        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
-                key,
-                serializeBigInt(value)
-            ]));
-    }
-    return obj;
-};
-const getStaffPermissions = async (filter = {})=>{
-    try {
-        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
-            where: {
-                ...filter.panel && {
-                    panel: filter.panel
-                },
-                ...filter.module && {
-                    module: filter.module
-                },
-                ...filter.action && {
-                    action: filter.action
-                }
-            },
-            orderBy: {
-                id: "desc"
-            }
-        });
-        return {
-            status: true,
-            staffPermissions: serializeBigInt(staffPermissions)
-        };
-    } catch (error) {
-        console.error("❌ getStaffPermissions Error:", error);
-        return {
-            status: false,
-            message: "Error fetching staff permissions"
-        };
-    }
-};
-const checkStaffPermissionStatus = async (filter = {}, staffId)=>{
-    try {
-        if (!staffId || isNaN(staffId)) {
-            return {
-                status: false,
-                message: "Invalid staff ID"
-            };
-        }
-        // Fetch staff permissions based on the provided filter and staff ID
-        if (!filter.panel || !filter.module || !filter.action) {
-            return {
-                status: false,
-                message: "all of filter must be provided"
-            };
-        }
-        const isValidPanel = [
-            "admin",
-            "supplier",
-            "customer"
-        ].includes(filter.panel);
-        if (!isValidPanel) {
-            return {
-                status: false,
-                message: "Invalid panel provided"
-            };
-        }
-        const staffPermissionsExist = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findFirst({
-            where: {
-                panel: filter.panel,
-                module: filter.module,
-                action: filter.action
-            }
-        });
-        if (!staffPermissionsExist) {
-            return {
-                status: false,
-                message: "No permissions found for the given filter"
-            };
-        }
-        const staffPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findFirst({
-            where: {
-                adminStaffPermissionId: staffPermissionsExist.id,
-                adminStaffId: staffId
-            },
-            orderBy: {
-                id: "desc"
-            }
-        });
-        if (!staffPermissions) {
-            return {
-                status: false,
-                message: "Action Unauthorized"
-            };
-        }
-        return {
-            status: true,
-            message: "Action Authorized"
-        };
-    } catch (error) {
-        console.error("❌ getStaffPermissions Error:", error);
-        return {
-            status: false,
-            message: "Error fetching staff permissions"
-        };
-    }
-};
-const getStaffPermissionsByStaffId = async (filter = {}, staffId)=>{
-    try {
-        // Validate staff ID
-        if (!staffId || isNaN(staffId)) {
-            return {
-                status: false,
-                message: "Invalid staff ID"
-            };
-        }
-        // Validate panel if provided
-        if (filter.panel) {
-            const isValidPanel = [
-                "admin",
-                "supplier",
-                "customer",
-                "dropshipper"
-            ].includes(filter.panel);
-            if (!isValidPanel) {
-                return {
-                    status: false,
-                    message: "Invalid panel provided"
-                };
-            }
-        }
-        // Fetch permissions matching the filter
-        const matchingPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffPermission.findMany({
-            where: {
-                ...filter.panel && {
-                    panel: filter.panel
-                },
-                ...filter.module && {
-                    module: filter.module
-                },
-                ...filter.action && {
-                    action: filter.action
-                }
-            },
-            orderBy: {
-                id: 'desc'
-            }
-        });
-        if (!matchingPermissions.length) {
-            return {
-                status: false,
-                message: "No matching permissions found for the given filter"
-            };
-        }
-        const permissionIds = matchingPermissions.map((p)=>p.id);
-        // Get all permissions assigned to the staff from filtered list
-        const assignedPermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaffHasPermission.findMany({
-            where: {
-                adminStaffPermissionId: {
-                    in: permissionIds
-                },
-                adminStaffId: staffId
-            },
-            include: {
-                permission: true
-            },
-            orderBy: {
-                id: 'desc'
-            }
-        });
-        if (!assignedPermissions.length) {
-            return {
-                status: false,
-                message: "No permissions assigned to this staff for the given filter"
-            };
-        }
-        return {
-            status: true,
-            message: "Permissions retrieved successfully",
-            assignedPermissions
-        };
-    } catch (error) {
-        console.error("❌ getStaffPermissionsByStaffId Error:", error);
-        return {
-            status: false,
-            message: "Error retrieving staff permissions"
-        };
-    }
-};
+const mod = __turbopack_context__.x("buffer", () => require("buffer"));
+
+module.exports = mod;
 }}),
-"[project]/src/app/controllers/admin/authController.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[externals]/stream [external] (stream, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}}),
+"[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}}),
+"[externals]/crypto [external] (crypto, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}}),
+"[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "adminByToken": (()=>adminByToken),
-    "adminByUsernameRole": (()=>adminByUsernameRole),
-    "handleForgetPassword": (()=>handleForgetPassword),
-    "handleLogin": (()=>handleLogin),
-    "handleResetPassword": (()=>handleResetPassword),
-    "handleVerifyLogin": (()=>handleVerifyLogin),
-    "handleVerifyStatus": (()=>handleVerifyStatus)
+    "generatePasswordResetToken": (()=>generatePasswordResetToken),
+    "generateRegistrationToken": (()=>generateRegistrationToken),
+    "generateToken": (()=>generateToken),
+    "isUserExist": (()=>isUserExist),
+    "verifyToken": (()=>verifyToken)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jose/dist/webapi/jwt/verify.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/hashUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/admin/emailConfig.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/email/sendEmail.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/staffPermission.ts [app-route] (ecmascript)");
 ;
 ;
 ;
-;
-;
-;
-;
-;
-;
-;
-async function handleLogin(req, adminRole, adminStaffRole) {
+const SECRET_KEY = process.env.JWT_SECRET || '3792e68ef011e0f236a60627ddf304e1bb64d76d5e4dbebca4579490d3c4e6d8c618456f29aa6f92f8dc3cbd4414362b47d4545ffdc0b9549e43b629c39282bb36b9cff7295fc4269d765d59e4d8a811113b911080878f7647e0329a072afdc06d2ecd658c8e79f2ad04e74dbffc45ed10c850b02afdf10b209989910fadaf7ddbef0bb7d0cff27ed8f4a10d3415420107ddba2d9ac8bcf4f7b3b942b5bbe600d9007f9e88b2451cbfaeaab239677b3ed28eaa860eb40fd5d0e36969b6943a3215d2a9f1125ca06be806f8d73d8ae642c4a29b3a728cf42305e1150e4c1f3ed6e14bd3662531cd14357c6b3f3a57095609811f5e9459307cbe70f9b7a159c8d3';
+function generateToken(adminId, adminRole) {
+    console.log(`adminId: ${adminId}, adminRole: ${adminRole}`);
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '3h'
+    });
+}
+function generatePasswordResetToken(adminId, adminRole) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '1h'
+    });
+}
+function generateRegistrationToken(adminId, adminRole) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+        adminId,
+        adminRole
+    }, SECRET_KEY, {
+        expiresIn: '1h'
+    });
+}
+async function verifyToken(token) {
     try {
-        const { email, password } = await req.json();
-        // Hash the password using bcrypt
-        const salt = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10); // Generates a salt with 10 rounds
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, salt);
-        console.log(`Hashed Password: ${hashedPassword}`); // Log the hashed password
-        // Fetch admin by email and role
-        let type = 'main';
-        let adminResponse = await adminByUsernameRole(email, adminRole);
-        if (!adminResponse.status || !adminResponse.admin) {
-            adminResponse = await adminByUsernameRole(email, adminStaffRole);
-            type = 'sub';
-            if (!adminResponse.status || !adminResponse.admin) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: adminResponse.message || "Invalid email or password",
-                    status: false
-                }, {
-                    status: 401
-                });
-            }
-        }
-        const admin = adminResponse.admin;
-        console.log(`admin - `, admin);
-        // Correct usage of .toLowerCase() as a function
-        if (admin.status.toLowerCase() !== 'active') {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Admin account is not active",
-                status: false
-            }, {
-                status: 403
-            });
-        }
-        // Compare the provided password with the stored hash
-        const isPasswordValid = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$hashUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["comparePassword"])(password, admin.password);
-        if (!isPasswordValid) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'Invalid email or password',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Email & account verification checks for supplier
-        if (type === 'main' && admin.role === 'supplier') {
-            if ('isEmailVerified' in admin && !admin?.isEmailVerified) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: "Email is not verified yet"
-                }, {
-                    status: 403
-                });
-            }
-            if ('isVerified' in admin && !admin?.isVerified) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: "Your account has not been verified by admin"
-                }, {
-                    status: 403
-                });
-            }
-        }
-        if (type === 'sub' && 'admin' in admin && admin.admin?.role === 'supplier') {
-            if ('admin' in admin && !admin.admin.isEmailVerified) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: "Main account's email is not verified yet"
-                }, {
-                    status: 403
-                });
-            }
-            if ('admin' in admin && !admin.admin.isVerified) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    status: false,
-                    message: "Main account is not yet verified by admin"
-                }, {
-                    status: 403
-                });
-            }
-        }
-        // Generate authentication token
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generateToken"])(admin.id, admin.role);
-        const isStaffUser = ![
-            'admin',
-            'dropshipper',
-            'supplier'
-        ].includes(String(admin.role));
-        let assignedPermissions;
-        if (isStaffUser) {
-            console.log(`AdminStaff`);
-            const options = {
-                panel: 'admin'
-            };
-            const assignedPermissionsResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$staffPermission$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getStaffPermissionsByStaffId"])(options, admin.id);
-            assignedPermissions = assignedPermissionsResult.assignedPermissions;
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Login successful",
-            token,
-            admin: {
-                id: admin.id,
-                name: admin.name,
-                email: admin.email,
-                role: admin.role
-            },
-            assignedPermissions
-        });
+        const { payload } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$verify$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["jwtVerify"])(token, new TextEncoder().encode(SECRET_KEY));
+        return {
+            payload,
+            status: true,
+            message: "Token is valid"
+        };
     } catch (error) {
-        console.error(`Error during login:`, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
+        let message = "Authentication failed. Please try again.";
+        if (typeof error === "object" && error !== null && "code" in error) {
+            const err = error;
+            if (err.code === 'ERR_JWT_EXPIRED') {
+                message = "Session expired. Please log in again.";
+            }
+        }
+        return {
+            payload: null,
+            status: false,
+            message
+        };
     }
 }
-async function handleVerifyLogin(req, adminRole, adminStaffRole) {
+async function isUserExist(adminId, adminRole) {
     try {
-        // Extract token from Authorization header
-        const token = req.headers.get('authorization')?.split(' ')[1];
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'No token provided',
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        // Use adminByToken to verify token and fetch admin details
-        const { status, message, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: message || "Invalid email or password",
-                status: false
-            }, {
-                status: 401
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Token is valid",
-            admin,
-            status: true
-        });
-    } catch (error) {
-        console.error(`error - `, error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Internal Server Error",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleForgetPassword(req, panel, adminRole, adminStaffRole) {
-    try {
-        const { email } = await req.json();
-        if (!email) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Email is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Attempt to fetch admin or adminStaff by email
-        let userResponse = await adminByUsernameRole(email, adminRole);
-        if (!userResponse.status || !userResponse.admin) {
-            userResponse = await adminByUsernameRole(email, adminStaffRole);
-            if (!userResponse.status || !userResponse.admin) {
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: "No account found with this email.",
-                    status: false
-                }, {
-                    status: 404
-                });
-            }
-        }
-        const admin = userResponse.admin;
-        const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["generatePasswordResetToken"])(admin.id, admin.role);
-        const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-        // Update token and expiry in database
-        const updateData = {
-            pr_token: token,
-            pr_expires_at: expiry
-        };
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        // Optional: Send email
-        // await sendPasswordResetEmail(admin.email, token);
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("admin", "auth", "forget-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        let urlPanel;
-        if (panel == 'dropshipper') {
-            urlPanel = `https://shipowl.io/dropshipping/auth/password/reset?token=${token}`;
-        } else {
-            urlPanel = `https://shipowl.io/${panel}/auth/password/reset?token=${token}`;
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{resetUrl}}": urlPanel,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Click <a href='{{resetUrl}}'>here</a> to reset your password.</p>";
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email
-                }
-            ],
-            cc: [],
-            bcc: [],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Reset token created but failed to send email. Please try again.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset link has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Forgot password error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Something went wrong. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleResetPassword(req, adminRole, adminStaffRole) {
-    try {
-        const { token, password } = await req.json();
-        // Check if token is provided
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Token is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Verify token and fetch admin details using adminByToken function
-        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!tokenStatus || !admin) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: tokenMessage || "Invalid token or role."
-            }, {
-                status: 401
-            });
-        }
-        // Hash the password using bcrypt
-        const hashedPassword = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].hash(password, await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].genSalt(10));
-        // Prepare the update data
-        const updateData = {
-            pr_token: null,
-            pr_expires_at: null,
-            pr_last_reset: new Date(),
-            password: hashedPassword
-        };
-        // Update the admin or admin staff record based on the role
-        if (admin.role === adminRole) {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        } else {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                where: {
-                    id: admin.id
-                },
-                data: updateData
-            });
-        }
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])("admin", "auth", "reset-password", true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your password has been reset successfully.</p>";
-        // Replace placeholders in the HTML template
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email: admin.email
-                }
-            ],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        // Send email notification
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Password reset successful, but failed to send email notification.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        // Return success response
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Password reset successful. A notification has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Password reset error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "An error occurred while resetting the password. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function handleVerifyStatus(req, adminRole, adminStaffRole) {
-    try {
-        const { token } = await req.json();
-        // Check if token is provided
-        if (!token) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Token is required.",
-                status: false
-            }, {
-                status: 400
-            });
-        }
-        // Verify token and fetch admin details using adminByToken function
-        const { status: tokenStatus, message: tokenMessage, admin } = await adminByToken(token, adminRole, adminStaffRole);
-        if (!tokenStatus || !admin) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: tokenMessage || "Invalid token or role."
-            }, {
-                status: 401
-            });
-        }
-        let loginLink;
-        // Update the admin or admin staff record based on the role
-        if (adminRole == 'supplier') {
-            // Prepare the update data
-            const updateAdminData = {
-                isEmailVerified: true,
-                emailVerifiedAt: new Date()
-            };
-            const updateStaffData = {
-                status: 'active'
-            };
-            if (admin.role === adminRole) {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                    where: {
-                        id: admin.id
-                    },
-                    data: updateAdminData
-                });
-            } else {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                    where: {
-                        id: admin.id
-                    },
-                    data: updateStaffData
-                });
-            }
-            loginLink = `https://shipowl.io/supplier/auth/login`;
-        } else if (adminRole == 'dropshipper') {
-            // Prepare the update data
-            const updateData = {
-                status: 'active'
-            };
-            if (admin.role === adminRole) {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
-                    where: {
-                        id: admin.id
-                    },
-                    data: updateData
-                });
-            } else {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.update({
-                    where: {
-                        id: admin.id
-                    },
-                    data: updateData
-                });
-            }
-            loginLink = `https://shipowl.io/dropshipping/auth/login`;
-        } else {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                status: false,
-                message: "Role is not supproted for this action"
-            }, {
-                status: 500
-            });
-        }
-        const { status: emailStatus, message: emailMessage, emailConfig, htmlTemplate, subject: emailSubject } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$admin$2f$emailConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getEmailConfig"])(adminRole, 'auth', 'verify', true);
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'Email Config:', emailConfig);
-        if (!emailStatus || !emailConfig) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: emailMessage || "Failed to fetch email configuration.",
-                status: false
-            }, {
-                status: 500
-            });
-        }
-        // Use index signature to avoid TS error
-        const replacements = {
-            "{{name}}": admin.name,
-            "{{year}}": new Date().getFullYear().toString(),
-            "{{loginLink}}": loginLink,
-            "{{appName}}": "Shipping OWL"
-        };
-        let htmlBody = htmlTemplate?.trim() ? htmlTemplate : "<p>Dear {{name}},</p><p>Your account has been verified successfully.</p>";
-        // Replace placeholders in the HTML template
-        Object.keys(replacements).forEach((key)=>{
-            htmlBody = htmlBody.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        let subject = emailSubject;
-        Object.keys(replacements).forEach((key)=>{
-            subject = subject.replace(new RegExp(key, "g"), replacements[key]);
-        });
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('debug', 'HTML Body:', htmlBody);
-        const mailData = {
-            recipient: [
-                {
-                    name: admin.name,
-                    email: admin.email
-                }
-            ],
-            subject,
-            htmlBody,
-            attachments: []
-        };
-        // Send email notification
-        const emailResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$email$2f$sendEmail$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["sendEmail"])(emailConfig, mailData);
-        if (!emailResult.status) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: "Account Verified successful, but failed to send email notification.",
-                status: false,
-                emailError: emailResult.error
-            }, {
-                status: 500
-            });
-        }
-        // Return success response
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Account Verified successful. A notification has been sent to your email.",
-            status: true
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("❌ Account Verified error:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "An error occurred while verifing the account. Please try again later.",
-            status: false
-        }, {
-            status: 500
-        });
-    }
-}
-async function adminByUsernameRole(username, role) {
-    try {
-        const adminRoleStr = String(role); // Ensure it's a string
+        const adminRoleStr = String(adminRole); // Ensure it's a string
         const adminModel = [
             "admin",
             "dropshipper",
             "supplier"
         ].includes(adminRoleStr) ? "admin" : "adminStaff";
-        console.log(`adminRoleStr - `, adminRoleStr);
         // Fetch admin details from database
         let admin;
         if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findFirst({
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
                 where: {
-                    email: username,
-                    role
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
                     name: true,
                     email: true,
                     password: true,
-                    role: true,
-                    status: true,
-                    isVerified: true,
-                    isEmailVerified: true
+                    role: true
                 }
             });
         } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findFirst({
+            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
                 where: {
-                    email: username,
-                    role
+                    id: adminId,
+                    role: adminRoleStr
                 },
                 select: {
                     id: true,
@@ -10831,7 +9783,6 @@ async function adminByUsernameRole(username, role) {
                     email: true,
                     password: true,
                     role: true,
-                    status: true,
                     admin: true
                 }
             });
@@ -10843,89 +9794,13 @@ async function adminByUsernameRole(username, role) {
                 message: "User with the provided ID does not exist"
             };
         }
+        // Return admin details if found
         return {
             status: true,
             admin
         };
     } catch (error) {
-        console.error(`Error fetching admin:`, error);
-        return {
-            status: false,
-            message: "Internal Server Error"
-        };
-    }
-}
-async function adminByToken(token, adminRole, adminStaffRole) {
-    try {
-        // Verify token and extract admin details
-        const { payload, status, message } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["verifyToken"])(token);
-        if (!status || !payload || typeof payload.adminId !== 'number') {
-            return {
-                status: false,
-                message: message || "Unauthorized access. Invalid token."
-            };
-        }
-        // Determine the admin model based on role
-        const payloadAdminRole = String(payload.adminRole); // Ensure it's a string
-        if (![
-            adminRole,
-            adminStaffRole
-        ].includes(payloadAdminRole)) {
-            return {
-                status: false,
-                message: "Access denied. Invalid role."
-            };
-        }
-        // Set the correct admin model
-        const adminModel = [
-            "admin",
-            "dropshipper",
-            "supplier"
-        ].includes(payloadAdminRole) ? "admin" : "adminStaff";
-        // Fetch the admin from the database
-        let admin;
-        if (adminModel === "admin") {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        } else {
-            admin = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].adminStaff.findUnique({
-                where: {
-                    id: payload.adminId
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    role: true,
-                    createdAt: true
-                }
-            });
-        }
-        // If admin not found, return error
-        if (!admin) {
-            return {
-                status: false,
-                message: "Invalid admin credentials or account not found."
-            };
-        }
-        // Return success with admin details
-        return {
-            status: true,
-            message: "Token is valid",
-            admin
-        };
-    } catch (error) {
-        console.error("Error fetching admin:", error);
+        console.error("Error fetching admin by ID:", error);
         return {
             status: false,
             message: "Internal Server Error"
@@ -10933,23 +9808,1347 @@ async function adminByToken(token, adminRole, adminStaffRole) {
     }
 }
 }}),
-"[project]/src/app/api/dropshipper/auth/login/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/models/order/order.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "POST": (()=>POST)
+    "checkPaymentIdAvailability": (()=>checkPaymentIdAvailability),
+    "createOrder": (()=>createOrder),
+    "createRTOInventory": (()=>createRTOInventory),
+    "deleteOrder": (()=>deleteOrder),
+    "generateOrderNumber": (()=>generateOrderNumber),
+    "getAllOrders": (()=>getAllOrders),
+    "getOrderById": (()=>getOrderById),
+    "getOrdersByStatus": (()=>getOrdersByStatus),
+    "getOrdersByStatusForDropshipperReporting": (()=>getOrdersByStatusForDropshipperReporting),
+    "getOrdersByStatusForSupplierReporting": (()=>getOrdersByStatusForSupplierReporting),
+    "getOrdersByTypeForSupplierReporting": (()=>getOrdersByTypeForSupplierReporting),
+    "refreshPendingOrdersShippingStatus": (()=>refreshPendingOrdersShippingStatus),
+    "refreshShippingApiResultOfOrder": (()=>refreshShippingApiResultOfOrder),
+    "restoreOrder": (()=>restoreOrder),
+    "softDeleteOrder": (()=>softDeleteOrder),
+    "updateAWBNuberOfOrder": (()=>updateAWBNuberOfOrder),
+    "updateBarcodeOfOrder": (()=>updateBarcodeOfOrder),
+    "updateDeliveredStatusOfOrder": (()=>updateDeliveredStatusOfOrder),
+    "updateOrder": (()=>updateOrder),
+    "updateRTODeliveredStatusOfOrder": (()=>updateRTODeliveredStatusOfOrder),
+    "updateShippingApiResultOfOrder": (()=>updateShippingApiResultOfOrder)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/controllers/admin/authController.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
 ;
-async function POST(req) {
-    const adminRole = "dropshipper";
-    const adminStaffRole = "dropshipper_staff";
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$controllers$2f$admin$2f$authController$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["handleLogin"])(req, adminRole, adminStaffRole);
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+async function generateOrderNumber(base = '') {
+    const cleanBase = base ? base.toUpperCase().replace(/[^A-Z0-9]/g, '') : Array.from({
+        length: 8
+    }, ()=>'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 36)]).join('');
+    let orderNumber = cleanBase;
+    let isTaken = true;
+    let suffix = 0;
+    while(isTaken){
+        const existingOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                orderNumber
+            }
+        });
+        if (existingOrder) {
+            suffix++;
+            orderNumber = `${cleanBase}-${suffix}`;
+        } else {
+            isTaken = false;
+        }
+    }
+    return orderNumber;
+}
+async function checkPaymentIdAvailability(paymentId) {
+    try {
+        // Check if the payment exists
+        const existingPayment = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].payment.findUnique({
+            where: {
+                id: paymentId
+            }
+        });
+        if (!existingPayment) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" does not exist.`
+            };
+        }
+        // Check if the payment ID is already linked to an order
+        const usedInOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findFirst({
+            where: {
+                paymentId: paymentId
+            }
+        });
+        if (usedInOrder) {
+            return {
+                status: false,
+                message: `Payment ID "${paymentId}" is already assigned to an order.`
+            };
+        }
+        return {
+            status: true,
+            message: `Payment ID "${paymentId}" is available.`
+        };
+    } catch (error) {
+        console.error("Error checking Payment ID:", error);
+        return {
+            status: false,
+            message: "Error while checking Payment ID availability."
+        };
+    }
+}
+async function createOrder(order) {
+    try {
+        // Generate a unique orderNumber for the order
+        const orderNumber = await generateOrderNumber();
+        const { status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment } = order;
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.create({
+            data: {
+                orderNumber,
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(newOrder)
+        };
+    } catch (error) {
+        console.error(`Error creating order:`, error);
+        return {
+            status: false,
+            message: "Internal Server Error"
+        };
+    }
+}
+const updateOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { status, orderNote, subtotal, tax, discount, totalAmount, currency, shippingName, shippingPhone, shippingEmail, shippingAddress, shippingZip, shippingCountry, shippingState, shippingCity, billingName, billingPhone, billingEmail, billingAddress, billingZip, billingCountry, billingState, billingCity, payment, updatedBy, updatedByRole } = data;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                status,
+                orderNote,
+                subtotal,
+                tax,
+                discount,
+                totalAmount,
+                currency,
+                shippingName,
+                shippingPhone,
+                shippingEmail,
+                shippingAddress,
+                shippingZip,
+                shippingCountry,
+                shippingState,
+                shippingCity,
+                billingName,
+                billingPhone,
+                billingEmail,
+                billingAddress,
+                billingZip,
+                billingCountry,
+                billingState,
+                billingCity,
+                payment,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateBarcodeOfOrder = async (orderId, barcodeImage)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                barcodeImage,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateBarcodeOfOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order barcode"
+        };
+    }
+};
+const updateShippingApiResultOfOrder = async (adminId, adminRole, orderId, data)=>{
+    try {
+        const { updatedBy, updatedByRole, shippingApiJson } = data;
+        const shippingApiObj = typeof shippingApiJson === 'string' ? JSON.parse(shippingApiJson) : shippingApiJson;
+        const awbNumber = shippingApiObj?.data?.awb_number || null;
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                awbNumber: awbNumber,
+                shippingApiResult: shippingApiJson,
+                updatedAt: new Date(),
+                updatedBy: updatedBy,
+                updatedByRole: updatedByRole
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const refreshShippingApiResultOfOrder = async (orderId, data)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                shippingApiResult: data
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateRTODeliveredStatusOfOrder = async (orderId, status)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id: orderId
+            }
+        });
+        if (!order) {
+            return {
+                status: false,
+                message: "Order not found"
+            };
+        }
+        if (order.rtoDelivered && order.rtoDeliveredDate) {
+            return {
+                status: false,
+                message: "rtoDeliveredDate already set"
+            };
+        }
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                rtoDelivered: status,
+                rtoDeliveredDate: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateDeliveredStatusOfOrder = async (orderId, status)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id: orderId
+            }
+        });
+        if (!order) {
+            return {
+                status: false,
+                message: "Order not found"
+            };
+        }
+        if (order.delivered && order.deliveredDate) {
+            return {
+                status: false,
+                message: "deliveredDate already set"
+            };
+        }
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                delivered: status,
+                deliveredDate: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const updateAWBNuberOfOrder = async (orderId, awbNumber)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id: orderId
+            },
+            data: {
+                awbNumber
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ updateOrder Error:", error);
+        return {
+            status: false,
+            message: "Error updating order"
+        };
+    }
+};
+const getOrderById = async (id)=>{
+    try {
+        const order = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findUnique({
+            where: {
+                id
+            },
+            include: {
+                items: true
+            }
+        });
+        if (!order) return {
+            status: false,
+            message: "Order not found"
+        };
+        return {
+            status: true,
+            order: serializeBigInt(order)
+        };
+    } catch (error) {
+        console.error("❌ getOrderById Error:", error);
+        return {
+            status: false,
+            message: "Error fetching order"
+        };
+    }
+};
+const getAllOrders = async ()=>{
+    try {
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error("❌ getAllOrders Error:", error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatus = async (status)=>{
+    try {
+        let whereCondition = {};
+        switch(status){
+            case "active":
+                whereCondition = {
+                    status: true,
+                    deletedAt: null
+                };
+                break;
+            case "inactive":
+                whereCondition = {
+                    status: false,
+                    deletedAt: null
+                };
+                break;
+            case "deleted":
+                whereCondition = {
+                    deletedAt: {
+                        not: null
+                    }
+                };
+                break;
+            case "notDeleted":
+                whereCondition = {
+                    deletedAt: null
+                };
+                break;
+            default:
+                throw new Error("Invalid status");
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: whereCondition,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatusForDropshipperReporting = async (status, dropshipperId, fromDate, toDate)=>{
+    try {
+        const baseWhere = {};
+        // Base status logic
+        switch(status){
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = {
+                    not: null
+                };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [
+                    {
+                        delivered: true
+                    },
+                    {
+                        rtoDelivered: true
+                    }
+                ];
+                break;
+        }
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        const andConditions = [];
+        if (isValidRange) {
+            andConditions.push({
+                createdAt: {
+                    gte: from,
+                    lte: to
+                }
+            });
+        /*
+                if (status === "delivered") {
+                    andConditions.push({
+                        deliveredDate: { gte: from, lte: to }
+                    });
+                } else if (status === "RTO") {
+                    andConditions.push({
+                        rtoDeliveredDate: { gte: from, lte: to }
+                    });
+                } else if (status === "deliveredOrRto") {
+                    andConditions.push({
+                        OR: [
+                            { deliveredDate: { gte: from, lte: to } },
+                            { rtoDeliveredDate: { gte: from, lte: to } }
+                        ]
+                    });
+                } else if (status === "All") {
+                    andConditions.push({
+                        createdAt: { gte: from, lte: to }
+                    });
+                }
+            */ }
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        dropshipperId
+                    }
+                }
+            }
+        });
+        if (andConditions.length > 0) {
+            Object.assign(baseWhere, {
+                AND: andConditions
+            });
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByStatusForSupplierReporting = async (status, supplierId, fromDate, toDate)=>{
+    try {
+        const baseWhere = {};
+        // Base status logic
+        switch(status){
+            case "active":
+                baseWhere.status = true;
+                baseWhere.deletedAt = null;
+                break;
+            case "inactive":
+                baseWhere.status = false;
+                baseWhere.deletedAt = null;
+                break;
+            case "deleted":
+                baseWhere.deletedAt = {
+                    not: null
+                };
+                break;
+            case "notDeleted":
+                baseWhere.deletedAt = null;
+                break;
+            case "delivered":
+                baseWhere.deletedAt = null;
+                baseWhere.delivered = true;
+                break;
+            case "RTO":
+                baseWhere.deletedAt = null;
+                baseWhere.rtoDelivered = true;
+                break;
+            case "deliveredOrRto":
+                baseWhere.deletedAt = null;
+                baseWhere.OR = [
+                    {
+                        delivered: true
+                    },
+                    {
+                        rtoDelivered: true
+                    }
+                ];
+                break;
+        }
+        // Date range
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        const andConditions = [];
+        if (isValidRange) {
+            if (status === "delivered") {
+                andConditions.push({
+                    deliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "RTO") {
+                andConditions.push({
+                    rtoDeliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (status === "deliveredOrRto") {
+                andConditions.push({
+                    OR: [
+                        {
+                            deliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        },
+                        {
+                            rtoDeliveredDate: {
+                                gte: from,
+                                lte: to
+                            }
+                        }
+                    ]
+                });
+            }
+        }
+        // Supplier condition
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        supplierId: supplierId
+                    }
+                }
+            }
+        });
+        if (andConditions.length > 0) {
+            baseWhere.AND = andConditions;
+        }
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        console.log(`orders - `, orders);
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders by status (${status}):`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const getOrdersByTypeForSupplierReporting = async (type, supplierId, fromDate, toDate)=>{
+    try {
+        const baseWhere = {};
+        // Status/type-based conditions
+        switch(type){
+            case "warehouseCollected":
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = {
+                    not: null
+                };
+                baseWhere.collectedAtWarehouse = {
+                    not: null
+                };
+                break;
+            case "rtoCount":
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = {
+                    not: null
+                };
+                break;
+            case "needToRaise":
+                baseWhere.collectedAtWarehouse = null;
+                baseWhere.rtoDelivered = true;
+                baseWhere.rtoDeliveredDate = {
+                    not: null
+                };
+                break;
+        }
+        // Prepare date range condition
+        const from = new Date(fromDate);
+        const to = new Date(toDate);
+        const isValidRange = !isNaN(from.getTime()) && !isNaN(to.getTime());
+        const andConditions = [];
+        if (isValidRange) {
+            if (type === "warehouseCollected") {
+                andConditions.push({
+                    collectedAtWarehouse: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            } else if (type === "rtoCount") {
+                andConditions.push({
+                    rtoDeliveredDate: {
+                        gte: from,
+                        lte: to
+                    }
+                });
+            }
+        // `needToRaise` has no date filter as per current logic
+        }
+        // Add supplier-specific condition
+        andConditions.push({
+            items: {
+                some: {
+                    dropshipperProduct: {
+                        supplierId: supplierId
+                    }
+                }
+            }
+        });
+        // Merge AND conditions if any exist
+        if (andConditions.length > 0) {
+            baseWhere.AND = andConditions;
+        }
+        // Query orders
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: baseWhere,
+            orderBy: {
+                id: "desc"
+            },
+            include: {
+                items: {
+                    include: {
+                        dropshipperProduct: true,
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true,
+                                        product: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                shippingCountry: true,
+                shippingState: true,
+                shippingCity: true,
+                billingCountry: true,
+                billingState: true,
+                billingCity: true,
+                payment: true
+            }
+        });
+        console.log(`📦 Orders fetched for ${type}:`, orders.length);
+        return {
+            status: true,
+            orders: serializeBigInt(orders)
+        };
+    } catch (error) {
+        console.error(`❌ Error fetching orders for ${type}:`, error);
+        return {
+            status: false,
+            message: "Error fetching orders"
+        };
+    }
+};
+const softDeleteOrder = async (adminId, adminRole, id)=>{
+    try {
+        const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: adminId,
+                deletedAt: new Date(),
+                deletedByRole: adminRole
+            }
+        });
+        return {
+            status: true,
+            message: "Order soft deleted successfully",
+            updatedOrder: serializeBigInt(updatedOrder)
+        };
+    } catch (error) {
+        console.error("❌ softDeleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error soft deleting order"
+        };
+    }
+};
+const restoreOrder = async (adminId, adminRole, id)=>{
+    try {
+        const restoredOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.update({
+            where: {
+                id
+            },
+            data: {
+                deletedBy: null,
+                deletedAt: null,
+                deletedByRole: null,
+                updatedBy: adminId,
+                updatedByRole: adminRole,
+                updatedAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            message: "Order restored successfully",
+            restoredOrder: serializeBigInt(restoredOrder)
+        };
+    } catch (error) {
+        console.error("❌ restoreOrder Error:", error);
+        return {
+            status: false,
+            message: "Error restoring order"
+        };
+    }
+};
+const deleteOrder = async (id)=>{
+    try {
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.delete({
+            where: {
+                id
+            }
+        });
+        return {
+            status: true,
+            message: "Order deleted successfully"
+        };
+    } catch (error) {
+        console.error("❌ deleteOrder Error:", error);
+        return {
+            status: false,
+            message: "Error deleting order"
+        };
+    }
+};
+async function refreshPendingOrdersShippingStatus() {
+    try {
+        // Calculate the cutoff date/time (1 hour ago)
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+        // Fetch orders with delivered = false and lastRefreshAt <= oneHourAgo or null
+        const ordersToRefresh = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            where: {
+                delivered: false,
+                OR: [
+                    {
+                        lastRefreshAt: null
+                    },
+                    {
+                        lastRefreshAt: {
+                            lt: oneHourAgo
+                        }
+                    }
+                ]
+            },
+            orderBy: {
+                lastRefreshAt: 'asc'
+            },
+            take: 100,
+            // select: {
+            //     id: true,
+            //     orderNumber: true,
+            //     lastRefreshAt: true,
+            //     shippingApiResult: true,
+            // },
+            include: {
+                items: {
+                    include: {
+                        dropshipperVariant: {
+                            include: {
+                                supplierProductVariant: {
+                                    include: {
+                                        variant: true
+                                    }
+                                }
+                            }
+                        },
+                        dropshipperProduct: true
+                    }
+                }
+            }
+        });
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `Found ${ordersToRefresh.length} orders to refresh shipping status`);
+        return {
+            status: true,
+            message: `Fetched ${ordersToRefresh.length} orders for shipping status refresh`,
+            orders: ordersToRefresh
+        };
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error fetching orders for shipping status refresh', {
+            error
+        });
+        return {
+            status: false,
+            message: 'Failed to fetch orders for shipping status refresh',
+            error: error instanceof Error ? error.message : 'Unknown error'
+        };
+    }
+}
+async function createRTOInventory(RTOInventory) {
+    try {
+        const { order, orderItem, dropshipper, dropshipperProduct, dropshipperProductVariant, quantity, price } = RTOInventory;
+        // Check for existing RTO Inventory using unique orderItem ID
+        const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].rtoInventory.findFirst({
+            where: {
+                orderItemId: orderItem.connect.id
+            }
+        });
+        if (existing) {
+            return {
+                status: false,
+                message: 'RTO Inventory already exists for this order item.',
+                existing: serializeBigInt(existing)
+            };
+        }
+        // Create new RTO Inventory
+        const newOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].rtoInventory.create({
+            data: {
+                order,
+                orderItem,
+                dropshipper,
+                dropshipperProduct,
+                dropshipperProductVariant,
+                quantity,
+                price,
+                createdAt: new Date()
+            }
+        });
+        return {
+            status: true,
+            order: serializeBigInt(newOrder)
+        };
+    } catch (error) {
+        console.error(`Error creating RTO Inventory:`, error);
+        return {
+            status: false,
+            message: 'Internal Server Error'
+        };
+    }
+}
+}}),
+"[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "getAppConfig": (()=>getAppConfig)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-route] (ecmascript)");
+;
+const serializeBigInt = (obj)=>{
+    if (typeof obj === "bigint") {
+        return obj.toString();
+    }
+    if (obj instanceof Date) {
+        // Return Date object unchanged, no conversion
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(serializeBigInt);
+    }
+    if (obj && typeof obj === "object") {
+        return Object.fromEntries(Object.entries(obj).map(([key, value])=>[
+                key,
+                serializeBigInt(value)
+            ]));
+    }
+    return obj;
+};
+const getAppConfig = async ()=>{
+    try {
+        const appConfig = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].appConfig.findFirst({
+            where: {
+                status: true
+            },
+            orderBy: {
+                id: "desc"
+            }
+        });
+        if (!appConfig) {
+            return {
+                status: false,
+                message: "AppConfig not found"
+            };
+        }
+        return {
+            status: true,
+            appConfig: serializeBigInt(appConfig)
+        };
+    } catch (error) {
+        console.error("❌ getAppConfig Error:", error);
+        return {
+            status: false,
+            message: "Error fetching AppConfig"
+        };
+    }
+};
+}}),
+"[project]/src/app/api/dropshipper/order/report/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "GET": (()=>GET)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/commonUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/auth/authUtils.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/order/order.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/models/app/appConfig.ts [app-route] (ecmascript)");
+;
+;
+;
+;
+;
+async function GET(req) {
+    try {
+        const dropshipperIdHeader = req.headers.get('x-dropshipper-id');
+        const dropshipperRole = req.headers.get('x-dropshipper-role');
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', 'Dropshipper details received', {
+            dropshipperIdHeader,
+            dropshipperRole
+        });
+        const dropshipperId = Number(dropshipperIdHeader);
+        if (!dropshipperIdHeader || isNaN(dropshipperId)) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Invalid dropshipper ID received', {
+                dropshipperIdHeader
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'Invalid or missing dropshipper ID'
+            }, {
+                status: 400
+            });
+        }
+        const userExistence = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2f$authUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["isUserExist"])(dropshipperId, String(dropshipperRole));
+        if (!userExistence.status) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', 'Dropshipper user not found', {
+                dropshipperId,
+                dropshipperRole
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: `User Not Found: ${userExistence.message}`
+            }, {
+                status: 404
+            });
+        }
+        const searchParams = req.nextUrl.searchParams;
+        const fromRaw = searchParams.get('from');
+        const toRaw = searchParams.get('to');
+        const extractDate = (value, outputFormat)=>{
+            if (!value) return null;
+            const regexPatterns = [
+                {
+                    format: 'DD-MM-YYYY',
+                    regex: /^(\d{2})-(\d{2})-(\d{4})$/
+                },
+                {
+                    format: 'YYYY-MM-DD',
+                    regex: /^(\d{4})-(\d{2})-(\d{2})$/
+                },
+                {
+                    format: 'DD/MM/YYYY',
+                    regex: /^(\d{2})\/(\d{2})\/(\d{4})$/
+                },
+                {
+                    format: 'YYYY/MM/DD',
+                    regex: /^(\d{4})\/(\d{2})\/(\d{2})$/
+                }
+            ];
+            let parsedDate = null;
+            for (const { format, regex } of regexPatterns){
+                const match = value.match(regex);
+                if (match) {
+                    let day, month, year;
+                    if (format.startsWith('DD')) {
+                        [, day, month, year] = match;
+                    } else {
+                        [, year, month, day] = match;
+                    }
+                    parsedDate = new Date(`${year}-${month}-${day}`);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('info', `✅ Parsed date from "${value}" using format "${format}"`);
+                    break;
+                }
+            }
+            if (!parsedDate) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('warn', `Failed to parse date for "${value}"`);
+                return null;
+            }
+            const formatDate = (date, format)=>{
+                const options = {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                };
+                const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+                return format === 'YYYY-MM-DD' ? formattedDate.split('/').reverse().join('-') : formattedDate.replace(/\//g, '-');
+            };
+            return formatDate(parsedDate, outputFormat);
+        };
+        const fromDate = extractDate(fromRaw, 'YYYY-MM-DD') || '';
+        const toDate = extractDate(toRaw, 'YYYY-MM-DD') || '';
+        console.log(`fromDate - `, fromDate);
+        console.log(`toDate - `, toDate);
+        const ordersResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$order$2f$order$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getOrdersByStatusForDropshipperReporting"])('All', dropshipperId, fromDate, toDate);
+        const orders = ordersResult.orders;
+        if (!ordersResult?.status || !orders) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'No orders found'
+            }, {
+                status: 404
+            });
+        }
+        const appConfigResult = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$models$2f$app$2f$appConfig$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getAppConfig"])();
+        const appConfig = appConfigResult.appConfig;
+        if (!appConfigResult.status || !appConfig) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                status: false,
+                error: 'No app config found'
+            }, {
+                status: 404
+            });
+        }
+        const shippingCost = appConfig.shippingCost;
+        const reportAnalytics = {
+            shipowl: {
+                orderCount: 0,
+                totalProductCost: 0,
+                totalCODCollected: 0,
+                totalShippingCost: 0,
+                totalDeduction: 0,
+                remittanceToDropshipper: 0,
+                deliveredOrder: 0,
+                rtoOrder: 0
+            },
+            selfship: {
+                prepaid: {
+                    orderCount: 0,
+                    totalProductCost: 0,
+                    totalCODCollected: 0,
+                    totalShippingCost: 0,
+                    totalDeduction: 0,
+                    remittanceToDropshipper: 0,
+                    deliveredOrder: 0,
+                    rtoOrder: 0
+                },
+                postpaid: {
+                    orderCount: 0,
+                    totalProductCost: 0,
+                    totalCODCollected: 0,
+                    totalShippingCost: 0,
+                    totalDeduction: 0,
+                    remittanceToDropshipper: 0,
+                    deliveredOrder: 0,
+                    rtoOrder: 0
+                }
+            }
+        };
+        orders.forEach((order)=>{
+            const orderItems = order.items;
+            if (!orderItems || !Array.isArray(orderItems)) return;
+            // TODO: Replace with real logic to determine if order is prepaid or postpaid
+            const orderType = order.isPostpaid ? 'postpaid' : 'prepaid';
+            let hasShipOwlProduct = false;
+            orderItems.forEach((item)=>{
+                const orderItemQty = Number(item.quantity) || 0;
+                const dropshipperVariant = item.dropshipperVariant;
+                if (!dropshipperVariant?.supplierProductVariant) return;
+                const supplierVariant = dropshipperVariant.supplierProductVariant;
+                const productVariant = supplierVariant.variant;
+                const productModel = productVariant?.model || '';
+                const totalShippingCost = Number(shippingCost) || 0;
+                const model = productModel.toLowerCase();
+                if (model === 'shipowl') {
+                    hasShipOwlProduct = true;
+                    if (order.delivered) {
+                        reportAnalytics.shipowl.deliveredOrder += 1;
+                        reportAnalytics.shipowl.totalCODCollected += orderItemQty * Number(dropshipperVariant.price || 0);
+                        reportAnalytics.shipowl.totalProductCost += orderItemQty * Number(supplierVariant.price || 0);
+                    } else if (order.rtoDelivered) {
+                        reportAnalytics.shipowl.rtoOrder += 1;
+                    }
+                    reportAnalytics.shipowl.totalShippingCost += totalShippingCost;
+                    reportAnalytics.shipowl.totalDeduction += orderItemQty * Number(supplierVariant.price || 0) + totalShippingCost;
+                    reportAnalytics.shipowl.remittanceToDropshipper += orderItemQty * Number(dropshipperVariant.price || 0) - (orderItemQty * Number(supplierVariant.price || 0) + totalShippingCost);
+                } else if (model === 'selfship') {
+                    const section = reportAnalytics.selfship[orderType];
+                    if (order.delivered) {
+                        section.deliveredOrder += 1;
+                        section.totalCODCollected += orderItemQty * Number(dropshipperVariant.price || 0);
+                    } else if (order.rtoDelivered) {
+                        section.rtoOrder += 1;
+                    }
+                    section.totalShippingCost += totalShippingCost;
+                    section.totalProductCost += orderItemQty * Number(supplierVariant.price || 0);
+                    section.totalDeduction += orderItemQty * Number(supplierVariant.price || 0) + totalShippingCost;
+                    section.remittanceToDropshipper += orderItemQty * Number(dropshipperVariant.price || 0) - (orderType === 'postpaid' ? orderItemQty * Number(supplierVariant.price || 0) + totalShippingCost : totalShippingCost);
+                }
+            });
+            if (hasShipOwlProduct) {
+                reportAnalytics.shipowl.orderCount += 1;
+            }
+        });
+        console.log('ShipOwl Analytics:', reportAnalytics.shipowl);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: true,
+            reportAnalytics,
+            orders
+        }, {
+            status: 200
+        });
+    } catch (error) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$commonUtils$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["logMessage"])('error', 'Error while fetching orders', {
+            error
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            status: false,
+            error: 'Failed to fetch orders due to an internal error'
+        }, {
+            status: 500
+        });
+    }
 }
 }}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__d77f5b27._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__c6a4f397._.js.map

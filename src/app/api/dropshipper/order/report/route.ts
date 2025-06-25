@@ -88,7 +88,7 @@ export async function GET(req: NextRequest) {
         console.log(`fromDate - `, fromDate);
         console.log(`toDate - `, toDate);
 
-        const ordersResult = await getOrdersByStatusForDropshipperReporting('deliveredOrRto', dropshipperId, fromDate, toDate);
+        const ordersResult = await getOrdersByStatusForDropshipperReporting('All', dropshipperId, fromDate, toDate);
         const orders = ordersResult.orders;
 
         if (!ordersResult?.status || !orders) {
