@@ -298,6 +298,7 @@ export async function POST(req: NextRequest) {
     const companyUploadDir = path.join(process.cwd(), 'tmp', 'uploads', 'supplier', `${supplierCreateResult.supplier.id}`, 'company');
     const supplierCompanyFileFields = [
       'gstDocument',
+      'companyPanCardImage',
       'panCardImage',
       'aadharCardImage',
       'additionalDocumentUpload',

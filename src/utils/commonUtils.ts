@@ -180,3 +180,62 @@ export async function fetchLogInfo(module: string, action: string, req: NextRequ
         console.error('❌ Error saving activity log:', error);
     }
 }
+
+/**
+ * Formats a given date string or Date object into a specified format.
+ * Returns null if the input is not a valid date.
+ *
+ * Supported Tokens:
+ * - DD     : Day (2 digits)
+ * - D      : Day (1-2 digits)
+ * - MMM    : Abbreviated month name (e.g., Jan)
+ * - MMMM   : Full month name (e.g., January)
+ * - MM     : Month (2 digits)
+ * - M      : Month (1-2 digits)
+ * - YYYY   : Full year
+ * - HH     : Hours (00-23)
+ * - mm     : Minutes (00-59)
+ * - ss     : Seconds (00-59)
+ *
+ * @param input - A date input as string, Date object, or null
+ * @param format - Desired output format string
+ * @returns Formatted date string or null if invalid
+ */
+export function formatDate(input: string | Date | null | undefined, format: string = "DD-MM-YYYY"): string | null {
+    if (!input) return null;
+
+    const date = typeof input === "string" ? new Date(input) : input;
+
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        return null;
+    }
+
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const dayStr = String(day).padStart(2, '0');
+    const monthStr = String(month + 1).padStart(2, '0');
+    const hourStr = String(hours).padStart(2, '0');
+    const minuteStr = String(minutes).padStart(2, '0');
+    const secondStr = String(seconds).padStart(2, '0');
+
+    const MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const MONTH_NAMES_FULL = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    return format
+        .replace(/DD/g, dayStr)
+        .replace(/D/g, String(day))
+        .replace(/MMMM/g, MONTH_NAMES_FULL[month])
+        .replace(/MMM/g, MONTH_NAMES_SHORT[month])
+        .replace(/MM/g, monthStr)
+        .replace(/M/g, String(month + 1))
+        .replace(/YYYY/g, String(year))
+        .replace(/HH/g, hourStr)
+        .replace(/mm/g, minuteStr)
+        .replace(/ss/g, secondStr);
+}

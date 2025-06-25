@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { logMessage } from '@/utils/commonUtils';
+import { logMessage, formatDate } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { getOrderById } from '@/app/models/order/order';
 import { orderDisputeLevelOne } from '@/app/models/order/item';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
+import { sendEmail } from '@/utils/email/sendEmail';
 
 export async function POST(req: NextRequest) {
     try {
-        // Extract and validate supplier ID and role headers
         const supplierIdHeader = req.headers.get('x-supplier-id');
         const supplierRole = req.headers.get('x-supplier-role');
         const supplierId = Number(supplierIdHeader);
@@ -20,7 +21,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Verify user existence
+        // Validate user
         const userCheck = await isUserExist(supplierId, String(supplierRole));
         if (!userCheck.status) {
             logMessage('warn', `User verification failed: ${userCheck.message}`);
@@ -30,13 +31,12 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // TODO: Replace hardcoded IDs with dynamic values as needed
+        // Extract order ID from URL
         const parts = req.nextUrl.pathname.split('/');
         const orderId = Number(parts[parts.length - 2]);
 
-        // Fetch order and order itemW
+        // Fetch order
         const orderResult = await getOrderById(orderId);
-
         if (!orderResult.status || !orderResult.order) {
             logMessage('warn', `Order not found or inaccessible. Order ID: ${orderId}`);
             return NextResponse.json(
@@ -45,28 +45,8 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        /*
-            const order = orderResult.order;
-            const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-            if (order.rtoDelivered && order.rtoDeliveredDate) {
-                const rtoDeliveredTime = new Date(order.rtoDeliveredDate).getTime();
-                const now = Date.now();
-
-                if (now - rtoDeliveredTime > ONE_DAY_MS) {
-                    logMessage('warn', `Dispute period expired for order item ID: ${orderId}`);
-                    return NextResponse.json(
-                        { status: false, message: 'Dispute period of 24 hours has expired; you cannot dispute now.' },
-                        { status: 400 }
-                    );
-                }
-            }
-        */
-
-        // Validate status query parameter
         const urlParams = req.nextUrl.searchParams;
         const status = decodeURIComponent(urlParams.get('status') || 'not received');
-
         const allowedStatuses = ['not received'];
 
         if (!status || !allowedStatuses.includes(status.toLowerCase())) {
@@ -79,7 +59,6 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Prepare payload for update
         const orderItemRTOPayload = {
             orderId,
             status: 'not received',
@@ -87,7 +66,6 @@ export async function POST(req: NextRequest) {
         };
 
         const result = await orderDisputeLevelOne(orderItemRTOPayload);
-
         if (!result.status) {
             logMessage('error', `Failed to update order item status: ${result.message}`);
             return NextResponse.json(
@@ -96,20 +74,94 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        logMessage('info', `Order status updated successfully for orderId: ${orderId}`);
+        // Finalized dispute data
+        const finalOrders = [
+            {
+                orderNumber: orderResult.order.orderNumber,
+                awbNumber: orderResult.order.awbNumber,
+                rtoDeliveredDate: formatDate(orderResult.order.rtoDeliveredDate, "DD-MM-YYYY"),
+                disputeDate: formatDate(new Date().toISOString().slice(0, 10), "DD-MM-YYYY")
+            }
+        ];
+
+        const {
+            status: emailStatus,
+            message: emailMessage,
+            emailConfig,
+            htmlTemplate,
+            subject: emailSubject
+        } = await getEmailConfig("supplier", "need to raise", "dispute-1", true);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Generate HTML table rows
+        const orderTableRows = finalOrders.map(order => {
+            return `<tr>
+                <td>${order.orderNumber}</td>
+                <td>${order.awbNumber}</td>
+                <td>${order.rtoDeliveredDate || '-'}</td>
+                <td>${order.disputeDate}</td>
+            </tr>`;
+        }).join('');
+
+        const replacements: Record<string, string> = {
+            "{{orderTableRows}}": orderTableRows,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear Supplier,</p><p>Your dispute has been registered successfully.</p>";
+
+        let subject = emailSubject;
+
+        Object.entries(replacements).forEach(([key, value]) => {
+            htmlBody = htmlBody.replace(new RegExp(key, 'g'), value);
+            subject = subject.replace(new RegExp(key, 'g'), value);
+        });
+
+        const mailData = {
+            recipient: [
+                { name: `Rohit Webstep`, email: `rohitwebstep@gmail.com` }
+            ],
+            subject,
+            htmlBody,
+            attachments: []
+        };
+
+        const emailResult = await sendEmail(emailConfig, mailData);
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Dispute raised but email notification failed.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
+        logMessage('info', `Order status updated and email sent successfully for orderId: ${orderId}`);
 
         return NextResponse.json(
             {
                 status: true,
-                message: 'Order item status updated successfully.',
+                message: 'Order item status updated and email sent successfully.',
             },
             { status: 200 }
         );
+
     } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
-        logMessage('error', `Error updating order item status: ${errorMessage}`);
+        logMessage('error', `Error in dispute handling: ${errorMessage}`);
         return NextResponse.json(
-            { status: false, error: 'An unexpected error occurred while processing your request. Please try again later.' },
+            { status: false, error: 'An unexpected error occurred. Please try again later.' },
             { status: 500 }
         );
     }
