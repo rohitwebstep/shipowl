@@ -10740,7 +10740,6 @@ async function createSupplier(adminId, adminRole, supplier) {
 const getSuppliersByStatus = async (status = "notDeleted", withPassword = false)=>{
     try {
         let whereCondition = {};
-        console.log(`status - `, status);
         switch(status.trim().toLowerCase()){
             case "notdeleted":
                 whereCondition = {
@@ -10770,7 +10769,7 @@ const getSuppliersByStatus = async (status = "notDeleted", withPassword = false)
                     deletedAt: null
                 };
                 break;
-            case "notVerified":
+            case "notverified":
                 whereCondition = {
                     role: 'supplier',
                     isVerified: false,
@@ -10980,18 +10979,25 @@ const updateSupplierVerifyStatus = async (adminId, adminRole, supplierId, status
             'yes'
         ].includes(statusRaw);
         // Fetch current supplier details, including password based on withPassword flag
-        const { status: supplierStatus, supplier: currentDropshipper, message } = await getSupplierById(supplierId);
-        if (!supplierStatus || !currentDropshipper) {
+        const { status: supplierStatus, supplier: currentSupplier, message } = await getSupplierById(supplierId);
+        if (!supplierStatus || !currentSupplier) {
             return {
                 status: false,
-                message: message || "Dropshipper not found."
+                message: message || "Supplier not found."
+            };
+        }
+        // Ensure email is verified before allowing onboarding
+        if (!currentSupplier.isEmailVerified || !currentSupplier.emailVerifiedAt) {
+            return {
+                status: false,
+                message: "Supplier cannot be onboarded as their email address is not verified."
             };
         }
         const updateData = {
             isVerified: status,
             verifiedAt: status ? new Date() : null
         };
-        const newDropshipper = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
+        const newSupplier = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].admin.update({
             where: {
                 id: supplierId
             },
@@ -10999,7 +11005,7 @@ const updateSupplierVerifyStatus = async (adminId, adminRole, supplierId, status
         });
         return {
             status: true,
-            supplier: serializeBigInt(newDropshipper)
+            supplier: serializeBigInt(newSupplier)
         };
     } catch (error) {
         console.error(`Error updating supplier:`, error);

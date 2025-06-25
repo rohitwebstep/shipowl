@@ -293,3 +293,9 @@ export async function PUT(req: NextRequest) {
   }
 
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};

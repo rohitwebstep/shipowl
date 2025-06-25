@@ -544,3 +544,8 @@ export async function DELETE(req: NextRequest) {
   }
 }
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};

@@ -287,3 +287,9 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ status: false, error: 'Failed to fetch orders due to an internal error' }, { status: 500 });
     }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
