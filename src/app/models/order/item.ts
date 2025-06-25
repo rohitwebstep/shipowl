@@ -101,11 +101,11 @@ export async function orderDisputeCaseTwo({
       };
     }
 
-    if (order.collectedAtWarehouse) {
+    if (!order.collectedAtWarehouse) {
       return {
         status: false,
         message:
-          "Dispute cannot be raised. Order has already been marked as collected at warehouse.",
+          "Dispute cannot be raised. Order has not been marked as collected at warehouse.",
       };
     }
 

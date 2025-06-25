@@ -11,26 +11,26 @@ import { checkEmailAvailability, checkUsernameAvailability, createSupplier, getS
 import { createSupplierCompany } from '@/app/models/supplier/company';
 
 interface MainAdmin {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    // other optional properties if needed
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  // other optional properties if needed
 }
 
 interface SupplierStaff {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    role: string;
-    admin?: MainAdmin;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  admin?: MainAdmin;
 }
 
 interface UserCheckResult {
-    status: boolean;
-    message?: string;
-    admin?: SupplierStaff;
+  status: boolean;
+  message?: string;
+  admin?: SupplierStaff;
 }
 
 type UploadedFileInfo = {
@@ -421,8 +421,11 @@ export async function GET(req: NextRequest) {
       case "inactive":
         suppliersResult = await getSuppliersByStatus("inactive");
         break;
-      case "active":
-        suppliersResult = await getSuppliersByStatus("active");
+      case "notverified":
+        suppliersResult = await getSuppliersByStatus("notVerified");
+        break;
+      case "verified":
+        suppliersResult = await getSuppliersByStatus("verified");
         break;
       default:
         suppliersResult = await getSuppliersByStatus("notDeleted");

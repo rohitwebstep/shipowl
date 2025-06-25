@@ -473,7 +473,7 @@ export async function GET(req: NextRequest) {
       case "inactive":
         suppliersResult = await getSuppliersByStatus("inactive");
         break;
-      case "notVerified":
+      case "notverified":
         suppliersResult = await getSuppliersByStatus("notVerified");
         break;
       case "verified":

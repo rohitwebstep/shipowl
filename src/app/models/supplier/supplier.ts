@@ -267,7 +267,6 @@ export const getSuppliersByStatus = async (
 ) => {
     try {
         let whereCondition = {};
-
         switch (status.trim().toLowerCase()) {
             case "notdeleted":
                 whereCondition = { role: 'supplier', deletedAt: null };
@@ -281,7 +280,7 @@ export const getSuppliersByStatus = async (
             case "active":
                 whereCondition = { role: 'supplier', status: 'active', deletedAt: null };
                 break;
-            case "notVerified":
+            case "notverified":
                 whereCondition = { role: 'supplier', isVerified: false, deletedAt: null };
                 break;
             case "verified":
