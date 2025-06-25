@@ -1,3 +1,4 @@
 {
-  "/api/supplier/order/need-to-raise/[orderId]/dispute-1/route": "app/api/supplier/order/need-to-raise/[orderId]/dispute-1/route.js"
+  "/api/supplier/order/need-to-raise/[orderId]/dispute-1/route": "app/api/supplier/order/need-to-raise/[orderId]/dispute-1/route.js",
+  "/api/supplier/order/need-to-raise/[orderId]/dispute-2/route": "app/api/supplier/order/need-to-raise/[orderId]/dispute-2/route.js"
 }

@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
-import { logMessage } from '@/utils/commonUtils';
+import { logMessage, formatDate } from '@/utils/commonUtils';
 import { isUserExist } from '@/utils/auth/authUtils';
 import { saveFilesFromFormData } from '@/utils/saveFiles';
 import { validateFormData } from '@/utils/validateFormData';
 import { getOrderById } from '@/app/models/order/order';
 import { orderDisputeLevelTwo } from '@/app/models/order/item';
+import { getEmailConfig } from '@/app/models/admin/emailConfig';
+import { sendEmail } from '@/utils/email/sendEmail';
 
 interface UploadedFile {
     url: string;
@@ -107,13 +109,13 @@ export async function POST(req: NextRequest) {
         if (status.toLowerCase() === 'wrong item received') {
 
             const packingFiles = await saveFilesFromFormData(formData, 'packingGallery', {
-                dir: path.join(process.cwd(), 'tmp', 'uploads', 'returns'),
+                dir: path.join(process.cwd(), 'tmp', 'uploads', 'order', orderResult.order.orderNumber, 'packing-gallery'),
                 pattern: 'slug-unique',
                 multiple: true,
             });
 
             const unboxingFiles = await saveFilesFromFormData(formData, 'unboxingGallery', {
-                dir: path.join(process.cwd(), 'tmp', 'uploads', 'returns'),
+                dir: path.join(process.cwd(), 'tmp', 'uploads', 'order', orderResult.order.orderNumber, 'unboxing-gallery'),
                 pattern: 'slug-unique',
                 multiple: true,
             });
@@ -159,6 +161,110 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        // Finalized dispute data
+        const finalOrders = [
+            {
+                orderNumber: orderResult.order.orderNumber,
+                awbNumber: orderResult.order.awbNumber,
+                rtoDeliveredDate: formatDate(orderResult.order.rtoDeliveredDate, "DD-MM-YYYY"),
+                disputeDate: formatDate(new Date().toISOString().slice(0, 10), "DD-MM-YYYY")
+            }
+        ];
+
+        const {
+            status: emailStatus,
+            message: emailMessage,
+            emailConfig,
+            htmlTemplate,
+            subject: emailSubject
+        } = await getEmailConfig("supplier", "need to raise", "dispute-2", true);
+
+        if (!emailStatus || !emailConfig) {
+            return NextResponse.json(
+                { message: emailMessage || "Failed to fetch email configuration.", status: false },
+                { status: 500 }
+            );
+        }
+
+        // Generate HTML table rows
+        const orderTableRows = finalOrders.map(order => {
+            return `<tr>
+                        <td>${order.orderNumber}</td>
+                        <td>${order.awbNumber}</td>
+                        <td>${order.rtoDeliveredDate || '-'}</td>
+                        <td>${order.disputeDate}</td>
+                    </tr>`;
+        }).join('');
+
+        const replacements: Record<string, string> = {
+            "{{orderTableRows}}": orderTableRows,
+            "{{year}}": new Date().getFullYear().toString(),
+            "{{appName}}": "Shipping OWL",
+        };
+
+        let htmlBody = htmlTemplate?.trim()
+            ? htmlTemplate
+            : "<p>Dear Supplier,</p><p>Your dispute has been registered successfully.</p>";
+
+        let subject = emailSubject;
+
+        Object.entries(replacements).forEach(([key, value]) => {
+            htmlBody = htmlBody.replace(new RegExp(key, 'g'), value);
+            subject = subject.replace(new RegExp(key, 'g'), value);
+        });
+
+        logMessage(`table`, `uploadedMedia: `, uploadedMedia);
+
+        // 1. Create packaging attachments
+        const packagingAttachments = (uploadedMedia.packingGallery || '')
+            .split(',')
+            .map(path => path.trim())
+            .filter(path => !!path)
+            .map((filePath, index) => {
+                const ext = path.extname(filePath); // crude but works
+                return {
+                    name: `Packaging Gallery ${index + 1}.${ext}`,
+                    path: filePath,
+                };
+            });
+
+        // 2. Create unboxing attachments
+        const unboxingAttachments = (uploadedMedia.unboxingGallery || '')
+            .split(',')
+            .map(path => path.trim())
+            .filter(path => !!path)
+            .map((filePath, index) => {
+                const ext = path.extname(filePath); // crude but works
+                return {
+                    name: `Unboxing Gallery ${index + 1}.${ext}`,
+                    path: filePath,
+                };
+            });
+
+        // 3. Combine all valid attachments
+        const allAttachments = [...packagingAttachments, ...unboxingAttachments];
+
+        const mailData = {
+            recipient: [
+                { name: `Rohit Webstep`, email: `rohitwebstep@gmail.com` }
+            ],
+            subject,
+            htmlBody,
+            attachments: allAttachments
+        };
+
+        const emailResult = await sendEmail(emailConfig, mailData);
+        if (!emailResult.status) {
+            return NextResponse.json(
+                {
+                    message: "Dispute raised but email notification failed.",
+                    status: false,
+                    emailError: emailResult.error,
+                },
+                { status: 500 }
+            );
+        }
+
         logMessage('info', `Order status updated successfully for orderId: ${orderId}`);
 
         return NextResponse.json(
@@ -171,7 +277,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         logMessage('error', `Error updating order item status: ${error}`);
         return NextResponse.json(
-            { status: false, message : error || 'An unexpected error occurred while processing your request. Please try again later.' },
+            { status: false, message: error || 'An unexpected error occurred while processing your request. Please try again later.' },
             { status: 500 }
         );
     }

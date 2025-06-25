@@ -109,10 +109,17 @@ export async function orderDisputeLevelTwo({
       };
     }
 
+    if (order.disputeLevel === 2) {
+      return {
+        status: false,
+        message: "Dispute Level 2 already applied for this order.",
+      };
+    }
+
     if (order.disputeLevel !== 1) {
       return {
         status: false,
-        message: "First apply dispute level 1 before raising further disputes.",
+        message: "First apply dispute level 1 before raising level 2.",
       };
     }
 
@@ -201,6 +208,20 @@ export async function orderDisputeLevelOne({
         status: false,
         message:
           "Dispute cannot be raised. Order has already been marked as collected at warehouse.",
+      };
+    }
+
+    if (order.disputeLevel === 2) {
+      return {
+        status: false,
+        message: "Dispute Level 2 already applied. You cannot apply Level 1 now.",
+      };
+    }
+
+    if (order.disputeLevel === 1) {
+      return {
+        status: false,
+        message: "Dispute Level 1 already raised for this order.",
       };
     }
 
