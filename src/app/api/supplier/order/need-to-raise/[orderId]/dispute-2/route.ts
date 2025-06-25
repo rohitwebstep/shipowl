@@ -223,7 +223,7 @@ export async function POST(req: NextRequest) {
             .map((filePath, index) => {
                 const ext = path.extname(filePath); // crude but works
                 return {
-                    name: `Packaging Gallery ${index + 1}.${ext}`,
+                    name: `Packaging Gallery ${index + 1}${ext}`,
                     path: filePath,
                 };
             });
@@ -236,7 +236,7 @@ export async function POST(req: NextRequest) {
             .map((filePath, index) => {
                 const ext = path.extname(filePath); // crude but works
                 return {
-                    name: `Unboxing Gallery ${index + 1}.${ext}`,
+                    name: `Unboxing Gallery ${index + 1}${ext}`,
                     path: filePath,
                 };
             });
