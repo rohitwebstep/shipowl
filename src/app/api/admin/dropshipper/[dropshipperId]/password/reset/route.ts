@@ -163,6 +163,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
             {
                 status: false,
+                error,
                 message: 'An unexpected error occurred while changing the password. Please try again later.',
             },
             { status: 500 }
