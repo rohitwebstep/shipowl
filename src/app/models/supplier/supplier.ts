@@ -319,7 +319,13 @@ export const getSupplierById = async (id: number, withPassword: boolean | string
         const supplier = await prisma.admin.findUnique({
             where: { id, role: 'supplier' },
             include: {
-                companyDetail: true,
+                companyDetail: {
+                    include:{
+                        billingCountry: true,
+                        billingState: true,
+                        billingCity: true
+                    }
+                },
                 bankAccount: true,
                 permanentCity: true,
                 permanentCountry: true,
