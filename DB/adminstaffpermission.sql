@@ -18,6 +18,7 @@ INSERT INTO `adminStaffPermission` (`panel`, `module`, `action`, `status`, `Crea
 ('admin', 'Supplier', 'Orders', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'Supplier', 'Bank Account Change Request View Listing', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'Supplier', 'Bank Account Change Request Review', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
+('admin', 'Supplier', 'Password Change', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 
 ('admin', 'Product', 'Create', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),
 ('admin', 'Product', 'View', 1, '2025-06-09 17:44:14.000', NULL, NULL, '2025-06-09 17:44:14.000', NULL, NULL, NULL, NULL, NULL),

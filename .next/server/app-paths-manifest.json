@@ -1,10 +1,1 @@
-{
-  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/admin/auth/verify/route": "app/api/admin/auth/verify/route.js",
-  "/api/admin/brand/route": "app/api/admin/brand/route.js",
-  "/api/admin/category/route": "app/api/admin/category/route.js",
-  "/api/admin/product/[productId]/route": "app/api/admin/product/[productId]/route.js",
-  "/api/admin/product/route": "app/api/admin/product/route.js",
-  "/api/admin/supplier/route": "app/api/admin/supplier/route.js",
-  "/api/location/country/route": "app/api/location/country/route.js"
-}
+{}

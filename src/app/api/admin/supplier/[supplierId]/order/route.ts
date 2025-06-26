@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
             const options = {
                 panel: 'admin',
                 module: 'Supplier',
-                action: 'order-report',
+                action: 'Orders',
             };
 
             const staffPermissionsResult = await checkStaffPermissionStatus(options, adminId);
